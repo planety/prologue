@@ -1,2 +1,2 @@
 # Prologue
-"What's past is prologue。
+"What's past is prologue.
