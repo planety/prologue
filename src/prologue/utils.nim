@@ -1,7 +1,7 @@
 import uri, cgi, net, httpcore, httpclient, asyncdispatch, asyncnet
 
 
-import tables, times, strutils, strformat
+import os, tables, times, strutils, strformat
 
 
 const
@@ -43,10 +43,9 @@ type
 proc `$`(version: HttpVersion): string {.inline.} =
   case version 
   of HttpVer10:
-    result = "Http/1.0 "
+    result = "Http/1.0"
   of HttpVer11:
-    result = "Http/1.1 "
-
+    result = "Http/1.1"
 
 proc initHttpServer*(hostName: string = "127.0.0.1",
     port: int = 8080): HttpServer {.inline.} =
@@ -54,8 +53,12 @@ proc initHttpServer*(hostName: string = "127.0.0.1",
 
 proc parseStartLine*(s: string, request: var Request) {.inline.} =
   let params = s.splitWhitespace
-  assert params.len == 3
+  # assert params.len == 3, $params
+  if params.len != 3:
+    return
   case params[0]
+  of "Head":
+    request.httpMethod = HttpHead 
   of "Get":
     request.httpMethod = HttpGet
   of "Post":
@@ -71,7 +74,6 @@ proc parseStartLine*(s: string, request: var Request) {.inline.} =
   else:
     discard
 
-
 proc parseHttpRequest*(client: Socket, hostName: string): Request =
   result.httpHeaders = newHttpHeaders()
   result.hostName = hostName
@@ -84,13 +86,53 @@ proc parseHttpRequest*(client: Socket, hostName: string): Request =
     let pairs = line.parseHeader
     result.httpHeaders[pairs.key] = pairs.value
 
-proc handleRequest(version: HttpVersion, code: HttpCode, data: string): string =
-  result = $version & $code & "\c\L"
-  result.add "Server: Prologue" & "\c\L"
+# proc handleRequest(version: HttpVersion, status: HttpCode, data: string): string =
+#   result = $version & $status & "\c\L"
+#   result.add "Server: Prologue" & "\c\L"
+#   result.add "Content-type: text/html; charset=UTF-8\c\L"
+#   result.add &"Content-Length: {data.len}"
+#   result.add "\c\L\c\L"
+#   result.add data
+
+proc `$`(rep: Response): string {.inline.} =
+  result = &"{rep.httpVersion} {rep.status}\c\L"
+  result.add "Server: Prologue\c\L"
   result.add "Content-type: text/html; charset=UTF-8\c\L"
-  result.add &"Content-Length: {data.len}"
+  result.add &"Content-Length: {rep.body.len}"
   result.add "\c\L\c\L"
-  result.add data
+  result.add rep.body
+   
+
+proc handleHtml*(path: string, version: HttpVersion, status: HttpCode): Response =
+  var f: File
+  try:
+    f = open(path, fmRead)
+  except IOError:
+    return
+  defer: f.close()
+  result.body = f.readAll()
+  result.httpVersion = version
+  result.status = status
+
+proc handleHead(url: Uri, version: HttpVersion, status: HttpCode): Response =
+  let path = url.path
+  if path.isRootDir:
+    return handleHtml("index.html", version, status)
+  let pathStrip = path.strip(chars={'/'})
+  return handleHtml(pathStrip, version, status)
+  # echo pathStrip
+  # let pathSplit = splitPath(path)
+  # echo pathSplit.repr
+
+
+proc handleRequest(req: Request): Response =
+  case req.httpMethod
+  of HttpHead:
+    result = handleHead(req.httpUrl, req.httpVersion, Http200)
+  of HttpGet:
+    discard
+  else:
+    discard
 
 proc start*(server: HttpServer) =
   var socket = newSocket()
@@ -106,8 +148,10 @@ proc start*(server: HttpServer) =
     echo "Client connected from: ", address
     let
       req = client.parseHttpRequest(address)
-      response = handleRequest(HttpVer11, HttpCode(200), Page)
-    client.send(response)
+      response = req.handleRequest
+      # response = handleRequest(HttpVer11, HttpCode(200), Page)
+    echo response
+    client.send($response)
     client.close()
 
 
