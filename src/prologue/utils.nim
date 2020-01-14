@@ -1,16 +1,8 @@
 import uri, cgi, net, httpcore, httpclient, asyncdispatch, asyncnet
 
 
-import os, tables, times, strutils, strformat
+import os, tables, strutils, strformat
 
-
-const
-  Page = """<html>
-<body>
-<p>Hello, Nim!</p>
-</body>
-</html>
-"""
 
 
 type
@@ -27,7 +19,7 @@ type
     body*: string
     cookies*: Table[string, string]
 
-  Response* = object
+  Response* = object 
     client*: Socket
     httpVersion*: HttpVersion
     status*: HttpCode
@@ -41,7 +33,7 @@ type
     maxBody: int
 
 proc `$`(version: HttpVersion): string {.inline.} =
-  case version 
+  case version
   of HttpVer10:
     result = "Http/1.0"
   of HttpVer11:
@@ -58,16 +50,16 @@ proc parseStartLine*(s: string, request: var Request) {.inline.} =
     return
   case params[0]
   of "Head":
-    request.httpMethod = HttpHead 
+    request.httpMethod = HttpHead
   of "Get":
     request.httpMethod = HttpGet
   of "Post":
     request.httpMethod = HttpPost
   else:
-    discard 
+    discard
   request.httpUrl = parseUri(params[1])
   case params[2]
-  of "HTTP/1.0":  
+  of "HTTP/1.0":
     request.httpVersion = HttpVer10
   of "HTTP/1.1":
     request.httpVersion = HttpVer11
@@ -86,13 +78,8 @@ proc parseHttpRequest*(client: Socket, hostName: string): Request =
     let pairs = line.parseHeader
     result.httpHeaders[pairs.key] = pairs.value
 
-# proc handleRequest(version: HttpVersion, status: HttpCode, data: string): string =
-#   result = $version & $status & "\c\L"
-#   result.add "Server: Prologue" & "\c\L"
-#   result.add "Content-type: text/html; charset=UTF-8\c\L"
-#   result.add &"Content-Length: {data.len}"
-#   result.add "\c\L\c\L"
-#   result.add data
+  if result.httpHeaders.hasKey("Content-Length"):
+    result.body = client.recv(parseInt(result.httpHeaders["Content-Length"]))
 
 proc `$`(rep: Response): string {.inline.} =
   result = &"{rep.httpVersion} {rep.status}\c\L"
@@ -101,10 +88,19 @@ proc `$`(rep: Response): string {.inline.} =
   result.add &"Content-Length: {rep.body.len}"
   result.add "\c\L\c\L"
   result.add rep.body
-   
 
-proc handleHtml*(path: string, version: HttpVersion, status: HttpCode): Response =
-  var f: File
+proc handleHtml*(path: string, version: HttpVersion,
+    status: HttpCode): Response =
+  var
+    f: File
+    path = path
+  if path.splitFile.ext == "":
+    path &= ".html"
+  if not existsFile(path):
+    result.body = "<h1>404 Not Found!</h1>"
+    result.httpVersion = HttpVer11
+    result.status = Http404
+    return
   try:
     f = open(path, fmRead)
   except IOError:
@@ -118,12 +114,8 @@ proc handleHead(url: Uri, version: HttpVersion, status: HttpCode): Response =
   let path = url.path
   if path.isRootDir:
     return handleHtml("index.html", version, status)
-  let pathStrip = path.strip(chars={'/'})
+  let pathStrip = path.strip(chars = {'/'})
   return handleHtml(pathStrip, version, status)
-  # echo pathStrip
-  # let pathSplit = splitPath(path)
-  # echo pathSplit.repr
-
 
 proc handleRequest(req: Request): Response =
   case req.httpMethod
@@ -149,15 +141,9 @@ proc start*(server: HttpServer) =
     let
       req = client.parseHttpRequest(address)
       response = req.handleRequest
-      # response = handleRequest(HttpVer11, HttpCode(200), Page)
-    echo response
     client.send($response)
+    echo response
     client.close()
-
-
-proc body*(req: Request) {.async.} =
-  while true:
-    break
 
 when isMainModule:
   var s = initHttpServer(port = 5000)
