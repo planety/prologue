@@ -1,4 +1,4 @@
-import uri, cgi, net, httpcore, httpclient, asyncdispatch, asyncnet
+import uri, httpcore, httpclient, asyncdispatch, asyncnet
 
 
 import os, tables, strutils, strformat
@@ -69,7 +69,11 @@ proc parseStartLine*(s: string, request: var Request) {.inline.} =
 proc parseHttpRequest*(client: AsyncSocket, hostName: string): Future[Request] {.async.} =
   result.httpHeaders = newHttpHeaders()
   result.hostName = hostName
+  echo result
   let startLine = await client.recvLine()
+  if startLine == "":
+    return
+  echo startLine
   startLine.parseStartLine(result)
   while true:
     let line = await client.recvLine
@@ -77,9 +81,10 @@ proc parseHttpRequest*(client: AsyncSocket, hostName: string): Future[Request] {
       break
     let pairs = line.parseHeader
     result.httpHeaders[pairs.key] = pairs.value
-
+  echo result
   if result.httpHeaders.hasKey("Content-Length"):
     result.body = await client.recv(parseInt(result.httpHeaders["Content-Length"]))
+  echo result
 
 proc `$`(rep: Response): string {.inline.} =
   result = &"{rep.httpVersion} {rep.status}\c\L"
@@ -118,6 +123,7 @@ proc handle(url: Uri, version: HttpVersion, status: HttpCode): Response =
   return handleHtml(pathStrip, version, status)
 
 proc handleRequest(req: Request): Response =
+  echo req.httpMethod
   case req.httpMethod
   of HttpHead:
     result = handle(req.httpUrl, req.httpVersion, Http200)
@@ -145,6 +151,7 @@ proc start*(server: AsyncHttpServer) {.async.} =
     echo response
     await client.sendResponse(response)
     client.close()
+    echo "over"
 
 when isMainModule:
   var s = newAsyncHttpServer(port = 5000)
