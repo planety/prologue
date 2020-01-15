@@ -1,24 +1,18 @@
-import asynchttpserver, asyncdispatch, uri, httpcore, httpclient, asyncnet
+import asynchttpserver, asyncdispatch, uri, httpcore, httpclient
 
-
-import os, tables, strutils, strformat
+import tables, strutils, strformat
 
 type
+  NativeRequest = asynchttpserver.Request
   PrologueError* = object of Exception
   RouteError* = object of PrologueError
   RouteResetError* = object of PrologueError
+  Settings* = object
   Request* = object
-    httpMethod*: HttpMethod
-    httpUrl*: Uri
-    httpVersion*: HttpVersion
-    httpHeaders*: HttpHeaders # HttpHeaders = ref object
-                              #   table*: TableRef[string, seq[string]]
-    hostName*: string
-    body*: string
-    cookies*: Table[string, string]
+    nativeRequest: NativeRequest
+    settings: Settings
 
-  Response* = object 
-    client*: AsyncSocket
+  Response* = object
     httpVersion*: HttpVersion
     status*: HttpCode
     httpHeaders*: HttpHeaders
@@ -34,6 +28,20 @@ type
   Router* = ref object
     callable*: Table[string, Handler]
 
+proc initResponse*(): Response =
+  Response(httpVersion: HttpVer11, httpHeaders: newHttpHeaders())
+
+proc abortWith*(response: var Response, status = Http404, body: string) =
+  response.status = status
+  response.body = body
+
+proc redirectTo*(response: var Response, status = Http301, url: string) =
+  response.status = status
+  response.httpHeaders.add("Location", url)
+
+proc error*(response: var Response, status = Http404) =
+  response.status = Http404
+  response.body = "404 Not Found!"
 
 proc newRouter*(): Router =
   Router(callable: initTable[string, Handler]())
@@ -41,8 +49,11 @@ proc newRouter*(): Router =
 proc addRoute*(router: Router, route: string, handler: Handler) =
   router.callable[route] = handler
 
+proc handle*(request: Request, response: Response) {.async.} =
+  await request.nativeRequest.respond(response.status, response.body, response.httpHeaders)
+
 # proc hello(): string =
-#   return "Hello, Nim......" 
+#   return "Hello, Nim......"
 
 
 # macro callHandler(s: string): untyped =
@@ -58,7 +69,7 @@ proc addRoute*(router: Router, route: string, handler: Handler) =
 #     let response = callHandler(call)
 #     echo response
 #     # await req.respond(Http200, call)
-  
+
 #   await req.respond(Http200, "It's ok")
 
 
