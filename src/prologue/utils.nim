@@ -20,13 +20,13 @@ type
     cookies*: Table[string, string]
 
   Response* = object 
-    client*: Socket
+    client*: AsyncSocket
     httpVersion*: HttpVersion
     status*: HttpCode
     httpHeaders*: HttpHeaders
     body*: string
 
-  HttpServer* = ref object
+  AsyncHttpServer* = ref object
     hostName: string
     port: int
     reuseAddr, reusePort: bool
@@ -39,9 +39,9 @@ proc `$`(version: HttpVersion): string {.inline.} =
   of HttpVer11:
     result = "Http/1.1"
 
-proc initHttpServer*(hostName: string = "127.0.0.1",
-    port: int = 8080): HttpServer {.inline.} =
-  HttpServer(hostName: hostName, port: port)
+proc newAsyncHttpServer*(hostName: string = "127.0.0.1",
+    port: int = 8080): AsyncHttpServer {.inline.} =
+  AsyncHttpServer(hostName: hostName, port: port)
 
 proc parseStartLine*(s: string, request: var Request) {.inline.} =
   let params = s.splitWhitespace
@@ -66,20 +66,20 @@ proc parseStartLine*(s: string, request: var Request) {.inline.} =
   else:
     discard
 
-proc parseHttpRequest*(client: Socket, hostName: string): Request =
+proc parseHttpRequest*(client: AsyncSocket, hostName: string): Future[Request] {.async.} =
   result.httpHeaders = newHttpHeaders()
   result.hostName = hostName
-  let startLine = client.recvLine
+  let startLine = await client.recvLine()
   startLine.parseStartLine(result)
   while true:
-    let line = client.recvLine
+    let line = await client.recvLine
     if line == "\c\L":
       break
     let pairs = line.parseHeader
     result.httpHeaders[pairs.key] = pairs.value
 
   if result.httpHeaders.hasKey("Content-Length"):
-    result.body = client.recv(parseInt(result.httpHeaders["Content-Length"]))
+    result.body = await client.recv(parseInt(result.httpHeaders["Content-Length"]))
 
 proc `$`(rep: Response): string {.inline.} =
   result = &"{rep.httpVersion} {rep.status}\c\L"
@@ -110,7 +110,7 @@ proc handleHtml*(path: string, version: HttpVersion,
   result.httpVersion = version
   result.status = status
 
-proc handleHead(url: Uri, version: HttpVersion, status: HttpCode): Response =
+proc handle(url: Uri, version: HttpVersion, status: HttpCode): Response =
   let path = url.path
   if path.isRootDir:
     return handleHtml("index.html", version, status)
@@ -120,31 +120,32 @@ proc handleHead(url: Uri, version: HttpVersion, status: HttpCode): Response =
 proc handleRequest(req: Request): Response =
   case req.httpMethod
   of HttpHead:
-    result = handleHead(req.httpUrl, req.httpVersion, Http200)
+    result = handle(req.httpUrl, req.httpVersion, Http200)
   of HttpGet:
-    discard
+    result = handle(req.httpUrl, req.httpVersion, Http200)
   else:
     discard
 
-proc start*(server: HttpServer) =
-  var socket = newSocket()
+proc sendResponse(client: AsyncSocket, response: Response): Future[void] = 
+  client.send($response)
+
+proc start*(server: AsyncHttpServer) {.async.} =
+  var socket = newAsyncSocket()
+  socket.setSockOpt(OptReuseAddr, true)
   socket.bindAddr(Port(server.port), server.hostName)
   socket.listen()
   echo fmt"Prologue serve at {server.hostName}:{server.port}"
 
-  var
-    client: Socket
-    address = ""
   while true:
-    socket.acceptAddr(client, address)
+    let (address, client) = await socket.acceptAddr()
     echo "Client connected from: ", address
     let
-      req = client.parseHttpRequest(address)
+      req = await client.parseHttpRequest(address)
       response = req.handleRequest
-    client.send($response)
     echo response
+    await client.sendResponse(response)
     client.close()
 
 when isMainModule:
-  var s = initHttpServer(port = 5000)
-  s.start()
+  var s = newAsyncHttpServer(port = 5000)
+  waitFor s.start()
