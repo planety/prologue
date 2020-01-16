@@ -18,16 +18,16 @@ listen = localhost:8080
 ```nim
 import strtabs
 import views
-from prologue import config
+import prologue
 
 
-proc setup(settings: StringTableRef):
-  var config = Configure(settings:settings)
-  config.addRoute('/home', home, HttpGet)
-  config.addRoute('/hello', hello, HttpGet)
-  config.addRoute("/templ", templ, HttpGet, render = "templ.html")
-  config.addRoute("/hello/<name>", HttpGet,helloName)
-  return config.makeApp()
+proc setup(settings: Settings): Prologue =
+  var app = Prologue(settings: Settings)
+  app.addRoute('/home', home, HttpGet)
+  app.addRoute('/hello', hello, HttpGet)
+  app.addRoute("/templ", templ, HttpGet, render = "templ.html")
+  app.addRoute("/hello/<name>", HttpGet,helloName)
+  return app
 ```
 
 ### View

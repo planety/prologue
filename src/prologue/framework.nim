@@ -8,12 +8,15 @@ type
   RouteError* = object of PrologueError
   RouteResetError* = object of PrologueError
   Settings* = object
-  Request* = object
+    debug: bool
+    address: string
+    port: int 
+  Request* = ref object
     nativeRequest: NativeRequest
-    params*: TableRef[string, string]
+    params*: Table[string, string]
     settings: Settings
 
-  Response* = object
+  Response* = ref object
     httpVersion*: HttpVersion
     status*: HttpCode
     httpHeaders*: HttpHeaders
@@ -23,6 +26,10 @@ type
 
   Router* = ref object
     callable*: Table[string, Handler]
+
+  Prologue* = object
+    setting: Settings
+    router: Router
 
 proc initResponse*(): Response =
   Response(httpVersion: HttpVer11, httpHeaders: newHttpHeaders())
@@ -48,8 +55,8 @@ proc addRoute*(router: Router, route: string, handler: Handler) =
 proc handle*(request: Request, response: Response) {.async.} =
   await request.nativeRequest.respond(response.status, response.body, response.httpHeaders)
 
-# proc hello(request: Request): string =
-#   return "<h1>Hello, Nim</h1>"
+# proc hello(request: Request) =
+#   resp "<h1>Hello, Nim</h1>"
 
 
 
