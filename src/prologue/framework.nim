@@ -10,7 +10,7 @@ type
   Settings* = object
     debug: bool
     address: string
-    port: int 
+    port: Port
   Request* = ref object
     nativeRequest: NativeRequest
     params*: Table[string, string]
@@ -26,10 +26,12 @@ type
 
   Router* = ref object
     callable*: Table[string, Handler]
+    httpMethod*: HttpMethod
 
   Prologue* = object
     setting: Settings
     router: Router
+
 
 proc initResponse*(): Response =
   Response(httpVersion: HttpVer11, httpHeaders: newHttpHeaders())
@@ -49,8 +51,9 @@ proc error*(response: var Response, status = Http404) =
 proc newRouter*(): Router =
   Router(callable: initTable[string, Handler]())
 
-proc addRoute*(router: Router, route: string, handler: Handler) =
+proc addRoute*(router: Router, route: string, handler: Handler, httpMethod = HttpGet) =
   router.callable[route] = handler
+  router.httpMethod = httpMethod
 
 proc handle*(request: Request, response: Response) {.async.} =
   await request.nativeRequest.respond(response.status, response.body, response.httpHeaders)

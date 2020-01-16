@@ -38,16 +38,16 @@ proc setup(settings: Settings): Prologue =
 import tables
 from prologue import view
 
-proc hello*(request: Request): string =
+proc hello*(request: Request): Future[string] {.async.} =
   resp "<h1>Hello, Prologue!</h1>"
     
-proc home*(request: Request): string =
+proc home*(request: Request): Future[string] {.async.} =
   resp "<h1>Home</h1>"
     
-proc templ*(request: Request): string =
+proc templ*(request: Request): Future[string] {.async.} =
   resp {"name": "string"}.toTable
     
-proc helloName*(request: Request): string =
+proc helloName*(request: Request): Future[string] {.async.} =
   resp "Hello, " & resuest.params["name"]
 ```
 
