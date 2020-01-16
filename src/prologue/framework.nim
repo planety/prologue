@@ -10,6 +10,7 @@ type
   Settings* = object
   Request* = object
     nativeRequest: NativeRequest
+    params*: TableRef[string, string]
     settings: Settings
 
   Response* = object
@@ -18,12 +19,7 @@ type
     httpHeaders*: HttpHeaders
     body*: string
 
-  Context* = ref object
-    request*: Request
-    params*: Table[string, string]
-    reponse*: Response
-
-  Handler* = proc(ctx: Context): Future[void]
+  Handler* = proc(request: Request): Future[void]
 
   Router* = ref object
     callable*: Table[string, Handler]
@@ -52,8 +48,10 @@ proc addRoute*(router: Router, route: string, handler: Handler) =
 proc handle*(request: Request, response: Response) {.async.} =
   await request.nativeRequest.respond(response.status, response.body, response.httpHeaders)
 
-# proc hello(): string =
-#   return "Hello, Nim......"
+# proc hello(request: Request): string =
+#   return "<h1>Hello, Nim</h1>"
+
+
 
 
 # macro callHandler(s: string): untyped =
