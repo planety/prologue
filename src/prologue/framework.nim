@@ -1,6 +1,6 @@
 import asynchttpserver, asyncdispatch, uri, httpcore, httpclient
 
-import tables, strutils, strformat
+import tables, strutils, strformat, macros
 
 type
   NativeRequest = asynchttpserver.Request
@@ -58,6 +58,19 @@ proc addRoute*(router: Router, route: string, handler: Handler, httpMethod = Htt
 proc handle*(request: Request, response: Response) {.async.} =
   await request.nativeRequest.respond(response.status, response.body, response.httpHeaders)
 
+macro resp*(params: untyped) =
+  let request = ident"request"
+  let response = ident"response"
+  result = quote do:
+    # echo `request`
+    handle(request, response)
+
+proc run*(port: Port, server: AsyncHttpServer) =
+  proc handleRequest(nativeRequest: NativeRequest) {.async.} =
+    # await handle(nativeRequest, response)
+    discard
+
+  waitFor server.serve(port, handleRequest)
 # proc hello(request: Request) =
 #   resp "<h1>Hello, Nim</h1>"
 
