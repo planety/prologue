@@ -3,11 +3,16 @@
 #### config.ini
 
 ```ini
-[app:main]
+[logger]
+consoleLogger = true
+fileLogger = true
+defaultFileLoggerPath = "app.log"
+
+[app]
 prologue.reload_templates = true
 
-[server:main]
-use = egg:asynchttpserver 
+[server]
+use = asynchttpserver 
 listen = localhost:8080
 ```
 

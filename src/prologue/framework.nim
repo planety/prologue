@@ -62,7 +62,6 @@ macro resp*(params: untyped) =
   let request = ident"request"
   let response = ident"response"
   result = quote do:
-    # echo `request`
     handle(request, response)
 
 proc run*(port: Port, server: AsyncHttpServer) =
