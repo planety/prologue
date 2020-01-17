@@ -36,17 +36,20 @@ type
 proc initResponse*(): Response =
   Response(httpVersion: HttpVer11, httpHeaders: newHttpHeaders())
 
-proc abortWith*(response: var Response, status = Http404, body: string) =
+proc abortWith*(response: var Response, status = Http404, body = "") =
   response.status = status
   response.body = body
 
-proc redirectTo*(response: var Response, status = Http301, url: string) =
+proc redirectTo*(response: var Response, status = Http301, url: string, body = "", delay = 0) =
   response.status = status
-  response.httpHeaders.add("Location", url)
+  if delay == 0:
+    response.httpHeaders.add("Location", url)
+  else:
+    response.httpHeaders.add("refresh", fmt"""{delay};url="{url}"""")
 
-proc error*(response: var Response, status = Http404) =
+proc error*(response: var Response, status = Http404, body = "404 Not Found!") =
   response.status = Http404
-  response.body = "404 Not Found!"
+  response.body = body
 
 proc newRouter*(): Router =
   Router(callable: initTable[string, Handler]())
