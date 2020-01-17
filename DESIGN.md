@@ -27,11 +27,11 @@ import prologue
 
 
 proc setup(settings: Settings): Prologue =
-  var app = Prologue(settings: Settings)
+  var app = initApp(settings: settings)
   app.addRoute('/home', home, HttpGet)
   app.addRoute('/hello', hello, HttpGet)
   app.addRoute("/templ", templ, HttpGet, render = "templ.html")
-  app.addRoute("/hello/<name>", HttpGet,helloName)
+  app.addRoute("/hello/<name>", HttpGet, helloName)
   return app
 ```
 
@@ -42,6 +42,9 @@ proc setup(settings: Settings): Prologue =
 ```nim
 import tables
 from prologue import view
+
+import config
+
 
 proc hello*(request: Request) {.async.} =
   resp "<h1>Hello, Prologue!</h1>"
@@ -54,6 +57,11 @@ proc templ*(request: Request) {.async.} =
     
 proc helloName*(request: Request) {.async.} =
   resp "Hello, " & request.params["name"]
+
+
+let settings = Settings(port: port, address: address, debug: debug)
+var app = setup(settings)
+app.run()
 ```
 
 - Return Html
