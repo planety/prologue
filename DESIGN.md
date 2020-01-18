@@ -27,9 +27,9 @@ import prologue
 
 
 proc setup(settings: Settings): Prologue =
-  var app = initApp(settings: settings)
-  app.addRoute('/home', home, HttpGet)
-  app.addRoute('/hello', hello, HttpGet)
+  var app = initApp(settings = settings)
+  app.addRoute("/home", home, HttpGet)
+  app.addRoute("/hello", hello, HttpGet)
   app.addRoute("/templ", templ, HttpGet, render = "templ.html")
   app.addRoute("/hello/<name>", HttpGet, helloName)
   return app

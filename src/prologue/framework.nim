@@ -1,6 +1,6 @@
 import asynchttpserver, asyncdispatch, uri, httpcore, httpclient
 
-import tables, strutils, strformat, macros
+import tables, strutils, strformat, macros, logging
 
 type
   NativeRequest = asynchttpserver.Request
@@ -71,9 +71,10 @@ proc handle*(request: Request, response: Response) {.async.} =
 
 macro resp*(params: untyped) =
   let request = ident"request"
-  let response = ident"response"
+  # let response = ident"response"
   result = quote do:
-    handle(request, response)
+    let response = new Response
+    asyncCheck handle(`request`, response)
 
 proc initSettings*(port = Port(8080), address = "127.0.0.1",
     debug = false): Settings =
@@ -84,39 +85,39 @@ proc initApp*(settings: Settings): Prologue =
       router: newRouter())
 
 proc run*(app: Prologue) =
-  proc handleRequest(nativeRequest: NativeRequest) {.async.} =
-    # await handle(nativeRequest, response)
+  proc handleRequest(nativeRequest: NativeRequest) {.async, gcsafe.} =
     var request = Request(nativeRequest: nativeRequest, params: initTable[
         string, string](), settings: app.settings)
     if app.findHandler(request):
-      discard
+      {.gcsafe.}:
+        let handler = app.router.callable[request.nativeRequest.url.path]
+        await handler(request)
     else:
-      var response = error()
+      let response = error()
       await request.nativeRequest.respond(response.status, response.body,
           response.httpHeaders)
 
+  defer: app.server.close()
   waitFor app.server.serve(app.settings.port, handleRequest)
-# proc hello(request: Request) =
-#   resp "<h1>Hello, Nim</h1>"
 
 
+when isMainModule:
+  proc hello*(request: Request) {.async.} =
+    resp "<h1>Hello, Prologue!</h1>"
 
-# macro callHandler(s: string): untyped =
-#   result = newIdentNode(strVal(s))
+  proc home*(request: Request) {.async.} =
+    resp "<h1>Home</h1>"
 
-# var server = newAsyncHttpServer()
-# proc cb(req: Request) {.async, gcsafe.} =
-#   var router = newRouter()
-#   router.addRoute("/hello", "hello")
-#   router.addRoute("/hello/<name>", "hello")
-#   if req.url.path in router.callable:
-#     let call = router.callable[req.url.path]
-#     let response = callHandler(call)
-#     echo response
-#     # await req.respond(Http200, call)
+  proc templ*(request: Request) {.async.} =
+    resp {"name": "string"}.toTable
 
-#   await req.respond(Http200, "It's ok")
+  proc helloName*(request: Request) {.async.} =
+    resp "Hello, " & request.params["name"]
 
-
-
-# waitFor server.serve(Port(5000), cb)
+  let settings = Settings(port: Port(8080), address: "127.0.0.1", debug: false)
+  var app = initApp(settings = settings)
+  app.addRoute("/home", home, HttpGet)
+  app.addRoute("/hello", hello, HttpGet)
+  # app.addRoute("/templ", templ, HttpGet, render = "templ.html")
+  # app.addRoute("/hello/<name>", HttpGet, helloName)
+  app.run()
