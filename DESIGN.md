@@ -59,7 +59,7 @@ proc helloName*(request: Request) {.async.} =
   resp "Hello, " & request.params["name"]
 
 
-let settings = Settings(port: port, address: address, debug: debug)
+let settings = initSettings(appName = "Prologue")
 var app = setup(settings)
 app.run()
 ```

@@ -10,8 +10,9 @@ type
 
   Settings* = object
     port: Port
-    address: string
     debug: bool
+    reusePort: bool
+    appName: string
 
   Request* = ref object
     nativeRequest: NativeRequest
@@ -76,12 +77,11 @@ macro resp*(params: untyped) =
     let response = new Response
     asyncCheck handle(`request`, response)
 
-proc initSettings*(port = Port(8080), address = "127.0.0.1",
-    debug = false): Settings =
-  Settings(port: port, address: address, debug: debug)
+proc initSettings*(port = Port(8080), debug = false, reusePort = true, appName = ""): Settings =
+  Settings(port: port, debug: debug, reusePort: reusePort, appName: appName)
 
 proc initApp*(settings: Settings): Prologue =
-  Prologue(server: newAsyncHttpServer(true, true), settings: settings,
+  Prologue(server: newAsyncHttpServer(true, settings.reusePort), settings: settings,
       router: newRouter())
 
 proc run*(app: Prologue) =
@@ -97,7 +97,12 @@ proc run*(app: Prologue) =
       await request.nativeRequest.respond(response.status, response.body,
           response.httpHeaders)
 
+  # maybe should read settings from file
+  if logging.getHandlers().len == 0:
+    addHandler(logging.newConsoleLogger())
+    setLogFilter(if app.settings.debug: lvlInfo else: lvlDebug)
   defer: app.server.close()
+  logging.info(fmt"Prologue is serving at 127.0.0.1:{app.settings.port.int} {app.settings.appName}")
   waitFor app.server.serve(app.settings.port, handleRequest)
 
 
@@ -114,7 +119,7 @@ when isMainModule:
   proc helloName*(request: Request) {.async.} =
     resp "Hello, " & request.params["name"]
 
-  let settings = Settings(port: Port(8080), address: "127.0.0.1", debug: false)
+  let settings = initSettings(appName = "Test")
   var app = initApp(settings = settings)
   app.addRoute("/home", home, HttpGet)
   app.addRoute("/hello", hello, HttpGet)
