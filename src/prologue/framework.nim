@@ -1,12 +1,14 @@
 import asynchttpserver, asyncdispatch, uri, httpcore, httpclient
+import tables, strutils, strformat, macros, logging, parseutils
 
-import tables, strutils, strformat, macros, logging
+
 
 type
   NativeRequest = asynchttpserver.Request
   PrologueError* = object of Exception
   RouteError* = object of PrologueError
-  RouteResetError* = object of PrologueError
+  RouteResetError* = object of RouteError
+  DuplicatedRouteError* = object of RouteError
 
   Settings* = object
     port: Port
@@ -26,6 +28,11 @@ type
     body*: string
 
   Handler* = proc(request: Request): Future[void]
+
+  Path* = object
+    basePath*: string
+    handler*: Handler
+    path*: string
 
   Router* = ref object
     callable*: Table[string, Handler]
@@ -61,13 +68,17 @@ proc newRouter*(): Router =
 
 proc addRoute*(app: Prologue, route: string, handler: Handler,
     httpMethod = HttpGet) =
+  if route in app.router.callable:
+    raise newException(DuplicatedRouteError, fmt"Route {route} is duplicated!")
   app.router.callable[route] = handler
   app.router.httpMethod = httpMethod
+
 
 proc findHandler*(app: Prologue, request: Request): bool =
   let path = request.nativeRequest.url.path
   if path in app.router.callable:
     return true
+  return false
 
 proc handle*(request: Request, response: Response) {.async.} =
   await request.nativeRequest.respond(response.status, response.body,
@@ -103,7 +114,7 @@ proc run*(app: Prologue) =
         let handler = app.router.callable[request.nativeRequest.url.path]
         await handler(request)
     else:
-      let response = error(status = Http404, body = "404 Not Found!")
+      let response = error(status = Http404, body = "<h1>404 Not Found!</h1>")
       await request.nativeRequest.respond(response.status, response.body,
           response.httpHeaders)
       logging.debug($response)
@@ -135,6 +146,7 @@ when isMainModule:
   app.addRoute("/", home, HttpGet)
   app.addRoute("/home", home, HttpGet)
   app.addRoute("/hello", hello, HttpGet)
+  # app.addRoute("/hello", hello, HttpGet)
   # app.addRoute("/templ", templ, HttpGet, render = "templ.html")
   # app.addRoute("/hello/<name>", HttpGet, helloName)
   app.run()

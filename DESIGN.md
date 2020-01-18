@@ -20,6 +20,8 @@ listen = localhost:8080
 
 - Return Server
 
+Support simple route or single file urls.
+
 ```nim
 import strtabs
 import views
@@ -28,10 +30,11 @@ import prologue
 
 proc setup(settings: Settings): Prologue =
   var app = initApp(settings = settings)
-  app.addRoute("/home", home, HttpGet)
-  app.addRoute("/hello", hello, HttpGet)
-  app.addRoute("/templ", templ, HttpGet, render = "templ.html")
-  app.addRoute("/hello/<name>", HttpGet, helloName)
+  app.addRoute(Path("", home, "/home"), HttpGet)
+  app.addRoute(Path("", hello, "/hello"), HttpGet)
+  app.addRoute(Path("mywebsite", include("mywebsite.urls")))
+  app.addRoute(Path("advanced", templ, "/templ"), HttpGet, render = "templ.html")
+  app.addRoute(Path("", helloName, "/hello/<name>"), HttpGet)
   return app
 ```
 
