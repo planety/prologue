@@ -40,11 +40,15 @@ proc initResponse*(): Response =
   Response(httpVersion: HttpVer11, httpHeaders: newHttpHeaders())
 
 proc abortWith*(status = Http404, body = ""): Response =
+  new result
+
   result.status = status
   result.body = body
 
 proc redirectTo*(status = Http301, url: string,
     body = "", delay = 0): Response =
+  new result
+
   result.status = status
   if delay == 0:
     result.httpHeaders.add("Location", url)
@@ -52,6 +56,8 @@ proc redirectTo*(status = Http301, url: string,
     result.httpHeaders.add("refresh", fmt"""{delay};url="{url}"""")
 
 proc error*(status = Http404, body = "404 Not Found!"): Response =
+  new result
+
   result.status = status
   result.body = body
 
@@ -64,7 +70,9 @@ proc addRoute*(app: Prologue, route: string, handler: Handler,
   app.router.httpMethod = httpMethod
 
 proc findHandler*(app: Prologue, request: Request): bool =
-  discard
+  let path = request.nativeRequest.url.path
+  if path in app.router.callable:
+    return true
 
 proc handle*(request: Request, response: Response) {.async.} =
   await request.nativeRequest.respond(response.status, response.body,
@@ -75,17 +83,19 @@ macro resp*(params: untyped) =
   # let response = ident"response"
   result = quote do:
     let response = new Response
+    response.body = $`params`
     asyncCheck handle(`request`, response)
 
-proc initSettings*(port = Port(8080), debug = false, reusePort = true, appName = ""): Settings =
+proc initSettings*(port = Port(8080), debug = false, reusePort = true,
+    appName = ""): Settings =
   Settings(port: port, debug: debug, reusePort: reusePort, appName: appName)
 
 proc initApp*(settings: Settings): Prologue =
-  Prologue(server: newAsyncHttpServer(true, settings.reusePort), settings: settings,
-      router: newRouter())
+  Prologue(server: newAsyncHttpServer(true, settings.reusePort),
+      settings: settings, router: newRouter())
 
 proc run*(app: Prologue) =
-  proc handleRequest(nativeRequest: NativeRequest) {.async, gcsafe.} =
+  proc handleRequest(nativeRequest: NativeRequest) {.async.} =
     var request = Request(nativeRequest: nativeRequest, params: initTable[
         string, string](), settings: app.settings)
     if app.findHandler(request):
@@ -93,7 +103,7 @@ proc run*(app: Prologue) =
         let handler = app.router.callable[request.nativeRequest.url.path]
         await handler(request)
     else:
-      let response = error()
+      let response = error(status = Http404, body = "404 Not Found!")
       await request.nativeRequest.respond(response.status, response.body,
           response.httpHeaders)
 
