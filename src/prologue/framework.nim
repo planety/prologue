@@ -38,21 +38,21 @@ type
 proc initResponse*(): Response =
   Response(httpVersion: HttpVer11, httpHeaders: newHttpHeaders())
 
-proc abortWith*(response: var Response, status = Http404, body = "") =
-  response.status = status
-  response.body = body
+proc abortWith*(status = Http404, body = ""): Response =
+  result.status = status
+  result.body = body
 
-proc redirectTo*(response: var Response, status = Http301, url: string,
-    body = "", delay = 0) =
-  response.status = status
+proc redirectTo*(status = Http301, url: string,
+    body = "", delay = 0): Response =
+  result.status = status
   if delay == 0:
-    response.httpHeaders.add("Location", url)
+    result.httpHeaders.add("Location", url)
   else:
-    response.httpHeaders.add("refresh", fmt"""{delay};url="{url}"""")
+    result.httpHeaders.add("refresh", fmt"""{delay};url="{url}"""")
 
-proc error*(response: var Response, status = Http404, body = "404 Not Found!") =
-  response.status = Http404
-  response.body = body
+proc error*(status = Http404, body = "404 Not Found!"): Response =
+  result.status = status
+  result.body = body
 
 proc newRouter*(): Router =
   Router(callable: initTable[string, Handler]())
@@ -61,6 +61,9 @@ proc addRoute*(app: Prologue, route: string, handler: Handler,
     httpMethod = HttpGet) =
   app.router.callable[route] = handler
   app.router.httpMethod = httpMethod
+
+proc findHandler*(app: Prologue, request: Request): bool =
+  discard
 
 proc handle*(request: Request, response: Response) {.async.} =
   await request.nativeRequest.respond(response.status, response.body,
@@ -85,8 +88,12 @@ proc run*(app: Prologue) =
     # await handle(nativeRequest, response)
     var request = Request(nativeRequest: nativeRequest, params: initTable[
         string, string](), settings: app.settings)
-
-    discard
+    if app.findHandler(request):
+      discard
+    else:
+      var response = error()
+      await request.nativeRequest.respond(response.status, response.body,
+          response.httpHeaders)
 
   waitFor app.server.serve(app.settings.port, handleRequest)
 # proc hello(request: Request) =

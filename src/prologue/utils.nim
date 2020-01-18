@@ -19,7 +19,7 @@ type
     body*: string
     cookies*: Table[string, string]
 
-  Response* = object 
+  Response* = object
     client*: AsyncSocket
     httpVersion*: HttpVersion
     status*: HttpCode
@@ -66,7 +66,8 @@ proc parseStartLine*(s: string, request: var Request) {.inline.} =
   else:
     discard
 
-proc parseHttpRequest*(client: AsyncSocket, hostName: string): Future[Request] {.async.} =
+proc parseHttpRequest*(client: AsyncSocket, hostName: string): Future[
+    Request] {.async.} =
   result.httpHeaders = newHttpHeaders()
   result.hostName = hostName
   echo result
@@ -83,7 +84,8 @@ proc parseHttpRequest*(client: AsyncSocket, hostName: string): Future[Request] {
     result.httpHeaders[pairs.key] = pairs.value
   echo result
   if result.httpHeaders.hasKey("Content-Length"):
-    result.body = await client.recv(parseInt(result.httpHeaders["Content-Length"]))
+    result.body = await client.recv(parseInt(result.httpHeaders[
+        "Content-Length"]))
   echo result
 
 proc `$`(rep: Response): string {.inline.} =
@@ -132,7 +134,7 @@ proc handleRequest(req: Request): Response =
   else:
     discard
 
-proc sendResponse(client: AsyncSocket, response: Response): Future[void] = 
+proc sendResponse(client: AsyncSocket, response: Response): Future[void] =
   client.send($response)
 
 proc start*(server: AsyncHttpServer) {.async.} =
