@@ -1,5 +1,5 @@
-import asynchttpserver, asyncdispatch, uri, httpcore, httpclient
-import tables, strutils, strformat, macros, logging, parseutils, hashes
+import asynchttpserver, asyncdispatch, uri, cookies, httpcore, httpclient
+import tables, strutils, strformat, macros, logging, hashes, strtabs
 
 
 
@@ -14,12 +14,14 @@ type
     port: Port
     debug: bool
     reusePort: bool
+    staticDir: string
     appName: string
 
   Request* = ref object
-    nativeRequest: NativeRequest
-    params*: Table[string, string]
+    nativeRequest*: NativeRequest
+    params*: StringTableRef
     settings: Settings
+    cookies: StringTableRef
 
   Response* = ref object
     httpVersion*: HttpVersion
@@ -95,7 +97,7 @@ proc defaultHandler*(request: Request) {.async.} =
 proc findHandler*(app: Prologue, request: Request, path: Path): Handler =
   if path in app.router.callable:
     return app.router.callable[path]
-  let 
+  let
     path = path.basePath & path.route
     pathList = path.split("/")
 
@@ -119,7 +121,7 @@ proc findHandler*(app: Prologue, request: Request, path: Path): Handler =
       if flag:
         return handler
   return defaultHandler
-  
+
 proc handle*(request: Request, response: Response) {.async.} =
   await request.nativeRequest.respond(response.status, response.body,
       response.httpHeaders)
@@ -127,9 +129,10 @@ proc handle*(request: Request, response: Response) {.async.} =
 proc `$`*(response: Response): string =
   fmt"{response.status} {response.httpHeaders}"
 
-macro resp*(params: untyped) =
+macro resp*(params: typed) =
   let request = ident"request"
   # let response = ident"response"
+  # echo getTypeInst(params).repr
   result = quote do:
     var response = newResponse(HttpVer11, Http200, httpHeaders = {
         "Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders,
@@ -138,8 +141,9 @@ macro resp*(params: untyped) =
     logging.debug($response)
 
 proc initSettings*(port = Port(8080), debug = false, reusePort = true,
-    appName = ""): Settings =
-  Settings(port: port, debug: debug, reusePort: reusePort, appName: appName)
+    staticDir = "/static", appName = ""): Settings =
+  Settings(port: port, debug: debug, reusePort: reusePort, staticDir: staticDir,
+      appName: appName)
 
 proc initApp*(settings: Settings): Prologue =
   Prologue(server: newAsyncHttpServer(true, settings.reusePort),
@@ -147,8 +151,8 @@ proc initApp*(settings: Settings): Prologue =
 
 proc run*(app: Prologue) =
   proc handleRequest(nativeRequest: NativeRequest) {.async.} =
-    var request = Request(nativeRequest: nativeRequest, params: initTable[
-        string, string](), settings: app.settings)
+    var request = Request(nativeRequest: nativeRequest, params: newStringTable(
+      ), settings: app.settings, cookies: newStringTable())
 
     logging.debug(fmt"{request.nativeRequest.reqMethod} {request.nativeRequest.url.path}")
     let path = initPath(route = request.nativeRequest.url.path, basePath = "",
@@ -156,7 +160,6 @@ proc run*(app: Prologue) =
     {.gcsafe.}:
       let handler = app.findHandler(request, path)
       await handler(request)
- 
 
   # maybe should read settings from file
   if logging.getHandlers().len == 0:
@@ -178,12 +181,12 @@ when isMainModule:
     resp {"name": "string"}.toTable
 
   proc helloName*(request: Request) {.async.} =
-    resp "<h1>Hello, " & request.params["name"] & "</h1>"
+    resp "<h1>Hello, " & request.params.getOrDefault("name", "Prologue") & "</h1>"
 
   proc testRedirect*(request: Request) {.async.} =
     await redirect(request, "/hello")
 
-  let settings = initSettings(appName = "Test")
+  let settings = initSettings(appName = "StarLight")
   var app = initApp(settings = settings)
   app.addRoute("/", home, "", HttpGet)
   app.addRoute("/", home, "", HttpPost)

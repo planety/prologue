@@ -5,14 +5,28 @@
 ```ini
 [logger]
 consoleLogger = true
+consoleLoggerLevel = "warning"
+consoleLoggerFormat = "[$time] - $levelname: "
 fileLogger = true
 defaultFileLoggerPath = "app.log"
 
 [app]
-prologue.reload_templates = true
+debug = false
+reload_templates = true
+static_folders = "/static"
+secure_proxy_ssl_header = none
+
+[plugins]
+starlight_cache = true
+starlight_oauth = true
+starlight_admin = true
+starlight_session = true
+
+[plugins_options]
+session_secret = "My session secret."
 
 [server]
-use = asynchttpserver 
+use = "asynchttpserver"
 listen = localhost:8080
 ```
 
@@ -29,10 +43,15 @@ import prologue
 
 
 proc setup(settings: Settings): Prologue =
+  # We create an instance of app, the first argument is settings.
   var app = initApp(settings = settings)
+  # you can specify default options from files.
+  # for example, debug options.
+  # var app = initApp(config = "config.debug") 
   let routes = [HttpRoute("/test", test, "", HttpGet), WebSocket("websocket", find)]
   app.addRoute(routes)
   # May change later
+  # addRoute tell framework what URLs should trigger our handler function. 
   app.addRoute("/", home, "", HttpGet)
   app.addRoute("/home", home, "", HttpGet)
   app.addRoute("/hello", hello, "", HttpGet)
