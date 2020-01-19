@@ -55,21 +55,6 @@ proc newResponse*(httpVersion: HttpVersion, status: HttpCode,
     httpHeaders = newHttpHeaders(), body = ""): Response =
   Response(httpVersion: httpVersion, status: status, httpHeaders: httpHeaders, body: body)
 
-proc abortWith*(status = Http404, body = ""): Response =
-  result = newResponse(httpVersion = HttpVer11, status = status, body = body)
-
-proc redirectTo*(status = Http301, url: string,
-    body = "", delay = 0): Response =
-  result = newResponse(httpVersion = HttpVer11, status = status, body = body)
-
-  if delay == 0:
-    result.httpHeaders.add("Location", url)
-  else:
-    result.httpHeaders.add("refresh", fmt"""{delay};url="{url}"""")
-
-proc error*(status = Http404, body = "<h1>404 Not Found!</h1>"): Response =
-  newResponse(httpVersion = HttpVer11, status = status, body = body)
-
 proc newRouter*(): Router =
   Router(callable: initTable[Path, Handler]())
 
@@ -104,6 +89,26 @@ macro resp*(params: untyped) =
     asyncCheck handle(`request`, response)
     logging.debug($response)
 
+proc abortWith*(request: Request, status = Http404, body = "") {.async.} =
+  await request.nativeRequest.respond(status, body)
+  logging.debug($status)
+
+proc redirect*(request: Request, url: string, status = Http301,
+    body = "", delay = 0) {.async.} =
+
+  var headers = newHttpHeaders()
+  if delay == 0:
+    headers.add("Location", url)
+  else:
+    headers.add("refresh", fmt"""{delay};url="{url}"""")
+  await request.nativeRequest.respond(status, body, headers)
+  logging.debug(fmt"{status} {headers}")
+
+proc error404*(request: Request, status = Http404,
+    body = "<h1>404 Not Found!</h1>") {.async.} =
+  await request.nativeRequest.respond(status, body)
+  logging.debug($status)
+
 proc initSettings*(port = Port(8080), debug = false, reusePort = true,
     appName = ""): Settings =
   Settings(port: port, debug: debug, reusePort: reusePort, appName: appName)
@@ -125,10 +130,7 @@ proc run*(app: Prologue) =
         let handler = app.router.callable[path]
         await handler(request)
     else:
-      let response = error(status = Http404, body = "<h1>404 Not Found!</h1>")
-      await request.nativeRequest.respond(response.status, response.body,
-          response.httpHeaders)
-      logging.debug($response)
+      await error404(request)
 
   # maybe should read settings from file
   if logging.getHandlers().len == 0:
@@ -152,11 +154,15 @@ when isMainModule:
   proc helloName*(request: Request) {.async.} =
     resp "Hello, " & request.params["name"]
 
+  proc testRedirect*(request: Request) {.async.} =
+    await redirect(request, "/hello")
+
   let settings = initSettings(appName = "Test")
   var app = initApp(settings = settings)
   app.addRoute("/", home, "", HttpGet)
   app.addRoute("/home", home, "", HttpGet)
   app.addRoute("/hello", hello, "", HttpGet)
+  app.addRoute("/redirect", testRedirect, "", HttpGet)
   # app.addRoute("/hello", hello, "advanced"， HttpGet)
   # app.addRoute("/templ", templ, "tempalte", HttpGet)
   # app.addRoute("/hello/<name>", helloName, "name", HttpGet, )

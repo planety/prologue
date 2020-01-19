@@ -30,15 +30,27 @@ import prologue
 
 proc setup(settings: Settings): Prologue =
   var app = initApp(settings = settings)
+  let routes = [HttpRoute("/test", test, "", HttpGet), WebSocket("websocket", find)]
+  app.addRoute(routes)
+  # May change later
   app.addRoute("/", home, "", HttpGet)
   app.addRoute("/home", home, "", HttpGet)
   app.addRoute("/hello", hello, "", HttpGet)
-  app.addRoute("/hello", hello, "advanced"， HttpGet)
+  app.addRoute("/hello", hello, "advanced", HttpGet)
   app.addRoute("/templ", templ, "tempalte", HttpGet)
-  app.addRoute("/hello/<name>", helloName, "name", HttpGet, )
+    app.addRoute("/redirect", testRedirect, "", HttpGet)
+  app.addRoute("/hello/<name>", helloName, "name", HttpGet)
   # support file urls
   app.addRoute(basePath = "mywebsite", fileName = "mywebsite.urls")
   return app
+```
+
+mywebsite.urls
+
+```text
+Route("/", home, "", HttpGet)
+WebSocketRoute("/", hello, HttpGet)
+Mount('/static', StaticFiles(directory="static"))
 ```
 
 ### View
@@ -64,6 +76,8 @@ proc templ*(request: Request) {.async.} =
 proc helloName*(request: Request) {.async.} =
   resp "Hello, " & request.params["name"]
 
+proc testRedirect*(request: Request) {.async.} =
+  await redirect(request, "/hello")
 
 let settings = initSettings(appName = "Prologue")
 var app = setup(settings)
