@@ -30,11 +30,12 @@ import prologue
 
 proc setup(settings: Settings): Prologue =
   var app = initApp(settings = settings)
-  app.addRoute(Path("", home, "/home"), HttpGet)
-  app.addRoute(Path("", hello, "/hello"), HttpGet)
-  app.addRoute(Path("mywebsite", include("mywebsite.urls")))
-  app.addRoute(Path("advanced", templ, "/templ"), HttpGet, render = "templ.html")
-  app.addRoute(Path("", helloName, "/hello/<name>"), HttpGet)
+  app.addRoute(Path("/home", home, ""), HttpGet)
+  app.addRoute(Path("/hello", hello, ""), HttpGet)
+  app.addRoute(Path("/templ", templ, "advanced"), HttpGet, render = "templ.html")
+  app.addRoute("/hello/<name>", Path(helloName, ""), HttpGet)
+  # support file urls
+  app.addRoute("mywebsite.urls", "mywebsite")
   return app
 ```
 
@@ -76,8 +77,22 @@ app.run()
 
 - Test Module
 
+Support Test Client.
+
 ```nim
-from prologue import test
+from prologue import testclient
+
+suite "Test Prologue":
+  let
+    address = "127.0.0.1"
+    port = Port(8080)
+    baseUrl = ""
+
+  test "route hello":
+    check testRoute("/hello") == "<h1>Hello, Prologue!</h1>"
+
+  test "route home":
+    check testRoute("/home") == "<h1>Home</h1>"
 ```
 
 
