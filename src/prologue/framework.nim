@@ -69,27 +69,7 @@ proc addRoute*(app: Prologue, route: string, handler: Handler, basePath = "",
 proc addRoute*(app: Prologue, basePath: string, fileName: string) =
   discard
 
-proc findHandler*(app: Prologue, request: Request, path: Path): bool =
-  if path in app.router.callable:
-    return true
-  return false
-
-proc handle*(request: Request, response: Response) {.async.} =
-  await request.nativeRequest.respond(response.status, response.body,
-      response.httpHeaders)
-
-proc `$`*(response: Response): string =
-  fmt"{response.status} {response.httpHeaders}"
-
-macro resp*(params: untyped) =
-  let request = ident"request"
-  # let response = ident"response"
-  result = quote do:
-    var response = newResponse(HttpVer11, Http200, body = $`params`)
-    asyncCheck handle(`request`, response)
-    logging.debug($response)
-
-proc abortWith*(request: Request, status = Http404, body = "") {.async.} =
+proc abort*(request: Request, status = Http401, body = "") {.async.} =
   await request.nativeRequest.respond(status, body)
   logging.debug($status)
 
@@ -109,6 +89,54 @@ proc error404*(request: Request, status = Http404,
   await request.nativeRequest.respond(status, body)
   logging.debug($status)
 
+proc defaultHandler*(request: Request) {.async.} =
+  await error404(request)
+
+proc findHandler*(app: Prologue, request: Request, path: Path): Handler =
+  if path in app.router.callable:
+    return app.router.callable[path]
+  let 
+    path = path.basePath & path.route
+    pathList = path.split("/")
+
+  var flag = true
+
+  for route, handler in app.router.callable.pairs:
+    let routeList = (route.basePath & route.route).split("/")
+    if pathList.len == routeList.len:
+      for idx in 0 ..< pathList.len:
+        if pathList[idx] == routeList[idx]:
+          continue
+        if routeList[idx].startsWith("{"):
+          # should be checked in addRoute
+          let key = routeList[idx]
+          if key.len <= 2:
+            raise newException(RouteError, "{} shouldn't be empty!")
+          request.params[key[1 .. ^2]] = pathList[idx]
+        else:
+          flag = false
+          break
+      if flag:
+        return handler
+  return defaultHandler
+  
+proc handle*(request: Request, response: Response) {.async.} =
+  await request.nativeRequest.respond(response.status, response.body,
+      response.httpHeaders)
+
+proc `$`*(response: Response): string =
+  fmt"{response.status} {response.httpHeaders}"
+
+macro resp*(params: untyped) =
+  let request = ident"request"
+  # let response = ident"response"
+  result = quote do:
+    var response = newResponse(HttpVer11, Http200, httpHeaders = {
+        "Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders,
+        body = $`params`)
+    asyncCheck handle(`request`, response)
+    logging.debug($response)
+
 proc initSettings*(port = Port(8080), debug = false, reusePort = true,
     appName = ""): Settings =
   Settings(port: port, debug: debug, reusePort: reusePort, appName: appName)
@@ -125,12 +153,10 @@ proc run*(app: Prologue) =
     logging.debug(fmt"{request.nativeRequest.reqMethod} {request.nativeRequest.url.path}")
     let path = initPath(route = request.nativeRequest.url.path, basePath = "",
     httpMethod = request.nativeRequest.reqMethod)
-    if app.findHandler(request, path):
-      {.gcsafe.}:
-        let handler = app.router.callable[path]
-        await handler(request)
-    else:
-      await error404(request)
+    {.gcsafe.}:
+      let handler = app.findHandler(request, path)
+      await handler(request)
+ 
 
   # maybe should read settings from file
   if logging.getHandlers().len == 0:
@@ -152,7 +178,7 @@ when isMainModule:
     resp {"name": "string"}.toTable
 
   proc helloName*(request: Request) {.async.} =
-    resp "Hello, " & request.params["name"]
+    resp "<h1>Hello, " & request.params["name"] & "</h1>"
 
   proc testRedirect*(request: Request) {.async.} =
     await redirect(request, "/hello")
@@ -160,10 +186,11 @@ when isMainModule:
   let settings = initSettings(appName = "Test")
   var app = initApp(settings = settings)
   app.addRoute("/", home, "", HttpGet)
+  app.addRoute("/", home, "", HttpPost)
   app.addRoute("/home", home, "", HttpGet)
   app.addRoute("/hello", hello, "", HttpGet)
   app.addRoute("/redirect", testRedirect, "", HttpGet)
   # app.addRoute("/hello", hello, "advanced"， HttpGet)
   # app.addRoute("/templ", templ, "tempalte", HttpGet)
-  # app.addRoute("/hello/<name>", helloName, "name", HttpGet, )
+  app.addRoute("/hello/{name}", helloName, "", HttpGet)
   app.run()
