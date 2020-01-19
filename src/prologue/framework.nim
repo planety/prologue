@@ -1,5 +1,5 @@
 import asynchttpserver, asyncdispatch, uri, httpcore, httpclient
-import tables, strutils, strformat, macros, logging, parseutils
+import tables, strutils, strformat, macros, logging, parseutils, hashes
 
 
 
@@ -30,19 +30,26 @@ type
   Handler* = proc(request: Request): Future[void]
 
   Path* = object
-    basePath*: string
-    handler*: Handler
-    path*: string
+    route: string
+    basePath: string
+    httpMethod*: HttpMethod
 
   Router* = ref object
-    callable*: Table[string, Handler]
-    httpMethod*: HttpMethod
+    callable*: Table[Path, Handler]
 
   Prologue* = object
     server: AsyncHttpServer
     settings: Settings
     router: Router
 
+proc initPath*(route: string, basePath = "", httpMethod = HttpGet): Path =
+  Path(route: route, basePath: basePath, httpMethod: httpMethod)
+
+proc hash*(x: Path): Hash =
+  var h: Hash = 0
+  h = h !& hash(x.basePath & x.route)
+  h = h !& hash(x.httpMethod)
+  result = !$h
 
 proc newResponse*(httpVersion: HttpVersion, status: HttpCode,
     httpHeaders = newHttpHeaders(), body = ""): Response =
@@ -64,18 +71,20 @@ proc error*(status = Http404, body = "<h1>404 Not Found!</h1>"): Response =
   newResponse(httpVersion = HttpVer11, status = status, body = body)
 
 proc newRouter*(): Router =
-  Router(callable: initTable[string, Handler]())
+  Router(callable: initTable[Path, Handler]())
 
-proc addRoute*(app: Prologue, route: string, handler: Handler,
+proc addRoute*(app: Prologue, route: string, handler: Handler, basePath = "",
     httpMethod = HttpGet) =
-  if route in app.router.callable:
+  let path = initPath(route = route, basePath = basePath,
+      httpMethod = httpMethod)
+  if path in app.router.callable:
     raise newException(DuplicatedRouteError, fmt"Route {route} is duplicated!")
-  app.router.callable[route] = handler
-  app.router.httpMethod = httpMethod
+  app.router.callable[path] = handler
 
+proc addRoute*(app: Prologue, basePath: string, fileName: string) =
+  discard
 
-proc findHandler*(app: Prologue, request: Request): bool =
-  let path = request.nativeRequest.url.path
+proc findHandler*(app: Prologue, request: Request, path: Path): bool =
   if path in app.router.callable:
     return true
   return false
@@ -109,9 +118,11 @@ proc run*(app: Prologue) =
         string, string](), settings: app.settings)
 
     logging.debug(fmt"{request.nativeRequest.reqMethod} {request.nativeRequest.url.path}")
-    if app.findHandler(request):
+    let path = initPath(route = request.nativeRequest.url.path, basePath = "",
+    httpMethod = request.nativeRequest.reqMethod)
+    if app.findHandler(request, path):
       {.gcsafe.}:
-        let handler = app.router.callable[request.nativeRequest.url.path]
+        let handler = app.router.callable[path]
         await handler(request)
     else:
       let response = error(status = Http404, body = "<h1>404 Not Found!</h1>")
@@ -143,10 +154,10 @@ when isMainModule:
 
   let settings = initSettings(appName = "Test")
   var app = initApp(settings = settings)
-  app.addRoute("/", home, HttpGet)
-  app.addRoute("/home", home, HttpGet)
-  app.addRoute("/hello", hello, HttpGet)
-  # app.addRoute("/hello", hello, HttpGet)
-  # app.addRoute("/templ", templ, HttpGet, render = "templ.html")
-  # app.addRoute("/hello/<name>", HttpGet, helloName)
+  app.addRoute("/", home, "", HttpGet)
+  app.addRoute("/home", home, "", HttpGet)
+  app.addRoute("/hello", hello, "", HttpGet)
+  # app.addRoute("/hello", hello, "advanced"， HttpGet)
+  # app.addRoute("/templ", templ, "tempalte", HttpGet)
+  # app.addRoute("/hello/<name>", helloName, "name", HttpGet, )
   app.run()

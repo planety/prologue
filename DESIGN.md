@@ -30,12 +30,14 @@ import prologue
 
 proc setup(settings: Settings): Prologue =
   var app = initApp(settings = settings)
-  app.addRoute(Path("/home", home, ""), HttpGet)
-  app.addRoute(Path("/hello", hello, ""), HttpGet)
-  app.addRoute(Path("/templ", templ, "advanced"), HttpGet, render = "templ.html")
-  app.addRoute("/hello/<name>", Path(helloName, ""), HttpGet)
+  app.addRoute("/", home, "", HttpGet)
+  app.addRoute("/home", home, "", HttpGet)
+  app.addRoute("/hello", hello, "", HttpGet)
+  app.addRoute("/hello", hello, "advanced"， HttpGet)
+  app.addRoute("/templ", templ, "tempalte", HttpGet)
+  app.addRoute("/hello/<name>", helloName, "name", HttpGet, )
   # support file urls
-  app.addRoute("mywebsite.urls", "mywebsite")
+  app.addRoute(basePath = "mywebsite", fileName = "mywebsite.urls")
   return app
 ```
 
@@ -57,7 +59,7 @@ proc home*(request: Request) {.async.} =
   resp "<h1>Home</h1>"
     
 proc templ*(request: Request) {.async.} =
-  resp {"name": "string"}.toTable
+  resp templateRender("template.html", {"name": "string"})
     
 proc helloName*(request: Request) {.async.} =
   resp "Hello, " & request.params["name"]
@@ -81,6 +83,7 @@ Support Test Client.
 
 ```nim
 from prologue import testclient
+
 
 suite "Test Prologue":
   let
