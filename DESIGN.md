@@ -83,20 +83,20 @@ from prologue import view
 import config
 
 
-proc hello*(request: Request) {.async.} =
+proc hello*(ctx: Context) {.async.} =
   resp "<h1>Hello, Prologue!</h1>"
-    
-proc home*(request: Request) {.async.} =
-  resp "<h1>Home</h1>"
-    
-proc templ*(request: Request) {.async.} =
-  resp templateRender("template.html", {"name": "string"})
-    
-proc helloName*(request: Request) {.async.} =
-  resp "Hello, " & request.params["name"]
 
-proc testRedirect*(request: Request) {.async.} =
-  await redirect(request, "/hello")
+proc home*(ctx: Context) {.async.} =
+  resp "<h1>Home</h1>"
+
+proc templ*(ctx: Context) {.async.} =
+  resp {"name": "string"}.toTable
+
+proc helloName*(ctx: Context) {.async.} =
+  resp "<h1>Hello, " & ctx.params.getOrDefault("name", "Prologue") & "</h1>"
+
+proc testRedirect*(ctx: Context) {.async.} =
+  await redirect(ctx, "/hello")
 
 let settings = initSettings(appName = "Prologue")
 var app = setup(settings)

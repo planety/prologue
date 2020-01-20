@@ -17,19 +17,19 @@ type
     staticDir: string
     appName: string
 
-  Request* = ref object
-    nativeRequest*: NativeRequest
-    params*: StringTableRef
-    settings: Settings
-    cookies: StringTableRef
-
-  Response* = ref object
+  Response* = object
     httpVersion*: HttpVersion
     status*: HttpCode
     httpHeaders*: HttpHeaders
     body*: string
 
-  Handler* = proc(request: Request): Future[void]
+  Context* = ref object
+    request*: NativeRequest
+    response*: Response
+    params*: StringTableRef
+    cookies: StringTableRef
+
+  Handler* = proc(ctx: Context): Future[void]
 
   Path* = object
     route: string
@@ -53,9 +53,14 @@ proc hash*(x: Path): Hash =
   h = h !& hash(x.httpMethod)
   result = !$h
 
-proc newResponse*(httpVersion: HttpVersion, status: HttpCode,
+proc initResponse*(httpVersion: HttpVersion, status: HttpCode,
     httpHeaders = newHttpHeaders(), body = ""): Response =
   Response(httpVersion: httpVersion, status: status, httpHeaders: httpHeaders, body: body)
+
+proc newContext(request: NativeRequest, response: Response,
+    params = newStringTable(), cookies = newStringTable()): Context =
+  Context(request: request, response: response, params: params,
+      cookies: cookies)
 
 proc newRouter*(): Router =
   Router(callable: initTable[Path, Handler]())
@@ -71,11 +76,11 @@ proc addRoute*(app: Prologue, route: string, handler: Handler, basePath = "",
 proc addRoute*(app: Prologue, basePath: string, fileName: string) =
   discard
 
-proc abort*(request: Request, status = Http401, body = "") {.async.} =
-  await request.nativeRequest.respond(status, body)
+proc abort*(ctx: Context, status = Http401, body = "") {.async.} =
+  await ctx.request.respond(status, body)
   logging.debug($status)
 
-proc redirect*(request: Request, url: string, status = Http301,
+proc redirect*(ctx: Context, url: string, status = Http301,
     body = "", delay = 0) {.async.} =
 
   var headers = newHttpHeaders()
@@ -83,18 +88,18 @@ proc redirect*(request: Request, url: string, status = Http301,
     headers.add("Location", url)
   else:
     headers.add("refresh", fmt"""{delay};url="{url}"""")
-  await request.nativeRequest.respond(status, body, headers)
+  await ctx.request.respond(status, body, headers)
   logging.debug(fmt"{status} {headers}")
 
-proc error404*(request: Request, status = Http404,
+proc error404*(ctx: Context, status = Http404,
     body = "<h1>404 Not Found!</h1>") {.async.} =
-  await request.nativeRequest.respond(status, body)
+  await ctx.request.respond(status, body)
   logging.debug($status)
 
-proc defaultHandler*(request: Request) {.async.} =
-  await error404(request)
+proc defaultHandler*(ctx: Context) {.async.} =
+  await error404(ctx)
 
-proc findHandler*(app: Prologue, request: Request, path: Path): Handler =
+proc findHandler*(app: Prologue, ctx: Context, path: Path): Handler =
   if path in app.router.callable:
     return app.router.callable[path]
   let
@@ -114,7 +119,7 @@ proc findHandler*(app: Prologue, request: Request, path: Path): Handler =
           let key = routeList[idx]
           if key.len <= 2:
             raise newException(RouteError, "{} shouldn't be empty!")
-          request.params[key[1 .. ^2]] = pathList[idx]
+          ctx.params[key[1 .. ^2]] = decodeUrl(pathList[idx])
         else:
           flag = false
           break
@@ -122,23 +127,21 @@ proc findHandler*(app: Prologue, request: Request, path: Path): Handler =
         return handler
   return defaultHandler
 
-proc handle*(request: Request, response: Response) {.async.} =
-  await request.nativeRequest.respond(response.status, response.body,
-      response.httpHeaders)
+proc handle*(ctx: Context) {.async.} =
+  await ctx.request.respond(ctx.response.status, ctx.response.body,
+      ctx.response.httpHeaders)
 
 proc `$`*(response: Response): string =
   fmt"{response.status} {response.httpHeaders}"
 
 macro resp*(params: typed) =
-  let request = ident"request"
+  var ctx = ident"ctx"
   # let response = ident"response"
   # echo getTypeInst(params).repr
   result = quote do:
-    var response = newResponse(HttpVer11, Http200, httpHeaders = {
-        "Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders,
-        body = $`params`)
-    asyncCheck handle(`request`, response)
-    logging.debug($response)
+    `ctx`.response.body = `params`
+    asyncCheck handle(`ctx`)
+    logging.debug($(`ctx`.response))
 
 proc initSettings*(port = Port(8080), debug = false, reusePort = true,
     staticDir = "/static", appName = ""): Settings =
@@ -151,15 +154,16 @@ proc initApp*(settings: Settings): Prologue =
 
 proc run*(app: Prologue) =
   proc handleRequest(nativeRequest: NativeRequest) {.async.} =
-    var request = Request(nativeRequest: nativeRequest, params: newStringTable(
-      ), settings: app.settings, cookies: newStringTable())
+    var response = initResponse(HttpVer11, Http200, httpHeaders = {
+        "Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders)
+    var ctx = newContext(request = nativeRequest, response = response)
 
-    logging.debug(fmt"{request.nativeRequest.reqMethod} {request.nativeRequest.url.path}")
-    let path = initPath(route = request.nativeRequest.url.path, basePath = "",
-    httpMethod = request.nativeRequest.reqMethod)
+    logging.debug(fmt"{ctx.request.reqMethod} {ctx.request.url.path}")
+    let path = initPath(route = ctx.request.url.path, basePath = "",
+    httpMethod = ctx.request.reqMethod)
     {.gcsafe.}:
-      let handler = app.findHandler(request, path)
-      await handler(request)
+      let handler = app.findHandler(ctx, path)
+      await handler(ctx)
 
   # maybe should read settings from file
   if logging.getHandlers().len == 0:
@@ -171,20 +175,20 @@ proc run*(app: Prologue) =
 
 
 when isMainModule:
-  proc hello*(request: Request) {.async.} =
+  proc hello*(ctx: Context) {.async.} =
     resp "<h1>Hello, Prologue!</h1>"
 
-  proc home*(request: Request) {.async.} =
+  proc home*(ctx: Context) {.async.} =
     resp "<h1>Home</h1>"
 
-  proc templ*(request: Request) {.async.} =
-    resp {"name": "string"}.toTable
+  # proc templ*(ctx: Context) {.async.} =
+  #   resp {"name": "string"}.toTable
 
-  proc helloName*(request: Request) {.async.} =
-    resp "<h1>Hello, " & request.params.getOrDefault("name", "Prologue") & "</h1>"
+  proc helloName*(ctx: Context) {.async.} =
+    resp "<h1>Hello, " & ctx.params.getOrDefault("name", "Prologue") & "</h1>"
 
-  proc testRedirect*(request: Request) {.async.} =
-    await redirect(request, "/hello")
+  proc testRedirect*(ctx: Context) {.async.} =
+    await redirect(ctx, "/hello")
 
   let settings = initSettings(appName = "StarLight")
   var app = initApp(settings = settings)
