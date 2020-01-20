@@ -17,10 +17,13 @@ type
     route*: string
     basePath*: string
     httpMethod*: HttpMethod
+
+  PathHandler* = ref object
+    handler*: Handler
     middlewares*: seq[MiddlewareHandler]
 
   Router* = ref object
-    callable*: Table[Path, Handler]
+    callable*: Table[Path, PathHandler]
 
   Server* = AsyncHttpServer
 
@@ -38,8 +41,8 @@ type
     middlewares*: seq[MiddlewareHandler]
 
 
-proc initPath*(route: string, basePath = "", httpMethod = HttpGet, middlewares: seq[MiddlewareHandler] = @[]): Path =
-  Path(route: route, basePath: basePath, httpMethod: httpMethod, middlewares: middlewares)
+proc initPath*(route: string, basePath = "", httpMethod = HttpGet): Path =
+  Path(route: route, basePath: basePath, httpMethod: httpMethod)
 
 proc hash*(x: Path): Hash =
   var h: Hash = 0
@@ -51,8 +54,11 @@ proc newContext*(request: Request, response: Response,
     params = newStringTable(), cookies = newStringTable()): Context =
   Context(request: request, response: response, params: params)
 
+proc newPathHandler*(handler: Handler, middlewares: seq[MiddlewareHandler] = @[]): PathHandler =
+  PathHandler(handler: handler, middlewares: middlewares) 
+
 proc newRouter*(): Router =
-  Router(callable: initTable[Path, Handler]())
+  Router(callable: initTable[Path, PathHandler]())
 
 proc serve*(app: Prologue, port: Port,
   callback: proc (request: NativeRequest): Future[void] {.closure, gcsafe.},

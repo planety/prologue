@@ -14,10 +14,10 @@ export asyncdispatch
 proc addRoute*(app: Prologue, route: string, handler: Handler, basePath = "",
     httpMethod = HttpGet, middlewares: seq[MiddlewareHandler] = @[]) =
   let path = initPath(route = route, basePath = basePath,
-      httpMethod = httpMethod, middlewares = middlewares)
+      httpMethod = httpMethod)
   if path in app.router.callable:
     raise newException(DuplicatedRouteError, fmt"Route {route} is duplicated!")
-  app.router.callable[path] = handler
+  app.router.callable[path] = newPathHandler(handler, middlewares)
 
 proc addRoute*(app: Prologue, basePath: string, fileName: string) =
   discard
@@ -45,7 +45,7 @@ proc error404*(ctx: Context, status = Http404,
 proc defaultHandler*(ctx: Context) {.async.} =
   await error404(ctx)
 
-proc findHandler*(app: Prologue, ctx: Context, path: Path): Handler =
+proc findHandler*(app: Prologue, ctx: Context, path: Path): PathHandler =
   if path in app.router.callable:
     return app.router.callable[path]
   let
@@ -71,7 +71,7 @@ proc findHandler*(app: Prologue, ctx: Context, path: Path): Handler =
           break
       if flag:
         return handler
-  return defaultHandler
+  return newPathHandler(defaultHandler)
 
 proc handle*(ctx: Context) {.async.} =
   await ctx.request.respond(ctx.response.status, ctx.response.body,
@@ -105,14 +105,18 @@ proc run*(app: Prologue) =
         "Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders)
     var ctx = newContext(request = request, response = response)
 
+    # gcsafe
     for middlewareHandler in app.middlewares:
       middlewareHandler(ctx)
 
     logging.debug(fmt"{ctx.request.reqMethod} {ctx.request.url.path}")
     let path = initPath(route = ctx.request.url.path, basePath = "",
     httpMethod = ctx.request.reqMethod)
-    let handler = app.findHandler(ctx, path)
-    await handler(ctx)
+    # gcsafe
+    let pathHandler = app.findHandler(ctx, path)
+    for middlewareHandler in pathHandler.middlewares:
+      middlewareHandler(ctx)
+    await pathHandler.handler(ctx)
 
   # maybe should read settings from file
   if logging.getHandlers().len == 0:
@@ -143,7 +147,7 @@ when isMainModule:
   var app = initApp(settings = settings, @[loggingMiddleware])
   app.addRoute("/", home, "", HttpGet)
   app.addRoute("/", home, "", HttpPost)
-  app.addRoute("/home", home, "", HttpGet)
+  app.addRoute("/home", home, "", HttpGet, @[loggingMiddleware])
   app.addRoute("/hello", hello, "", HttpGet)
   app.addRoute("/redirect", testRedirect, "", HttpGet)
   # app.addRoute("/hello", hello, "advanced"， HttpGet)
