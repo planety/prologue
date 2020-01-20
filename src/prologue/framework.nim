@@ -1,69 +1,15 @@
-import asynchttpserver, asyncdispatch, uri, cookies, httpcore, httpclient
-import tables, strutils, strformat, macros, logging, hashes, strtabs
+import asyncdispatch, uri, httpcore
+import tables, strutils, strformat, macros, logging, strtabs
+import request, response, types
 
 
+export Settings
+export Prologue
+export Context
+export httpcore
+export strtabs
+export asyncdispatch
 
-type
-  NativeRequest = asynchttpserver.Request
-  PrologueError* = object of Exception
-  RouteError* = object of PrologueError
-  RouteResetError* = object of RouteError
-  DuplicatedRouteError* = object of RouteError
-
-  Settings* = object
-    port: Port
-    debug: bool
-    reusePort: bool
-    staticDir: string
-    appName: string
-
-  Response* = object
-    httpVersion*: HttpVersion
-    status*: HttpCode
-    httpHeaders*: HttpHeaders
-    body*: string
-
-  Context* = ref object
-    request*: NativeRequest
-    response*: Response
-    params*: StringTableRef
-    cookies: StringTableRef
-
-  Handler* = proc(ctx: Context): Future[void]
-
-  Path* = object
-    route: string
-    basePath: string
-    httpMethod*: HttpMethod
-
-  Router* = ref object
-    callable*: Table[Path, Handler]
-
-  Prologue* = object
-    server: AsyncHttpServer
-    settings: Settings
-    router: Router
-
-proc initPath*(route: string, basePath = "", httpMethod = HttpGet): Path =
-  Path(route: route, basePath: basePath, httpMethod: httpMethod)
-
-proc hash*(x: Path): Hash =
-  var h: Hash = 0
-  h = h !& hash(x.basePath & x.route)
-  h = h !& hash(x.httpMethod)
-  result = !$h
-
-proc initResponse*(httpVersion: HttpVersion, status: HttpCode,
-    httpHeaders = newHttpHeaders(), body = ""): Response =
-  Response(httpVersion: httpVersion, status: status, httpHeaders: httpHeaders, body: body)
-
-proc newContext(request: NativeRequest, response: Response,
-    params = newStringTable(), cookies = newStringTable()): Context =
-  Context(request: request, response: response, params: params,
-      cookies: cookies)
-
-proc newRouter*(): Router =
-  Router(callable: initTable[Path, Handler]())
 
 proc addRoute*(app: Prologue, route: string, handler: Handler, basePath = "",
     httpMethod = HttpGet) =
@@ -149,14 +95,15 @@ proc initSettings*(port = Port(8080), debug = false, reusePort = true,
       appName: appName)
 
 proc initApp*(settings: Settings): Prologue =
-  Prologue(server: newAsyncHttpServer(true, settings.reusePort),
+  Prologue(server: newPrologueServer(true, settings.reusePort),
       settings: settings, router: newRouter())
 
 proc run*(app: Prologue) =
   proc handleRequest(nativeRequest: NativeRequest) {.async.} =
+    var request = initRequest(nativeRequest)
     var response = initResponse(HttpVer11, Http200, httpHeaders = {
         "Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders)
-    var ctx = newContext(request = nativeRequest, response = response)
+    var ctx = newContext(request = request, response = response)
 
     logging.debug(fmt"{ctx.request.reqMethod} {ctx.request.url.path}")
     let path = initPath(route = ctx.request.url.path, basePath = "",
@@ -169,9 +116,9 @@ proc run*(app: Prologue) =
   if logging.getHandlers().len == 0:
     addHandler(logging.newConsoleLogger())
     setLogFilter(if app.settings.debug: lvlInfo else: lvlDebug)
-  defer: app.server.close()
+  defer: app.close()
   logging.info(fmt"Prologue is serving at 127.0.0.1:{app.settings.port.int} {app.settings.appName}")
-  waitFor app.server.serve(app.settings.port, handleRequest)
+  waitFor app.serve(app.settings.port, handleRequest)
 
 
 when isMainModule:
