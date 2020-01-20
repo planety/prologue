@@ -1,6 +1,6 @@
 import asyncdispatch, uri, httpcore
 import tables, strutils, strformat, macros, logging, strtabs
-import request, response, context, types
+import request, response, context, types, middlewares
 
 
 export Settings
@@ -94,9 +94,9 @@ proc initSettings*(port = Port(8080), debug = false, reusePort = true,
   Settings(port: port, debug: debug, reusePort: reusePort, staticDir: staticDir,
       appName: appName)
 
-proc initApp*(settings: Settings): Prologue =
+proc initApp*(settings: Settings, middlewares: seq[MiddlewareHandler] = @[]): Prologue =
   Prologue(server: newPrologueServer(true, settings.reusePort),
-      settings: settings, router: newRouter(), middlewares: @[])
+      settings: settings, router: newRouter(), middlewares: middlewares)
 
 proc run*(app: Prologue) =
   proc handleRequest(nativeRequest: NativeRequest) {.async.} =
@@ -105,12 +105,14 @@ proc run*(app: Prologue) =
         "Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders)
     var ctx = newContext(request = request, response = response)
 
+    for middlewareHandler in app.middlewares:
+      middlewareHandler(ctx)
+
     logging.debug(fmt"{ctx.request.reqMethod} {ctx.request.url.path}")
     let path = initPath(route = ctx.request.url.path, basePath = "",
     httpMethod = ctx.request.reqMethod)
-    {.gcsafe.}:
-      let handler = app.findHandler(ctx, path)
-      await handler(ctx)
+    let handler = app.findHandler(ctx, path)
+    await handler(ctx)
 
   # maybe should read settings from file
   if logging.getHandlers().len == 0:
@@ -138,7 +140,7 @@ when isMainModule:
     await redirect(ctx, "/hello")
 
   let settings = initSettings(appName = "StarLight")
-  var app = initApp(settings = settings)
+  var app = initApp(settings = settings, @[loggingMiddleware])
   app.addRoute("/", home, "", HttpGet)
   app.addRoute("/", home, "", HttpPost)
   app.addRoute("/home", home, "", HttpGet)

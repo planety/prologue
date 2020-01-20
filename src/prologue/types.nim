@@ -10,8 +10,8 @@ type
   RouteResetError* = object of RouteError
   DuplicatedRouteError* = object of RouteError
 
-  Handler* = proc(ctx: Context): Future[void]
-  MiddlewareHandler* = proc(ctx: Context)
+  Handler* = proc(ctx: Context): Future[void] {.gcsafe.}
+  MiddlewareHandler* = proc(ctx: Context) {.nimcall, gcsafe.}
 
   Path* = object
     route*: string
