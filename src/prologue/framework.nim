@@ -1,4 +1,4 @@
-import asyncdispatch, uri, httpcore
+import asyncdispatch, uri, cgi, httpcore
 import tables, strutils, strformat, macros, logging, strtabs
 import request, response, context, types, middlewares
 
@@ -100,7 +100,12 @@ proc initApp*(settings: Settings, middlewares: seq[MiddlewareHandler] = @[]): Pr
 
 proc run*(app: Prologue) =
   proc handleRequest(nativeRequest: NativeRequest) {.async.} =
-    var request = initRequest(nativeRequest)
+    let urlPath = nativeRequest.url.path
+    var params = newStringTable()
+    if "?" in urlPath:
+      for (key, value) in decodeData(urlPath):
+        params[key] = value
+    var request = initRequest(nativeRequest = nativeRequest, queryParams = params)
     var response = initResponse(HttpVer11, Http200, httpHeaders = {
         "Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders)
     var ctx = newContext(request = request, response = response)
