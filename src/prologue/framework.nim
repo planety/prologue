@@ -1,6 +1,6 @@
 import asyncdispatch, uri, httpcore
 import tables, strutils, strformat, macros, logging, strtabs
-import request, response, types
+import request, response, context, types
 
 
 export Settings
@@ -12,9 +12,9 @@ export asyncdispatch
 
 
 proc addRoute*(app: Prologue, route: string, handler: Handler, basePath = "",
-    httpMethod = HttpGet) =
+    httpMethod = HttpGet, middlewares: seq[MiddlewareHandler] = @[]) =
   let path = initPath(route = route, basePath = basePath,
-      httpMethod = httpMethod)
+      httpMethod = httpMethod, middlewares = middlewares)
   if path in app.router.callable:
     raise newException(DuplicatedRouteError, fmt"Route {route} is duplicated!")
   app.router.callable[path] = handler
@@ -96,7 +96,7 @@ proc initSettings*(port = Port(8080), debug = false, reusePort = true,
 
 proc initApp*(settings: Settings): Prologue =
   Prologue(server: newPrologueServer(true, settings.reusePort),
-      settings: settings, router: newRouter())
+      settings: settings, router: newRouter(), middlewares: @[])
 
 proc run*(app: Prologue) =
   proc handleRequest(nativeRequest: NativeRequest) {.async.} =

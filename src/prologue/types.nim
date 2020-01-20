@@ -1,7 +1,7 @@
 import httpcore, tables, strtabs, hashes
 import asyncdispatch
 import asynchttpserver except Request
-import request, response
+import request, response, context
 
 
 type
@@ -10,17 +10,14 @@ type
   RouteResetError* = object of RouteError
   DuplicatedRouteError* = object of RouteError
 
-  Context* = ref object
-    request*: Request
-    response*: Response
-    params*: StringTableRef
-
   Handler* = proc(ctx: Context): Future[void]
+  MiddlewareHandler* = proc(ctx: Context)
 
   Path* = object
     route*: string
     basePath*: string
     httpMethod*: HttpMethod
+    middlewares*: seq[MiddlewareHandler]
 
   Router* = ref object
     callable*: Table[Path, Handler]
@@ -38,10 +35,11 @@ type
     server*: Server
     settings*: Settings
     router*: Router
+    middlewares*: seq[MiddlewareHandler]
 
 
-proc initPath*(route: string, basePath = "", httpMethod = HttpGet): Path =
-  Path(route: route, basePath: basePath, httpMethod: httpMethod)
+proc initPath*(route: string, basePath = "", httpMethod = HttpGet, middlewares: seq[MiddlewareHandler] = @[]): Path =
+  Path(route: route, basePath: basePath, httpMethod: httpMethod, middlewares: middlewares)
 
 proc hash*(x: Path): Hash =
   var h: Hash = 0

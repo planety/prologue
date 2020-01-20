@@ -7,10 +7,17 @@ type
   Request* = object
     nativeRequest: NativeRequest
     cookies*: StringTableRef
+    queryParams*: StringTableRef
 
 
 proc url*(request: Request): Uri =
   request.nativeRequest.url
+
+proc path*(request: Request): string = 
+  request.nativeRequest.url.path
+
+proc headers*(request: Request): HttpHeaders = 
+  request.nativeRequest.headers
 
 proc reqMethod*(request: Request): HttpMethod =
   request.nativeRequest.reqMethod
