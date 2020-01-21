@@ -16,6 +16,9 @@ proc url*(request: Request): Uri =
 proc path*(request: Request): string =
   request.nativeRequest.url.path
 
+proc query*(request: Request): string =
+  request.nativeRequest.url.query
+
 proc headers*(request: Request): HttpHeaders =
   request.nativeRequest.headers
 
