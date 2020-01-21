@@ -1,6 +1,6 @@
 import asyncdispatch, uri, cgi, httpcore
 import tables, strutils, strformat, macros, logging, strtabs
-import request, response, context, types, middlewares
+import request, response, context, types, middlewares, pages
 
 
 export Settings
@@ -147,7 +147,13 @@ when isMainModule:
     resp "<h1>Hello, " & ctx.params.getOrDefault("name", "Prologue") & "</h1>"
 
   proc testRedirect*(ctx: Context) {.async.} =
-    await redirect(ctx, "/hello")
+    await ctx.redirect("/hello")
+
+  proc testLogin*(ctx: Context) {.async.} =
+    resp login()
+
+  proc loginRedirect*(ctx: Context) {.async.} = 
+    await ctx.redirect("/hello/Nim")
 
   let settings = initSettings(appName = "StarLight")
   var app = initApp(settings = settings, @[loggingMiddleware])
@@ -156,6 +162,8 @@ when isMainModule:
   app.addRoute("/home", home, "", HttpGet, @[loggingMiddleware])
   app.addRoute("/hello", hello, "", HttpGet)
   app.addRoute("/redirect", testRedirect, "", HttpGet)
+  app.addRoute("/login", testLogin, "", HttpGet)
+  app.addRoute("/login", loginRedirect, "", HttpPost)
   # app.addRoute("/hello", hello, "advanced"， HttpGet)
   # app.addRoute("/templ", templ, "tempalte", HttpGet)
   app.addRoute("/hello/{name}", helloName, "", HttpGet)

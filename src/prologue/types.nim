@@ -40,6 +40,8 @@ type
     router*: Router
     middlewares*: seq[MiddlewareHandler]
 
+proc appName*(app: Prologue): string =
+  app.settings.appName
 
 proc initPath*(route: string, basePath = "", httpMethod = HttpGet): Path =
   Path(route: route, basePath: basePath, httpMethod: httpMethod)
