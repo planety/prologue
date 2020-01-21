@@ -4,7 +4,7 @@
 # the letter 't').
 #
 # To run these tests, simply execute `nimble test`.
-import prologue / framework
+import prologue
 
 
 proc hello*(ctx: Context) {.async.} =
