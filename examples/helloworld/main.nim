@@ -7,6 +7,8 @@ proc hello*(ctx: Context) {.async.} =
 proc home*(ctx: Context) {.async.} =
   resp "<h1>Home</h1>"
 
+proc index*(ctx: Context) {.async.} =
+  resp htmlResponse("index.html").body
 # proc templ*(ctx: Context) {.async.} =
 #   resp {"name": "string"}.toTable
 
@@ -26,6 +28,7 @@ let settings = initSettings(appName = "StarLight")
 var app = initApp(settings = settings)
 app.addRoute("/", home, "", HttpGet)
 app.addRoute("/", home, "", HttpPost)
+app.addRoute("/index.html", index, "", HttpGet)
 app.addRoute("/home", home, "", HttpGet)
 app.addRoute("/hello", hello, "", HttpGet)
 app.addRoute("/redirect", testRedirect, "", HttpGet)
