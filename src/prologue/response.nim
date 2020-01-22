@@ -1,4 +1,5 @@
 import httpcore
+import mimetypes
 
 
 type
@@ -20,3 +21,15 @@ proc htmlResponse*(fileName: string): Response =
   result = initResponse(HttpVer11, Http200, {
       "Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders,
       body = f.readAll())
+
+# Static File Response
+proc staticFileResponse*(fileName, root: string, mimetype = true,
+    download = false, charset = "UTF-8", headers: HttpHeaders = nil): Response =
+  var status = Http200
+  var headers = headers
+  if headers == nil:
+    headers = {"Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders
+
+  let f = open(fileName, fmRead)
+  defer: f.close()
+  result = initResponse(HttpVer11, status, headers, body = f.readAll())
