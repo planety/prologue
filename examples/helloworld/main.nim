@@ -5,10 +5,11 @@ proc hello*(ctx: Context) {.async.} =
   resp "<h1>Hello, Prologue!</h1>"
 
 proc home*(ctx: Context) {.async.} =
+  echo ctx.request.queryParams.getOrDefault("name", "")
   resp "<h1>Home</h1>"
 
 proc index*(ctx: Context) {.async.} =
-  resp htmlResponse("index.html").body
+  resp htmlResponse("index.html")
 # proc templ*(ctx: Context) {.async.} =
 #   resp {"name": "string"}.toTable
 

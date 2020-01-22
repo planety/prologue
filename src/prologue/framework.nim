@@ -10,6 +10,7 @@ export strtabs
 export asyncdispatch
 export middlewares
 export pages
+export request
 export response
 export context
 
@@ -84,12 +85,21 @@ proc handle*(ctx: Context) {.async.} =
 proc `$`*(response: Response): string =
   fmt"{response.status} {response.httpHeaders}"
 
-macro resp*(params: typed) =
+macro resp*(params: string) =
   var ctx = ident"ctx"
   # let response = ident"response"
-  # echo getTypeInst(params).repr
+
   result = quote do:
     `ctx`.response.body = `params`
+    asyncCheck handle(`ctx`)
+    logging.debug($(`ctx`.response))
+
+macro resp*(params: Response) =
+  var ctx = ident"ctx"
+  # let response = ident"response"
+
+  result = quote do:
+    `ctx`.response = `params`
     asyncCheck handle(`ctx`)
     logging.debug($(`ctx`.response))
 
@@ -107,7 +117,6 @@ proc run*(app: Prologue) =
     var request = initRequest(nativeRequest = nativeRequest,
         queryParams = newStringTable())
     let urlQuery = request.query
-
     for (key, value) in decodeData(urlQuery):
       request.queryParams[key] = value
 
