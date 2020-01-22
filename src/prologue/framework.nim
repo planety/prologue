@@ -9,7 +9,10 @@ export Context
 export httpcore
 export strtabs
 export asyncdispatch
+export middlewares
+export pages
 
+const PrologueVersion = "0.1.0"
 
 proc addRoute*(app: Prologue, route: string, handler: Handler, basePath = "",
     httpMethod = HttpGet, middlewares: seq[MiddlewareHandler] = @[]) =
@@ -43,7 +46,7 @@ proc error404*(ctx: Context, status = Http404,
   logging.debug($status)
 
 proc defaultHandler*(ctx: Context) {.async.} =
-  await error404(ctx)
+  await error404(ctx, body = errorPage("404 Not Found!", PrologueVersion))
 
 proc findHandler*(app: Prologue, ctx: Context, path: Path): PathHandler =
   if path in app.router.callable:
@@ -149,21 +152,21 @@ when isMainModule:
   proc testRedirect*(ctx: Context) {.async.} =
     await ctx.redirect("/hello")
 
-  proc testLogin*(ctx: Context) {.async.} =
-    resp login()
+  proc login*(ctx: Context) {.async.} =
+    resp loginPage()
 
-  proc loginRedirect*(ctx: Context) {.async.} = 
+  proc do_login*(ctx: Context) {.async.} = 
     await ctx.redirect("/hello/Nim")
 
   let settings = initSettings(appName = "StarLight")
-  var app = initApp(settings = settings, @[loggingMiddleware])
+  var app = initApp(settings = settings)
   app.addRoute("/", home, "", HttpGet)
   app.addRoute("/", home, "", HttpPost)
-  app.addRoute("/home", home, "", HttpGet, @[loggingMiddleware])
+  app.addRoute("/home", home, "", HttpGet)
   app.addRoute("/hello", hello, "", HttpGet)
   app.addRoute("/redirect", testRedirect, "", HttpGet)
-  app.addRoute("/login", testLogin, "", HttpGet)
-  app.addRoute("/login", loginRedirect, "", HttpPost)
+  app.addRoute("/login", login, "", HttpGet, @[debugRequestMiddleware])
+  app.addRoute("/login", do_login, "", HttpPost, @[debugRequestMiddleware])
   # app.addRoute("/hello", hello, "advanced"， HttpGet)
   # app.addRoute("/templ", templ, "tempalte", HttpGet)
   app.addRoute("/hello/{name}", helloName, "", HttpGet)
