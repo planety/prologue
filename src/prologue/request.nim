@@ -28,6 +28,7 @@ proc headers*(request: Request): HttpHeaders =
 proc reqMethod*(request: Request): HttpMethod =
   request.nativeRequest.reqMethod
 
+
 proc hostName*(request: Request): string =
   result = request.nativeRequest.hostname
   let headers = request.nativeRequest.headers

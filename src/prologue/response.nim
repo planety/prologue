@@ -1,5 +1,7 @@
 import httpcore
-import mimetypes
+import cookies
+import times
+# import mimetypes
 
 
 type
@@ -7,11 +9,22 @@ type
     httpVersion*: HttpVersion
     status*: HttpCode
     httpHeaders*: HttpHeaders
+    cookies*: string
     body*: string
 
 proc initResponse*(httpVersion: HttpVersion, status: HttpCode,
     httpHeaders = newHttpHeaders(), body = ""): Response =
   Response(httpVersion: httpVersion, status: status, httpHeaders: httpHeaders, body: body)
+
+proc setHeader*(response: var Response; key, value: string) =
+  response.httpHeaders[key] = value
+
+proc addHeader*(response: var Response; key, value: string) =
+  response.httpHeaders.add(key, value)
+
+proc setCookie*(response: var Response; key, value: string; expires: DateTime |
+    Time; domain = ""; path = ""; noName = false; secure = false; httpOnly = false): string =
+  response.cookies = setCookie(key, value, expires, domain, path, noName, secure, httpOnly)
 
 # change later
 # for example use asyncfile

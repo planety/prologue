@@ -1,4 +1,4 @@
-import asyncdispatch, uri, cgi, httpcore
+import asyncdispatch, uri, cgi, httpcore, cookies
 import tables, strutils, strformat, macros, logging, strtabs
 import request, response, context, types, middlewares, pages
 
@@ -116,7 +116,13 @@ proc run*(app: Prologue) =
   proc handleRequest(nativeRequest: NativeRequest) {.async.} =
     var request = initRequest(nativeRequest = nativeRequest,
         queryParams = newStringTable())
-    let urlQuery = request.query
+    let 
+      urlQuery = request.query
+      headers = request.headers
+
+    if headers.hasKey("cookies"):
+      request.cookies = headers["cookies"].parseCookies
+    
     for (key, value) in decodeData(urlQuery):
       request.queryParams[key] = value
 
