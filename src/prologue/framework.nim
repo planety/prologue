@@ -24,7 +24,11 @@ proc addRoute*(app: Prologue, route: string, handler: Handler,
     raise newException(DuplicatedRouteError, fmt"Route {route} is duplicated!")
   app.router.callable[path] = newPathHandler(handler, middlewares)
 
-proc addRoute*(app: Prologue, basePath: string, fileName: string) =
+proc addRoute*(app: Prologue, route: seq[(string, Handler, HttpMethod)],
+    baseRoute = "") =
+  discard
+
+proc addRoute*(app: Prologue, urlFile: string, baseRoute = "") =
   discard
 
 proc abort*(ctx: Context, status = Http401, body = "") {.async.} =

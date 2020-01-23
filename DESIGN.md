@@ -52,7 +52,7 @@ proc setup(settings: Settings): Prologue =
   # you can specify default options from files.
   # for example, debug options.
   # var app = initApp(config = "config.debug") 
-  let routes = [HttpRoute("/test", test, "", HttpGet), WebSocket("websocket", find)]
+  let routes = [HttpRoute("/test", test, HttpGet), WebSocket("websocket", find)]
   app.addRoute(routes)
   # May change later
   # addRoute tell framework what URLs should trigger our handler function. 
@@ -61,7 +61,7 @@ proc setup(settings: Settings): Prologue =
   app.addRoute("/hello", hello, HttpGet)
   app.addRoute("/hello", hello, HttpGet)
   app.addRoute("/templ", templ, HttpGet)
-    app.addRoute("/redirect", testRedirect, HttpGet)
+  app.addRoute("/redirect", testRedirect, HttpGet)
   app.addRoute("/hello/<name>", helloName, HttpGet)
   # support file urls
   app.addRoute(basePath = "mywebsite", fileName = "mywebsite.urls")
