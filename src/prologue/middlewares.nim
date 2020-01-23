@@ -19,3 +19,10 @@ proc debugRequestMiddleware*(ctx: Context) =
   logging.debug "headers: " & $ctx.request.headers
   logging.debug "body: " & ctx.request.body
   logging.debug "============================"
+
+
+proc stripPathMiddleware*(ctx: Context) =
+  logging.debug "============================"
+  logging.debug "from stripPathMiddleware"
+  ctx.request.stripPath()
+  logging.debug "============================"

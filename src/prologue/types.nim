@@ -15,7 +15,7 @@ type
 
   Path* = object
     route*: string
-    basePath*: string
+    # basePath*: string
     httpMethod*: HttpMethod
 
   PathHandler* = ref object
@@ -43,12 +43,12 @@ type
 proc appName*(app: Prologue): string =
   app.settings.appName
 
-proc initPath*(route: string, basePath = "", httpMethod = HttpGet): Path =
-  Path(route: route, basePath: basePath, httpMethod: httpMethod)
+proc initPath*(route: string, httpMethod = HttpGet): Path =
+  Path(route: route, httpMethod: httpMethod)
 
 proc hash*(x: Path): Hash =
   var h: Hash = 0
-  h = h !& hash(x.basePath & x.route)
+  h = h !& hash(x.route)
   h = h !& hash(x.httpMethod)
   result = !$h
 
@@ -57,7 +57,7 @@ proc newContext*(request: Request, response: Response,
   Context(request: request, response: response, params: params)
 
 proc newPathHandler*(handler: Handler, middlewares: seq[MiddlewareHandler] = @[]): PathHandler =
-  PathHandler(handler: handler, middlewares: middlewares) 
+  PathHandler(handler: handler, middlewares: middlewares)
 
 proc newRouter*(): Router =
   Router(callable: initTable[Path, PathHandler]())

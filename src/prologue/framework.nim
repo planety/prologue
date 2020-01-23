@@ -16,9 +16,9 @@ export context
 
 const PrologueVersion = "0.1.0"
 
-proc addRoute*(app: Prologue, route: string, handler: Handler, basePath = "",
+proc addRoute*(app: Prologue, route: string, handler: Handler,
     httpMethod = HttpGet, middlewares: seq[MiddlewareHandler] = @[]) =
-  let path = initPath(route = route, basePath = basePath,
+  let path = initPath(route = route,
       httpMethod = httpMethod)
   if path in app.router.callable:
     raise newException(DuplicatedRouteError, fmt"Route {route} is duplicated!")
@@ -54,13 +54,13 @@ proc findHandler*(app: Prologue, ctx: Context, path: Path): PathHandler =
   if path in app.router.callable:
     return app.router.callable[path]
   let
-    path = path.basePath & path.route
+    path = path.route
     pathList = path.split("/")
 
-  var flag = true
 
   for route, handler in app.router.callable.pairs:
-    let routeList = (route.basePath & route.route).split("/")
+    let routeList = route.route.split("/")
+    var flag = true
     if pathList.len == routeList.len:
       for idx in 0 ..< pathList.len:
         if pathList[idx] == routeList[idx]:
@@ -116,13 +116,13 @@ proc run*(app: Prologue) =
   proc handleRequest(nativeRequest: NativeRequest) {.async.} =
     var request = initRequest(nativeRequest = nativeRequest,
         queryParams = newStringTable())
-    let 
+    let
       urlQuery = request.query
       headers = request.headers
 
     if headers.hasKey("cookies"):
       request.cookies = headers["cookies"].parseCookies
-    
+
     for (key, value) in decodeData(urlQuery):
       request.queryParams[key] = value
 
@@ -135,8 +135,8 @@ proc run*(app: Prologue) =
       middlewareHandler(ctx)
 
     logging.debug(fmt"{ctx.request.reqMethod} {ctx.request.url.path}")
-    let path = initPath(route = ctx.request.url.path, basePath = "",
-    httpMethod = ctx.request.reqMethod)
+    let path = initPath(route = ctx.request.url.path,
+        httpMethod = ctx.request.reqMethod)
     # gcsafe
     let pathHandler = app.findHandler(ctx, path)
     for middlewareHandler in pathHandler.middlewares:
@@ -171,19 +171,19 @@ when isMainModule:
   proc login*(ctx: Context) {.async.} =
     resp loginPage()
 
-  proc do_login*(ctx: Context) {.async.} = 
+  proc do_login*(ctx: Context) {.async.} =
     await ctx.redirect("/hello/Nim")
 
   let settings = initSettings(appName = "StarLight")
-  var app = initApp(settings = settings)
-  app.addRoute("/", home, "", HttpGet)
-  app.addRoute("/", home, "", HttpPost)
-  app.addRoute("/home", home, "", HttpGet)
-  app.addRoute("/hello", hello, "", HttpGet)
-  app.addRoute("/redirect", testRedirect, "", HttpGet)
-  app.addRoute("/login", login, "", HttpGet, @[debugRequestMiddleware])
-  app.addRoute("/login", do_login, "", HttpPost, @[debugRequestMiddleware])
-  # app.addRoute("/hello", hello, "advanced"， HttpGet)
-  # app.addRoute("/templ", templ, "tempalte", HttpGet)
-  app.addRoute("/hello/{name}", helloName, "", HttpGet)
+  var app = initApp(settings = settings, middlewares = @[debugRequestMiddleware])
+  app.addRoute("/", home, HttpGet)
+  app.addRoute("/", home, HttpPost)
+  app.addRoute("/home", home, HttpGet)
+  app.addRoute("/hello", hello, HttpGet)
+  app.addRoute("/redirect", testRedirect, HttpGet)
+  app.addRoute("/login", login, HttpGet)
+  app.addRoute("/login", do_login, HttpPost, @[debugRequestMiddleware])
+  # app.addRoute("/hello", hello, HttpGet)
+  # app.addRoute("/templ", templ, HttpGet)
+  app.addRoute("/hello/{name}", helloName, HttpGet)
   app.run()

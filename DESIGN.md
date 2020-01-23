@@ -12,9 +12,13 @@ defaultFileLoggerPath = "app.log"
 
 [app]
 debug = false
+auto_json = false
 reload_templates = true
 static_folders = "/static"
 secure_proxy_ssl_header = none
+
+[db]
+sqlite = ":memory"
 
 [plugins]
 starlight_cache = true
@@ -105,6 +109,11 @@ app.run()
 
 - Return Html
 - Render Html
+
+### Hook
+
+- before request
+- after request
 
 ### Tests
 
