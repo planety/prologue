@@ -17,13 +17,13 @@ proc helloName*(ctx: Context) {.async.} =
   resp "<h1>Hello, " & ctx.params.getOrDefault("name", "Prologue") & "</h1>"
 
 proc testRedirect*(ctx: Context) {.async.} =
-  await ctx.redirect("/hello")
+  resp redirect("/hello")
 
 proc login*(ctx: Context) {.async.} =
   resp loginPage()
 
 proc do_login*(ctx: Context) {.async.} =
-  await ctx.redirect("/hello/Nim")
+  resp redirect("/hello/Nim")
 
 let settings = initSettings(appName = "StarLight")
 var app = initApp(settings = settings, middlewares = @[debugRequestMiddleware])

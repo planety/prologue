@@ -1,4 +1,4 @@
-import asynchttpserver, strutils, strtabs, uri, asyncdispatch
+import asynchttpserver, strutils, strtabs, uri, asyncdispatch, response
 
 
 type
@@ -47,8 +47,11 @@ proc hostName*(request: Request): string =
     result = headers["x-forwarded-for"]
 
 proc respond*(request: Request; status: HttpCode; body: string;
-  headers: HttpHeaders = nil): Future[void] =
-  request.nativeRequest.respond(status, body, headers)
+  headers: HttpHeaders = newHttpHeaders()) {.async.} =
+  await request.nativeRequest.respond(status, body, headers)
+
+proc respond*(request: Request; response: Response) {.async.} =
+  await request.nativeRequest.respond(response.status, response.body, response.httpHeaders)
 
 proc initRequest*(nativeRequest: NativeRequest; cookies = newStringTable();
     queryParams = newStringTable()): Request =

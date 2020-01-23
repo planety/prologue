@@ -16,6 +16,7 @@ export context
 
 const PrologueVersion = "0.1.0"
 
+
 proc addRoute*(app: Prologue, route: string, handler: Handler,
     httpMethod = HttpGet, middlewares: seq[MiddlewareHandler] = @[]) =
   let path = initPath(route = route,
@@ -31,28 +32,27 @@ proc addRoute*(app: Prologue, route: seq[(string, Handler, HttpMethod)],
 proc addRoute*(app: Prologue, urlFile: string, baseRoute = "") =
   discard
 
-proc abort*(ctx: Context, status = Http401, body = "") {.async.} =
-  await ctx.request.respond(status, body)
-  logging.debug($status)
+proc abort*(status = Http401, body = ""): Response =
+  result = initResponse(HttpVer11, status = status, body = body)
 
-proc redirect*(ctx: Context, url: string, status = Http301,
-    body = "", delay = 0) {.async.} =
+proc redirect*(url: string, status = Http301,
+    body = "", delay = 0): Response =
 
   var headers = newHttpHeaders()
   if delay == 0:
     headers.add("Location", url)
   else:
     headers.add("refresh", fmt"""{delay};url="{url}"""")
-  await ctx.request.respond(status, body, headers)
-  logging.debug(fmt"{status} {headers}")
+  result = initResponse(HttpVer11, status = status, httpHeaders = headers, body = body)
 
-proc error404*(ctx: Context, status = Http404,
-    body = "<h1>404 Not Found!</h1>") {.async.} =
-  await ctx.request.respond(status, body)
-  logging.debug($status)
+
+proc error404*(status = Http404,
+    body = "<h1>404 Not Found!</h1>"): Response =
+  result = initResponse(HttpVer11, status = status, body = body)
 
 proc defaultHandler*(ctx: Context) {.async.} =
-  await error404(ctx, body = errorPage("404 Not Found!", PrologueVersion))
+  let response = error404(body = errorPage("404 Not Found!", PrologueVersion))
+  await ctx.request.respond(response)
 
 proc findHandler*(app: Prologue, ctx: Context, path: Path): PathHandler =
   if path in app.router.callable:
@@ -83,8 +83,7 @@ proc findHandler*(app: Prologue, ctx: Context, path: Path): PathHandler =
   return newPathHandler(defaultHandler)
 
 proc handle*(ctx: Context) {.async.} =
-  await ctx.request.respond(ctx.response.status, ctx.response.body,
-      ctx.response.httpHeaders)
+  await ctx.request.respond(ctx.response)
 
 proc `$`*(response: Response): string =
   fmt"{response.status} {response.httpHeaders}"
@@ -152,7 +151,10 @@ proc run*(app: Prologue) =
     addHandler(logging.newConsoleLogger())
     setLogFilter(if app.settings.debug: lvlInfo else: lvlDebug)
   defer: app.close()
-  logging.info(fmt"Prologue is serving at 127.0.0.1:{app.settings.port.int} {app.settings.appName}")
+  when defined(windows):
+    logging.info(fmt"Prologue is serving at 127.0.0.1:{app.settings.port.int} {app.settings.appName}")
+  else:
+    logging.info(fmt"Prologue is serving at 0.0.0.0:{app.settings.port.int} {app.settings.appName}")
   waitFor app.serve(app.settings.port, handleRequest)
 
 
@@ -170,13 +172,13 @@ when isMainModule:
     resp "<h1>Hello, " & ctx.params.getOrDefault("name", "Prologue") & "</h1>"
 
   proc testRedirect*(ctx: Context) {.async.} =
-    await ctx.redirect("/hello")
+    resp redirect("/hello")
 
   proc login*(ctx: Context) {.async.} =
     resp loginPage()
 
   proc do_login*(ctx: Context) {.async.} =
-    await ctx.redirect("/hello/Nim")
+    resp redirect("/hello/Nim")
 
   let settings = initSettings(appName = "StarLight")
   var app = initApp(settings = settings, middlewares = @[debugRequestMiddleware])
