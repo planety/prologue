@@ -56,13 +56,13 @@ proc setup(settings: Settings): Prologue =
   app.addRoute(routes)
   # May change later
   # addRoute tell framework what URLs should trigger our handler function. 
-  app.addRoute("/", home, "", HttpGet)
-  app.addRoute("/home", home, "", HttpGet)
-  app.addRoute("/hello", hello, "", HttpGet)
-  app.addRoute("/hello", hello, "advanced", HttpGet)
-  app.addRoute("/templ", templ, "tempalte", HttpGet)
-    app.addRoute("/redirect", testRedirect, "", HttpGet)
-  app.addRoute("/hello/<name>", helloName, "name", HttpGet)
+  app.addRoute("/", home, HttpGet)
+  app.addRoute("/home", home, HttpGet)
+  app.addRoute("/hello", hello, HttpGet)
+  app.addRoute("/hello", hello, HttpGet)
+  app.addRoute("/templ", templ, HttpGet)
+    app.addRoute("/redirect", testRedirect, HttpGet)
+  app.addRoute("/hello/<name>", helloName, HttpGet)
   # support file urls
   app.addRoute(basePath = "mywebsite", fileName = "mywebsite.urls")
   return app
@@ -71,7 +71,7 @@ proc setup(settings: Settings): Prologue =
 mywebsite.urls
 
 ```text
-Route("/", home, "", HttpGet)
+Route("/", home, HttpGet)
 WebSocketRoute("/", hello, HttpGet)
 Mount('/static', StaticFiles(directory="static"))
 ```
