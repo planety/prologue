@@ -52,9 +52,8 @@ proc hash*(x: Path): Hash =
   h = h !& hash(x.httpMethod)
   result = !$h
 
-proc newContext*(request: Request, response: Response,
-    params = newStringTable(), cookies = newStringTable()): Context =
-  Context(request: request, response: response, params: params)
+proc newContext*(request: Request, response: Response, cookies = newStringTable()): Context =
+  Context(request: request, response: response)
 
 proc newPathHandler*(handler: Handler, middlewares: seq[MiddlewareHandler] = @[]): PathHandler =
   PathHandler(handler: handler, middlewares: middlewares)

@@ -18,7 +18,7 @@ const PrologueVersion = "0.1.0"
 
 
 proc addRoute*(app: Prologue, route: string, handler: Handler,
-    httpMethod = HttpGet, middlewares: seq[MiddlewareHandler] = @[]) =
+    httpMethod = HttpGet, middlewares: seq[MiddlewareHandler] = @[]) {.inline.} =
   let path = initPath(route = route,
       httpMethod = httpMethod)
   if path in app.router.callable:
@@ -32,24 +32,6 @@ proc addRoute*(app: Prologue, route: seq[(string, Handler, HttpMethod)],
 proc addRoute*(app: Prologue, urlFile: string, baseRoute = "") =
   discard
 
-proc abort*(status = Http401, body = ""): Response =
-  result = initResponse(HttpVer11, status = status, body = body)
-
-proc redirect*(url: string, status = Http301,
-    body = "", delay = 0): Response =
-
-  var headers = newHttpHeaders()
-  if delay == 0:
-    headers.add("Location", url)
-  else:
-    headers.add("refresh", fmt"""{delay};url="{url}"""")
-  result = initResponse(HttpVer11, status = status, httpHeaders = headers, body = body)
-
-
-proc error404*(status = Http404,
-    body = "<h1>404 Not Found!</h1>"): Response =
-  result = initResponse(HttpVer11, status = status, body = body)
-
 proc defaultHandler*(ctx: Context) {.async.} =
   let response = error404(body = errorPage("404 Not Found!", PrologueVersion))
   await ctx.request.respond(response)
@@ -60,7 +42,6 @@ proc findHandler*(app: Prologue, ctx: Context, path: Path): PathHandler =
   let
     path = path.route
     pathList = path.split("/")
-
 
   for route, handler in app.router.callable.pairs:
     let routeList = route.route.split("/")
@@ -74,7 +55,7 @@ proc findHandler*(app: Prologue, ctx: Context, path: Path): PathHandler =
           let key = routeList[idx]
           if key.len <= 2:
             raise newException(RouteError, "{} shouldn't be empty!")
-          ctx.params[key[1 .. ^2]] = decodeUrl(pathList[idx])
+          ctx.request.pathParams[key[1 .. ^2]] = decodeUrl(pathList[idx])
         else:
           flag = false
           break
@@ -82,7 +63,7 @@ proc findHandler*(app: Prologue, ctx: Context, path: Path): PathHandler =
         return handler
   return newPathHandler(defaultHandler)
 
-proc handle*(ctx: Context) {.async.} =
+proc handle*(ctx: Context) {.async, inline.} =
   await ctx.request.respond(ctx.response)
 
 proc `$`*(response: Response): string =
@@ -169,7 +150,7 @@ when isMainModule:
   #   resp {"name": "string"}.toTable
 
   proc helloName*(ctx: Context) {.async.} =
-    resp "<h1>Hello, " & ctx.params.getOrDefault("name", "Prologue") & "</h1>"
+    resp "<h1>Hello, " & ctx.request.pathParams.getOrDefault("name", "Prologue") & "</h1>"
 
   proc testRedirect*(ctx: Context) {.async.} =
     resp redirect("/hello")

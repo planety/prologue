@@ -14,7 +14,7 @@ proc index*(ctx: Context) {.async.} =
 #   resp {"name": "string"}.toTable
 
 proc helloName*(ctx: Context) {.async.} =
-  resp "<h1>Hello, " & ctx.params.getOrDefault("name", "Prologue") & "</h1>"
+  resp "<h1>Hello, " & ctx.request.pathParams.getOrDefault("name", "Prologue") & "</h1>"
 
 proc testRedirect*(ctx: Context) {.async.} =
   resp redirect("/hello")
