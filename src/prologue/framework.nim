@@ -1,6 +1,6 @@
 import asyncdispatch, uri, cgi, httpcore, cookies
 import tables, strutils, strformat, macros, logging, strtabs
-import request, response, context, types, middlewares, pages
+import request, response, context, server, middlewares, pages, route
 
 
 export Settings
@@ -36,7 +36,7 @@ proc defaultHandler*(ctx: Context) {.async.} =
   let response = error404(body = errorPage("404 Not Found!", PrologueVersion))
   await ctx.request.respond(response)
 
-proc findHandler*(app: Prologue, ctx: Context, path: Path): PathHandler =
+proc findHandler(app: Prologue, ctx: Context, path: Path): PathHandler =
   if path in app.router.callable:
     return app.router.callable[path]
   let

@@ -1,3 +1,5 @@
+import strtabs
+
 import request, response
 
 # TODO may add app instance
@@ -6,3 +8,5 @@ type
     request*: Request
     response*: Response
 
+proc newContext*(request: Request, response: Response, cookies = newStringTable()): Context =
+  Context(request: request, response: response)
