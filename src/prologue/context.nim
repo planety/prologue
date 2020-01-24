@@ -1,4 +1,4 @@
-import strtabs
+import strtabs, asyncdispatch
 
 import request, response
 
@@ -8,5 +8,8 @@ type
     request*: Request
     response*: Response
 
-proc newContext*(request: Request, response: Response, cookies = newStringTable()): Context =
+proc newContext*(request: Request, response: Response, cookies = newStringTable()): Context {.inline.} =
   Context(request: request, response: response)
+
+proc handle*(ctx: Context) {.async, inline.} =
+  await ctx.request.respond(ctx.response)

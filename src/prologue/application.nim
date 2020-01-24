@@ -3,8 +3,6 @@ import tables, strutils, strformat, macros, logging, strtabs
 import request, response, context, server, middlewares, pages, route
 
 
-export Settings
-export Prologue
 export httpcore
 export strtabs
 export asyncdispatch
@@ -13,6 +11,7 @@ export pages
 export request
 export response
 export context
+export server
 
 const PrologueVersion = "0.1.0"
 
@@ -32,7 +31,7 @@ proc addRoute*(app: Prologue, route: seq[(string, Handler, HttpMethod)],
 proc addRoute*(app: Prologue, urlFile: string, baseRoute = "") =
   discard
 
-proc defaultHandler*(ctx: Context) {.async.} =
+proc defaultHandler(ctx: Context) {.async.} =
   let response = error404(body = errorPage("404 Not Found!", PrologueVersion))
   await ctx.request.respond(response)
 
@@ -63,12 +62,6 @@ proc findHandler(app: Prologue, ctx: Context, path: Path): PathHandler =
         return handler
   return newPathHandler(defaultHandler)
 
-proc handle*(ctx: Context) {.async, inline.} =
-  await ctx.request.respond(ctx.response)
-
-proc `$`*(response: Response): string =
-  fmt"{response.status} {response.httpHeaders}"
-
 macro resp*(params: string) =
   var ctx = ident"ctx"
   # let response = ident"response"
@@ -86,11 +79,6 @@ macro resp*(params: Response) =
     `ctx`.response = `params`
     asyncCheck handle(`ctx`)
     logging.debug($(`ctx`.response))
-
-proc initSettings*(port = Port(8080), debug = false, reusePort = true,
-    staticDir = "/static", appName = ""): Settings =
-  Settings(port: port, debug: debug, reusePort: reusePort, staticDir: staticDir,
-      appName: appName)
 
 proc initApp*(settings: Settings, middlewares: seq[MiddlewareHandler] = @[]): Prologue =
   Prologue(server: newPrologueServer(true, settings.reusePort),

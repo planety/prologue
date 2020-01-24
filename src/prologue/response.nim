@@ -14,6 +14,9 @@ type
     cookies*: string
     body*: string
 
+proc `$`*(response: Response): string =
+  fmt"{response.status} {response.httpHeaders}"
+
 proc initResponse*(httpVersion: HttpVersion, status: HttpCode,
     httpHeaders = newHttpHeaders(), body = "",
         contentTypes = "text/html; charset=UTF-8"): Response =

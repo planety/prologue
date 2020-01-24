@@ -1,4 +1,3 @@
-import prologue / framework
+import prologue / application
 
-export framework
-
+export application

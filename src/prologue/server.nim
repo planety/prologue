@@ -20,6 +20,11 @@ type
     middlewares*: seq[MiddlewareHandler]
 
 
+proc initSettings*(port = Port(8080), debug = false, reusePort = true,
+      staticDir = "/static", appName = ""): Settings =
+  Settings(port: port, debug: debug, reusePort: reusePort, staticDir: staticDir,
+    appName: appName)
+
 proc appName*(app: Prologue): string {.inline.} =
   app.settings.appName
 
