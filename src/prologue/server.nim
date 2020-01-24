@@ -1,4 +1,4 @@
-import httpcore
+import httpcore, mimetypes
 import asyncdispatch
 import asynchttpserver except Request
 import request, route
@@ -6,10 +6,11 @@ import request, route
 
 type
   Server* = AsyncHttpServer
-  Settings* = object
+  Settings* = ref object
     port*: Port
     debug*: bool
     reusePort*: bool
+    mimes: MimeDB
     staticDir*: string
     appName*: string
 
@@ -23,7 +24,7 @@ type
 proc initSettings*(port = Port(8080), debug = false, reusePort = true,
       staticDir = "/static", appName = ""): Settings =
   Settings(port: port, debug: debug, reusePort: reusePort, staticDir: staticDir,
-    appName: appName)
+    mimes: newMimetypes(), appName: appName)
 
 proc appName*(app: Prologue): string {.inline.} =
   app.settings.appName

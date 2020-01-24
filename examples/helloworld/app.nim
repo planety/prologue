@@ -1,10 +1,11 @@
 import ../../src/prologue
 
 
-import views
+import views, urls
 
 let settings = initSettings(appName = "StarLight")
 var app = initApp(settings = settings, middlewares = @[debugRequestMiddleware])
+app.addRoute(urls.urlPatterns, "/todolist")
 app.addRoute("/", home, HttpGet)
 app.addRoute("/", home, HttpPost)
 app.addRoute("/index.html", index, HttpGet)

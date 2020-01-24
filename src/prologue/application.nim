@@ -12,6 +12,7 @@ export request
 export response
 export context
 export server
+export pattern
 
 const PrologueVersion = "0.1.0"
 
@@ -24,9 +25,11 @@ proc addRoute*(app: Prologue, route: string, handler: Handler,
     raise newException(DuplicatedRouteError, fmt"Route {route} is duplicated!")
   app.router.callable[path] = newPathHandler(handler, middlewares)
 
-proc addRoute*(app: Prologue, route: seq[(string, Handler, HttpMethod)],
+proc addRoute*(app: Prologue, patterns: seq[UrlPattern],
     baseRoute = "") =
-  discard
+  for pattern in patterns:
+    app.addRoute(baseRoute & pattern.route, pattern.handler, pattern.httpMethod,
+        pattern.middlewares)
 
 proc addRoute*(app: Prologue, urlFile: string, baseRoute = "") =
   discard
@@ -138,7 +141,8 @@ when isMainModule:
   #   resp {"name": "string"}.toTable
 
   proc helloName*(ctx: Context) {.async.} =
-    resp "<h1>Hello, " & ctx.request.pathParams.getOrDefault("name", "Prologue") & "</h1>"
+    resp "<h1>Hello, " & ctx.request.pathParams.getOrDefault("name",
+        "Prologue") & "</h1>"
 
   proc testRedirect*(ctx: Context) {.async.} =
     resp redirect("/hello")

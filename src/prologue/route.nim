@@ -12,6 +12,16 @@ type
   Handler* = proc(ctx: Context): Future[void] {.gcsafe.}
   MiddlewareHandler* = proc(ctx: Context) {.nimcall, gcsafe.}
 
+  WebAction* = enum
+    Http, Websocket
+
+  UrlPattern* = tuple
+    route: string
+    handler: Handler
+    httpMethod: HttpMethod
+    webAction: WebAction
+    middlewares: seq[MiddlewareHandler]
+
   Path* = object
     route*: string
     httpMethod*: HttpMethod
@@ -26,6 +36,10 @@ type
 
 proc initPath*(route: string, httpMethod = HttpGet): Path =
   Path(route: route, httpMethod: httpMethod)
+
+proc pattern*(route: string, handler: Handler, httpMethod = HttpGet,
+    webAction: WebAction = Http, middlewares: seq[MiddlewareHandler] = @[]): UrlPattern =
+  (route, handler, httpMethod, webAction, middlewares)
 
 proc hash*(x: Path): Hash =
   var h: Hash = 0
