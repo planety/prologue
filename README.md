@@ -2,7 +2,7 @@
 What's past is prologue.
 
 ### Purpose
-Micro Web framework.
+It tends to be Micro Web Framework and will be one part of our Full-Stack Web Framework, namely Starlight.
 
 ### Usage
 
