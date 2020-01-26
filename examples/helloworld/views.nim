@@ -23,4 +23,8 @@ proc login*(ctx: Context) {.async.} =
   resp loginPage()
 
 proc do_login*(ctx: Context) {.async.} =
+  echo "-----------------------------------------------------"
+  echo ctx.request.postParams
+  echo ctx.request.postParams.getOrDefault("username", "")
+  echo ctx.request.postParams.getOrDefault("password", "")
   resp redirect("/hello/Nim")

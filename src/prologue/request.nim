@@ -7,6 +7,8 @@ type
   Request* = object
     nativeRequest: NativeRequest
     cookies*: StringTableRef
+    postParams*: StringTableRef
+    getparams*: StringTableRef
     queryParams*: StringTableRef
     pathParams*: StringTableRef
 
@@ -55,9 +57,11 @@ proc respond*(request: Request; status: HttpCode; body: string;
   await request.nativeRequest.respond(status, body, headers)
 
 proc respond*(request: Request; response: Response) {.async, inline.} =
-  await request.nativeRequest.respond(response.status, response.body, response.httpHeaders)
+  await request.nativeRequest.respond(response.status, response.body,
+      response.httpHeaders)
 
-proc initRequest*(nativeRequest: NativeRequest; cookies = newStringTable(); pathParams = newStringTable(), 
-    queryParams = newStringTable()): Request {.inline.} =
-  Request(nativeRequest: nativeRequest, cookies: cookies, pathParams: pathParams, 
-      queryParams: queryParams)
+proc initRequest*(nativeRequest: NativeRequest; cookies = newStringTable();
+    pathParams = newStringTable(); queryParams = newStringTable();
+        postParams = newStringTable(); getParams = newStringTable()): Request {.inline.} =
+  Request(nativeRequest: nativeRequest, cookies: cookies,
+      pathParams: pathParams, queryParams: queryParams, postParams: postParams, getparams: getparams)

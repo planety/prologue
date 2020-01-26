@@ -89,15 +89,31 @@ proc initApp*(settings: Settings, middlewares: seq[MiddlewareHandler] = @[]): Pr
 
 proc run*(app: Prologue) =
   proc handleRequest(nativeRequest: NativeRequest) {.async.} =
-    var request = initRequest(nativeRequest = nativeRequest,
-        queryParams = newStringTable())
+    var request = initRequest(nativeRequest = nativeRequest)
     let
-      urlQuery = request.query
+      # /student?name=simon&age=sixteen
+      # query -> name=simon&age=sixteen
+      urlQuery = request.query # string
       headers = request.headers
 
     if headers.hasKey("cookies"):
       request.cookies = headers["cookies"].parseCookies
 
+    var contentType: string
+    if headers.hasKey("content-type"):
+      contentType = headers["content-type"]
+    
+    # get or post forms params
+    if contentType == "application/x-www-form-urlencoded":
+      for (key, value) in decodeData(request.body):
+        case request.reqMethod
+        of HttpGet:
+          request.getParams[key] = value
+        of HttpPost:
+          request.postParams[key] = value
+        else:
+          discard
+    
     for (key, value) in decodeData(urlQuery):
       request.queryParams[key] = value
 
