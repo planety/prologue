@@ -1,6 +1,6 @@
 import asyncdispatch, uri, cgi, httpcore, cookies
 import tables, strutils, strformat, macros, logging, strtabs
-import request, response, context, server, middlewares, pages, route, nativesettings
+import request, response, context, server, middlewares, pages, route, nativesettings, utils
 
 
 export httpcore
@@ -98,11 +98,11 @@ proc run*(app: Prologue) =
       headers = request.headers
 
     if headers.hasKey("cookies"):
-      request.cookies = headers["cookies"].parseCookies
+      request.cookies = headers["cookies", 0].parseCookies
 
     var contentType: string
     if headers.hasKey("content-type"):
-      contentType = headers["content-type"]
+      contentType = headers["content-type", 0]
 
     # get or post forms params
     if "form-urlencoded" in contentType:
@@ -126,7 +126,9 @@ proc run*(app: Prologue) =
 
     # gcsafe
     for middlewareHandler in app.middlewares:
-      middlewareHandler(ctx)
+      if middlewareHandler(ctx):
+        asyncCheck handle(ctx)
+        return
 
     logging.debug(fmt"{ctx.request.reqMethod} {ctx.request.url.path}")
     let path = initPath(route = ctx.request.url.path,
@@ -134,7 +136,9 @@ proc run*(app: Prologue) =
     # gcsafe
     let pathHandler = app.findHandler(ctx, path)
     for middlewareHandler in pathHandler.middlewares:
-      middlewareHandler(ctx)
+      if middlewareHandler(ctx):
+        asyncCheck handle(ctx)
+        return
     await pathHandler.handler(ctx)
 
   # maybe should read settings from file

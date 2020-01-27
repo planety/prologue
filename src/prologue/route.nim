@@ -10,7 +10,7 @@ type
   DuplicatedRouteError* = object of RouteError
 
   Handler* = proc(ctx: Context): Future[void] {.gcsafe.}
-  MiddlewareHandler* = proc(ctx: Context) {.nimcall, gcsafe.}
+  MiddlewareHandler* = proc(ctx: Context): bool {.nimcall, gcsafe.}
 
   WebAction* = enum
     Http, Websocket

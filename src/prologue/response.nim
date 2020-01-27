@@ -61,12 +61,12 @@ proc htmlResponse*(text: string): Response {.inline.} =
 
 proc plainTextResponse*(text: string): Response {.inline.} =
   initResponse(HttpVer11, Http200, {
-      "Content-Type": "text/plain; charset=UTF-8"}.newHttpHeaders,
+      "Content-Type": "text/plain"}.newHttpHeaders,
       body = text)
 
 proc jsonResponse*(text: JsonNode): Response {.inline.} =
   initResponse(HttpVer11, Http200, {
-      "Content-Type": "text/json; charset=UTF-8"}.newHttpHeaders,
+      "Content-Type": "application/json"}.newHttpHeaders,
       body = $text)
 
 # Static File Response

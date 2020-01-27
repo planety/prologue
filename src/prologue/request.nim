@@ -33,6 +33,9 @@ proc query*(request: Request): string {.inline.} =
 proc scheme*(request: Request): string {.inline.} =
   request.nativeRequest.url.scheme
 
+proc setScheme*(request: var Request, value: string) {.inline.} = 
+  request.nativeRequest.url.scheme = value
+
 proc body*(request: Request): string {.inline.} =
   request.nativeRequest.body
 
@@ -45,13 +48,23 @@ proc reqMethod*(request: Request): HttpMethod {.inline.} =
 proc getCookie*(request: Request; key: string): string {.inline.} =
   request.cookies.getOrDefault(key, "")
 
+proc secure*(request: Request): bool {.inline.} =
+  let headers = request.nativeRequest.headers
+  case headers["X-Forwarded-Proto", 0]
+  of "http":
+    result = false
+  of "https":
+    result = true
+  else:
+    result = false
+
 proc hostName*(request: Request): string {.inline.} =
   result = request.nativeRequest.hostname
   let headers = request.nativeRequest.headers
   if headers.hasKey("REMOTE_ADDR"):
-    result = headers["REMOTE_ADDR"]
+    result = headers["REMOTE_ADDR", 0]
   if headers.hasKey("x-forwarded-for"):
-    result = headers["x-forwarded-for"]
+    result = headers["x-forwarded-for", 0]
 
 proc respond*(request: Request; status: HttpCode; body: string;
   headers: HttpHeaders = newHttpHeaders()) {.async, inline.} =
