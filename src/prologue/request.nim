@@ -1,4 +1,4 @@
-import asynchttpserver, strutils, strtabs, uri, asyncdispatch, response
+import asynchttpserver, strutils, strtabs, uri, asyncdispatch, response, nativesettings
 
 
 type
@@ -11,6 +11,7 @@ type
     getparams*: StringTableRef
     queryParams*: StringTableRef
     pathParams*: StringTableRef
+    settings*: Settings
 
 
 proc url*(request: Request): Uri {.inline.} =
@@ -62,6 +63,8 @@ proc respond*(request: Request; response: Response) {.async, inline.} =
 
 proc initRequest*(nativeRequest: NativeRequest; cookies = newStringTable();
     pathParams = newStringTable(); queryParams = newStringTable();
-        postParams = newStringTable(); getParams = newStringTable()): Request {.inline.} =
+        postParams = newStringTable(); getParams = newStringTable();
+            settings = newSettings()): Request {.inline.} =
   Request(nativeRequest: nativeRequest, cookies: cookies,
-      pathParams: pathParams, queryParams: queryParams, postParams: postParams, getparams: getparams)
+      pathParams: pathParams, queryParams: queryParams, postParams: postParams,
+      getparams: getparams, settings: settings)

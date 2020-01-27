@@ -11,5 +11,6 @@ let urlPatterns* = @[
   pattern("/home", home),
   pattern("/login", login),
   pattern("/login", do_login, HttpPost),
-  pattern("/redirect", testRedirect)
+  pattern("/redirect", testRedirect),
+  pattern("/multipart", multipart)
 ]

@@ -1,18 +1,12 @@
-import httpcore, mimetypes
+import httpcore
 import asyncdispatch
 import asynchttpserver except Request
 import request, route
+import nativesettings
 
 
 type
   Server* = AsyncHttpServer
-  Settings* = ref object
-    port*: Port
-    debug*: bool
-    reusePort*: bool
-    mimes: MimeDB
-    staticDir*: string
-    appName*: string
 
   Prologue* = object
     server*: Server
@@ -20,11 +14,6 @@ type
     router*: Router
     middlewares*: seq[MiddlewareHandler]
 
-
-proc initSettings*(port = Port(8080), debug = false, reusePort = true,
-      staticDir = "/static", appName = ""): Settings =
-  Settings(port: port, debug: debug, reusePort: reusePort, staticDir: staticDir,
-    mimes: newMimetypes(), appName: appName)
 
 proc appName*(app: Prologue): string {.inline.} =
   app.settings.appName

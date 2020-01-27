@@ -1,6 +1,6 @@
 import asyncdispatch, uri, cgi, httpcore, cookies
 import tables, strutils, strformat, macros, logging, strtabs
-import request, response, context, server, middlewares, pages, route
+import request, response, context, server, middlewares, pages, route, nativesettings
 
 
 export httpcore
@@ -13,6 +13,7 @@ export response
 export context
 export server
 export pattern
+export nativesettings
 
 const PrologueVersion = "0.1.0"
 
@@ -89,7 +90,7 @@ proc initApp*(settings: Settings, middlewares: seq[MiddlewareHandler] = @[]): Pr
 
 proc run*(app: Prologue) =
   proc handleRequest(nativeRequest: NativeRequest) {.async.} =
-    var request = initRequest(nativeRequest = nativeRequest)
+    var request = initRequest(nativeRequest = nativeRequest, settings = app.settings)
     let
       # /student?name=simon&age=sixteen
       # query -> name=simon&age=sixteen
@@ -102,9 +103,9 @@ proc run*(app: Prologue) =
     var contentType: string
     if headers.hasKey("content-type"):
       contentType = headers["content-type"]
-    
+
     # get or post forms params
-    if contentType == "application/x-www-form-urlencoded":
+    if "form-urlencoded" in contentType:
       for (key, value) in decodeData(request.body):
         case request.reqMethod
         of HttpGet:
@@ -113,7 +114,9 @@ proc run*(app: Prologue) =
           request.postParams[key] = value
         else:
           discard
-    
+    elif "multipart/form-data" in contentType and "boundary" in contentType:
+      discard
+
     for (key, value) in decodeData(urlQuery):
       request.queryParams[key] = value
 
@@ -153,9 +156,6 @@ when isMainModule:
   proc home*(ctx: Context) {.async.} =
     resp "<h1>Home</h1>"
 
-  # proc templ*(ctx: Context) {.async.} =
-  #   resp {"name": "string"}.toTable
-
   proc helloName*(ctx: Context) {.async.} =
     resp "<h1>Hello, " & ctx.request.pathParams.getOrDefault("name",
         "Prologue") & "</h1>"
@@ -169,7 +169,7 @@ when isMainModule:
   proc do_login*(ctx: Context) {.async.} =
     resp redirect("/hello/Nim")
 
-  let settings = initSettings(appName = "StarLight")
+  let settings = newSettings(appName = "StarLight")
   var app = initApp(settings = settings, middlewares = @[debugRequestMiddleware])
   app.addRoute("/", home, HttpGet)
   app.addRoute("/", home, HttpPost)
@@ -178,7 +178,5 @@ when isMainModule:
   app.addRoute("/redirect", testRedirect, HttpGet)
   app.addRoute("/login", login, HttpGet)
   app.addRoute("/login", do_login, HttpPost, @[debugRequestMiddleware])
-  # app.addRoute("/hello", hello, HttpGet)
-  # app.addRoute("/templ", templ, HttpGet)
   app.addRoute("/hello/{name}", helloName, HttpGet)
   app.run()
