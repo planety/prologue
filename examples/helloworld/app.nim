@@ -4,7 +4,7 @@ import ../../src/prologue
 import views, urls
 
 let settings = newSettings(appName = "StarLight")
-var app = initApp(settings = settings, middlewares = @[debugRequestMiddleware, httpRedirectMiddleWare, stripPathMiddleware]d)
+var app = initApp(settings = settings, middlewares = @[])
 app.addRoute(urls.urlPatterns, "/todolist")
 app.addRoute("/", home, HttpGet)
 app.addRoute("/", home, HttpPost)

@@ -2,6 +2,14 @@ import asynchttpserver, strutils, strtabs, uri, asyncdispatch, response, natives
 
 
 type
+  FormPart* = object
+    name*: string
+    value*: string
+    filename*: string
+    filenamestar*: string
+
+  MultiFormPart* = seq[FormPart]
+
   NativeRequest* = asynchttpserver.Request
 
   Request* = object
@@ -25,7 +33,7 @@ proc path*(request: Request): string {.inline.} =
 
 proc stripPath*(request: var Request) {.inline.} =
   request.nativeRequest.url.path = request.nativeRequest.url.path.strip(
-      leading = false, chars = {'\\'})
+      leading = false, chars = {'/'})
 
 proc query*(request: Request): string {.inline.} =
   request.nativeRequest.url.query

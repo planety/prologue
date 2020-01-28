@@ -1,6 +1,6 @@
 import asyncdispatch, uri, cgi, httpcore, cookies
 import tables, strutils, strformat, macros, logging, strtabs
-import request, response, context, server, middlewares, pages, route, nativesettings, utils
+import request, response, context, server, middlewares, pages, route, nativesettings, parseutils
 
 
 export httpcore
@@ -114,8 +114,62 @@ proc run*(app: Prologue) =
           request.postParams[key] = value
         else:
           discard
+
     elif "multipart/form-data" in contentType and "boundary" in contentType:
-      discard
+      let 
+        sep = contentType[contentType.rfind("boundary") + 9 .. ^1]
+        startSep = fmt"--{sep}"
+        endSep = fmt"--{sep}--"
+        body = request.body
+        startPos = find(body, startSep)
+        endPos = rfind(body, endSep)
+        formData = body[startPos ..< endPos]
+        formDataSeq = formData.split(startSep & "\c\L")
+
+      var 
+        multiFormPart: MultiFormPart
+
+      for data in formDataSeq:
+        if data.len == 0:
+          continue
+        var formPart: FormPart
+        for line in data.splitLines:
+          if line.startsWith("Content-Disposition"):
+            var 
+              pos = 0
+              times = 0
+              tok = ""
+              formKey, formValue: string
+            let
+              content = line.parseHeader.value[0]
+              length = content.len
+            pos += parseUntil(content, tok, ';', pos)
+            doAssert tok == "form-data", fmt"{tok} != form-data"
+
+            while pos < length:
+              pos += skipWhile(content, {';', ' '}, pos)
+              pos += parseUntil(content, formKey, '=', pos)
+              pos += skipWhile(content, {'=', '\"'}, pos)
+              pos += parseUntil(content, formValue, '\"', pos)
+              pos += skipWhile(content, {'\"'}, pos)
+              case formKey
+              of "name":
+                formPart.name = formValue
+              of "filename":
+                formPart.filename = formValue
+              of "filename*":
+                formPart.filenamestar = formValue
+              else:
+                discard
+              times += 1
+              if times >= 3:
+                break
+          elif line.len > 0:
+            formPart.value = line
+          else:
+            discard
+        multiFormPart.add formPart
+      echo multiFormPart
 
     for (key, value) in decodeData(urlQuery):
       request.queryParams[key] = value
@@ -127,7 +181,7 @@ proc run*(app: Prologue) =
     # gcsafe
     for middlewareHandler in app.middlewares:
       if middlewareHandler(ctx):
-        asyncCheck handle(ctx)
+        await handle(ctx)
         return
 
     logging.debug(fmt"{ctx.request.reqMethod} {ctx.request.url.path}")
@@ -137,7 +191,7 @@ proc run*(app: Prologue) =
     let pathHandler = app.findHandler(ctx, path)
     for middlewareHandler in pathHandler.middlewares:
       if middlewareHandler(ctx):
-        asyncCheck handle(ctx)
+        await handle(ctx)
         return
     await pathHandler.handler(ctx)
 
