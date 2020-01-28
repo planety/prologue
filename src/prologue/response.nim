@@ -3,7 +3,6 @@ import cookies
 import times
 import json
 import strformat
-# import mimetypes
 
 
 type
@@ -68,13 +67,3 @@ proc jsonResponse*(text: JsonNode): Response {.inline.} =
   initResponse(HttpVer11, Http200, {
       "Content-Type": "application/json"}.newHttpHeaders,
       body = $text)
-
-# Static File Response
-proc staticFileResponse*(fileName, root: string, mimetype = true,
-    download = false, charset = "UTF-8", headers = {
-        "Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders): Response {.inline.} =
-  var status = Http200
-
-  let f = open(fileName, fmRead)
-  defer: f.close()
-  result = initResponse(HttpVer11, status, headers, body = f.readAll())

@@ -7,7 +7,7 @@ type
     port*: Port
     debug*: bool
     reusePort*: bool
-    mimes: MimeDB
+    mimeDB*: MimeDB
     staticDir*: string
     appName*: string
 
@@ -15,4 +15,4 @@ type
 proc newSettings*(port = Port(8080), debug = false, reusePort = true,
     staticDir = "/static", appName = ""): Settings =
   Settings(port: port, debug: debug, reusePort: reusePort, staticDir: staticDir,
-    mimes: newMimetypes(), appName: appName)
+    mimeDB: newMimetypes(), appName: appName)
