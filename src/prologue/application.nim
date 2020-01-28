@@ -15,8 +15,6 @@ export server
 export pattern
 export nativesettings
 
-const PrologueVersion = "0.1.0"
-
 
 proc addRoute*(app: Prologue, route: string, handler: Handler,
     httpMethod = HttpGet, middlewares: seq[MiddlewareHandler] = @[]) {.inline.} =
@@ -34,10 +32,6 @@ proc addRoute*(app: Prologue, patterns: seq[UrlPattern],
 
 proc addRoute*(app: Prologue, urlFile: string, baseRoute = "") =
   discard
-
-proc defaultHandler(ctx: Context) {.async.} =
-  let response = error404(body = errorPage("404 Not Found!", PrologueVersion))
-  await ctx.request.respond(response)
 
 proc findHandler(app: Prologue, ctx: Context, path: Path): PathHandler =
   if path in app.router.callable:

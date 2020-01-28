@@ -3,6 +3,7 @@ import cookies
 import times
 import json
 import strformat
+import mimetypes, os
 
 
 type
@@ -67,3 +68,23 @@ proc jsonResponse*(text: JsonNode): Response {.inline.} =
   initResponse(HttpVer11, Http200, {
       "Content-Type": "application/json"}.newHttpHeaders,
       body = $text)
+
+# Static File Response
+proc staticFileResponse*(fileName, root: string, mimetype = "",
+    download = false, charset = "UTF-8", headers = newHttpHeaders()): Response {.inline.} =
+  let
+    status = Http200
+    mimeDB = newMimetypes()
+  var mimetype = mimetype
+  if mimetype == "":
+    let ext = fileName.splitFile.ext
+    mimetype = mimeDB.getMimetype(ext)
+
+  var f: File
+  defer: f.close()
+  # exists -> have access -> can open
+  try:
+    f = open(fileName, fmRead)
+  except IOError:
+    return abort(body = "Not Found File")
+  result = initResponse(HttpVer11, status, headers, body = f.readAll())

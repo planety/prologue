@@ -1,8 +1,6 @@
-import strtabs, asyncdispatch, httpcore
-import os
-import mimetypes
+import strtabs, asyncdispatch
 
-import request, response, nativesettings
+import request, response, pages, constants
 
 # TODO may add app instance
 type
@@ -16,17 +14,6 @@ proc newContext*(request: Request, response: Response, cookies = newStringTable(
 proc handle*(ctx: Context) {.async, inline.} =
   await ctx.request.respond(ctx.response)
 
-# Static File Response
-proc staticFileResponse*(ctx: Context, fileName, root: string, mimetype = "",
-    download = false, charset = "UTF-8", headers = newHttpHeaders()): Response {.inline.} =
-  let 
-    status = Http200
-  var mimetype = mimetype
-  if mimetype == "":
-    let ext = fileName.splitFile.ext
-    mimetype = ctx.request.settings.mimeDB.getMimetype(ext)
-
-
-  let f = open(fileName, fmRead)
-  defer: f.close()
-  result = initResponse(HttpVer11, status, headers, body = f.readAll())
+proc defaultHandler*(ctx: Context) {.async.} =
+  let response = error404(body = errorPage("404 Not Found!", PrologueVersion))
+  await ctx.request.respond(response)
