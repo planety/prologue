@@ -127,7 +127,7 @@ proc run*(app: Prologue) =
         formDataSeq = formData.split(startSep & "\c\L")
 
       var 
-        multiFormPart: MultiFormPart
+        multiPartForm: MultiPartForm
 
       for data in formDataSeq:
         if data.len == 0:
@@ -168,8 +168,8 @@ proc run*(app: Prologue) =
             formPart.value = line
           else:
             discard
-        multiFormPart.add formPart
-      echo multiFormPart
+        multiPartForm.add formPart
+    
 
     for (key, value) in decodeData(urlQuery):
       request.queryParams[key] = value

@@ -8,7 +8,7 @@ type
     filename*: string
     filenamestar*: string
 
-  MultiFormPart* = seq[FormPart]
+  MultiPartForm* = seq[FormPart]
 
   NativeRequest* = asynchttpserver.Request
 
