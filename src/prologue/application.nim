@@ -16,24 +16,40 @@ export pattern
 export nativesettings
 
 
-proc addRoute*(app: Prologue, route: string, handler: Handler,
+proc addRoute*(app: Prologue, route: string, handler: HandlerSync,
     httpMethod = HttpGet, middlewares: seq[MiddlewareHandler] = @[]) {.inline.} =
   let path = initPath(route = route,
       httpMethod = httpMethod)
   if path in app.router.callable:
     raise newException(DuplicatedRouteError, fmt"Route {route} is duplicated!")
-  app.router.callable[path] = newPathHandler(handler, middlewares)
+  app.router.callable[path] = newPathMatcher(handler, middlewares)
+
+proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
+    httpMethod = HttpGet, middlewares: seq[MiddlewareHandler] = @[]) {.inline.} =
+  let path = initPath(route = route,
+      httpMethod = httpMethod)
+  if path in app.router.callable:
+    raise newException(DuplicatedRouteError, fmt"Route {route} is duplicated!")
+  app.router.callable[path] = newPathMatcher(handler, middlewares)
+
+proc addRoute*(app: Prologue, route: string, matcher: Matcher,
+  httpMethod = HttpGet, middlewares: seq[MiddlewareHandler] = @[]) {.inline.} =
+  let path = initPath(route = route,
+      httpMethod = httpMethod)
+  if path in app.router.callable:
+    raise newException(DuplicatedRouteError, fmt"Route {route} is duplicated!")
+  app.router.callable[path] = newPathMatcher(matcher, middlewares)
 
 proc addRoute*(app: Prologue, patterns: seq[UrlPattern],
     baseRoute = "") =
   for pattern in patterns:
-    app.addRoute(baseRoute & pattern.route, pattern.handler, pattern.httpMethod,
+    app.addRoute(baseRoute & pattern.route, pattern.matcher, pattern.httpMethod,
         pattern.middlewares)
 
 proc addRoute*(app: Prologue, urlFile: string, baseRoute = "") =
   discard
 
-proc findHandler(app: Prologue, ctx: Context, path: Path): PathHandler =
+proc findMatcher(app: Prologue, ctx: Context, path: Path): PathMatcher =
   if path in app.router.callable:
     return app.router.callable[path]
   let
@@ -58,7 +74,7 @@ proc findHandler(app: Prologue, ctx: Context, path: Path): PathHandler =
           break
       if flag:
         return handler
-  return newPathHandler(defaultHandler)
+  return newPathMatcher(defaultHandler)
 
 macro resp*(params: string) =
   var ctx = ident"ctx"
@@ -66,8 +82,6 @@ macro resp*(params: string) =
 
   result = quote do:
     `ctx`.response.body = `params`
-    asyncCheck handle(`ctx`)
-    logging.debug($(`ctx`.response))
 
 macro resp*(params: Response) =
   var ctx = ident"ctx"
@@ -75,8 +89,6 @@ macro resp*(params: Response) =
 
   result = quote do:
     `ctx`.response = `params`
-    asyncCheck handle(`ctx`)
-    logging.debug($(`ctx`.response))
 
 proc initApp*(settings: Settings, middlewares: seq[MiddlewareHandler] = @[]): Prologue =
   Prologue(server: newPrologueServer(true, settings.reusePort),
@@ -164,7 +176,6 @@ proc run*(app: Prologue) =
             discard
         multiPartForm.add formPart
     
-
     for (key, value) in decodeData(urlQuery):
       request.queryParams[key] = value
 
@@ -173,6 +184,7 @@ proc run*(app: Prologue) =
     var ctx = newContext(request = request, response = response)
 
     # gcsafe
+    # upgrade to hook
     for middlewareHandler in app.middlewares:
       if middlewareHandler(ctx):
         await handle(ctx)
@@ -182,12 +194,21 @@ proc run*(app: Prologue) =
     let path = initPath(route = ctx.request.url.path,
         httpMethod = ctx.request.reqMethod)
     # gcsafe
-    let pathHandler = app.findHandler(ctx, path)
-    for middlewareHandler in pathHandler.middlewares:
+    let pathMatcher = app.findMatcher(ctx, path)
+    for middlewareHandler in pathMatcher.middlewares:
       if middlewareHandler(ctx):
         await handle(ctx)
         return
-    await pathHandler.handler(ctx)
+    
+    let matcher = pathMatcher.matcher
+    case matcher.async
+    of true:
+      await matcher.handlerAsync(`ctx`)
+    of false:
+      matcher.handlerSync(`ctx`)
+
+    await handle(`ctx`)
+    logging.debug($(`ctx`.response))
 
   # maybe should read settings from file
   if logging.getHandlers().len == 0:
@@ -202,7 +223,7 @@ proc run*(app: Prologue) =
 
 
 when isMainModule:
-  proc hello*(ctx: Context) {.async.} =
+  proc hello*(ctx: Context) =
     resp "<h1>Hello, Prologue!</h1>"
 
   proc home*(ctx: Context) {.async.} =

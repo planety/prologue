@@ -9,15 +9,24 @@ type
   RouteResetError* = object of RouteError
   DuplicatedRouteError* = object of RouteError
 
-  Handler* = proc(ctx: Context): Future[void] {.gcsafe.}
+  # change to HandlerAsync later
+  HandlerAsync* = proc(ctx: Context): Future[void] {.gcsafe.}
+  HandlerSync* = proc(ctx: Context): void {.gcsafe.}
   MiddlewareHandler* = proc(ctx: Context): bool {.nimcall, gcsafe.}
+
+  Matcher* = object
+    case async*: bool
+    of true:
+      handlerAsync*: HandlerAsync
+    of false:
+      handlerSync*: HandlerSync
 
   WebAction* = enum
     Http, Websocket
 
   UrlPattern* = tuple
     route: string
-    handler: Handler
+    matcher: Matcher
     httpMethod: HttpMethod
     webAction: WebAction
     middlewares: seq[MiddlewareHandler]
@@ -26,20 +35,26 @@ type
     route*: string
     httpMethod*: HttpMethod
 
-  PathHandler* = ref object
-    handler*: Handler
+  PathMatcher* = ref object
+    matcher*: Matcher
     middlewares*: seq[MiddlewareHandler]
 
   Router* = ref object
-    callable*: Table[Path, PathHandler]
+    callable*: Table[Path, PathMatcher]
 
 
 proc initPath*(route: string, httpMethod = HttpGet): Path =
   Path(route: route, httpMethod: httpMethod)
 
-proc pattern*(route: string, handler: Handler, httpMethod = HttpGet,
+proc pattern*(route: string, handler: HandlerSync, httpMethod = HttpGet,
     webAction: WebAction = Http, middlewares: seq[MiddlewareHandler] = @[]): UrlPattern =
-  (route, handler, httpMethod, webAction, middlewares)
+  let matcher = Matcher(async: false, handlerSync: handler)
+  (route, matcher, httpMethod, webAction, middlewares)
+
+proc pattern*(route: string, handler: HandlerAsync, httpMethod = HttpGet,
+    webAction: WebAction = Http, middlewares: seq[MiddlewareHandler] = @[]): UrlPattern =
+  let matcher = Matcher(async: true, handlerAsync: handler)
+  (route, matcher, httpMethod, webAction, middlewares)
 
 proc hash*(x: Path): Hash =
   var h: Hash = 0
@@ -47,8 +62,16 @@ proc hash*(x: Path): Hash =
   h = h !& hash(x.httpMethod)
   result = !$h
 
-proc newPathHandler*(handler: Handler, middlewares: seq[MiddlewareHandler] = @[]): PathHandler =
-  PathHandler(handler: handler, middlewares: middlewares)
+proc newPathMatcher*(handler: HandlerSync, middlewares: seq[MiddlewareHandler] = @[]): PathMatcher =
+  let matcher = Matcher(async: false, handlerSync: handler)
+  PathMatcher(matcher: matcher, middlewares: middlewares)
+
+proc newPathMatcher*(handler: HandlerAsync, middlewares: seq[MiddlewareHandler] = @[]): PathMatcher =
+  let matcher = Matcher(async: true, handlerAsync: handler)
+  PathMatcher(matcher: matcher, middlewares: middlewares)
+
+proc newPathMatcher*(matcher: Matcher, middlewares: seq[MiddlewareHandler] = @[]): PathMatcher =
+  PathMatcher(matcher: matcher, middlewares: middlewares)
 
 proc newRouter*(): Router =
-  Router(callable: initTable[Path, PathHandler]())
+  Router(callable: initTable[Path, PathMatcher]())
