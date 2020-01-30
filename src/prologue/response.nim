@@ -84,7 +84,7 @@ proc staticFileResponse*(fileName, root: string, mimetype = "",
   defer: f.close()
   # exists -> have access -> can open
   try:
-    f = open(fileName, fmRead)
+    f = open(root / fileName, fmRead)
   except IOError:
     return abort(body = "Not Found File")
   result = initResponse(HttpVer11, status, headers, body = f.readAll())

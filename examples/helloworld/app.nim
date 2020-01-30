@@ -3,11 +3,14 @@ import ../../src/prologue
 
 import views, urls
 
-let settings = newSettings(appName = "StarLight")
+let settings = newSettings(appName = "StarLight", debug = true)
 var app = initApp(settings = settings, middlewares = @[])
 app.addRoute(urls.urlPatterns, "/todolist")
 app.addRoute("/", home, HttpGet)
 app.addRoute("/", home, HttpPost)
+app.addRoute("/docs", docs, HttpGet)
+app.addRoute("/redocs", redocs, HttpGet)
+app.addRoute("/openapi.json", docsjson, HttpPost)
 app.addRoute("/index.html", index, HttpGet)
 app.addRoute("/prefix/home", home, HttpGet)
 app.addRoute("/home", home, HttpGet)

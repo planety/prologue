@@ -1,6 +1,6 @@
 import asyncdispatch, uri, cgi, httpcore, cookies
 import tables, strutils, strformat, macros, logging, strtabs
-import request, response, context, server, middlewares, pages, route, nativesettings, parseutils
+import request, response, context, server, middlewares, pages, route, nativesettings, parseutils, openapi
 
 
 export httpcore
@@ -213,12 +213,16 @@ proc run*(app: Prologue) =
   # maybe should read settings from file
   if logging.getHandlers().len == 0:
     addHandler(logging.newConsoleLogger())
-    setLogFilter(if app.settings.debug: lvlInfo else: lvlDebug)
+    setLogFilter(if app.settings.debug: lvlDebug else: lvlInfo)
   defer: app.close()
+
+  if app.settings.debug:
+    writeDocs(description)
+
   when defined(windows):
-    logging.info(fmt"Prologue is serving at 127.0.0.1:{app.settings.port.int} {app.settings.appName}")
+    logging.debug(fmt"Prologue is serving at 127.0.0.1:{app.settings.port.int} {app.settings.appName}")
   else:
-    logging.info(fmt"Prologue is serving at 0.0.0.0:{app.settings.port.int} {app.settings.appName}")
+    logging.debug(fmt"Prologue is serving at 0.0.0.0:{app.settings.port.int} {app.settings.appName}")
   waitFor app.serve(app.settings.port, handleRequest)
 
 
