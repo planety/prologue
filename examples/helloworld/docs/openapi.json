@@ -1,14 +1,25 @@
 {
   "openapi": "3.0.2",
   "info": {
-    "title": "Prologue API",
+    "title": "StarLight",
+    "description": "My Conquest is the Sea of Stars.",
+    "termsOfService": "",
+    "contact": {
+      "name": "",
+      "url": "",
+      "email": ""
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://www.mit-license.org"
+    },
     "version": "0.1.0"
   },
   "paths": {
     "/": {
       "get": {
         "summary": "Root",
-        "operationId": "Root__get",
+        "operationId": "root__get",
         "responses": {
           "200": {
             "description": "Successful Response",

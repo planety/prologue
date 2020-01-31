@@ -1,6 +1,7 @@
 import asyncdispatch, uri, cgi, httpcore, cookies
 import tables, strutils, strformat, macros, logging, strtabs
-import request, response, context, server, middlewares, pages, route, nativesettings, parseutils, openapi
+import request, response, context, server, middlewares, pages, route,
+    nativesettings, parseutils, openapi, constants
 
 
 export httpcore
@@ -96,7 +97,8 @@ proc initApp*(settings: Settings, middlewares: seq[MiddlewareHandler] = @[]): Pr
 
 proc run*(app: Prologue) =
   proc handleRequest(nativeRequest: NativeRequest) {.async.} =
-    var request = initRequest(nativeRequest = nativeRequest, settings = app.settings)
+    var request = initRequest(nativeRequest = nativeRequest,
+        settings = app.settings)
     let
       # /student?name=simon&age=sixteen
       # query -> name=simon&age=sixteen
@@ -122,7 +124,7 @@ proc run*(app: Prologue) =
           discard
 
     elif "multipart/form-data" in contentType and "boundary" in contentType:
-      let 
+      let
         sep = contentType[contentType.rfind("boundary") + 9 .. ^1]
         startSep = fmt"--{sep}"
         endSep = fmt"--{sep}--"
@@ -132,7 +134,7 @@ proc run*(app: Prologue) =
         formData = body[startPos ..< endPos]
         formDataSeq = formData.split(startSep & "\c\L")
 
-      var 
+      var
         multiPartForm: MultiPartForm
 
       for data in formDataSeq:
@@ -141,7 +143,7 @@ proc run*(app: Prologue) =
         var formPart: FormPart
         for line in data.splitLines:
           if line.startsWith("Content-Disposition"):
-            var 
+            var
               pos = 0
               times = 0
               tok = ""
@@ -175,7 +177,7 @@ proc run*(app: Prologue) =
           else:
             discard
         multiPartForm.add formPart
-    
+
     for (key, value) in decodeData(urlQuery):
       request.queryParams[key] = value
 
@@ -199,7 +201,7 @@ proc run*(app: Prologue) =
       if middlewareHandler(ctx):
         await handle(ctx)
         return
-    
+
     let matcher = pathMatcher.matcher
     case matcher.async
     of true:
@@ -216,8 +218,42 @@ proc run*(app: Prologue) =
     setLogFilter(if app.settings.debug: lvlDebug else: lvlInfo)
   defer: app.close()
 
+
+
+  let
+    version = OpenApiVersion
+    license = initLicense("MIT", "https://www.mit-license.org")
+    description = "My Conquest is the Sea of Stars."
+    info = Info(title: app.settings.appName, description: description,
+        license: license, version: PrologueVersion)
+    descriptionJson = %* {
+      "openapi": version,
+      "info": info,
+      "paths": {
+      "/": {
+        "get": {
+          "summary": "Root",
+          "operationId": "root__get",
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+
+    descriptionDoc = $descriptionJson
+
   if app.settings.debug:
-    writeDocs(description)
+    writeDocs(descriptionDoc)
 
   when defined(windows):
     logging.debug(fmt"Prologue is serving at 127.0.0.1:{app.settings.port.int} {app.settings.appName}")
