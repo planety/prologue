@@ -22,8 +22,8 @@ type
     version*: string
   Contact = object
     name, url, email: string
-  License = object
-    name, url: string
+  License* = object
+    name*, url*: string
   Servers = object
     url, description: string
     # variables: Variable
@@ -34,18 +34,51 @@ type
   Security = object
   Tags = object
   ExternalDocs = object
+  Schema* = object
+    schemaType: string
+    title: string
+    multipleOf: string
+    maximum: string
+    exclusiveMaximum: string
+    minimum: string
+    exclusiveMinimum: string
+    maxLength: string
+    minLength: string
+    pattern: string
+    maxItems: string
+    minItems: string
+    uniqueItems: string
+    maxProperties: string
+    minProperties: string
+    required: string
+    shemaEnum: string
 
-proc initContact*(name, url, email: string): Contact =
+proc initContact*(name, url, email = ""): Contact =
   Contact(name: name, url: url, email: email)
 
-proc initLicense*(name, url: string): License =
+proc `$`*(contact: Contact): string =
+  $ %* contact
+
+proc initLicense*(name: string, url = ""): License =
   License(name: name, url: url)
 
-proc initInfo*(title, description, termsOfService: string; contact: Contact;
-    license: License; version: string): Info =
-  Info(title: title, description: description, termsOfService: termsOfService,
-      contact: contact, license: license, version: version)
+proc `$`*(license: License): string =
+  $ %* license
 
+proc initInfo*(title, licenseName, version: string;description, termsOfService = ""; contactName, contactUrl, contactEmail = "";
+     licenseUrl = ""): Info =
+  Info(title: title, description: description, termsOfService: termsOfService,
+      contact: initContact(contactName, contactUrl, contactEmail), license: initLicense(licenseName, licenseUrl), version: version)
+
+proc `$`*(info: Info): string =
+  $ %* {
+    "title": info.title,
+    "description": info.description,
+    "termsOfService": info.termsOfService,
+    "contact": $info.contact,
+    "license": $info.license,
+    "version": $info.version
+  }
 
 proc writeDocs*(description: string; fileName = "openapi.json"; dirs = "docs") =
   if not existsDir(dirs):
@@ -53,4 +86,3 @@ proc writeDocs*(description: string; fileName = "openapi.json"; dirs = "docs") =
   let f = open(dirs / fileName, fmWrite)
   defer: f.close()
   f.write(description)
-

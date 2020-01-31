@@ -95,6 +95,43 @@ proc initApp*(settings: Settings, middlewares: seq[MiddlewareHandler] = @[]): Pr
   Prologue(server: newPrologueServer(true, settings.reusePort),
       settings: settings, router: newRouter(), middlewares: middlewares)
 
+proc generateDocs*(app: Prologue) =
+  let
+    version = OpenApiVersion
+    license = initLicense("MIT", "https://www.mit-license.org")
+    description = "My Conquest is the Sea of Stars."
+    info = initInfo(title = app.settings.appName, description = description,
+        licenseName = license.name, licenseUrl = license.url, version = PrologueVersion)
+    descriptionJson = %* {
+      "openapi": version,
+      "info": info,
+      "paths": {
+      "/": {
+        "get": {
+          "summary": "Root",
+          "operationId": "root__get",
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+
+    descriptionDoc = $descriptionJson
+
+  
+  writeDocs(descriptionDoc)
+
+
 proc run*(app: Prologue) =
   proc handleRequest(nativeRequest: NativeRequest) {.async.} =
     var request = initRequest(nativeRequest = nativeRequest,
@@ -218,42 +255,8 @@ proc run*(app: Prologue) =
     setLogFilter(if app.settings.debug: lvlDebug else: lvlInfo)
   defer: app.close()
 
-
-
-  let
-    version = OpenApiVersion
-    license = initLicense("MIT", "https://www.mit-license.org")
-    description = "My Conquest is the Sea of Stars."
-    info = Info(title: app.settings.appName, description: description,
-        license: license, version: PrologueVersion)
-    descriptionJson = %* {
-      "openapi": version,
-      "info": info,
-      "paths": {
-      "/": {
-        "get": {
-          "summary": "Root",
-          "operationId": "root__get",
-          "responses": {
-            "200": {
-              "description": "Successful Response",
-              "content": {
-                "application/json": {
-                  "schema": {}
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-
-
-    descriptionDoc = $descriptionJson
-
   if app.settings.debug:
-    writeDocs(descriptionDoc)
+    generateDocs(app)
 
   when defined(windows):
     logging.debug(fmt"Prologue is serving at 127.0.0.1:{app.settings.port.int} {app.settings.appName}")
