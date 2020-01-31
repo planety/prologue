@@ -65,19 +65,20 @@ proc initLicense*(name: string, url = ""): License =
 proc `$`*(license: License): string =
   $ %* license
 
-proc initInfo*(title, licenseName, version: string;description, termsOfService = ""; contactName, contactUrl, contactEmail = "";
+proc initInfo*(title, licenseName, version: string; description, termsOfService = ""; contactName, contactUrl, contactEmail = "";
      licenseUrl = ""): Info =
   Info(title: title, description: description, termsOfService: termsOfService,
-      contact: initContact(contactName, contactUrl, contactEmail), license: initLicense(licenseName, licenseUrl), version: version)
+      contact: initContact(contactName, contactUrl, contactEmail),
+          license: initLicense(licenseName, licenseUrl), version: version)
 
 proc `$`*(info: Info): string =
   $ %* {
     "title": info.title,
     "description": info.description,
     "termsOfService": info.termsOfService,
-    "contact": $info.contact,
-    "license": $info.license,
-    "version": $info.version
+    "contact": info.contact,
+    "license": info.license,
+    "version": info.version
   }
 
 proc writeDocs*(description: string; fileName = "openapi.json"; dirs = "docs") =

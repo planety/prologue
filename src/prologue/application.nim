@@ -101,7 +101,8 @@ proc generateDocs*(app: Prologue) =
     license = initLicense("MIT", "https://www.mit-license.org")
     description = "My Conquest is the Sea of Stars."
     info = initInfo(title = app.settings.appName, description = description,
-        licenseName = license.name, licenseUrl = license.url, version = PrologueVersion)
+        licenseName = license.name,
+        licenseUrl = license.url, version = PrologueVersion)
     descriptionJson = %* {
       "openapi": version,
       "info": info,
@@ -116,19 +117,19 @@ proc generateDocs*(app: Prologue) =
               "content": {
                 "application/json": {
                   "schema": {}
-                  }
-                }
-              }
-            }
-          }
-        }
+      }
+    }
+      }
+    }
+      }
+    }
       }
     }
 
 
     descriptionDoc = $descriptionJson
 
-  
+
   writeDocs(descriptionDoc)
 
 
