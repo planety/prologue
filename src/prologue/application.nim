@@ -281,7 +281,7 @@ when isMainModule:
     resp "<h1>Home</h1>"
 
   proc helloName*(ctx: Context) {.async.} =
-    resp "<h1>Hello, " & getpathParams("name", string) & "</h1>"
+    resp "<h1>Hello, " & getPathParams("name", "Prologue!") & "</h1>"
 
   proc testRedirect*(ctx: Context) {.async.} =
     resp redirect("/hello")

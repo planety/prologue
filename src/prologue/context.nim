@@ -18,12 +18,6 @@ proc defaultHandler*(ctx: Context) {.async.} =
   let response = error404(body = errorPage("404 Not Found!", PrologueVersion))
   await ctx.request.respond(response)
 
-macro getPathParams*(key: string): PathParams =
-  var ctx = ident"ctx"
-
-  result = quote do:
-    `ctx`.request.pathParams.getOrDefault(`key`)
-
 macro getPostParams*(key: string, default = ""): string =
   var ctx = ident"ctx"
 
@@ -42,9 +36,19 @@ macro getQueryParams*(key: string, default = ""): string =
   result = quote do:
     `ctx`.request.queryParams.getOrDefault(`key`, default)
 
-macro getPathParams*[T: BaseType](key: string, keyType: typedesc[T]): T =
+macro getPathParams*(key: string): PathParams =
   var ctx = ident"ctx"
 
   result = quote do:
-    let pathParams = `ctx`.request.pathParams.getOrDefault(`key`)
-    parseValue(pathParams.value, `keyType`)
+    `ctx`.request.pathParams.getOrDefault(`key`)
+
+macro getPathParams*[T: BaseType](key: string, default: T): T =
+  var ctx = ident"ctx"
+
+  result = quote do:
+    var pathParams: PathParams
+    if `key` in `ctx`.request.pathParams:
+      pathParams = `ctx`.request.pathParams.getOrDefault(`key`)
+    
+    parseValue(pathParams.value, T)
+    
