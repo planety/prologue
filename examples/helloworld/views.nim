@@ -21,7 +21,8 @@ proc index*(ctx: Context) {.async.} =
   resp staticFileResponse("index.html", "static")
 
 proc helloName*(ctx: Context) {.async.} =
-  resp "<h1>Hello, " & ctx.request.pathParams.getOrDefault("name", "Prologue") & "</h1>"
+  echo getPathParams("name")
+  resp "<h1>Hello, " & getPathParams("name", string) & "</h1>"
 
 proc testRedirect*(ctx: Context) {.async.} =
   resp redirect("/hello")

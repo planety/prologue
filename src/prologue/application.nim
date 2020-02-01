@@ -1,7 +1,7 @@
 import asyncdispatch, uri, cgi, httpcore, cookies
 import tables, strutils, strformat, macros, logging, strtabs
 import request, response, context, server, middlewares, pages, route,
-    nativesettings, parseutils, openapi, constants
+    nativesettings, parseutils, openapi, constants, base, utils
 
 
 export httpcore
@@ -69,7 +69,10 @@ proc findMatcher(app: Prologue, ctx: Context, path: Path): PathMatcher =
           let key = routeList[idx]
           if key.len <= 2:
             raise newException(RouteError, "{} shouldn't be empty!")
-          ctx.request.pathParams[key[1 .. ^2]] = decodeUrl(pathList[idx])
+          let
+            (params, paramsType) = parsePathParams(key[1 ..< ^1])
+            pathParams = initPathParams(decodeUrl(pathList[idx]), paramsType)
+          ctx.request.pathParams[params] = pathParams
         else:
           flag = false
           break
@@ -274,8 +277,7 @@ when isMainModule:
     resp "<h1>Home</h1>"
 
   proc helloName*(ctx: Context) {.async.} =
-    resp "<h1>Hello, " & ctx.request.pathParams.getOrDefault("name",
-        "Prologue") & "</h1>"
+    resp "<h1>Hello, " & getpathParams("name", string) & "</h1>"
 
   proc testRedirect*(ctx: Context) {.async.} =
     resp redirect("/hello")

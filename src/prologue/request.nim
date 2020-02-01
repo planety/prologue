@@ -1,15 +1,9 @@
-import asynchttpserver, strutils, strtabs, uri, asyncdispatch, response, nativesettings
+import asynchttpserver, strutils, strtabs, uri, asyncdispatch, tables
+
+import nativesettings, base, response
 
 
 type
-  FormPart* = object
-    name*: string
-    value*: string
-    filename*: string
-    filenamestar*: string
-
-  MultiPartForm* = seq[FormPart]
-
   NativeRequest* = asynchttpserver.Request
 
   Request* = object
@@ -18,7 +12,7 @@ type
     postParams*: StringTableRef
     getparams*: StringTableRef
     queryParams*: StringTableRef
-    pathParams*: StringTableRef
+    pathParams*: TableRef[string, PathParams]
     settings*: Settings
 
 
@@ -41,7 +35,7 @@ proc query*(request: Request): string {.inline.} =
 proc scheme*(request: Request): string {.inline.} =
   request.nativeRequest.url.scheme
 
-proc setScheme*(request: var Request, value: string) {.inline.} = 
+proc setScheme*(request: var Request, value: string) {.inline.} =
   request.nativeRequest.url.scheme = value
 
 proc body*(request: Request): string {.inline.} =
@@ -83,7 +77,7 @@ proc respond*(request: Request; response: Response) {.async, inline.} =
       response.httpHeaders)
 
 proc initRequest*(nativeRequest: NativeRequest; cookies = newStringTable();
-    pathParams = newStringTable(); queryParams = newStringTable();
+    pathParams = newTable[string, PathParams](); queryParams = newStringTable();
         postParams = newStringTable(); getParams = newStringTable();
             settings = newSettings()): Request {.inline.} =
   Request(nativeRequest: nativeRequest, cookies: cookies,
