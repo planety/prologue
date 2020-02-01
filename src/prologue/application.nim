@@ -98,6 +98,10 @@ proc initApp*(settings: Settings, middlewares: seq[MiddlewareHandler] = @[]): Pr
   Prologue(server: newPrologueServer(true, settings.reusePort),
       settings: settings, router: newRouter(), middlewares: middlewares)
 
+
+proc generateRouterDocs(app: Prologue): string {.used.} =
+  discard
+
 proc generateDocs*(app: Prologue) =
   let
     version = OpenApiVersion

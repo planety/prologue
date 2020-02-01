@@ -24,6 +24,24 @@ macro getPathParams*(key: string): PathParams =
   result = quote do:
     `ctx`.request.pathParams.getOrDefault(`key`)
 
+macro getPostParams*(key: string, default = ""): string =
+  var ctx = ident"ctx"
+
+  result = quote do:
+    case `ctx`.request.reqMethod
+    of HttpGet:
+      `ctx`.request.getParams.getOrDefault(`key`, `default`)
+    of HttpPost:
+      `ctx`.request.postParams.getOrDefault(`key`, `default`)
+    else:
+      `default`
+
+macro getQueryParams*(key: string, default = ""): string =
+  var ctx = ident"ctx"
+
+  result = quote do:
+    `ctx`.request.queryParams.getOrDefault(`key`, default)
+
 macro getPathParams*[T: BaseType](key: string, keyType: typedesc[T]): T =
   var ctx = ident"ctx"
 

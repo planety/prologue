@@ -10,7 +10,7 @@ type
     nativeRequest: NativeRequest
     cookies*: StringTableRef
     postParams*: StringTableRef
-    getparams*: StringTableRef
+    getParams*: StringTableRef
     queryParams*: StringTableRef
     pathParams*: TableRef[string, PathParams]
     settings*: Settings

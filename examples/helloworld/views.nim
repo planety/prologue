@@ -33,8 +33,8 @@ proc login*(ctx: Context) {.async.} =
 proc do_login*(ctx: Context) {.async.} =
   echo "-----------------------------------------------------"
   echo ctx.request.postParams
-  echo ctx.request.postParams.getOrDefault("username", "")
-  echo ctx.request.postParams.getOrDefault("password", "")
+  echo getPostParams("username", "")
+  echo getPostParams("password", "")
   resp redirect("/hello/Nim")
 
 proc multiPart*(ctx: Context) {.async.} =
