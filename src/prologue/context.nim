@@ -18,6 +18,9 @@ proc defaultHandler*(ctx: Context) {.async.} =
   let response = error404(body = errorPage("404 Not Found!", PrologueVersion))
   await ctx.request.respond(response)
 
+proc getCookie*(request: Request; key: string, default: string): string {.inline.} =
+  getCookie(request, key, default)
+
 macro getPostParams*(key: string, default = ""): string =
   var ctx = ident"ctx"
 
@@ -45,10 +48,6 @@ macro getPathParams*(key: string): PathParams =
 macro getPathParams*[T: BaseType](key: string, default: T): T =
   var ctx = ident"ctx"
 
-  result = quote do:
-    var pathParams: PathParams
-    if `key` in `ctx`.request.pathParams:
-      pathParams = `ctx`.request.pathParams.getOrDefault(`key`)
-    
-    parseValue(pathParams.value, T)
-    
+  result = quote do:    
+    let pathParams = `ctx`.request.pathParams.getOrDefault(`key`)
+    parseValue(pathParams.value, `default`)

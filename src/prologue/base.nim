@@ -50,7 +50,10 @@ proc tryParseBool*(value: string): bool =
   except ValueError:
     discard
 
-proc parseValue*[T: BaseType](value: string, valueType: typedesc[T]): T =
+proc parseValue*[T: BaseType](value: string, default: T): T =
+  if value == "":
+    return default
+
   when T is int:
     result = tryParseInt(value)
   elif T is float:

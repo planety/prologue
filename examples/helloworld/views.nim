@@ -22,7 +22,7 @@ proc index*(ctx: Context) {.async.} =
 
 proc helloName*(ctx: Context) {.async.} =
   echo getPathParams("name")
-  resp "<h1>Hello, " & getPathParams("name", string) & "</h1>"
+  resp "<h1>Hello, " & getPathParams("name", "Prologue") & "</h1>"
 
 proc testRedirect*(ctx: Context) {.async.} =
   resp redirect("/hello")

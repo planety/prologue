@@ -47,8 +47,8 @@ proc headers*(request: Request): HttpHeaders {.inline.} =
 proc reqMethod*(request: Request): HttpMethod {.inline.} =
   request.nativeRequest.reqMethod
 
-proc getCookie*(request: Request; key: string): string {.inline.} =
-  request.cookies.getOrDefault(key, "")
+proc getCookie*(request: Request; key: string, default: string): string {.inline.} =
+  request.cookies.getOrDefault(key, default)
 
 proc secure*(request: Request): bool {.inline.} =
   let headers = request.nativeRequest.headers
