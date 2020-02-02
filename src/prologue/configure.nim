@@ -1,6 +1,9 @@
-import os, strtabs, strutils
+import os, tables, strutils, parsecfg, streams
 
 import constants
+
+
+export Config, loadConfig, writeConfig, setSectionKey
 
 
 # please set env with prefix namely PROLOGUE
@@ -10,8 +13,8 @@ proc putPrologueEnv*(key, val: string, prefix: string) {.inline.} =
 proc getPrologueEnv*(key: string, prefix: string, default = ""): string {.inline.} =
   getEnv(prefix & key, default)
 
-proc getAllPrologueEnv*(prefix: string): StringTableRef {.inline.} =
-  result = newStringTable()
+proc getAllPrologueEnv*(prefix: string): TableRef[string, string] {.inline.} =
+  result = newTable[string, string]()
   for k, v in envPairs():
     if k.startsWith(prefix):
       result[k] = v
@@ -21,6 +24,7 @@ proc existsPrologueEnv*(key: string, prefix: string): bool {.inline.} =
 
 proc delPrologueEnv*(key: string, prefix: string) {.inline.} =
   delEnv(prefix & key)
+
 
 
 when isMainModule:
@@ -36,7 +40,17 @@ when isMainModule:
 
   let res = getAllPrologueEnv(prefix)
 
-  assert($res == ${"PROLOGUE_appName": "Starlight",
+  assert(res == {"PROLOGUE_appName": "Starlight",
                 "PROLOGUE_port": "8080", "PROLOGUE_staticDir": "static",
-                "PROLOGUE_debug": "true"}.newStringTable,
+                "PROLOGUE_debug": "true"}.newTable,
           "got: " & $res)
+
+
+  let config = newStringStream("""[Prologue]
+debug=true
+port=8080
+appName=Starlight
+staticDir=static
+""")
+
+  echo loadConfig(config)["Prologue"]
