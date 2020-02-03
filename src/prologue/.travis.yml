@@ -1,0 +1,54 @@
+language: c
+
+cache: ccache
+cache:
+  directories:
+  - .cache
+
+matrix:
+  include:
+    # Build and test against the master (stable) and devel branches of Nim
+    - os: linux
+      env: CHANNEL=stable
+      compiler: gcc
+
+    # On OSX we only test against clang (gcc is mapped to clang by default)
+    - os: osx
+      env: CHANNEL=stable
+      compiler: clang
+
+    - os: windows
+      env: CHANNEL=stable
+      compiler: gcc
+
+
+  allow_failures:
+    # Ignore failures when building against the devel Nim branch
+    # Also ignore OSX, due to very long build queue
+    - os: osx
+  fast_finish: true
+
+# BEGIN: Assuming you rely on external dependencies
+# addons: # This will only be executed on Linux
+#   apt:
+#     packages:
+#       - libzip-dev
+
+# before_install:
+#   # If you want to install an OSX Homebrew dependency
+#   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update          ; fi
+#   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install libzip; fi
+# ## END: Assuming you rely on external dependencies
+
+install:
+  - export CHOOSENIM_NO_ANALYTICS=1
+  - curl https://nim-lang.org/choosenim/init.sh -sSf > init.sh
+  - sh init.sh -y
+  - export PATH=~/.nimble/bin:$PATH
+  - echo "export PATH=~/.nimble/bin:$PATH" >> ~/.profile
+  - choosenim $CHANNEL
+
+script:
+    # - nimble install -y
+    - nimble test
+    # - nimble test_arc
