@@ -153,7 +153,8 @@ steps:
     condition: ne(variables['Agent.OS'], 'Windows_NT')
   - bash: |
       echo "PATH=${PATH}"
-      # nimble refresh
+      nimble refresh
+      nimble install timeit
       # nimble install zip
     displayName: 'Building the package dependencies (Posix)'
     condition: ne(variables['Agent.OS'], 'Windows_NT')
@@ -163,8 +164,8 @@ steps:
     condition: eq(variables['Agent.OS'], 'Windows_NT')
   - powershell: |
       echo $Env:Path
-      # nimble refresh
-      # nimble install zip
+      nimble refresh
+      nimble install timeit
     displayName: 'Building the package dependencies (Windows)'
     condition: eq(variables['Agent.OS'], 'Windows_NT')
   - bash: |
