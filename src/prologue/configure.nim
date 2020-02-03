@@ -1,6 +1,6 @@
 import os, tables, strutils, parsecfg, streams
 
-import baseType
+import types
 
 export Config, loadConfig, writeConfig, setSectionKey
 

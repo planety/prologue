@@ -1,6 +1,6 @@
 import strtabs, asyncdispatch, macros, tables
 
-import request, response, pages, constants, baseType, base
+import request, response, pages, constants, types, base
 
 # TODO may add app instance
 type
