@@ -50,8 +50,27 @@ proc reqMethod*(request: Request): HttpMethod {.inline.} =
 proc getCookie*(request: Request; key: string, default: string): string {.inline.} =
   request.cookies.getOrDefault(key, default)
 
+proc contentType*(request: Request): string {.inline.} =
+  let headers = request.nativeRequest.headers
+  if not headers.hasKey("Content-Type"):
+    return ""
+  result = headers["Content-Type", 0]
+
+proc charset*(request: Request): string {.inline.} =
+  let 
+    findStr = "charset="
+    contentType = request.contentType
+  let pos = find(contentType, findStr)
+  if pos == -1:
+    return ""
+  else:
+    return contentType[pos + findStr.len .. ^1]
+
 proc secure*(request: Request): bool {.inline.} =
   let headers = request.nativeRequest.headers
+  if not headers.hasKey("X-Forwarded-Proto"):
+    return false
+  
   case headers["X-Forwarded-Proto", 0]
   of "http":
     result = false
