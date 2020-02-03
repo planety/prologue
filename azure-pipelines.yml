@@ -144,7 +144,7 @@ steps:
   # and also update it within this task with export
   # - bash: |
   #     brew update
-  #     brew install libzip
+  #     # brew install libzip
   #   displayName: 'install libzip.dynlib (MacOS)'
     condition: eq(variables['Agent.OS'], 'Darwin')
   - bash: |
@@ -154,6 +154,7 @@ steps:
   - bash: |
       echo "PATH=${PATH}"
       nimble refresh
+      # nimble install zip
     displayName: 'Building the package dependencies (Posix)'
     condition: ne(variables['Agent.OS'], 'Windows_NT')
   - powershell: |
@@ -163,6 +164,7 @@ steps:
   - powershell: |
       echo $Env:Path
       nimble refresh
+      # nimble install zip
     displayName: 'Building the package dependencies (Windows)'
     condition: eq(variables['Agent.OS'], 'Windows_NT')
   - bash: |
