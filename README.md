@@ -1,4 +1,5 @@
 ![Test Prologue](https://github.com/planety/prologue/workflows/Test%20Prologue/badge.svg)
+[![Build Status](https://dev.azure.com/xzsflywind/xlsx/_apis/build/status/planety.prologue?branchName=master)](https://dev.azure.com/xzsflywind/xlsx/_build/latest?definitionId=4&branchName=master)
 
 # Prologue
 What's past is prologue.
