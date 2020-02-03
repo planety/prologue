@@ -1,3 +1,5 @@
+![Test Prologue](https://github.com/planety/prologue/workflows/Test%20Prologue/badge.svg)
+
 # Prologue
 What's past is prologue.
 
