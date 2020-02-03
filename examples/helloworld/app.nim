@@ -3,7 +3,14 @@ import ../../src/prologue
 
 import views, urls
 
-let settings = newSettings(appName = "StarLight", debug = true)
+let env = loadPrologueEnv(".env")
+
+let settings = newSettings(appName = env.getOrDefault("appName", "Prologue"),
+                          debug = env.getOrDefault("debug", true), 
+                          port = Port(env.getOrDefault("port", 8080)),
+                          staticDir = env.get("staticDir")
+                          )
+
 var app = initApp(settings = settings, middlewares = @[])
 app.addRoute(urls.urlPatterns, "/todolist")
 app.addRoute("/", home, HttpGet)

@@ -1,5 +1,3 @@
-import strutils
-
 type
   FormPart* = object
     name*: string
@@ -16,8 +14,6 @@ type
     paramsType*: ParamsType
     value*: string
 
-  BaseType* = int | float | bool | string
-
 
 proc initPathParams*(params, paramsType: string): PathParams =
   case paramsType
@@ -31,34 +27,3 @@ proc initPathParams*(params, paramsType: string): PathParams =
     result = PathParams(paramsType: String, value: params)
   of "path":
     result = PathParams(paramsType: Path, value: params)
-
-proc tryParseInt*(value: string): int =
-  try:
-    result = parseInt(value)
-  except ValueError:
-    discard
-
-proc tryParseFloat*(value: string): float =
-  try:
-    result = parseFloat(value)
-  except ValueError:
-    discard
-
-proc tryParseBool*(value: string): bool =
-  try:
-    result = parseBool(value)
-  except ValueError:
-    discard
-
-proc parseValue*[T: BaseType](value: string, default: T): T =
-  if value == "":
-    return default
-
-  when T is int:
-    result = tryParseInt(value)
-  elif T is float:
-    result = tryParseFloat(value)
-  elif T is bool:
-    result = tryParseBool(value)
-  elif T is string:
-    result = value

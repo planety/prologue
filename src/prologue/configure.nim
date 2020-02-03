@@ -1,5 +1,6 @@
 import os, tables, strutils, parsecfg, streams
 
+import baseType
 
 export Config, loadConfig, writeConfig, setSectionKey
 
@@ -8,7 +9,7 @@ type
   Env* = object
     data: OrderedTableRef[string, string]
   EnvError* = object of Exception
-  EnvWrongFormatError* = object of EnvError 
+  EnvWrongFormatError* = object of EnvError
 
 
 proc initEnv*(): Env =
@@ -32,11 +33,11 @@ proc contains*(env: Env, key: string): bool =
   else:
     result = false
 
-proc getOrDefault*(env: Env, key: string, default = ""): string =
-  if key in env.data:
-    result = env.data[key]
-  else:
-    result = default
+proc get*(env: Env, key: string): string =
+  result = env.data[key]
+
+proc getOrDefault*[T: BaseType](env: Env, key: string, default: T): T =
+  parseValue(env.data[key], default)
 
 iterator keys*(env: Env): string =
   for key in env.data.keys:
@@ -75,7 +76,7 @@ proc loadPrologueEnv*(fileName: string): Env =
   if f != nil:
     var p: CfgParser
     open(p, f, fileName)
-    defer: 
+    defer:
       f.close()
       p.close()
     while true:
@@ -87,8 +88,8 @@ proc loadPrologueEnv*(fileName: string): Env =
         result.data[e.key] = e.value
       else:
         raise newException(EnvWrongFormatError, ".env file only support key-value pair")
-    
-          
+
+
 proc setPrologueEnv*(env: Env, key, value: string) =
   env.data[key] = value
 
