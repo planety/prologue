@@ -1,6 +1,6 @@
-![Prologue](https://github.com/planety/prologue/workflows/Test%20Prologue/badge.svg)
-[![Prologue](https://dev.azure.com/xzsflywind/xlsx/_apis/build/status/planety.prologue?branchName=master)](https://dev.azure.com/xzsflywind/xlsx/_build/latest?definitionId=4&branchName=master)
-![Prologue](https://travis-ci.org/planety/prologue.svg?branch=master)
+![Build Status](https://github.com/planety/prologue/workflows/Test%20Prologue/badge.svg)
+[![Build Status](https://dev.azure.com/xzsflywind/xlsx/_apis/build/status/planety.prologue?branchName=master)](https://dev.azure.com/xzsflywind/xlsx/_build/latest?definitionId=4&branchName=master)
+![Build Status](https://travis-ci.org/planety/prologue.svg?branch=master)
 
 # Prologue
 What's past is prologue.
