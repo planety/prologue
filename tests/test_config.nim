@@ -11,8 +11,6 @@ import unittest, os
 
 suite "Test Config":
   let fileName = "tests/.env"
-  if existsFile(fileName):
-    removeFile(fileName)
 
   test "can write config":
     let 
