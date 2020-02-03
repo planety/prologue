@@ -1,6 +1,8 @@
 import mimetypes
 from nativeSockets import Port
 
+import types
+
 
 type
   Settings* = ref object
@@ -9,10 +11,11 @@ type
     reusePort*: bool
     mimeDB*: MimeDB
     staticDir*: string
+    secretKey*: SecretKey
     appName*: string
 
 
 proc newSettings*(port = Port(8080), debug = false, reusePort = true,
-    staticDir = "/static", appName = ""): Settings =
+    staticDir = "/static", secretKey = SecretKey(""), appName = ""): Settings =
   Settings(port: port, debug: debug, reusePort: reusePort, staticDir: staticDir,
-    mimeDB: newMimetypes(), appName: appName)
+    mimeDB: newMimetypes(), secretKey: secretKey, appName: appName)

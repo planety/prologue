@@ -8,7 +8,8 @@ let env = loadPrologueEnv(".env")
 let settings = newSettings(appName = env.getOrDefault("appName", "Prologue"),
                           debug = env.getOrDefault("debug", true), 
                           port = Port(env.getOrDefault("port", 8080)),
-                          staticDir = env.get("staticDir")
+                          staticDir = env.get("staticDir"),
+                          secretKey = SecretKey(env.getOrDefault("secretKey", ""))
                           )
 
 var app = initApp(settings = settings, middlewares = @[])

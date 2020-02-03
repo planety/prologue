@@ -2,7 +2,7 @@ import os, tables, strutils, parsecfg, streams
 
 import types
 
-export Config, loadConfig, writeConfig, setSectionKey
+export Config, loadConfig, writeConfig, setSectionKey, types
 
 
 type
