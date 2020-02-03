@@ -1,7 +1,7 @@
 import asyncdispatch, uri, cgi, httpcore, cookies
 import tables, strutils, strformat, macros, logging, strtabs
 import request, response, context, server, middlewares, pages, route,
-    nativesettings, parseutils, openapi, constants, base, utils
+    nativesettings, parseutils, openapi, constants, base, utils, configure
 
 
 export httpcore
@@ -15,6 +15,7 @@ export context
 export server
 export pattern
 export nativesettings
+export configure
 
 
 proc addRoute*(app: Prologue, route: string, handler: HandlerSync,

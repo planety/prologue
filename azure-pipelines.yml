@@ -1,0 +1,171 @@
+strategy:
+  maxParallel: 10
+  matrix:
+    # Nim requires enforcing ARCH="x86" and ucpu
+    # for 32-bit targets as it seems like Azure machines are 64-bit
+#     Windows_devel_32bit:
+#       VM: 'windows-latest'
+#       ARCH: x86
+#       ucpu: i686
+#       PLATFORM: x86
+#       CHANNEL: devel
+#       WEAVE_TEST_LANG: c
+    Windows_devel_64bit:
+      VM: 'windows-latest'
+      PLATFORM: x64
+      CHANNEL: devel
+      WEAVE_TEST_LANG: c
+    Windows_cpp_devel_64bit:
+      VM: 'windows-latest'
+      PLATFORM: x64
+      CHANNEL: devel
+      WEAVE_TEST_LANG: cpp
+    Linux_devel_64bit:
+      VM: 'ubuntu-latest'
+      PLATFORM: x64
+      CHANNEL: devel
+      WEAVE_TEST_LANG: c
+    Linux_cpp_devel_64bit:
+      VM: 'ubuntu-latest'
+      PLATFORM: x64
+      CHANNEL: devel
+      WEAVE_TEST_LANG: cpp
+    Linux_devel_32bit:
+      VM: 'ubuntu-latest'
+      PLATFORM: x86
+      ucpu: i686
+      CHANNEL: devel
+      WEAVE_TEST_LANG: c
+    MacOS_devel_64bit:
+      VM: 'macOS-latest'
+      PLATFORM: x64
+      CHANNEL: devel
+      WEAVE_TEST_LANG: c
+
+pool:
+  vmImage: $(VM)
+
+steps:
+  - task: CacheBeta@1
+    displayName: 'cache Nim binaries'
+    inputs:
+      key: NimBinaries | $(Agent.OS) | $(CHANNEL) | $(PLATFORM)
+      path: NimBinaries
+
+  - task: CacheBeta@1
+    displayName: 'cache MinGW-w64'
+    inputs:
+      key: mingwCache | 8_1_0 | $(PLATFORM)
+      path: mingwCache
+    condition: eq(variables['Agent.OS'], 'Windows_NT')
+
+  - powershell: |
+      Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem' -Name 'LongPathsEnabled' -Value 1
+    displayName: 'long path support'
+    condition: eq(variables['Agent.OS'], 'Windows_NT')
+  - bash: |
+      echo "PATH=${PATH}"
+      set -e
+      echo "Installing MinGW-w64"
+      if [[ $PLATFORM == "x86" ]]; then
+        MINGW_FILE="i686-8.1.0-release-posix-dwarf-rt_v6-rev0.7z"
+        MINGW_URL="https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win32/Personal%20Builds/mingw-builds/8.1.0/threads-posix/dwarf/${MINGW_FILE}"
+        MINGW_DIR="mingw32"
+      else
+        MINGW_FILE="x86_64-8.1.0-release-posix-seh-rt_v6-rev0.7z"
+        MINGW_URL="https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win64/Personal%20Builds/mingw-builds/8.1.0/threads-posix/seh/${MINGW_FILE}"
+        MINGW_DIR="mingw64"
+      fi
+      mkdir -p mingwCache
+      pushd mingwCache
+      if [[ ! -e "$MINGW_FILE" ]]; then
+        rm -f *.7z
+        curl -OLsS "$MINGW_URL"
+      fi
+      7z x -y -bd "$MINGW_FILE" >/dev/null
+      mkdir -p /c/custom
+      mv "$MINGW_DIR" /c/custom/
+      popd
+      echo "##vso[task.prependpath]/c/custom/${MINGW_DIR}/bin"
+    displayName: 'Install dependencies (Windows)'
+    condition: eq(variables['Agent.OS'], 'Windows_NT')
+  - bash: |
+      echo "PATH=${PATH}"
+      export ncpu=
+      case '$(Agent.OS)' in
+      'Linux')
+        ncpu=$(nproc)
+        ;;
+      'Darwin')
+        ncpu=$(sysctl -n hw.ncpu)
+        ;;
+      'Windows_NT')
+        ncpu=$NUMBER_OF_PROCESSORS
+        ;;
+      esac
+      [[ -z "$ncpu" || $ncpu -le 0 ]] && ncpu=1
+      echo "Found ${ncpu} cores"
+      echo "##vso[task.setvariable variable=ncpu;]$ncpu"
+    displayName: 'Detecting number of cores'
+  - bash: |
+      echo "PATH=${PATH}"
+      if [ "${CHANNEL}" = stable ]; then
+        BRANCH="v$(curl https://nim-lang.org/channels/stable)"
+      else
+        BRANCH="${CHANNEL}"
+      fi
+      mkdir -p NimBinaries
+      pushd NimBinaries
+      if [ ! -x "nim-${CHANNEL}/bin/nim" ]; then
+        git clone -b "${BRANCH}" https://github.com/nim-lang/nim "nim-${CHANNEL}/"
+        pushd "nim-${CHANNEL}"
+        git clone --depth 1 https://github.com/nim-lang/csources csources/
+        pushd csources
+        make -j $ncpu CC=gcc
+        popd
+        rm -rf csources
+        bin/nim c koch
+        ./koch boot -d:release
+        ./koch tools
+      else
+        pushd "nim-${CHANNEL}"
+        git fetch origin "${BRANCH}"
+        if [ git merge FETCH_HEAD | grep -c "Already up to date." -ne 1 ]; then
+          bin/nim c koch
+          ./koch boot -d:release
+          ./koch tools
+        fi
+      fi
+      popd # exit nim-CHANNEL
+      popd # exit NimBinaries
+    displayName: 'Building Nim'
+  # Nimble uses findExe which is broken under bash windows
+  # We need to set PATH in the collector for the next tast
+  # and also update it within this task with export
+  # - bash: |
+  #     brew update
+  #     brew install libzip
+  #   displayName: 'install libzip.dynlib (MacOS)'
+    condition: eq(variables['Agent.OS'], 'Darwin')
+  - bash: |
+      echo "##vso[task.prependpath]$PWD/NimBinaries/nim-${CHANNEL}/bin"
+    displayName: 'Set env variable (Posix)'
+    condition: ne(variables['Agent.OS'], 'Windows_NT')
+  - bash: |
+      echo "PATH=${PATH}"
+      nimble refresh
+    displayName: 'Building the package dependencies (Posix)'
+    condition: ne(variables['Agent.OS'], 'Windows_NT')
+  - powershell: |
+      echo "##vso[task.prependpath]$pwd\NimBinaries\nim-$(CHANNEL)\bin"
+    displayName: 'Set env variable (Windows)'
+    condition: eq(variables['Agent.OS'], 'Windows_NT')
+  - powershell: |
+      echo $Env:Path
+      nimble refresh
+    displayName: 'Building the package dependencies (Windows)'
+    condition: eq(variables['Agent.OS'], 'Windows_NT')
+  - bash: |
+      echo "PATH=${PATH}"
+      nimble test
+    displayName: 'Testing the package'

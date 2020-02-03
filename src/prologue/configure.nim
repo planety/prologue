@@ -1,20 +1,54 @@
 import os, tables, strutils, parsecfg, streams
 
-import constants
-
 
 export Config, loadConfig, writeConfig, setSectionKey
 
 
 type
   Env* = object
-    data*: OrderedTableRef[string, string]
-  EnvError* = object of RootObj
+    data: OrderedTableRef[string, string]
+  EnvError* = object of Exception
   EnvWrongFormatError* = object of EnvError 
 
 
 proc initEnv*(): Env =
   Env(data: newOrderedTable[string, string]())
+
+proc `$`*(env: Env): string =
+  $env.data
+
+proc `[]`*(env: Env, key: string): string =
+  env.data[key]
+
+proc hasKey*(env: Env, key: string): bool =
+  if key in env.data:
+    result = true
+  else:
+    result = false
+
+proc contains*(env: Env, key: string): bool =
+  if key in env.data:
+    result = true
+  else:
+    result = false
+
+proc getOrDefault*(env: Env, key: string, default = ""): string =
+  if key in env.data:
+    result = env.data[key]
+  else:
+    result = default
+
+iterator keys*(env: Env): string =
+  for key in env.data.keys:
+    yield key
+
+iterator values*(env: Env): string =
+  for value in env.data.values:
+    yield value
+
+iterator pairs*(env: Env): (string, string) =
+  for pair in env.data.pairs:
+    yield pair
 
 # please set env with prefix namely PROLOGUE
 proc putPrologueEnv*(key, val: string, prefix: string) {.inline.} =
@@ -35,24 +69,24 @@ proc existsPrologueEnv*(key: string, prefix: string): bool {.inline.} =
 proc delPrologueEnv*(key: string, prefix: string) {.inline.} =
   delEnv(prefix & key)
 
-proc loadPrologueEnv*(fileName: string): OrderedTableRef =
-  result = newOrderedTable[string, string]()
+proc loadPrologueEnv*(fileName: string): Env =
+  result = initEnv()
   var f = newFileStream(fileName, fmRead)
-  defer: f.close()
   if f != nil:
     var p: CfgParser
     open(p, f, fileName)
     defer: 
+      f.close()
       p.close()
     while true:
       var e = p.next
-      case e.kind:
-        of cfgEof:
-          break
-        of cfgKeyValuePair:
-          result[e.key] = e.value
-        else:
-          raise newException(EnvWrongFormatError, ".env file only support key-value pair")
+      case e.kind
+      of cfgEof:
+        break
+      of cfgKeyValuePair:
+        result.data[e.key] = e.value
+      else:
+        raise newException(EnvWrongFormatError, ".env file only support key-value pair")
     
           
 proc setPrologueEnv*(env: Env, key, value: string) =
@@ -67,7 +101,11 @@ proc writePrologueEnv*(fileName: string, env: Env) =
 
 
 when isMainModule:
+  import constants
+
+
   let prefix = ProloguePrefix
+  # only work in application scope
   putPrologueEnv("debug", "true", prefix)
   putPrologueEnv("port", "8080", prefix)
   putPrologueEnv("appName", "Starlight", prefix)
@@ -79,11 +117,7 @@ when isMainModule:
 
   let res = getAllPrologueEnv(prefix)
 
-  assert(res == {"PROLOGUE_appName": "Starlight",
-                "PROLOGUE_port": "8080", "PROLOGUE_staticDir": "static",
-                "PROLOGUE_debug": "true"}.newOrderedTable,
-          "got: " & $res)
-
+  assert(res.len == 4, "got: " & $res)
 
   let config = newStringStream("""[Prologue]
 debug=true
