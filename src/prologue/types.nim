@@ -4,7 +4,7 @@ import strutils
 type
   BaseType* = int | float | bool | string
   SecretKey* = distinct string
-
+  SecretUrl* = distinct string
 
 proc tryParseInt(value: string): int =
   try:
@@ -38,4 +38,4 @@ proc parseValue*[T: BaseType](value: string, default: T): T =
     result = value
 
 proc `$`*(secretKey: SecretKey): string =
-  "SecretKey(********)" 
+  "SecretKey(********)"

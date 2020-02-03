@@ -1,6 +1,7 @@
 import parseutils
 
 
+# support str, int, float, path, ...
 proc parsePathParams*(s: string): (string, string) =
   var
     pos = 0
