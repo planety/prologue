@@ -83,10 +83,11 @@ proc home*(ctx: Context) {.async.} =
   resp "<h1>Home</h1>"
 
 proc index*(ctx: Context) {.async.} =
-  resp htmlResponse("index.html")
+  await ctx.staticFileResponse("index.html", "static")
 
 proc helloName*(ctx: Context) {.async.} =
-  resp "<h1>Hello, " & ctx.request.pathParams.getOrDefault("name", "Prologue") & "</h1>"
+  echo getPathParams("name")
+  resp "<h1>Hello, " & getPathParams("name", "Prologue") & "</h1>"
 
 proc testRedirect*(ctx: Context) {.async.} =
   resp redirect("/hello")
@@ -97,15 +98,14 @@ proc login*(ctx: Context) {.async.} =
 proc do_login*(ctx: Context) {.async.} =
   echo "-----------------------------------------------------"
   echo ctx.request.postParams
-  echo ctx.request.postParams.getOrDefault("username", "")
-  echo ctx.request.postParams.getOrDefault("password", "")
+  echo getPostParams("username", "")
+  echo getPostParams("password", "")
   resp redirect("/hello/Nim")
 
 proc multiPart*(ctx: Context) {.async.} =
   resp multiPartPage()
 
-proc do_multiPart*(ctx: Context) {.async.} = 
-  echo "do_multiPart"
+proc do_multiPart*(ctx: Context) {.async.} =
   resp redirect("/login")
 ```
 
@@ -139,13 +139,17 @@ import prologue
 import views, urls
 
 # read environment variables from file
-let env = loadPrologueEnv(".env")
+# Make sure ".env" in your ".gitignore" file.
+let 
+  env = loadPrologueEnv(".env")
 
-let settings = newSettings(appName = env.getOrDefault("appName", "Prologue"),
-                          debug = env.getOrDefault("debug", true), 
-                          port = Port(env.getOrDefault("port", 8080)),
-                          staticDir = env.get("staticDir")
-                          )
+let
+  settings = newSettings(appName = env.getOrDefault("appName", "Prologue"),
+                debug = env.getOrDefault("debug", true), 
+                port = Port(env.getOrDefault("port", 8080)),
+                staticDir = env.get("staticDir"),
+                secretKey = SecretKey(env.getOrDefault("secretKey", ""))
+                )
 
 var app = initApp(settings = settings, middlewares = @[])
 app.addRoute(urls.urlPatterns, "/todolist")
