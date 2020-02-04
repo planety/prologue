@@ -62,7 +62,7 @@ proc parseFormPart*(body, contentType: string): FormPart {.inline.} =
     for line in head.splitLines:
       let header = line.parseHeader
       if header.key != "Content-Disposition":
-        # process later
+        result.data[name].params[header.key] = header.value[0]
         continue
       pos = 0
       let 
