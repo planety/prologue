@@ -92,7 +92,6 @@ proc send*(request: Request, content: string) {.async, inline.} =
 
 proc respond*(request: Request; status: HttpCode; body: string;
   headers: HttpHeaders = newHttpHeaders()) {.async, inline.} =
-  echo status
   await request.nativeRequest.respond(status, body, headers)
 
 proc respond*(request: Request; response: Response) {.async, inline.} =

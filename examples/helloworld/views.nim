@@ -41,4 +41,7 @@ proc multiPart*(ctx: Context) {.async.} =
   resp multiPartPage()
 
 proc do_multiPart*(ctx: Context) {.async.} =
+  echo ctx.request.postParams
+  echo getPostParams("username", "")
+  echo getPostParams("password", "")
   resp redirect("/login")
