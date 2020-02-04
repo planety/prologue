@@ -12,6 +12,7 @@ type
     postParams*: StringTableRef
     getParams*: StringTableRef
     queryParams*: StringTableRef
+    formParams*: FormPart
     pathParams*: TableRef[string, PathParams]
     settings*: Settings
 

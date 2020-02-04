@@ -1,4 +1,5 @@
 import ../../src/prologue
+import tables
 
 
 proc hello*(ctx: Context) {.async.} =
@@ -41,14 +42,13 @@ proc multiPart*(ctx: Context) {.async.} =
   resp multiPartPage()
 
 proc do_multiPart*(ctx: Context) {.async.} =
-  echo ctx.request.postParams
-  echo getPostParams("username", "")
-  echo getPostParams("password", "")
+  echo ctx.request.formParams["username"].body
+  echo ctx.request.formParams["password"].body
   resp redirect("/login")
 
 proc upload*(ctx: Context) {.async.} =
   await ctx.staticFileResponse("upload.html", "static")
 
 proc do_upload*(ctx: Context) {.async.} =
-  echo ctx.request.postParams
-  resp getPostParams("file")
+  echo ctx.request.formParams
+  resp ctx.request.formParams["file"].body

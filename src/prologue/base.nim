@@ -1,8 +1,8 @@
-import strtabs, strutils, strformat, httpcore, parseutils 
+import strtabs, strutils, strformat, httpcore, parseutils, tables
 
 type
   FormPart* = object
-    data*: StringTableRef
+    data*: OrderedTableRef[string, tuple[params: StringTableRef, body: string]]
 
   ParamsType* {.pure.} = enum
     Int, Float, String, Boolean, Path
@@ -11,6 +11,9 @@ type
     paramsType*: ParamsType
     value*: string
 
+
+proc `[]`*(formPart: FormPart, key: string): tuple[params: StringTableRef, body: string] =
+  formPart.data[key]
 
 proc initPathParams*(params, paramsType: string): PathParams =
   case paramsType
@@ -35,7 +38,7 @@ proc parseFormPart*(body, contentType: string): FormPart {.inline.} =
     formData = body[startPos ..< endPos]
     formDataSeq = formData.split(startSep & "\c\L")
 
-  result = FormPart(data: newStringTable())
+  result = FormPart(data: newOrderedTable[string, (StringTableRef, string)]())
 
   for data in formDataSeq:
     if data.len == 0:
@@ -77,14 +80,15 @@ proc parseFormPart*(body, contentType: string): FormPart {.inline.} =
         case formKey
         of "name":
           name = formValue
+          result.data[name] = (newStringTable(), "")
         of "filename":
-          result.data["fileName"] = formValue
+          result.data[name].params["fileName"] = formValue
         of "filename*":
-          result.data["fileNameStar"] = formValue
+          result.data[name].params["fileNameStar"] = formValue
         else:
           discard
         times += 1
         if times >= 3:
           break
 
-    result.data[name] = tail
+    result.data[name].body = tail

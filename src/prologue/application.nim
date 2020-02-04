@@ -16,6 +16,7 @@ export server
 export pattern
 export nativesettings
 export configure
+export base
 
 
 proc addRoute*(app: Prologue, route: string, handler: HandlerSync,
@@ -167,13 +168,7 @@ proc run*(app: Prologue) =
         else:
           discard
     elif "multipart/form-data" in contentType and "boundary" in contentType:
-      case request.reqMethod
-      of HttpGet:
-        request.getParams = parseFormPart(request.body, contentType).data
-      of HttpPost:
-        request.postParams = parseFormPart(request.body, contentType).data
-      else:
-        discard
+      request.formParams = parseFormPart(request.body, contentType)
 
     for (key, value) in decodeData(urlQuery):
       request.queryParams[key] = value
