@@ -167,9 +167,6 @@ proc run*(app: Prologue) =
         else:
           discard
     elif "multipart/form-data" in contentType and "boundary" in contentType:
-      echo request.body
-      echo contentType
-      echo parseFormPart(request.body, contentType).data
       case request.reqMethod
       of HttpGet:
         request.getParams = parseFormPart(request.body, contentType).data
