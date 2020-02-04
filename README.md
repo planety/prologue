@@ -6,7 +6,7 @@
 What's past is prologue.
 
 ### Purpose
-It tends to be Micro Web Framework and will be one part of our Full-Stack Web Framework, namely Starlight.
+It tends to be Micro Web Framework and will be one part of our Full-Stack Web Framework, namely `Starlight`.
 
 You can see our task assignment as below or join us.
 

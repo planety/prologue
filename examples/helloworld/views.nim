@@ -5,20 +5,20 @@ proc hello*(ctx: Context) {.async.} =
   resp "<h1>Hello, Prologue!</h1>"
 
 proc docs*(ctx: Context) {.async.} =
-  resp staticFileResponse("docs.html", "docs")
+  await ctx.staticFileResponse("docs.html", "docs")
 
 proc redocs*(ctx: Context) {.async.} = 
-  resp staticFileResponse("redocs.html", "docs")
+  await ctx.staticFileResponse("redocs.html", "docs")
 
 proc docsjson*(ctx: Context) {.async.} =
-  resp staticFileResponse("openapi.json", "docs")
+  await ctx.staticFileResponse("openapi.json", "docs")
 
 proc home*(ctx: Context) {.async.} =
   echo ctx.request.queryParams.getOrDefault("name", "")
   resp "<h1>Home</h1>"
 
 proc index*(ctx: Context) {.async.} =
-  resp staticFileResponse("index.html", "static")
+  await ctx.staticFileResponse("index.html", "static")
 
 proc helloName*(ctx: Context) {.async.} =
   echo getPathParams("name")

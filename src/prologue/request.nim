@@ -1,4 +1,4 @@
-import asynchttpserver, strutils, strtabs, uri, asyncdispatch, tables
+import asynchttpserver, strutils, strtabs, uri, asyncdispatch, tables, asyncdispatch, asyncnet
 
 import nativesettings, base, response
 
@@ -57,7 +57,7 @@ proc contentType*(request: Request): string {.inline.} =
   result = headers["Content-Type", 0]
 
 proc charset*(request: Request): string {.inline.} =
-  let 
+  let
     findStr = "charset="
     contentType = request.contentType
   let pos = find(contentType, findStr)
@@ -70,7 +70,7 @@ proc secure*(request: Request): bool {.inline.} =
   let headers = request.nativeRequest.headers
   if not headers.hasKey("X-Forwarded-Proto"):
     return false
-  
+
   case headers["X-Forwarded-Proto", 0]
   of "http":
     result = false
@@ -87,8 +87,12 @@ proc hostName*(request: Request): string {.inline.} =
   if headers.hasKey("x-forwarded-for"):
     result = headers["x-forwarded-for", 0]
 
+proc send*(request: Request, content: string) {.async, inline.} =
+  await request.nativeRequest.client.send(content)
+
 proc respond*(request: Request; status: HttpCode; body: string;
   headers: HttpHeaders = newHttpHeaders()) {.async, inline.} =
+  echo status
   await request.nativeRequest.respond(status, body, headers)
 
 proc respond*(request: Request; response: Response) {.async, inline.} =
