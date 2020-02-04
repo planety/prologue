@@ -45,3 +45,10 @@ proc do_multiPart*(ctx: Context) {.async.} =
   echo getPostParams("username", "")
   echo getPostParams("password", "")
   resp redirect("/login")
+
+proc upload*(ctx: Context) {.async.} =
+  await ctx.staticFileResponse("upload.html", "static")
+
+proc do_upload*(ctx: Context) {.async.} =
+  echo ctx.request.postParams
+  resp getPostParams("file")

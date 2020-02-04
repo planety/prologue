@@ -1,4 +1,4 @@
-import strtabs, strutils, strformat, httpcore, parseutils
+import strtabs, strutils, strformat, httpcore, parseutils 
 
 type
   FormPart* = object
@@ -40,40 +40,51 @@ proc parseFormPart*(body, contentType: string): FormPart {.inline.} =
   for data in formDataSeq:
     if data.len == 0:
       continue
+    
+    var
+      pos = 0
+      head, tail: string
+      name: string
+      times = 0
+      tok = ""
+      formKey, formValue: string
 
-    var name: string
-    for line in data.splitLines:
-      if line.startsWith("Content-Disposition"):
-        var
-          pos = 0
-          times = 0
-          tok = ""
-          formKey, formValue: string
-        let
-          content = line.parseHeader.value[0]
-          length = content.len
-        pos += parseUntil(content, tok, ';', pos)
-        doAssert tok == "form-data", fmt"{tok} != form-data"
+    pos += parseUntil(data, head, "\c\L\c\L")
+    pos += 4
+    tail = data[pos ..< ^1] 
 
-        while pos < length:
-          pos += skipWhile(content, {';', ' '}, pos)
-          pos += parseUntil(content, formKey, '=', pos)
-          pos += skipWhile(content, {'=', '\"'}, pos)
-          pos += parseUntil(content, formValue, '\"', pos)
-          pos += skipWhile(content, {'\"'}, pos)
-          case formKey
-          of "name":
-            name = formValue
-          of "filename":
-            result.data["fileName"] = formValue
-          of "filename*":
-            result.data["fileNameStar"] = formValue
-          else:
-            discard
-          times += 1
-          if times >= 3:
-            break
-      elif line.len > 0:
-        result.data[name] = line
-      else:
-        discard
+    if not head.startsWith("Content-Disposition"):
+      break
+
+    for line in head.splitLines:
+      let header = line.parseHeader
+      if header.key != "Content-Disposition":
+        # process later
+        continue
+      pos = 0
+      let 
+        content = header.value[0]
+        length = content.len
+      pos += parseUntil(content, tok, ';', pos)
+
+      while pos < length:
+        pos += skipWhile(content, {';', ' '}, pos)
+        pos += parseUntil(content, formKey, '=', pos)
+        pos += skipWhile(content, {'=', '\"'}, pos)
+        pos += parseUntil(content, formValue, '\"', pos)
+        pos += skipWhile(content, {'\"'}, pos)
+
+        case formKey
+        of "name":
+          name = formValue
+        of "filename":
+          result.data["fileName"] = formValue
+        of "filename*":
+          result.data["fileNameStar"] = formValue
+        else:
+          discard
+        times += 1
+        if times >= 3:
+          break
+
+    result.data[name] = tail
