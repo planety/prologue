@@ -12,6 +12,10 @@ srcDir        = "src"
 
 requires "nim >= 1.0.0"
 
+# # examples
+# task helloworld, "helloworld":
+#   exec "nim c -r examples/helloworld/app.nim"
+
 # tests
 task test, "Run all tests":
   exec "nim c -r tests/alltests.nim"
