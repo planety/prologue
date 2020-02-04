@@ -85,8 +85,15 @@ proc staticFileResponse*(ctx: Context, fileName, root: string, mimetype = "",
     etag = getMD5(etagBase)
 
   if downloadName != "":
+    var ext = fileName.splitFile.ext
+    if ext.len > 0:
+      ext = ext[1 .. ^ 1]
+      let mimes = mimeDB.getMimetype(ext)
+      if mimes != "":
+        mimetype = mimes
     headers["Content-Disposition"] = fmt"""attachment; filename="{downloadName}""""
     download = true
+  
   headers["Content-Length"] = $contentLength
   headers["Content-Type"] = mimetype & "; " & charset
   headers["Last-Modified"] = $lastModified
