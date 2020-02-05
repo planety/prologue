@@ -19,29 +19,13 @@ export configure
 export base
 
 
-proc addRoute*(app: Prologue, route: string, handler: HandlerSync,
-    httpMethod = HttpGet, middlewares: seq[MiddlewareHandler] = @[]) {.inline.} =
-  let path = initPath(route = route,
-      httpMethod = httpMethod)
-  if path in app.router.callable:
-    raise newException(DuplicatedRouteError, fmt"Route {route} is duplicated!")
-  app.router.callable[path] = newPathMatcher(handler, middlewares)
-
 proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
-    httpMethod = HttpGet, middlewares: seq[MiddlewareHandler] = @[]) {.inline.} =
-  let path = initPath(route = route,
-      httpMethod = httpMethod)
-  if path in app.router.callable:
-    raise newException(DuplicatedRouteError, fmt"Route {route} is duplicated!")
-  app.router.callable[path] = newPathMatcher(handler, middlewares)
+    httpMethod = HttpGet, middlewares: seq[HandlerAsync] = @[]) {.inline.} =
+  let path = initPath(route = route, httpMethod = httpMethod)
 
-proc addRoute*(app: Prologue, route: string, matcher: Matcher,
-  httpMethod = HttpGet, middlewares: seq[MiddlewareHandler] = @[]) {.inline.} =
-  let path = initPath(route = route,
-      httpMethod = httpMethod)
   if path in app.router.callable:
     raise newException(DuplicatedRouteError, fmt"Route {route} is duplicated!")
-  app.router.callable[path] = newPathMatcher(matcher, middlewares)
+  app.router.callable[path] = newPathHandler(handler, middlewares)
 
 proc addRoute*(app: Prologue, patterns: seq[UrlPattern],
     baseRoute = "") =
@@ -52,9 +36,10 @@ proc addRoute*(app: Prologue, patterns: seq[UrlPattern],
 proc addRoute*(app: Prologue, urlFile: string, baseRoute = "") =
   discard
 
-proc findMatcher(app: Prologue, ctx: Context, path: Path): PathMatcher =
+proc findHandler(app: Prologue, ctx: Context, path: Path): PathHandler =
   if path in app.router.callable:
     return app.router.callable[path]
+
   let
     path = path.route
     pathList = path.split("/")
@@ -80,7 +65,7 @@ proc findMatcher(app: Prologue, ctx: Context, path: Path): PathMatcher =
           break
       if flag:
         return handler
-  return newPathMatcher(defaultHandler)
+  return newPathHandler(defaultHandler)
 
 macro resp*(params: string) =
   var ctx = ident"ctx"
@@ -96,10 +81,9 @@ macro resp*(params: Response) =
   result = quote do:
     `ctx`.response = `params`
 
-proc initApp*(settings: Settings, middlewares: seq[MiddlewareHandler] = @[]): Prologue =
+proc initApp*(settings: Settings, middlewares: seq[HandlerAsync] = @[]): Prologue =
   Prologue(server: newPrologueServer(true, settings.reusePort),
       settings: settings, router: newRouter(), middlewares: middlewares)
-
 
 proc generateRouterDocs(app: Prologue): string {.used.} =
   discard
@@ -126,16 +110,14 @@ proc generateDocs*(app: Prologue) =
               "content": {
                 "application/json": {
                   "schema": {}
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
-      }
-    }
-      }
-    }
-      }
-    }
-
-
     descriptionDoc = $descriptionJson
 
   writeDocs(descriptionDoc)
@@ -177,32 +159,25 @@ proc run*(app: Prologue) =
         "Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders)
     var ctx = newContext(request = request, response = response)
 
-    # gcsafe
-    # upgrade to hook
-    for middlewareHandler in app.middlewares:
-      if middlewareHandler(ctx):
-        await handle(ctx)
-        return
-
     logging.debug(fmt"{ctx.request.reqMethod} {ctx.request.url.path}")
-    let path = initPath(route = ctx.request.url.path,
+    let 
+      path = initPath(route = ctx.request.url.path,
         httpMethod = ctx.request.reqMethod)
-    # gcsafe
-    let pathMatcher = app.findMatcher(ctx, path)
-    for middlewareHandler in pathMatcher.middlewares:
-      if middlewareHandler(ctx):
-        await handle(ctx)
-        return
+      # gcsafe
+      pathHandler = app.findHandler(ctx, path)
+      handler = pathHandler.handler
+      middlewares = app.middlewares & pathHandler.middlewares
 
-    let matcher = pathMatcher.matcher
-    case matcher.async
-    of true:
-      await matcher.handlerAsync(`ctx`)
-    of false:
-      matcher.handlerSync(`ctx`)
+    if middlewares.len == 0:
+      await handler(ctx)
+    else:
+      ctx.middlewares = middlewares & handler
+      ctx.length = ctx.middlewares.len
+      await start(ctx)
 
-    await handle(`ctx`)
-    logging.debug($(`ctx`.response))
+    await handle(ctx)
+    logging.debug($(ctx.response))
+
 
   # maybe should read settings from file
   if logging.getHandlers().len == 0:
@@ -221,13 +196,16 @@ proc run*(app: Prologue) =
 
 
 when isMainModule:
-  proc hello*(ctx: Context) =
+  proc hello*(ctx: Context) {.async.} =
+    echo "hello"
     resp "<h1>Hello, Prologue!</h1>"
 
   proc home*(ctx: Context) {.async.} =
+    echo "home"
     resp "<h1>Home</h1>"
 
   proc helloName*(ctx: Context) {.async.} =
+    echo "helloname"
     resp "<h1>Hello, " & getPathParams("name", "Prologue!") & "</h1>"
 
   proc testRedirect*(ctx: Context) {.async.} =
@@ -240,13 +218,13 @@ when isMainModule:
     resp redirect("/hello/Nim")
 
   let settings = newSettings(appName = "StarLight")
-  var app = initApp(settings = settings, middlewares = @[debugRequestMiddleware])
+  var app = initApp(settings = settings, middlewares = @[debugRequestMiddleware, stripPathMiddleware, loggingMiddleware])
   app.addRoute("/", home, HttpGet)
   app.addRoute("/", home, HttpPost)
-  app.addRoute("/home", home, HttpGet)
+  app.addRoute("/home", home, HttpGet, @[debugRequestMiddleware, loggingMiddleware])
   app.addRoute("/hello", hello, HttpGet)
   app.addRoute("/redirect", testRedirect, HttpGet)
   app.addRoute("/login", login, HttpGet)
-  app.addRoute("/login", do_login, HttpPost, @[debugRequestMiddleware])
+  app.addRoute("/login", do_login, HttpPost)
   app.addRoute("/hello/{name}", helloName, HttpGet)
   app.run()

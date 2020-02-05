@@ -1,8 +1,8 @@
 import httpcore
 import asyncdispatch
 import asynchttpserver except Request
-import request, route
-import nativesettings
+
+import request, route, nativesettings, context
 
 
 type
@@ -12,7 +12,7 @@ type
     server*: Server
     settings*: Settings
     router*: Router
-    middlewares*: seq[MiddlewareHandler]
+    middlewares*: seq[HandlerAsync]
 
 
 proc appName*(app: Prologue): string {.inline.} =

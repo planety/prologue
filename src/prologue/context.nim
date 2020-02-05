@@ -8,9 +8,14 @@ type
   Context* = ref object
     request*: Request
     response*: Response
+    size*: int
+    length*: int
+    middlewares*: seq[HandlerAsync]
+
+  HandlerAsync* = proc(ctx: Context): Future[void] {.nimcall, gcsafe.}
 
 proc newContext*(request: Request, response: Response, cookies = newStringTable()): Context {.inline.} =
-  Context(request: request, response: response)
+  Context(request: request, response: response, size: 0)
 
 proc handle*(ctx: Context) {.async, inline.} =
   await ctx.request.respond(ctx.response)
@@ -93,7 +98,7 @@ proc staticFileResponse*(ctx: Context, fileName, root: string, mimetype = "",
         mimetype = mimes
     headers["Content-Disposition"] = fmt"""attachment; filename="{downloadName}""""
     download = true
-  
+
   headers["Content-Length"] = $contentLength
   headers["Content-Type"] = mimetype & "; " & charset
   headers["Last-Modified"] = $lastModified
