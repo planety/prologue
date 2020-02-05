@@ -5,17 +5,29 @@ import request, response, pages, constants, types, base
 
 # TODO may add app instance
 type
+  PathHandler* = ref object
+    handler*: HandlerAsync
+    middlewares*: seq[HandlerAsync]
+
+  Path* = object
+    route*: string
+    httpMethod*: HttpMethod
+
+  Router* = ref object
+    callable*: Table[Path, PathHandler]
+
   Context* = ref object
     request*: Request
     response*: Response
+    router*: Router
     size*: int
-    length*: int
+    first*: bool
     middlewares*: seq[HandlerAsync]
 
   HandlerAsync* = proc(ctx: Context): Future[void] {.nimcall, gcsafe.}
 
-proc newContext*(request: Request, response: Response, cookies = newStringTable()): Context {.inline.} =
-  Context(request: request, response: response, size: 0)
+proc newContext*(request: Request, response: Response, router: Router): Context {.inline.} =
+  Context(request: request, response: response, router: router, size: 0, first: true)
 
 proc handle*(ctx: Context) {.async, inline.} =
   await ctx.request.respond(ctx.response)

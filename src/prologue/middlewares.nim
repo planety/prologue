@@ -1,13 +1,31 @@
-import logging, asyncdispatch
+import logging, asyncdispatch, httpcore, strtabs
 
-import request, context, httpcore, strtabs
-
+import request, context, server
 
 proc start*(ctx: Context) {.async.} =
+  if ctx.middlewares.len == 0:
+    let 
+      handler = findHandler(ctx)
+      next = handler.handler
+      middlewares = handler.middlewares
+    ctx.middlewares = middlewares & next
+    ctx.first = false
+
   ctx.size += 1
-  if ctx.size <= ctx.length:
+  if ctx.size < ctx.middlewares.len:
     let next = ctx.middlewares[ctx.size - 1]
     await next(ctx)
+  elif ctx.size == ctx.middlewares.len:
+    if ctx.first:
+      let 
+        handler = findHandler(ctx)
+        next = handler.handler
+        middlewares = handler.middlewares
+      ctx.middlewares = ctx.middlewares & middlewares & next
+      ctx.first = false
+    let next = ctx.middlewares[ctx.size - 1]
+    await next(ctx)
+
 
 proc loggingMiddleware*(ctx: Context) {.async.} =
   echo "logging->begin"
@@ -37,6 +55,7 @@ proc stripPathMiddleware*(ctx: Context) {.async.} =
   logging.debug "============================"
   logging.debug "from stripPathMiddleware"
   ctx.request.stripPath()
+  logging.debug ctx.request.path
   logging.debug "============================"
   await start(ctx)
   echo "strip->end"

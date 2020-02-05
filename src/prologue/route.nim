@@ -20,17 +20,6 @@ type
     webAction: WebAction
     middlewares: seq[HandlerAsync]
 
-  Path* = object
-    route*: string
-    httpMethod*: HttpMethod
-
-  PathHandler* = ref object
-    handler*: HandlerAsync
-    middlewares*: seq[HandlerAsync]
-
-  Router* = ref object
-    callable*: Table[Path, PathHandler]
-
 
 proc initPath*(route: string, httpMethod = HttpGet): Path =
   Path(route: route, httpMethod: httpMethod)

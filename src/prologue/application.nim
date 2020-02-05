@@ -1,7 +1,7 @@
 import asyncdispatch, uri, cgi, httpcore, cookies
 import tables, strutils, strformat, macros, logging, strtabs
 import request, response, context, server, middlewares, pages, route,
-    nativesettings, openapi, constants, base, utils, configure
+    nativesettings, openapi, constants, base, configure
 
 
 export httpcore
@@ -35,37 +35,6 @@ proc addRoute*(app: Prologue, patterns: seq[UrlPattern],
 
 proc addRoute*(app: Prologue, urlFile: string, baseRoute = "") =
   discard
-
-proc findHandler(app: Prologue, ctx: Context, path: Path): PathHandler =
-  if path in app.router.callable:
-    return app.router.callable[path]
-
-  let
-    path = path.route
-    pathList = path.split("/")
-
-  for route, handler in app.router.callable.pairs:
-    let routeList = route.route.split("/")
-    var flag = true
-    if pathList.len == routeList.len:
-      for idx in 0 ..< pathList.len:
-        if pathList[idx] == routeList[idx]:
-          continue
-        if routeList[idx].startsWith("{"):
-          # should be checked in addRoute
-          let key = routeList[idx]
-          if key.len <= 2:
-            raise newException(RouteError, "{} shouldn't be empty!")
-          let
-            (params, paramsType) = parsePathParams(key[1 ..< ^1])
-            pathParams = initPathParams(decodeUrl(pathList[idx]), paramsType)
-          ctx.request.pathParams[params] = pathParams
-        else:
-          flag = false
-          break
-      if flag:
-        return handler
-  return newPathHandler(defaultHandler)
 
 macro resp*(params: string) =
   var ctx = ident"ctx"
@@ -157,24 +126,13 @@ proc run*(app: Prologue) =
 
     var response = initResponse(HttpVer11, Http200, httpHeaders = {
         "Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders)
-    var ctx = newContext(request = request, response = response)
+    var ctx = newContext(request = request, response = response, router = app.router)
 
     logging.debug(fmt"{ctx.request.reqMethod} {ctx.request.url.path}")
-    let 
-      path = initPath(route = ctx.request.url.path,
-        httpMethod = ctx.request.reqMethod)
-      # gcsafe
-      pathHandler = app.findHandler(ctx, path)
-      handler = pathHandler.handler
-      middlewares = app.middlewares & pathHandler.middlewares
 
-    if middlewares.len == 0:
-      await handler(ctx)
-    else:
-      ctx.middlewares = middlewares & handler
-      ctx.length = ctx.middlewares.len
-      await start(ctx)
-
+    # gcsafe
+    ctx.middlewares = app.middlewares
+    await start(ctx)
     await handle(ctx)
     logging.debug($(ctx.response))
 
@@ -212,13 +170,14 @@ when isMainModule:
     resp redirect("/hello")
 
   proc login*(ctx: Context) {.async.} =
+    echo ctx.request.path
     resp loginPage()
 
   proc do_login*(ctx: Context) {.async.} =
     resp redirect("/hello/Nim")
 
-  let settings = newSettings(appName = "StarLight")
-  var app = initApp(settings = settings, middlewares = @[debugRequestMiddleware, stripPathMiddleware, loggingMiddleware])
+  let settings = newSettings(appName = "StarLight", debug = false)
+  var app = initApp(settings = settings, middlewares = @[])
   app.addRoute("/", home, HttpGet)
   app.addRoute("/", home, HttpPost)
   app.addRoute("/home", home, HttpGet, @[debugRequestMiddleware, loggingMiddleware])
