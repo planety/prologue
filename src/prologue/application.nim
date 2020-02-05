@@ -79,12 +79,12 @@ proc generateDocs*(app: Prologue) =
               "content": {
                 "application/json": {
                   "schema": {}
-                  }
-                }
-              }
-            }
-          }
-        }
+      }
+    }
+      }
+    }
+      }
+    }
       }
     }
     descriptionDoc = $descriptionJson
@@ -126,7 +126,8 @@ proc run*(app: Prologue) =
 
     var response = initResponse(HttpVer11, Http200, httpHeaders = {
         "Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders)
-    var ctx = newContext(request = request, response = response, router = app.router)
+    var ctx = newContext(request = request, response = response,
+        router = app.router)
 
     logging.debug(fmt"{ctx.request.reqMethod} {ctx.request.url.path}")
 
@@ -180,7 +181,8 @@ when isMainModule:
   var app = initApp(settings = settings, middlewares = @[])
   app.addRoute("/", home, HttpGet)
   app.addRoute("/", home, HttpPost)
-  app.addRoute("/home", home, HttpGet, @[debugRequestMiddleware, loggingMiddleware])
+  app.addRoute("/home", home, HttpGet, @[debugRequestMiddleware,
+      loggingMiddleware])
   app.addRoute("/hello", hello, HttpGet)
   app.addRoute("/redirect", testRedirect, HttpGet)
   app.addRoute("/login", login, HttpGet)

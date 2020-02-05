@@ -26,7 +26,8 @@ type
 
   HandlerAsync* = proc(ctx: Context): Future[void] {.nimcall, gcsafe.}
 
-proc newContext*(request: Request, response: Response, router: Router): Context {.inline.} =
+proc newContext*(request: Request, response: Response,
+    router: Router): Context {.inline.} =
   Context(request: request, response: response, router: router, size: 0, first: true)
 
 proc handle*(ctx: Context) {.async, inline.} =

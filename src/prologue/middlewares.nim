@@ -4,7 +4,7 @@ import request, context, server
 
 proc start*(ctx: Context) {.async.} =
   if ctx.middlewares.len == 0:
-    let 
+    let
       handler = findHandler(ctx)
       next = handler.handler
       middlewares = handler.middlewares
@@ -17,7 +17,7 @@ proc start*(ctx: Context) {.async.} =
     await next(ctx)
   elif ctx.size == ctx.middlewares.len:
     if ctx.first:
-      let 
+      let
         handler = findHandler(ctx)
         next = handler.handler
         middlewares = handler.middlewares
@@ -68,7 +68,6 @@ proc httpRedirectMiddleWare*(ctx: Context) {.async.} =
     setScheme(ctx.request, "wss")
   else:
     return
-  
+
   await start(ctx)
   ctx.response.status = Http307
-  
