@@ -24,7 +24,8 @@ type
     first*: bool
     middlewares*: seq[HandlerAsync]
 
-  HandlerAsync* = proc(ctx: Context): Future[void] {.nimcall, gcsafe.}
+  HandlerAsync* = proc(ctx: Context): Future[void] {.closure, gcsafe.}
+
 
 proc newContext*(request: Request, response: Response,
     router: Router): Context {.inline.} =

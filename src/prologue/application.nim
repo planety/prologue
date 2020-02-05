@@ -178,11 +178,11 @@ when isMainModule:
     resp redirect("/hello/Nim")
 
   let settings = newSettings(appName = "StarLight", debug = false)
-  var app = initApp(settings = settings, middlewares = @[])
+  var app = initApp(settings = settings, middlewares = @[loggingMiddleware(),
+    debugRequestMiddleware(), stripPathMiddleware()])
   app.addRoute("/", home, HttpGet)
   app.addRoute("/", home, HttpPost)
-  app.addRoute("/home", home, HttpGet, @[debugRequestMiddleware,
-      loggingMiddleware])
+  app.addRoute("/home", home, HttpGet, @[stripPathMiddleware()])
   app.addRoute("/hello", hello, HttpGet)
   app.addRoute("/redirect", testRedirect, HttpGet)
   app.addRoute("/login", login, HttpGet)
