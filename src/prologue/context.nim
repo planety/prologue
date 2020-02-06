@@ -57,7 +57,7 @@ macro getQueryParams*(key: string, default = ""): string =
   var ctx = ident"ctx"
 
   result = quote do:
-    `ctx`.request.queryParams.getOrDefault(`key`, default)
+    `ctx`.request.queryParams.getOrDefault(`key`, `default`)
 
 macro getPathParams*(key: string): PathParams =
   var ctx = ident"ctx"
