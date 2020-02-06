@@ -177,12 +177,11 @@ when isMainModule:
   proc do_login*(ctx: Context) {.async.} =
     resp redirect("/hello/Nim")
 
-  let settings = newSettings(appName = "StarLight", debug = false)
-  var app = initApp(settings = settings, middlewares = @[loggingMiddleware(),
-    debugRequestMiddleware(), stripPathMiddleware()])
+  let settings = newSettings(appName = "StarLight", debug = true)
+  var app = initApp(settings = settings, middlewares = @[stripPathMiddleware()])
   app.addRoute("/", home, HttpGet)
   app.addRoute("/", home, HttpPost)
-  app.addRoute("/home", home, HttpGet, @[stripPathMiddleware()])
+  app.addRoute("/home", home, HttpGet, @[debugRequestMiddleware()])
   app.addRoute("/hello", hello, HttpGet)
   app.addRoute("/redirect", testRedirect, HttpGet)
   app.addRoute("/login", login, HttpGet)

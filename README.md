@@ -18,7 +18,7 @@ https://github.com/planety/BluePrint/blob/master/task.md
 #### Hello World
 
 ```nim
-proc hello*(ctx: Context) =
+proc hello*(ctx: Context) {.async.} =
   resp "<h1>Hello, Prologue!</h1>"
 
 
@@ -34,14 +34,13 @@ The server is running at localhost:8080.
 #### Another example
 
 ```nim
-# Sync Function
-proc hello*(ctx: Context) =
+# Async Function
+proc hello*(ctx: Context) {.async.} =
   resp "<h1>Hello, Prologue!</h1>"
 
-proc home*(ctx: Context) =
+proc home*(ctx: Context) {.async.} =
   resp "<h1>Home</h1>"
 
-# Async Function
 proc helloName*(ctx: Context) {.async.} =
   resp "<h1>Hello, " & ctx.request.pathParams.getOrDefault("name", "Prologue") & "</h1>"
 

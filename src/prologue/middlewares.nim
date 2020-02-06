@@ -24,7 +24,11 @@ proc start*(ctx: Context) {.async.} =
     ctx.first = false
     let next = ctx.middlewares[ctx.size - 1]
     await next(ctx)
-    
+
+
+proc doNothingClosureMiddleware*(): HandlerAsync =
+  result = proc(ctx: Context) {.async.} =
+    await start(ctx)
 
 proc loggingMiddleware*(appName = "Starlight"): HandlerAsync =
   result = proc(ctx: Context) {.async.} =
@@ -74,6 +78,5 @@ proc httpRedirectMiddleWare*(): HandlerAsync =
       setScheme(ctx.request, "wss")
     else:
       return
-
     await start(ctx)
     ctx.response.status = Http307
