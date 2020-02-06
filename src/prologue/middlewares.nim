@@ -25,7 +25,6 @@ proc start*(ctx: Context) {.async.} =
     let next = ctx.middlewares[ctx.size - 1]
     await next(ctx)
 
-
 proc doNothingClosureMiddleware*(): HandlerAsync =
   result = proc(ctx: Context) {.async.} =
     await start(ctx)
