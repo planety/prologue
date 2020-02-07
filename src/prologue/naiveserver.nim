@@ -1,7 +1,7 @@
 import httpcore, asyncdispatch, strutils
 import asynchttpserver except Request
 
-import request, nativesettings, context
+import naiverequest, nativesettings, context
 
 
 type

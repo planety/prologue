@@ -2,7 +2,7 @@ import ../../src/prologue
 import db_sqlite, strformat, strutils
 from sqlite3 import last_insert_rowid
 
-import views
+import templates / views 
 
 let 
   db = open("todo.db", "", "", "") # Warning: This file is created in the current directory

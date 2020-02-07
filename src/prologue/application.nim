@@ -1,18 +1,20 @@
 import asyncdispatch, uri, cgi, httpcore, cookies
 import tables, strutils, strformat, macros, logging, strtabs, os
-import request, response, context, server, middlewares, pages, route,
+import response, context, middlewares, pages, route,
     nativesettings, openapi, constants, base, configure
 
+
+when not defined(production):
+  import naiverequest, naiveserver
+  export naiverequest, naiveserver
 
 export httpcore
 export strtabs
 export asyncdispatch
 export middlewares
 export pages
-export request
 export response
 export context
-export server
 export pattern
 export nativesettings
 export configure

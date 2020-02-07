@@ -1,6 +1,10 @@
 import logging, asyncdispatch, httpcore, strtabs
 
-import request, context, route
+import context, route
+
+when not defined(production):
+  import naiverequest
+
 
 proc start*(ctx: Context) {.async.} =
   if ctx.middlewares.len == 0:

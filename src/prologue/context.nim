@@ -1,7 +1,12 @@
 import strtabs, asyncdispatch, macros, tables, asyncfile, strformat, httpcore,
     mimetypes, os, md5
 
-import request, response, pages, constants, types, base
+import response, pages, constants, types, base
+
+
+when not defined(production):
+  import naiverequest
+
 
 # TODO may add app instance
 type

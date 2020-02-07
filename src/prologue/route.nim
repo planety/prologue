@@ -1,7 +1,10 @@
 import httpcore, cgi
 import tables, hashes, strutils
 
-import request, context, utils, base
+import context, utils, base
+
+when not defined(production):
+  import naiverequest
 
 type
   PrologueError* = object of Exception
