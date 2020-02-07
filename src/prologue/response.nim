@@ -16,10 +16,9 @@ type
 proc `$`*(response: Response): string =
   fmt"{response.status} {response.httpHeaders}"
 
-proc initResponse*(httpVersion: HttpVersion, status: HttpCode,
-    httpHeaders = newHttpHeaders(), body = "",
-        contentTypes = "text/html; charset=UTF-8"): Response =
-  httpHeaders["Content-Type"] = contentTypes
+proc initResponse*(httpVersion: HttpVersion, status: HttpCode, httpHeaders =
+    {"Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders,
+        body = ""): Response =
   Response(httpVersion: httpVersion, status: status, httpHeaders: httpHeaders, body: body)
 
 proc setHeader*(response: var Response; key, value: string) =

@@ -35,11 +35,13 @@ proc addRoute*(app: Prologue, patterns: seq[UrlPattern],
     app.addRoute(baseRoute & pattern.route, pattern.matcher, pattern.httpMethod,
         pattern.middlewares)
 
-macro resp*(params: string) =
+macro resp*(params: string, status = Http200) =
   var ctx = ident"ctx"
 
   result = quote do:
-    `ctx`.response.body = `params`
+    let response = initResponse(httpVersion = HttpVer11, status = `status`,
+      httpHeaders = {"Content-Type": "text/plain; charset=UTF-8"}.newHttpHeaders, body = `params`)
+    `ctx`.response = response
 
 macro resp*(params: Response) =
   var ctx = ident"ctx"
@@ -76,12 +78,12 @@ proc generateDocs*(app: Prologue) =
               "content": {
                 "application/json": {
                   "schema": {}
-      }
-    }
-      }
-    }
-      }
-    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
     descriptionDoc = $descriptionJson
