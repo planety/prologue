@@ -1,6 +1,7 @@
 import strtabs, strutils, strformat, httpcore, parseutils, tables
 
 type
+  # TODO add FileUpload object
   FormPart* = object
     data*: OrderedTableRef[string, tuple[params: StringTableRef, body: string]]
 
@@ -29,6 +30,7 @@ proc initPathParams*(params, paramsType: string): PathParams =
     result = PathParams(paramsType: Path, value: params)
 
 proc parseFormPart*(body, contentType: string): FormPart {.inline.} =
+  # parse form
   let
     sep = contentType[contentType.rfind("boundary") + 9 .. ^1]
     startSep = fmt"--{sep}"

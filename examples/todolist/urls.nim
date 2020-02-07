@@ -1,6 +1,6 @@
 import ../../src/prologue
 
-import views
+import controllers
 
 let urlPatterns* = @[
   pattern("/todo", todoList),

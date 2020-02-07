@@ -3,7 +3,7 @@ import strformat
 
 
 proc makeList*(rows: seq[seq[string]]): string =
-  let vnode = buildHtml(tdiv(class = "list")):
+  let vnode = buildHtml(html):
     p: text "List items are as follows:"
     table(border = "1"):
       for row in rows:
@@ -13,7 +13,7 @@ proc makeList*(rows: seq[seq[string]]): string =
   result = $vnode
 
 proc editList*(id: int, value: seq[string]): string =
-  let vnode = buildHtml(tdiv(class = "edit_list")):
+  let vnode = buildHtml(html):
     p: text fmt"Edit the task with ID = {id}"
     form(action = fmt"/edit/{id}", `method` = "get"):
       input(`type` = "text", name = "task", value = value[0], size = "100",
@@ -26,7 +26,7 @@ proc editList*(id: int, value: seq[string]): string =
   result = $vnode
 
 proc newList*(): string =
-  let vnode = buildHtml(tdiv(class = "new_list")):
+  let vnode = buildHtml(html):
     p: text "Add a new task to the ToDo list:"
     form(action = "/new", `method` = "get"):
       input(`type` = "text", size = "100", maxlength = "80", name = "task")

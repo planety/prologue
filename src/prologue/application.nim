@@ -33,19 +33,14 @@ proc addRoute*(app: Prologue, patterns: seq[UrlPattern],
     app.addRoute(baseRoute & pattern.route, pattern.matcher, pattern.httpMethod,
         pattern.middlewares)
 
-proc addRoute*(app: Prologue, urlFile: string, baseRoute = "") =
-  discard
-
 macro resp*(params: string) =
   var ctx = ident"ctx"
-  # let response = ident"response"
 
   result = quote do:
     `ctx`.response.body = `params`
 
 macro resp*(params: Response) =
   var ctx = ident"ctx"
-  # let response = ident"response"
 
   result = quote do:
     `ctx`.response = `params`

@@ -1,7 +1,7 @@
-import httpcore
-import tables, hashes
+import httpcore, cgi
+import tables, hashes, strutils
 
-import context
+import request, context, utils, base
 
 type
   PrologueError* = object of Exception
@@ -39,3 +39,37 @@ proc newPathHandler*(handler: HandlerAsync, middlewares: seq[HandlerAsync] = @[]
 
 proc newRouter*(): Router =
   Router(callable: initTable[Path, PathHandler]())
+
+
+proc findHandler*(ctx: Context): PathHandler =
+  let rawPath = initPath(route = ctx.request.url.path,
+    httpMethod = ctx.request.reqMethod)
+  if rawPath in ctx.router.callable:
+    return ctx.router.callable[rawPath]
+
+  let
+    path = rawPath.route
+    pathList = path.split("/")
+
+  for route, handler in ctx.router.callable.pairs:
+    let routeList = route.route.split("/")
+    var flag = true
+    if pathList.len == routeList.len:
+      for idx in 0 ..< pathList.len:
+        if pathList[idx] == routeList[idx]:
+          continue
+        if routeList[idx].startsWith("{"):
+          # should be checked in addRoute
+          let key = routeList[idx]
+          if key.len <= 2:
+            raise newException(RouteError, "{} shouldn't be empty!")
+          let
+            (params, paramsType) = parsePathParams(key[1 ..< ^1])
+            pathParams = initPathParams(decodeUrl(pathList[idx]), paramsType)
+          ctx.request.pathParams[params] = pathParams
+        else:
+          flag = false
+          break
+      if flag:
+        return handler
+  return newPathHandler(defaultHandler)

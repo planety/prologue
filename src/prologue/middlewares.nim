@@ -1,6 +1,6 @@
 import logging, asyncdispatch, httpcore, strtabs
 
-import request, context, server
+import request, context, route
 
 proc start*(ctx: Context) {.async.} =
   if ctx.middlewares.len == 0:
@@ -31,7 +31,7 @@ proc doNothingClosureMiddleware*(): HandlerAsync =
 
 proc loggingMiddleware*(appName = "Starlight"): HandlerAsync =
   result = proc(ctx: Context) {.async.} =
-    echo "logging->begin"
+    logging.info "logging->begin"
     logging.debug "============================"
     logging.debug appName
     logging.debug "from logging middleware"
@@ -39,11 +39,11 @@ proc loggingMiddleware*(appName = "Starlight"): HandlerAsync =
     logging.debug "headers: " & $ctx.request.headers
     logging.debug "============================"
     await start(ctx)
-    echo "logging->end"
+    logging.info "logging->end"
 
 proc debugRequestMiddleware*(appName = "Starlight"): HandlerAsync =
   result = proc(ctx: Context) {.async.} =
-    echo "debug->begin"
+    logging.info "debug->begin"
     logging.debug "============================"
     logging.debug appName
     logging.debug "from debugRequestMiddleware"
@@ -54,11 +54,11 @@ proc debugRequestMiddleware*(appName = "Starlight"): HandlerAsync =
     logging.debug "body: " & ctx.request.body
     logging.debug "============================"
     await start(ctx)
-    echo "debug->end"
+    logging.info "debug->end"
 
 proc stripPathMiddleware*(appName = "Starlight"): HandlerAsync =
   result = proc(ctx: Context) {.async.} =
-    echo "strip->begin"
+    logging.info "strip->begin"
     logging.debug "============================"
     logging.debug appName
     logging.debug "from stripPathMiddleware"
@@ -66,7 +66,7 @@ proc stripPathMiddleware*(appName = "Starlight"): HandlerAsync =
     logging.debug ctx.request.path
     logging.debug "============================"
     await start(ctx)
-    echo "strip->end"
+    logging.info "strip->end"
 
 proc httpRedirectMiddleWare*(): HandlerAsync =
   result = proc(ctx: Context) {.async.} =

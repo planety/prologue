@@ -1,7 +1,7 @@
 import ../../src/prologue
 
 
-import views
+import controllers
 
 
 
