@@ -1,5 +1,5 @@
 import asyncdispatch, uri, cgi, httpcore, cookies
-import tables, strutils, strformat, macros, logging, strtabs
+import tables, strutils, strformat, macros, logging, strtabs, os
 import request, response, context, server, middlewares, pages, route,
     nativesettings, openapi, constants, base, configure
 
@@ -124,11 +124,15 @@ proc run*(app: Prologue) =
     var ctx = newContext(request = request, response = response,
         router = app.router)
 
+    ctx.middlewares = app.middlewares
     logging.debug(fmt"{ctx.request.reqMethod} {ctx.request.url.path}")
 
-    # gcsafe
-    ctx.middlewares = app.middlewares
-    await start(ctx)
+    let file = splitFile(request.path)
+    echo request.path
+    if request.path.startsWith(app.settings.staticDir):
+      await staticFileResponse(ctx, file.name & file.ext, file.dir.strip(chars = {'/'}, trailing = false))
+    else:
+      await start(ctx)
     await handle(ctx)
     logging.debug($(ctx.response))
 

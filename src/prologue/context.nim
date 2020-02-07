@@ -87,14 +87,19 @@ proc staticFileResponse*(ctx: Context, fileName, root: string, mimetype = "",
       ext = ext[1 .. ^ 1]
     mimetype = mimeDB.getMimetype(ext)
 
+  # echo filePath
   # exists -> have access -> can open
+  echo filePath
+  echo existsFile(filePath)
   if not existsFile(filePath):
     await ctx.request.respond(error404())
+    return
 
   var filePermission = getFilePermissions(filePath)
   if fpOthersRead notin filePermission:
     await ctx.request.respond(abort(status = Http403,
         body = "You do not have permission to access this file."))
+    return
 
   let
     info = getFileInfo(filePath)
