@@ -127,10 +127,10 @@ proc run*(app: Prologue) =
     ctx.middlewares = app.middlewares
     logging.debug(fmt"{ctx.request.reqMethod} {ctx.request.url.path}")
 
-    let file = splitFile(request.path)
-    echo request.path
-    if request.path.startsWith(app.settings.staticDir):
-      await staticFileResponse(ctx, file.name & file.ext, file.dir.strip(chars = {'/'}, trailing = false))
+    let file = splitFile(request.path.strip(chars = {'/'}, trailing = false))
+
+    if file.dir.startsWith(app.settings.staticDir.strip(chars = {'/'}, trailing = false)):
+      await staticFileResponse(ctx, file.name & file.ext, file.dir)
     else:
       await start(ctx)
     await handle(ctx)
@@ -155,25 +155,27 @@ proc run*(app: Prologue) =
 
 when isMainModule:
   proc hello*(ctx: Context) {.async.} =
-    echo "hello"
+    logging.debug "hello"
     resp "<h1>Hello, Prologue!</h1>"
 
   proc home*(ctx: Context) {.async.} =
-    echo "home"
+    logging.debug "home"
     resp "<h1>Home</h1>"
 
   proc helloName*(ctx: Context) {.async.} =
-    echo "helloname"
+    logging.debug "helloname"
     resp "<h1>Hello, " & getPathParams("name", "Prologue!") & "</h1>"
 
   proc testRedirect*(ctx: Context) {.async.} =
+    logging.debug "testRedirect"
     resp redirect("/hello")
 
   proc login*(ctx: Context) {.async.} =
-    echo ctx.request.path
+    logging.debug "logging"
     resp loginPage()
 
-  proc do_login*(ctx: Context) {.async.} =
+  proc doLogin*(ctx: Context) {.async.} =
+    logging.debug "doLogin"
     resp redirect("/hello/Nim")
 
   let settings = newSettings(appName = "StarLight", debug = true)
@@ -184,6 +186,6 @@ when isMainModule:
   app.addRoute("/hello", hello, HttpGet)
   app.addRoute("/redirect", testRedirect, HttpGet)
   app.addRoute("/login", login, HttpGet)
-  app.addRoute("/login", do_login, HttpPost)
+  app.addRoute("/login", doLogin, HttpPost)
   app.addRoute("/hello/{name}", helloName, HttpGet)
   app.run()

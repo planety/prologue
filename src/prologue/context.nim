@@ -87,10 +87,8 @@ proc staticFileResponse*(ctx: Context, fileName, root: string, mimetype = "",
       ext = ext[1 .. ^ 1]
     mimetype = mimeDB.getMimetype(ext)
 
-  # echo filePath
+
   # exists -> have access -> can open
-  echo filePath
-  echo existsFile(filePath)
   if not existsFile(filePath):
     await ctx.request.respond(error404())
     return
