@@ -13,6 +13,31 @@ You can see our task assignment as below or join us.
 https://github.com/planety/BluePrint/blob/master/task.md
 
 
+### Docs
+
+Docs in https://starlight-prologue.readthedocs.io/en/latest/
+
+
+### Feature
+
+
+- [ ] High Performance Http 1.1/2.0 Server
+- [ ] High Performance Websocket Server
+- [ ] Http 2.0 Client
+- [ ] Reloader
+- [x] Configure and Settings
+- [x] Context
+- [x] Static Files
+- [ ] CORS, GZIP, Streams Response
+- [ ] High Performance Route
+- [ ] Session and Cookies
+- [ ] Authentication
+- [x] Middlewares
+- [x] Template(Using Karax Native or Using Nim Filter)
+- [x] Test Client
+- [ ] Cache
+- [ ] Openapi
+
 ### Usage
 
 #### Hello World
