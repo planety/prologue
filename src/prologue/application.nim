@@ -40,7 +40,7 @@ macro resp*(params: string, status = Http200) =
 
   result = quote do:
     let response = initResponse(httpVersion = HttpVer11, status = `status`,
-      httpHeaders = {"Content-Type": "text/plain; charset=UTF-8"}.newHttpHeaders, body = `params`)
+      httpHeaders = {"Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders, body = `params`)
     `ctx`.response = response
 
 macro resp*(params: Response) =
