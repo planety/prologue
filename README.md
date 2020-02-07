@@ -13,7 +13,7 @@ You can see our task assignment as below or join us.
 https://github.com/planety/BluePrint/blob/master/task.md
 
 
-### Docs
+### Docs [Not yet]
 
 Docs in https://starlight-prologue.readthedocs.io/en/latest/
 
