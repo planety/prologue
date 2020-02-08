@@ -34,8 +34,8 @@ proc login*(ctx: Context) {.async.} =
 proc do_login*(ctx: Context) {.async.} =
   logging.debug "-----------------------------------------------------"
   logging.debug ctx.request.postParams
-  logging.debug getPostParams("username", "")
-  logging.debug getPostParams("password", "")
+  logging.debug ctx.request.formParams["username"].body
+  logging.debug ctx.request.formParams["password"].body
   resp redirect("/hello/Nim")
 
 proc multiPart*(ctx: Context) {.async.} =

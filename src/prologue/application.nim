@@ -113,8 +113,8 @@ proc run*(app: Prologue) =
 
     # get or post forms params
     if "form-urlencoded" in contentType:
+      request.formParams = initFormPart()
       for (key, value) in decodeData(request.body):
-        request.formParams = initFormPart()
         request.formParams[key] = value
         case request.reqMethod
         of HttpGet:
