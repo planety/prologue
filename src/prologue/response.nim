@@ -50,8 +50,6 @@ proc error404*(status = Http404,
     body = "<h1>404 Not Found!</h1>"): Response {.inline.} =
   result = initResponse(HttpVer11, status = status, body = body)
 
-# change later
-# for example use asyncfile
 proc htmlResponse*(text: string): Response {.inline.} =
   result = initResponse(HttpVer11, Http200, {
       "Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders,

@@ -23,6 +23,7 @@ export base
 
 proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
     httpMethod = HttpGet, middlewares: seq[HandlerAsync] = @[]) {.inline.} =
+  ## add single handler route
   let path = initPath(route = route, httpMethod = httpMethod)
 
   if path in app.router.callable:
@@ -31,11 +32,13 @@ proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
 
 proc addRoute*(app: Prologue, patterns: seq[UrlPattern],
     baseRoute = "") =
+  ## add multi handler route
   for pattern in patterns:
     app.addRoute(baseRoute & pattern.route, pattern.matcher, pattern.httpMethod,
         pattern.middlewares)
 
 macro resp*(params: string, status = Http200) =
+  ## handy to make ctx's response
   var ctx = ident"ctx"
 
   result = quote do:
@@ -44,6 +47,7 @@ macro resp*(params: string, status = Http200) =
     `ctx`.response = response
 
 macro resp*(params: Response) =
+  ## handy to make ctx's response
   var ctx = ident"ctx"
 
   result = quote do:
@@ -110,6 +114,8 @@ proc run*(app: Prologue) =
     # get or post forms params
     if "form-urlencoded" in contentType:
       for (key, value) in decodeData(request.body):
+        request.formParams = initFormPart()
+        request.formParams[key] = value
         case request.reqMethod
         of HttpGet:
           request.getParams[key] = value
@@ -141,7 +147,7 @@ proc run*(app: Prologue) =
     logging.debug($(ctx.response))
 
 
-  # maybe should read settings from file
+  # TODO maybe should read settings from file
   if logging.getHandlers().len == 0:
     addHandler(logging.newConsoleLogger())
     setLogFilter(if app.settings.debug: lvlDebug else: lvlInfo)

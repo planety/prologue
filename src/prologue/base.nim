@@ -12,9 +12,14 @@ type
     paramsType*: ParamsType
     value*: string
 
+proc initFormPart*(): FormPart {.inline.} =
+  FormPart(data: newOrderedTable[string, (StringTableRef, string)]())
 
 proc `[]`*(formPart: FormPart, key: string): tuple[params: StringTableRef, body: string] =
   formPart.data[key]
+
+proc `[]=`*(formPart: FormPart, key: string, body: string) =
+  formPart.data[key] = (newStringTable(), body) 
 
 proc initPathParams*(params, paramsType: string): PathParams =
   case paramsType
@@ -40,7 +45,7 @@ proc parseFormPart*(body, contentType: string): FormPart {.inline.} =
     formData = body[startPos ..< endPos]
     formDataSeq = formData.split(startSep & "\c\L")
 
-  result = FormPart(data: newOrderedTable[string, (StringTableRef, string)]())
+  result = initFormPart()
 
   for data in formDataSeq:
     if data.len == 0:

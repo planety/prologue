@@ -92,7 +92,6 @@ proc staticFileResponse*(ctx: Context, fileName, root: string, mimetype = "",
       ext = ext[1 .. ^ 1]
     mimetype = mimeDB.getMimetype(ext)
 
-
   # exists -> have access -> can open
   if not existsFile(filePath):
     await ctx.request.respond(error404())
@@ -125,7 +124,6 @@ proc staticFileResponse*(ctx: Context, fileName, root: string, mimetype = "",
   headers["Content-Type"] = mimetype & "; " & charset
   headers["Last-Modified"] = $lastModified
   headers["Etag"] = etag
-
 
   if contentLength < 20_000_000:
     # if ctx.request.headers.hasKey("If-None-Match") and ctx.request.headers[
