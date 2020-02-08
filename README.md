@@ -2,7 +2,7 @@
 [![Build Status](https://dev.azure.com/xzsflywind/xlsx/_apis/build/status/planety.prologue?branchName=master)](https://dev.azure.com/xzsflywind/xlsx/_build/latest?definitionId=4&branchName=master)
 ![Build Status](https://travis-ci.org/planety/prologue.svg?branch=master)
 
-# Prologue
+# Prologue[![nimble](https://raw.githubusercontent.com/yglukhov/nimble-tag/master/nimble.png)](https://github.com/yglukhov/nimble-tag)
 What's past is prologue.
 
 ### Purpose
@@ -37,6 +37,12 @@ Docs in https://starlight-prologue.readthedocs.io/en/latest/
 - [x] Test Client
 - [ ] Cache
 - [ ] Openapi
+
+### Installation
+
+```bash
+nimble install prologue
+```
 
 ### Usage
 

@@ -142,7 +142,7 @@ proc run*(app: Prologue) =
     if file.dir.startsWith(app.settings.staticDir.strip(chars = {'/'}, trailing = false)):
       await staticFileResponse(ctx, file.name & file.ext, file.dir)
     else:
-      await start(ctx)
+      await switch(ctx)
     await handle(ctx)
     logging.debug($(ctx.response))
 

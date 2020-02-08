@@ -6,7 +6,7 @@ when not defined(production):
   import naiverequest
 
 
-proc start*(ctx: Context) {.async.} =
+proc switch*(ctx: Context) {.async.} =
   if ctx.middlewares.len == 0:
     let
       handler = findHandler(ctx)
@@ -31,7 +31,7 @@ proc start*(ctx: Context) {.async.} =
 
 proc doNothingClosureMiddleware*(): HandlerAsync =
   result = proc(ctx: Context) {.async.} =
-    await start(ctx)
+    await switch(ctx)
 
 proc loggingMiddleware*(appName = "Starlight"): HandlerAsync =
   result = proc(ctx: Context) {.async.} =
@@ -42,7 +42,7 @@ proc loggingMiddleware*(appName = "Starlight"): HandlerAsync =
     logging.debug "route: " & ctx.request.path
     logging.debug "headers: " & $ctx.request.headers
     logging.debug "============================"
-    await start(ctx)
+    await switch(ctx)
     logging.info "logging->end"
 
 proc debugRequestMiddleware*(appName = "Starlight"): HandlerAsync =
@@ -57,7 +57,7 @@ proc debugRequestMiddleware*(appName = "Starlight"): HandlerAsync =
     logging.debug "headers: " & $ctx.request.headers
     logging.debug "body: " & ctx.request.body
     logging.debug "============================"
-    await start(ctx)
+    await switch(ctx)
     logging.info "debug->end"
 
 proc stripPathMiddleware*(appName = "Starlight"): HandlerAsync =
@@ -69,7 +69,7 @@ proc stripPathMiddleware*(appName = "Starlight"): HandlerAsync =
     ctx.request.stripPath()
     logging.debug ctx.request.path
     logging.debug "============================"
-    await start(ctx)
+    await switch(ctx)
     logging.info "strip->end"
 
 proc httpRedirectMiddleWare*(): HandlerAsync =
@@ -81,5 +81,5 @@ proc httpRedirectMiddleWare*(): HandlerAsync =
       setScheme(ctx.request, "wss")
     else:
       return
-    await start(ctx)
+    await switch(ctx)
     ctx.response.status = Http307
