@@ -11,6 +11,7 @@ srcDir        = "src"
 # Dependencies
 
 requires "nim >= 1.0.0"
+requires "regex >= 0.13.0"
 
 # # examples
 # task helloworld, "helloworld":
