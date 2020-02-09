@@ -6,34 +6,34 @@ type
   SecretKey* = distinct string
   SecretUrl* = distinct string
 
-proc tryParseInt(value: string): int {.inline.} =
+proc tryParseInt(value: string, default: int): int {.inline.} =
   try:
     result = parseInt(value)
   except ValueError:
-    discard
+    result = default
 
-proc tryParseFloat(value: string): float {.inline.} =
+proc tryParseFloat(value: string, default: float): float {.inline.} =
   try:
     result = parseFloat(value)
   except ValueError:
-    discard
+    result = default
 
-proc tryParseBool(value: string): bool {.inline.} =
+proc tryParseBool(value: string, default: bool): bool {.inline.} =
   try:
     result = parseBool(value)
   except ValueError:
-    discard
+    result = default
 
 proc parseValue*[T: BaseType](value: string, default: T): T {.inline.} =
   if value == "":
     return default
 
   when T is int:
-    result = tryParseInt(value)
+    result = tryParseInt(value, default)
   elif T is float:
-    result = tryParseFloat(value)
+    result = tryParseFloat(value, default)
   elif T is bool:
-    result = tryParseBool(value)
+    result = tryParseBool(value, default)
   elif T is string:
     result = value
 
