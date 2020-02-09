@@ -5,6 +5,6 @@ import controllers
 let urlPatterns* = @[
   pattern("/todo", todoList),
   pattern("/new", newItem),
-  pattern("/edit/{id:int}", editItem),
-  pattern("/item/{item:int}", showItem)
+  pattern("/edit/{id}", editItem),
+  pattern("/item/{item}", showItem)
 ]
