@@ -3,6 +3,8 @@ import tables, hashes, strutils
 
 import context, utils, base
 
+import regex
+
 when not defined(production):
   import naiverequest
 
@@ -27,6 +29,9 @@ type
 proc initPath*(route: string, httpMethod = HttpGet): Path =
   Path(route: route, httpMethod: httpMethod)
 
+proc initRePath*(route: Regex, httpMethod = HttpGet): RePath =
+  RePath(route: route, httpMethod: httpMethod)
+
 proc pattern*(route: string, handler: HandlerAsync, httpMethod = HttpGet,
     webAction: WebAction = Http, middlewares: seq[HandlerAsync] = @[]): UrlPattern =
   (route, handler, httpMethod, webAction, middlewares)
@@ -43,11 +48,26 @@ proc newPathHandler*(handler: HandlerAsync, middlewares: seq[HandlerAsync] = @[]
 proc newRouter*(): Router =
   Router(callable: initTable[Path, PathHandler]())
 
+proc newReRouter*(): ReRouter =
+  ReRouter(callable: newSeq[(RePath, PathHandler)]())
+
 proc findHandler*(ctx: Context): PathHandler =
   let rawPath = initPath(route = ctx.request.url.path,
     httpMethod = ctx.request.reqMethod)
+
   if rawPath in ctx.router.callable:
     return ctx.router.callable[rawPath]
+
+  for (path, pathHandler) in ctx.reRouter.callable:
+    if path.httpMethod != rawPath.httpMethod:
+      continue
+    var m: RegexMatch
+    echo rawPath
+    if rawPath.route.match(path.route, m):
+      echo "jsdfg"
+      for name in m.groupNames():
+        ctx.request.pathParams[name] = initPathParams(m.groupFirstCapture(name, rawPath.route), "str")
+      return pathHandler
 
   let
     pathList = rawPath.route.split("/")

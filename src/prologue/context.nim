@@ -3,6 +3,8 @@ import strtabs, asyncdispatch, macros, tables, asyncfile, strformat, httpcore,
 
 import response, pages, constants, types, base
 
+import regex
+
 
 when not defined(production):
   import naiverequest
@@ -21,10 +23,18 @@ type
   Router* = ref object
     callable*: Table[Path, PathHandler]
 
+  RePath* = object
+    route*: Regex
+    httpMethod*: HttpMethod
+
+  ReRouter* = ref object
+    callable*: seq[(RePath, PathHandler)]
+
   Context* = ref object
     request*: Request
     response*: Response
     router*: Router
+    reRouter*: ReRouter
     size*: int
     first*: bool
     middlewares*: seq[HandlerAsync]
@@ -33,8 +43,8 @@ type
 
 
 proc newContext*(request: Request, response: Response,
-    router: Router): Context {.inline.} =
-  Context(request: request, response: response, router: router, size: 0, first: true)
+    router: Router, reRouter: ReRouter): Context {.inline.} =
+  Context(request: request, response: response, router: router, reRouter: reRouter, size: 0, first: true)
 
 proc handle*(ctx: Context) {.async, inline.} =
   await ctx.request.respond(ctx.response)

@@ -11,6 +11,7 @@ type
     server*: Server
     settings*: Settings
     router*: Router
+    reRouter*: ReRouter
     middlewares*: seq[HandlerAsync]
 
 

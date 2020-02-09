@@ -1,2 +1,2 @@
-switch("threads", "on")
-switch("gc", "arc")
+# switch("threads", "on")
+# switch("gc", "arc")

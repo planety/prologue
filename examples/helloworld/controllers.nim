@@ -2,6 +2,9 @@ import ../../src/prologue
 import tables, logging
 
 
+proc articles*(ctx: Context) {.async.} =
+  resp $getPathParams("num", 1)
+
 proc hello*(ctx: Context) {.async.} =
   resp "<h1>Hello, Prologue!</h1>"
 

@@ -1,8 +1,11 @@
 import asyncdispatch, uri, cgi, httpcore, cookies
 import tables, strutils, strformat, macros, logging, strtabs, os
+
 import response, context, middlewares, pages, route,
     nativesettings, openapi, constants, base, configure
 
+import regex
+export re
 
 when not defined(production):
   import naiverequest, naiveserver
@@ -21,9 +24,17 @@ export configure
 export base
 
 
+proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
+    httpMethod = HttpGet, middlewares: seq[HandlerAsync] = @[]) {.inline.} =
+  ## add single handler route
+  ## don't check whether regex routes are duplicated
+  let path = initRePath(route = route, httpMethod = httpMethod)
+  app.reRouter.callable.add (path, newPathHandler(handler, middlewares))
+
 proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
     httpMethod = HttpGet, middlewares: seq[HandlerAsync] = @[]) {.inline.} =
   ## add single handler route
+  ## check whether routes are duplicated
   let path = initPath(route = route, httpMethod = httpMethod)
 
   if path in app.router.callable:
@@ -55,7 +66,7 @@ macro resp*(params: Response) =
 
 proc initApp*(settings: Settings, middlewares: seq[HandlerAsync] = @[]): Prologue =
   Prologue(server: newPrologueServer(true, settings.reusePort),
-      settings: settings, router: newRouter(), middlewares: middlewares)
+      settings: settings, router: newRouter(), reRouter: newReRouter(), middlewares: middlewares)
 
 proc generateRouterDocs(app: Prologue): string {.used.} =
   discard
@@ -132,7 +143,7 @@ proc run*(app: Prologue) =
     var response = initResponse(HttpVer11, Http200, httpHeaders = {
         "Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders)
     var ctx = newContext(request = request, response = response,
-        router = app.router)
+        router = app.router, reRouter = app.reRouter)
 
     ctx.middlewares = app.middlewares
     logging.debug(fmt"{ctx.request.reqMethod} {ctx.request.url.path}")
@@ -143,6 +154,7 @@ proc run*(app: Prologue) =
       await staticFileResponse(ctx, file.name & file.ext, file.dir)
     else:
       await switch(ctx)
+  
     await handle(ctx)
     logging.debug($(ctx.response))
 

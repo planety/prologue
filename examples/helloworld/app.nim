@@ -17,6 +17,9 @@ var
 
 
 app.addRoute(urls.urlPatterns, "/todolist")
+# only sopport (?P<name>exp)
+app.addRoute(re"/post(?P<num>[\d]+)", articles, HttpGet)
+
 app.addRoute("/", home, HttpGet)
 app.addRoute("/", home, HttpPost)
 app.addRoute("/docs", docs, HttpGet)
