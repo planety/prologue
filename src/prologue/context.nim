@@ -10,7 +10,6 @@ when not defined(production):
   import naiverequest
 
 
-# TODO may add app instance
 type
   PathHandler* = ref object
     handler*: HandlerAsync

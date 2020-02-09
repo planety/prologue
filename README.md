@@ -30,7 +30,7 @@ Docs in https://starlight-prologue.readthedocs.io/en/latest/
 - [x] Static Files
 - [ ] CORS, GZIP, Streams Response
 - [x] Simple Route
-- [ ] Session and Cookies
+- [ ] Sessions and Cookies
 - [ ] Authentication
 - [x] Middlewares
 - [x] Template(Using Karax Native or Using Nim Filter)

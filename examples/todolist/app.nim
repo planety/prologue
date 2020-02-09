@@ -17,4 +17,5 @@ var
 
 
 app.addRoute(urls.urlPatterns, "")
+app.generateDocs()
 app.run()

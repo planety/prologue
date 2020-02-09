@@ -1,5 +1,7 @@
 import os, json
 
+import naiveserver, constants
+
 export json
 
 
@@ -87,3 +89,42 @@ proc writeDocs*(description: string; fileName = "openapi.json"; dirs = "docs") =
   let f = open(dirs / fileName, fmWrite)
   defer: f.close()
   f.write(description)
+
+proc generateDocs*(app: Prologue) =
+  if not app.settings.debug:
+    return
+  let
+    version = OpenApiVersion
+    license = initLicense("MIT", "https://www.mit-license.org")
+    description = "My Conquest is the Sea of Stars."
+    info = initInfo(title = app.settings.appName, description = description,
+        licenseName = license.name,
+        licenseUrl = license.url, version = PrologueVersion)
+    descriptionJson = %* {
+      "openapi": version,
+      "info": info,
+      "paths": {
+      "/": {
+        "get": {
+          "summary": "Root",
+          "operationId": "root__get",
+          "responses": {
+            "200": {
+              "description": "Successful Response",
+              "content": {
+                "application/json": {
+                  "schema": {}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    descriptionDoc = $descriptionJson
+
+  writeDocs(descriptionDoc)
+
+proc generateRouterDocs(app: Prologue): string {.used.} =
+  discard

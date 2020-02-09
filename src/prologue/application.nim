@@ -2,7 +2,7 @@ import asyncdispatch, uri, cgi, httpcore, cookies
 import tables, strutils, strformat, macros, logging, strtabs, os
 
 import response, context, middlewares, pages, route,
-    nativesettings, openapi, constants, base, configure
+    nativesettings, openapi, base, configure
 
 import regex
 export re
@@ -22,6 +22,7 @@ export pattern
 export nativesettings
 export configure
 export base
+export openapi
 
 
 proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
@@ -67,43 +68,6 @@ macro resp*(params: Response) =
 proc initApp*(settings: Settings, middlewares: seq[HandlerAsync] = @[]): Prologue =
   Prologue(server: newPrologueServer(true, settings.reusePort),
       settings: settings, router: newRouter(), reRouter: newReRouter(), middlewares: middlewares)
-
-proc generateRouterDocs(app: Prologue): string {.used.} =
-  discard
-
-proc generateDocs*(app: Prologue) =
-  let
-    version = OpenApiVersion
-    license = initLicense("MIT", "https://www.mit-license.org")
-    description = "My Conquest is the Sea of Stars."
-    info = initInfo(title = app.settings.appName, description = description,
-        licenseName = license.name,
-        licenseUrl = license.url, version = PrologueVersion)
-    descriptionJson = %* {
-      "openapi": version,
-      "info": info,
-      "paths": {
-      "/": {
-        "get": {
-          "summary": "Root",
-          "operationId": "root__get",
-          "responses": {
-            "200": {
-              "description": "Successful Response",
-              "content": {
-                "application/json": {
-                  "schema": {}
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-    descriptionDoc = $descriptionJson
-
-  writeDocs(descriptionDoc)
 
 proc run*(app: Prologue) =
   proc handleRequest(nativeRequest: NativeRequest) {.async.} =
@@ -165,8 +129,6 @@ proc run*(app: Prologue) =
     setLogFilter(if app.settings.debug: lvlDebug else: lvlInfo)
   defer: app.close()
 
-  if app.settings.debug:
-    generateDocs(app)
 
   when defined(windows):
     logging.debug(fmt"Prologue is serving at 127.0.0.1:{app.settings.port.int} {app.settings.appName}")
@@ -210,4 +172,5 @@ when isMainModule:
   app.addRoute("/login", login, HttpGet)
   app.addRoute("/login", doLogin, HttpPost)
   app.addRoute("/hello/{name}", helloName, HttpGet)
+  app.generateDocs()
   app.run()
