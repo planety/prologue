@@ -1,6 +1,6 @@
 # Package
 
-version       = "0.1.0"
+version       = "0.1.2"
 author        = "flywind"
 description   = "Another micro web framework."
 license       = "MIT"
