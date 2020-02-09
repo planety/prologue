@@ -1,5 +1,5 @@
-import httpclient, asyncdispatch, strformat
-import nativesockets
+import httpclient, asyncdispatch, nativesockets
+import strformat
 
 
 proc testRoute*(route, expected: string, address = "127.0.0.1", port = Port(8080)) {.async.} = 

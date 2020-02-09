@@ -10,7 +10,6 @@ proc errorPage*(errorMsg: string, version: string): string =
     ),
     xmlns = "http://www.w3.org/1999/xhtml")
 
-
 proc loginPage*(): string =
   return html(form(action = "/login",
       `method` = "post",

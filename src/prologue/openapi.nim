@@ -91,8 +91,10 @@ proc writeDocs*(description: string; fileName = "openapi.json"; dirs = "docs") =
   f.write(description)
 
 proc generateDocs*(app: Prologue) =
+  
   if not app.settings.debug:
     return
+  
   let
     version = OpenApiVersion
     license = initLicense("MIT", "https://www.mit-license.org")

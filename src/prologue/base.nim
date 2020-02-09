@@ -1,4 +1,5 @@
-import strtabs, strutils, strformat, httpcore, parseutils, tables
+import httpcore
+import strtabs, strutils, strformat, parseutils, tables
 
 type
   # TODO add FileUpload object

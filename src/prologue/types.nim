@@ -38,4 +38,5 @@ proc parseValue*[T: BaseType](value: string, default: T): T {.inline.} =
     result = value
 
 proc `$`*(secretKey: SecretKey): string =
+  ## Hide secretKey's value
   "SecretKey(********)"

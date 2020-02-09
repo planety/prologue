@@ -5,7 +5,7 @@ import response, context, middlewares, pages, route,
     nativesettings, openapi, base, configure
 
 import regex
-export re
+
 
 when not defined(production):
   import naiverequest, naiveserver
@@ -23,6 +23,7 @@ export nativesettings
 export configure
 export base
 export openapi
+export re
 
 
 proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,

@@ -1,5 +1,5 @@
-import strtabs, asyncdispatch, macros, tables, asyncfile, strformat, httpcore,
-    mimetypes, os, md5
+import httpcore, asyncdispatch, asyncfile, mimetypes, md5
+import strtabs, macros, tables, strformat, os
 
 import response, pages, constants, types 
 

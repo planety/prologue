@@ -1,4 +1,5 @@
-import logging, asyncdispatch, httpcore, strtabs
+import asyncdispatch, httpcore
+import logging, strtabs
 
 import context, route
 

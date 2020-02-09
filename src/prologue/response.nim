@@ -1,8 +1,5 @@
-import httpcore
-import cookies
-import times
-import json
-import strformat
+import httpcore, cookies
+import times, json, strformat
 
 
 type
@@ -34,34 +31,37 @@ proc setCookie*(response: var Response; key, value: string; expires: DateTime |
   response.cookies = setCookie(key, value, expires, domain, path, noName,
       secure, httpOnly)
 
-proc abort*(status = Http401, body = ""): Response {.inline.} =
-  result = initResponse(HttpVer11, status = status, body = body)
+proc abort*(status = Http401, body = "", version = HttpVer11): Response {.inline.} =
+  result = initResponse(version, status = status, body = body)
 
 proc redirect*(url: string, status = Http301,
-    body = "", delay = 0): Response {.inline.} =
-
+    body = "", delay = 0, version = HttpVer11): Response {.inline.} =
+  ## redirect to new url.
   var headers = newHttpHeaders()
   if delay == 0:
     headers.add("Location", url)
   else:
     headers.add("refresh", fmt"""{delay};url="{url}"""")
-  result = initResponse(HttpVer11, status = status, httpHeaders = headers, body = body)
+  result = initResponse(version, status = status, httpHeaders = headers, body = body)
 
 proc error404*(status = Http404,
-    body = "<h1>404 Not Found!</h1>"): Response {.inline.} =
-  result = initResponse(HttpVer11, status = status, body = body)
+    body = "<h1>404 Not Found!</h1>", version = HttpVer11): Response {.inline.} =
+  result = initResponse(version, status = status, body = body)
 
-proc htmlResponse*(text: string): Response {.inline.} =
-  result = initResponse(HttpVer11, Http200, {
+proc htmlResponse*(text: string, status = Http200, version = HttpVer11): Response {.inline.} =
+  ## Content-Type": "text/html; charset=UTF-8
+  result = initResponse(version, status, {
       "Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders,
       body = text)
 
-proc plainTextResponse*(text: string): Response {.inline.} =
-  initResponse(HttpVer11, Http200, {
+proc plainTextResponse*(text: string, status = Http200, version = HttpVer11): Response {.inline.} =
+  ## Content-Type": "text/plain
+  initResponse(version, status, {
       "Content-Type": "text/plain"}.newHttpHeaders,
       body = text)
 
-proc jsonResponse*(text: JsonNode): Response {.inline.} =
-  initResponse(HttpVer11, Http200, {
+proc jsonResponse*(text: JsonNode, status = Http200, version = HttpVer11): Response {.inline.} =
+  ## Content-Type": "application/json
+  initResponse(version, status, {
       "Content-Type": "application/json"}.newHttpHeaders,
       body = $text)

@@ -1,5 +1,5 @@
 import httpcore, cgi
-import tables, hashes, strutils, strtabs
+import hashes, strutils, strtabs, tables
 
 import context
 
@@ -52,12 +52,16 @@ proc newReRouter*(): ReRouter =
   ReRouter(callable: newSeq[(RePath, PathHandler)]())
 
 proc findHandler*(ctx: Context): PathHandler =
+  ## fixed route -> regex route -> params route
+  ## Follow the order of addition
   let rawPath = initPath(route = ctx.request.url.path,
     httpMethod = ctx.request.reqMethod)
 
+  # find fixed route
   if rawPath in ctx.router.callable:
     return ctx.router.callable[rawPath]
 
+  # find regex route
   for (path, pathHandler) in ctx.reRouter.callable:
     if path.httpMethod != rawPath.httpMethod:
       continue
@@ -71,6 +75,7 @@ proc findHandler*(ctx: Context): PathHandler =
   let
     pathList = rawPath.route.split("/")
 
+  # find params route
   for route, handler in ctx.router.callable.pairs:
     let routeList = route.route.split("/")
     var flag = true
