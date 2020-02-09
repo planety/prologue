@@ -1,5 +1,6 @@
 import htmlgen
 
+
 proc errorPage*(errorMsg: string, version: string): string =
   return html(head(title(errorMsg)),
               body(h1(errorMsg),

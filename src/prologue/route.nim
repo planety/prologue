@@ -1,7 +1,7 @@
 import httpcore, cgi
-import tables, hashes, strutils
+import tables, hashes, strutils, strtabs
 
-import context, utils, base
+import context
 
 import regex
 
@@ -64,9 +64,8 @@ proc findHandler*(ctx: Context): PathHandler =
     var m: RegexMatch
     echo rawPath
     if rawPath.route.match(path.route, m):
-      echo "jsdfg"
       for name in m.groupNames():
-        ctx.request.pathParams[name] = initPathParams(m.groupFirstCapture(name, rawPath.route), "str")
+        ctx.request.pathParams[name] = m.groupFirstCapture(name, rawPath.route)
       return pathHandler
 
   let
@@ -86,15 +85,9 @@ proc findHandler*(ctx: Context): PathHandler =
           if key.len <= 2:
             raise newException(RouteError, "{} shouldn't be empty!")
           let
-            (params, paramsType) = parsePathParams(key[1 ..< ^1])
-
-          if not checkPathParams(params, paramsType):
-            # not match params types
-            flag = false
-            break
-          let
-            pathParams = initPathParams(decodeUrl(pathList[idx]), paramsType)
-          ctx.request.pathParams[params] = pathParams
+            params = key[1 ..< ^1]
+           
+          ctx.request.pathParams[params] = decodeUrl(pathList[idx])
         else:
           flag = false
           break

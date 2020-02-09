@@ -1,4 +1,4 @@
-import asynchttpserver, strutils, strtabs, uri, asyncdispatch, tables, asyncnet
+import asynchttpserver, strutils, strtabs, uri, asyncdispatch, asyncnet
 
 import nativesettings, base, response
 
@@ -13,7 +13,7 @@ type
     getParams*: StringTableRef
     queryParams*: StringTableRef
     formParams*: FormPart
-    pathParams*: TableRef[string, PathParams]
+    pathParams*: StringTableRef
     settings*: Settings
 
 
@@ -100,7 +100,7 @@ proc respond*(request: Request; response: Response) {.async, inline.} =
       response.httpHeaders)
 
 proc initRequest*(nativeRequest: NativeRequest; cookies = newStringTable();
-    pathParams = newTable[string, PathParams](); queryParams = newStringTable();
+    pathParams = newStringTable(); queryParams = newStringTable();
         postParams = newStringTable(); getParams = newStringTable();
             settings = newSettings()): Request {.inline.} =
   Request(nativeRequest: nativeRequest, cookies: cookies,

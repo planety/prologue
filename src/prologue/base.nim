@@ -5,12 +5,6 @@ type
   FormPart* = object
     data*: OrderedTableRef[string, tuple[params: StringTableRef, body: string]]
 
-  ParamsType* {.pure.} = enum
-    Int, Str, Slug, Uuid
-
-  PathParams* = object
-    paramsType*: ParamsType
-    value*: string
 
 proc initFormPart*(): FormPart {.inline.} =
   FormPart(data: newOrderedTable[string, (StringTableRef, string)]())
@@ -21,17 +15,6 @@ proc `[]`*(formPart: FormPart, key: string): tuple[params: StringTableRef,
 
 proc `[]=`*(formPart: FormPart, key: string, body: string) =
   formPart.data[key] = (newStringTable(), body)
-
-proc initPathParams*(params, paramsType: string): PathParams =
-  case paramsType
-  of "int":
-    result = PathParams(paramsType: Int, value: params)
-  of "slug":
-    result = PathParams(paramsType: Slug, value: params)
-  of "str":
-    result = PathParams(paramsType: Str, value: params)
-  of "uuid":
-    result = PathParams(paramsType: Uuid, value: params)
 
 proc parseFormPart*(body, contentType: string): FormPart {.inline.} =
   # parse form

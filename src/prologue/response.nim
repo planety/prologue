@@ -13,6 +13,7 @@ type
     cookies*: string
     body*: string
 
+
 proc `$`*(response: Response): string =
   fmt"{response.status} {response.httpHeaders}"
 

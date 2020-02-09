@@ -1,7 +1,7 @@
 import strtabs, asyncdispatch, macros, tables, asyncfile, strformat, httpcore,
     mimetypes, os, md5
 
-import response, pages, constants, types, base
+import response, pages, constants, types 
 
 import regex
 
@@ -73,7 +73,7 @@ macro getQueryParams*(key: string, default = ""): string =
   result = quote do:
     `ctx`.request.queryParams.getOrDefault(`key`, `default`)
 
-macro getPathParams*(key: string): PathParams =
+macro getPathParams*(key: string): string =
   var ctx = ident"ctx"
 
   result = quote do:
@@ -84,7 +84,7 @@ macro getPathParams*[T: BaseType](key: string, default: T): T =
 
   result = quote do:
     let pathParams = `ctx`.request.pathParams.getOrDefault(`key`)
-    parseValue(pathParams.value, `default`)
+    parseValue(pathParams, `default`)
 
 proc staticFileResponse*(ctx: Context, fileName, root: string, mimetype = "",
     downloadName = "", charset = "UTF-8", headers = newHttpHeaders()) {.async.} =

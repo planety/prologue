@@ -1,2 +1,2 @@
-import test_config, test_utils
+import test_config
 {.warnings: off.}
