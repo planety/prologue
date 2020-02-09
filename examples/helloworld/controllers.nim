@@ -23,7 +23,7 @@ proc index*(ctx: Context) {.async.} =
 
 proc helloName*(ctx: Context) {.async.} =
   logging.debug getPathParams("name")
-  resp "<h1>Hello, " & getPathParams("name", "Prologue") & "</h1>"
+  resp "<h1>Hello, " & getPathParams("name", "World") & "</h1>"
 
 proc testRedirect*(ctx: Context) {.async.} =
   resp redirect("/hello")

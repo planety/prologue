@@ -29,7 +29,7 @@ Docs in https://starlight-prologue.readthedocs.io/en/latest/
 - [x] Context
 - [x] Static Files
 - [ ] CORS, GZIP, Streams Response
-- [ ] High Performance Route
+- [x] Simple Route
 - [ ] Session and Cookies
 - [ ] Authentication
 - [x] Middlewares

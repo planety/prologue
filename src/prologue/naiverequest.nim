@@ -1,4 +1,4 @@
-import asynchttpserver, strutils, strtabs, uri, asyncdispatch, tables, asyncdispatch, asyncnet
+import asynchttpserver, strutils, strtabs, uri, asyncdispatch, tables, asyncnet
 
 import nativesettings, base, response
 

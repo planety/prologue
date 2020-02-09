@@ -43,7 +43,6 @@ proc newPathHandler*(handler: HandlerAsync, middlewares: seq[HandlerAsync] = @[]
 proc newRouter*(): Router =
   Router(callable: initTable[Path, PathHandler]())
 
-
 proc findHandler*(ctx: Context): PathHandler =
   let rawPath = initPath(route = ctx.request.url.path,
     httpMethod = ctx.request.reqMethod)
@@ -51,8 +50,7 @@ proc findHandler*(ctx: Context): PathHandler =
     return ctx.router.callable[rawPath]
 
   let
-    path = rawPath.route
-    pathList = path.split("/")
+    pathList = rawPath.route.split("/")
 
   for route, handler in ctx.router.callable.pairs:
     let routeList = route.route.split("/")
@@ -61,6 +59,7 @@ proc findHandler*(ctx: Context): PathHandler =
       for idx in 0 ..< pathList.len:
         if pathList[idx] == routeList[idx]:
           continue
+
         if routeList[idx].startsWith("{"):
           # should be checked in addRoute
           let key = routeList[idx]
@@ -68,6 +67,12 @@ proc findHandler*(ctx: Context): PathHandler =
             raise newException(RouteError, "{} shouldn't be empty!")
           let
             (params, paramsType) = parsePathParams(key[1 ..< ^1])
+
+          if not checkPathParams(params, paramsType):
+            # not match params types
+            flag = false
+            break
+          let
             pathParams = initPathParams(decodeUrl(pathList[idx]), paramsType)
           ctx.request.pathParams[params] = pathParams
         else:

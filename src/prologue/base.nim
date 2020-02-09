@@ -6,7 +6,7 @@ type
     data*: OrderedTableRef[string, tuple[params: StringTableRef, body: string]]
 
   ParamsType* {.pure.} = enum
-    Int, Float, String, Boolean, Path
+    Int, Str, Slug, Uuid
 
   PathParams* = object
     paramsType*: ParamsType
@@ -15,24 +15,23 @@ type
 proc initFormPart*(): FormPart {.inline.} =
   FormPart(data: newOrderedTable[string, (StringTableRef, string)]())
 
-proc `[]`*(formPart: FormPart, key: string): tuple[params: StringTableRef, body: string] =
+proc `[]`*(formPart: FormPart, key: string): tuple[params: StringTableRef,
+    body: string] =
   formPart.data[key]
 
 proc `[]=`*(formPart: FormPart, key: string, body: string) =
-  formPart.data[key] = (newStringTable(), body) 
+  formPart.data[key] = (newStringTable(), body)
 
 proc initPathParams*(params, paramsType: string): PathParams =
   case paramsType
   of "int":
     result = PathParams(paramsType: Int, value: params)
-  of "float":
-    result = PathParams(paramsType: Float, value: params)
-  of "bool":
-    result = PathParams(paramsType: Boolean, value: params)
+  of "slug":
+    result = PathParams(paramsType: Slug, value: params)
   of "str":
-    result = PathParams(paramsType: String, value: params)
-  of "path":
-    result = PathParams(paramsType: Path, value: params)
+    result = PathParams(paramsType: Str, value: params)
+  of "uuid":
+    result = PathParams(paramsType: Uuid, value: params)
 
 proc parseFormPart*(body, contentType: string): FormPart {.inline.} =
   # parse form
@@ -50,7 +49,7 @@ proc parseFormPart*(body, contentType: string): FormPart {.inline.} =
   for data in formDataSeq:
     if data.len == 0:
       continue
-    
+
     var
       pos = 0
       head, tail: string
@@ -61,7 +60,7 @@ proc parseFormPart*(body, contentType: string): FormPart {.inline.} =
 
     pos += parseUntil(data, head, "\c\L\c\L")
     pos += 4
-    tail = data[pos ..< ^1] 
+    tail = data[pos ..< ^1]
 
     if not head.startsWith("Content-Disposition"):
       break
@@ -72,7 +71,7 @@ proc parseFormPart*(body, contentType: string): FormPart {.inline.} =
         result.data[name].params[header.key] = header.value[0]
         continue
       pos = 0
-      let 
+      let
         content = header.value[0]
         length = content.len
       pos += parseUntil(content, tok, ';', pos)
