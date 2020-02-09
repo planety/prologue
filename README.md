@@ -192,6 +192,7 @@ app.addRoute("/hello", hello, HttpGet)
 app.addRoute("/redirect", testRedirect, HttpGet)
 app.addRoute("/login", login, HttpGet)
 app.addRoute("/login", do_login, HttpPost)
+# will match /hello/Nim and /hello/
 app.addRoute("/hello/{name}", helloName, HttpGet)
 app.addRoute("/multipart", multiPart, HttpGet)
 app.addRoute("/multipart", do_multiPart, HttpPost)
