@@ -31,13 +31,16 @@ Docs in https://starlight-prologue.readthedocs.io/en/latest/
 - [x] Configure and Settings
 - [x] Context
 - [x] Static Files
-- [ ] CORS, GZIP, Streams Response
-- [x] Simple Route
-- [ ] Sessions and Cookies
-- [ ] Authentication
 - [x] Middlewares
+- [x] Simple Route
 - [x] Template(Using Karax Native or Using Nim Filter)
-- [x] Test Client
+- [x] Test Client(Using httpclient)
+- [ ] CORS Response
+- [ ] GZIP Response
+- [ ] Streams Response
+- [ ] Session 
+- [ ] Cookie
+- [ ] Authentication
 - [ ] Cache
 - [ ] Openapi
 
