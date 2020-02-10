@@ -56,8 +56,8 @@ proc hello*(ctx: Context) {.async.} =
   resp "<h1>Hello, Prologue!</h1>"
 
 
-let settings = initSettings(appName = "StarLight")
-var app = initApp(settings = settings)
+let settings = newSettings(appName = "StarLight", debug = true)
+var app = initApp(settings = settings, middlewares = @[stripPathMiddleware()])
 app.addRoute("/", hello, HttpGet)
 app.addRoute("/hello", hello, HttpGet)
 app.run()
@@ -88,7 +88,7 @@ proc do_login*(ctx: Context) {.async.} =
   resp redirect("/hello/Nim")
 
 
-let settings = initSettings(appName = "StarLight")
+let settings = newSettings(appName = "StarLight")
 var app = initApp(settings = settings, middlewares = @[debugRequestMiddleware])
 app.addRoute("/", home, HttpGet)
 app.addRoute("/", home, HttpPost)
