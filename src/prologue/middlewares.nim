@@ -1,7 +1,9 @@
 import asyncdispatch, httpcore
-import logging, strtabs
+import logging, strtabs, strutils
 
 import context, route
+
+import regex
 
 when not defined(production):
   import naiverequest
@@ -84,3 +86,16 @@ proc httpRedirectMiddleWare*(): HandlerAsync =
       return
     await switch(ctx)
     ctx.response.status = Http307
+
+
+proc CORSMiddleware*(
+  allowOrigins: seq[string] = @[],
+  allowOriginRegex: Regex = re"",
+  allowMethods: seq[string] = @[],
+  allowHeaders: seq[string] = @[],
+  exposeHeaders: seq[string] = @[],
+  allowCredentials = false,
+  maxAge = 600,
+  ): HandlerAsync =
+  result = proc(ctx: Context) {.async.} =
+    discard
