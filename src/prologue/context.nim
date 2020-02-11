@@ -1,7 +1,7 @@
 import httpcore, asyncdispatch, asyncfile, mimetypes, md5
 import strtabs, macros, tables, strformat, os
 
-import response, pages, constants, types 
+import response, pages, constants, types
 
 import regex
 
@@ -43,7 +43,8 @@ type
 
 proc newContext*(request: Request, response: Response,
     router: Router, reRouter: ReRouter): Context {.inline.} =
-  Context(request: request, response: response, router: router, reRouter: reRouter, size: 0, first: true)
+  Context(request: request, response: response, router: router,
+      reRouter: reRouter, size: 0, first: true)
 
 proc handle*(ctx: Context) {.async, inline.} =
   await ctx.request.respond(ctx.response)

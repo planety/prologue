@@ -1,8 +1,10 @@
 import asyncdispatch, uri, cgi, httpcore, cookies
 import tables, strutils, strformat, macros, logging, strtabs, os
 
-import response, context, middlewares, pages, route,
-    nativesettings, openapi, base, configure
+import response, context, pages, route,
+    nativesettings, base, configure
+
+import middlewares / middlewares, openapi / openapi
 
 import regex
 
@@ -56,7 +58,8 @@ macro resp*(params: string, status = Http200) =
 
   result = quote do:
     let response = initResponse(httpVersion = HttpVer11, status = `status`,
-      httpHeaders = {"Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders, body = `params`)
+      httpHeaders = {"Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders,
+          body = `params`)
     `ctx`.response = response
 
 macro resp*(params: Response) =
@@ -68,7 +71,8 @@ macro resp*(params: Response) =
 
 proc initApp*(settings: Settings, middlewares: seq[HandlerAsync] = @[]): Prologue =
   Prologue(server: newPrologueServer(true, settings.reusePort),
-      settings: settings, router: newRouter(), reRouter: newReRouter(), middlewares: middlewares)
+      settings: settings, router: newRouter(), reRouter: newReRouter(),
+          middlewares: middlewares)
 
 proc run*(app: Prologue) =
   proc handleRequest(nativeRequest: NativeRequest) {.async.} =
@@ -115,11 +119,12 @@ proc run*(app: Prologue) =
 
     let file = splitFile(request.path.strip(chars = {'/'}, trailing = false))
 
-    if file.dir.startsWith(app.settings.staticDir.strip(chars = {'/'}, trailing = false)):
+    if file.dir.startsWith(app.settings.staticDir.strip(chars = {'/'},
+        trailing = false)):
       await staticFileResponse(ctx, file.name & file.ext, file.dir)
     else:
       await switch(ctx)
-  
+
     await handle(ctx)
     logging.debug($(ctx.response))
 
