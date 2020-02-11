@@ -36,8 +36,8 @@ proc CORSMiddleware*(
   allowCredentials = false,
   maxAge = 7200,
   ): HandlerAsync =
-  result = proc(ctx: Context) {.async.} =
 
+  result = proc(ctx: Context) {.async.} =
     var
       reqHeaders = ctx.request.headers
 
@@ -56,15 +56,11 @@ proc CORSMiddleware*(
       allowAllHeaders = "*" in allowHeaders
       allowAllOrigins = "*" in allowOrigins
 
-
     var
       allowMethodsSeq: seq[string]
 
-
-
     if "*" in allowMethods:
       allowMethodsSeq = AllHttpMethod
-
 
     if ctx.request.reqMethod == HttpOptions and reqHeaders.hasKey("access-control-request-method"):
       var
@@ -105,9 +101,9 @@ proc CORSMiddleware*(
         await ctx.request.respond(plainTextResponse("Disallowed CORS " &
             errorMsg.join(", "), Http403, preflightHeaders))
       else:
-        await ctx.request.respond(plainTextResponse("Ok", Http200, preflightHeaders))
+        await ctx.request.respond(plainTextResponse("Ok", Http200,
+            preflightHeaders))
       return
-
 
     var
       simpleHeaders = newHttpHeaders()
@@ -125,7 +121,6 @@ proc CORSMiddleware*(
       let value = toLowerAscii(httpMethod)
       if value in AllHttpMethod:
         allowMethodsSeq.add value
-
 
     for key, value in simpleHeaders:
       reqHeaders[key] = value
