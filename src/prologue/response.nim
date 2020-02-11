@@ -31,13 +31,16 @@ proc setCookie*(response: var Response; key, value: string; expires: DateTime |
   response.cookies = setCookie(key, value, expires, domain, path, noName,
       secure, httpOnly)
 
-proc abort*(status = Http401, body = "", version = HttpVer11): Response {.inline.} =
-  result = initResponse(version, status = status, body = body)
+proc abort*(status = Http401, body = "", headers = newHttpHeaders(),
+    version = HttpVer11): Response {.inline.} =
+  result = initResponse(version, status = status, body = body,
+      httpHeaders = headers)
 
 proc redirect*(url: string, status = Http301,
-    body = "", delay = 0, version = HttpVer11): Response {.inline.} =
+    body = "", delay = 0, headers = newHttpHeaders(),
+        version = HttpVer11): Response {.inline.} =
   ## redirect to new url.
-  var headers = newHttpHeaders()
+  var headers = headers
   if delay == 0:
     headers.add("Location", url)
   else:
@@ -45,23 +48,31 @@ proc redirect*(url: string, status = Http301,
   result = initResponse(version, status = status, httpHeaders = headers, body = body)
 
 proc error404*(status = Http404,
-    body = "<h1>404 Not Found!</h1>", version = HttpVer11): Response {.inline.} =
-  result = initResponse(version, status = status, body = body)
+    body = "<h1>404 Not Found!</h1>", headers = newHttpHeaders(),
+        version = HttpVer11): Response {.inline.} =
+  result = initResponse(version, status = status, body = body,
+      httpHeaders = headers)
 
-proc htmlResponse*(text: string, status = Http200, version = HttpVer11): Response {.inline.} =
+proc htmlResponse*(text: string, status = Http200, headers = newHttpHeaders(),
+    version = HttpVer11): Response {.inline.} =
   ## Content-Type": "text/html; charset=UTF-8
-  result = initResponse(version, status, {
-      "Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders,
+  var headers = headers
+  headers["Content-Type"] = "text/html; charset=UTF-8"
+  result = initResponse(version, status, headers,
       body = text)
 
-proc plainTextResponse*(text: string, status = Http200, version = HttpVer11): Response {.inline.} =
+proc plainTextResponse*(text: string, status = Http200,
+    headers = newHttpHeaders(), version = HttpVer11): Response {.inline.} =
   ## Content-Type": "text/plain
-  initResponse(version, status, {
-      "Content-Type": "text/plain"}.newHttpHeaders,
+  var headers = headers
+  headers["Content-Type"] = "text/plain"
+  initResponse(version, status, headers,
       body = text)
 
-proc jsonResponse*(text: JsonNode, status = Http200, version = HttpVer11): Response {.inline.} =
+proc jsonResponse*(text: JsonNode, status = Http200, headers = newHttpHeaders(),
+    version = HttpVer11): Response {.inline.} =
   ## Content-Type": "application/json
-  initResponse(version, status, {
-      "Content-Type": "application/json"}.newHttpHeaders,
+  var headers = headers
+  headers["Content-Type"] = "text/json"
+  initResponse(version, status, headers,
       body = $text)
