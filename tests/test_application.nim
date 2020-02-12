@@ -1,5 +1,5 @@
 import httpclient, asyncdispatch, nativesockets
-import strformat, os, osproc
+import strformat, os, osproc, terminal
 
 import unittest
 
@@ -9,13 +9,30 @@ when defined(windows):
     let code = execCmd("nim c --hints:off tests/start_server.nim")
     if code != 0:
       raise newException(IOError, "can't compile tests/start_server.nim")
-  let process = startProcess("tests/start_server")
 else:
   if not existsFile("start_server"):
     let code = execCmd("nim c --hints:off tests/start_server.nim")
     if code != 0:
       raise newException(IOError, "can't compile tests/start_server.nim")
-  let process = startProcess("tests/start_server")
+
+proc start() {.async.} =
+
+  let address = "http://127.0.0.1:8080/home"
+  for i in 0 .. 10:
+    var client = newAsyncHttpClient()
+    styledEcho(fgBlue, "Getting ", address)
+    let fut = client.get(address)
+    yield fut or sleepAsync(3000)
+    if not fut.finished:
+      styledEcho(fgYellow, "Timed out")
+    elif not fut.failed:
+      styledEcho(fgGreen, "Server started!")
+      return
+    else: echo fut.error.msg
+    client.close()
+
+let process = startProcess("tests/start_server")
+waitFor start()
 
 
 suite "Test Application":
@@ -45,4 +62,5 @@ suite "Test Application":
     check response.code == Http200
     check (waitFor response.body) == "<h1>Home</h1>"
 
+  client.close()
   process.terminate()
