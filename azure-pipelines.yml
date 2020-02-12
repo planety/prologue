@@ -154,7 +154,7 @@ steps:
   - bash: |
       echo "PATH=${PATH}"
       nimble refresh
-      nimble install timeit
+      nimble install regex -y
       # nimble install zip
     displayName: 'Building the package dependencies (Posix)'
     condition: ne(variables['Agent.OS'], 'Windows_NT')
