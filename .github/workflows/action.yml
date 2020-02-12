@@ -28,6 +28,8 @@ jobs:
         path: ~/.nimble
         key: ${{ runner.os }}-nimble-stable
     - uses: jiro4989/setup-nim-action@master
+    - name: Install regex
+      run: nimble install regex -y
     - name: Test command
       run: nimble test
 
