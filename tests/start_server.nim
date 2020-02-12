@@ -25,6 +25,7 @@ proc doLogin*(ctx: Context) {.async.} =
   logging.debug "doLogin"
   resp redirect("/hello/Nim")
 
+
 let settings = newSettings(appName = "StarLight", debug = true)
 var app = initApp(settings = settings, middlewares = @[])
 app.addRoute("", home, HttpGet)
