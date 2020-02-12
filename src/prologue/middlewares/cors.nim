@@ -74,7 +74,6 @@ proc CORSMiddleware*(
         accessControlRequestMethod = reqHeaders["Access-Control-Request-Method"]
         accessControlRequestHeaders = seq[string](reqHeaders.getOrDefault("Access-Control-Request-Headers"))
 
-
       if "*" in allowOrigins:
         preflightHeaders["Access-Control-Allow-Origin"] = "*"
 
@@ -130,7 +129,6 @@ proc CORSMiddleware*(
 
     if allowAllOrigins and hasCookie:
       ctx.response.httpHeaders["Access-Control-Allow-Origin"] = origin
-
     elif not allowAllOrigins and isAllowedOrigin(origin, allowAllOrigins,
         allowOrigins, allowOriginRegex):
       ctx.response.httpHeaders["Access-Control-Allow-Origin"] = origin
