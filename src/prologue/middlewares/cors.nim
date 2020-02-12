@@ -10,9 +10,6 @@ when not defined(production):
 
 const
   AllHttpMethod = @["get", "post", "put", "patch", "options", "delete"]
-  AllHttpMethodEnum = @[HttpGet, HttpPost, HttpPut, HttpPatch, HttpOptions, HttpDelete]
-
-
 
 
 proc isAllowedOrigin(origin: string, allowAllOrigins: bool,
@@ -28,74 +25,83 @@ proc isAllowedOrigin(origin: string, allowAllOrigins: bool,
 
 
 proc CORSMiddleware*(
-  allowOrigins: seq[string] = @[],
-  allowOriginRegex: Regex = re"",
-  allowMethods: seq[string] = @["get"],
-  allowHeaders: seq[string] = @[],
-  exposeHeaders: seq[string] = @[],
+  allowOrigins: sink seq[string] = @[],
+  allowOriginRegex: sink Regex = re"",
+  allowMethods: sink seq[string] = @["get"],
+  allowHeaders: sink seq[string] = @[],
+  exposeHeaders: sink seq[string] = @[],
   allowCredentials = false,
   maxAge = 7200,
   ): HandlerAsync =
 
   result = proc(ctx: Context) {.async.} =
     var
-      reqHeaders = ctx.request.headers
+      reqHeaders = ctx.request.headers # request headers
 
     let
       origin = reqHeaders.getOrDefault("origin")
+      hasCookie = reqHeaders.hasKey("cookie")
 
-    ## don't have origin
-    ## simple headers
-    ## preflight headers
-
+    # don't have origin, switch
     if origin == "":
       await switch(ctx)
       return
 
     let
-      allowAllHeaders = "*" in allowHeaders
-      allowAllOrigins = "*" in allowOrigins
+      allowAllHeaders = "*" in allowHeaders # allow all headers
+      allowAllOrigins = "*" in allowOrigins # allow all origins
 
     var
-      allowMethodsSeq: seq[string]
+      allowMethodsSeq: seq[string] # sequence of allowed methods
 
     if "*" in allowMethods:
       allowMethodsSeq = AllHttpMethod
 
-    if ctx.request.reqMethod == HttpOptions and reqHeaders.hasKey("access-control-request-method"):
+    # preflight headers
+    # This header is necessary as the preflight request is always an OPTIONS and
+    # doesn't use the same method as the actual request.
+    if ctx.request.reqMethod == HttpOptions and reqHeaders.hasKey("Access-Control-Request-Method"):
       var
         preflightHeaders = newHttpHeaders()
         errorMsg: seq[string] = @[]
 
+      let
+        accessControlRequestMethod = reqHeaders["Access-Control-Request-Method"]
+        accessControlRequestHeaders = seq[string](reqHeaders.getOrDefault("Access-Control-Request-Headers"))
+
+
       if "*" in allowOrigins:
         preflightHeaders["Access-Control-Allow-Origin"] = "*"
+
+      if allowCredentials:
+        preflightHeaders["Access-Control-Allow-Credentials"] = "true"
+
+      if exposeHeaders.len != 0:
+        preflightHeaders["Access-Control-Expose-Headers"] = exposeHeaders
+
+      if allowAllOrigins:
+        if hasCookie:
+          preflightHeaders["Access-Control-Allow-Origin"] = origin
+      elif not allowAllOrigins and isAllowedOrigin(origin, allowAllOrigins,
+          allowOrigins, allowOriginRegex):
+        preflightHeaders["Access-Control-Allow-Origin"] = origin
+        preflightHeaders.add("vary", "Origin")
       else:
-        preflightHeaders["Vary"] = "Origin"
+        errorMsg.add "origin"
 
       preflightHeaders["Access-Control-Allow-Methods"] = allowMethodsSeq
       preflightHeaders["Access-Control-Max-Age"] = $maxAge
 
-      if allowHeaders.len != 0 and not allowAllHeaders:
-        preflightHeaders["Access-Control-Allow-Headers"] = allowHeaders
-      if allow_credentials:
-        preflightHeaders["Access-Control-Allow-Credentials"] = "true"
-
-      if isAllowedOrigin(origin, allowAllOrigins, allowOrigins,
-          allowOriginRegex) and not allowAllOrigins:
-        preflightHeaders["Access-Control-Allow-Origin"] = origin
-      else:
-        errorMsg.add "origin"
-
-      if ctx.request.reqMethod notin AllHttpMethodEnum:
+      if accessControlRequestMethod notin allowMethodsSeq:
         errorMsg.add "method"
 
-      let accessControlAllowHeaders = seq[string](reqHeaders["Access-Control-Allow-Headers"])
-      if allowAllHeaders and accessControlAllowHeaders.len != 0:
-        preflightHeaders["Access-Control-Allow-Headers"] = accessControlAllowHeaders
-      elif accessControlAllowHeaders.len != 0:
-        for header in accessControlAllowHeaders:
+      if allowAllHeaders:
+        preflightHeaders["Access-Control-Allow-Headers"] = accessControlRequestHeaders
+      else:
+        for header in accessControlRequestHeaders:
           if header notin allowHeaders:
             errorMsg.add "headers"
+        preflightHeaders["Access-Control-Allow-Headers"] = accessControlRequestHeaders
 
       if errorMsg.len != 0:
         await ctx.request.respond(plainTextResponse("Disallowed CORS " &
@@ -105,35 +111,28 @@ proc CORSMiddleware*(
             preflightHeaders))
       return
 
-    var
-      simpleHeaders = newHttpHeaders()
+    # simple headers
+    await switch(ctx)
+
 
     if "*" in allowOrigins:
-      simpleHeaders["Access-Control-Allow-Origin"] = "*"
+      ctx.response.httpHeaders["Access-Control-Allow-Origin"] = "*"
 
     if allowCredentials:
-      simpleHeaders["Access-Control-Allow-Credentials"] = "true"
+      ctx.response.httpHeaders["Access-Control-Allow-Credentials"] = "true"
 
     if exposeHeaders.len != 0:
-      simpleHeaders["Access-Control-Expose-Headers"] = exposeHeaders
+      ctx.response.httpHeaders["Access-Control-Expose-Headers"] = exposeHeaders
 
     for httpMethod in allowMethods:
       let value = toLowerAscii(httpMethod)
       if value in AllHttpMethod:
         allowMethodsSeq.add value
 
-    for key, value in simpleHeaders:
-      reqHeaders[key] = value
-
-    let
-      hasCookie = reqHeaders.hasKey("cookie")
-
     if allowAllOrigins and hasCookie:
-      reqHeaders["Access-Control-Allow-Origin"] = origin
+      ctx.response.httpHeaders["Access-Control-Allow-Origin"] = origin
 
-    elif not allowAll_Origins and isAllowedOrigin(origin, allowAllOrigins,
+    elif not allowAllOrigins and isAllowedOrigin(origin, allowAllOrigins,
         allowOrigins, allowOriginRegex):
-      reqHeaders["Access-Control-Allow-Origin"] = origin
-      reqHeaders.add("vary", "Origin")
-
-    await switch(ctx)
+      ctx.response.httpHeaders["Access-Control-Allow-Origin"] = origin
+      ctx.response.httpHeaders.add("vary", "Origin")
