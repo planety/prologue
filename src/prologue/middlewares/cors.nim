@@ -57,6 +57,11 @@ proc CORSMiddleware*(
     if "*" in allowMethods:
       allowMethodsSeq = AllHttpMethod
 
+    for httpMethod in allowMethods:
+      let value = toLowerAscii(httpMethod)
+      if value in AllHttpMethod:
+        allowMethodsSeq.add value
+
     # preflight headers
     # This header is necessary as the preflight request is always an OPTIONS and
     # doesn't use the same method as the actual request.
@@ -114,7 +119,6 @@ proc CORSMiddleware*(
     # simple headers
     await switch(ctx)
 
-
     if "*" in allowOrigins:
       ctx.response.httpHeaders["Access-Control-Allow-Origin"] = "*"
 
@@ -123,11 +127,6 @@ proc CORSMiddleware*(
 
     if exposeHeaders.len != 0:
       ctx.response.httpHeaders["Access-Control-Expose-Headers"] = exposeHeaders
-
-    for httpMethod in allowMethods:
-      let value = toLowerAscii(httpMethod)
-      if value in AllHttpMethod:
-        allowMethodsSeq.add value
 
     if allowAllOrigins and hasCookie:
       ctx.response.httpHeaders["Access-Control-Allow-Origin"] = origin
