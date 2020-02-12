@@ -9,13 +9,13 @@ when defined(windows):
     let code = execCmd("nim c --hints:off tests/start_server.nim")
     if code != 0:
       raise newException(IOError, "can't compile tests/start_server.nim")
-  let process = startProcess("start_server")
+  let process = startProcess("tests/start_server")
 else:
   if not existsFile("start_server"):
     let code = execCmd("nim c --hints:off tests/start_server.nim")
     if code != 0:
       raise newException(IOError, "can't compile tests/start_server.nim")
-  let process = startProcess("./start_server")
+  let process = startProcess("tests/start_server")
 
 
 suite "Test Application":
