@@ -45,7 +45,7 @@ jobs:
     - uses: jiro4989/setup-nim-action@v1.0.1
       with:
         nim-version: ${{ matrix.version }}
-    # - name: Install xlsx
-    #   run: nimble install https://github.com/xflywind/xlsx -y
+    - name: Install regex
+      run: nimble install regex -y
     - name: Test command
       run: nimble test
