@@ -3,6 +3,8 @@ import strformat, os, osproc, terminal
 
 import unittest
 
+import utils
+
 
 when defined(windows):
   if not existsFile("start_server.exe"):
@@ -16,7 +18,6 @@ else:
       raise newException(IOError, "can't compile tests/start_server.nim")
 
 proc start() {.async.} =
-
   let address = "http://127.0.0.1:8080/home"
   for i in 0 .. 10:
     var client = newAsyncHttpClient()
@@ -61,6 +62,43 @@ suite "Test Application":
       response = waitFor client.get(fmt"http://{address}:{port}{route}")
     check response.code == Http200
     check (waitFor response.body) == "<h1>Home</h1>"
+
+  test "can get /hello/{name} with name = Starlight":
+    let
+      route = "/hello/Starlight!"
+      response = waitFor client.get(fmt"http://{address}:{port}{route}")
+    check response.code == Http200
+    check (waitFor response.body) == "<h1>Hello, Starlight!</h1>"
+
+  test "can get /hello/{name} with name = ":
+    let
+      route = "/hello/"
+      response = waitFor client.get(fmt"http://{address}:{port}{route}")
+    check response.code == Http200
+    check (waitFor response.body) == "<h1>Hello, Prologue!</h1>"
+
+  test "can redirect /home":
+    let
+      route = "/redirect"
+      response = waitFor client.get(fmt"http://{address}:{port}{route}")
+    check response.code == Http200
+    check (waitFor response.body) == "<h1>Home</h1>"
+
+  test "can get /login":
+    let
+      route = "/login"
+      response = waitFor client.get(fmt"http://{address}:{port}{route}")
+    check response.code == Http200
+    check (waitFor response.body) == loginPage()
+
+  test "can post /login":
+    let
+      route = "/login"
+    var data = newMultipartData()
+    data["username"] = "starlight"
+    data["password"] = "prologue"
+    check (waitFor client.postContent(fmt"http://{address}:{port}{route}",
+        multipart = data)) == "<h1>Hello, Nim</h1>"
 
   client.close()
   process.terminate()
