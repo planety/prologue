@@ -23,7 +23,6 @@ proc isAllowedOrigin(origin: string, allowAllOrigins: bool,
 
   return origin in allowOrigins
 
-
 proc CORSMiddleware*(
   allowOrigins: sink seq[string] = @[],
   allowOriginRegex: sink Regex = re"",
