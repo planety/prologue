@@ -36,10 +36,7 @@ Docs in https://starlight-prologue.readthedocs.io/en/latest/
 - [x] Template(Using Karax Native or Using Nim Filter)
 - [x] Test Client(Using httpclient)
 - [x] CORS Response
-- [ ] GZIP Response
-- [ ] Streams Response
-- [ ] Session 
-- [ ] Cookie
+- [ ] Session
 - [ ] Authentication
 - [ ] Cache
 - [ ] Openapi
