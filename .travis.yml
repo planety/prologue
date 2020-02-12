@@ -49,6 +49,6 @@ install:
   - choosenim $CHANNEL
 
 script:
-    # - nimble install -y
+    - nimble install regex -y
     - nimble test
     # - nimble test_arc
