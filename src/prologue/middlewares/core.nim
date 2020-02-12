@@ -3,7 +3,6 @@ import asyncdispatch
 import ../context, ../route
 
 
-
 proc switch*(ctx: Context) {.async.} =
   if ctx.middlewares.len == 0:
     let
