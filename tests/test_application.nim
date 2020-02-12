@@ -1,13 +1,7 @@
 import httpclient, asyncdispatch, nativesockets
-import strformat
-import os, osproc
+import strformat, os, osproc
 
-
-proc testRoute*(route, expected: string, address = "127.0.0.1", port = Port(8080)) {.async.} = 
-  var client = newAsyncHttpClient()
-  let value = await client.getContent(fmt"http://{address}:{port}{route}")
-  echo value
-  # doAssert(value == expected, fmt"Expect: {expected}, but got: {value}")
+import unittest
 
 
 when defined(windows):
@@ -17,15 +11,33 @@ else:
   if not existsFile("start_server"):
     discard execProcess("nim c --hints:off start_server.nim")
 
-let process = startProcess("start_server")
 
-# echo ^execC
-waitFor testRoute(route = "/", "<h1>Home</h1>")
-waitFor testRoute(route = "/hello", "<h1>Hello, Prologue!</h1>")
-waitFor testRoute(route = "/home", "<h1>Home</h1>")
-waitFor testRoute(route = "/home", "<h1>Home</h1>")
-process.terminate()
+suite "Test Application":
+  let 
+    process = startProcess("start_server")
+    client = newAsyncHttpClient()
+    address = "127.0.0.1"
+    port = Port(8080)
 
+  test "can get /":
+    let 
+      route = "/"
+      response = waitFor client.get(fmt"http://{address}:{port}{route}")
+    check response.code == Http200
+    check (waitFor response.body) == "<h1>Home</h1>"
+  
+  test "can get /hello":
+    let 
+      route = "/hello"
+      response = waitFor client.get(fmt"http://{address}:{port}{route}")
+    check response.code == Http200
+    check (waitFor response.body) == "<h1>Hello, Prologue!</h1>"
 
+  test "can get /home":
+    let 
+      route = "/home"
+      response = waitFor client.get(fmt"http://{address}:{port}{route}")
+    check response.code == Http200
+    check (waitFor response.body) == "<h1>Home</h1>"
 
-echo "ok"
+  process.terminate()
