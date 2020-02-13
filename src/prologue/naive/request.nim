@@ -92,8 +92,8 @@ proc hostName*(request: Request): string {.inline.} =
     result = headers["x-forwarded-for", 0]
 
 proc send*(request: Request, content: string) {.inline.} =
-  # TODO reduce asyncCheck
-  asyncCheck request.nativeRequest.client.send(content)
+  # TODO can't use asyncCheck
+  waitFor request.nativeRequest.client.send(content)
 
 proc respond*(request: Request; status: HttpCode; body: string;
   headers: HttpHeaders = newHttpHeaders()): Future[void] {.inline.} =
