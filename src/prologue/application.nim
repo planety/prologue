@@ -30,28 +30,29 @@ export utils
 
 
 proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
-    httpMethod = HttpGet, middlewares: seq[HandlerAsync] = @[]) {.inline.} =
+    httpMethod = HttpGet, middlewares: seq[HandlerAsync] = @[],
+        excludeMiddlewares: seq[HandlerAsync] = @[]) {.inline.} =
   ## add single handler route
   ## don't check whether regex routes are duplicated
   let path = initRePath(route = route, httpMethod = httpMethod)
-  app.reRouter.callable.add (path, newPathHandler(handler, middlewares))
+  app.reRouter.callable.add (path, newPathHandler(handler, middlewares, excludeMiddlewares))
 
 proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
-    httpMethod = HttpGet, middlewares: seq[HandlerAsync] = @[]) {.inline.} =
+    httpMethod = HttpGet, middlewares: seq[HandlerAsync] = @[], excludeMiddlewares: seq[HandlerAsync] = @[]) {.inline.} =
   ## add single handler route
   ## check whether routes are duplicated
   let path = initPath(route = route, httpMethod = httpMethod)
 
   if path in app.router.callable:
     raise newException(DuplicatedRouteError, fmt"Route {route} is duplicated!")
-  app.router.callable[path] = newPathHandler(handler, middlewares)
+  app.router.callable[path] = newPathHandler(handler, middlewares, excludeMiddlewares)
 
 proc addRoute*(app: Prologue, patterns: seq[UrlPattern],
     baseRoute = "") =
   ## add multi handler route
   for pattern in patterns:
     app.addRoute(baseRoute & pattern.route, pattern.matcher, pattern.httpMethod,
-        pattern.middlewares)
+        pattern.middlewares, pattern.excludeMiddlewares)
 
 macro resp*(params: string, status = Http200) =
   ## handy to make ctx's response

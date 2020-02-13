@@ -8,10 +8,6 @@ when not defined(production):
   import ../naiverequest
 
 
-proc doNothingClosureMiddleware*(): HandlerAsync =
-  result = proc(ctx: Context) {.async.} =
-    await switch(ctx)
-
 proc loggingMiddleware*(appName = "Starlight"): HandlerAsync =
   result = proc(ctx: Context) {.async.} =
     logging.info "logging->begin"

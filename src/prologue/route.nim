@@ -14,7 +14,6 @@ type
   RouteResetError* = object of RouteError
   DuplicatedRouteError* = object of RouteError
 
-
   WebAction* = enum
     Http, Websocket
 
@@ -24,6 +23,7 @@ type
     httpMethod: HttpMethod
     webAction: WebAction
     middlewares: seq[HandlerAsync]
+    excludeMiddlewares: seq[HandlerAsync]
 
 
 proc initPath*(route: string, httpMethod = HttpGet): Path =
@@ -33,8 +33,8 @@ proc initRePath*(route: Regex, httpMethod = HttpGet): RePath =
   RePath(route: route, httpMethod: httpMethod)
 
 proc pattern*(route: string, handler: HandlerAsync, httpMethod = HttpGet,
-    webAction: WebAction = Http, middlewares: seq[HandlerAsync] = @[]): UrlPattern =
-  (route, handler, httpMethod, webAction, middlewares)
+    webAction: WebAction = Http, middlewares: seq[HandlerAsync] = @[], excludeMiddlewares: seq[HandlerAsync] = @[]): UrlPattern =
+  (route, handler, httpMethod, webAction, middlewares, excludeMiddlewares)
 
 proc hash*(x: Path): Hash =
   var h: Hash = 0
@@ -42,8 +42,10 @@ proc hash*(x: Path): Hash =
   h = h !& hash(x.httpMethod)
   result = !$h
 
-proc newPathHandler*(handler: HandlerAsync, middlewares: seq[HandlerAsync] = @[]): PathHandler =
-  PathHandler(handler: handler, middlewares: middlewares)
+proc newPathHandler*(handler: HandlerAsync, middlewares: seq[HandlerAsync] = @[],
+    excludeMiddlewares: seq[HandlerAsync] = @[]): PathHandler =
+  PathHandler(handler: handler, middlewares: middlewares,
+      excludeMiddlewares: excludeMiddlewares)
 
 proc newRouter*(): Router =
   Router(callable: initTable[Path, PathHandler]())
@@ -91,7 +93,7 @@ proc findHandler*(ctx: Context): PathHandler =
             raise newException(RouteError, "{} shouldn't be empty!")
           let
             params = key[1 ..< ^1]
-           
+
           ctx.request.pathParams[params] = decodeUrl(pathList[idx])
         else:
           flag = false

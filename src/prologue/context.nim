@@ -14,6 +14,7 @@ type
   PathHandler* = ref object
     handler*: HandlerAsync
     middlewares*: seq[HandlerAsync]
+    excludeMiddlewares*: seq[HandlerAsync]
 
   Path* = object
     route*: string
