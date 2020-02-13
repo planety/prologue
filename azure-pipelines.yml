@@ -1,47 +1,52 @@
 strategy:
   maxParallel: 10
   matrix:
-    # Nim requires enforcing ARCH="x86" and ucpu
-    # for 32-bit targets as it seems like Azure machines are 64-bit
     # Windows_devel_32bit:
     #   VM: 'windows-latest'
     #   ARCH: x86
-    #   ucpu: i686
+    #   UCPU: i686
     #   PLATFORM: x86
     #   CHANNEL: devel
-    #   WEAVE_TEST_LANG: c
-    # Windows_devel_64bit:
-    #   VM: 'windows-latest'
-    #   PLATFORM: x64
-    #   CHANNEL: devel
-    #   WEAVE_TEST_LANG: c
-    # Windows_cpp_devel_64bit:
-    #   VM: 'windows-latest'
-    #   PLATFORM: x64
-    #   CHANNEL: devel
-    #   WEAVE_TEST_LANG: cpp
-    # Linux_devel_64bit:
-    #   VM: 'ubuntu-latest'
-    #   PLATFORM: x64
-    #   CHANNEL: devel
-    #   WEAVE_TEST_LANG: c
-    # Linux_cpp_devel_64bit:
-    #   VM: 'ubuntu-latest'
-    #   PLATFORM: x64
-    #   CHANNEL: devel
-    #   WEAVE_TEST_LANG: cpp
-    # Linux_devel_32bit:
-    #   VM: 'ubuntu-latest'
-    #   PLATFORM: x86
-    #   ucpu: i686
-    #   CHANNEL: devel
-    #   WEAVE_TEST_LANG: c
-    MacOS_devel_64bit:
-      VM: 'macOS-latest'
+    #   TEST_LANG: c
+    Windows_devel_64bit:
+      VM: 'windows-latest'
+      UCPU: amd64
       PLATFORM: x64
       CHANNEL: devel
-      WEAVE_TEST_LANG: c
+      TEST_LANG: c
+    Windows_cpp_devel_64bit:
+      VM: 'windows-latest'
+      UCPU: amd64
+      PLATFORM: x64
+      CHANNEL: devel
+      TEST_LANG: cpp
+    Linux_devel_64bit:
+      VM: 'ubuntu-16.04'
+      UCPU: amd64
+      PLATFORM: x64
+      CHANNEL: devel
+      TEST_LANG: c
+    Linux_cpp_devel_64bit:
+      VM: 'ubuntu-16.04'
+      UCPU: amd64
+      PLATFORM: x64
+      CHANNEL: devel
+      WEAVE_TEST_LANG: cpp
 
+    # Linux_devel_32bit:
+    #   VM: 'ubuntu-16.04'
+    #   ARCH: x86
+    #   PLATFORM: x86
+    #   UCPU: i686
+    #   CHANNEL: devel
+    #   TEST_LANG: c
+
+    MacOS_devel_64bit:
+      VM: 'macOS-10.14'
+      UCPU: amd64
+      PLATFORM: x64
+      CHANNEL: devel
+      TEST_LANG: c
 pool:
   vmImage: $(VM)
 
@@ -109,6 +114,8 @@ steps:
     displayName: 'Detecting number of cores'
   - bash: |
       echo "PATH=${PATH}"
+      gcc -v
+      echo "UCPU=${UCPU}"
       if [ "${CHANNEL}" = stable ]; then
         BRANCH="v$(curl https://nim-lang.org/channels/stable)"
       else
@@ -121,7 +128,7 @@ steps:
         pushd "nim-${CHANNEL}"
         git clone --depth 1 https://github.com/nim-lang/csources csources/
         pushd csources
-        make -j $ncpu CC=gcc
+        make -j $ncpu ucpu=${UCPU} CC=gcc
         popd
         rm -rf csources
         bin/nim c koch
@@ -130,7 +137,7 @@ steps:
       else
         pushd "nim-${CHANNEL}"
         git fetch origin "${BRANCH}"
-        if [ git merge FETCH_HEAD | grep -c "Already up to date." -ne 1 ]; then
+        if [[ $(git merge FETCH_HEAD | grep -c "Already up to date.") -ne 1 ]]; then
           bin/nim c koch
           ./koch boot -d:release
           ./koch tools
@@ -138,37 +145,15 @@ steps:
       fi
       popd # exit nim-CHANNEL
       popd # exit NimBinaries
-    displayName: 'Building Nim'
-  # Nimble uses findExe which is broken under bash windows
-  # We need to set PATH in the collector for the next tast
-  # and also update it within this task with export
-  # - bash: |
-  #     brew update
-  #     # brew install libzip
-  #   displayName: 'install libzip.dynlib (MacOS)'
-    condition: eq(variables['Agent.OS'], 'Darwin')
-  - bash: |
       echo "##vso[task.prependpath]$PWD/NimBinaries/nim-${CHANNEL}/bin"
-    displayName: 'Set env variable (Posix)'
-    condition: ne(variables['Agent.OS'], 'Windows_NT')
+    displayName: 'Building Nim'
   - bash: |
       echo "PATH=${PATH}"
       nimble refresh
-      nimble install regex -y
-      # nimble install zip
-    displayName: 'Building the package dependencies (Posix)'
-    condition: ne(variables['Agent.OS'], 'Windows_NT')
-  - powershell: |
-      echo "##vso[task.prependpath]$pwd\NimBinaries\nim-$(CHANNEL)\bin"
-    displayName: 'Set env variable (Windows)'
-    condition: eq(variables['Agent.OS'], 'Windows_NT')
-  - powershell: |
-      echo $Env:Path
-      nimble refresh
-      nimble install regex -y
-    displayName: 'Building the package dependencies (Windows)'
-    condition: eq(variables['Agent.OS'], 'Windows_NT')
+      nimble install regex
+    displayName: 'Building the package dependencies'
   - bash: |
       echo "PATH=${PATH}"
+      export ucpu=${UCPU}
       nimble test
     displayName: 'Testing the package'
