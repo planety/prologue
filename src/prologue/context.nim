@@ -47,8 +47,8 @@ proc newContext*(request: Request, response: Response,
   Context(request: request, response: response, router: router,
       reRouter: reRouter, size: 0, first: true)
 
-proc handle*(ctx: Context) {.async, inline.} =
-  await ctx.request.respond(ctx.response)
+proc handle*(ctx: Context): Future[void] {.inline.} =
+  result = ctx.request.respond(ctx.response)
 
 proc defaultHandler*(ctx: Context) {.async.} =
   let response = error404(body = errorPage("404 Not Found!", PrologueVersion))

@@ -1,5 +1,6 @@
 import prologue, logging
 
+{.warnings: off.}
 
 proc hello*(ctx: Context) {.async.} =
   logging.debug "hello"
