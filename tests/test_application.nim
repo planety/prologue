@@ -8,7 +8,7 @@ import utils
 
 when defined(windows):
   if not existsFile("start_server.exe"):
-    let code = execCmd("nim c --hints:off tests/start_server.nim")
+    let code = execCmd("nim c --hints:off --verbosity=0 tests/start_server.nim")
     if code != 0:
       raise newException(IOError, "can't compile tests/start_server.nim")
 else:

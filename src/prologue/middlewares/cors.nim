@@ -6,7 +6,7 @@ import ../context, ../response, core
 import regex
 
 when not defined(production):
-  import ../naiverequest
+  import ../naive/request
 
 const
   AllHttpMethod = @["get", "post", "put", "patch", "options", "delete"]

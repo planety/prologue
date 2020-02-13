@@ -5,7 +5,7 @@ import ../context, core
 
 
 when not defined(production):
-  import ../naiverequest
+  import ../naive/request
 
 
 proc loggingMiddleware*(appName = "Starlight"): HandlerAsync =
