@@ -3,7 +3,8 @@
 ![Build Status](https://travis-ci.org/planety/prologue.svg?branch=master)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-![Stability: experimental](https://img.shields.io/badge/stability-experimental-orange.svg)
+[![Version](https://img.shields.io/github/v/release/planety/prologue?include_prereleases)](https://github.com/planety/prologue/releases)
+
 
 # Prologue[![nimble](https://raw.githubusercontent.com/yglukhov/nimble-tag/master/nimble.png)](https://github.com/yglukhov/nimble-tag)
 What's past is prologue.
