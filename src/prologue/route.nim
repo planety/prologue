@@ -20,7 +20,7 @@ type
   UrlPattern* = tuple
     route: string
     matcher: HandlerAsync
-    httpMethod: HttpMethod
+    httpMethod: seq[HttpMethod]
     webAction: WebAction
     middlewares: seq[HandlerAsync]
     excludeMiddlewares: seq[HandlerAsync]
@@ -33,6 +33,11 @@ proc initRePath*(route: Regex, httpMethod = HttpGet): RePath =
   RePath(route: route, httpMethod: httpMethod)
 
 proc pattern*(route: string, handler: HandlerAsync, httpMethod = HttpGet,
+    webAction: WebAction = Http, middlewares: seq[HandlerAsync] = @[], excludeMiddlewares: seq[HandlerAsync] = @[]): UrlPattern =
+  (route, handler, @[httpMethod], webAction, middlewares, excludeMiddlewares)
+
+
+proc pattern*(route: string, handler: HandlerAsync, httpMethod: seq[HttpMethod],
     webAction: WebAction = Http, middlewares: seq[HandlerAsync] = @[], excludeMiddlewares: seq[HandlerAsync] = @[]): UrlPattern =
   (route, handler, httpMethod, webAction, middlewares, excludeMiddlewares)
 

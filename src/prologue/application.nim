@@ -35,10 +35,20 @@ proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
   ## add single handler route
   ## don't check whether regex routes are duplicated
   let path = initRePath(route = route, httpMethod = httpMethod)
-  app.reRouter.callable.add (path, newPathHandler(handler, middlewares, excludeMiddlewares))
+  app.reRouter.callable.add (path, newPathHandler(handler, middlewares,
+      excludeMiddlewares))
+
+proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
+    httpMethod: seq[HttpMethod], middlewares: seq[HandlerAsync] = @[],
+        excludeMiddlewares: seq[HandlerAsync] = @[]) {.inline.} =
+  ## add single handler route with multi http method
+  ## don't check whether regex routes are duplicated
+  for m in httpMethod:
+    app.addRoute(route, handler, m, middlewares, excludeMiddlewares)
 
 proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
-    httpMethod = HttpGet, middlewares: seq[HandlerAsync] = @[], excludeMiddlewares: seq[HandlerAsync] = @[]) {.inline.} =
+    httpMethod = HttpGet, middlewares: seq[HandlerAsync] = @[],
+        excludeMiddlewares: seq[HandlerAsync] = @[]) {.inline.} =
   ## add single handler route
   ## check whether routes are duplicated
   let path = initPath(route = route, httpMethod = httpMethod)
@@ -47,8 +57,16 @@ proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
     raise newException(DuplicatedRouteError, fmt"Route {route} is duplicated!")
   app.router.callable[path] = newPathHandler(handler, middlewares, excludeMiddlewares)
 
+proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
+    httpMethod: seq[HttpMethod], middlewares: seq[HandlerAsync] = @[],
+        excludeMiddlewares: seq[HandlerAsync] = @[]) {.inline.} =
+  ## add single handler route with multi http method
+  ## check whether routes are duplicated
+  for m in httpMethod:
+    app.addRoute(route, handler, m, middlewares, excludeMiddlewares)
+
 proc addRoute*(app: Prologue, patterns: seq[UrlPattern],
-    baseRoute = "") =
+    baseRoute = "") {.inline.} =
   ## add multi handler route
   for pattern in patterns:
     app.addRoute(baseRoute & pattern.route, pattern.matcher, pattern.httpMethod,
