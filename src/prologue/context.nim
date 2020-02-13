@@ -155,6 +155,6 @@ proc staticFileResponse*(ctx: Context, fileName, root: string, mimetype = "",
     while true:
       let (hasValue, value) = await fileStream.read()
       if hasValue:
-        await ctx.request.send(value)
+        ctx.request.send(value)
       else:
         break

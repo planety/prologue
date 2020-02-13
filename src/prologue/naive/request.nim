@@ -91,15 +91,16 @@ proc hostName*(request: Request): string {.inline.} =
   if headers.hasKey("x-forwarded-for"):
     result = headers["x-forwarded-for", 0]
 
-proc send*(request: Request, content: string): Future[void] {.inline.} =
-  result = request.nativeRequest.client.send(content)
+proc send*(request: Request, content: string) {.inline.} =
+  # TODO reduce asyncCheck
+  asyncCheck request.nativeRequest.client.send(content)
 
 proc respond*(request: Request; status: HttpCode; body: string;
   headers: HttpHeaders = newHttpHeaders()): Future[void] {.inline.} =
   result = request.nativeRequest.respond(status, body, headers)
 
 proc respond*(request: Request; response: Response): Future[void] {.inline.} =
-  result = request.nativeRequest.respond(response.status, response.body,
+  result = request.respond(response.status, response.body,
       response.httpHeaders)
 
 proc initRequest*(nativeRequest: NativeRequest; cookies = newStringTable();
