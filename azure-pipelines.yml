@@ -8,18 +8,18 @@ strategy:
     #   PLATFORM: x86
     #   CHANNEL: devel
     #   TEST_LANG: c
-    Windows_devel_64bit:
-      VM: 'windows-latest'
-      UCPU: amd64
-      PLATFORM: x64
-      CHANNEL: devel
-      TEST_LANG: c
-    Windows_cpp_devel_64bit:
-      VM: 'windows-latest'
-      UCPU: amd64
-      PLATFORM: x64
-      CHANNEL: devel
-      TEST_LANG: cpp
+    # Windows_devel_64bit:
+    #   VM: 'windows-latest'
+    #   UCPU: amd64
+    #   PLATFORM: x64
+    #   CHANNEL: devel
+    #   TEST_LANG: c
+    # Windows_cpp_devel_64bit:
+    #   VM: 'windows-latest'
+    #   UCPU: amd64
+    #   PLATFORM: x64
+    #   CHANNEL: devel
+    #   TEST_LANG: cpp
     Linux_devel_64bit:
       VM: 'ubuntu-16.04'
       UCPU: amd64
