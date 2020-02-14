@@ -12,6 +12,7 @@ srcDir        = "src"
 
 requires "nim >= 1.0.0"
 requires "regex >= 0.13.0"
+requires "nimcrypto >= 0.4.9"
 
 # # examples
 # task helloworld, "helloworld":
