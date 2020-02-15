@@ -38,6 +38,7 @@ Docs in https://starlight-prologue.readthedocs.io/en/latest/
 - [x] Test Client(Using httpclient)
 - [x] CORS Response
 - [x] Signing
+- [x] Cookie
 - [ ] Session
 - [ ] Authentication
 - [ ] Cache
