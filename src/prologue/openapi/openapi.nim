@@ -1,6 +1,6 @@
 import os, json
 
-import ../naive/server, ../constants
+import ../naive/server, ../core/constants
 
 export json
 

@@ -1,7 +1,7 @@
 import httpcore
 import times, json, strformat
 
-import core/cookies
+import cookies
 
 type
   Response* = object

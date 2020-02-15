@@ -6,7 +6,7 @@ import context
 import regex
 
 when not defined(production):
-  import naive/request
+  import ../naive/request
 
 type
   PrologueError* = object of Exception

@@ -1,9 +1,9 @@
 import asyncdispatch, asynchttpserver, asyncnet, uri
 import strutils, strtabs, uri
 
-import ../nativesettings
-import ../base
-import ../response
+import ../core/nativesettings
+import ../core/base
+import ../core/response
 
 
 type

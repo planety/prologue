@@ -5,6 +5,7 @@ import base
 import nimcrypto
 export randomBytes
 
+import ../core/types
 
 type
   BaseDigestType = sha1 | sha2 | keccak | ripemd | blake2
@@ -22,14 +23,14 @@ type
     Concat, MoreConcat, KeyHmac, None
 
   Signer* = object
-    secretKey: string
+    secretKey: SecretKey
     salt: string
     sep: char
     keyDerivation: KeyDerivation
     digestMethod: BaseDigestMethodType
 
   TimedSigner* = object
-    secretKey: string
+    secretKey: SecretKey
     salt: string
     sep: char
     keyDerivation: KeyDerivation
@@ -45,7 +46,7 @@ const
 
 # TODO base64 should use urlSafeEndoe
 
-proc initSigner*(secretKey: string, salt = defaultSalt, sep = defaultSep,
+proc initSigner*(secretKey: SecretKey, salt = defaultSalt, sep = defaultSep,
     keyDerivation = DefaultKeyDerivation,
         digestMethod = DefaultDigestMethodType): Signer =
 
@@ -57,7 +58,8 @@ proc initSigner*(secretKey: string, salt = defaultSalt, sep = defaultSep,
   Signer(secretKey: secretKey, salt: salt, sep: sep,
       keyDerivation: keyDerivation, digestMethod: digestMethod)
 
-proc initTimedSigner*(secretKey: string, salt = defaultSalt, sep = defaultSep,
+proc initTimedSigner*(secretKey: SecretKey, salt = defaultSalt,
+    sep = defaultSep,
 keyDerivation = DefaultKeyDerivation, digestMethod = DefaultDigestMethodType): TimedSigner =
 
   if sep in base64Alphabet:
@@ -70,41 +72,42 @@ keyDerivation = DefaultKeyDerivation, digestMethod = DefaultDigestMethodType): T
 
 proc getKeyDerivationEncode[T: BaseDigestType](s: Signer | TimedSigner,
     digestMethodType: typedesc[T], value: openArray[byte]): string =
+  let secretKey = string(s.secretKey)
   case s.keyDerivation
   of Concat:
-    let key = digestMethodType.digest(s.salt & s.secretKey)
+    let key = digestMethodType.digest(s.salt & secretKey)
     result = digestMethodType.hmac(key.data, value).data.encode.strip(
         leading = false, chars = {'='})
   of MoreConcat:
-    let key = digestMethodType.digest(s.salt & "signer" & s.secretKey)
+    let key = digestMethodType.digest(s.salt & "signer" & secretKey)
     result = digestMethodType.hmac(key.data, value).data.encode.strip(
         leading = false, chars = {'='})
   of KeyHmac:
     var hctx: Hmac[digestMethodType]
-    hctx.init(s.secretKey)
+    hctx.init(secretKey)
     hctx.update(s.salt)
     let key = finish(hctx)
     result = digestMethodType.hmac(key.data, value).data.encode.strip(
         leading = false, chars = {'='})
   of None:
-    let key = s.secretKey
-    result = digestMethodType.hmac(key, value).data.encode.strip(
+    result = digestMethodType.hmac(secretKey, value).data.encode.strip(
         leading = false, chars = {'='})
 
 proc getKeyDerivationDecode[T: BaseDigestType](s: Signer | TimedSigner,
     digestMethodType: typedesc[T]): string =
+  let secretKey = string(s.secretKey)
   case s.keyDerivation
   of Concat:
-    result = $digestMethodType.digest(s.salt & s.secretKey)
+    result = $digestMethodType.digest(s.salt & secretKey)
   of MoreConcat:
-    result = $digestMethodType.digest(s.salt & "signer" & s.secretKey)
+    result = $digestMethodType.digest(s.salt & "signer" & secretKey)
   of KeyHmac:
     var hctx: Hmac[digestMethodType]
-    hctx.init(s.secretKey)
+    hctx.init(secretKey)
     hctx.update(s.salt)
     result = $finish(hctx)
   of None:
-    result = s.secretKey
+    result = secretKey
 
 proc getSignatureEncode*(s: Signer | TimedSigner, value: openArray[
     byte]): string =
@@ -276,7 +279,8 @@ when isMainModule:
 
   block:
     let
-      s = initSigner("secret-key", salt = "itsdangerous.Signer")
+      key = SecretKey("secret-key")
+      s = initSigner(key, salt = "itsdangerous.Signer")
       sig = s.sign("my string")
     assert sig == "my string.wh6tMHxLgJqB6oY1uT73iMlyrOA"
     assert s.unsign(sig) == "my string"
@@ -284,7 +288,8 @@ when isMainModule:
 
   block:
     let
-      s = initTimedSigner("secret-key", salt = "activate",
+      key = SecretKey("secret-key")
+      s = initTimedSigner(key, salt = "activate",
           digestMethod = Sha1Type)
       sig = s.sign("my string")
     sleep(6000)

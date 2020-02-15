@@ -1,3 +1,3 @@
-import prologue / application
+import prologue / core / application
 
 export application

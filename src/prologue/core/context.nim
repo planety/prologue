@@ -7,7 +7,7 @@ import regex
 
 
 when not defined(production):
-  import naive/request
+  import ../naive/request
 
 
 type

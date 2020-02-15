@@ -4,13 +4,14 @@ import tables, strutils, strformat, macros, logging, strtabs, os
 import response, context, pages, route,
     nativesettings, base, configure, utils
 
-import middlewares/middlewares, openapi/openapi, signing/signer, core/cookies
+import ../middlewares/middlewares, ../openapi/openapi, ../signing/signer
+import cookies, types
 
 import regex
 
 
 when not defined(production):
-  import naive / [request, server]
+  import ../ naive / [request, server]
   export request, server
 
 export httpcore

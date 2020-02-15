@@ -3,8 +3,8 @@ import asynchttpserver except Request
 import strutils
 
 import request
-import ../nativesettings
-import ../context
+import ../core/nativesettings
+import ../core/context
 
 
 type
