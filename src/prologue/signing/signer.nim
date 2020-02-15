@@ -45,6 +45,15 @@ const
   DefaultDigestMethodType = Sha1Type
 
 
+proc randomString*(size: int): string =
+  result = newString(size)
+  discard randomBytes(result)
+
+proc randomSecretKey*(size: int): SecretKey =
+  var buffer = newString(size)
+  discard randomBytes(buffer)
+  result = SecretKey(buffer)
+
 # TODO base64 should use urlSafeEndoe
 proc initSigner*(secretKey: SecretKey, salt = defaultSalt, sep = defaultSep,
     keyDerivation = DefaultKeyDerivation,
