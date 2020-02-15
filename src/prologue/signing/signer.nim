@@ -1,10 +1,11 @@
 import strutils, tables, strformat, times
 
-import base
+import signingbase
 
 import nimcrypto
 
-import ../core/types
+from ../core/types import SecretKey
+
 
 type
   BaseDigestType = sha1 | sha2 | keccak | ripemd | blake2
@@ -290,6 +291,7 @@ when isMainModule:
       key = SecretKey("secret-key")
       s = initSigner(key, salt = "itsdangerous.Signer")
       sig = s.sign("my string")
+    echo sig
     assert sig == "my string.wh6tMHxLgJqB6oY1uT73iMlyrOA"
     assert s.unsign(sig) == "my string"
     assert validate(s, sig)

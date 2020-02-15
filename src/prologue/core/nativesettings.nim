@@ -1,7 +1,7 @@
 import mimetypes
 from nativeSockets import Port
 
-import types
+from types import SecretKey
 
 
 type

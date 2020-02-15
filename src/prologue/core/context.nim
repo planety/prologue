@@ -1,7 +1,8 @@
 import httpcore, asyncdispatch, asyncfile, mimetypes, md5
 import strtabs, macros, tables, strformat, os
 
-import response, pages, constants, types
+import response, pages, constants
+from types import BaseType, Session
 
 import regex
 
@@ -38,6 +39,7 @@ type
     size*: int
     first*: bool
     middlewares*: seq[HandlerAsync]
+    session: Session
 
   HandlerAsync* = proc(ctx: Context): Future[void] {.closure, gcsafe.}
 

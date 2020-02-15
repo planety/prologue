@@ -1,8 +1,6 @@
 import strtabs, parseutils, times
 
-type
-  SameSite* = enum
-    None, Lax, Strict
+from types import SameSite
 
 
 proc parseCookies*(s: string): StringTableRef =

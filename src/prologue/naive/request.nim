@@ -2,7 +2,7 @@ import asyncdispatch, asynchttpserver, asyncnet, uri
 import strutils, strtabs, uri
 
 import ../core/nativesettings
-import ../core/base
+import ../core/corebase
 import ../core/response
 
 

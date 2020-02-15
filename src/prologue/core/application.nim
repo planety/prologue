@@ -2,10 +2,11 @@ import asyncdispatch, uri, cgi, httpcore
 import tables, strutils, strformat, macros, logging, strtabs, os
 
 import response, context, pages, route,
-    nativesettings, base, configure, utils
+    nativesettings, corebase, configure, utils
 
 import ../middlewares/middlewares, ../openapi/openapi, ../signing/signer
-import cookies, types
+from cookies import parseCookies
+from types import SameSite
 
 import regex
 
@@ -24,7 +25,7 @@ export context
 export pattern
 export nativesettings
 export configure
-export base
+export corebase
 export openapi
 export regex
 export utils

@@ -1,7 +1,8 @@
 import httpcore
 import times, json, strformat
 
-import cookies
+from cookies import setCookie
+from types import SameSite
 
 type
   Response* = object
