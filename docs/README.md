@@ -2,16 +2,51 @@
 [![Build Status](https://dev.azure.com/xzsflywind/xlsx/_apis/build/status/planety.prologue?branchName=master)](https://dev.azure.com/xzsflywind/xlsx/_build/latest?definitionId=4&branchName=master)
 ![Build Status](https://travis-ci.org/planety/prologue.svg?branch=master)
 
-# Prologue
+[![License: BSD-3-Clause](https://img.shields.io/github/license/planety/prologue)](https://opensource.org/licenses/BSD-3-Clause)
+[![Version](https://img.shields.io/github/v/release/planety/prologue?include_prereleases)](https://github.com/planety/prologue/releases)
+
+
+# Prologue[![nimble](https://raw.githubusercontent.com/yglukhov/nimble-tag/master/nimble.png)](https://github.com/yglukhov/nimble-tag)
 What's past is prologue.
 
 ### Purpose
-It tends to be Micro Web Framework and will be one part of our Full-Stack Web Framework, namely `Starlight`.
+It tends to be Medium scale Web Framework(May be Full-Stack without models or Orm)
 
 You can see our task assignment as below or join us.
 
 https://github.com/planety/BluePrint/blob/master/task.md
 
+
+### Docs [Not yet]
+
+Docs in https://starlight-prologue.readthedocs.io/en/latest/
+
+
+### Feature
+
+
+- [ ] High Performance Http 1.1/2.0 Server
+- [ ] High Performance Websocket Server
+- [ ] Http 2.0 Client
+- [ ] Reloader
+- [x] Configure and Settings
+- [x] Context
+- [x] Static Files
+- [x] Middlewares
+- [x] Simple Route
+- [x] Template(Using Karax Native or Using Nim Filter)
+- [x] Test Client(Using httpclient)
+- [x] CORS Response
+- [ ] Session
+- [ ] Authentication
+- [ ] Cache
+- [ ] Openapi
+
+### Installation
+
+```bash
+nimble install prologue
+```
 
 ### Usage
 
@@ -22,8 +57,8 @@ proc hello*(ctx: Context) {.async.} =
   resp "<h1>Hello, Prologue!</h1>"
 
 
-let settings = initSettings(appName = "StarLight")
-var app = initApp(settings = settings)
+let settings = newSettings(appName = "StarLight", debug = true)
+var app = initApp(settings = settings, middlewares = @[stripPathMiddleware()])
 app.addRoute("/", hello, HttpGet)
 app.addRoute("/hello", hello, HttpGet)
 app.run()
@@ -54,7 +89,7 @@ proc do_login*(ctx: Context) {.async.} =
   resp redirect("/hello/Nim")
 
 
-let settings = initSettings(appName = "StarLight")
+let settings = newSettings(appName = "StarLight")
 var app = initApp(settings = settings, middlewares = @[debugRequestMiddleware])
 app.addRoute("/", home, HttpGet)
 app.addRoute("/", home, HttpPost)
@@ -161,6 +196,7 @@ app.addRoute("/hello", hello, HttpGet)
 app.addRoute("/redirect", testRedirect, HttpGet)
 app.addRoute("/login", login, HttpGet)
 app.addRoute("/login", do_login, HttpPost)
+# will match /hello/Nim and /hello/
 app.addRoute("/hello/{name}", helloName, HttpGet)
 app.addRoute("/multipart", multiPart, HttpGet)
 app.addRoute("/multipart", do_multiPart, HttpPost)
