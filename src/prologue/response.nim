@@ -19,23 +19,22 @@ proc initResponse*(httpVersion: HttpVersion, status: HttpCode, httpHeaders =
         body = ""): Response =
   Response(httpVersion: httpVersion, status: status, httpHeaders: httpHeaders, body: body)
 
-proc setHeader*(response: var Response; key, value: string) =
+proc setHeader*(response: var Response; key, value: string) {.inline.} =
   response.httpHeaders[key] = value
 
-proc addHeader*(response: var Response; key, value: string) =
+proc addHeader*(response: var Response; key, value: string) {.inline.} =
   response.httpHeaders.add(key, value)
 
 proc setCookie*(response: var Response; key, value: string, expires = "",
     domain = "", path = "", secure = false, httpOnly = false, sameSite = Lax) {.inline.} =
   let cookies = setCookie(key, value, expires, domain, path, secure, httpOnly, sameSite)
-  response.httpHeaders.add("Set-Cookie", cookies)
+  response.addHeader("Set-Cookie", cookies)
 
 proc setCookie*(response: var Response; key, value: string,
-    expires: DateTime|Time, domain = "",
-
-path = "", secure = false, httpOnly = false, sameSite = Lax) {.inline.} =
+    expires: DateTime|Time, domain = "", path = "", secure = false,
+        httpOnly = false, sameSite = Lax) {.inline.} =
   let cookies = setCookie(key, value, expires, domain, path, secure, httpOnly, sameSite)
-  response.httpHeaders.add("Set-Cookie", cookies)
+  response.addHeader("Set-Cookie", cookies)
 
 proc abort*(status = Http401, body = "", headers = newHttpHeaders(),
     version = HttpVer11): Response {.inline.} =
