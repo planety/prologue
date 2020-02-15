@@ -1,9 +1,8 @@
-import strutils, base64, tables, strformat, times
+import strutils, tables, strformat, times
 
 import base
 
 import nimcrypto
-export randomBytes
 
 import ../core/types
 
@@ -85,22 +84,22 @@ proc getKeyDerivationEncode[T: BaseDigestType](s: Signer | TimedSigner,
   case s.keyDerivation
   of Concat:
     let key = digestMethodType.digest(s.salt & secretKey)
-    result = digestMethodType.hmac(key.data, value).data.encode.strip(
-        leading = false, chars = {'='})
+    result = digestMethodType.hmac(key.data,
+        value).data.urlsafeBase64Encode.strip(leading = false, chars = {'='})
   of MoreConcat:
     let key = digestMethodType.digest(s.salt & "signer" & secretKey)
-    result = digestMethodType.hmac(key.data, value).data.encode.strip(
-        leading = false, chars = {'='})
+    result = digestMethodType.hmac(key.data,
+        value).data.urlsafeBase64Encode.strip(leading = false, chars = {'='})
   of KeyHmac:
     var hctx: Hmac[digestMethodType]
     hctx.init(secretKey)
     hctx.update(s.salt)
     let key = finish(hctx)
-    result = digestMethodType.hmac(key.data, value).data.encode.strip(
-        leading = false, chars = {'='})
+    result = digestMethodType.hmac(key.data,
+        value).data.urlsafeBase64Encode.strip(leading = false, chars = {'='})
   of None:
-    result = digestMethodType.hmac(secretKey, value).data.encode.strip(
-        leading = false, chars = {'='})
+    result = digestMethodType.hmac(secretKey,
+        value).data.urlsafeBase64Encode.strip(leading = false, chars = {'='})
 
 proc getKeyDerivationDecode[T: BaseDigestType](s: Signer | TimedSigner,
     digestMethodType: typedesc[T]): string =
@@ -310,6 +309,6 @@ when isMainModule:
       key = SecretKey("secret-key")
       s = initSigner(key, salt = "activate",
           digestMethod = Sha1Type)
-      sig {.used.} = s.sign($ %*[1, 2, 3])
+      sig {.used.} = s.sign( $ %*[1, 2, 3])
     doAssertRaises(BadSignature):
       discard s.unsign("[1, 2, 3].sdhfghjkjhdfghjigf")
