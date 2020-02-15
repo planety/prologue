@@ -1,5 +1,5 @@
 # To run these tests, simply execute `nimble test`.
-import prologue / configure
+import prologue/core/configure
 
 import unittest, os
 
