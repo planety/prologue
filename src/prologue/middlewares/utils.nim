@@ -1,7 +1,7 @@
 import asyncdispatch, httpcore
 import logging, strtabs, strutils
 
-import ../core/context, core
+import ../core/context, base
 
 
 when not defined(production):
