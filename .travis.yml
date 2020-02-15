@@ -50,5 +50,6 @@ install:
 
 script:
     - nimble install regex -y
+    - nimble install nimcrypto -y
     - nimble test
     # - nimble test_arc

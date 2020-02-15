@@ -151,6 +151,7 @@ steps:
       echo "PATH=${PATH}"
       nimble refresh
       nimble install regex
+      nimble install nimcrypto
     displayName: 'Building the package dependencies'
   - bash: |
       echo "PATH=${PATH}"
