@@ -1,10 +1,10 @@
-import asyncdispatch, uri, cgi, httpcore, cookies
+import asyncdispatch, uri, cgi, httpcore
 import tables, strutils, strformat, macros, logging, strtabs, os
 
 import response, context, pages, route,
     nativesettings, base, configure, utils
 
-import middlewares/middlewares, openapi/openapi, signing/signer
+import middlewares/middlewares, openapi/openapi, signing/signer, core/cookies
 
 import regex
 
@@ -105,8 +105,8 @@ proc run*(app: Prologue) =
       urlQuery = request.query # string
       headers = request.headers
 
-    if headers.hasKey("cookies"):
-      request.cookies = headers["cookies", 0].parseCookies
+    if headers.hasKey("cookie"):
+      request.cookies = seq[string](headers.getOrDefault("cookie")).join("; ").parseCookies
 
     var contentType: string
     if headers.hasKey("content-type"):

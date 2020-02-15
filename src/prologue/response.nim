@@ -1,13 +1,13 @@
-import httpcore, cookies
+import httpcore
 import times, json, strformat
 
+import core/cookies
 
 type
   Response* = object
     httpVersion*: HttpVersion
     status*: HttpCode
     httpHeaders*: HttpHeaders
-    cookies*: string
     body*: string
 
 
@@ -25,11 +25,17 @@ proc setHeader*(response: var Response; key, value: string) =
 proc addHeader*(response: var Response; key, value: string) =
   response.httpHeaders.add(key, value)
 
-proc setCookie*(response: var Response; key, value: string; expires: DateTime |
-    Time; domain = ""; path = ""; noName = false; secure = false;
-        httpOnly = false): string =
-  response.cookies = setCookie(key, value, expires, domain, path, noName,
-      secure, httpOnly)
+proc setCookie*(response: var Response; key, value: string, expires = "",
+    domain = "", path = "", secure = false, httpOnly = false, sameSite = Lax) {.inline.} =
+  let cookies = setCookie(key, value, expires, domain, path, secure, httpOnly, sameSite)
+  response.httpHeaders.add("Set-Cookie", cookies)
+
+proc setCookie*(response: var Response; key, value: string,
+    expires: DateTime|Time, domain = "",
+
+path = "", secure = false, httpOnly = false, sameSite = Lax) {.inline.} =
+  let cookies = setCookie(key, value, expires, domain, path, secure, httpOnly, sameSite)
+  response.httpHeaders.add("Set-Cookie", cookies)
 
 proc abort*(status = Http401, body = "", headers = newHttpHeaders(),
     version = HttpVer11): Response {.inline.} =
