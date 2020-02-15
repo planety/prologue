@@ -44,8 +44,8 @@ const
   DefaultKeyDerivation = MoreConcat
   DefaultDigestMethodType = Sha1Type
 
-# TODO base64 should use urlSafeEndoe
 
+# TODO base64 should use urlSafeEndoe
 proc initSigner*(secretKey: SecretKey, salt = defaultSalt, sep = defaultSep,
     keyDerivation = DefaultKeyDerivation,
         digestMethod = DefaultDigestMethodType): Signer =
@@ -275,7 +275,7 @@ proc validate*(s: Signer, signedValue: string): bool =
 
 
 when isMainModule:
-  import os
+  import os, json
 
   block:
     let
@@ -293,4 +293,14 @@ when isMainModule:
           digestMethod = Sha1Type)
       sig = s.sign("my string")
     sleep(6000)
-    assert s.unsign(sig, 5) == "my string"
+    doAssertRaises(SignatureExpired):
+      discard s.unsign(sig, 5) == "my string"
+
+  block:
+    let
+      key = SecretKey("secret-key")
+      s = initSigner(key, salt = "activate",
+          digestMethod = Sha1Type)
+      sig {.used.} = s.sign($ %*[1, 2, 3])
+    doAssertRaises(BadSignature):
+      discard s.unsign("[1, 2, 3].sdhfghjkjhdfghjigf")
