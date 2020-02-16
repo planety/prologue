@@ -39,7 +39,7 @@ Docs in https://starlight-prologue.readthedocs.io/en/latest/
 - [x] CORS Response
 - [x] Signing
 - [x] Cookie
-- [ ] Session
+- [x] Session
 - [ ] Authentication
 - [ ] Cache
 - [ ] Data Mapper
