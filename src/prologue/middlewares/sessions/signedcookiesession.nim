@@ -4,7 +4,7 @@ import asyncdispatch, options
 from ../../core/types import BadSecretKeyError, SecretKey, SameSite, loads, dumps, len
 from ../../core/context import Context, HandlerAsync, getCookie, setCookie,
     deleteCookie, addHeader
-import ../../signing/signer
+import ../../signing/signing
 from ../../core/middlewaresbase import switch
 
 

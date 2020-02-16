@@ -60,10 +60,8 @@ proc put*[A, B](x: var LockedLRUCached[A, B], key: A, value: B) =
 when isMainModule:
   import random, timeit
 
-
   randomize(128)
-
-
+  
   timeOnce("cached"):
     var s = newLockedLRUCached[int, int](128)
     for i in 1 .. 100:

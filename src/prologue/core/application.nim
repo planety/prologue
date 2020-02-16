@@ -4,7 +4,8 @@ import tables, strutils, strformat, macros, logging, strtabs, os, options
 import response, context, pages, route,
     nativesettings, corebase, configure, utils, middlewaresbase
 
-import ../middlewares/middlewares, ../openapi/openapi, ../signing/signer
+import ../middlewares/middlewares, ../openapi/openapi, ../signing/signing
+import ../cache/cache
 from cookies import parseCookies
 from types import SameSite
 
@@ -29,9 +30,10 @@ export corebase
 export openapi
 export regex
 export utils
-export signer
+export signing
 export middlewaresbase
 export options
+export cache
 
 
 proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
@@ -110,7 +112,8 @@ proc run*(app: Prologue) =
       headers = request.headers
 
     if headers.hasKey("cookie"):
-      request.cookies = seq[string](headers.getOrDefault("cookie")).join("; ").parseCookies
+      request.cookies = seq[string](headers.getOrDefault("cookie")).join(
+          "; ").parseCookies
 
     var contentType: string
     if headers.hasKey("content-type"):
