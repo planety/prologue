@@ -40,9 +40,8 @@ Docs in https://starlight-prologue.readthedocs.io/en/latest/
 - [x] Signing
 - [x] Cookie
 - [x] Session
+- [x] Cache
 - [ ] Authentication
-- [ ] Cache
-- [ ] Data Mapper
 - [ ] Openapi
 
 ### Installation
