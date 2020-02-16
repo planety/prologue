@@ -1,5 +1,5 @@
 import asyncdispatch, uri, cgi, httpcore
-import tables, strutils, strformat, macros, logging, strtabs, os
+import tables, strutils, strformat, macros, logging, strtabs, os, options
 
 import response, context, pages, route,
     nativesettings, corebase, configure, utils, middlewaresbase
@@ -31,6 +31,7 @@ export regex
 export utils
 export signer
 export middlewaresbase
+export options
 
 
 proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,

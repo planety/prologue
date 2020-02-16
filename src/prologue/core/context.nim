@@ -1,5 +1,5 @@
 import httpcore, asyncdispatch, asyncfile, mimetypes, md5
-import strtabs, macros, tables, strformat, os, times
+import strtabs, macros, tables, strformat, os, times, options
 
 import response, pages, constants, cookies
 from types import BaseType, Session, SameSite, initSession
@@ -59,15 +59,14 @@ proc defaultHandler*(ctx: Context) {.async.} =
 proc getCookie*(ctx: Context; key: string, default: string = ""): string {.inline.} =
   getCookie(ctx.request, key, default)
 
-proc setCookie*(ctx: Context; key, value: string, expires = "",
+proc setCookie*(ctx: Context; key, value: string, expires = "", maxAge: Option[int] = none(int),
   domain = "", path = "", secure = false, httpOnly = false, sameSite = Lax) {.inline.} =
-  let cookies = setCookie(key, value, expires, domain, path, secure, httpOnly, sameSite)
+  let cookies = setCookie(key, value, expires, maxAge, domain, path, secure, httpOnly, sameSite)
   ctx.response.addHeader("Set-Cookie", cookies)
 
-proc setCookie*(ctx: Context; key, value: string,
-  expires: DateTime|Time, domain = "", path = "", secure = false,
-      httpOnly = false, sameSite = Lax) {.inline.} =
-  let cookies = setCookie(key, value, expires, domain, path, secure, httpOnly, sameSite)
+proc setCookie*(ctx: Context; key, value: string, expires: DateTime|Time, maxAge: Option[int] = none(int),
+   domain = "", path = "", secure = false, httpOnly = false, sameSite = Lax) {.inline.} =
+  let cookies = setCookie(key, value, domain, expires, maxAge, path, secure, httpOnly, sameSite)
   ctx.response.addHeader("Set-Cookie", cookies)
 
 macro getPostParams*(key: string, default = ""): string =

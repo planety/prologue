@@ -1,4 +1,4 @@
-import strtabs, parseutils, times
+import strtabs, parseutils, times, options
 
 from types import SameSite
 
@@ -21,14 +21,15 @@ proc parseCookies*(s: string): StringTableRef =
       break
     inc(pos) # skip ';'
 
-proc setCookie*(key, value: string, expires = "", domain = "", path = "",
-                 secure = false, httpOnly = false,
-                 sameSite = Lax): string {.inline.} =
+proc setCookie*(key, value: string, expires = "", maxAge: Option[int] = none(int), domain = "", path = "",
+                 secure = false, httpOnly = false, sameSite = Lax): string {.inline.} =
   result.add key & "=" & value
   if domain != "":
     result.add("; Domain=" & domain)
   if path != "":
     result.add("; Path=" & path)
+  if maxAge.isSome:
+    result.add("; Max-Age=" & $maxAge)
   if expires != "":
     result.add("; Expires=" & expires)
   if secure:
@@ -38,8 +39,8 @@ proc setCookie*(key, value: string, expires = "", domain = "", path = "",
   if sameSite != None:
     result.add("; SameSite=" & $sameSite)
 
-proc setCookie*(key, value: string, expires: DateTime|Time,
-    domain = "", path = "", secure = false, httpOnly = false,
+proc setCookie*(key, value: string, expires: DateTime|Time, maxAge: Option[
+    int] = none(int), domain = "", path = "", secure = false, httpOnly = false,
     sameSite = Lax): string {.inline.} =
   result = setCookie(key, value, format(expires.utc,
       "ddd',' dd MMM yyyy HH:mm:ss 'GMT'"), domain, path.secure, httpOnly, sameSite)

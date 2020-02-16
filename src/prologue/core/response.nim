@@ -1,5 +1,5 @@
 import httpcore
-import times, json, strformat
+import times, json, strformat, options
 
 from cookies import setCookie
 from types import SameSite
@@ -26,15 +26,15 @@ proc setHeader*(response: var Response; key, value: string) {.inline.} =
 proc addHeader*(response: var Response; key, value: string) {.inline.} =
   response.httpHeaders.add(key, value)
 
-proc setCookie*(response: var Response; key, value: string, expires = "",
+proc setCookie*(response: var Response; key, value: string, expires = "", maxAge: Option[int] = none(int),
     domain = "", path = "", secure = false, httpOnly = false, sameSite = Lax) {.inline.} =
-  let cookies = setCookie(key, value, expires, domain, path, secure, httpOnly, sameSite)
+  let cookies = setCookie(key, value, expires, maxAge, domain, path, secure, httpOnly, sameSite)
   response.addHeader("Set-Cookie", cookies)
 
-proc setCookie*(response: var Response; key, value: string,
-    expires: DateTime|Time, domain = "", path = "", secure = false,
+proc setCookie*(response: var Response; key, value: string, expires: DateTime|Time, maxAge: Option[int] = none(int),
+    domain = "", path = "", secure = false,
         httpOnly = false, sameSite = Lax) {.inline.} =
-  let cookies = setCookie(key, value, expires, domain, path, secure, httpOnly, sameSite)
+  let cookies = setCookie(key, value, expires, maxAge, domain, path, secure, httpOnly, sameSite)
   response.addHeader("Set-Cookie", cookies)
 
 proc abort*(status = Http401, body = "", headers = newHttpHeaders(),

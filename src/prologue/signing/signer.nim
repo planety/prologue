@@ -6,6 +6,8 @@ import nimcrypto
 
 from ../core/types import SecretKey
 
+export signingbase
+
 
 type
   BaseDigestType = sha1 | sha2 | keccak | ripemd | blake2
@@ -68,8 +70,8 @@ proc initSigner*(secretKey: SecretKey, salt = DefaultSalt, sep = DefaultSep,
       keyDerivation: keyDerivation, digestMethod: digestMethod)
 
 proc initTimedSigner*(secretKey: SecretKey, salt = DefaultSalt,
-    sep = DefaultSep,
-keyDerivation = DefaultKeyDerivation, digestMethod = DefaultDigestMethodType): TimedSigner =
+    sep = DefaultSep, keyDerivation = DefaultKeyDerivation,
+        digestMethod = DefaultDigestMethodType): TimedSigner =
 
   if sep in Base64Alphabet:
     raise newException(ValueError, "The given separator cannot be used because it may be " &

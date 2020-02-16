@@ -11,6 +11,7 @@ type
 
   Session* = ref object
     data: StringTableRef
+    modified*: bool
 
 proc tryParseInt(value: sink string, default: int): int {.inline.} =
   try:
@@ -47,8 +48,8 @@ proc `$`*(secretKey: SecretKey): string =
   ## Hide secretKey's value
   "SecretKey(********)"
 
-proc initSession*(data: StringTableRef): Session =
-  Session(data: data)
+proc initSession*(data: StringTableRef, modified = false): Session =
+  Session(data: data, modified: modified)
 
 proc `[]`*(session: Session, key: string): string =
   session.data[key]
@@ -95,5 +96,8 @@ proc parseStringTable*(s: string): StringTableRef =
   result = newStringTable()
   parseStringTable(result, s)
 
-proc parseSession*(session: Session, s: string) {.inline.} =
+proc loads*(session: Session, s: string) {.inline.} =
   session.data.parseStringTable(s)
+
+proc dumps*(session: Session): string {.inline.} =
+  $session

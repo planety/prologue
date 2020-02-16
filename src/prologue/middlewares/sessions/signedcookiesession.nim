@@ -1,11 +1,12 @@
 import asyncdispatch
 
-import sessionsbase
 
-from ../../core/types import SecretKey, SameSite, parseSession
+from ../../core/types import SecretKey, SameSite, loads, dumps
 from ../../core/context import Context, HandlerAsync, getCookie, setCookie
 import ../../signing/signer 
 from ../../core/middlewaresbase import switch
+
+
 
 
 proc sessionMiddleware*(
@@ -26,8 +27,15 @@ proc sessionMiddleware*(
     let 
       data = ctx.getCookie(sessionName)
 
-    ctx.session.parseSession(signer.unsign(data))
+    try:
+      ctx.session.loads(signer.unsign(data, maxAge))
+    except:
+      # BadTimeSignature, SignatureExpired or ValueError
+      # reset
+      ctx.session.modified = true
+
     await switch(ctx)
+    ctx.setCookie(sessionName, signer.sign(dumps(ctx.session)))
   # setCookie(key, value: string, expires = "", domain = "", path = "",
   #                secure = false, httpOnly = false,
   #                sameSite = Lax)
