@@ -215,6 +215,7 @@ proc getSignatureDecode*(s: Signer | TimedSigner): string =
   of Blake2_512Type:
     result = getKeyDerivationDecode(s, blake2_512)
 
+# TODO May support compress
 proc sign*(s: Signer, value: string): string =
   value & s.sep & s.getSignatureEncode(value.toOpenArrayByte(0, value.len - 1))
 
@@ -231,14 +232,14 @@ proc verifySignature(s: Signer | TimedSigner, value, sig: string): bool =
 proc unsign*(s: Signer | TimedSigner, signedValue: string): string =
   let sep = s.sep
   if sep notin signedValue:
-    raise newException(BadSignature, fmt"No {$sep} found in value")
+    raise newException(BadSignatureError, fmt"No {$sep} found in value")
   let
     temp = signedValue.rsplit({sep}, maxsplit = 1)
     value = temp[0]
     sig = temp[1]
   if verifySignature(s, value, sig):
     return value
-  raise newException(BadSignature, fmt"Signature {sig} does not match")
+  raise newException(BadSignatureError, fmt"Signature {sig} does not match")
 
 proc unsign*(s: TimedSigner, signedValue: string, max_age: Natural): string =
   var
@@ -246,7 +247,7 @@ proc unsign*(s: TimedSigner, signedValue: string, max_age: Natural): string =
     exception: ref Exception
   try:
     res = unsign(s, signedValue)
-  except BadSignature as e:
+  except BadSignatureError as e:
     exception = e
     res = ""
 
@@ -255,7 +256,7 @@ proc unsign*(s: TimedSigner, signedValue: string, max_age: Natural): string =
   if sep notin signedValue:
     if exception != nil:
       raise exception
-    raise newException(BadTimeSignature, "timestamp missing")
+    raise newException(BadTimeSignatureError, "timestamp missing")
 
   let
     temp = res.rsplit({sep}, maxsplit = 1)
@@ -267,12 +268,12 @@ proc unsign*(s: TimedSigner, signedValue: string, max_age: Natural): string =
     raise exception
 
   if timestamp == "":
-    raise newException(BadTimeSignature, "Malformed timestamp")
+    raise newException(BadTimeSignatureError, "Malformed timestamp")
 
   if max_age > 0:
     let age = int(cputime()) - parseInt(timestamp) + 1
     if age > max_age:
-      raise newException(SignatureExpired,
+      raise newException(SignatureExpiredError,
           fmt"Signature age {age} > {max_age} seconds")
 
   return value
@@ -281,7 +282,7 @@ proc validate*(s: Signer, signedValue: string): bool =
   result = true
   try:
     discard s.unsign(signedValue)
-  except BadSignature:
+  except BadSignatureError:
     result = false
 
 
@@ -305,7 +306,7 @@ when isMainModule:
           digestMethod = Sha1Type)
       sig = s.sign("my string")
     sleep(6000)
-    doAssertRaises(SignatureExpired):
+    doAssertRaises(SignatureExpiredError):
       discard s.unsign(sig, 5) == "my string"
 
   block:
@@ -314,5 +315,5 @@ when isMainModule:
       s = initSigner(key, salt = "activate",
           digestMethod = Sha1Type)
       sig {.used.} = s.sign( $ %*[1, 2, 3])
-    doAssertRaises(BadSignature):
+    doAssertRaises(BadSignatureError):
       discard s.unsign("[1, 2, 3].sdhfghjkjhdfghjigf")

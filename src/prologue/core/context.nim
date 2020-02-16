@@ -56,18 +56,25 @@ proc defaultHandler*(ctx: Context) {.async.} =
   let response = error404(body = errorPage("404 Not Found!", PrologueVersion))
   await ctx.request.respond(response)
 
+proc setHeader*(ctx: Context; key, value: string) {.inline.} =
+  ctx.response.httpHeaders[key] = value
+
+proc addHeader*(ctx: Context; key, value: string) {.inline.} =
+  ctx.response.httpHeaders.add(key, value)
+
 proc getCookie*(ctx: Context; key: string, default: string = ""): string {.inline.} =
   getCookie(ctx.request, key, default)
 
 proc setCookie*(ctx: Context; key, value: string, expires = "", maxAge: Option[int] = none(int),
   domain = "", path = "", secure = false, httpOnly = false, sameSite = Lax) {.inline.} =
-  let cookies = setCookie(key, value, expires, maxAge, domain, path, secure, httpOnly, sameSite)
-  ctx.response.addHeader("Set-Cookie", cookies)
+  ctx.response.setCookie(key, value, expires, maxAge, domain, path, secure, httpOnly, sameSite)
 
 proc setCookie*(ctx: Context; key, value: string, expires: DateTime|Time, maxAge: Option[int] = none(int),
    domain = "", path = "", secure = false, httpOnly = false, sameSite = Lax) {.inline.} =
-  let cookies = setCookie(key, value, domain, expires, maxAge, path, secure, httpOnly, sameSite)
-  ctx.response.addHeader("Set-Cookie", cookies)
+  ctx.response.setCookie(key, value, domain, expires, maxAge, path, secure, httpOnly, sameSite)
+
+proc deleteCookie*(ctx: Context, key: string, path = "", domain = "") {.inline.} =
+  ctx.response.setCookie(key = key, value = "", maxAge = some(0), path = path, domain = domain)
 
 macro getPostParams*(key: string, default = ""): string =
   var ctx = ident"ctx"

@@ -37,6 +37,9 @@ proc setCookie*(response: var Response; key, value: string, expires: DateTime|Ti
   let cookies = setCookie(key, value, expires, maxAge, domain, path, secure, httpOnly, sameSite)
   response.addHeader("Set-Cookie", cookies)
 
+proc deleteCookie*(response: var Response, key: string, value = "", path = "", domain = "") {.inline.} =
+  response.setCookie(key, value, maxAge = some(0), path = path, domain = domain)
+
 proc abort*(status = Http401, body = "", headers = newHttpHeaders(),
     version = HttpVer11): Response {.inline.} =
   result = initResponse(version, status = status, body = body,

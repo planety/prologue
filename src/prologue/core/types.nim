@@ -2,6 +2,7 @@ import strutils, strtabs, parseutils
 
 
 type
+  BadSecretKeyError* = object of Exception
   BaseType* = int | float | bool | string
   SecretKey* = distinct string
   SecretUrl* = distinct string
@@ -11,7 +12,9 @@ type
 
   Session* = ref object
     data: StringTableRef
+    newCreated*: bool
     modified*: bool
+    accessed*: bool
 
 proc tryParseInt(value: sink string, default: int): int {.inline.} =
   try:
@@ -44,24 +47,45 @@ proc parseValue*[T: BaseType](value: sink string, default: T): T {.inline.} =
   elif T is string:
     result = value
 
+proc len*(secretKey: SecretKey): int =
+  string(secretKey).len
+
 proc `$`*(secretKey: SecretKey): string =
   ## Hide secretKey's value
   "SecretKey(********)"
 
-proc initSession*(data: StringTableRef, modified = false): Session =
+proc initSession*(data: StringTableRef, newCreated = false, modified = false, accessed = false): Session =
   Session(data: data, modified: modified)
 
+proc update*(session: Session) =
+  session.accessed = true
+  session.modified = true
+
 proc `[]`*(session: Session, key: string): string =
-  session.data[key]
+  result = session.data[key]
+  session.accessed = true
 
 proc `[]=`*(session: Session, key, value: string): string =
   session.data[key] = value
+  update(session)
+
+proc len*(session: Session): int = 
+  session.data.len
 
 proc getOrDefault*(session: Session, key: string, default = ""): string =
   if session.data.hasKey(key):
     result = session.data[key]
   else:
     result = default
+  session.accessed = true
+
+proc del*(session: Session, key: string) {.inline.} =
+  session.data.del(key)
+  update(session)
+
+proc clear*(session: Session) {.inline.} =
+  session.data.clear(modeCaseSensitive)
+  update(session)
 
 proc `$`*(session: Session): string =
   $session.data
