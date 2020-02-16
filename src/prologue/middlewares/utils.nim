@@ -1,7 +1,8 @@
 import asyncdispatch, httpcore
 import logging, strtabs, strutils
 
-import ../core/context, middlewaresbase
+import ../core/context
+from ../core/middlewaresbase import switch
 
 
 when not defined(production):

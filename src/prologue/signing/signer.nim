@@ -38,11 +38,11 @@ type
 
 
 const
-  defaultSalt = "Starlight.Prologue"
-  defaultSep = '.'
-  base64Alphabet = IdentChars + {'-', '='}
-  DefaultKeyDerivation = MoreConcat
-  DefaultDigestMethodType = Sha1Type
+  DefaultSalt = "Starlight.Prologue"
+  DefaultSep* = '.'
+  Base64Alphabet = IdentChars + {'-', '='}
+  DefaultKeyDerivation* = MoreConcat
+  DefaultDigestMethodType* = Sha1Type
 
 
 proc randomString*(size: int): string =
@@ -55,11 +55,11 @@ proc randomSecretKey*(size: int): SecretKey =
   result = SecretKey(buffer)
 
 # TODO base64 should use urlSafeEndoe
-proc initSigner*(secretKey: SecretKey, salt = defaultSalt, sep = defaultSep,
+proc initSigner*(secretKey: SecretKey, salt = DefaultSalt, sep = DefaultSep,
     keyDerivation = DefaultKeyDerivation,
         digestMethod = DefaultDigestMethodType): Signer =
 
-  if sep in base64Alphabet:
+  if sep in Base64Alphabet:
     raise newException(ValueError, "The given separator cannot be used because it may be " &
                 "contained in the signature itself. Alphanumeric " &
                 "characters and `-_=` must not be used.")
@@ -67,11 +67,11 @@ proc initSigner*(secretKey: SecretKey, salt = defaultSalt, sep = defaultSep,
   Signer(secretKey: secretKey, salt: salt, sep: sep,
       keyDerivation: keyDerivation, digestMethod: digestMethod)
 
-proc initTimedSigner*(secretKey: SecretKey, salt = defaultSalt,
-    sep = defaultSep,
+proc initTimedSigner*(secretKey: SecretKey, salt = DefaultSalt,
+    sep = DefaultSep,
 keyDerivation = DefaultKeyDerivation, digestMethod = DefaultDigestMethodType): TimedSigner =
 
-  if sep in base64Alphabet:
+  if sep in Base64Alphabet:
     raise newException(ValueError, "The given separator cannot be used because it may be " &
                 "contained in the signature itself. Alphanumeric " &
                 "characters and `-_=` must not be used. ")

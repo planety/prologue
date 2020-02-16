@@ -1,7 +1,7 @@
 import asyncdispatch, httpcore
 import strutils
 
-import middlewaresbase
+from ../core/middlewaresbase import switch
 import ../core/context, ../core/response
 
 import regex

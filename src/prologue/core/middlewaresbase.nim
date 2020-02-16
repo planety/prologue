@@ -1,6 +1,6 @@
 import asyncdispatch
 
-import ../core/context, ../core/route
+import context, route
 
 
 proc doNothingClosureMiddleware*(): HandlerAsync

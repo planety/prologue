@@ -1,5 +1,5 @@
-import utils, cors, middlewaresbase
+import utils, cors
 
-import sessions/signedcookie
+import sessions/signedcookiesession
 
-export utils, cors, middlewaresbase, signedcookie
+export utils, cors, signedcookiesession

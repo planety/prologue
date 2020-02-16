@@ -51,7 +51,7 @@ proc headers*(request: Request): HttpHeaders {.inline.} =
 proc reqMethod*(request: Request): HttpMethod {.inline.} =
   request.nativeRequest.reqMethod
 
-proc getCookie*(request: Request; key: string, default: string): string {.inline.} =
+proc getCookie*(request: Request; key: string, default: string = ""): string {.inline.} =
   request.cookies.getOrDefault(key, default)
 
 proc contentType*(request: Request): string {.inline.} =

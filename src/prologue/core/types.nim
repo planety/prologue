@@ -9,7 +9,7 @@ type
   SameSite* = enum
     None, Lax, Strict
 
-  Session* = object
+  Session* = ref object
     data: StringTableRef
 
 proc tryParseInt(value: sink string, default: int): int {.inline.} =
@@ -47,6 +47,9 @@ proc `$`*(secretKey: SecretKey): string =
   ## Hide secretKey's value
   "SecretKey(********)"
 
+proc initSession*(data: StringTableRef): Session =
+  Session(data: data)
+
 proc `[]`*(session: Session, key: string): string =
   session.data[key]
 
@@ -62,11 +65,10 @@ proc getOrDefault*(session: Session, key: string, default = ""): string =
 proc `$`*(session: Session): string =
   $session.data
 
-proc parseStringTable*(s: string): StringTableRef =
+proc parseStringTable*(tabs: StringTableRef, s: string) {.inline.} =
   # """{username: flywind, password: root}"""
   # {:} 
   # make sure {':', ',', '}'} notin key or value
-  result = newStringTable()
   if s.len <= 3:
     return
   var 
@@ -85,6 +87,13 @@ proc parseStringTable*(s: string): StringTableRef =
     pos += s.parseUntil(value, {',', '}'}, pos)
     # ignore ',' or '}'
     inc(pos, 2)
-    result[key] = value
+    tabs[key] = value
     if pos >= s.len:
       break
+
+proc parseStringTable*(s: string): StringTableRef =
+  result = newStringTable()
+  parseStringTable(result, s)
+
+proc parseSession*(session: Session, s: string) {.inline.} =
+  session.data.parseStringTable(s)

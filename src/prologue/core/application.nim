@@ -2,7 +2,7 @@ import asyncdispatch, uri, cgi, httpcore
 import tables, strutils, strformat, macros, logging, strtabs, os
 
 import response, context, pages, route,
-    nativesettings, corebase, configure, utils
+    nativesettings, corebase, configure, utils, middlewaresbase
 
 import ../middlewares/middlewares, ../openapi/openapi, ../signing/signer
 from cookies import parseCookies
@@ -30,6 +30,7 @@ export openapi
 export regex
 export utils
 export signer
+export middlewaresbase
 
 
 proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,

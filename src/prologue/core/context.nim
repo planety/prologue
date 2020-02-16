@@ -1,8 +1,8 @@
 import httpcore, asyncdispatch, asyncfile, mimetypes, md5
-import strtabs, macros, tables, strformat, os
+import strtabs, macros, tables, strformat, os, times
 
-import response, pages, constants
-from types import BaseType, Session
+import response, pages, constants, cookies
+from types import BaseType, Session, SameSite, initSession
 
 import regex
 
@@ -39,7 +39,7 @@ type
     size*: int
     first*: bool
     middlewares*: seq[HandlerAsync]
-    session: Session
+    session*: Session
 
   HandlerAsync* = proc(ctx: Context): Future[void] {.closure, gcsafe.}
 
@@ -47,7 +47,7 @@ type
 proc newContext*(request: Request, response: Response,
     router: Router, reRouter: ReRouter): Context {.inline.} =
   Context(request: request, response: response, router: router,
-      reRouter: reRouter, size: 0, first: true)
+      reRouter: reRouter, size: 0, first: true, session: initSession(data = newStringTable()))
 
 proc handle*(ctx: Context): Future[void] {.inline.} =
   result = ctx.request.respond(ctx.response)
@@ -56,8 +56,19 @@ proc defaultHandler*(ctx: Context) {.async.} =
   let response = error404(body = errorPage("404 Not Found!", PrologueVersion))
   await ctx.request.respond(response)
 
-proc getCookie*(request: Request; key: string, default: string): string {.inline.} =
-  getCookie(request, key, default)
+proc getCookie*(ctx: Context; key: string, default: string = ""): string {.inline.} =
+  getCookie(ctx.request, key, default)
+
+proc setCookie*(ctx: Context; key, value: string, expires = "",
+  domain = "", path = "", secure = false, httpOnly = false, sameSite = Lax) {.inline.} =
+  let cookies = setCookie(key, value, expires, domain, path, secure, httpOnly, sameSite)
+  ctx.response.addHeader("Set-Cookie", cookies)
+
+proc setCookie*(ctx: Context; key, value: string,
+  expires: DateTime|Time, domain = "", path = "", secure = false,
+      httpOnly = false, sameSite = Lax) {.inline.} =
+  let cookies = setCookie(key, value, expires, domain, path, secure, httpOnly, sameSite)
+  ctx.response.addHeader("Set-Cookie", cookies)
 
 macro getPostParams*(key: string, default = ""): string =
   var ctx = ident"ctx"
