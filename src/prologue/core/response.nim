@@ -1,7 +1,7 @@
 import httpcore
 import times, json, strformat, options
 
-from cookies import setCookie
+from cookies import setCookie, timeForward
 from types import SameSite
 
 type
@@ -38,7 +38,7 @@ proc setCookie*(response: var Response; key, value: string, expires: DateTime|Ti
   response.addHeader("Set-Cookie", cookies)
 
 proc deleteCookie*(response: var Response, key: string, value = "", path = "", domain = "") {.inline.} =
-  response.setCookie(key, value, maxAge = some(0), path = path, domain = domain)
+  response.setCookie(key, value, expires = timeForward(0), maxAge = some(0), path = path, domain = domain)
 
 proc abort*(status = Http401, body = "", headers = newHttpHeaders(),
     version = HttpVer11): Response {.inline.} =

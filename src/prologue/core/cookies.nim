@@ -43,9 +43,11 @@ proc setCookie*(key, value: string, expires: DateTime|Time, maxAge: Option[
     int] = none(int), domain = "", path = "", secure = false, httpOnly = false,
     sameSite = Lax): string {.inline.} =
   result = setCookie(key, value, format(expires.utc,
-      "ddd',' dd MMM yyyy HH:mm:ss 'GMT'"), domain, path.secure, httpOnly, sameSite)
+      "ddd',' dd MMM yyyy HH:mm:ss 'GMT'"), maxAge, domain, path, secure,
+      httpOnly, sameSite)
 
-
+proc timeForward*(lastingTime: int): DateTime =
+  getTime().utc + initDuration(seconds = lastingTime)
 
 when isMainModule:
   echo setCookie("useName", "xzsd")

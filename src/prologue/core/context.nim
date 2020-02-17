@@ -47,7 +47,8 @@ type
 proc newContext*(request: Request, response: Response,
     router: Router, reRouter: ReRouter): Context {.inline.} =
   Context(request: request, response: response, router: router,
-      reRouter: reRouter, size: 0, first: true, session: initSession(data = newStringTable()))
+      reRouter: reRouter, size: 0, first: true, session: initSession(
+          data = newStringTable()))
 
 proc handle*(ctx: Context): Future[void] {.inline.} =
   result = ctx.request.respond(ctx.response)
@@ -65,16 +66,20 @@ proc addHeader*(ctx: Context; key, value: string) {.inline.} =
 proc getCookie*(ctx: Context; key: string, default: string = ""): string {.inline.} =
   getCookie(ctx.request, key, default)
 
-proc setCookie*(ctx: Context; key, value: string, expires = "", maxAge: Option[int] = none(int),
+proc setCookie*(ctx: Context; key, value: string, expires = "", maxAge: Option[
+    int] = none(int),
   domain = "", path = "", secure = false, httpOnly = false, sameSite = Lax) {.inline.} =
-  ctx.response.setCookie(key, value, expires, maxAge, domain, path, secure, httpOnly, sameSite)
+  ctx.response.setCookie(key, value, expires, maxAge, domain, path, secure,
+      httpOnly, sameSite)
 
-proc setCookie*(ctx: Context; key, value: string, expires: DateTime|Time, maxAge: Option[int] = none(int),
+proc setCookie*(ctx: Context; key, value: string, expires: DateTime|Time,
+    maxAge: Option[int] = none(int),
    domain = "", path = "", secure = false, httpOnly = false, sameSite = Lax) {.inline.} =
-  ctx.response.setCookie(key, value, domain, expires, maxAge, path, secure, httpOnly, sameSite)
+  ctx.response.setCookie(key, value, domain, expires, maxAge, path, secure,
+      httpOnly, sameSite)
 
 proc deleteCookie*(ctx: Context, key: string, path = "", domain = "") {.inline.} =
-  ctx.response.setCookie(key = key, value = "", maxAge = some(0), path = path, domain = domain)
+  ctx.deleteCookie(key = key, path = path, domain = domain)
 
 macro getPostParams*(key: string, default = ""): string =
   var ctx = ident"ctx"
