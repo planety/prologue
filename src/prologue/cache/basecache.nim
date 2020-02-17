@@ -63,13 +63,10 @@ proc contains*[A, B](x: var LRUCached[A, B], key: A): bool =
     return false
 
 
-
 when isMainModule:
   import random, timeit
 
-
   randomize(128)
-
 
   timeOnce("cached"):
     var s = initLRUCached[int, int](128)

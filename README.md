@@ -33,6 +33,7 @@ Docs in https://starlight-prologue.readthedocs.io/en/latest/
 - [x] Context
 - [x] Static Files
 - [x] Middlewares
+- [x] Regex Route
 - [x] Simple Route
 - [x] Template(Using Karax Native or Using Nim Filter)
 - [x] Test Client(Using httpclient)
