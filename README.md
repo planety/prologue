@@ -24,26 +24,30 @@ Docs in https://starlight-prologue.readthedocs.io/en/latest/
 
 ### Feature
 
-
-- [ ] High Performance Http 1.1/2.0 Server
-- [ ] High Performance Websocket Server
-- [ ] Http 2.0 Client
-- [ ] Reloader
-- [x] Configure and Settings
-- [x] Context
-- [x] Static Files
-- [x] Middlewares
-- [x] Simple Route
-- [x] Regex Route
-- [x] Template(Using Karax Native or Using Nim Filter)
-- [x] Test Client(Using httpclient)
-- [x] CORS Response
-- [x] Signing
-- [x] Cookie
-- [x] Session
-- [x] Cache
-- [ ] Authentication
-- [ ] Openapi
+- Server
+  - [ ] High Performance Http 1.1/2.0 Server
+  - [ ] High Performance Websocket Server
+  - [ ] Http 2.0 Client
+  - [ ] Reloader
+- Core
+  - [x] Configure and Settings
+  - [x] Context
+  - [x] Params and Query Data
+  - [x] Form Data
+  - [x] Static Files
+  - [x] Middlewares
+  - [x] Simple Route
+  - [x] Regex Route
+  - [x] CORS Response
+  - [x] Signing
+  - [x] Cookie
+  - [x] Session
+  - [x] Cache
+  - [ ] Authentication
+- Plugin
+  - [x] Template(Using Karax Native or Using Nim Filter)
+  - [x] Test Client(Using httpclient)
+  - [ ] Openapi
 
 ### Installation
 
