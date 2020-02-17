@@ -7,15 +7,9 @@ import common
 
 type
   LRUCached*[A, B] = object
-    map: Table[A, MapValue[A, B]]
-    cached: CachedKeyPair[A, B]
-    info: CachedInfo
-
-  LFUCached*[A, B] = object
-    map: Table[A, MapValue[A, B]]
-    cached: Table[int, CachedKeyPair[A, B]]
-    info: CachedInfo
-
+    map*: Table[A, MapValue[A, B]]
+    cached*: CachedKeyPair[A, B]
+    info*: CachedInfo
 
 proc initLruCached*[A, B](maxSize: Natural = 128): LRUCached[A, B] {.inline.} =
   LRUCached[A, B](map: initTable[A, MapValue[A, B]](),

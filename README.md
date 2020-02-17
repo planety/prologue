@@ -28,6 +28,7 @@ Docs in https://starlight-prologue.readthedocs.io/en/latest/
   - [ ] High Performance Http 1.1/2.0 Server
   - [ ] High Performance Websocket Server
   - [ ] Http 2.0 Client
+  - [ ] SSL/HttpS Support
   - [ ] Reloader
 - Core
   - [x] Configure and Settings
@@ -45,6 +46,10 @@ Docs in https://starlight-prologue.readthedocs.io/en/latest/
   - [x] Cache
   - [ ] Startup and Shutdown Events
   - [ ] Cross-Site Request Forgery
+  - [ ] Cross-Site Scripting (XSS) Protection
+  - [ ] Clickjacking Protection
+  - [ ] Host header validation
+  - [ ] Referrer policy
   - [ ] Live Monitor
   - [ ] Flashing Messages
   - [ ] Authentication

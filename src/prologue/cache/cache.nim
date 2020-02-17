@@ -1,3 +1,3 @@
-import basecache, lockedcache
+import lfucache, lrucache, lockedcache
 
-export basecache, lockedcache
+export lfucache, lrucache, lockedcache
