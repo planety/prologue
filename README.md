@@ -33,8 +33,8 @@ Docs in https://starlight-prologue.readthedocs.io/en/latest/
 - [x] Context
 - [x] Static Files
 - [x] Middlewares
-- [x] Regex Route
 - [x] Simple Route
+- [x] Regex Route
 - [x] Template(Using Karax Native or Using Nim Filter)
 - [x] Test Client(Using httpclient)
 - [x] CORS Response
@@ -52,6 +52,10 @@ nimble install prologue
 ```
 
 ### Usage
+
+More examples
+- [HelloWorld](https://github.com/planety/prologue/tree/master/examples/helloworld)
+- [ToDoList](https://github.com/planety/prologue/tree/master/examples/todolist)
 
 #### Hello World
 
