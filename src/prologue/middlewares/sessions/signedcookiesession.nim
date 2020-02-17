@@ -49,6 +49,8 @@ proc sessionMiddleware*(
     if ctx.session.accessed:
       ctx.addHeader("vary", "Cookie")
 
-    ctx.setCookie(sessionName, signer.sign(dumps(ctx.session)), maxAge = some(
-        maxAge), path = path, domain = domain, sameSite = sameSite,
-        httpOnly = httpOnly)
+    # TODO add refresh every request[in permanent session]
+    if ctx.session.modified:
+      ctx.setCookie(sessionName, signer.sign(dumps(ctx.session)), maxAge = some(
+          maxAge), path = path, domain = domain, sameSite = sameSite,
+          httpOnly = httpOnly)
