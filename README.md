@@ -43,6 +43,10 @@ Docs in https://starlight-prologue.readthedocs.io/en/latest/
   - [x] Cookie
   - [x] Session
   - [x] Cache
+  - [ ] Startup and Shutdown Events
+  - [ ] Cross-Site Request Forgery
+  - [ ] Live Monitor
+  - [ ] Flashing Messages
   - [ ] Authentication
 - Plugin
   - [x] Template(Using Karax Native or Using Nim Filter)
@@ -102,8 +106,7 @@ proc do_login*(ctx: Context) {.async.} =
 
 let settings = newSettings(appName = "StarLight")
 var app = initApp(settings = settings, middlewares = @[debugRequestMiddleware])
-app.addRoute("/", home, HttpGet)
-app.addRoute("/", home, HttpPost)
+app.addRoute("/", home, @[HttpGet, HttpPost])
 app.addRoute("/home", home, HttpGet)
 app.addRoute("/hello", hello, HttpGet)
 app.addRoute("/redirect", testRedirect, HttpGet)
@@ -165,8 +168,7 @@ import views
 
 
 let urlPatterns* = @[
-  pattern("/", home),
-  pattern("/", home, HttpPost),
+  pattern("/", home, @[HttpGet, HttpPost]),
   pattern("/home", home),
   pattern("/login", login),
   pattern("/login", do_login, HttpPost),
@@ -198,8 +200,7 @@ let
 
 var app = initApp(settings = settings, middlewares = @[])
 app.addRoute(urls.urlPatterns, "/todolist")
-app.addRoute("/", home, HttpGet)
-app.addRoute("/", home, HttpPost)
+app.addRoute("/", home, @[HttpGet, HttpPost])
 app.addRoute("/index.html", index, HttpGet)
 app.addRoute("/prefix/home", home, HttpGet)
 app.addRoute("/home", home, HttpGet)
