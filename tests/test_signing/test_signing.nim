@@ -1,7 +1,7 @@
-import ../../src/prologue
+from ../../src/prologue/core/types import SecretKey
 import ../../src/prologue/signing/signing
 
-import unittest, strtabs
+import unittest, json
 
 
 suite "Test signing":
