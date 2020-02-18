@@ -18,7 +18,7 @@ web services.
 
 ## Documentation
 
-You can read documentation in https://planety.github.io/prologue
+You can read documentation in https://planety.github.io/prologue.
 
 
 ## Feature
@@ -73,10 +73,9 @@ proc hello*(ctx: Context) {.async.} =
   resp "<h1>Hello, Prologue!</h1>"
 
 
-let settings = newSettings(appName = "StarLight", debug = true)
-var app = initApp(settings = settings, middlewares = @[stripPathMiddleware()])
-app.addRoute("/", hello, HttpGet)
-app.addRoute("/hello", hello, HttpGet)
+let settings = newSettings()
+var app = initApp(settings = settings)
+app.addRoute("/", hello)
 app.run()
 ```
 
@@ -86,16 +85,13 @@ The server is running at localhost:8080.
 
 ```nim
 # Async Function
-proc hello*(ctx: Context) {.async.} =
-  resp "<h1>Hello, Prologue!</h1>"
-
 proc home*(ctx: Context) {.async.} =
   resp "<h1>Home</h1>"
 
 proc helloName*(ctx: Context) {.async.} =
-  resp "<h1>Hello, " & ctx.request.pathParams.getOrDefault("name", "Prologue") & "</h1>"
+  resp "<h1>Hello, " & getPathParams("name", "Prologue") & "</h1>"
 
-proc testRedirect*(ctx: Context) {.async.} =
+proc doRedirect*(ctx: Context) {.async.} =
   resp redirect("/hello")
 
 proc login*(ctx: Context) {.async.} =
@@ -107,11 +103,9 @@ proc do_login*(ctx: Context) {.async.} =
 
 let settings = newSettings(appName = "StarLight")
 var app = initApp(settings = settings, middlewares = @[debugRequestMiddleware])
-app.addRoute("/", home, HttpGet)
-app.addRoute("/", home, HttpPost)
+app.addRoute("/", home, @[HttpGet, HttpPost])
 app.addRoute("/home", home, HttpGet)
-app.addRoute("/hello", hello, HttpGet)
-app.addRoute("/redirect", testRedirect, HttpGet)
+app.addRoute("/redirect", doRedirect, HttpGet)
 app.addRoute("/login", login, HttpGet)
 app.addRoute("/login", do_login, HttpPost, @[debugRequestMiddleware])
 app.addRoute("/hello/{name}", helloName, HttpGet)

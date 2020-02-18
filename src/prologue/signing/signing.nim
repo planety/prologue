@@ -10,10 +10,10 @@ export signingbase
 
 
 type
-  BaseDigestType = sha1 | sha2 | keccak | ripemd | blake2
+  BaseDigestType* = sha1 | sha2 | keccak | ripemd | blake2
 
   # TODO try macros
-  BaseDigestMethodType = enum
+  BaseDigestMethodType* = enum
     Sha1Type = "sha1"
     Sha224Type = "sha224", Sha384Type = "sha384", Sha512Type, Sha512_224Type, Sha512_256Type
     Keccak224Type, Keccak256Type, Keccak384Type, Keccak512Type, Sha3_224Type,
@@ -21,7 +21,7 @@ type
     Ripemd128Type, Ripemd160Type, Ripemd256Type, Ripemd320Type
     Blake2_224Type, Blake2_256Type, Blake2_384Type, Blake2_512Type
 
-  KeyDerivation = enum
+  KeyDerivation* = enum
     Concat, MoreConcat, KeyHmac, None
 
   Signer* = object
