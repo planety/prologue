@@ -6,52 +6,44 @@
 [![Version](https://img.shields.io/github/v/release/planety/prologue?include_prereleases)](https://github.com/planety/prologue/releases)
 
 
-# Prologue[![nimble](https://raw.githubusercontent.com/yglukhov/nimble-tag/master/nimble.png)](https://github.com/yglukhov/nimble-tag)
+# Prologue
 What's past is prologue.
 
-### Purpose
-It tends to be Medium scale Web Framework(May be Full-Stack without models or Orm)
-
-You can see our task assignment as below or join us.
-
-https://github.com/planety/BluePrint/blob/master/task.md
+## Purpose
+Prologue is a Medium Scale Web Framework which is
+ideal for building elegant and high performance
+web services.
 
 
-### Docs [Not yet]
+---
 
-Docs in https://planety.github.io/prologue
+## Feature
 
-
-### Feature
-
-
-- High Performance Http 1.1/2.0 Server
-- High Performance Websocket Server
-- Http 2.0 Client
-- Reloader
 - Configure and Settings
 - Context
+- Params and Query Data
+- Form Data
 - Static Files
 - Middlewares
 - Simple Route
-- Template(Using Karax Native or Using Nim Filter)
-- Test Client(Using httpclient)
+- Regex Route
 - CORS Response
 - Signing
+- Cookie
 - Session
-- Authentication
 - Cache
-- Openapi
+- Template(Using Karax Native or Using Nim Filter)
+- Test Client(Using httpclient)
 
-### Installation
+## Installation
 
 ```bash
 nimble install prologue
 ```
 
-### Usage
+## Usage
 
-#### Hello World
+### Hello World
 
 ```nim
 proc hello*(ctx: Context) {.async.} =
@@ -67,7 +59,7 @@ app.run()
 
 The server is running at localhost:8080.
 
-#### Another example
+### Another example
 
 ```nim
 # Async Function
@@ -103,7 +95,7 @@ app.addRoute("/hello/{name}", helloName, HttpGet)
 app.run()
 ```
 
-#### Urls Files
+### Urls Files
 **views.nim**
 
 ```nim
@@ -203,3 +195,7 @@ app.addRoute("/multipart", multiPart, HttpGet)
 app.addRoute("/multipart", do_multiPart, HttpPost)
 app.run()
 ```
+
+### More examples
+- [HelloWorld](https://github.com/planety/prologue/tree/master/examples/helloworld)
+- [ToDoList](https://github.com/planety/prologue/tree/master/examples/todolist)
