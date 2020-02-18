@@ -112,11 +112,35 @@ macro getPathParams*[T: BaseType](key: string, default: T): T =
     let pathParams = `ctx`.request.pathParams.getOrDefault(`key`)
     parseValue(pathParams, `default`)
 
+proc attachment(ctx: Context, downloadName = "", charset = "utf-8") {.inline.} =
+  if downloadName == "":
+    return
+  
+  var ext = downloadName.splitFile.ext
+  if ext.len > 0:
+    ext = ext[1 .. ^1]
+    let mimes = ctx.request.settings.mimeDB.getMimetype(ext)
+    if mimes != "":
+      ctx.setHeader("Content-Type", fmt"{mimes}; charset={charset}")
+    
+  ctx.setHeader("Content-Disposition", fmt"""attachment; filename="{downloadName}"""")
+
 proc staticFileResponse*(ctx: Context, fileName, root: string, mimetype = "",
-    downloadName = "", charset = "UTF-8", headers = newHttpHeaders()) {.async.} =
+    downloadName = "", charset = "utf-8", headers = newHttpHeaders()) {.async.} =
   let
-    mimeDB = newMimetypes()
     filePath = root / fileName
+
+  # exists -> have access -> can open
+  if not existsFile(filePath):
+    await ctx.request.respond(error404(headers = headers))
+    return
+
+  var filePermission = getFilePermissions(filePath)
+  if fpOthersRead notin filePermission:
+    await ctx.request.respond(abort(status = Http403,
+        body = "You do not have permission to access this file.", headers = headers))
+    return
+
   var
     mimetype = mimetype
     download = false
@@ -125,18 +149,7 @@ proc staticFileResponse*(ctx: Context, fileName, root: string, mimetype = "",
     var ext = fileName.splitFile.ext
     if ext.len > 0:
       ext = ext[1 .. ^ 1]
-    mimetype = mimeDB.getMimetype(ext)
-
-  # exists -> have access -> can open
-  if not existsFile(filePath):
-    await ctx.request.respond(error404())
-    return
-
-  var filePermission = getFilePermissions(filePath)
-  if fpOthersRead notin filePermission:
-    await ctx.request.respond(abort(status = Http403,
-        body = "You do not have permission to access this file."))
-    return
+    mimetype = ctx.request.settings.mimeDB.getMimetype(ext)
 
   let
     info = getFileInfo(filePath)
@@ -145,20 +158,19 @@ proc staticFileResponse*(ctx: Context, fileName, root: string, mimetype = "",
     etagBase = fmt"{fileName}-{lastModified}-{contentLength}"
     etag = getMD5(etagBase)
 
+  ctx.response.httpHeaders = headers
+  
+  if mimetype != "":
+    ctx.setHeader("Content-Type", fmt"{mimetype}; {charset}")
+
+  ctx.setHeader("Content-Length", $contentLength)
+  ctx.setHeader("Last-Modified", $lastModified)
+  ctx.setHeader("Etag", etag)
+
   if downloadName != "":
-    var ext = fileName.splitFile.ext
-    if ext.len > 0:
-      ext = ext[1 .. ^ 1]
-      let mimes = mimeDB.getMimetype(ext)
-      if mimes != "":
-        mimetype = mimes
-    headers["Content-Disposition"] = fmt"""attachment; filename="{downloadName}""""
+    ctx.attachment(downloadName)
     download = true
 
-  headers["Content-Length"] = $contentLength
-  headers["Content-Type"] = mimetype & "; " & charset
-  headers["Last-Modified"] = $lastModified
-  headers["Etag"] = etag
 
   if contentLength < 20_000_000:
     # if ctx.request.headers.hasKey("If-None-Match") and ctx.request.headers[
