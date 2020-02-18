@@ -19,7 +19,7 @@ https://github.com/planety/BluePrint/blob/master/task.md
 
 ### Docs [Not yet]
 
-Docs in https://starlight-prologue.readthedocs.io/en/latest/
+Docs in https://planety.github.io/prologue
 
 
 ### Feature

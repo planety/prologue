@@ -26,4 +26,5 @@ task test_arc, "Run all tests with arc":
   exec "nim c -r --gc:arc tests/alltests.nim"
 
 task docs, "Only for gh-pages, not for users":
+  exec "mkdocs build"
   exec "mkdocs gh-deploy"

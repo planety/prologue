@@ -19,29 +19,29 @@ https://github.com/planety/BluePrint/blob/master/task.md
 
 ### Docs [Not yet]
 
-Docs in https://starlight-prologue.readthedocs.io/en/latest/
+Docs in https://planety.github.io/prologue
 
 
 ### Feature
 
 
-- [ ] High Performance Http 1.1/2.0 Server
-- [ ] High Performance Websocket Server
-- [ ] Http 2.0 Client
-- [ ] Reloader
-- [x] Configure and Settings
-- [x] Context
-- [x] Static Files
-- [x] Middlewares
-- [x] Simple Route
-- [x] Template(Using Karax Native or Using Nim Filter)
-- [x] Test Client(Using httpclient)
-- [x] CORS Response
-- [x] Signing
-- [ ] Session
-- [ ] Authentication
-- [ ] Cache
-- [ ] Openapi
+- High Performance Http 1.1/2.0 Server
+- High Performance Websocket Server
+- Http 2.0 Client
+- Reloader
+- Configure and Settings
+- Context
+- Static Files
+- Middlewares
+- Simple Route
+- Template(Using Karax Native or Using Nim Filter)
+- Test Client(Using httpclient)
+- CORS Response
+- Signing
+- Session
+- Authentication
+- Cache
+- Openapi
 
 ### Installation
 
