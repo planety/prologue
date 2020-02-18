@@ -10,6 +10,8 @@ edit_uri: ""
 
 nav:
     - Introduction: 'index.md'
+    - Application: "application.md"
+    - Route: "route.md"
 
 
 markdown_extensions:
