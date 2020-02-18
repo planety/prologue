@@ -1,0 +1,17 @@
+site_name: Prologue
+site_description:  Medium scale Web Framework.
+
+theme:
+    name: 'material'
+
+repo_name: planety/prologue
+repo_url: https://github.com/planety/prologue
+edit_uri: ""
+
+nav:
+    - Introduction: 'index.md'
+
+
+markdown_extensions:
+  - markdown.extensions.codehilite:
+      guess_lang: false
