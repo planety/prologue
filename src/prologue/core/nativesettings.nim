@@ -10,12 +10,12 @@ type
     debug*: bool
     reusePort*: bool
     mimeDB*: MimeDB
-    staticDir*: string
+    staticDirs*: seq[string]
     secretKey*: SecretKey
     appName*: string
 
 
 proc newSettings*(port = Port(8080), debug = true, reusePort = true,
-    staticDir = "/static", secretKey = SecretKey(""), appName = ""): Settings =
-  Settings(port: port, debug: debug, reusePort: reusePort, staticDir: staticDir,
+    staticDirs = @["/static"], secretKey = SecretKey(""), appName = ""): Settings =
+  Settings(port: port, debug: debug, reusePort: reusePort, staticDirs: staticDirs,
     mimeDB: newMimetypes(), secretKey: secretKey, appName: appName)

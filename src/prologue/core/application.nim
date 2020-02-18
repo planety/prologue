@@ -96,6 +96,12 @@ macro resp*(params: Response) =
   result = quote do:
     `ctx`.response = `params`
 
+proc serveStaticFile*(app: Prologue, staticDir: string) {.inline.} =
+  app.settings.staticDirs.add(staticDir)
+
+proc serveStaticFile*(app: Prologue, staticDir: seq[string]) {.inline.} =
+  app.settings.staticDirs.add(staticDir)
+
 proc initApp*(settings: Settings, middlewares: seq[HandlerAsync] = @[]): Prologue =
   Prologue(server: newPrologueServer(true, settings.reusePort),
       settings: settings, router: newRouter(), reRouter: newReRouter(),
@@ -147,15 +153,17 @@ proc run*(app: Prologue) =
 
     let file = splitFile(request.path.strip(chars = {'/'}, trailing = false))
 
-    if file.dir.startsWith(app.settings.staticDir.strip(chars = {'/'},
-        trailing = false)):
-      await staticFileResponse(ctx, file.name & file.ext, file.dir)
-    else:
+    var staticFileMatched = false
+    for dir in app.settings.staticDirs:
+      if file.dir.startsWith(dir.strip(chars = {'/'},
+          trailing = false)):
+        await staticFileResponse(ctx, file.name & file.ext, file.dir)
+        staticFileMatched = true
+        break
+    if not staticFileMatched:
       await switch(ctx)
-
     await handle(ctx)
     logging.debug($(ctx.response))
-
 
   # TODO maybe should read settings from file
   if logging.getHandlers().len == 0:
@@ -206,5 +214,6 @@ when isMainModule:
   app.addRoute("/login", login, HttpGet)
   app.addRoute("/login", doLogin, HttpPost)
   app.addRoute("/hello/{name}", helloName, HttpGet)
+  app.serveStaticFile("static")
   app.generateDocs()
   app.run()
