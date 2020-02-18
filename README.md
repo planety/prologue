@@ -32,10 +32,10 @@ You can read documentation in https://planety.github.io/prologue.
 - Core
   - [x] Configure and Settings
   - [x] Context
-  - [x] Params and Query Data
+  - [x] Param and Query Data
   - [x] Form Data
   - [x] Static Files
-  - [x] Middlewares
+  - [x] Middleware
   - [x] Simple Route
   - [x] Regex Route
   - [x] CORS Response
@@ -55,9 +55,13 @@ You can read documentation in https://planety.github.io/prologue.
 - Plugin
   - [x] Template(Using Karax Native or Using Nim Filter)
   - [x] Test Client(Using httpclient)
-  - [ ] Openapi
+  - [ ] OpenID
 
 ## Installation
+
+First you should install [Nim](https://nim-lang.org/) language which is an elegant and high performance language.Follow the [instructions](https://nim-lang.org/install.html) and set environment variables correctly.
+
+Then you can use `nimble` command to install prologue.
 
 ```bash
 nimble install prologue
@@ -69,6 +73,11 @@ nimble install prologue
 ### Hello World
 
 ```nim
+# app.nim
+import asyncdispatch
+import prologue
+
+
 proc hello*(ctx: Context) {.async.} =
   resp "<h1>Hello, Prologue!</h1>"
 
@@ -79,11 +88,16 @@ app.addRoute("/", hello)
 app.run()
 ```
 
-The server is running at localhost:8080.
+Run **app.nim**.Now the server is running at localhost:8080.
 
 ### Another example
 
 ```nim
+# app.nim
+import asyncdispatch
+import prologue
+
+
 # Async Function
 proc home*(ctx: Context) {.async.} =
   resp "<h1>Home</h1>"
@@ -112,7 +126,7 @@ app.addRoute("/hello/{name}", helloName, HttpGet)
 app.run()
 ```
 
-The server is running at localhost:8080.
+Run **app.nim**.Now the server is running at localhost:8080.
 
 ### More examples
 - [HelloWorld](https://github.com/planety/prologue/tree/master/examples/helloworld)

@@ -6,7 +6,7 @@
 What's past is prologue.
 
 ## Purpose
-Prologue is a Medium Scale Web Framework which is
+`Prologue` is a Medium Scale Web Framework which is
 ideal for building elegant and high performance
 web services.
 
@@ -15,10 +15,10 @@ web services.
 
 - Configure and Settings
 - Context
-- Params and Query Data
+- Param and Query Data
 - Form Data
 - Static Files
-- Middlewares
+- Middleware
 - Simple Route
 - Regex Route
 - CORS Response
@@ -30,6 +30,9 @@ web services.
 - Test Client(Using httpclient)
 
 ## Installation
+First you should install [Nim](https://nim-lang.org/) language which is an elegant and high performance language.Follow the [instructions](https://nim-lang.org/install.html) and set environment variables correctly.
+
+Then you can use `nimble` command to install prologue.
 
 ```bash
 nimble install prologue
@@ -40,6 +43,11 @@ nimble install prologue
 ### Hello World
 
 ```nim
+# app.nim
+import asyncdispatch
+import prologue
+
+
 proc hello*(ctx: Context) {.async.} =
   resp "<h1>Hello, Prologue!</h1>"
 
@@ -50,11 +58,16 @@ app.addRoute("/", hello)
 app.run()
 ```
 
-The server is running at localhost:8080.
+Run **app.nim**.Now the server is running at localhost:8080.
 
 ### Another Example
 
 ```nim
+# app.nim
+import asyncdispatch
+import prologue
+
+
 # Async Function
 proc home*(ctx: Context) {.async.} =
   resp "<h1>Home</h1>"
@@ -80,12 +93,14 @@ app.addRoute("/hello/{name}", helloName, HttpGet)
 app.run()
 ```
 
-### Urls Files
+Run **app.nim**.Now the server is running at localhost:8080.
+
+### URLs Files
 **views.nim**
 
 ```nim
+import asyncdispatch
 import prologue
-
 
 proc index*(ctx: Context) {.async.} =
   resp "<h1>Hello, Prologue!</h1>"
@@ -95,10 +110,9 @@ proc hello*(ctx: Context) {.async.} =
   resp "<h1>Home</h1>"
 ```
 
-**urls.nim**
+**URLs.nim**
 
 ```nim
-
 import prologue
 
 
@@ -138,6 +152,8 @@ app.addRoute(urls.urlPatterns, "/api")
 app.addRoute("/", index, HttpGet)
 app.run()
 ```
+
+Run **app.nim**.Now the server is running at localhost:8080.
 
 ### More Examples
 - [HelloWorld](https://github.com/planety/prologue/tree/master/examples/helloworld)
