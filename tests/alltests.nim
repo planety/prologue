@@ -1,2 +1,3 @@
-import test_config, test_types, test_application
+import test_config/test_config
+import test_core / [test_types, test_application]
 {.warnings: off.}

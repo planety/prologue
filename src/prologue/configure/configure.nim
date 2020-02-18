@@ -1,6 +1,6 @@
 import os, tables, strutils, parsecfg, streams
 
-import types
+import ../core/types
 
 export Config, loadConfig, writeConfig, setSectionKey, types
 
@@ -102,7 +102,7 @@ proc writePrologueEnv*(fileName: string, env: Env) =
 
 
 when isMainModule:
-  import constants
+  import ../core/constants
 
 
   let prefix = ProloguePrefix

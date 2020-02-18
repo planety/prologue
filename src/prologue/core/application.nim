@@ -2,10 +2,10 @@ import asyncdispatch, uri, cgi, httpcore
 import tables, strutils, strformat, macros, logging, strtabs, os, options
 
 import response, context, pages, route,
-    nativesettings, corebase, configure, utils, middlewaresbase
+    nativesettings, corebase, utils, middlewaresbase
 
 import ../middlewares/middlewares, ../openapi/openapi, ../signing/signing
-import ../cache/cache
+import ../cache/cache, ../configure/configure
 from cookies import parseCookies
 from types import SameSite
 
