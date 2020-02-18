@@ -1,7 +1,7 @@
 import ../../src/prologue
 import ../../src/prologue/signing/signing
 
-import unittest, strtabs, os
+import unittest, strtabs
 
 
 suite "Test signing":
@@ -23,10 +23,8 @@ suite "Test signing":
       key = SecretKey("secret-key")
       s = initTimedSigner(key, salt = "activate",
           digestMethod = Sha1Type)
-      sig = s.sign("my string")
-    sleep(1000)
-    expect(SignatureExpiredError):
-      discard s.unsign(sig, 1) == "my string"
+      sig = s.sign("my string")    
+    check s.unsign(sig, 0) == "my string"
 
   test "can sign with json string":
     let
