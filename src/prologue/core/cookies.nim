@@ -46,7 +46,7 @@ proc setCookie*(key, value: string, expires: DateTime|Time, maxAge: Option[
       "ddd',' dd MMM yyyy HH:mm:ss 'GMT'"), maxAge, domain, path, secure,
       httpOnly, sameSite)
 
-proc timeForward*(lastingTime: int): DateTime =
+proc timeForward*(lastingTime: Natural): DateTime =
   getTime().utc + initDuration(seconds = lastingTime)
 
 when isMainModule:

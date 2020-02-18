@@ -1,4 +1,4 @@
-import prologue/configure/configure
+import ../../src/prologue/configure/configure
 
 import unittest, os
 
@@ -18,7 +18,11 @@ suite "Test Config":
 
   test "can load config":
     let env = loadPrologueEnv("tests/.env")
-    check $env == """{"debug": "true", "port": "8080", "appName": "Starlight", "staticDir": "static"}"""
+    check: 
+      env["debug"] == "true"
+      env["port"] == "8080"
+      env["appName"] == "Starlight"
+      env["staticDir"] == "static"
 
   if existsFile(fileName):
     removeFile(fileName)

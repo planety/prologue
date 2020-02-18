@@ -1,4 +1,4 @@
-import prologue/core/types
+import ../../src/prologue/core/types
 
 import unittest, strtabs
 

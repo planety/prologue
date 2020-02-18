@@ -1,4 +1,4 @@
-import prologue, logging
+import ../src/prologue, logging
 
 
 proc hello*(ctx: Context) {.async.} =
