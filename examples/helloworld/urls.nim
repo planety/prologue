@@ -4,7 +4,6 @@ import ../../src/prologue
 import controllers
 
 
-
 let urlPatterns* = @[
   # strip latter
   pattern("/", home),
