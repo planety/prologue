@@ -20,8 +20,9 @@ suite "Test Cookies":
     check $tabs == $newStringTable()
 
   test "timeForward can work":
-    discard timeForward(0)
-    discard timeForward(10)
+    discard secondsForward(0)
+    discard daysForward(10)
+    discard timesForward(1, 2, 3, 4, 5, 6, 7, 8)
 
     # setCookie*(key, value: string, expires = "", maxAge: Option[int] = none(int), domain = "", path = "",
     # secure = false, httpOnly = false, sameSite = Lax)

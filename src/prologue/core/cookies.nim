@@ -46,8 +46,20 @@ proc setCookie*(key, value: string, expires: DateTime|Time, maxAge: Option[
       "ddd',' dd MMM yyyy HH:mm:ss 'GMT'"), maxAge, domain, path, secure,
       httpOnly, sameSite)
 
-proc timeForward*(lastingTime: Natural): DateTime =
-  getTime().utc + initDuration(seconds = lastingTime)
+proc secondsForward*(seconds: Natural): DateTime =
+  ## in seconds
+  getTime().utc + initDuration(seconds = seconds)
+
+proc daysForward*(days: Natural): DateTime =
+  ## in days
+  getTime().utc + initDuration(days = days)
+
+proc timesForward*(nanoseconds, microseconds, milliseconds, seconds, minutes,
+    hours, days, weeks: Natural = 0): DateTime =
+  ## in seconds
+  getTime().utc + initDuration(nanoseconds, microseconds, milliseconds, seconds,
+      minutes, hours, days, weeks)
+
 
 when isMainModule:
   echo setCookie("useName", "xzsd")
