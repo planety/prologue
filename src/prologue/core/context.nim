@@ -41,9 +41,23 @@ type
     middlewares*: seq[HandlerAsync]
     session*: Session
 
-  EventHandler* = proc() {.closure, gcsafe.}
+  AsyncEvent* = proc(): Future[void] {.closure, gcsafe.}
+  SyncEvent* = proc() {.closure, gcsafe.}
+
+  Event* = object
+    case async*: bool
+    of true:
+      asyncHandler*: AsyncEvent
+    of false:
+      syncHandler*: SyncEvent
+  
   HandlerAsync* = proc(ctx: Context): Future[void] {.closure, gcsafe.}
 
+proc initEvent*(handler: AsyncEvent): Event =
+  Event(async: true, asyncHandler: handler)
+
+proc initEvent*(handler: SyncEvent): Event =
+  Event(async: false, syncHandler: handler)
 
 proc newContext*(request: Request, response: Response,
     router: Router, reRouter: ReRouter): Context {.inline.} =
