@@ -10,7 +10,7 @@ import ../core/context
 type
   Server* = AsyncHttpServer
 
-  Prologue* = object
+  Prologue* = ref object
     server*: Server
     settings*: Settings
     router*: Router

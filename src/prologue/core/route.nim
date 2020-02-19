@@ -23,7 +23,6 @@ type
     httpMethod: seq[HttpMethod]
     webAction: WebAction
     middlewares: seq[HandlerAsync]
-    excludeMiddlewares: seq[HandlerAsync]
 
 
 proc initPath*(route: string, httpMethod = HttpGet): Path =
@@ -33,13 +32,12 @@ proc initRePath*(route: Regex, httpMethod = HttpGet): RePath =
   RePath(route: route, httpMethod: httpMethod)
 
 proc pattern*(route: string, handler: HandlerAsync, httpMethod = HttpGet,
-    webAction: WebAction = Http, middlewares: seq[HandlerAsync] = @[], excludeMiddlewares: seq[HandlerAsync] = @[]): UrlPattern =
-  (route, handler, @[httpMethod], webAction, middlewares, excludeMiddlewares)
-
+    webAction: WebAction = Http, middlewares: seq[HandlerAsync] = @[]): UrlPattern =
+  (route, handler, @[httpMethod], webAction, middlewares)
 
 proc pattern*(route: string, handler: HandlerAsync, httpMethod: seq[HttpMethod],
-    webAction: WebAction = Http, middlewares: seq[HandlerAsync] = @[], excludeMiddlewares: seq[HandlerAsync] = @[]): UrlPattern =
-  (route, handler, httpMethod, webAction, middlewares, excludeMiddlewares)
+    webAction: WebAction = Http, middlewares: seq[HandlerAsync] = @[]): UrlPattern =
+  (route, handler, httpMethod, webAction, middlewares)
 
 proc hash*(x: Path): Hash =
   var h: Hash = 0
@@ -47,10 +45,8 @@ proc hash*(x: Path): Hash =
   h = h !& hash(x.httpMethod)
   result = !$h
 
-proc newPathHandler*(handler: HandlerAsync, middlewares: seq[HandlerAsync] = @[],
-    excludeMiddlewares: seq[HandlerAsync] = @[]): PathHandler =
-  PathHandler(handler: handler, middlewares: middlewares,
-      excludeMiddlewares: excludeMiddlewares)
+proc newPathHandler*(handler: HandlerAsync, middlewares: seq[HandlerAsync] = @[]): PathHandler =
+  PathHandler(handler: handler, middlewares: middlewares)
 
 proc newRouter*(): Router =
   Router(callable: initTable[Path, PathHandler]())

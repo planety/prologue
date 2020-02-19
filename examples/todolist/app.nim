@@ -13,7 +13,7 @@ let
     )
 
 var
-  app = initApp(settings = settings, middlewares = @[debugRequestMiddleware()])
+  app = newApp(settings = settings, middlewares = @[debugRequestMiddleware()])
 
 app.addRoute(urls.urlPatterns, "")
 app.generateDocs()

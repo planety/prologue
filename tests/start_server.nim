@@ -27,7 +27,7 @@ proc doLogin*(ctx: Context) {.async.} =
 
 
 let settings = newSettings(appName = "StarLight", debug = true)
-var app = initApp(settings = settings, middlewares = @[])
+var app = newApp(settings = settings, middlewares = @[])
 app.addRoute("", home, HttpGet)
 app.addRoute("/", home, HttpGet)
 app.addRoute("/home", home, HttpGet, @[debugRequestMiddleware()])

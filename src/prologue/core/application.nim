@@ -36,48 +36,42 @@ export options
 export cache
 
 
+
 proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
-    httpMethod = HttpGet, middlewares: seq[HandlerAsync] = @[],
-        excludeMiddlewares: seq[HandlerAsync] = @[]) {.inline.} =
+    httpMethod = HttpGet, middlewares: seq[HandlerAsync] = @[]) {.inline.} =
   ## add single handler route
   ## don't check whether regex routes are duplicated
   let path = initRePath(route = route, httpMethod = httpMethod)
-  app.reRouter.callable.add (path, newPathHandler(handler, middlewares,
-      excludeMiddlewares))
+  app.reRouter.callable.add (path, newPathHandler(handler, middlewares))
 
 proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
-    httpMethod: seq[HttpMethod], middlewares: seq[HandlerAsync] = @[],
-        excludeMiddlewares: seq[HandlerAsync] = @[]) {.inline.} =
-  ## add single handler route with multi http method
-  ## don't check whether regex routes are duplicated
+    httpMethod: seq[HttpMethod], middlewares: seq[HandlerAsync] = @[]) {.inline.} =
   for m in httpMethod:
-    app.addRoute(route, handler, m, middlewares, excludeMiddlewares)
+    app.addRoute(route, handler, m, middlewares)
 
 proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
-    httpMethod = HttpGet, middlewares: seq[HandlerAsync] = @[],
-        excludeMiddlewares: seq[HandlerAsync] = @[]) {.inline.} =
+    httpMethod = HttpGet, middlewares: seq[HandlerAsync] = @[]) {.inline.} =
   ## add single handler route
   ## check whether routes are duplicated
   let path = initPath(route = route, httpMethod = httpMethod)
 
   if path in app.router.callable:
     raise newException(DuplicatedRouteError, fmt"Route {route} is duplicated!")
-  app.router.callable[path] = newPathHandler(handler, middlewares, excludeMiddlewares)
+  app.router.callable[path] = newPathHandler(handler, middlewares)
 
 proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
-    httpMethod: seq[HttpMethod], middlewares: seq[HandlerAsync] = @[],
-        excludeMiddlewares: seq[HandlerAsync] = @[]) {.inline.} =
+    httpMethod: seq[HttpMethod], middlewares: seq[HandlerAsync] = @[]) {.inline.} =
   ## add single handler route with multi http method
   ## check whether routes are duplicated
   for m in httpMethod:
-    app.addRoute(route, handler, m, middlewares, excludeMiddlewares)
+    app.addRoute(route, handler, m, middlewares)
 
 proc addRoute*(app: Prologue, patterns: seq[UrlPattern],
     baseRoute = "") {.inline.} =
   ## add multi handler route
   for pattern in patterns:
     app.addRoute(baseRoute & pattern.route, pattern.matcher, pattern.httpMethod,
-        pattern.middlewares, pattern.excludeMiddlewares)
+        pattern.middlewares)
 
 macro resp*(params: string, status = Http200) =
   ## handy to make ctx's response
@@ -102,7 +96,7 @@ proc serveStaticFile*(app: Prologue, staticDir: string) {.inline.} =
 proc serveStaticFile*(app: Prologue, staticDir: seq[string]) {.inline.} =
   app.settings.staticDirs.add(staticDir)
 
-proc initApp*(settings: Settings, middlewares: seq[HandlerAsync] = @[],
+proc newApp*(settings: Settings, middlewares: seq[HandlerAsync] = @[],
     startup: seq[Event] = @[], shutdown: seq[Event] = @[]): Prologue =
   Prologue(server: newPrologueServer(true, settings.reusePort),
       settings: settings, router: newRouter(), reRouter: newReRouter(),
@@ -218,7 +212,7 @@ when isMainModule:
     resp redirect("/hello/Nim")
 
   let settings = newSettings(appName = "StarLight", debug = true)
-  var app = initApp(settings = settings, middlewares = @[stripPathMiddleware()])
+  var app = newApp(settings = settings, middlewares = @[stripPathMiddleware()])
   app.addRoute("/", home, HttpGet)
   app.addRoute("/", home, HttpPost)
   app.addRoute("/home", home, HttpGet, @[debugRequestMiddleware()])

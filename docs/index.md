@@ -54,7 +54,7 @@ proc hello*(ctx: Context) {.async.} =
 
 
 let settings = newSettings()
-var app = initApp(settings = settings)
+var app = newApp(settings = settings)
 app.addRoute("/", hello)
 app.run()
 ```
@@ -84,7 +84,7 @@ proc do_login*(ctx: Context) {.async.} =
 
 
 let settings = newSettings(appName = "StarLight")
-var app = initApp(settings = settings, middlewares = @[debugRequestMiddleware])
+var app = newApp(settings = settings, middlewares = @[debugRequestMiddleware])
 app.addRoute("/", home, @[HttpGet, HttpPost])
 app.addRoute("/home", home, HttpGet)
 app.addRoute("/redirect", testRedirect, HttpGet)
@@ -148,7 +148,7 @@ let
                 secretKey = SecretKey(env.getOrDefault("secretKey", ""))
                 )
 
-var app = initApp(settings = settings, middlewares = @[])
+var app = newApp(settings = settings, middlewares = @[])
 app.addRoute(urls.urlPatterns, "/api")
 app.addRoute("/", index, HttpGet)
 app.run()

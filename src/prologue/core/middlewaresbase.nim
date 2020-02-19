@@ -5,8 +5,12 @@ import context, route
 
 proc doNothingClosureMiddleware*(): HandlerAsync
 
-# let doNothing = doNothingClosureMiddleware()
 
+proc test() {.async.} =
+  var doNothing: seq[HandlerAsync] = @[]
+  doNothing.add doNothingClosureMiddleware()
+
+waitFor test()
 
 proc switch*(ctx: Context) {.async.} =
   ## TODO make middlewares check in compile time
@@ -20,7 +24,7 @@ proc switch*(ctx: Context) {.async.} =
     # for findHandler in handler.excludeMiddlewares:
     #   let idx = middlewares.find(findHandler)
     #   if idx != -1:
-    #     middlewares[idx] = doNothing
+    #     middlewares[idx] = doNothingClosureMiddleware()
 
     ctx.middlewares = middlewares & next
     ctx.first = false
@@ -43,3 +47,18 @@ proc switch*(ctx: Context) {.async.} =
 proc doNothingClosureMiddleware*(): HandlerAsync =
   result = proc(ctx: Context) {.async.} =
     await switch(ctx)
+
+# type
+#   Handler = proc() {.closure.}
+
+# proc doNothingClosureMiddleware*(): Handler =
+#   result = proc(ctx: Context) {.async.} =
+#     discard
+
+# discard doNothingClosureMiddleware()
+
+# proc test() =
+#   let x: seq[HandlerAsync] =
+#   let x: HandlerAsync = doNothingClosureMiddleware()
+
+# test()

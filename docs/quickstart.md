@@ -11,7 +11,7 @@ proc hello*(ctx: Context) {.async.} =
 
 
 let settings = newSettings()
-var app = initApp(settings = settings)
+var app = newApp(settings = settings)
 app.addRoute("/", hello)
 app.run()
 ```
