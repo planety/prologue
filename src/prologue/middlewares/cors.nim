@@ -32,9 +32,15 @@ proc CORSMiddleware*(
   exposeHeaders: sink seq[string] = @[],
   allowCredentials = false,
   maxAge = 7200,
+  excludeEndPoint: seq[string] = @[]
   ): HandlerAsync =
 
   result = proc(ctx: Context) {.async.} =
+    # just for example
+    if ctx.request.path in excludeEndPoint:
+      await switch(ctx)
+      return
+
     var
       reqHeaders = ctx.request.headers # request headers
 

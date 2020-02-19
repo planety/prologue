@@ -36,11 +36,23 @@ let process = startProcess("tests/start_server")
 waitFor start()
 
 
+# proc houndredsRequest(client: AsyncHttpClient, address: string, port: Port, route: string,num: int = 100000) {.async.} =
+#   for i in 0 ..< num:
+#     echo await client.getContent(fmt"http://{address}:{port}{route}")
+#     echo i
+
 suite "Test Application":
   let
     client = newAsyncHttpClient()
     address = "127.0.0.1"
     port = Port(8080)
+
+  # test "can handle houndreds of reuqest":
+  #   let
+  #     route = "/"
+  #   echo "begin"
+  #   waitFor client.houndredsRequest(address, port, route)
+  #   echo "end"
 
   test "can get /":
     let

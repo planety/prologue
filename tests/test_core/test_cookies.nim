@@ -19,7 +19,7 @@ suite "Test Cookies":
     let tabs = parseCookies("")
     check $tabs == $newStringTable()
 
-  test "timeForward can work":
+  test "timesForward can work":
     discard secondsForward(0)
     discard daysForward(10)
     discard timesForward(1, 2, 3, 4, 5, 6, 7, 8)
