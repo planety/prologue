@@ -12,7 +12,11 @@ nav:
     - Introduction: "index.md"
     - QuickStart: "quickstart.md"
     - Application: "application.md"
+    - Requests: "requests.md"
+    - Response: "response.md"
     - Route: "route.md"
+    - Middleware: "middleware.md"
+    - Static Files: "staticfiles.md"
 
 
 markdown_extensions:

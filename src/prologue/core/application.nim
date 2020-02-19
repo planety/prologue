@@ -102,12 +102,16 @@ proc serveStaticFile*(app: Prologue, staticDir: string) {.inline.} =
 proc serveStaticFile*(app: Prologue, staticDir: seq[string]) {.inline.} =
   app.settings.staticDirs.add(staticDir)
 
-proc initApp*(settings: Settings, middlewares: seq[HandlerAsync] = @[]): Prologue =
+proc initApp*(settings: Settings, middlewares: seq[HandlerAsync] = @[],
+    startup: seq[EventHandler] = @[], shutdown: seq[EventHandler] = @[]): Prologue =
   Prologue(server: newPrologueServer(true, settings.reusePort),
       settings: settings, router: newRouter(), reRouter: newReRouter(),
-          middlewares: middlewares)
+          middlewares: middlewares, startup: startup, shutdown: shutdown)
 
 proc run*(app: Prologue) =
+  for hander in app.startup:
+    hander()
+
   proc handleRequest(nativeRequest: NativeRequest) {.async.} =
     var request = initRequest(nativeRequest = nativeRequest,
         settings = app.settings)
@@ -177,6 +181,8 @@ proc run*(app: Prologue) =
   else:
     logging.debug(fmt"Prologue is serving at 0.0.0.0:{app.settings.port.int} {app.settings.appName}")
   waitFor app.serve(app.settings.port, handleRequest)
+  for hander in app.shutdown:
+    hander()
 
 
 when isMainModule:

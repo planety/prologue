@@ -16,6 +16,8 @@ type
     router*: Router
     reRouter*: ReRouter
     middlewares*: seq[HandlerAsync]
+    startup*: seq[EventHandler]
+    shutdown*: seq[EventHandler]
 
 
 proc appName*(app: Prologue): string {.inline.} =

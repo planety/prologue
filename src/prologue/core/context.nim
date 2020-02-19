@@ -41,6 +41,7 @@ type
     middlewares*: seq[HandlerAsync]
     session*: Session
 
+  EventHandler* = proc() {.closure, gcsafe.}
   HandlerAsync* = proc(ctx: Context): Future[void] {.closure, gcsafe.}
 
 

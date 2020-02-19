@@ -19,6 +19,7 @@ web services.
 - Form Data
 - Static Files
 - Middleware
+- Startup and Shutdown Events
 - Simple Route
 - Regex Route
 - CORS Response

@@ -27,7 +27,7 @@ You can read documentation in https://planety.github.io/prologue.
   - [ ] High Performance Http 1.1/2.0 Server
   - [ ] High Performance Websocket Server
   - [ ] Http 2.0 Client
-  - [ ] SSL/HttpS Support
+  - [ ] SSL/Https Support
   - [ ] Reloader
 - Core
   - [x] Configure and Settings
@@ -43,7 +43,7 @@ You can read documentation in https://planety.github.io/prologue.
   - [x] Cookie
   - [x] Session
   - [x] Cache
-  - [ ] Startup and Shutdown Events
+  - [x] Startup and Shutdown Events
   - [ ] Cross-Site Request Forgery
   - [ ] Cross-Site Scripting (XSS) Protection
   - [ ] Clickjacking Protection
