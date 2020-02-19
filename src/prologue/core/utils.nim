@@ -16,4 +16,3 @@ template beforeApi*(version, body: untyped) {.dirty.} =
   ## error: cannot attach a custom pragma.
   when (NimMajor, NimMinor) <= version:
     body
-

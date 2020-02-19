@@ -55,7 +55,7 @@ You can read documentation in https://planety.github.io/prologue.
 - Plugin
   - [x] Template(Using Karax Native or Using Nim Filter)
   - [x] Test Client(Using httpclient)
-  - [ ] OpenID
+  - [ ] OpenApi
 
 ## Installation
 

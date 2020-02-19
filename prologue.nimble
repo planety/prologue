@@ -2,7 +2,7 @@
 
 version       = "0.1.4"
 author        = "flywind"
-description   = "Another micro web framework."
+description   = "Medium Scale Web Framework."
 license       = "BSD-3-Clause"
 srcDir        = "src"
 

@@ -114,7 +114,7 @@ proc run*(app: Prologue) =
       asyncCheck event.asyncHandler()
     else:
       event.syncHandler()
-    
+
 
   proc handleRequest(nativeRequest: NativeRequest) {.async.} =
     var request = initRequest(nativeRequest = nativeRequest,
