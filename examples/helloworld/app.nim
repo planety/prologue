@@ -13,7 +13,7 @@ let
     )
 
 var
-  app = newApp(settings = settings, middlewares = @[debugRequestMiddleware()])
+  app = newApp(settings = settings, middlewares = @[])
 
 
 app.addRoute(urls.urlPatterns, "/todolist")

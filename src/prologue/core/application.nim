@@ -6,7 +6,7 @@ import response, context, pages, route,
 
 import ../middlewares/middlewares, ../openapi/openapi, ../signing/signing
 import ../cache/cache, ../configure/configure
-from cookies import parseCookies
+from ./cookies import parseCookies
 from types import SameSite
 
 import regex

@@ -1,7 +1,8 @@
-import httpcore, asyncdispatch, asyncfile, mimetypes, md5
+import httpcore, asyncdispatch, asyncfile, mimetypes, md5, uri
 import strtabs, macros, tables, strformat, os, times, options, parseutils
 
-import response, pages, constants, cookies
+import response, pages, constants
+import ./cookies
 from types import BaseType, Session, SameSite, initSession
 
 import regex
@@ -134,7 +135,7 @@ macro getPathParams*[T: BaseType](key: string, default: T): T =
     let pathParams = `ctx`.request.pathParams.getOrDefault(`key`)
     parseValue(pathParams, `default`)
 
-proc multiMatch(s: string, replacements: StringTableRef): string =
+proc multiMatch*(s: string, replacements: StringTableRef): string =
   result = newStringOfCap(s.len)
   var
     pos = 0
@@ -156,17 +157,25 @@ proc multiMatch(s: string, replacements: StringTableRef): string =
       else:
         raise newException(ValueError, "Unexpected key")
 
-proc multiMatch(s: string, replacements: varargs[(string, string)]): string {.inline.} =
+proc multiMatch*(s: string, replacements: varargs[(string, string)]): string {.inline.} =
   multiMatch(s, replacements.newStringTable)
 
-macro urlFor*(handler: HandlerAsync, parameters: seq[(string, string)] = @[]): string =
+macro urlFor*(handler: HandlerAsync, parameters: seq[(string,
+    string)] = @[], queryParams: seq[(string, string)] = @[],
+        usePlus = true, omitEq = true): string =
+  ## { } can't appear in url
   var ctx = ident"ctx"
 
   result = quote do:
     var res: string
     if `handler` in `ctx`.reversedRouter:
       res = `ctx`.reversedRouter[`handler`]
-    multiMatch(res, `parameters`)
+
+    res = multiMatch(res, `parameters`)
+    let queryString = encodeQuery(`queryParams`, `usePlus`, `omitEq`)
+    if queryString != "":
+      res = multiMatch(res, `parameters`) & "?" & queryString
+    res
 
 proc attachment(ctx: Context, downloadName = "", charset = "utf-8") {.inline.} =
   if downloadName == "":

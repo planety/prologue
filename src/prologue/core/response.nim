@@ -1,7 +1,7 @@
 import httpcore
 import times, json, strformat, options, macros
 
-from cookies import setCookie, secondsForward
+from ./cookies import setCookie, secondsForward
 from types import SameSite
 
 type
