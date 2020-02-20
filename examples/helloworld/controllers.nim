@@ -25,7 +25,7 @@ proc helloName*(ctx: Context) {.async.} =
   resp "<h1>Hello, " & getPathParams("name", "World") & "</h1>"
 
 proc home*(ctx: Context) {.async.} =
-  logging.dubug urlFor(index)
+  logging.debug urlFor(index)
   logging.debug urlFor(helloName, @[("name", "flywind")])
   logging.debug ctx.request.queryParams.getOrDefault("name", "")
   resp(redirect urlFor(helloName, @[("name", "flywind")]))
