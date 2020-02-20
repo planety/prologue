@@ -58,6 +58,7 @@ proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
   if path in app.router.callable:
     raise newException(DuplicatedRouteError, fmt"Route {route} is duplicated!")
   app.router.callable[path] = newPathHandler(handler, middlewares)
+  app.reversedRouter[handler] = route
 
 proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
     httpMethod: seq[HttpMethod], middlewares: seq[HandlerAsync] = @[]) {.inline.} =
@@ -99,8 +100,10 @@ proc serveStaticFile*(app: Prologue, staticDir: seq[string]) {.inline.} =
 proc newApp*(settings: Settings, middlewares: seq[HandlerAsync] = @[],
     startup: seq[Event] = @[], shutdown: seq[Event] = @[]): Prologue =
   Prologue(server: newPrologueServer(true, settings.reusePort),
-      settings: settings, router: newRouter(), reRouter: newReRouter(),
-          middlewares: middlewares, startup: startup, shutdown: shutdown)
+      settings: settings, router: newRouter(), reversedRouter: newTable[
+          HandlerAsync, string](), reRouter: newReRouter(),
+
+middlewares: middlewares, startup: startup, shutdown: shutdown)
 
 proc run*(app: Prologue) =
   for event in app.startup:
@@ -148,7 +151,8 @@ proc run*(app: Prologue) =
     var response = initResponse(HttpVer11, Http200, httpHeaders = {
         "Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders)
     var ctx = newContext(request = request, response = response,
-        router = app.router, reRouter = app.reRouter)
+        router = app.router, reversedRouter = app.reversedRouter,
+        reRouter = app.reRouter)
 
     ctx.middlewares = app.middlewares
     logging.debug(fmt"{ctx.request.reqMethod} {ctx.request.url.path}")

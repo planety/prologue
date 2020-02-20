@@ -34,6 +34,7 @@ type
     request*: Request
     response*: Response
     router*: Router
+    reversedRouter*: TableRef[HandlerAsync, string]
     reRouter*: ReRouter
     size*: int
     first*: bool
@@ -49,7 +50,7 @@ type
       asyncHandler*: AsyncEvent
     of false:
       syncHandler*: SyncEvent
-  
+
   HandlerAsync* = proc(ctx: Context): Future[void] {.closure, gcsafe.}
 
 proc initEvent*(handler: AsyncEvent): Event =
@@ -59,10 +60,11 @@ proc initEvent*(handler: SyncEvent): Event =
   Event(async: false, syncHandler: handler)
 
 proc newContext*(request: Request, response: Response,
-    router: Router, reRouter: ReRouter): Context {.inline.} =
+    router: Router, reversedRouter: TableRef[HandlerAsync, string],
+        reRouter: ReRouter): Context {.inline.} =
   Context(request: request, response: response, router: router,
-      reRouter: reRouter, size: 0, first: true, session: initSession(
-          data = newStringTable()))
+          reversedRouter: reversedRouter, reRouter: reRouter, size: 0, first: true,
+          session: initSession(data = newStringTable()))
 
 proc handle*(ctx: Context): Future[void] {.inline.} =
   result = ctx.request.respond(ctx.response)
@@ -129,14 +131,14 @@ macro getPathParams*[T: BaseType](key: string, default: T): T =
 proc attachment(ctx: Context, downloadName = "", charset = "utf-8") {.inline.} =
   if downloadName == "":
     return
-  
+
   var ext = downloadName.splitFile.ext
   if ext.len > 0:
     ext = ext[1 .. ^1]
     let mimes = ctx.request.settings.mimeDB.getMimetype(ext)
     if mimes != "":
       ctx.setHeader("Content-Type", fmt"{mimes}; charset={charset}")
-    
+
   ctx.setHeader("Content-Disposition", fmt"""attachment; filename="{downloadName}"""")
 
 proc staticFileResponse*(ctx: Context, fileName, root: string, mimetype = "",
@@ -152,7 +154,8 @@ proc staticFileResponse*(ctx: Context, fileName, root: string, mimetype = "",
   var filePermission = getFilePermissions(filePath)
   if fpOthersRead notin filePermission:
     await ctx.request.respond(abort(status = Http403,
-        body = "You do not have permission to access this file.", headers = headers))
+        body = "You do not have permission to access this file.",
+        headers = headers))
     return
 
   var
@@ -173,7 +176,7 @@ proc staticFileResponse*(ctx: Context, fileName, root: string, mimetype = "",
     etag = getMD5(etagBase)
 
   ctx.response.httpHeaders = headers
-  
+
   if mimetype != "":
     ctx.setHeader("Content-Type", fmt"{mimetype}; {charset}")
 
