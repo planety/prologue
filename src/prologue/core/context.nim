@@ -136,10 +136,10 @@ macro getPathParams*[T: BaseType](key: string, default: T): T =
 
 proc multiMatch(s: string, replacements: StringTableRef): string =
   result = newStringOfCap(s.len)
-  var 
+  var
     pos = 0
     tok = ""
-  let 
+  let
     startChar = '{'
     endChar = '}'
 
@@ -159,20 +159,14 @@ proc multiMatch(s: string, replacements: StringTableRef): string =
 proc multiMatch(s: string, replacements: varargs[(string, string)]): string {.inline.} =
   multiMatch(s, replacements.newStringTable)
 
-proc urlFor*(ctx: Context, handler: HandlerAsync, parameters: varargs[(string, string)] = @[]): string =
-  var res:string
-  if handler in ctx.reversedRouter:
-    res = ctx.reversedRouter[`handler`]
-  multiMatch(res, parameters)
+macro urlFor*(handler: HandlerAsync, parameters: seq[(string, string)] = @[]): string =
+  var ctx = ident"ctx"
 
-# macro urlFor*(handler: HandlerAsync, parameters: varargs[(string, string)] = @[]): string =
-#   var ctx = ident"ctx"
-
-#   result = quote do:
-#     var res: string
-#     if `handler` in `ctx`.reversedRouter:
-#       res = `ctx`.reversedRouter[`handler`]
-#     multiMatch(res, `parameters`)
+  result = quote do:
+    var res: string
+    if `handler` in `ctx`.reversedRouter:
+      res = `ctx`.reversedRouter[`handler`]
+    multiMatch(res, `parameters`)
 
 proc attachment(ctx: Context, downloadName = "", charset = "utf-8") {.inline.} =
   if downloadName == "":

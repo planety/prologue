@@ -25,10 +25,10 @@ proc helloName*(ctx: Context) {.async.} =
   resp "<h1>Hello, " & getPathParams("name", "World") & "</h1>"
 
 proc home*(ctx: Context) {.async.} =
-  echo urlFor(ctx, index)
-  
+  logging.dubug urlFor(index)
+  logging.debug urlFor(helloName, @[("name", "flywind")])
   logging.debug ctx.request.queryParams.getOrDefault("name", "")
-  resp(redirect urlFor(ctx, helloName, ("name", "flywind")))
+  resp(redirect urlFor(helloName, @[("name", "flywind")]))
 
 proc testRedirect*(ctx: Context) {.async.} =
   resp redirect("/hello")
