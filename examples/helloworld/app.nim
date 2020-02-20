@@ -1,7 +1,7 @@
 import ../../src/prologue
 
 
-import controllers, urls
+import views, urls
 
 let
   env = loadPrologueEnv(".env")

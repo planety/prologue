@@ -1,7 +1,7 @@
 import ../../src/prologue
 
 
-import controllers
+import views
 
 
 let urlPatterns* = @[
