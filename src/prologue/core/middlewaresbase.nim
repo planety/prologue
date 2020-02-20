@@ -6,12 +6,6 @@ import context, route
 proc doNothingClosureMiddleware*(): HandlerAsync
 
 
-proc test() {.async.} =
-  var doNothing: seq[HandlerAsync] = @[]
-  doNothing.add doNothingClosureMiddleware()
-
-waitFor test()
-
 proc switch*(ctx: Context) {.async.} =
   ## TODO make middlewares check in compile time
   if ctx.middlewares.len == 0:
@@ -47,18 +41,3 @@ proc switch*(ctx: Context) {.async.} =
 proc doNothingClosureMiddleware*(): HandlerAsync =
   result = proc(ctx: Context) {.async.} =
     await switch(ctx)
-
-# type
-#   Handler = proc() {.closure.}
-
-# proc doNothingClosureMiddleware*(): Handler =
-#   result = proc(ctx: Context) {.async.} =
-#     discard
-
-# discard doNothingClosureMiddleware()
-
-# proc test() =
-#   let x: seq[HandlerAsync] =
-#   let x: HandlerAsync = doNothingClosureMiddleware()
-
-# test()

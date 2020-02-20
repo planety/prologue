@@ -17,16 +17,18 @@ proc redocs*(ctx: Context) {.async.} =
 proc docsjson*(ctx: Context) {.async.} =
   await ctx.staticFileResponse("openapi.json", "docs")
 
-proc home*(ctx: Context) {.async.} =
-  logging.debug ctx.request.queryParams.getOrDefault("name", "")
-  resp "<h1>Home</h1>"
-
 proc index*(ctx: Context) {.async.} =
   await ctx.staticFileResponse("index.html", "static")
 
 proc helloName*(ctx: Context) {.async.} =
   logging.debug getPathParams("name")
   resp "<h1>Hello, " & getPathParams("name", "World") & "</h1>"
+
+proc home*(ctx: Context) {.async.} =
+  echo urlFor(ctx, index)
+  
+  logging.debug ctx.request.queryParams.getOrDefault("name", "")
+  resp(redirect urlFor(ctx, helloName, ("name", "flywind")))
 
 proc testRedirect*(ctx: Context) {.async.} =
   resp redirect("/hello")

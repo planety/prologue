@@ -1,5 +1,5 @@
 import httpcore
-import times, json, strformat, options
+import times, json, strformat, options, macros
 
 from cookies import setCookie, secondsForward
 from types import SameSite
@@ -85,3 +85,20 @@ proc jsonResponse*(text: JsonNode, status = Http200, headers = newHttpHeaders(),
   headers["Content-Type"] = "text/json"
   initResponse(version, status, headers,
       body = $text)
+
+macro resp*(params: string, status = Http200) =
+  ## handy to make ctx's response
+  var ctx = ident"ctx"
+
+  result = quote do:
+    let response = initResponse(httpVersion = HttpVer11, status = `status`,
+      httpHeaders = {"Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders,
+          body = `params`)
+    `ctx`.response = response
+
+macro resp*(params: Response) =
+  ## handy to make ctx's response
+  var ctx = ident"ctx"
+
+  result = quote do:
+    `ctx`.response = `params`

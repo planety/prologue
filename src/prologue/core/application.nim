@@ -1,5 +1,5 @@
 import asyncdispatch, uri, cgi, httpcore
-import tables, strutils, strformat, macros, logging, strtabs, os, options
+import tables, strutils, strformat, logging, strtabs, os, options
 
 import response, context, pages, route,
     nativesettings, corebase, utils, middlewaresbase
@@ -36,11 +36,12 @@ export options
 export cache
 
 
-
 proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
     httpMethod = HttpGet, middlewares: seq[HandlerAsync] = @[]) {.inline.} =
   ## add single handler route
   ## don't check whether regex routes are duplicated
+  # for group in route.namedGroups.keys:
+  #   echo group
   let path = initRePath(route = route, httpMethod = httpMethod)
   app.reRouter.callable.add (path, newPathHandler(handler, middlewares))
 
@@ -74,23 +75,6 @@ proc addRoute*(app: Prologue, patterns: seq[UrlPattern],
     app.addRoute(baseRoute & pattern.route, pattern.matcher, pattern.httpMethod,
         pattern.middlewares)
 
-macro resp*(params: string, status = Http200) =
-  ## handy to make ctx's response
-  var ctx = ident"ctx"
-
-  result = quote do:
-    let response = initResponse(httpVersion = HttpVer11, status = `status`,
-      httpHeaders = {"Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders,
-          body = `params`)
-    `ctx`.response = response
-
-macro resp*(params: Response) =
-  ## handy to make ctx's response
-  var ctx = ident"ctx"
-
-  result = quote do:
-    `ctx`.response = `params`
-
 proc serveStaticFile*(app: Prologue, staticDir: string) {.inline.} =
   app.settings.staticDirs.add(staticDir)
 
@@ -100,10 +84,8 @@ proc serveStaticFile*(app: Prologue, staticDir: seq[string]) {.inline.} =
 proc newApp*(settings: Settings, middlewares: seq[HandlerAsync] = @[],
     startup: seq[Event] = @[], shutdown: seq[Event] = @[]): Prologue =
   Prologue(server: newPrologueServer(true, settings.reusePort),
-      settings: settings, router: newRouter(), reversedRouter: newTable[
-          HandlerAsync, string](), reRouter: newReRouter(),
-
-middlewares: middlewares, startup: startup, shutdown: shutdown)
+      settings: settings, router: newRouter(), reversedRouter: newReversedRouter(), reRouter: newReRouter(),
+              middlewares: middlewares, startup: startup, shutdown: shutdown)
 
 proc run*(app: Prologue) =
   for event in app.startup:
@@ -111,7 +93,6 @@ proc run*(app: Prologue) =
       asyncCheck event.asyncHandler()
     else:
       event.syncHandler()
-
 
   proc handleRequest(nativeRequest: NativeRequest) {.async.} =
     var request = initRequest(nativeRequest = nativeRequest,

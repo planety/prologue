@@ -1,5 +1,5 @@
 import httpcore, asyncdispatch, asyncfile, mimetypes, md5
-import strtabs, macros, tables, strformat, os, times, options
+import strtabs, macros, tables, strformat, os, times, options, parseutils
 
 import response, pages, constants, cookies
 from types import BaseType, Session, SameSite, initSession
@@ -30,11 +30,13 @@ type
   ReRouter* = ref object
     callable*: seq[(RePath, PathHandler)]
 
+  ReversedRouter* = TableRef[HandlerAsync, string]
+
   Context* = ref object
     request*: Request
     response*: Response
     router*: Router
-    reversedRouter*: TableRef[HandlerAsync, string]
+    reversedRouter*: ReversedRouter
     reRouter*: ReRouter
     size*: int
     first*: bool
@@ -53,6 +55,9 @@ type
 
   HandlerAsync* = proc(ctx: Context): Future[void] {.closure, gcsafe.}
 
+proc newReversedRouter*(): ReversedRouter =
+  newTable[HandlerAsync, string]()
+
 proc initEvent*(handler: AsyncEvent): Event =
   Event(async: true, asyncHandler: handler)
 
@@ -60,10 +65,11 @@ proc initEvent*(handler: SyncEvent): Event =
   Event(async: false, syncHandler: handler)
 
 proc newContext*(request: Request, response: Response,
-    router: Router, reversedRouter: TableRef[HandlerAsync, string],
+    router: Router, reversedRouter: ReversedRouter,
         reRouter: ReRouter): Context {.inline.} =
   Context(request: request, response: response, router: router,
-          reversedRouter: reversedRouter, reRouter: reRouter, size: 0, first: true,
+          reversedRouter: reversedRouter, reRouter: reRouter, size: 0,
+          first: true,
           session: initSession(data = newStringTable()))
 
 proc handle*(ctx: Context): Future[void] {.inline.} =
@@ -127,6 +133,46 @@ macro getPathParams*[T: BaseType](key: string, default: T): T =
   result = quote do:
     let pathParams = `ctx`.request.pathParams.getOrDefault(`key`)
     parseValue(pathParams, `default`)
+
+proc multiMatch(s: string, replacements: StringTableRef): string =
+  result = newStringOfCap(s.len)
+  var 
+    pos = 0
+    tok = ""
+  let 
+    startChar = '{'
+    endChar = '}'
+
+  while pos < s.len:
+    pos += parseUntil(s, tok, startChar, pos)
+    inc(pos)
+    result.add tok
+
+    pos += parseUntil(s, tok, endChar, pos)
+    inc pos
+    if tok != "":
+      if tok in replacements:
+        result.add replacements[tok]
+      else:
+        raise newException(ValueError, "Unexpected key")
+
+proc multiMatch(s: string, replacements: varargs[(string, string)]): string {.inline.} =
+  multiMatch(s, replacements.newStringTable)
+
+proc urlFor*(ctx: Context, handler: HandlerAsync, parameters: varargs[(string, string)] = @[]): string =
+  var res:string
+  if handler in ctx.reversedRouter:
+    res = ctx.reversedRouter[`handler`]
+  multiMatch(res, parameters)
+
+# macro urlFor*(handler: HandlerAsync, parameters: varargs[(string, string)] = @[]): string =
+#   var ctx = ident"ctx"
+
+#   result = quote do:
+#     var res: string
+#     if `handler` in `ctx`.reversedRouter:
+#       res = `ctx`.reversedRouter[`handler`]
+#     multiMatch(res, `parameters`)
 
 proc attachment(ctx: Context, downloadName = "", charset = "utf-8") {.inline.} =
   if downloadName == "":

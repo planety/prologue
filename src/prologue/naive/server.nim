@@ -1,6 +1,6 @@
 import httpcore, asyncdispatch
 import asynchttpserver except Request
-import strutils, tables
+import strutils
 
 import request
 import ../core/nativesettings
@@ -14,7 +14,7 @@ type
     server*: Server
     settings*: Settings
     router*: Router
-    reversedRouter*: TableRef[HandlerAsync, string]
+    reversedRouter*: ReversedRouter
     reRouter*: ReRouter
     middlewares*: seq[HandlerAsync]
     startup*: seq[Event]
