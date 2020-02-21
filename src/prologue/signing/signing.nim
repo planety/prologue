@@ -56,7 +56,6 @@ proc randomSecretKey*(size: int): SecretKey =
   discard randomBytes(buffer)
   result = SecretKey(buffer)
 
-# TODO base64 should use urlSafeEndoe
 proc initSigner*(secretKey: SecretKey, salt = DefaultSalt, sep = DefaultSep,
     keyDerivation = DefaultKeyDerivation,
         digestMethod = DefaultDigestMethodType): Signer =

@@ -5,10 +5,18 @@ import unittest
 
 
 suite "Test Hasher":
-  test "can verify correct password":
-    let res = pbkdf2_256encode(SecretKey("flywind"), "prologue")
-    check pbkdf2_256verify(SecretKey("flywind"), res)
+  test "pbkdf2_sha256 can verify correct password":
+    let res = pbkdf2_sha256encode(SecretKey("flywind"), "prologue")
+    check pbkdf2_sha256verify(SecretKey("flywind"), res)
 
-  test "can verify wrong password":
-    let res = pbkdf2_256encode(SecretKey("flywind"), "prologue")
-    check not pbkdf2_256verify(SecretKey("flywin"), res)
+  test "pbkdf2_sha256 can verify wrong password":
+    let res = pbkdf2_sha256encode(SecretKey("flywind"), "prologue")
+    check not pbkdf2_sha256verify(SecretKey("flywin"), res)
+
+  test "pbkdf2_sha1 can verify correct password":
+    let res = pbkdf2_sha1encode(SecretKey("flywind"), "prologue")
+    check pbkdf2_sha1verify(SecretKey("flywind"), res)
+
+  test "pbkdf2_sha1 can verify wrong password":
+    let res = pbkdf2_sha1encode(SecretKey("flywind"), "prologue")
+    check not pbkdf2_sha1verify(SecretKey("flywin"), res)
