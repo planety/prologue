@@ -65,7 +65,7 @@ proc `[]`*(session: Session, key: string): string =
   result = session.data[key]
   session.accessed = true
 
-proc `[]=`*(session: Session, key, value: string): string =
+proc `[]=`*(session: Session, key, value: string) =
   session.data[key] = value
   update(session)
 

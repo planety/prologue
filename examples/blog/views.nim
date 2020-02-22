@@ -5,8 +5,41 @@ import ../../src/prologue
 
 # /login
 proc login*(ctx: Context) {.async.} =
-  resp "login"
+  let db = open(ctx.request.settings.dbPath, "", "", "")
+  case ctx.request.reqMethod
+  of HttpPost:
+    var 
+      error: string
+      id: string
+      encoded: string
+    let
+      userName = getPostParams("username")
+      password = SecretKey(getPostParams("password"))
+      row = db.getRow(sql"SELECT * FROM user WHERE username = ?", userName)
+      
+    echo row
+    if row == @[]:
+      error = "Incorrect username"
+    elif row.len < 3:
+      error = "Incorrect username"
+    else:
+      # TODO process IndexError
+      id = row[0]
+      encoded = row[2]
+      
+      if not pbkdf2_sha256verify(password, encoded):
+        error = "Incorrect password"
 
+    if error == "":
+      ctx.session.clear()
+      ctx.session["user_id"] = id
+      resp "index"
+    else:
+      resp error
+  of HttpGet:
+    await staticFileResponse(ctx, "login.html", "static")
+  else:
+    discard
 
 # /register
 proc register*(ctx: Context) {.async.} =

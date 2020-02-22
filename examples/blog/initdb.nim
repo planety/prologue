@@ -1,15 +1,14 @@
 import db_sqlite, os, strutils
 
-import configure
-
 
 const
+  dbPath = "blog.db"
   schemaPath = "schema.sql"
 
 
-if not existsFile(settings.dbPath):
+if not existsFile(dbPath):
   let
-    db = open(settings.dbPath, "", "", "")
+    db = open(dbPath, "", "", "")
     schema = readFile(schemaPath)
   for line in schema.split(";"):
     if line == "\c\n":
