@@ -2,12 +2,13 @@ import db_sqlite
 
 import ../../src/prologue
 
+import templates / [login, register]
+
 
 # /login
 proc login*(ctx: Context) {.async.} =
   let db = open(ctx.request.settings.dbPath, "", "", "")
-  case ctx.request.reqMethod
-  of HttpPost:
+  if ctx.request.reqMethod == HttpPost:
     var 
       error: string
       id: string
@@ -33,20 +34,22 @@ proc login*(ctx: Context) {.async.} =
     if error == "":
       ctx.session.clear()
       ctx.session["user_id"] = id
-      resp "index"
+      resp loginPage(ctx)
     else:
       resp error
-  of HttpGet:
-    await staticFileResponse(ctx, "login.html", "static")
   else:
-    discard
+    resp htmlResponse(loginPage(ctx))
+
+
+# /logout
+proc logout*(ctx: Context) {.async.} =
+  discard
 
 # /register
 proc register*(ctx: Context) {.async.} =
   let db = open(ctx.request.settings.dbPath, "", "", "")
-
-  case ctx.request.reqMethod
-  of HttpPost:
+  defer: db.close()
+  if ctx.request.reqMethod == HttpPost:
     var error: string
     let
       userName = getPostParams("username")
@@ -65,8 +68,6 @@ proc register*(ctx: Context) {.async.} =
       resp redirect(urlFor(login), Http301)
     else:
       resp error
-  of HttpGet:
-    await staticFileResponse(ctx, "register.html", "static")
   else:
-    discard
-  db.close()
+    resp htmlResponse(registerPage(ctx))
+
