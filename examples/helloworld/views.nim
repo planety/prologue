@@ -28,7 +28,7 @@ proc home*(ctx: Context) {.async.} =
   logging.debug urlFor(index)
   logging.debug urlFor(helloName, @[("name", "flywind")], @{"age": "20"})
   logging.debug ctx.request.queryParams.getOrDefault("name", "")
-  resp(redirect(urlFor(helloName, @{"name": "flywind"}, @{"age": "20", "hobby": "Nim"}), Http302))
+  resp redirect(urlFor(helloName, @{"name": "flywind"}, @{"age": "20", "hobby": "Nim"}), Http302)
 
 proc testRedirect*(ctx: Context) {.async.} =
   resp redirect("/hello", Http302)

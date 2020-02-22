@@ -5,7 +5,7 @@ import response, context, pages, route,
     nativesettings, corebase, utils, middlewaresbase
 
 import ../middlewares/middlewares, ../openapi/openapi, ../signing/signing
-import ../cache/cache, ../configure/configure
+import ../cache/cache, ../configure/configure, ../security/hasher
 from ./cookies import parseCookies
 from types import SameSite
 
@@ -18,7 +18,9 @@ when not defined(production):
 
 export httpcore
 export strtabs
-export asyncdispatch
+export tables
+# export asyncdispatch
+export asyncdispatch except register
 export middlewares
 export pages
 export response
@@ -31,6 +33,7 @@ export openapi
 export regex
 export utils
 export signing
+export hasher
 export middlewaresbase
 export options
 export cache
