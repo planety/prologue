@@ -90,6 +90,19 @@ proc newApp*(settings: Settings, middlewares: seq[HandlerAsync] = @[],
       settings: settings, router: newRouter(), reversedRouter: newReversedRouter(), reRouter: newReRouter(),
               middlewares: middlewares, startup: startup, shutdown: shutdown)
 
+proc tryResponse(ctx: Context): Future[void] {.inline.} =
+  let file = splitFile(ctx.request.path.strip(chars = {'/'}, trailing = false))
+
+
+  for dir in ctx.request.settings.staticDirs:
+    if file.dir.startsWith(dir.strip(chars = {'/'},
+        trailing = false)):
+      return staticFileResponse(ctx, file.name & file.ext, file.dir)
+
+  return switch(ctx)
+
+
+
 proc run*(app: Prologue) =
   for event in app.startup:
     if event.async:
@@ -141,17 +154,14 @@ proc run*(app: Prologue) =
     ctx.middlewares = app.middlewares
     logging.debug(fmt"{ctx.request.reqMethod} {ctx.request.url.path}")
 
-    let file = splitFile(request.path.strip(chars = {'/'}, trailing = false))
+    try:
+      await tryResponse(ctx)
+    except:
+      if ctx.request.settings.debug:
+        ctx.response.body = fmt"{getStackTrace()}"
+      else:
+        logging.info fmt"{getCurrentExceptionMsg()}"
 
-    var staticFileMatched = false
-    for dir in app.settings.staticDirs:
-      if file.dir.startsWith(dir.strip(chars = {'/'},
-          trailing = false)):
-        await staticFileResponse(ctx, file.name & file.ext, file.dir)
-        staticFileMatched = true
-        break
-    if not staticFileMatched:
-      await switch(ctx)
     await handle(ctx)
     logging.debug($(ctx.response))
 
