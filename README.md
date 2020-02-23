@@ -45,6 +45,7 @@ You can read documentation in https://planety.github.io/prologue.
   - [x] Cache
   - [x] Startup and Shutdown Events
   - [x] URL Building
+  - [ ] Exception Handler
   - [ ] Cross-Site Request Forgery
   - [ ] Cross-Site Scripting (XSS) Protection
   - [ ] Clickjacking Protection
