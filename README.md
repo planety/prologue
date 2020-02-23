@@ -132,3 +132,4 @@ Run **app.nim**.Now the server is running at localhost:8080.
 ### More examples
 - [HelloWorld](https://github.com/planety/prologue/tree/master/examples/helloworld)
 - [ToDoList](https://github.com/planety/prologue/tree/master/examples/todolist)
+- [Blog](https://github.com/planety/prologue/tree/master/examples/blog)
