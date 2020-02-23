@@ -1,8 +1,9 @@
-import db_sqlite
+import db_sqlite, strformat
 
 import ../../src/prologue
 
-import templates / [login, register]
+import templates / [loginPage, registerPage]
+
 
 
 # /login
@@ -60,7 +61,7 @@ proc register*(ctx: Context) {.async.} =
     elif password == "":
       error = "password required"
     elif db.getValue(sql"SELECT id FROM user WHERE username = ?", userName) != "":
-      error = "username registered already"
+      error = fmt"username {userName} registered already"
 
     if error == "":
       db.exec(sql"INSERT INTO user (username, password) VALUES (?, ?)",
