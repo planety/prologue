@@ -34,7 +34,7 @@ proc login*(ctx: Context) {.async.} =
 
     if error == "":
       ctx.session.clear()
-      ctx.session["user_id"] = id
+      ctx.session["userId"] = id
       resp loginPage(ctx)
     else:
       resp error

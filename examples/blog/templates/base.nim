@@ -5,31 +5,30 @@ import ../../../src/prologue
 const
   name* = "Prologue"
 
-proc formPage*(title, action: string): string =
-  let vnode = buildHtml(section(class = "content")):
-    h1: text title
-    body:
-      form(`method`="post"):
-        label(`for`="username"): text "Username"
-        input(name="username", id = "username", required = "required")
-        label(`for`="password"): text "Password"
-        input(`type`="password", name="password", id="password", required = "required")
-        input(`type`="submit", value=action)
-  result = $vnode
 
-proc basePage*(ctx: Context, appName, title, action: string): string =
+proc formPage*(header, action: string): Vnode =
+  result = buildHtml(section(class = "content")):
+    header: h1: text header
+    form(`method`="post"):
+      label(`for`="username"): text "Username"
+      input(name="username", id = "username", required = "required")
+      label(`for`="password"): text "Password"
+      input(`type`="password", name="password", id="password", required = "required")
+      input(`type`="submit", value = action)
+
+proc basePage*(ctx: Context, appName, title: string, content: VNode): string =
   let userName = getPostParams("username")
-  let vnode = buildHtml(html):
-    title: text title
+  let vNode = buildHtml(html):
+    title: text title & " - " & appName
     link(rel = "stylesheet", href = "/static/style.css")
     nav: 
-      h1: text appName
+      h1: a(href = "/blog/index"): text appName
       ul:
         if userName == "":
-          li: a(href = "/register"): text "Register"
-          li: a(href = "/login"): text "Log In"
+          li: a(href = "/auth/register"): text "Register"
+          li: a(href = "/auth/login"): text "Log In"
         else:
           li: span: text userName
-          li: a(href = "/logout"): text "Log Out"
-    verbatim formPage(title, action)
-  result = $vnode
+          li: a(href = "/auth/logout"): text "Log Out"
+    content
+  result = $vNode
