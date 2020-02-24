@@ -76,7 +76,6 @@ nimble install prologue@#head
 
 ```nim
 # app.nim
-import asyncdispatch
 import prologue
 
 
@@ -96,7 +95,6 @@ Run **app.nim**.Now the server is running at localhost:8080.
 
 ```nim
 # app.nim
-import asyncdispatch
 import prologue
 
 
