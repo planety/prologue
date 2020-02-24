@@ -156,11 +156,12 @@ proc run*(app: Prologue) =
 
     try:
       await tryResponse(ctx)
-    except:
+    except Exception as e:
       if ctx.request.settings.debug:
-        ctx.response.body = fmt"{getStackTrace()}"
+        ctx.response = plainTextResponse(e.msg, status = Http500)
+        # ctx.response.body = fmt"{getStackTrace()}\n{getCurrentExceptionMsg()}"
       else:
-        logging.info fmt"{getCurrentExceptionMsg()}"
+        logging.error getCurrentExceptionMsg()
 
     await handle(ctx)
     logging.debug($(ctx.response))
