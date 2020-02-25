@@ -86,7 +86,8 @@ proc serveStaticFile*(app: Prologue, staticDir: seq[string]) {.inline.} =
 
 proc newApp*(settings: Settings, middlewares: seq[HandlerAsync] = @[],
     startup: seq[Event] = @[], shutdown: seq[Event] = @[],
-        errorHandlerTable = newErrorHandlerTable()): Prologue =
+        errorHandlerTable = {Http404: default404Handler,
+            Http500: default500Handler}.newErrorHandlerTable): Prologue =
   Prologue(server: newPrologueServer(true, settings.reusePort),
       settings: settings, router: newRouter(), reversedRouter: newReversedRouter(), reRouter: newReRouter(),
               middlewares: middlewares, startup: startup, shutdown: shutdown,
@@ -154,17 +155,17 @@ proc run*(app: Prologue) =
     logging.debug(fmt"{ctx.request.reqMethod} {ctx.request.url.path}")
 
 
-    var msg: string
     try:
       await tryResponse(ctx)
     except Exception as e:
-      msg = e.msg
-      logging.error msg
-        # ctx.response.body = fmt"{getStackTrace()}\n{getCurrentExceptionMsg()}"
-
+      logging.error e.msg
+      ctx.response.status = Http500
+      ctx.response.body = fmt"{e.msg}"
+      ctx.setHeader("content-type", "text/plain; charset=UTF-8")
+      # ctx.response.body = fmt"{getStackTrace()}\n{getCurrentExceptionMsg()}"
 
     if ctx.request.settings.debug and ctx.response.status == Http500:
-      resp plainTextResponse(msg, status = Http500)
+      discard
     elif ctx.response.status in app.errorHandlerTable:
       # TODO Maybe async and sync
       # TODO Maybe change to Future[void] reduce async

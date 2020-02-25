@@ -34,7 +34,7 @@ proc internalServerErrorPage*(): string {.inline.} =
 </head>
 
 <body>
-  <h1>Internal Server Error</h1>
+  <h1>500 Internal Server Error</h1>
   <div>
     <p>
       The Server encountered an internal error and unable to complete

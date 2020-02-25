@@ -6,7 +6,10 @@ proc articles*(ctx: Context) {.async.} =
   resp $getPathParams("num", 1)
 
 proc hello*(ctx: Context) {.async.} =
+  # await sleepAsync(3000)
   resp "<h1>Hello, Prologue!</h1>"
+  if true:
+    raise newException(ValueError, "can't be reached")
 
 proc docs*(ctx: Context) {.async.} =
   await ctx.staticFileResponse("docs.html", "docs")

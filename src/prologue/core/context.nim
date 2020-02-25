@@ -57,15 +57,21 @@ type
 
   HandlerAsync* = proc(ctx: Context): Future[void] {.closure, gcsafe.}
 
-  ErrorHandlerTable* = TableRef[HttpCode, HandlerAsync]
+  ErrorHandler* = proc(ctx: Context): Future[void] {.nimcall, gcsafe.}
+
+  ErrorHandlerTable* = TableRef[HttpCode, ErrorHandler]
+
+
+proc default404Handler*(ctx: Context) {.async.}
+proc default500Handler*(ctx: Context) {.async.}
 
 
 proc newErrorHandlerTable*(initialSize = defaultInitialSize): ErrorHandlerTable {.inline.} =
-  newTable[HttpCode, HandlerAsync](initialSize)
+  newTable[HttpCode, ErrorHandler](initialSize)
 
 proc newErrorHandlerTable*(pairs: openArray[(HttpCode,
-    HandlerAsync)]): ErrorHandlerTable {.inline.} =
-  newTable[HttpCode, HandlerAsync](pairs)
+    ErrorHandler)]): ErrorHandlerTable {.inline.} =
+  newTable[HttpCode, ErrorHandler](pairs)
 
 proc newReversedRouter*(): ReversedRouter =
   newTable[HandlerAsync, string]()
@@ -87,18 +93,6 @@ proc newContext*(request: Request, response: Response,
 proc handle*(ctx: Context): Future[void] {.inline.} =
   result = ctx.request.respond(ctx.response)
 
-# TODO change
-proc defaultHandler*(ctx: Context) {.async.} =
-  let response = error404(body = errorPage("404 Not Found!", PrologueVersion))
-  await ctx.request.respond(response)
-
-proc default404Handler*(ctx: Context) {.async.} =
-  resp initResponse(HttpVer11, Http404, body = errorPage("404 Not Found!",
-      PrologueVersion))
-
-proc default500Handler*(ctx: Context) {.async.} =
-  resp initResponse(HttpVer11, Http500, body = internalServerErrorPage())
-
 proc setHeader*(ctx: Context; key, value: string) {.inline.} =
   ctx.response.httpHeaders[key] = value
 
@@ -116,12 +110,23 @@ proc setCookie*(ctx: Context; key, value: string, expires = "", maxAge: Option[
 
 proc setCookie*(ctx: Context; key, value: string, expires: DateTime|Time,
     maxAge: Option[int] = none(int),
-   domain = "", path = "", secure = false, httpOnly = false, sameSite = Lax) {.inline.} =
+    domain = "", path = "", secure = false, httpOnly = false, sameSite = Lax) {.inline.} =
   ctx.response.setCookie(key, value, domain, expires, maxAge, path, secure,
       httpOnly, sameSite)
 
 proc deleteCookie*(ctx: Context, key: string, path = "", domain = "") {.inline.} =
   ctx.deleteCookie(key = key, path = path, domain = domain)
+
+proc defaultHandler*(ctx: Context) {.async.} =
+  ctx.response.status = Http404
+
+proc default404Handler*(ctx: Context) {.async.} =
+  ctx.response.body = errorPage("404 Not Found!", PrologueVersion)
+  ctx.setHeader("content-type", "text/html; charset=UTF-8")
+
+proc default500Handler*(ctx: Context) {.async.} =
+  ctx.response.body = internalServerErrorPage()
+  ctx.setHeader("content-type", "text/html; charset=UTF-8")
 
 macro getPostParams*(key: string, default = ""): string =
   var ctx = ident"ctx"
