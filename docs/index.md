@@ -101,6 +101,7 @@ Run **app.nim**.Now the server is running at localhost:8080.
 ```nim
 import prologue
 
+
 proc index*(ctx: Context) {.async.} =
   resp "<h1>Hello, Prologue!</h1>"
 
@@ -113,7 +114,6 @@ proc hello*(ctx: Context) {.async.} =
 
 ```nim
 import prologue
-
 
 import views
 
@@ -130,8 +130,8 @@ let urlPatterns* = @[
 ```nim
 import prologue
 
-
 import views, urls
+
 
 # read environment variables from file
 # Make sure ".env" in your ".gitignore" file.

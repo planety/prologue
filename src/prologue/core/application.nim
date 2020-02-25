@@ -93,15 +93,12 @@ proc newApp*(settings: Settings, middlewares: seq[HandlerAsync] = @[],
 proc tryResponse(ctx: Context): Future[void] {.inline.} =
   let file = splitFile(ctx.request.path.strip(chars = {'/'}, trailing = false))
 
-
   for dir in ctx.request.settings.staticDirs:
     if file.dir.startsWith(dir.strip(chars = {'/'},
         trailing = false)):
       return staticFileResponse(ctx, file.name & file.ext, file.dir)
 
   return switch(ctx)
-
-
 
 proc run*(app: Prologue) =
   for event in app.startup:
@@ -171,7 +168,6 @@ proc run*(app: Prologue) =
     addHandler(logging.newConsoleLogger())
     setLogFilter(if app.settings.debug: lvlDebug else: lvlInfo)
   defer: app.close()
-
 
   when defined(windows):
     logging.debug(fmt"Prologue is serving at 127.0.0.1:{app.settings.port.int} {app.settings.appName}")
