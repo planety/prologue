@@ -23,6 +23,7 @@ web services.
 - Simple Route
 - Regex Route
 - CORS Response
+- Exception Handler
 - Signing
 - Cookie
 - Session
@@ -137,8 +138,6 @@ import views, urls
 # Make sure ".env" in your ".gitignore" file.
 let 
   env = loadPrologueEnv(".env")
-
-let
   settings = newSettings(appName = env.getOrDefault("appName", "Prologue"),
                 debug = env.getOrDefault("debug", true), 
                 port = Port(env.getOrDefault("port", 8080)),
