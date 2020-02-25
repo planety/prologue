@@ -153,14 +153,22 @@ proc run*(app: Prologue) =
     ctx.middlewares = app.middlewares
     logging.debug(fmt"{ctx.request.reqMethod} {ctx.request.url.path}")
 
+
+    var msg: string
     try:
       await tryResponse(ctx)
     except Exception as e:
-      if ctx.request.settings.debug:
-        ctx.response = plainTextResponse(e.msg, status = Http500)
+      msg = e.msg
+      logging.error msg
         # ctx.response.body = fmt"{getStackTrace()}\n{getCurrentExceptionMsg()}"
-      else:
-        logging.error getCurrentExceptionMsg()
+
+
+    if ctx.request.settings.debug and ctx.response.status == Http500:
+      resp plainTextResponse(msg, status = Http500)
+    elif ctx.response.status in app.errorHandlerTable:
+      # TODO Maybe async and sync
+      # TODO Maybe change to Future[void] reduce async
+      await (app.errorHandlerTable[ctx.response.status])(ctx)
 
     await handle(ctx)
     logging.debug($(ctx.response))
