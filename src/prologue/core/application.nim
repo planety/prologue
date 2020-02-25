@@ -39,6 +39,17 @@ export options
 export cache
 
 
+proc registErrorHandler*(app: Prologue, status: HttpCode, handler: ErrorHandler) {.inline.} =
+  app.errorHandlerTable[status] = handler
+
+proc registErrorHandler*(app: Prologue, status: set[HttpCode], handler: ErrorHandler) {.inline.} =
+  for idx in status:
+    app.errorHandlerTable[idx] = handler
+
+proc registErrorHandler*(app: Prologue, status: openArray[HttpCode], handler: ErrorHandler) {.inline.} =
+  for idx in status:
+    app.errorHandlerTable[idx] = handler
+
 proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
     httpMethod = HttpGet, middlewares: seq[HandlerAsync] = @[]) {.inline.} =
   ## add single handler route
