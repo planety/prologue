@@ -25,3 +25,23 @@ proc multiPartPage*(): string =
       input(name = "password", `type` = "password", value = "start"),
       input(value = "submit", `type` = "submit")),
       xmlns = "http://www.w3.org/1999/xhtml")
+
+proc internalServerErrorPage*(): string {.inline.} =
+  result = """<html>
+
+<head>
+  <title>500 Internal Server Error</title>
+</head>
+
+<body>
+  <h1>Internal Server Error</h1>
+  <div>
+    <p>
+      The Server encountered an internal error and unable to complete
+      you request.
+    </p>
+  </div>
+</body>
+
+</html>
+"""

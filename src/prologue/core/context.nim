@@ -21,6 +21,7 @@ type
     route*: string
     httpMethod*: HttpMethod
 
+  # may change to flat
   Router* = ref object
     callable*: Table[Path, PathHandler]
 
@@ -56,6 +57,16 @@ type
 
   HandlerAsync* = proc(ctx: Context): Future[void] {.closure, gcsafe.}
 
+  ErrorHandlerTable* = TableRef[HttpCode, HandlerAsync]
+
+
+proc newErrorHandlerTable*(initialSize = defaultInitialSize): ErrorHandlerTable {.inline.} =
+  newTable[HttpCode, HandlerAsync](initialSize)
+
+proc newErrorHandlerTable*(pairs: openArray[(HttpCode,
+    HandlerAsync)]): ErrorHandlerTable {.inline.} =
+  newTable[HttpCode, HandlerAsync](pairs)
+
 proc newReversedRouter*(): ReversedRouter =
   newTable[HandlerAsync, string]()
 
@@ -76,9 +87,17 @@ proc newContext*(request: Request, response: Response,
 proc handle*(ctx: Context): Future[void] {.inline.} =
   result = ctx.request.respond(ctx.response)
 
+# TODO change
 proc defaultHandler*(ctx: Context) {.async.} =
   let response = error404(body = errorPage("404 Not Found!", PrologueVersion))
   await ctx.request.respond(response)
+
+proc default404Handler*(ctx: Context) {.async.} =
+  resp initResponse(HttpVer11, Http404, body = errorPage("404 Not Found!",
+      PrologueVersion))
+
+proc default500Handler*(ctx: Context) {.async.} =
+  resp initResponse(HttpVer11, Http500, body = internalServerErrorPage())
 
 proc setHeader*(ctx: Context; key, value: string) {.inline.} =
   ctx.response.httpHeaders[key] = value

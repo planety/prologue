@@ -85,10 +85,12 @@ proc serveStaticFile*(app: Prologue, staticDir: seq[string]) {.inline.} =
   app.settings.staticDirs.add(staticDir)
 
 proc newApp*(settings: Settings, middlewares: seq[HandlerAsync] = @[],
-    startup: seq[Event] = @[], shutdown: seq[Event] = @[]): Prologue =
+    startup: seq[Event] = @[], shutdown: seq[Event] = @[],
+        errorHandlerTable = newErrorHandlerTable()): Prologue =
   Prologue(server: newPrologueServer(true, settings.reusePort),
       settings: settings, router: newRouter(), reversedRouter: newReversedRouter(), reRouter: newReRouter(),
-              middlewares: middlewares, startup: startup, shutdown: shutdown)
+              middlewares: middlewares, startup: startup, shutdown: shutdown,
+                  errorHandlerTable: errorHandlerTable)
 
 proc tryResponse(ctx: Context): Future[void] {.inline.} =
   let file = splitFile(ctx.request.path.strip(chars = {'/'}, trailing = false))

@@ -1,10 +1,10 @@
-import httpcore, asyncdispatch
-import asynchttpserver except Request
-import strutils
+import asyncdispatch
+from asynchttpserver import newAsyncHttpServer, serve, close, AsyncHttpServer
 
-import request
-import ../core/nativesettings
-import ../core/context
+
+from request import NativeRequest
+from ../core/nativesettings import Settings
+from ../core/context import Router, ReversedRouter, ReRouter, HandlerAsync, Event, ErrorHandlerTable
 
 
 type
@@ -19,7 +19,8 @@ type
     middlewares*: seq[HandlerAsync]
     startup*: seq[Event]
     shutdown*: seq[Event]
-
+    errorHandlerTable*: ErrorHandlerTable
+    
 
 proc appName*(app: Prologue): string {.inline.} =
   app.settings.appName
