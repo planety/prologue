@@ -19,7 +19,6 @@ when not defined(production):
 export httpcore
 export strtabs
 export tables
-# export asyncdispatch
 export asyncdispatch except register
 export middlewares
 export pages
@@ -39,14 +38,17 @@ export options
 export cache
 
 
-proc registErrorHandler*(app: Prologue, status: HttpCode, handler: ErrorHandler) {.inline.} =
+proc registErrorHandler*(app: Prologue, status: HttpCode,
+    handler: ErrorHandler) {.inline.} =
   app.errorHandlerTable[status] = handler
 
-proc registErrorHandler*(app: Prologue, status: set[HttpCode], handler: ErrorHandler) {.inline.} =
+proc registErrorHandler*(app: Prologue, status: set[HttpCode],
+    handler: ErrorHandler) {.inline.} =
   for idx in status:
     app.errorHandlerTable[idx] = handler
 
-proc registErrorHandler*(app: Prologue, status: openArray[HttpCode], handler: ErrorHandler) {.inline.} =
+proc registErrorHandler*(app: Prologue, status: openArray[HttpCode],
+    handler: ErrorHandler) {.inline.} =
   for idx in status:
     app.errorHandlerTable[idx] = handler
 
@@ -104,15 +106,15 @@ proc newApp*(settings: Settings, middlewares: seq[HandlerAsync] = @[],
               middlewares: middlewares, startup: startup, shutdown: shutdown,
                   errorHandlerTable: errorHandlerTable)
 
-proc tryResponse(ctx: Context): Future[void] {.inline.} =
-  let file = splitFile(ctx.request.path.strip(chars = {'/'}, trailing = false))
+proc isStaticFile(path: string, dirs: seq[string]): tuple[hasValue: bool, fileName, root: string] {.inline.} =
+  let file = splitFile(path.strip(chars = {'/'}, trailing = false))
 
-  for dir in ctx.request.settings.staticDirs:
+  for dir in dirs:
     if file.dir.startsWith(dir.strip(chars = {'/'},
         trailing = false)):
-      return staticFileResponse(ctx, file.name & file.ext, file.dir)
+      return (true, file.name & file.ext, file.dir)
 
-  return switch(ctx)
+  return (false, "", "")
 
 proc run*(app: Prologue) =
   for event in app.startup:
@@ -166,8 +168,13 @@ proc run*(app: Prologue) =
     logging.debug(fmt"{ctx.request.reqMethod} {ctx.request.url.path}")
 
 
+    let staticFileFlag = isStaticFile(ctx.request.path, ctx.request.settings.staticDirs)
     try:
-      await tryResponse(ctx)
+      if staticFileFlag.hasValue:
+        await staticFileResponse(ctx, staticFileFlag.fileName, staticFileFlag.root)
+        return
+      else:
+        await switch(ctx)
     except Exception as e:
       logging.error e.msg
       ctx.response.status = Http500

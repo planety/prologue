@@ -1,2 +1,4 @@
-# switch("threads", "on")
-# switch("gc", "arc")
+switch("threads", "on")
+
+when (NimMajor, NimMinor) > (1, 1):
+  switch("gc", "arc")
