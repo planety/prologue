@@ -8,6 +8,11 @@
 
 # Prologue
 
+If you want to join us or have some design ideas, learning material, please contact me in Nim Forum or in gitter.
+Any advice will be appreciated.
+
+https://forum.nim-lang.org/t/5910#36778
+
 What's past is prologue.
 
 ## Purpose
