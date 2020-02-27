@@ -125,17 +125,17 @@ proc CORSMiddleware*(
     await switch(ctx)
 
     if "*" in allowOrigins:
-      ctx.response.httpHeaders["Access-Control-Allow-Origin"] = "*"
+      ctx.setHeader("Access-Control-Allow-Origin", "*")
 
     if allowCredentials:
-      ctx.response.httpHeaders["Access-Control-Allow-Credentials"] = "true"
+      ctx.setHeader("Access-Control-Allow-Credentials", "true")
 
     if exposeHeaders.len != 0:
-      ctx.response.httpHeaders["Access-Control-Expose-Headers"] = exposeHeaders
+      ctx.setHeader("Access-Control-Expose-Headers", exposeHeaders)
 
     if allowAllOrigins and hasCookie:
-      ctx.response.httpHeaders["Access-Control-Allow-Origin"] = origin
+      ctx.setHeader("Access-Control-Allow-Origin", origin)
     elif not allowAllOrigins and isAllowedOrigin(origin, allowAllOrigins,
         allowOrigins, allowOriginRegex):
-      ctx.response.httpHeaders["Access-Control-Allow-Origin"] = origin
-      ctx.response.httpHeaders.add("vary", "Origin")
+      ctx.setHeader("Access-Control-Allow-Origin", origin)
+      ctx.addHeader("vary", "Origin")

@@ -91,12 +91,15 @@ proc newContext*(request: Request, response: Response,
           first: true,
           session: initSession(data = newStringTable()),
           attributes: newStringTable()
-          )
+    )
 
 proc handle*(ctx: Context): Future[void] {.inline.} =
   result = ctx.request.respond(ctx.response)
 
 proc setHeader*(ctx: Context; key, value: string) {.inline.} =
+  ctx.response.httpHeaders[key] = value
+
+proc setHeader*(ctx: Context; key: string, value: seq[string]) {.inline.} =
   ctx.response.httpHeaders[key] = value
 
 proc addHeader*(ctx: Context; key, value: string) {.inline.} =
