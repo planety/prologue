@@ -1,7 +1,7 @@
 import asyncdispatch, httpcore
 import logging, strtabs, strutils
 
-import ../core/context
+from ../core/context import Context, HandlerAsync
 from ../core/middlewaresbase import switch
 
 

@@ -1,10 +1,12 @@
 import asyncdispatch, httpcore
-import strutils
+from strutils import toLowerAscii, join
 
 from ../core/middlewaresbase import switch
-import ../core/context, ../core/response
+from ../core/context import Context, HandlerAsync, setHeader, addHeader
 
-import regex
+from ../core/response import plainTextResponse, resp
+
+from regex import re, Regex, RegexMatch, match
 
 when not defined(production):
   import ../naive/request
@@ -114,11 +116,11 @@ proc CORSMiddleware*(
         preflightHeaders["Access-Control-Allow-Headers"] = accessControlRequestHeaders
 
       if errorMsg.len != 0:
-        await ctx.request.respond(plainTextResponse("Disallowed CORS " &
-            errorMsg.join(", "), Http403, preflightHeaders))
+        resp plainTextResponse("Disallowed CORS " &
+            errorMsg.join(", "), Http403, preflightHeaders)
       else:
-        await ctx.request.respond(plainTextResponse("Ok", Http200,
-            preflightHeaders))
+        resp plainTextResponse("Ok", Http200,
+            preflightHeaders)
       return
 
     # simple headers
