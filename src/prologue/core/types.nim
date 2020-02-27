@@ -34,7 +34,7 @@ proc tryParseBool(value: sink string, default: bool): bool {.inline.} =
   except ValueError:
     result = default
 
-proc parseValue*[T: BaseType](value: sink string, default: T): T {.inline.} =
+proc parseValue*[T: BaseType](value: string, default: T): T {.inline.} =
   if value == "":
     return default
 

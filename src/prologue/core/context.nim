@@ -142,7 +142,7 @@ macro getPostParams*(key: string, default = ""): string =
     of HttpPost:
       `ctx`.request.postParams.getOrDefault(`key`, `default`)
     else:
-      `default`
+      ""
 
 macro getQueryParams*(key: string, default = ""): string =
   var ctx = ident"ctx"
@@ -156,7 +156,7 @@ macro getPathParams*(key: string): string =
   result = quote do:
     `ctx`.request.pathParams.getOrDefault(`key`)
 
-macro getPathParams*[T: BaseType](key: string, default: T): T =
+macro getPathParams*[T: BaseType](key: sink string, default: T): T =
   var ctx = ident"ctx"
 
   result = quote do:
