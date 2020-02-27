@@ -44,6 +44,7 @@ type
     first*: bool
     middlewares*: seq[HandlerAsync]
     session*: Session
+    attributes*: StringTableRef # for extension
 
   AsyncEvent* = proc(): Future[void] {.closure, gcsafe.}
   SyncEvent* = proc() {.closure, gcsafe.}
@@ -88,7 +89,9 @@ proc newContext*(request: Request, response: Response,
   Context(request: request, response: response, router: router,
           reversedRouter: reversedRouter, reRouter: reRouter, size: 0,
           first: true,
-          session: initSession(data = newStringTable()))
+          session: initSession(data = newStringTable()),
+          attributes: newStringTable()
+          )
 
 proc handle*(ctx: Context): Future[void] {.inline.} =
   result = ctx.request.respond(ctx.response)
