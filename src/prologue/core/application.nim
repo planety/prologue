@@ -189,6 +189,8 @@ proc run*(app: Prologue) =
       # TODO Maybe change to Future[void] reduce async
       await (app.errorHandlerTable[ctx.response.status])(ctx)
 
+    # central processing
+    # all context processed here except static file
     await handle(ctx)
     logging.debug($(ctx.response))
 
@@ -203,6 +205,7 @@ proc run*(app: Prologue) =
   else:
     logging.debug(fmt"Prologue is serving at 0.0.0.0:{app.settings.port.int} {app.settings.appName}")
   waitFor app.serve(app.settings.port, handleRequest)
+
   for event in app.shutdown:
     if event.async:
       asyncCheck event.asyncHandler()

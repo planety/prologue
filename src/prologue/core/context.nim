@@ -139,8 +139,6 @@ macro getPostParams*(key: string, default = ""): string =
 
   result = quote do:
     case `ctx`.request.reqMethod
-    of HttpGet:
-      `ctx`.request.getParams.getOrDefault(`key`, `default`)
     of HttpPost:
       `ctx`.request.postParams.getOrDefault(`key`, `default`)
     else:
