@@ -96,7 +96,23 @@ suite "Test Application":
     check response.code == Http200
     check (waitFor response.body) == "<h1>Home</h1>"
 
-  test "can get /login":
+  test "can get /loginget using get method":
+    let
+      route = "/loginget"
+      response = waitFor client.get(fmt"http://{address}:{port}{route}")
+    check response.code == Http200
+    check (waitFor response.body) == loginGetPage()
+
+  test "can get /loginpage":
+    let
+      route = "/loginpage"
+    var data = newMultipartData()
+    data["username"] = "starlight"
+    data["password"] = "prologue"
+    check (waitFor client.postContent(fmt"http://{address}:{port}{route}",
+        multipart = data)) == "<h1>Hello, Nim</h1>"
+
+  test "can get /login using post method":
     let
       route = "/login"
       response = waitFor client.get(fmt"http://{address}:{port}{route}")

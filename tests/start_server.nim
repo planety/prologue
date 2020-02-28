@@ -1,4 +1,7 @@
-import ../src/prologue, logging
+import ../src/prologue except loginPage
+import logging
+
+import test_core/utils
 
 
 proc hello*(ctx: Context) {.async.} =
@@ -17,12 +20,20 @@ proc redirectHome*(ctx: Context) {.async.} =
   logging.debug "redirectHome"
   resp redirect("/home")
 
+proc loginGet*(ctx: Context) {.async.} =
+  logging.debug "login get"
+  resp loginGetPage()
+
+proc doLoginGet*(ctx: Context) {.async.} =
+  logging.debug "doLogin get"
+  resp redirect("/hello/Nim")
+  
 proc login*(ctx: Context) {.async.} =
-  logging.debug "logging"
+  logging.debug "log post"
   resp loginPage()
 
 proc doLogin*(ctx: Context) {.async.} =
-  logging.debug "doLogin"
+  logging.debug "doLogin post"
   resp redirect("/hello/Nim")
 
 
@@ -33,6 +44,8 @@ app.addRoute("/", home, HttpGet)
 app.addRoute("/home", home, HttpGet, @[debugRequestMiddleware()])
 app.addRoute("/hello", hello, HttpGet)
 app.addRoute("/redirect", redirectHome, HttpGet)
+app.addRoute("/loginget", loginGet, HttpGet)
+app.addRoute("/loginpage", doLoginGet, HttpGet)
 app.addRoute("/login", login, HttpGet)
 app.addRoute("/login", doLogin, HttpPost)
 app.addRoute("/hello/{name}", helloName, HttpGet)

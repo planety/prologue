@@ -8,3 +8,11 @@ proc loginPage*(): string =
       "Password: ", input(name = "password", `type` = "password"),
       input(value = "login", `type` = "submit")),
       xmlns = "http://www.w3.org/1999/xhtml")
+
+proc loginGetPage*(): string =
+  return html(form(action = "/loginpage",
+      `method` = "get",
+      "Username: ", input(name = "username", `type` = "text"),
+      "Password: ", input(name = "password", `type` = "password"),
+      input(value = "login", `type` = "submit")),
+      xmlns = "http://www.w3.org/1999/xhtml")
