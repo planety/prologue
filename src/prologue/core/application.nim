@@ -3,7 +3,7 @@ import tables, strutils, strformat, logging, strtabs, os, options
 
 import response, context, pages, route, urandom,
     nativesettings, utils, middlewaresbase
- 
+
 
 from form import parseFormParams
 
@@ -109,7 +109,8 @@ proc newApp*(settings: Settings, middlewares: seq[HandlerAsync] = @[],
               middlewares: middlewares, startup: startup, shutdown: shutdown,
                   errorHandlerTable: errorHandlerTable)
 
-proc isStaticFile(path: string, dirs: seq[string]): tuple[hasValue: bool, fileName, root: string] {.inline.} =
+proc isStaticFile(path: string, dirs: seq[string]): tuple[hasValue: bool,
+    fileName, root: string] {.inline.} =
   let file = splitFile(path.strip(chars = {'/'}, trailing = false))
 
   for dir in dirs:
@@ -151,10 +152,12 @@ proc run*(app: Prologue) =
     ctx.middlewares = app.middlewares
     logging.debug(fmt"{ctx.request.reqMethod} {ctx.request.url.path}")
 
-    let staticFileFlag = isStaticFile(ctx.request.path, ctx.request.settings.staticDirs)
+    let staticFileFlag = isStaticFile(ctx.request.path,
+        ctx.request.settings.staticDirs)
     try:
       if staticFileFlag.hasValue:
-        await staticFileResponse(ctx, staticFileFlag.fileName, staticFileFlag.root)
+        await staticFileResponse(ctx, staticFileFlag.fileName,
+            staticFileFlag.root)
         return
       else:
         await switch(ctx)
