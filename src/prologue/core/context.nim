@@ -196,7 +196,7 @@ proc multiMatch*(s: string, replacements: StringTableRef): string =
     inc(pos)
     pos += parseUntil(s, tok, endChar, pos)
     inc pos
-    if tok != "":
+    if tok.len != 0:
       if tok in replacements:
         result.add replacements[tok]
       else:
@@ -218,19 +218,19 @@ macro urlFor*(handler: HandlerAsync, parameters: seq[(string,
 
     res = multiMatch(res, `parameters`)
     let queryString = encodeQuery(`queryParams`, `usePlus`, `omitEq`)
-    if queryString != "":
+    if queryString.len != 0:
       res = multiMatch(res, `parameters`) & "?" & queryString
     res
 
 proc attachment(ctx: Context, downloadName = "", charset = "utf-8") {.inline.} =
-  if downloadName == "":
+  if downloadName.len == 0:
     return
 
   var ext = downloadName.splitFile.ext
   if ext.len > 0:
     ext = ext[1 .. ^1]
     let mimes = ctx.request.settings.mimeDB.getMimetype(ext)
-    if mimes != "":
+    if mimes.len != 0:
       ctx.setHeader("Content-Type", fmt"{mimes}; charset={charset}")
 
   ctx.setHeader("Content-Disposition", fmt"""attachment; filename="{downloadName}"""")
@@ -256,7 +256,7 @@ proc staticFileResponse*(ctx: Context, fileName, root: string, mimetype = "",
     mimetype = mimetype
     download = false
 
-  if mimetype == "":
+  if mimetype.len == 0:
     var ext = fileName.splitFile.ext
     if ext.len > 0:
       ext = ext[1 .. ^ 1]
@@ -271,14 +271,14 @@ proc staticFileResponse*(ctx: Context, fileName, root: string, mimetype = "",
 
   ctx.response.httpHeaders = headers
 
-  if mimetype != "":
+  if mimetype.len != 0:
     ctx.setHeader("Content-Type", fmt"{mimetype}; {charset}")
 
   ctx.setHeader("Content-Length", $contentLength)
   ctx.setHeader("Last-Modified", $lastModified)
   ctx.setHeader("Etag", etag)
 
-  if downloadName != "":
+  if downloadName.len != 0:
     ctx.attachment(downloadName)
     download = true
 

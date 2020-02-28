@@ -51,7 +51,7 @@ proc CORSMiddleware*(
       hasCookie = reqHeaders.hasKey("cookie")
 
     # don't have origin, switch
-    if origin == "":
+    if origin.len == 0:
       await switch(ctx)
       return
 

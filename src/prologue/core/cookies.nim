@@ -24,13 +24,13 @@ proc parseCookies*(s: string): StringTableRef =
 proc setCookie*(key, value: string, expires = "", maxAge: Option[int] = none(int), domain = "", path = "",
                  secure = false, httpOnly = false, sameSite = Lax): string {.inline.} =
   result.add key & "=" & value
-  if domain != "":
+  if domain.len != 0:
     result.add("; Domain=" & domain)
-  if path != "":
+  if path.len != 0:
     result.add("; Path=" & path)
   if maxAge.isSome:
     result.add("; Max-Age=" & $maxAge)
-  if expires != "":
+  if expires.len != 0:
     result.add("; Expires=" & expires)
   if secure:
     result.add("; Secure")

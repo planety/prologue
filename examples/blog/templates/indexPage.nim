@@ -8,7 +8,7 @@ proc indexBase*(ctx: Context, posts: seq[StringTableRef]): VNode =
   result = buildHtml(section(class = "content")):
     header:
       h1: text "Posts"
-      if ctx.session.getOrDefault("userId") != "":
+      if ctx.session.getOrDefault("userId").len != 0:
         a(class = "action", href = "/blog/create"): text "New"
 
     for post in posts:

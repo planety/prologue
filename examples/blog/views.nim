@@ -10,7 +10,7 @@ import templates / [loginPage, registerPage]
 proc login*(ctx: Context) {.async.} =
   let db = open(ctx.request.settings.dbPath, "", "", "")
   if ctx.request.reqMethod == HttpPost:
-    var 
+    var
       error: string
       id: string
       encoded: string
@@ -18,9 +18,9 @@ proc login*(ctx: Context) {.async.} =
       userName = getPostParams("username")
       password = SecretKey(getPostParams("password"))
       row = db.getRow(sql"SELECT * FROM user WHERE username = ?", userName)
-      
+
     echo row
-    if row == @[]:
+    if row.len == 0:
       error = "Incorrect username"
     elif row.len < 3:
       error = "Incorrect username"
@@ -28,11 +28,11 @@ proc login*(ctx: Context) {.async.} =
       # TODO process IndexError
       id = row[0]
       encoded = row[2]
-      
+
       if not pbkdf2_sha256verify(password, encoded):
         error = "Incorrect password"
 
-    if error == "":
+    if error.len == 0:
       ctx.session.clear()
       ctx.session["userId"] = id
       resp loginPage(ctx)
@@ -56,14 +56,15 @@ proc register*(ctx: Context) {.async.} =
       userName = getPostParams("username")
       password = pbkdf2_sha256encode(SecretKey(getPostParams(
           "password")), "Prologue")
-    if userName == "":
+    if userName.len == 0:
       error = "userName required"
-    elif password == "":
+    elif password.len == 0:
       error = "password required"
-    elif db.getValue(sql"SELECT id FROM user WHERE username = ?", userName) != "":
+    elif db.getValue(sql"SELECT id FROM user WHERE username = ?",
+        userName).len != 0:
       error = fmt"username {userName} registered already"
 
-    if error == "":
+    if error.len == 0:
       db.exec(sql"INSERT INTO user (username, password) VALUES (?, ?)",
           userName, password)
       resp redirect(urlFor(login), Http301)

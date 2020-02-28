@@ -37,7 +37,7 @@ proc tryParseBool(value: sink string, default: bool): bool {.inline.} =
     result = default
 
 proc parseValue*[T: BaseType](value: string, default: T): T {.inline.} =
-  if value == "":
+  if value.len == 0:
     return default
 
   when T is int:
@@ -56,7 +56,8 @@ proc `$`*(secretKey: SecretKey): string =
   ## Hide secretKey's value
   "SecretKey(********)"
 
-proc initSession*(data: StringTableRef, newCreated = false, modified = false, accessed = false): Session =
+proc initSession*(data: StringTableRef, newCreated = false, modified = false,
+    accessed = false): Session =
   Session(data: data, modified: modified)
 
 proc update*(session: Session) =
@@ -71,7 +72,7 @@ proc `[]=`*(session: Session, key, value: string) =
   session.data[key] = value
   update(session)
 
-proc len*(session: Session): int = 
+proc len*(session: Session): int =
   session.data.len
 
 proc getOrDefault*(session: Session, key: string, default = ""): string =
@@ -94,11 +95,11 @@ proc `$`*(session: Session): string =
 
 proc parseStringTable*(tabs: StringTableRef, s: string) {.inline.} =
   # """{username: flywind, password: root}"""
-  # {:} 
+  # {:}
   # make sure {':', ',', '}'} notin key or value
   if s.len <= 3:
     return
-  var 
+  var
     pos = 0
     key, value: string
   assert(s[pos] == '{', "StringTable String starts with '{'")

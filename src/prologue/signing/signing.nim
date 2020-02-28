@@ -14,7 +14,7 @@ type
 
   # TODO try macros
   BaseDigestMethodType* = enum
-    Sha1Type, 
+    Sha1Type,
     Sha224Type, Sha384Type, Sha512Type, Sha512_224Type, Sha512_256Type
     Keccak224Type, Keccak256Type, Keccak384Type, Keccak512Type, Sha3_224Type,
         Sha3_256Type, Sha3_384Type, Sha3_512Type
@@ -257,7 +257,7 @@ proc unsign*(s: TimedSigner, signedValue: string, max_age: Natural): string =
   if exception != nil:
     raise exception
 
-  if timestamp == "":
+  if timestamp.len == 0:
     raise newException(BadTimeSignatureError, "Malformed timestamp")
 
   if max_age > 0:

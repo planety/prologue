@@ -20,7 +20,7 @@ proc todoList*(ctx: Context) {.async.} =
   resp htmlResponse(makeList(rows=rows))
 
 proc newItem*(ctx: Context) {.async.} =
-  if getQueryParams("save") != "":
+  if getQueryParams("save").len != 0:
     let
       row = getQueryParams("task").strip
       db = open("todo.db", "", "", "")
@@ -33,7 +33,7 @@ proc newItem*(ctx: Context) {.async.} =
     resp htmlResponse(newList())
 
 proc editItem*(ctx: Context) {.async.} =
-  if getQueryParams("save") != "":
+  if getQueryParams("save").len != 0:
     let
       edit = getQueryParams("task").strip
       status = getQueryParams("status").strip
