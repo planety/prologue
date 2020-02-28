@@ -1,13 +1,16 @@
 import asyncdispatch, asynchttpserver, asyncnet, uri
-import strutils, strtabs, uri
+import strutils, strtabs, uri, tables
 
-import ../core/nativesettings
-import ../core/corebase
-import ../core/response
+from ../core/nativesettings import Settings, newSettings
+from ../core/response import Response
 
 
 type
   NativeRequest* = asynchttpserver.Request
+
+  # TODO add FileUpload object
+  FormPart* = object
+    data*: OrderedTableRef[string, tuple[params: StringTableRef, body: string]]
 
   Request* = object
     nativeRequest: NativeRequest
@@ -19,6 +22,16 @@ type
     pathParams*: StringTableRef
     settings*: Settings
 
+
+proc initFormPart*(): FormPart {.inline.} =
+  FormPart(data: newOrderedTable[string, (StringTableRef, string)]())
+
+proc `[]`*(formPart: FormPart, key: string): tuple[params: StringTableRef,
+    body: string] =
+  formPart.data[key]
+
+proc `[]=`*(formPart: FormPart, key: string, body: string) =
+  formPart.data[key] = (newStringTable(), body)
 
 proc url*(request: Request): Uri {.inline.} =
   request.nativeRequest.url

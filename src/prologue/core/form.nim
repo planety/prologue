@@ -1,21 +1,12 @@
 import httpcore
 import strtabs, strutils, strformat, parseutils, tables
 
-type
-  # TODO add FileUpload object
-  FormPart* = object
-    data*: OrderedTableRef[string, tuple[params: StringTableRef, body: string]]
+from cgi import decodeData
 
 
-proc initFormPart*(): FormPart {.inline.} =
-  FormPart(data: newOrderedTable[string, (StringTableRef, string)]())
+when not defined(production):
+  import ../naive/request
 
-proc `[]`*(formPart: FormPart, key: string): tuple[params: StringTableRef,
-    body: string] =
-  formPart.data[key]
-
-proc `[]=`*(formPart: FormPart, key: string, body: string) =
-  formPart.data[key] = (newStringTable(), body)
 
 proc parseFormPart*(body, contentType: string): FormPart {.inline.} =
   # parse form
@@ -82,3 +73,24 @@ proc parseFormPart*(body, contentType: string): FormPart {.inline.} =
           break
 
     result.data[name].body = tail
+
+proc parseFormParams*(request: var Request, contentType: string) =
+  # get or post forms params
+  if "form-urlencoded" in contentType:
+    request.formParams = initFormPart()
+    for (key, value) in decodeData(request.body):
+      request.formParams[key] = value
+      case request.reqMethod
+      of HttpGet:
+        request.getParams[key] = value
+      of HttpPost:
+        request.postParams[key] = value
+      else:
+        discard
+  elif "multipart/form-data" in contentType and "boundary" in contentType:
+    request.formParams = parseFormPart(request.body, contentType)
+
+  # /student?name=simon&age=sixteen
+  # query -> name=simon&age=sixteen
+  for (key, value) in decodeData(request.query):
+    request.queryParams[key] = value

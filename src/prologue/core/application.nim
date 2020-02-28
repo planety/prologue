@@ -1,8 +1,10 @@
-import asyncdispatch, uri, cgi, httpcore
+import asyncdispatch, uri, httpcore
 import tables, strutils, strformat, logging, strtabs, os, options
 
 import response, context, pages, route, urandom,
-    nativesettings, corebase, utils, middlewaresbase
+    nativesettings, utils, middlewaresbase
+
+from form import parseFormParams
 
 import ../middlewares/middlewares, ../openapi/openapi, ../signing/signing
 import ../cache/cache, ../configure/configure, ../security/hasher
@@ -27,7 +29,6 @@ export context
 export pattern
 export nativesettings
 export configure
-export corebase
 export openapi
 export regex
 export utils
@@ -116,27 +117,6 @@ proc isStaticFile(path: string, dirs: seq[string]): tuple[hasValue: bool, fileNa
       return (true, file.name & file.ext, file.dir)
 
   return (false, "", "")
-
-proc parseFormParams(request: var Request, contentType: string) =
-  # get or post forms params
-  if "form-urlencoded" in contentType:
-    request.formParams = initFormPart()
-    for (key, value) in decodeData(request.body):
-      request.formParams[key] = value
-      case request.reqMethod
-      of HttpGet:
-        request.getParams[key] = value
-      of HttpPost:
-        request.postParams[key] = value
-      else:
-        discard
-  elif "multipart/form-data" in contentType and "boundary" in contentType:
-    request.formParams = parseFormPart(request.body, contentType)
-
-  # /student?name=simon&age=sixteen
-  # query -> name=simon&age=sixteen
-  for (key, value) in decodeData(request.query):
-    request.queryParams[key] = value
 
 proc run*(app: Prologue) =
   for event in app.startup:
