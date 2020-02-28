@@ -16,8 +16,7 @@ type
     nativeRequest: NativeRequest
     cookies*: StringTableRef
     postParams*: StringTableRef
-    getParams*: StringTableRef
-    queryParams*: StringTableRef
+    queryParams*: StringTableRef # Only use queryParams for all url params
     formParams*: FormPart
     pathParams*: StringTableRef
     settings*: Settings
@@ -118,8 +117,7 @@ proc respond*(request: Request; response: Response): Future[void] {.inline.} =
 
 proc initRequest*(nativeRequest: NativeRequest; cookies = newStringTable();
     pathParams = newStringTable(); queryParams = newStringTable();
-        postParams = newStringTable(); getParams = newStringTable();
-            settings = newSettings()): Request {.inline.} =
+        postParams = newStringTable(); settings = newSettings()): Request {.inline.} =
   Request(nativeRequest: nativeRequest, cookies: cookies,
       pathParams: pathParams, queryParams: queryParams, postParams: postParams,
-      getparams: getparams, settings: settings)
+      settings: settings)
