@@ -117,6 +117,27 @@ proc isStaticFile(path: string, dirs: seq[string]): tuple[hasValue: bool, fileNa
 
   return (false, "", "")
 
+proc parseFormParams(request: var Request, contentType: string) =
+  # get or post forms params
+  if "form-urlencoded" in contentType:
+    request.formParams = initFormPart()
+    for (key, value) in decodeData(request.body):
+      request.formParams[key] = value
+      case request.reqMethod
+      of HttpGet:
+        request.getParams[key] = value
+      of HttpPost:
+        request.postParams[key] = value
+      else:
+        discard
+  elif "multipart/form-data" in contentType and "boundary" in contentType:
+    request.formParams = parseFormPart(request.body, contentType)
+
+  # /student?name=simon&age=sixteen
+  # query -> name=simon&age=sixteen
+  for (key, value) in decodeData(request.query):
+    request.queryParams[key] = value
+
 proc run*(app: Prologue) =
   for event in app.startup:
     if event.async:
@@ -128,9 +149,6 @@ proc run*(app: Prologue) =
     var request = initRequest(nativeRequest = nativeRequest,
         settings = app.settings)
     let
-      # /student?name=simon&age=sixteen
-      # query -> name=simon&age=sixteen
-      urlQuery = request.query # string
       headers = request.headers
 
     if headers.hasKey("cookie"):
@@ -141,23 +159,7 @@ proc run*(app: Prologue) =
     if headers.hasKey("content-type"):
       contentType = headers["content-type", 0]
 
-    # get or post forms params
-    if "form-urlencoded" in contentType:
-      request.formParams = initFormPart()
-      for (key, value) in decodeData(request.body):
-        request.formParams[key] = value
-        case request.reqMethod
-        of HttpGet:
-          request.getParams[key] = value
-        of HttpPost:
-          request.postParams[key] = value
-        else:
-          discard
-    elif "multipart/form-data" in contentType and "boundary" in contentType:
-      request.formParams = parseFormPart(request.body, contentType)
-
-    for (key, value) in decodeData(urlQuery):
-      request.queryParams[key] = value
+    request.parseFormParams(contentType)
 
     var response = initResponse(HttpVer11, Http200, httpHeaders = {
         "Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders)
@@ -167,7 +169,6 @@ proc run*(app: Prologue) =
 
     ctx.middlewares = app.middlewares
     logging.debug(fmt"{ctx.request.reqMethod} {ctx.request.url.path}")
-
 
     let staticFileFlag = isStaticFile(ctx.request.path, ctx.request.settings.staticDirs)
     try:
