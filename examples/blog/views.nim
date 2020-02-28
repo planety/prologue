@@ -19,7 +19,6 @@ proc login*(ctx: Context) {.async.} =
       password = SecretKey(getPostParams("password"))
       row = db.getRow(sql"SELECT * FROM user WHERE username = ?", userName)
 
-    echo row
     if row.len == 0:
       error = "Incorrect username"
     elif row.len < 3:

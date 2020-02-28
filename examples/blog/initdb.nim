@@ -1,4 +1,4 @@
-import db_sqlite, os, strutils
+import db_sqlite, os, strutils, logging
 
 
 const
@@ -15,4 +15,4 @@ if not existsFile(dbPath):
       continue
     db.exec(sql(line.strip))
   db.close()
-  echo("Initialized the database.")
+  logging.info("Initialized the database.")

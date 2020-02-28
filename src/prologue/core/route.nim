@@ -69,7 +69,7 @@ proc findHandler*(ctx: Context): PathHandler =
     if path.httpMethod != rawPath.httpMethod:
       continue
     var m: RegexMatch
-    echo rawPath
+
     if rawPath.route.match(path.route, m):
       for name in m.groupNames():
         ctx.request.pathParams[name] = m.groupFirstCapture(name, rawPath.route)
