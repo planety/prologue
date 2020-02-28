@@ -1,7 +1,7 @@
 import asyncdispatch, uri, cgi, httpcore
 import tables, strutils, strformat, logging, strtabs, os, options
 
-import response, context, pages, route,
+import response, context, pages, route, urandom,
     nativesettings, corebase, utils, middlewaresbase
 
 import ../middlewares/middlewares, ../openapi/openapi, ../signing/signing
@@ -36,6 +36,7 @@ export hasher
 export middlewaresbase
 export options
 export cache
+export urandom
 
 
 proc registErrorHandler*(app: Prologue, status: HttpCode,

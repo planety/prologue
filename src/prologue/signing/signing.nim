@@ -47,15 +47,6 @@ const
   DefaultDigestMethodType* = Sha1Type
 
 
-proc randomString*(size: int): string =
-  result = newString(size)
-  discard randomBytes(result)
-
-proc randomSecretKey*(size: int): SecretKey =
-  var buffer = newString(size)
-  discard randomBytes(buffer)
-  result = SecretKey(buffer)
-
 proc initSigner*(secretKey: SecretKey, salt = DefaultSalt, sep = DefaultSep,
     keyDerivation = DefaultKeyDerivation,
         digestMethod = DefaultDigestMethodType): Signer =

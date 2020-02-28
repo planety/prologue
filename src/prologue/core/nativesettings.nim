@@ -1,7 +1,8 @@
 import mimetypes 
 from nativeSockets import Port
 
-from types import SecretKey
+from types import SecretKey, EmptySecretKeyError, len
+from urandom import randomSecretKey
 
 
 type
@@ -18,6 +19,8 @@ type
 
 
 proc newSettings*(port = Port(8080), debug = true, reusePort = true,
-    staticDirs = "/static", secretKey = SecretKey(""), appName = "", dbPath = ""): Settings =
+    staticDirs = "/static", secretKey = randomSecretKey(8), appName = "", dbPath = ""): Settings =
+  if secretKey.len == 0:
+    raise newException(EmptySecretKeyError, "Secret key can't be empty!")
   Settings(port: port, debug: debug, reusePort: reusePort, staticDirs: @[staticDirs],
     mimeDB: newMimetypes(), secretKey: secretKey, appName: appName, dbPath: dbPath)

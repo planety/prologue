@@ -3,6 +3,7 @@ import strutils, strtabs, parseutils
 
 type
   BadSecretKeyError* = object of Exception
+  EmptySecretKeyError* = object of Exception
   BaseType* = int | float | bool | string
   SecretKey* = distinct string
   SecretUrl* = distinct string
@@ -15,6 +16,7 @@ type
     newCreated*: bool
     modified*: bool
     accessed*: bool
+
 
 proc tryParseInt(value: sink string, default: int): int {.inline.} =
   try:
