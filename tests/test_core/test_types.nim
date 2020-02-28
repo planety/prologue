@@ -1,4 +1,4 @@
-import ../../src/prologue/core/types
+from ../../src/prologue/core/types import SecretKey, parseValue, `$`, parseStringTable
 
 import unittest, strtabs
 
@@ -34,20 +34,23 @@ suite "Test Types":
 suite "Deserialize StringTable":
   test "can parse stringTable from empty stringTable":
     let tabs = newStringTable()
-    check $parseStringTable($(tabs)) == $tabs 
+    check $parseStringTable($(tabs)) == $tabs
 
   test "can parse stringTable from stringTable with elements":
     let tabs = {"username": "flywind", "password": "root"}.newStringTable()
     check $parseStringTable($tabs) == $tabs
 
   test "can parse stringTable from stringTable with empty value":
-    let tabs = {"username": "flywind", "password": "", "day": "one"}.newStringTable()
+    let tabs = {"username": "flywind", "password": "",
+        "day": "one"}.newStringTable()
     check $parseStringTable($tabs) == $tabs
 
   test "can parse stringTable from stringTable with empty key":
-    let tabs = {"username": "flywind", "password": "root", "": "one"}.newStringTable()
+    let tabs = {"username": "flywind", "password": "root",
+        "": "one"}.newStringTable()
     check $parseStringTable($tabs) == $tabs
 
   test "can parse stringTable from stringTable with space key or value":
-    let tabs = {"user    name": "   flywind", "password": " ro  ot  ", "": "    o ne"}.newStringTable()
+    let tabs = {"user    name": "   flywind", "password": " ro  ot  ",
+        "": "    o ne"}.newStringTable()
     check $parseStringTable($tabs) == $tabs

@@ -1,4 +1,5 @@
-import ../../src/prologue/core/cookies
+from ../../src/prologue/core/cookies import parseCookies, secondsForward,
+    daysForward, timesForward, setCookie
 
 import unittest, strtabs, options, strutils
 
@@ -14,7 +15,7 @@ suite "Test Cookies":
     check:
       tabs["username"] == "flywind"
       tabs["password"] == "root"
-      
+
   test "can parse empty cookies":
     let tabs = parseCookies("")
     check $tabs == $newStringTable()

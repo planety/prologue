@@ -1,4 +1,5 @@
-import ../../src/prologue/security/hasher
+from ../../src/prologue/security/hasher import pbkdf2_sha256encode,
+    pbkdf2_sha1encode, pbkdf2_sha256verify, pbkdf2_sha1verify
 from ../../src/prologue/core/types import SecretKey
 
 import unittest

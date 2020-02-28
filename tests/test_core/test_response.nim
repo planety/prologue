@@ -1,4 +1,4 @@
-import ../../src/prologue/core/response
+from ../../src/prologue/core/response import initResponse, setHeader, addHeader, setCookie
 
 
 import unittest, httpcore, strutils
@@ -43,6 +43,6 @@ suite "Test Response":
     response.setCookie("username", "flywind")
     response.setCookie("password", "root")
     check:
-      seq[string](response.httpHeaders["set-cookie"]).join("; ") == 
+      seq[string](response.httpHeaders["set-cookie"]).join("; ") ==
           "username=flywind; SameSite=Lax; password=root; SameSite=Lax"
 

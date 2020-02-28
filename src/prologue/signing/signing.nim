@@ -14,8 +14,8 @@ type
 
   # TODO try macros
   BaseDigestMethodType* = enum
-    Sha1Type = "sha1"
-    Sha224Type = "sha224", Sha384Type = "sha384", Sha512Type, Sha512_224Type, Sha512_256Type
+    Sha1Type, 
+    Sha224Type, Sha384Type, Sha512Type, Sha512_224Type, Sha512_256Type
     Keccak224Type, Keccak256Type, Keccak384Type, Keccak512Type, Sha3_224Type,
         Sha3_256Type, Sha3_384Type, Sha3_512Type
     Ripemd128Type, Ripemd160Type, Ripemd256Type, Ripemd320Type

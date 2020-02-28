@@ -1,5 +1,6 @@
 from ../../src/prologue/core/types import SecretKey
-import ../../src/prologue/signing/signing
+from ../../src/prologue/signing/signing import initSigner, initTimedSigner,
+    BaseDigestMethodType, BadSignatureError, sign, unsign, validate
 
 import unittest, json
 
@@ -23,7 +24,7 @@ suite "Test signing":
       key = SecretKey("secret-key")
       s = initTimedSigner(key, salt = "activate",
           digestMethod = Sha1Type)
-      sig = s.sign("my string")    
+      sig = s.sign("my string")
     check s.unsign(sig, 0) == "my string"
 
   test "can sign with json string":
