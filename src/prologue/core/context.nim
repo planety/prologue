@@ -163,6 +163,19 @@ macro getPathParams*[T: BaseType](key: sink string, default: T): T =
     let pathParams = `ctx`.request.pathParams.getOrDefault(`key`)
     parseValue(pathParams, `default`)
 
+proc setResponse*(ctx: Context, status: HttpCode, httpHeaders =
+  {"Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders,
+      body = "", version = HttpVer11) {.inline.} =
+  ## handy to make ctx's response
+  let response = initResponse(httpVersion = version, status = status,
+    httpHeaders = {"Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders,
+        body = body)
+  ctx.response = response
+
+proc setResponse*(ctx: Context, response: Response) {.inline.} =
+  ## handy to make ctx's response
+  ctx.response = response
+
 proc multiMatch*(s: string, replacements: StringTableRef): string =
   result = newStringOfCap(s.len)
   var

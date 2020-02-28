@@ -86,19 +86,19 @@ proc jsonResponse*(text: JsonNode, status = Http200, headers = newHttpHeaders(),
   initResponse(version, status, headers,
       body = $text)
 
-macro resp*(params: string, status = Http200) =
+macro resp*(body: string, status = Http200) =
   ## handy to make ctx's response
   var ctx = ident"ctx"
 
   result = quote do:
     let response = initResponse(httpVersion = HttpVer11, status = `status`,
       httpHeaders = {"Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders,
-          body = `params`)
+          body = `body`)
     `ctx`.response = response
 
-macro resp*(params: Response) =
+macro resp*(response: Response) =
   ## handy to make ctx's response
   var ctx = ident"ctx"
 
   result = quote do:
-    `ctx`.response = `params`
+    `ctx`.response = `response`
