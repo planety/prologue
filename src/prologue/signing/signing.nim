@@ -5,6 +5,7 @@ import signingbase
 import nimcrypto
 
 from ../core/types import SecretKey
+from ../core/encode import urlsafeBase64Encode
 
 export signingbase
 

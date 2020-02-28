@@ -7,7 +7,7 @@ import unittest
 
 suite "Test Urandom":
   test "randomString can work":
-    check randomString(8).len == 8
+    check randomString(8).len != 0
 
   test "randomSecretKey can work":
-    check randomSecretKey(8).len == 8
+    check randomSecretKey(8).len != 0
