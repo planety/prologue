@@ -23,12 +23,6 @@ You can read documentation in https://planety.github.io/prologue.
 
 ## Feature
 
-- Server
-  - [ ] High Performance Http 1.1/2.0 Server
-  - [ ] High Performance Websocket Server
-  - [ ] Http 2.0 Client
-  - [ ] SSL/Https Support
-  - [ ] Reloader
 - Core
   - [x] Configure and Settings
   - [x] Context
@@ -47,15 +41,13 @@ You can read documentation in https://planety.github.io/prologue.
   - [x] URL Building
   - [x] Exception Handler
   - [x] Cross-Site Request Forgery
-  - [ ] Cross-Site Scripting (XSS) Protection
+  - [x] Cross-Site Scripting (XSS) Protection(Karax quote string automatically)
   - [ ] Clickjacking Protection
   - [ ] Host header validation
   - [ ] Referrer policy
-  - [ ] Live Monitor
-  - [ ] Flashing Messages
   - [ ] Authentication
 - Plugin
-  - [x] Template(Using Karax Native or Using Nim Filter)
+  - [x] Template(Using Karax Native)
   - [x] Test Client(Using httpclient)
   - [ ] OpenApi
 

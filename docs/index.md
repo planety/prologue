@@ -24,6 +24,7 @@ web services.
 - Regex Route
 - CORS Response
 - Cross-Site Request Forgery
+- Cross-Site Scripting (XSS) Protection(Karax quote string automatically)
 - Exception Handler
 - Signing
 - Cookie
@@ -157,3 +158,4 @@ Run **app.nim**.Now the server is running at localhost:8080.
 ### More Examples
 - [HelloWorld](https://github.com/planety/prologue/tree/master/examples/helloworld)
 - [ToDoList](https://github.com/planety/prologue/tree/master/examples/todolist)
+- [Blog](https://github.com/planety/prologue/tree/master/examples/blog)
