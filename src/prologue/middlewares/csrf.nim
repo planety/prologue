@@ -17,10 +17,19 @@ const
   DefaultTokenSize* = 64
 
 
-proc generateToken(secret: openArray[byte]): string =
-  let  
+proc getToken*(ctx: Context, tokenName = DefaultTokenName): string {.inline.} =
+  ctx.getCookie(tokenName)
+
+proc setToken*(ctx: Context, value: string, tokenName = DefaultTokenName) {.inline.} =
+  ctx.setCookie(tokenName, value)
+
+proc reject(ctx: Context) {.inline.} =
+  ctx.response.status = Http403
+
+proc makeToken(secret: openArray[byte]): string =
+  let
     secret = randomBytesSeq(DefaultSecretSize)
-  
+
   var
     mask = randomBytesSeq(DefaultSecretSize)
     token = newSeq[byte](DefaultTokenSize)
@@ -35,21 +44,20 @@ proc generateToken(secret: openArray[byte]): string =
 proc recoverToken(token: string): seq[byte] =
   let
     token = token.urlsafeBase64Decode
-  
+
   result = newSeq[byte](DefaultSecretSize)
   for idx in 0 ..< DefaultSecretSize:
     result[idx] = byte(token[idx]) - byte(token[DefaultSecretSize + idx])
 
-proc getToken*(ctx: Context): string =
-  if not ctx.attributes.hasKey("CSRF_COOKIE"):
+proc generateToken*(ctx: Context, tokenName = DefaultTokenName): string =
+  let tok = ctx.getToken(tokenName)
+  if tok.len == 0:
     let secret = randomBytesSeq(DefaultSecretSize)
-    result = generateToken(secret)
-    ctx.attributes["CSRF_COOKIE"] = result
+    result = makeToken(secret)
+    ctx.setToken(result, tokenName)
   else:
-    let secret = recoverToken(ctx.attributes["CSRF_COOKIE"])
-    result = generateToken(secret)
-  ctx.attributes["CSRF_COOKIE_USED"] = "true"
-
+    let secret = recoverToken(tok)
+    result = makeToken(secret)
 
 proc checkToken*(checked, secret: string): bool =
   let
@@ -57,19 +65,9 @@ proc checkToken*(checked, secret: string): bool =
     secret = secret.recoverToken
 
   checked == secret
-  
-proc csrfToken*(ctx: Context, size = DefaultEntropy,
-    tokenName = DefaultTokenName): string {.inline.} =
-  input(`type` = "hidden", name = tokenName, value = "")
 
-proc getToken*(ctx: Context, tokenName = DefaultTokenName): string {.inline.} =
-  ctx.getCookie(tokenName)
-
-proc setToken*(ctx: Context, value: string, tokenName = DefaultTokenName) {.inline.} =
-  ctx.setCookie(tokenName, value)
-
-proc reject(ctx: Context) {.inline.} =
-  ctx.response.status = Http403
+proc csrfToken*(ctx: Context, tokenName = DefaultTokenName): string {.inline.} =
+  input(`type` = "hidden", name = tokenName, value = generateToken(ctx, tokenName))
 
 # logging potential csrf attack
 proc CsrfMiddleWare*(tokenName = DefaultTokenName): HandlerAsync =
@@ -79,16 +77,20 @@ proc CsrfMiddleWare*(tokenName = DefaultTokenName): HandlerAsync =
       await switch(ctx)
       return
 
+    # forms don't send hidden values
     if not ctx.request.postParams.hasKey(tokenName):
       reject(ctx)
       return
 
-    if ctx.getToken(tokenName).len != 0:
-      if not checkToken(ctx.request.postParams[tokenName], ctx.getToken(tokenName)):
-        reject(ctx)
-        return
-    else:
-      ctx.setToken(ctx.request.postParams[tokenName])
+    # forms don't use csrfToken
+    if ctx.getToken(tokenName).len == 0:
+      reject(ctx)
+      return
+
+    # not equal
+    if not checkToken(ctx.request.postParams[tokenName], ctx.getToken(tokenName)):
+      reject(ctx)
+      return
 
     await switch(ctx)
 
