@@ -11,7 +11,7 @@
 What's past is prologue.
 
 ## Purpose
-Prologue is a Full-Stack Scale Web Framework which is
+Prologue is a Full-Stack Web Framework which is
 ideal for building elegant and high performance
 web services.
 
