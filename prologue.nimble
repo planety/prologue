@@ -2,7 +2,7 @@
 
 version       = "0.1.4"
 author        = "flywind"
-description   = "Medium Scale Web Framework."
+description   = "Full-Stack Web Framework."
 license       = "BSD-3-Clause"
 srcDir        = "src"
 

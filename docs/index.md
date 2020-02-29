@@ -6,7 +6,7 @@
 What's past is prologue.
 
 ## Purpose
-`Prologue` is a Medium Scale Web Framework which is
+`Prologue` is a Full-Stack Scale Web Framework which is
 ideal for building elegant and high performance
 web services.
 
@@ -23,6 +23,7 @@ web services.
 - Simple Route
 - Regex Route
 - CORS Response
+- Cross-Site Request Forgery
 - Exception Handler
 - Signing
 - Cookie

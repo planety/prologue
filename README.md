@@ -8,15 +8,10 @@
 
 # Prologue
 
-If you want to join us or have some design ideas, learning material, please contact me in Nim Forum or in gitter.
-Any advice will be appreciated.
-
-https://forum.nim-lang.org/t/5910#36778
-
 What's past is prologue.
 
 ## Purpose
-Prologue is a Medium Scale Web Framework which is
+Prologue is a Full-Stack Scale Web Framework which is
 ideal for building elegant and high performance
 web services.
 
@@ -51,7 +46,7 @@ You can read documentation in https://planety.github.io/prologue.
   - [x] Startup and Shutdown Events
   - [x] URL Building
   - [x] Exception Handler
-  - [ ] Cross-Site Request Forgery
+  - [x] Cross-Site Request Forgery
   - [ ] Cross-Site Scripting (XSS) Protection
   - [ ] Clickjacking Protection
   - [ ] Host header validation
