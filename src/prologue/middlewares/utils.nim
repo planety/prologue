@@ -5,8 +5,10 @@ from ../core/context import Context, HandlerAsync
 from ../core/middlewaresbase import switch
 
 
-when not defined(production):
+when defined(windows) or defined(usestd):
   import ../naive/request
+else:
+  import ../beast/request
 
 
 proc loggingMiddleware*(appName = "Starlight"): HandlerAsync =

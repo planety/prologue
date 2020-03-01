@@ -1,4 +1,4 @@
-import strutils, strtabs, parseutils
+import strutils, strtabs, parseutils, tables
 
 
 type
@@ -17,6 +17,20 @@ type
     modified*: bool
     accessed*: bool
 
+  # TODO add FileUpload object
+  FormPart* = object
+    data*: OrderedTableRef[string, tuple[params: StringTableRef, body: string]]
+
+
+proc initFormPart*(): FormPart {.inline.} =
+  FormPart(data: newOrderedTable[string, (StringTableRef, string)]())
+
+proc `[]`*(formPart: FormPart, key: string): tuple[params: StringTableRef,
+    body: string] =
+  formPart.data[key]
+
+proc `[]=`*(formPart: FormPart, key: string, body: string) =
+  formPart.data[key] = (newStringTable(), body)
 
 proc tryParseInt(value: sink string, default: int): int {.inline.} =
   try:
