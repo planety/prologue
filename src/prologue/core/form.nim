@@ -6,6 +6,8 @@ from cgi import decodeData
 
 when not defined(production):
   import ../naive/request
+else:
+  import ../beast/request
 
 
 proc parseFormPart*(body, contentType: string): FormPart {.inline.} =

@@ -1,6 +1,11 @@
 import os, json
 
-import ../naive/server, ../core/constants
+when not defined(production):
+  import ../naive/server
+else:
+  import ../beast/server
+
+import ../core/constants
 
 export json
 

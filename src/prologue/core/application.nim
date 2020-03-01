@@ -18,6 +18,10 @@ import regex
 when not defined(production):
   import ../ naive / [request, server]
   export request, server
+else:
+  import ../ beast / [request, server]
+  export request, server
+
 
 export httpcore
 export strtabs
@@ -104,10 +108,16 @@ proc newApp*(settings: Settings, middlewares: seq[HandlerAsync] = @[],
     startup: seq[Event] = @[], shutdown: seq[Event] = @[],
         errorHandlerTable = {Http404: default404Handler,
             Http500: default500Handler}.newErrorHandlerTable): Prologue =
-  Prologue(server: newPrologueServer(true, settings.reusePort),
-      settings: settings, router: newRouter(), reversedRouter: newReversedRouter(), reRouter: newReRouter(),
-              middlewares: middlewares, startup: startup, shutdown: shutdown,
-                  errorHandlerTable: errorHandlerTable)
+  when not defined(production):
+    Prologue(server: newPrologueServer(true, settings.reusePort),
+        settings: settings, router: newRouter(), reversedRouter: newReversedRouter(), reRouter: newReRouter(),
+                middlewares: middlewares, startup: startup, shutdown: shutdown,
+                    errorHandlerTable: errorHandlerTable)
+  else:
+    Prologue(settings: settings, router: newRouter(), reversedRouter: newReversedRouter(), reRouter: newReRouter(),
+            middlewares: middlewares, startup: startup, shutdown: shutdown,
+                errorHandlerTable: errorHandlerTable)
+
 
 proc isStaticFile(path: string, dirs: seq[string]): tuple[hasValue: bool,
     fileName, root: string] {.inline.} =
@@ -184,13 +194,13 @@ proc run*(app: Prologue) =
   if logging.getHandlers().len == 0:
     addHandler(logging.newConsoleLogger())
     setLogFilter(if app.settings.debug: lvlDebug else: lvlInfo)
-  defer: app.close()
+  # defer: app.close()
 
   when defined(windows):
     logging.debug(fmt"Prologue is serving at 127.0.0.1:{app.settings.port.int} {app.settings.appName}")
   else:
     logging.debug(fmt"Prologue is serving at 0.0.0.0:{app.settings.port.int} {app.settings.appName}")
-  waitFor app.serve(app.settings.port, handleRequest)
+  app.serve(app.settings.port, handleRequest)
 
   for event in app.shutdown:
     if event.async:

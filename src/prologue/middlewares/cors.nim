@@ -10,6 +10,9 @@ from regex import re, Regex, RegexMatch, match
 
 when not defined(production):
   import ../naive/request
+else:
+  import ../beast/request
+
 
 const
   AllHttpMethod = @["get", "post", "put", "patch", "options", "delete"]

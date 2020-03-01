@@ -9,6 +9,8 @@ from ../core/context import Context, HandlerAsync, getCookie, setCookie, deleteC
 
 when not defined(production):
   import ../naive/request
+else:
+  import ../beast/request
 
 
 const

@@ -10,6 +10,8 @@ import regex
 
 when not defined(production):
   import ../naive/request
+else:
+  import ../beast/request
 
 
 type
