@@ -76,6 +76,7 @@ proc CsrfMiddleWare*(tokenName = DefaultTokenName): HandlerAsync =
 
     # don't submit forms multi-times
     if ctx.request.cookies.hasKey("csrf_used"):
+      ctx.deleteCookie("csrf_used")
       reject(ctx)
       return
 
