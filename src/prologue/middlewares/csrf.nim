@@ -4,7 +4,7 @@ from htmlgen import input
 from ../core/urandom import randomBytesSeq, randomString, DefaultEntropy
 from ../core/encode import urlsafeBase64Encode, urlsafeBase64Decode
 from ../core/middlewaresbase import switch
-from ../core/context import Context, HandlerAsync, getCookie, setCookie
+from ../core/context import Context, HandlerAsync, getCookie, setCookie, deleteCookie
 
 
 when not defined(production):
@@ -27,9 +27,6 @@ proc reject(ctx: Context) {.inline.} =
   ctx.response.status = Http403
 
 proc makeToken(secret: openArray[byte]): string =
-  let
-    secret = randomBytesSeq(DefaultSecretSize)
-
   var
     mask = randomBytesSeq(DefaultSecretSize)
     token = newSeq[byte](DefaultTokenSize)
@@ -77,6 +74,11 @@ proc CsrfMiddleWare*(tokenName = DefaultTokenName): HandlerAsync =
       await switch(ctx)
       return
 
+    # don't submit forms multi-times
+    if ctx.request.cookies.hasKey("csrf_used"):
+      reject(ctx)
+      return
+
     # forms don't send hidden values
     if not ctx.request.postParams.hasKey(tokenName):
       reject(ctx)
@@ -92,8 +94,8 @@ proc CsrfMiddleWare*(tokenName = DefaultTokenName): HandlerAsync =
       reject(ctx)
       return
 
+    # pass
+    ctx.setCookie("csrf_used", "")
+
     await switch(ctx)
 
-    if ctx.getToken(tokenName).len != 0:
-      return
-    ctx.setToken(ctx.request.postParams[tokenName])
