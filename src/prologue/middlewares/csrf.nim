@@ -7,7 +7,7 @@ from ../core/middlewaresbase import switch
 from ../core/context import Context, HandlerAsync, getCookie, setCookie, deleteCookie
 
 
-when not defined(production):
+when defined(windows) or defined(usestd):
   import ../naive/request
 else:
   import ../beast/request

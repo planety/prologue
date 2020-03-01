@@ -5,7 +5,7 @@ from ../core/context import Context, HandlerAsync
 from ../core/middlewaresbase import switch
 
 
-when not defined(production):
+when defined(windows) or defined(usestd):
   import ../naive/request
 else:
   import ../beast/request
@@ -44,20 +44,20 @@ proc stripPathMiddleware*(appName = "Starlight"): HandlerAsync =
     logging.debug "============================"
     logging.debug appName
     logging.debug "from stripPathMiddleware"
-    # ctx.request.stripPath()
+    ctx.request.stripPath()
     logging.debug ctx.request.path
     logging.debug "============================"
     await switch(ctx)
     logging.info "strip->end"
 
-# proc httpRedirectMiddleWare*(): HandlerAsync =
-#   result = proc(ctx: Context) {.async.} =
-#     case ctx.request.scheme
-#     of "http":
-#       setScheme(ctx.request, "https")
-#     of "ws":
-#       setScheme(ctx.request, "wss")
-#     else:
-#       return
-#     await switch(ctx)
-#     ctx.response.status = Http307
+proc httpRedirectMiddleWare*(): HandlerAsync =
+  result = proc(ctx: Context) {.async.} =
+    case ctx.request.scheme
+    of "http":
+      setScheme(ctx.request, "https")
+    of "ws":
+      setScheme(ctx.request, "wss")
+    else:
+      return
+    await switch(ctx)
+    ctx.response.status = Http307

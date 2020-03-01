@@ -1,4 +1,4 @@
-import asyncdispatch
+import asyncdispatch, httpcore
 from asynchttpserver import newAsyncHttpServer, serve, close, AsyncHttpServer
 
 
@@ -29,9 +29,6 @@ proc serve*(app: Prologue, port: Port,
   callback: proc (request: NativeRequest): Future[void] {.closure, gcsafe.},
   address = "") =
   waitFor app.server.serve(port, callback, address)
-
-proc close*(app: Prologue) =
-  app.server.close()
 
 proc newPrologueServer*(reuseAddr = true, reusePort = false,
                          maxBody = 8388608): Server =

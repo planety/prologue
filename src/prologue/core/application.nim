@@ -15,7 +15,7 @@ from types import SameSite
 import regex
 
 
-when not defined(production):
+when defined(windows) or defined(usestd):
   import ../ naive / [request, server]
   export request, server
 else:
@@ -108,7 +108,7 @@ proc newApp*(settings: Settings, middlewares: seq[HandlerAsync] = @[],
     startup: seq[Event] = @[], shutdown: seq[Event] = @[],
         errorHandlerTable = {Http404: default404Handler,
             Http500: default500Handler}.newErrorHandlerTable): Prologue =
-  when not defined(production):
+  when defined(windows) or defined(usestd):
     Prologue(server: newPrologueServer(true, settings.reusePort),
         settings: settings, router: newRouter(), reversedRouter: newReversedRouter(), reRouter: newReRouter(),
                 middlewares: middlewares, startup: startup, shutdown: shutdown,

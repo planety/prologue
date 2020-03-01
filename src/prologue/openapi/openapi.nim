@@ -1,6 +1,6 @@
 import os, json
 
-when not defined(production):
+when defined(windows) or defined(usestd):
   import ../naive/server
 else:
   import ../beast/server

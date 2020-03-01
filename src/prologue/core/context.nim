@@ -8,7 +8,7 @@ from types import BaseType, Session, SameSite, initSession
 import regex
 
 
-when not defined(production):
+when defined(windows) or defined(usestd):
   import ../naive/request
 else:
   import ../beast/request

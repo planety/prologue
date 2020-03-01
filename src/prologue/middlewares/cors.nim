@@ -8,7 +8,7 @@ from ../core/response import plainTextResponse, resp
 
 from regex import re, Regex, RegexMatch, match
 
-when not defined(production):
+when defined(windows) or defined(usestd):
   import ../naive/request
 else:
   import ../beast/request
