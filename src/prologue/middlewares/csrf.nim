@@ -69,7 +69,7 @@ proc csrfToken*(ctx: Context, tokenName = DefaultTokenName): string {.inline.} =
   input(`type` = "hidden", name = tokenName, value = generateToken(ctx, tokenName))
 
 # logging potential csrf attack
-proc CsrfMiddleWare*(tokenName = DefaultTokenName): HandlerAsync =
+proc csrfMiddleWare*(tokenName = DefaultTokenName): HandlerAsync =
   result = proc(ctx: Context) {.async.} =
     # "safe method"
     if ctx.request.reqMethod in {HttpGet, HttpHead, HttpOptions, HttpTrace}:
