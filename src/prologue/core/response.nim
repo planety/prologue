@@ -32,19 +32,24 @@ proc setHeader*(response: var Response; key: string, value: seq[string]) {.inlin
 proc addHeader*(response: var Response; key, value: string) {.inline.} =
   response.httpHeaders.add(key, value)
 
-proc setCookie*(response: var Response; key, value: string, expires = "", maxAge: Option[int] = none(int),
-    domain = "", path = "", secure = false, httpOnly = false, sameSite = Lax) {.inline.} =
-  let cookies = setCookie(key, value, expires, maxAge, domain, path, secure, httpOnly, sameSite)
-  response.addHeader("Set-Cookie", cookies)
-
-proc setCookie*(response: var Response; key, value: string, expires: DateTime|Time, maxAge: Option[int] = none(int),
-    domain = "", path = "", secure = false,
+proc setCookie*(response: var Response; key, value: string, expires = "",
+    maxAge: Option[int] = none(int), domain = "", path = "", secure = false,
         httpOnly = false, sameSite = Lax) {.inline.} =
-  let cookies = setCookie(key, value, expires, maxAge, domain, path, secure, httpOnly, sameSite)
+  let cookies = setCookie(key, value, expires, maxAge, domain, path, secure,
+      httpOnly, sameSite)
   response.addHeader("Set-Cookie", cookies)
 
-proc deleteCookie*(response: var Response, key: string, value = "", path = "", domain = "") {.inline.} =
-  response.setCookie(key, value, expires = secondsForward(0), maxAge = some(0), path = path, domain = domain)
+proc setCookie*(response: var Response; key, value: string,
+    expires: DateTime|Time, maxAge: Option[int] = none(int), domain = "", path = "", secure = false,
+        httpOnly = false, sameSite = Lax) {.inline.} =
+  let cookies = setCookie(key, value, expires, maxAge, domain, path, secure,
+      httpOnly, sameSite)
+  response.addHeader("Set-Cookie", cookies)
+
+proc deleteCookie*(response: var Response, key: string, value = "", path = "",
+    domain = "") {.inline.} =
+  response.setCookie(key, value, expires = secondsForward(0), maxAge = some(0),
+      path = path, domain = domain)
 
 proc abort*(status = Http401, body = "", headers = newHttpHeaders(),
     version = HttpVer11): Response {.inline.} =

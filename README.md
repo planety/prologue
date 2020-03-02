@@ -43,7 +43,7 @@ You can read documentation in https://planety.github.io/prologue.
   - [x] Exception Handler
   - [x] Cross-Site Request Forgery
   - [x] Cross-Site Scripting (XSS) Protection(Karax quote string automatically)
-  - [ ] Clickjacking Protection
+  - [x] Clickjacking Protection
   - [ ] Host header validation
   - [ ] Referrer policy
   - [ ] Authentication

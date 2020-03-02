@@ -26,6 +26,7 @@ web services.
 - CORS Response
 - Cross-Site Request Forgery
 - Cross-Site Scripting (XSS) Protection(Karax quote string automatically)
+- Clickjacking Protection
 - Exception Handler
 - Signing
 - Cookie
