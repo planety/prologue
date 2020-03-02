@@ -24,6 +24,7 @@ You can read documentation in https://planety.github.io/prologue.
 ## Feature
 
 - Core
+  - [x] Base on httpbeast and asynchttpserver
   - [x] Configure and Settings
   - [x] Context
   - [x] Param and Query Data
