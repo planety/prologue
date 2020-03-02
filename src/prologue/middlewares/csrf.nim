@@ -23,7 +23,7 @@ proc getToken*(ctx: Context, tokenName = DefaultTokenName): string {.inline.} =
 proc setToken*(ctx: Context, value: string, tokenName = DefaultTokenName) {.inline.} =
   ctx.setCookie(tokenName, value)
 
-proc reject(ctx: Context) {.inline.} =
+proc reject(ctx: Context): Future[void] =
   ctx.response.status = Http403
 
 proc makeToken(secret: openArray[byte]): string =
@@ -77,22 +77,22 @@ proc CsrfMiddleWare*(tokenName = DefaultTokenName): HandlerAsync =
     # don't submit forms multi-times
     if ctx.request.cookies.hasKey("csrf_used"):
       ctx.deleteCookie("csrf_used")
-      reject(ctx)
+      await reject(ctx)
       return
 
     # forms don't send hidden values
     if not ctx.request.postParams.hasKey(tokenName):
-      reject(ctx)
+      await reject(ctx)
       return
 
     # forms don't use csrfToken
     if ctx.getToken(tokenName).len == 0:
-      reject(ctx)
+      await reject(ctx)
       return
 
     # not equal
     if not checkToken(ctx.request.postParams[tokenName], ctx.getToken(tokenName)):
-      reject(ctx)
+      await reject(ctx)
       return
 
     # pass
