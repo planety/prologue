@@ -51,4 +51,4 @@ install:
 script:
     - nimble install -y
     - nimble test
-    # - nimble test_arc
+    - nimble test_std
