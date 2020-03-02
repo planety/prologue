@@ -1,0 +1,130 @@
+import asyncdispatch, uri, httpcore
+import strutils, strtabs, options
+
+
+from ../core/nativesettings import Settings, newSettings
+from ../core/types import FormPart
+from ../core/response import Response
+
+import httpbeast except Settings
+
+type
+  NativeRequest* = httpBeast.Request
+
+  Request* = object
+    nativeRequest: NativeRequest
+    url: Uri
+    cookies*: StringTableRef
+    postParams*: StringTableRef
+    queryParams*: StringTableRef # Only use queryParams for all url params
+    formParams*: FormPart
+    pathParams*: StringTableRef
+    settings*: Settings
+
+
+proc createHeaders(headers: HttpHeaders): string =
+
+  for (key, value) in headers.pairs:
+    result.add(key & ": " & value & "\c\L")
+
+  result = result[0 .. ^3] # Strip trailing \c\L
+
+# TODO sometime modify
+proc url*(request: Request): Uri {.inline.} =
+  request.url
+  
+proc port*(request: Request): string {.inline.} =
+  request.url.port
+
+proc path*(request: Request): string {.inline.} =
+  request.url.path
+
+proc stripPath*(request: var Request) {.inline.} =
+  request.url.path = request.url.path.strip(
+      leading = false, chars = {'/'})
+
+proc query*(request: Request): string {.inline.} =
+  request.url.query
+
+proc scheme*(request: Request): string {.inline.} =
+  request.url.scheme
+
+proc setScheme*(request: var Request, value: string) {.inline.} =
+  request.url.scheme = value
+
+proc body*(request: Request): string {.inline.} =
+  request.nativeRequest.body.get()
+
+proc headers*(request: Request): HttpHeaders {.inline.} =
+  request.nativeRequest.headers.get()
+
+proc reqMethod*(request: Request): HttpMethod {.inline.} =
+  request.nativeRequest.httpMethod.get()
+
+proc getCookie*(request: Request; key: string; default: string): string {.inline.} =
+  request.cookies.getOrDefault(key, default)
+
+proc contentType*(request: Request): string {.inline.} =
+  let headers = request.nativeRequest.headers.get()
+  if not headers.hasKey("Content-Type"):
+    return ""
+  result = headers["Content-Type", 0]
+
+proc charset*(request: Request): string {.inline.} =
+  let
+    findStr = "charset="
+    contentType = request.contentType
+  let pos = find(contentType, findStr)
+  if pos == -1:
+    return ""
+  else:
+    return contentType[pos + findStr.len .. ^1]
+
+proc secure*(request: Request): bool {.inline.} =
+  let headers = request.nativeRequest.headers.get()
+  if not headers.hasKey("X-Forwarded-Proto"):
+    return false
+
+  case headers["X-Forwarded-Proto", 0]
+  of "http":
+    result = false
+  of "https":
+    result = true
+  else:
+    result = false
+
+proc hostName*(request: Request): string {.inline.} =
+  result = request.nativeRequest.ip
+  let headers = request.nativeRequest.headers.get()
+  if headers.hasKey("REMOTE_ADDR"):
+    result = headers["REMOTE_ADDR", 0]
+  if headers.hasKey("x-forwarded-for"):
+    result = headers["x-forwarded-for", 0]
+
+proc send*(request: Request; content: string): Future[void] {.inline.} =
+  request.nativeRequest.unsafeSend(content)
+  var fut = newFuture[void]()
+  complete(fut)
+  return fut
+
+proc respond*(request: Request; status: HttpCode; body: string;
+  headers: HttpHeaders = newHttpHeaders()): Future[void] {.inline.} =
+
+  let h = headers.createHeaders
+  request.nativeRequest.send(status, body, h)
+  var fut = newFuture[void]()
+  complete(fut)
+  return fut
+
+proc respond*(request: Request; response: Response): Future[void] {.inline.} =
+  request.respond(response.status, response.body, response.httpHeaders)
+
+proc initRequest*(nativeRequest: NativeRequest; cookies = newStringTable();
+  pathParams = newStringTable(); queryParams = newStringTable();
+      postParams = newStringTable(); settings = newSettings()): Request {.inline.} =
+  Request(nativeRequest: nativeRequest, url: parseUri(nativeRequest.path.get()), cookies: cookies,
+      pathParams: pathParams, queryParams: queryParams, postParams: postParams,
+      settings: settings)
+
+proc close*(request: Request) =
+  request.nativeRequest.forget()

@@ -22,6 +22,7 @@ when not defined(windows):
 #   exec "nim c -r examples/helloworld/app.nim"
 
 # tests
+# TODO ci add test_std 
 task test, "Run all tests":
   exec "nim c -r tests/alltests.nim"
 
