@@ -150,8 +150,7 @@ steps:
   - bash: |
       echo "PATH=${PATH}"
       nimble refresh
-      nimble install regex
-      nimble install nimcrypto
+      nimble install -y
     displayName: 'Building the package dependencies'
   - bash: |
       echo "PATH=${PATH}"
