@@ -60,7 +60,6 @@ proc redirect*(url: string, status = Http301,
     body = "", delay = 0, headers = newHttpHeaders(),
         version = HttpVer11): Response {.inline.} =
   ## redirect to new url.
-  var headers = headers
   if delay == 0:
     headers.add("Location", url)
   else:
@@ -76,7 +75,6 @@ proc error404*(status = Http404,
 proc htmlResponse*(text: string, status = Http200, headers = newHttpHeaders(),
     version = HttpVer11): Response {.inline.} =
   ## Content-Type": "text/html; charset=UTF-8
-  var headers = headers
   headers["Content-Type"] = "text/html; charset=UTF-8"
   result = initResponse(version, status, headers,
       body = text)
@@ -84,7 +82,6 @@ proc htmlResponse*(text: string, status = Http200, headers = newHttpHeaders(),
 proc plainTextResponse*(text: string, status = Http200,
     headers = newHttpHeaders(), version = HttpVer11): Response {.inline.} =
   ## Content-Type": "text/plain
-  var headers = headers
   headers["Content-Type"] = "text/plain"
   initResponse(version, status, headers,
       body = text)
@@ -92,7 +89,6 @@ proc plainTextResponse*(text: string, status = Http200,
 proc jsonResponse*(text: JsonNode, status = Http200, headers = newHttpHeaders(),
     version = HttpVer11): Response {.inline.} =
   ## Content-Type": "application/json
-  var headers = headers
   headers["Content-Type"] = "text/json"
   initResponse(version, status, headers,
       body = $text)

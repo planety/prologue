@@ -140,16 +140,14 @@ proc run*(app: Prologue) =
   proc handleRequest(nativeRequest: NativeRequest) {.async.} =
     var request = initRequest(nativeRequest = nativeRequest,
         settings = app.settings)
-    let
-      headers = request.headers
 
-    if headers.hasKey("cookie"):
-      request.cookies = seq[string](headers.getOrDefault("cookie")).join(
+    if request.headers.hasKey("cookie"):
+      request.cookies = seq[string](request.headers.getOrDefault("cookie")).join(
           "; ").parseCookies
 
     var contentType: string
-    if headers.hasKey("content-type"):
-      contentType = headers["content-type", 0]
+    if request.headers.hasKey("content-type"):
+      contentType = request.headers["content-type", 0]
 
     request.parseFormParams(contentType)
 
