@@ -11,6 +11,11 @@ when defined(windows):
     let code = execCmd("nim c --hints:off --verbosity=0 tests/start_server.nim")
     if code != 0:
       raise newException(IOError, "can't compile tests/start_server.nim")
+elif not defined(windows) and defined(usestd):
+  if not existsFile("start_server"):
+    let code = execCmd("nim c --hints:off -d:usestd tests/start_server.nim")
+    if code != 0:
+      raise newException(IOError, "can't compile tests/start_server.nim")
 else:
   if not existsFile("start_server"):
     let code = execCmd("nim c --hints:off tests/start_server.nim")
@@ -103,14 +108,15 @@ suite "Test Application":
     check response.code == Http200
     check (waitFor response.body) == loginGetPage()
 
-  test "can get /loginpage":
-    let
-      route = "/loginpage"
-    var data = newMultipartData()
-    data["username"] = "starlight"
-    data["password"] = "prologue"
-    check (waitFor client.postContent(fmt"http://{address}:{port}{route}",
-        multipart = data)) == "<h1>Hello, Nim</h1>"
+  when defined(windows) or defined(usestd):
+    test "can get /loginpage":
+      let
+        route = "/loginpage"
+      var data = newMultipartData()
+      data["username"] = "starlight"
+      data["password"] = "prologue"
+      check (waitFor client.postContent(fmt"http://{address}:{port}{route}",
+          multipart = data)) == "<h1>Hello, Nim</h1>"
 
   test "can get /login using post method":
     let
@@ -119,14 +125,15 @@ suite "Test Application":
     check response.code == Http200
     check (waitFor response.body) == loginPage()
 
-  test "can post /login":
-    let
-      route = "/login"
-    var data = newMultipartData()
-    data["username"] = "starlight"
-    data["password"] = "prologue"
-    check (waitFor client.postContent(fmt"http://{address}:{port}{route}",
-        multipart = data)) == "<h1>Hello, Nim</h1>"
+  when defined(windows) or defined(usestd):
+    test "can post /login":
+      let
+        route = "/login"
+      var data = newMultipartData()
+      data["username"] = "starlight"
+      data["password"] = "prologue"
+      check (waitFor client.postContent(fmt"http://{address}:{port}{route}",
+          multipart = data)) == "<h1>Hello, Nim</h1>"
 
   client.close()
   process.terminate()

@@ -1,6 +1,11 @@
 import os, json
 
-import ../naive/server, ../core/constants
+when defined(windows) or defined(usestd):
+  import ../naive/server
+else:
+  import ../beast/server
+
+import ../core/constants
 
 export json
 

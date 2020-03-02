@@ -14,13 +14,20 @@ requires "nim >= 1.0.6"
 requires "regex >= 0.13.1"
 requires "nimcrypto >= 0.4.10"
 
+when not defined(windows):
+  requires "httpbeast >= 0.2.2"
+
 # # examples
 # task helloworld, "helloworld":
 #   exec "nim c -r examples/helloworld/app.nim"
 
 # tests
+# TODO ci add test_std 
 task test, "Run all tests":
   exec "nim c -r tests/alltests.nim"
+
+task test_std, "Run all tests use asynchttpserver":
+  exec "nim c -r -d:usestd tests/alltests.nim"
 
 task test_arc, "Run all tests with arc":
   exec "nim c -r --gc:arc tests/alltests.nim"
