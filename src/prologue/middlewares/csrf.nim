@@ -101,4 +101,3 @@ proc CsrfMiddleWare*(tokenName = DefaultTokenName): HandlerAsync =
     ctx.setCookie("csrf_used", "")
 
     await switch(ctx)
-

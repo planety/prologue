@@ -10,8 +10,6 @@ from ../../signing/signing import DefaultSep, DefaultKeyDerivation,
 from ../../core/middlewaresbase import switch
 
 
-
-
 proc sessionMiddleware*(
   secretKey: SecretKey,
   sessionName: string = "session",

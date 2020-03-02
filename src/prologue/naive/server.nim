@@ -1,8 +1,7 @@
 import asyncdispatch, httpcore
 from asynchttpserver import newAsyncHttpServer, serve, close, AsyncHttpServer
 
-
-from request import NativeRequest
+from ./request import NativeRequest
 from ../core/nativesettings import Settings
 from ../core/context import Router, ReversedRouter, ReRouter, HandlerAsync, Event, ErrorHandlerTable
 

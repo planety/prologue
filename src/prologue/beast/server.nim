@@ -1,9 +1,8 @@
 import httpcore, asyncdispatch
 
-import request
-import ../core/nativesettings
-import ../core/context
-
+from ./request import NativeRequest
+from ../core/nativesettings import Settings
+from ../core/context import Router, ReversedRouter, ReRouter, HandlerAsync, Event, ErrorHandlerTable
 
 import httpbeast except Settings, Request
 
@@ -26,10 +25,3 @@ proc serve*(app: Prologue, port: Port,
   callback: proc (request: NativeRequest): Future[void] {.closure, gcsafe.},
   address = "") =
   run(callback, httpbeast.initSettings(port, address))
-
-# proc close*(app: Prologue) =
-#   app.server.close()
-
-# proc newPrologueServer*(reuseAddr = true, reusePort = false,
-#                          maxBody = 8388608): Server =
-#   newAsyncHttpServer(reuseAddr, reusePort, maxBody)
