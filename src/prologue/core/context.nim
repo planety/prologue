@@ -98,14 +98,17 @@ proc newContext*(request: Request, response: Response,
 proc handle*(ctx: Context): Future[void] {.inline.} =
   result = ctx.request.respond(ctx.response)
 
+proc hasHeader*(ctx: Context; key: string): bool {.inline.} =
+  ctx.response.hasHeader(key)
+
 proc setHeader*(ctx: Context; key, value: string) {.inline.} =
-  ctx.response.httpHeaders[key] = value
+  ctx.response.setHeader(key, value)
 
 proc setHeader*(ctx: Context; key: string, value: seq[string]) {.inline.} =
-  ctx.response.httpHeaders[key] = value
+  ctx.response.setHeader(key, value)
 
 proc addHeader*(ctx: Context; key, value: string) {.inline.} =
-  ctx.response.httpHeaders.add(key, value)
+  ctx.response.addHeader(key, value)
 
 proc getCookie*(ctx: Context; key: string, default: string = ""): string {.inline.} =
   getCookie(ctx.request, key, default)

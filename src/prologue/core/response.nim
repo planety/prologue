@@ -20,7 +20,13 @@ proc initResponse*(httpVersion: HttpVersion, status: HttpCode, httpHeaders =
         body = ""): Response =
   Response(httpVersion: httpVersion, status: status, httpHeaders: httpHeaders, body: body)
 
+proc hasHeader*(response: var Response; key: string): bool {.inline.} =
+  response.httpHeaders.hasKey(key)
+
 proc setHeader*(response: var Response; key, value: string) {.inline.} =
+  response.httpHeaders[key] = value
+
+proc setHeader*(response: var Response; key: string, value: seq[string]) {.inline.} =
   response.httpHeaders[key] = value
 
 proc addHeader*(response: var Response; key, value: string) {.inline.} =
