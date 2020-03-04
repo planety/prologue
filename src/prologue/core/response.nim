@@ -26,7 +26,7 @@ proc hasHeader*(response: var Response; key: string): bool {.inline.} =
 proc setHeader*(response: var Response; key, value: string) {.inline.} =
   response.httpHeaders[key] = value
 
-proc setHeader*(response: var Response; key: string, value: seq[string]) {.inline.} =
+proc setHeader*(response: var Response; key: string, value: sink seq[string]) {.inline.} =
   response.httpHeaders[key] = value
 
 proc addHeader*(response: var Response; key, value: string) {.inline.} =

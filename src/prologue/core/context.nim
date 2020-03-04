@@ -104,7 +104,7 @@ proc hasHeader*(ctx: Context; key: string): bool {.inline.} =
 proc setHeader*(ctx: Context; key, value: string) {.inline.} =
   ctx.response.setHeader(key, value)
 
-proc setHeader*(ctx: Context; key: string, value: seq[string]) {.inline.} =
+proc setHeader*(ctx: Context; key: string, value: sink seq[string]) {.inline.} =
   ctx.response.setHeader(key, value)
 
 proc addHeader*(ctx: Context; key, value: string) {.inline.} =
@@ -210,8 +210,8 @@ proc multiMatch*(s: string, replacements: StringTableRef): string =
 proc multiMatch*(s: string, replacements: varargs[(string, string)]): string {.inline.} =
   multiMatch(s, replacements.newStringTable)
 
-macro urlFor*(handler: HandlerAsync, parameters: seq[(string,
-    string)] = @[], queryParams: seq[(string, string)] = @[],
+macro urlFor*(handler: HandlerAsync, parameters: sink seq[(string,
+    string)] = @[], queryParams: sink seq[(string, string)] = @[],
         usePlus = true, omitEq = true): string =
   ## { } can't appear in url
   var ctx = ident"ctx"

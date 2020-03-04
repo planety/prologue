@@ -60,7 +60,7 @@ proc registErrorHandler*(app: Prologue, status: openArray[HttpCode],
     app.errorHandlerTable[idx] = handler
 
 proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
-    httpMethod = HttpGet, middlewares: seq[HandlerAsync] = @[]) {.inline.} =
+    httpMethod = HttpGet, middlewares: sink seq[HandlerAsync] = @[]) {.inline.} =
   ## add single handler route
   ## don't check whether regex routes are duplicated
   # for group in route.namedGroups.keys:
@@ -71,12 +71,12 @@ proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
   app.reRouter.callable.add (path, newPathHandler(handler, middlewares))
 
 proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
-    httpMethod: seq[HttpMethod], middlewares: seq[HandlerAsync] = @[]) {.inline.} =
+    httpMethod: sink seq[HttpMethod], middlewares: sink seq[HandlerAsync] = @[]) {.inline.} =
   for m in httpMethod:
     app.addRoute(route, handler, m, middlewares)
 
 proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
-    httpMethod = HttpGet, middlewares: seq[HandlerAsync] = @[]) {.inline.} =
+    httpMethod = HttpGet, middlewares: sink seq[HandlerAsync] = @[]) {.inline.} =
   ## add single handler route
   ## check whether routes are duplicated
   let path = initPath(route = route, httpMethod = httpMethod)
@@ -91,13 +91,13 @@ proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
   app.reversedRouter[handler] = route
 
 proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
-    httpMethod: seq[HttpMethod], middlewares: seq[HandlerAsync] = @[]) {.inline.} =
+    httpMethod: sink seq[HttpMethod], middlewares: sink seq[HandlerAsync] = @[]) {.inline.} =
   ## add single handler route with multi http method
   ## check whether routes are duplicated
   for m in httpMethod:
     app.addRoute(route, handler, m, middlewares)
 
-proc addRoute*(app: Prologue, patterns: seq[UrlPattern],
+proc addRoute*(app: Prologue, patterns: sink seq[UrlPattern],
     baseRoute = "") {.inline.} =
   ## add multi handler route
   for pattern in patterns:
@@ -107,11 +107,11 @@ proc addRoute*(app: Prologue, patterns: seq[UrlPattern],
 proc serveStaticFile*(app: Prologue, staticDir: string) {.inline.} =
   app.settings.staticDirs.add(staticDir)
 
-proc serveStaticFile*(app: Prologue, staticDir: seq[string]) {.inline.} =
+proc serveStaticFile*(app: Prologue, staticDir: sink seq[string]) {.inline.} =
   app.settings.staticDirs.add(staticDir)
 
-proc newApp*(settings: Settings, middlewares: seq[HandlerAsync] = @[],
-    startup: seq[Event] = @[], shutdown: seq[Event] = @[],
+proc newApp*(settings: Settings, middlewares: sink seq[HandlerAsync] = @[],
+    startup: sink seq[Event] = @[], shutdown: sink seq[Event] = @[],
         errorHandlerTable = {Http404: default404Handler,
             Http500: default500Handler}.newErrorHandlerTable): Prologue =
   when defined(windows) or defined(usestd):
@@ -125,7 +125,7 @@ proc newApp*(settings: Settings, middlewares: seq[HandlerAsync] = @[],
                 errorHandlerTable: errorHandlerTable)
 
 
-proc isStaticFile(path: string, dirs: seq[string]): tuple[hasValue: bool,
+proc isStaticFile(path: string, dirs: sink seq[string]): tuple[hasValue: bool,
     fileName, root: string] {.inline.} =
   let file = splitFile(path.strip(chars = {'/'}, trailing = false))
 
