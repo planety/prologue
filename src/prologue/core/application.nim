@@ -65,6 +65,8 @@ proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
   ## don't check whether regex routes are duplicated
   # for group in route.namedGroups.keys:
   #   echo group
+  if httpMethod == HttpGet:
+    app.addRoute(route, handler, HttpHead, middlewares)
   let path = initRePath(route = route, httpMethod = httpMethod)
   app.reRouter.callable.add (path, newPathHandler(handler, middlewares))
 
@@ -78,6 +80,10 @@ proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
   ## add single handler route
   ## check whether routes are duplicated
   let path = initPath(route = route, httpMethod = httpMethod)
+  # automatically register HttpHead for HttpGet
+  # TODO space vs time
+  if httpMethod == HttpGet:
+    app.addRoute(route, handler, HttpHead, middlewares)
 
   if path in app.router.callable:
     raise newException(DuplicatedRouteError, fmt"Route {route} is duplicated!")
