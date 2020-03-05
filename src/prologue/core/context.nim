@@ -3,7 +3,7 @@ import strtabs, macros, tables, strformat, os, times, options, parseutils
 
 import response, pages, constants
 import ./cookies
-from types import BaseType, Session, SameSite, initSession
+from types import BaseType, Session, SameSite, `[]`, initSession
 
 import regex
 
@@ -64,10 +64,26 @@ type
 
   ErrorHandlerTable* = TableRef[HttpCode, ErrorHandler]
 
+  UpLoadFile* = object
+    fileName*: string
+    body*: string
 
 proc default404Handler*(ctx: Context) {.async.}
 proc default500Handler*(ctx: Context) {.async.}
 
+
+proc initUploadFile*(fileName, body: string): UpLoadFile {.inline.} =
+  UpLoadFile(fileName: fileName, body: body)
+
+proc getUploadFile*(ctx: Context, name: string): UpLoadFile {.inline.} =
+  let file = ctx.request.formParams[name]
+  initUploadFile(fileName = file.params["filename"], body = file.body)
+  
+proc save*(uploadFile: UpLoadFile, dir: string, fileName: string, useDefault = false) =
+  # TODO use time or random string as filename
+  if useDefault:
+    writeFile(dir / uploadFile.fileName, uploadFile.body)
+  writeFile(dir / fileName, uploadFile.body)
 
 proc newErrorHandlerTable*(initialSize = defaultInitialSize): ErrorHandlerTable {.inline.} =
   newTable[HttpCode, ErrorHandler](initialSize)
