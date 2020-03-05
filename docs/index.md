@@ -33,6 +33,7 @@ web services.
 - Session
 - Cache
 - URL Building
+- Authentication
 - Template(Using Karax Native or Using Nim Filter)
 - Test Client(Using httpclient)
 

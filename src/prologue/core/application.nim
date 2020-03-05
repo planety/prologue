@@ -1,9 +1,10 @@
 import asyncdispatch, uri, httpcore
 import tables, strutils, strformat, logging, strtabs, os, options
 
-import response, context, pages, route, urandom,
+import response, context, pages, urandom,
     nativesettings, utils, middlewaresbase
 
+from route import pattern, initPath, initRePath, newPathHandler, newRouter, newReRouter, DuplicatedRouteError, UrlPattern
 
 from form import parseFormParams
 
@@ -31,7 +32,7 @@ export middlewares
 export pages
 export response
 export context
-export pattern
+export route
 export nativesettings
 export configure
 export openapi
@@ -148,8 +149,8 @@ proc run*(app: Prologue) =
         settings = app.settings)
 
     if request.headers.hasKey("cookie"):
-      request.cookies = seq[string](request.headers.getOrDefault("cookie")).join(
-          "; ").parseCookies
+      request.cookies = seq[string](request.headers.getOrDefault(
+          "cookie")).join("; ").parseCookies
 
     var contentType: string
     if request.headers.hasKey("content-type"):

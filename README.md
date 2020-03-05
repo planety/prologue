@@ -44,9 +44,8 @@ You can read documentation in https://planety.github.io/prologue.
   - [x] Cross-Site Request Forgery
   - [x] Cross-Site Scripting (XSS) Protection(Karax quote string automatically)
   - [x] Clickjacking Protection
-  - [ ] Host header validation
-  - [ ] Referrer policy
-  - [ ] Authentication
+  - [x] Authentication
+
 - Plugin
   - [x] Template(Using Karax Native)
   - [x] Test Client(Using httpclient)
