@@ -1,23 +1,26 @@
 import httpcore, strutils, strformat
 
-from ../core/context import Context, setHeader, hasHeader
+from ../core/context import Context, HandlerAsync, setHeader, hasHeader
 from ../core/encode import base64Decode
 
 
-proc unauthenticate*(ctx: Context, realm: string, charset = "") =
+type
+  VerifyHandler* = proc(ctx: Context, userName, password: string): bool
+
+
+proc unauthenticate*(ctx: Context, realm: string, charset = "UTF-8") {.inline.} =
   ctx.response.status = Http401
   ctx.setHeader("WWW-Authenticate", fmt"realm={realm}, charset={charset}")
 
-proc basicAuth*(ctx: Context): bool =
+proc basicAuth*(ctx: Context, realm: string, verify: VerifyHandler, charset = "UTF-8"): bool =
   if not ctx.hasHeader("Authorization"):
-    ctx.response.status = Http403
-    ctx.response.body = "Authorization Required"
+    unauthenticate(ctx, realm, charset)
     return false
 
-  let 
+  let
     text = ctx.response.httpHeaders["Authorization", 0]
     authorization = text.split(' ', maxsplit = 1)
-    authMethod =  authorization[0]
+    authMethod = authorization[0]
     authData = authorization[1]
 
   if authMethod.toLowerAscii != "basic":
@@ -25,15 +28,17 @@ proc basicAuth*(ctx: Context): bool =
     ctx.response.body = "Unsupported Authorization Method"
     return false
 
-  # TODO verify
-  var pairs: string
+  # TODO auth username or password
+  var decoded: string
   try:
-    pairs = base64Decode(authData)
+    decoded = base64Decode(authData)
   except ValueError:
     ctx.response.status = Http403
     ctx.response.body = "Base64 Decode Fails"
-    return
+    return false
 
-  return true
-   
-  
+  let
+    user = decoded.split(":", maxsplit = 1)
+    userName = user[0]
+    password = user[1]
+  return ctx.verify(userName, password)
