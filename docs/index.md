@@ -79,7 +79,7 @@ proc home*(ctx: Context) {.async.} =
   resp "<h1>Home</h1>"
 
 proc helloName*(ctx: Context) {.async.} =
-  resp "<h1>Hello, " & getPathParams("name", "Prologue") & "</h1>"
+  resp "<h1>Hello, " & ctx.getPathParams("name", "Prologue") & "</h1>"
 
 proc login*(ctx: Context) {.async.} =
   resp loginPage()
@@ -112,7 +112,7 @@ proc index*(ctx: Context) {.async.} =
   resp "<h1>Hello, Prologue!</h1>"
 
 proc hello*(ctx: Context) {.async.} =
-  echo ctx.request.queryParams.getOrDefault("name", "")
+  echo ctx.getQueryParams("name", "")
   resp "<h1>Home</h1>"
 ```
 

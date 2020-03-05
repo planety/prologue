@@ -3,7 +3,7 @@ import tables, logging
 
 
 proc articles*(ctx: Context) {.async.} =
-  resp $getPathParams("num", 1)
+  resp $ctx.getPathParams("num", 1)
 
 proc hello*(ctx: Context) {.async.} =
   # await sleepAsync(3000)
@@ -24,8 +24,8 @@ proc index*(ctx: Context) {.async.} =
   await ctx.staticFileResponse("index.html", "static")
 
 proc helloName*(ctx: Context) {.async.} =
-  logging.debug getPathParams("name")
-  resp "<h1>Hello, " & getPathParams("name", "World") & "</h1>"
+  logging.debug ctx.getPathParams("name")
+  resp "<h1>Hello, " & ctx.getPathParams("name", "World") & "</h1>"
 
 proc home*(ctx: Context) {.async.} =
   logging.debug urlFor(index)

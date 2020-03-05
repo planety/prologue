@@ -15,8 +15,8 @@ proc login*(ctx: Context) {.async.} =
       id: string
       encoded: string
     let
-      userName = getPostParams("username")
-      password = SecretKey(getPostParams("password"))
+      userName = ctx.getPostParams("username")
+      password = SecretKey(ctx.getPostParams("password"))
       row = db.getRow(sql"SELECT * FROM user WHERE username = ?", userName)
 
     if row.len == 0:
@@ -52,8 +52,8 @@ proc register*(ctx: Context) {.async.} =
   if ctx.request.reqMethod == HttpPost:
     var error: string
     let
-      userName = getPostParams("username")
-      password = pbkdf2_sha256encode(SecretKey(getPostParams(
+      userName = ctx.getPostParams("username")
+      password = pbkdf2_sha256encode(SecretKey(ctx.getPostParams(
           "password")), "Prologue")
     if userName.len == 0:
       error = "userName required"

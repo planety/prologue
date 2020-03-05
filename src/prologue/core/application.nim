@@ -225,7 +225,7 @@ when isMainModule:
 
   proc helloName*(ctx: Context) {.async.} =
     logging.debug "helloname"
-    resp "<h1>Hello, " & getPathParams("name", "Prologue!") & "</h1>"
+    resp "<h1>Hello, " & ctx.getPathParams("name", "Prologue!") & "</h1>"
 
   proc testRedirect*(ctx: Context) {.async.} =
     logging.debug "testRedirect"

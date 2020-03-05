@@ -20,9 +20,9 @@ proc todoList*(ctx: Context) {.async.} =
   resp htmlResponse(makeList(rows=rows))
 
 proc newItem*(ctx: Context) {.async.} =
-  if getQueryParams("save").len != 0:
+  if ctx.getQueryParams("save").len != 0:
     let
-      row = getQueryParams("task").strip
+      row = ctx.getQueryParams("task").strip
       db = open("todo.db", "", "", "")
     db.exec(sql"INSERT INTO todo (task,status) VALUES (?,?)", row, 1)
     let
@@ -33,11 +33,11 @@ proc newItem*(ctx: Context) {.async.} =
     resp htmlResponse(newList())
 
 proc editItem*(ctx: Context) {.async.} =
-  if getQueryParams("save").len != 0:
+  if ctx.getQueryParams("save").len != 0:
     let
-      edit = getQueryParams("task").strip
-      status = getQueryParams("status").strip
-      id = getPathParams("id", "")
+      edit = ctx.getQueryParams("task").strip
+      status = ctx.getQueryParams("status").strip
+      id = ctx.getPathParams("id", "")
     var statusId = 0
     if status == "open":
         statusId = 1
@@ -47,14 +47,14 @@ proc editItem*(ctx: Context) {.async.} =
     resp htmlResponse(fmt"<p>The item number {id} was successfully updated</p>")
   else:
     let db= open("todo.db", "", "", "")
-    let id = getPathParams("id", "")
+    let id = ctx.getPathParams("id", "")
     let data = db.getAllRows(sql"SELECT task FROM todo WHERE id LIKE ?", id)
     resp htmlResponse(editList(id.parseInt, data[0]))
 
 proc showItem*(ctx: Context) {.async.} =
   let
     db = open("todo.db", "", "", "")
-    item = getPathParams("item", "")
+    item = ctx.getPathParams("item", "")
     rows = db.getAllRows(sql"SELECT task FROM todo WHERE id LIKE ?", item)
   db.close()
   if rows.len == 0:

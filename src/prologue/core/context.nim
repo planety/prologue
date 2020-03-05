@@ -4,6 +4,7 @@ import strtabs, macros, tables, strformat, os, times, options, parseutils
 import response, pages, constants
 import ./cookies
 from types import BaseType, Session, SameSite, `[]`, initSession
+from ../configure/configure import parseValue
 
 import regex
 
@@ -155,34 +156,22 @@ proc default500Handler*(ctx: Context) {.async.} =
   ctx.response.body = internalServerErrorPage()
   ctx.setHeader("content-type", "text/html; charset=UTF-8")
 
-macro getPostParams*(key: string, default = ""): string =
-  var ctx = ident"ctx"
+proc getPostParams*(ctx: Context, key: string, default = ""): string {.inline.} =
+  case ctx.request.reqMethod
+  of HttpPost:
+    result = ctx.request.postParams.getOrDefault(key, default)
+  else:
+    result = ""
 
-  result = quote do:
-    case `ctx`.request.reqMethod
-    of HttpPost:
-      `ctx`.request.postParams.getOrDefault(`key`, `default`)
-    else:
-      ""
+proc getQueryParams*(ctx: Context, key: string, default = ""): string {.inline.} =
+  result = ctx.request.queryParams.getOrDefault(key, default)
 
-macro getQueryParams*(key: string, default = ""): string =
-  var ctx = ident"ctx"
+proc getPathParams*(ctx: Context, key: string): string {.inline.} =
+  ctx.request.pathParams.getOrDefault(key)
 
-  result = quote do:
-    `ctx`.request.queryParams.getOrDefault(`key`, `default`)
-
-macro getPathParams*(key: string): string =
-  var ctx = ident"ctx"
-
-  result = quote do:
-    `ctx`.request.pathParams.getOrDefault(`key`)
-
-macro getPathParams*[T: BaseType](key: sink string, default: T): T =
-  var ctx = ident"ctx"
-
-  result = quote do:
-    let pathParams = `ctx`.request.pathParams.getOrDefault(`key`)
-    parseValue(pathParams, `default`)
+proc getPathParams*[T: BaseType](ctx: Context, key: sink string, default: T): T {.inline.} =
+  let pathParams = ctx.request.pathParams.getOrDefault(key)
+  parseValue(pathParams, default)
 
 proc setResponse*(ctx: Context, status: HttpCode, httpHeaders =
   {"Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders,
@@ -243,7 +232,7 @@ macro urlFor*(handler: HandlerAsync, parameters: sink seq[(string,
       res = multiMatch(res, `parameters`) & "?" & queryString
     res
 
-proc attachment(ctx: Context, downloadName = "", charset = "utf-8") {.inline.} =
+proc attachment*(ctx: Context, downloadName = "", charset = "utf-8") {.inline.} =
   if downloadName.len == 0:
     return
 

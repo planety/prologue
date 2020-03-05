@@ -94,7 +94,7 @@ proc home*(ctx: Context) {.async.} =
   resp "<h1>Home</h1>"
 
 proc helloName*(ctx: Context) {.async.} =
-  resp "<h1>Hello, " & getPathParams("name", "Prologue") & "</h1>"
+  resp "<h1>Hello, " & ctx.getPathParams("name", "Prologue") & "</h1>"
 
 proc doRedirect*(ctx: Context) {.async.} =
   resp redirect("/hello")

@@ -18,7 +18,7 @@ proc formPage*(header, action: string): Vnode =
       input(`type` = "submit", value = action)
 
 proc basePage*(ctx: Context, appName, title: string, content: VNode): string =
-  let userName = getPostParams("username")
+  let userName = ctx.getPostParams("username")
   let vNode = buildHtml(html):
     title: text title & " - " & appName
     link(rel = "stylesheet", href = "/static/style.css")
