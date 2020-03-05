@@ -65,12 +65,12 @@ proc parseFormPart*(body, contentType: string): FormPart {.inline.} =
 
         case formKey
         of "name":
-          name = formValue
+          name = move(formValue)
           result.data[name] = (newStringTable(), "")
         of "filename":
-          result.data[name].params["fileName"] = formValue
+          result.data[name].params["fileName"] = move(formValue)
         of "filename*":
-          result.data[name].params["fileNameStar"] = formValue
+          result.data[name].params["fileNameStar"] = move(formValue)
         else:
           discard
         times += 1
