@@ -13,7 +13,6 @@ export signingbase
 type
   BaseDigestType* = sha1 | sha2 | keccak | ripemd | blake2
 
-  # TODO try macros
   BaseDigestMethodType* = enum
     Sha1Type,
     Sha224Type, Sha384Type, Sha512Type, Sha512_224Type, Sha512_256Type
