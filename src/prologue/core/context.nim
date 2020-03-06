@@ -79,8 +79,9 @@ proc initUploadFile*(fileName, body: string): UpLoadFile {.inline.} =
 proc getUploadFile*(ctx: Context, name: string): UpLoadFile {.inline.} =
   let file = ctx.request.formParams[name]
   initUploadFile(fileName = file.params["filename"], body = file.body)
-  
-proc save*(uploadFile: UpLoadFile, dir: string, fileName: string, useDefault = false) =
+
+proc save*(uploadFile: UpLoadFile, dir: string, fileName: string,
+    useDefault = false) =
   # TODO use time or random string as filename
   if useDefault:
     writeFile(dir / uploadFile.fileName, uploadFile.body)
@@ -169,7 +170,8 @@ proc getQueryParams*(ctx: Context, key: string, default = ""): string {.inline.}
 proc getPathParams*(ctx: Context, key: string): string {.inline.} =
   ctx.request.pathParams.getOrDefault(key)
 
-proc getPathParams*[T: BaseType](ctx: Context, key: sink string, default: T): T {.inline.} =
+proc getPathParams*[T: BaseType](ctx: Context, key: sink string,
+    default: T): T {.inline.} =
   let pathParams = ctx.request.pathParams.getOrDefault(key)
   parseValue(pathParams, default)
 

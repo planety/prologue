@@ -4,7 +4,8 @@ import tables, strutils, strformat, logging, strtabs, os, options
 import response, context, pages, urandom,
     nativesettings, utils, middlewaresbase
 
-from route import pattern, initPath, initRePath, newPathHandler, newRouter, newReRouter, DuplicatedRouteError, UrlPattern
+from route import pattern, initPath, initRePath, newPathHandler, newRouter,
+    newReRouter, DuplicatedRouteError, UrlPattern
 
 from form import parseFormParams
 
@@ -124,7 +125,6 @@ proc newApp*(settings: Settings, middlewares: sink seq[HandlerAsync] = @[],
     Prologue(settings: settings, router: newRouter(), reversedRouter: newReversedRouter(), reRouter: newReRouter(),
             middlewares: middlewares, startup: startup, shutdown: shutdown,
                 errorHandlerTable: errorHandlerTable)
-
 
 proc isStaticFile(path: string, dirs: sink seq[string]): tuple[hasValue: bool,
     fileName, root: string] {.inline.} =

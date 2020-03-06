@@ -1,3 +1,5 @@
+# Quick Start
+
 Now Let's begin a quick tour of `Prologue`.
 
 ```nim
