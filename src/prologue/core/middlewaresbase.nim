@@ -16,11 +16,6 @@ proc switch*(ctx: Context) {.async.} =
     var
       middlewares = handler.middlewares
 
-    # for findHandler in handler.excludeMiddlewares:
-    #   let idx = middlewares.find(findHandler)
-    #   if idx != -1:
-    #     middlewares[idx] = doNothingClosureMiddleware()
-
     ctx.middlewares = middlewares & next
     ctx.first = false
 

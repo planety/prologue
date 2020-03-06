@@ -3,7 +3,8 @@ from asynchttpserver import newAsyncHttpServer, serve, close, AsyncHttpServer
 
 from ./request import NativeRequest
 from ../core/nativesettings import Settings
-from ../core/context import Router, ReversedRouter, ReRouter, HandlerAsync, Event, ErrorHandlerTable
+from ../core/context import Router, ReversedRouter, ReRouter, HandlerAsync,
+    Event, ErrorHandlerTable
 
 
 type
@@ -19,7 +20,7 @@ type
     startup*: seq[Event]
     shutdown*: seq[Event]
     errorHandlerTable*: ErrorHandlerTable
-    
+
 
 proc appName*(app: Prologue): string {.inline.} =
   app.settings.appName

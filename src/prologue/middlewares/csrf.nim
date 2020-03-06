@@ -25,10 +25,10 @@ proc getToken*(ctx: Context, tokenName = DefaultTokenName): string {.inline.} =
 proc setToken*(ctx: Context, value: string, tokenName = DefaultTokenName) {.inline.} =
   ctx.setCookie(tokenName, value)
 
-proc reject(ctx: Context): Future[void] =
+proc reject(ctx: Context) {.inline.} =
   ctx.response.status = Http403
 
-proc makeToken(secret: openArray[byte]): string =
+proc makeToken(secret: openArray[byte]): string {.inline.} =
   var
     mask = randomBytesSeq(DefaultSecretSize)
     token = newSeq[byte](DefaultTokenSize)
@@ -40,7 +40,7 @@ proc makeToken(secret: openArray[byte]): string =
 
   result = token.urlsafeBase64Encode
 
-proc recoverToken(token: string): seq[byte] =
+proc recoverToken(token: string): seq[byte] {.inline.} =
   let
     token = token.urlsafeBase64Decode
 
@@ -48,7 +48,7 @@ proc recoverToken(token: string): seq[byte] =
   for idx in 0 ..< DefaultSecretSize:
     result[idx] = byte(token[idx]) - byte(token[DefaultSecretSize + idx])
 
-proc generateToken*(ctx: Context, tokenName = DefaultTokenName): string =
+proc generateToken*(ctx: Context, tokenName = DefaultTokenName): string {.inline.} =
   let tok = ctx.getToken(tokenName)
   if tok.len == 0:
     let secret = randomBytesSeq(DefaultSecretSize)
@@ -58,7 +58,7 @@ proc generateToken*(ctx: Context, tokenName = DefaultTokenName): string =
     let secret = recoverToken(tok)
     result = makeToken(secret)
 
-proc checkToken*(checked, secret: string): bool =
+proc checkToken*(checked, secret: string): bool {.inline.} =
   let
     checked = checked.recoverToken
     secret = secret.recoverToken
@@ -79,22 +79,22 @@ proc csrfMiddleWare*(tokenName = DefaultTokenName): HandlerAsync =
     # don't submit forms multi-times
     if ctx.request.cookies.hasKey("csrf_used"):
       ctx.deleteCookie("csrf_used")
-      await reject(ctx)
+      reject(ctx)
       return
 
     # forms don't send hidden values
     if not ctx.request.postParams.hasKey(tokenName):
-      await reject(ctx)
+      reject(ctx)
       return
 
     # forms don't use csrfToken
     if ctx.getToken(tokenName).len == 0:
-      await reject(ctx)
+      reject(ctx)
       return
 
     # not equal
     if not checkToken(ctx.request.postParams[tokenName], ctx.getToken(tokenName)):
-      await reject(ctx)
+      reject(ctx)
       return
 
     # pass

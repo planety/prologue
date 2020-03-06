@@ -37,8 +37,9 @@ proc pattern*(route: string, handler: HandlerAsync, httpMethod = HttpGet,
     webAction: WebAction = Http, middlewares: sink seq[HandlerAsync] = @[]): UrlPattern =
   (route, handler, @[httpMethod], webAction, middlewares)
 
-proc pattern*(route: string, handler: HandlerAsync, httpMethod: sink seq[HttpMethod],
-    webAction: WebAction = Http, middlewares: sink seq[HandlerAsync] = @[]): UrlPattern =
+proc pattern*(route: string, handler: HandlerAsync, httpMethod: sink seq[
+    HttpMethod], webAction: WebAction = Http, middlewares: sink seq[
+        HandlerAsync] = @[]): UrlPattern =
   (route, handler, httpMethod, webAction, middlewares)
 
 proc hash*(x: Path): Hash =
@@ -47,7 +48,8 @@ proc hash*(x: Path): Hash =
   h = h !& hash(x.httpMethod)
   result = !$h
 
-proc newPathHandler*(handler: HandlerAsync, middlewares: sink seq[HandlerAsync] = @[]): PathHandler =
+proc newPathHandler*(handler: HandlerAsync, middlewares: sink seq[
+    HandlerAsync] = @[]): PathHandler =
   PathHandler(handler: handler, middlewares: middlewares)
 
 proc newRouter*(): Router =

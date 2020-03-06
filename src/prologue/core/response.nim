@@ -40,8 +40,8 @@ proc setCookie*(response: var Response; key, value: string, expires = "",
   response.addHeader("Set-Cookie", cookies)
 
 proc setCookie*(response: var Response; key, value: string,
-    expires: DateTime|Time, maxAge: Option[int] = none(int), domain = "", path = "", secure = false,
-        httpOnly = false, sameSite = Lax) {.inline.} =
+    expires: DateTime|Time, maxAge: Option[int] = none(int), domain = "",
+        path = "", secure = false, httpOnly = false, sameSite = Lax) {.inline.} =
   let cookies = setCookie(key, value, expires, maxAge, domain, path, secure,
       httpOnly, sameSite)
   response.addHeader("Set-Cookie", cookies)

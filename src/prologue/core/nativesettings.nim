@@ -17,9 +17,8 @@ type
     dbPath*: string
 
 
-
 proc newSettings*(port = Port(8080), debug = true, reusePort = true,
-    staticDirs = "/static", secretKey = randomSecretKey(8), appName = "", dbPath = ""): Settings =
+    staticDirs = "static", secretKey = randomSecretKey(8), appName = "", dbPath = ""): Settings =
   if secretKey.len == 0:
     raise newException(EmptySecretKeyError, "Secret key can't be empty!")
   Settings(port: port, debug: debug, reusePort: reusePort, staticDirs: @[staticDirs],

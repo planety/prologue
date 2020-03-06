@@ -54,12 +54,12 @@ proc registErrorHandler*(app: Prologue, status: HttpCode,
 proc registErrorHandler*(app: Prologue, status: set[HttpCode],
     handler: ErrorHandler) {.inline.} =
   for idx in status:
-    app.errorHandlerTable[idx] = handler
+    app.registErrorHandler(idx, handler)
 
 proc registErrorHandler*(app: Prologue, status: openArray[HttpCode],
     handler: ErrorHandler) {.inline.} =
   for idx in status:
-    app.errorHandlerTable[idx] = handler
+    app.registErrorHandler(idx, handler)
 
 proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
     httpMethod = HttpGet, middlewares: sink seq[HandlerAsync] = @[]) {.inline.} =

@@ -13,22 +13,34 @@ proc articles*(ctx: Context) {.async.} =
   resp $ctx.getPathParams("num", 1)
 
 
-let settings = newSettings()
-var app = newApp(settings)
-
-
 suite "Func Test":
-  test "can add all route":
+  test "serveStaticFile can work":
+    let settings = newSettings()
+    var app = newApp(settings)
+    app.serveStaticFile("templates")
+    check app.settings.staticDirs.len == 2
+    check app.settings.staticDirs[0] == "static"
+    check app.settings.staticDirs[1] == "templates"
+
+  test "serveStaticFiles can work":
+    let settings = newSettings()
+    var app = newApp(settings)
+    app.serveStaticFile(@["templates", "css"])
+    check app.settings.staticDirs.len == 3
+    check app.settings.staticDirs[0] == "static"
+    check app.settings.staticDirs[1] == "templates"
+    check app.settings.staticDirs[2] == "css"
+
+  # test "registErrorHandler can work":
+
+
+  test "addRoute can work":
+    let settings = newSettings()
+    var app = newApp(settings)
     app.addRoute("/", hello)
     app.addRoute("/hello/{name}", helloName, @[HttpGet, HttpPost])
     app.addRoute(re"/post(?P<num>[\d]+)", articles, HttpGet)
-
-  test "addRoute static route can work":
     check app.router.callable[initPath("/", HttpGet)].handler == hello
     check app.router.callable[initPath("/", HttpHead)].handler == hello
-
-  test "addRoute parameters route can work":
     check app.router.callable[initPath("/hello/{name}", HttpPost)].handler == helloName
-    
-  test "addRoute regex route can work":
     check app.reRouter.callable[0][1].handler == articles
