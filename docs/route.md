@@ -29,7 +29,7 @@ app.addRoute("/hello", hello, @[HttpGet, HttpPost])
 
 ## Parameters Route
 
-`Prologue` support parameters route.
+`Prologue` support parameters route.You can use `getPathParams` to get name argument.
 
 ```nim
 proc helloName*(ctx: Context) {.async.} =
@@ -39,11 +39,13 @@ app.addRoute("/hello/{name}", helloName, HttpGet)
 ```
 
 
+### Regex Route
+
+`Prologue` support regex route.You can use `getPathParams` to get name argument.
+
 ```nim
-# handler
-proc helloName*(ctx: Context) {.async.} =
-  resp "<h1>Hello, " & ctx.getPathParams("name", "Prologue") & "</h1>"
+proc articles*(ctx: Context) {.async.} =
+  resp $ctx.getPathParams("num", 1)
 
-app.addRoute("/hello/{name}", helloName, HttpGet)
+app.addRoute(re"/post(?P<num>[\d]+)", articles, HttpGet)
 ```
-
