@@ -35,7 +35,7 @@ type
   ReRouter* = ref object
     callable*: seq[(RePath, PathHandler)]
 
-  ReversedRouter* = TableRef[HandlerAsync, string]
+  ReversedRouter* = StringTableRef
 
   Context* = ref object
     request*: Request
@@ -95,7 +95,7 @@ proc newErrorHandlerTable*(pairs: openArray[(HttpCode,
   newTable[HttpCode, ErrorHandler](pairs)
 
 proc newReversedRouter*(): ReversedRouter =
-  newTable[HandlerAsync, string]()
+  newStringTable()
 
 proc initEvent*(handler: AsyncEvent): Event =
   Event(async: true, asyncHandler: handler)
@@ -217,7 +217,7 @@ proc multiMatch*(s: string, replacements: StringTableRef): string =
 proc multiMatch*(s: string, replacements: varargs[(string, string)]): string {.inline.} =
   multiMatch(s, replacements.newStringTable)
 
-macro urlFor*(handler: HandlerAsync, parameters: sink seq[(string,
+macro urlFor*(handler: string, parameters: sink seq[(string,
     string)] = @[], queryParams: sink seq[(string, string)] = @[],
         usePlus = true, omitEq = true): string =
   ## { } can't appear in url

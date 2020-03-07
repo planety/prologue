@@ -15,15 +15,13 @@ type
   RouteError* = object of PrologueError
   RouteResetError* = object of RouteError
   DuplicatedRouteError* = object of RouteError
-
-  WebAction* = enum
-    Http, Websocket
+  DuplicatedReveredRouteError* = object of RouteError
 
   UrlPattern* = tuple
     route: string
     matcher: HandlerAsync
     httpMethod: seq[HttpMethod]
-    webAction: WebAction
+    name: string
     middlewares: seq[HandlerAsync]
 
 
@@ -34,13 +32,13 @@ proc initRePath*(route: Regex, httpMethod = HttpGet): RePath =
   RePath(route: route, httpMethod: httpMethod)
 
 proc pattern*(route: string, handler: HandlerAsync, httpMethod = HttpGet,
-    webAction: WebAction = Http, middlewares: sink seq[HandlerAsync] = @[]): UrlPattern =
-  (route, handler, @[httpMethod], webAction, middlewares)
+    name = "", middlewares: sink seq[HandlerAsync] = @[]): UrlPattern =
+  (route, handler, @[httpMethod], name, middlewares)
 
 proc pattern*(route: string, handler: HandlerAsync, httpMethod: sink seq[
-    HttpMethod], webAction: WebAction = Http, middlewares: sink seq[
+    HttpMethod], name = "", middlewares: sink seq[
         HandlerAsync] = @[]): UrlPattern =
-  (route, handler, httpMethod, webAction, middlewares)
+  (route, handler, httpMethod, name, middlewares)
 
 proc hash*(x: Path): Hash =
   var h: Hash = 0

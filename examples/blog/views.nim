@@ -66,7 +66,7 @@ proc register*(ctx: Context) {.async.} =
     if error.len == 0:
       db.exec(sql"INSERT INTO user (username, password) VALUES (?, ?)",
           userName, password)
-      resp redirect(urlFor(login), Http301)
+      resp redirect(urlFor("login"), Http301)
     else:
       resp error
   else:

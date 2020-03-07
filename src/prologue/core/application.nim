@@ -7,7 +7,7 @@ import response, context, pages, urandom,
 from utils import isStaticFile
 
 from route import pattern, initPath, initRePath, newPathHandler, newRouter,
-    newReRouter, DuplicatedRouteError, UrlPattern
+    newReRouter, DuplicatedRouteError, DuplicatedReveredRouteError, UrlPattern
 
 from form import parseFormParams
 
@@ -79,34 +79,43 @@ proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
   for m in httpMethod:
     app.addRoute(route, handler, m, middlewares)
 
+proc addReversedRoute(app: Prologue, name, route: string) {.inline.} =
+  if name.len != 0:
+    if app.reversedRouter.hasKey(name):
+      raise newException(DuplicatedReveredRouteError,
+          fmt"Revered Route {name} is duplicated!")
+    app.reversedRouter[name] = route
+
 proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
-    httpMethod = HttpGet, middlewares: sink seq[HandlerAsync] = @[]) {.inline.} =
+    httpMethod = HttpGet, name = "", middlewares: sink seq[HandlerAsync] = @[]) {.inline.} =
   ## add single handler route
   ## check whether routes are duplicated
   let path = initPath(route = route, httpMethod = httpMethod)
   # automatically register HttpHead for HttpGet
   # TODO space vs time
   if httpMethod == HttpGet:
-    app.addRoute(route, handler, HttpHead, middlewares)
+    app.addRoute(route, handler, HttpHead, "", middlewares)
 
   if path in app.router.callable:
     raise newException(DuplicatedRouteError, fmt"Route {route} is duplicated!")
   app.router.callable[path] = newPathHandler(handler, middlewares)
-  app.reversedRouter[handler] = route
+  app.addReversedRoute(name, route)
 
 proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
-    httpMethod: sink seq[HttpMethod], middlewares: sink seq[HandlerAsync] = @[]) {.inline.} =
+    httpMethod: sink seq[HttpMethod], name = "", middlewares: sink seq[
+        HandlerAsync] = @[]) {.inline.} =
   ## add single handler route with multi http method
   ## check whether routes are duplicated
+  app.addReversedRoute(name, route)
   for m in httpMethod:
-    app.addRoute(route, handler, m, middlewares)
+    app.addRoute(route, handler, m, "", middlewares)
 
 proc addRoute*(app: Prologue, patterns: sink seq[UrlPattern],
     baseRoute = "") {.inline.} =
   ## add multi handler route
   for pattern in patterns:
     app.addRoute(baseRoute & pattern.route, pattern.matcher, pattern.httpMethod,
-        pattern.middlewares)
+        pattern.name, pattern.middlewares)
 
 proc serveStaticFile*(app: Prologue, staticDir: string) {.inline.} =
   app.settings.staticDirs.add(staticDir)
@@ -236,7 +245,7 @@ when isMainModule:
   var app = newApp(settings = settings, middlewares = @[stripPathMiddleware()])
   app.addRoute("/", home, HttpGet)
   app.addRoute("/", home, HttpPost)
-  app.addRoute("/home", home, HttpGet, @[debugRequestMiddleware()])
+  app.addRoute("/home", home, HttpGet, middlewares = @[debugRequestMiddleware()])
   app.addRoute("/hello", hello, HttpGet)
   app.addRoute("/redirect", testRedirect, HttpGet)
   app.addRoute("/login", login, HttpGet)
