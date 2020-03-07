@@ -1,8 +1,10 @@
 import asyncdispatch, uri, httpcore
-import tables, strutils, strformat, logging, strtabs, os, options
+import tables, strutils, strformat, logging, strtabs, options
 
 import response, context, pages, urandom,
-    nativesettings, utils, middlewaresbase
+    nativesettings, middlewaresbase
+
+from utils import isStaticFile
 
 from route import pattern, initPath, initRePath, newPathHandler, newRouter,
     newReRouter, DuplicatedRouteError, UrlPattern
@@ -47,19 +49,19 @@ export cache
 export urandom
 
 
-proc registErrorHandler*(app: Prologue, status: HttpCode,
+proc registerErrorHandler*(app: Prologue, status: HttpCode,
     handler: ErrorHandler) {.inline.} =
   app.errorHandlerTable[status] = handler
 
-proc registErrorHandler*(app: Prologue, status: set[HttpCode],
+proc registerErrorHandler*(app: Prologue, status: set[HttpCode],
     handler: ErrorHandler) {.inline.} =
   for idx in status:
-    app.registErrorHandler(idx, handler)
+    app.registerErrorHandler(idx, handler)
 
-proc registErrorHandler*(app: Prologue, status: openArray[HttpCode],
+proc registerErrorHandler*(app: Prologue, status: openArray[HttpCode],
     handler: ErrorHandler) {.inline.} =
   for idx in status:
-    app.registErrorHandler(idx, handler)
+    app.registerErrorHandler(idx, handler)
 
 proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
     httpMethod = HttpGet, middlewares: sink seq[HandlerAsync] = @[]) {.inline.} =
@@ -126,17 +128,6 @@ proc newApp*(settings: Settings, middlewares: sink seq[HandlerAsync] = @[],
             middlewares: middlewares, startup: startup, shutdown: shutdown,
                 errorHandlerTable: errorHandlerTable)
 
-proc isStaticFile(path: string, dirs: sink seq[string]): tuple[hasValue: bool,
-    fileName, root: string] {.inline.} =
-  let file = splitFile(path.strip(chars = {'/'}, trailing = false))
-
-  for dir in dirs:
-    if file.dir.startsWith(dir.strip(chars = {'/'},
-        trailing = false)):
-      return (true, file.name & file.ext, file.dir)
-
-  return (false, "", "")
-
 proc run*(app: Prologue) =
   for event in app.startup:
     if event.async:
@@ -158,9 +149,10 @@ proc run*(app: Prologue) =
 
     request.parseFormParams(contentType)
 
-    var response = initResponse(HttpVer11, Http200, httpHeaders = {
+    var
+      response = initResponse(HttpVer11, Http200, httpHeaders = {
         "Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders)
-    var ctx = newContext(request = request, response = response,
+      ctx = newContext(request = request, response = response,
         router = app.router, reversedRouter = app.reversedRouter,
         reRouter = app.reRouter)
 
@@ -169,6 +161,7 @@ proc run*(app: Prologue) =
 
     let staticFileFlag = isStaticFile(ctx.request.path,
         ctx.request.settings.staticDirs)
+
     try:
       if staticFileFlag.hasValue:
         await staticFileResponse(ctx, staticFileFlag.fileName,

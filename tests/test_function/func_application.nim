@@ -12,6 +12,15 @@ proc helloName*(ctx: Context) {.async.} =
 proc articles*(ctx: Context) {.async.} =
   resp $ctx.getPathParams("num", 1)
 
+proc go404*(ctx: Context) {.async.} = 
+  resp "Something wrong!"
+
+proc go20x*(ctx: Context) {.async.} = 
+  resp "Ok!"
+
+proc go30x*(ctx: Context) {.async.} = 
+  resp "EveryThing else?"
+
 
 suite "Func Test":
   test "serveStaticFile can work":
@@ -31,7 +40,17 @@ suite "Func Test":
     check app.settings.staticDirs[1] == "templates"
     check app.settings.staticDirs[2] == "css"
 
-  # test "registErrorHandler can work":
+  test "registErrorHandler can work":
+    let settings = newSettings()
+    var app = newApp(settings)
+    app.registerErrorHandler(Http404, go404)
+    app.registerErrorHandler({Http200 .. Http204}, go20x)
+    app.registerErrorHandler(@[Http301, Http304, Http307], go30x)
+    check app.errorHandlerTable[Http404] == go404
+    check app.errorHandlerTable[Http202] == go20x
+    check app.errorHandlerTable[Http304] == go30x
+
+    
 
 
   test "addRoute can work":
