@@ -9,8 +9,8 @@ from route import pattern, initPath, initRePath, newPathHandler, newRouter,
 
 from form import parseFormParams
 
-import ../middlewares/middlewares, ../openapi/openapi, ../signing/signing
-import ../cache/cache, ../configure/configure, ../security/hasher
+# import ../middlewares/middlewares, ../openapi/openapi, ../signing/signing
+# import ../cache/cache, ../configure/configure, ../security/hasher
 from ./cookies import parseCookies
 from types import SameSite
 
@@ -29,21 +29,15 @@ export httpcore
 export strtabs
 export tables
 export asyncdispatch except register
-export middlewares
 export pages
 export response
 export context
 export route
 export nativesettings
-export configure
-export openapi
 export regex
 export utils
-export signing
-export hasher
 export middlewaresbase
 export options
-export cache
 export urandom
 
 
@@ -215,6 +209,9 @@ proc run*(app: Prologue) =
 
 
 when isMainModule:
+  import ../middlewares/middlewares, ../openapi/openapi
+  import ../configure/configure
+
   proc hello*(ctx: Context) {.async.} =
     logging.debug "hello"
     resp "<h1>Hello, Prologue!</h1>"
