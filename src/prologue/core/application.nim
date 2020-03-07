@@ -9,8 +9,8 @@ from route import pattern, initPath, initRePath, newPathHandler, newRouter,
 
 from form import parseFormParams
 
-# import ../middlewares/middlewares, ../openapi/openapi, ../signing/signing
-# import ../cache/cache, ../configure/configure, ../security/hasher
+import ../middlewares/middlewares, ../openapi/openapi, ../signing/signing
+import ../cache/cache, ../configure/configure, ../security/hasher
 from ./cookies import parseCookies
 from types import SameSite
 
