@@ -12,17 +12,17 @@ proc helloName*(ctx: Context) {.async.} =
 proc articles*(ctx: Context) {.async.} =
   resp $ctx.getPathParams("num", 1)
 
-proc go404*(ctx: Context) {.async.} = 
+proc go404*(ctx: Context) {.async.} =
   resp "Something wrong!"
 
-proc go20x*(ctx: Context) {.async.} = 
+proc go20x*(ctx: Context) {.async.} =
   resp "Ok!"
 
-proc go30x*(ctx: Context) {.async.} = 
+proc go30x*(ctx: Context) {.async.} =
   resp "EveryThing else?"
 
 
-suite "Func Test":
+suite "Application Func Test":
   test "serveStaticFile can work":
     let settings = newSettings()
     var app = newApp(settings)
@@ -50,9 +50,6 @@ suite "Func Test":
     check app.errorHandlerTable[Http202] == go20x
     check app.errorHandlerTable[Http304] == go30x
 
-    
-
-
   test "addRoute can work":
     let settings = newSettings()
     var app = newApp(settings)
@@ -63,3 +60,74 @@ suite "Func Test":
     check app.router.callable[initPath("/", HttpHead)].handler == hello
     check app.router.callable[initPath("/hello/{name}", HttpPost)].handler == helloName
     check app.reRouter.callable[0][1].handler == articles
+
+
+suite "Restful Function Test":
+  test "restful head can work":
+    let settings = newSettings()
+    var app = newApp(settings)
+    app.head("/hi", hello)
+    check app.router.callable[initPath("/hi", HttpHead)].handler == hello
+
+  test "restful get can work":
+    let settings = newSettings()
+    var app = newApp(settings)
+    app.get("/hi", hello)
+    check app.router.callable[initPath("/hi", HttpGet)].handler == hello
+    check app.router.callable[initPath("/hi", HttpHead)].handler == hello
+
+  test "restful post can work":
+    let settings = newSettings()
+    var app = newApp(settings)
+    app.post("/hi", hello)
+    check app.router.callable[initPath("/hi", HttpPost)].handler == hello
+
+  test "restful put can work":
+    let settings = newSettings()
+    var app = newApp(settings)
+    app.put("/hi", hello)
+    check app.router.callable[initPath("/hi", HttpPut)].handler == hello
+
+  test "restful delete can work":
+    let settings = newSettings()
+    var app = newApp(settings)
+    app.delete("/hi", hello)
+    check app.router.callable[initPath("/hi", HttpDelete)].handler == hello
+
+  test "restful trace can work":
+    let settings = newSettings()
+    var app = newApp(settings)
+    app.trace("/hi", hello)
+    check app.router.callable[initPath("/hi", HttpTrace)].handler == hello
+
+  test "restful options can work":
+    let settings = newSettings()
+    var app = newApp(settings)
+    app.options("/hi", hello)
+    check app.router.callable[initPath("/hi", HttpOptions)].handler == hello
+
+  test "restful connect can work":
+    let settings = newSettings()
+    var app = newApp(settings)
+    app.connect("/hi", hello)
+    check app.router.callable[initPath("/hi", HttpConnect)].handler == hello
+
+  test "restful patch can work":
+    let settings = newSettings()
+    var app = newApp(settings)
+    app.patch("/hi", hello)
+    check app.router.callable[initPath("/hi", HttpPatch)].handler == hello
+
+  test "restful all can work":
+    let settings = newSettings()
+    var app = newApp(settings)
+    app.all("/hi", hello)
+    check app.router.callable[initPath("/hi", HttpGet)].handler == hello
+    check app.router.callable[initPath("/hi", HttpHead)].handler == hello
+    check app.router.callable[initPath("/hi", HttpPost)].handler == hello
+    check app.router.callable[initPath("/hi", HttpPut)].handler == hello
+    check app.router.callable[initPath("/hi", HttpDelete)].handler == hello
+    check app.router.callable[initPath("/hi", HttpTrace)].handler == hello
+    check app.router.callable[initPath("/hi", HttpOptions)].handler == hello
+    check app.router.callable[initPath("/hi", HttpConnect)].handler == hello
+    check app.router.callable[initPath("/hi", HttpPatch)].handler == hello

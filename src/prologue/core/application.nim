@@ -117,6 +117,47 @@ proc addRoute*(app: Prologue, patterns: sink seq[UrlPattern],
     app.addRoute(baseRoute & pattern.route, pattern.matcher, pattern.httpMethod,
         pattern.name, pattern.middlewares)
 
+proc head*(app: Prologue, route: string, handler: HandlerAsync, name = "",
+    middlewares: sink seq[HandlerAsync] = @[]) {.inline.} =
+  app.addRoute(route, handler, HttpHead, name, middlewares)
+
+proc get*(app: Prologue, route: string, handler: HandlerAsync, name = "",
+    middlewares: sink seq[HandlerAsync] = @[]) {.inline.} =
+  app.addRoute(route, handler, HttpGet, name, middlewares)
+
+proc post*(app: Prologue, route: string, handler: HandlerAsync, name = "",
+    middlewares: sink seq[HandlerAsync] = @[]) {.inline.} =
+  app.addRoute(route, handler, HttpPost, name, middlewares)
+
+proc put*(app: Prologue, route: string, handler: HandlerAsync, name = "",
+    middlewares: sink seq[HandlerAsync] = @[]) {.inline.} =
+  app.addRoute(route, handler, HttpPut, name, middlewares)
+
+proc delete*(app: Prologue, route: string, handler: HandlerAsync, name = "",
+    middlewares: sink seq[HandlerAsync] = @[]) {.inline.} =
+  app.addRoute(route, handler, HttpDelete, name, middlewares)
+
+proc trace*(app: Prologue, route: string, handler: HandlerAsync, name = "",
+    middlewares: sink seq[HandlerAsync] = @[]) {.inline.} =
+  app.addRoute(route, handler, HttpTrace, name, middlewares)
+
+proc options*(app: Prologue, route: string, handler: HandlerAsync, name = "",
+    middlewares: sink seq[HandlerAsync] = @[]) {.inline.} =
+  app.addRoute(route, handler, HttpOptions, name, middlewares)
+
+proc connect*(app: Prologue, route: string, handler: HandlerAsync, name = "",
+  middlewares: sink seq[HandlerAsync] = @[]) {.inline.} =
+  app.addRoute(route, handler, HttpConnect, name, middlewares)
+
+proc patch*(app: Prologue, route: string, handler: HandlerAsync, name = "",
+  middlewares: sink seq[HandlerAsync] = @[]) {.inline.} =
+  app.addRoute(route, handler, HttpPatch, name, middlewares)
+
+proc all*(app: Prologue, route: string, handler: HandlerAsync, name = "",
+  middlewares: sink seq[HandlerAsync] = @[]) {.inline.} =
+  app.addRoute(route, handler, @[HttpGet, HttpPost, HttpPut, HttpDelete,
+      HttpTrace, HttpOptions, HttpConnect, HttpPatch], name, middlewares)
+
 proc serveStaticFile*(app: Prologue, staticDir: string) {.inline.} =
   app.settings.staticDirs.add(staticDir)
 
