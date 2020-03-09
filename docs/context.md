@@ -14,5 +14,6 @@ type
     first*: bool
     middlewares*: seq[HandlerAsync]
     session*: Session
+    cleanedData*: StringTableRef
     attributes*: StringTableRef # for extension
 ```
