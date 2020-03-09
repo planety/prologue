@@ -47,6 +47,7 @@ type
     first*: bool
     middlewares*: seq[HandlerAsync]
     session*: Session
+    cleanedData*: StringTableRef
     attributes*: StringTableRef # for extension
 
   AsyncEvent* = proc(): Future[void] {.closure, gcsafe.}
@@ -110,6 +111,7 @@ proc newContext*(request: Request, response: Response,
           reversedRouter: reversedRouter, reRouter: reRouter, size: 0,
           first: true,
           session: initSession(data = newStringTable()),
+          cleanedData: newStringTable(),
           attributes: newStringTable()
     )
 
