@@ -16,7 +16,7 @@ import ../cache/cache, ../configure/configure, ../security/hasher
 from ./cookies import parseCookies
 from types import SameSite
 
-import regex
+import basicregex
 
 
 when defined(windows) or defined(usestd):
@@ -39,7 +39,7 @@ export route
 export nativesettings
 export configure
 export openapi
-export regex
+export basicregex
 export utils
 export signing
 export hasher

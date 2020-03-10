@@ -3,7 +3,7 @@ import hashes, strutils, strtabs, tables
 
 import context
 
-import regex
+from basicregex import Regex, RegexMatch, match, groupNames, groupFirstCapture
 
 when defined(windows) or defined(usestd):
   import ../naive/request

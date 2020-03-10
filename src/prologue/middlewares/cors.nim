@@ -6,7 +6,7 @@ from ../core/context import Context, HandlerAsync, setHeader, addHeader
 
 from ../core/response import plainTextResponse, resp
 
-from regex import re, Regex, RegexMatch, match
+from ../core/basicregex import re, Regex, RegexMatch, match
 
 when defined(windows) or defined(usestd):
   import ../naive/request

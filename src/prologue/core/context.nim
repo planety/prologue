@@ -6,7 +6,7 @@ import ./cookies
 from types import BaseType, Session, SameSite, `[]`, initSession
 from ../configure/configure import parseValue
 
-import regex
+from basicregex import Regex
 
 
 when defined(windows) or defined(usestd):
