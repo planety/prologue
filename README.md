@@ -47,6 +47,7 @@ You can read documentation in https://planety.github.io/prologue.
   - [x] Authentication
 
 - Plugin
+  - [x] Minimal OpenApi support
   - [x] Template(Using Karax Native)
   - [x] Test Client(Using httpclient)
 
