@@ -17,7 +17,6 @@ type
     modified*: bool
     accessed*: bool
 
-  # TODO add FileUpload object
   FormPart* = object
     data*: OrderedTableRef[string, tuple[params: StringTableRef, body: string]]
 
