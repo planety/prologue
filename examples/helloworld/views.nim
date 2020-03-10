@@ -11,15 +11,6 @@ proc hello*(ctx: Context) {.async.} =
   if true:
     raise newException(ValueError, "can't be reached")
 
-proc docs*(ctx: Context) {.async.} =
-  await ctx.staticFileResponse("docs.html", "docs")
-
-proc redocs*(ctx: Context) {.async.} =
-  await ctx.staticFileResponse("redocs.html", "docs")
-
-proc docsjson*(ctx: Context) {.async.} =
-  await ctx.staticFileResponse("openapi.json", "docs")
-
 proc index*(ctx: Context) {.async.} =
   await ctx.staticFileResponse("index.html", "static")
 

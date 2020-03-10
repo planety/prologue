@@ -11,7 +11,9 @@ from route import pattern, initPath, initRePath, newPathHandler, newRouter,
 
 from form import parseFormParams
 
-import ../middlewares/middlewares, ../openapi/openapi, ../signing/signing
+from ../openapi/openapi import swaggerDocs, redocs, openapiHandler, swaggerHandler, redocsHandler
+
+import ../middlewares/middlewares, ../signing/signing
 import ../cache/cache, ../configure/configure, ../security/hasher
 from ./cookies import parseCookies
 from types import SameSite
@@ -38,7 +40,6 @@ export context
 export route
 export nativesettings
 export configure
-export openapi
 export basicregex
 export utils
 export signing
@@ -178,6 +179,13 @@ proc newApp*(settings: Settings, middlewares: sink seq[HandlerAsync] = @[],
             middlewares: middlewares, startup: startup, shutdown: shutdown,
                 errorHandlerTable: errorHandlerTable)
 
+proc serveDocs*(app: Prologue, onlyDebug = false) =
+  if onlyDebug and not app.settings.debug:
+    return
+  app.addRoute("/openapi.json", openapiHandler)
+  app.addRoute("/docs", swaggerHandler)
+  app.addRoute("/redocs", redocsHandler)
+
 proc run*(app: Prologue) =
   for event in app.startup:
     if event.async:
@@ -224,7 +232,6 @@ proc run*(app: Prologue) =
       ctx.response.status = Http500
       ctx.response.body = fmt"{e.msg}"
       ctx.setHeader("content-type", "text/plain; charset=UTF-8")
-      # ctx.response.body = fmt"{getStackTrace()}\n{getCurrentExceptionMsg()}"
 
     if ctx.request.settings.debug and ctx.response.status == Http500:
       discard
@@ -235,6 +242,7 @@ proc run*(app: Prologue) =
 
     # central processing
     # all context processed here except static file
+    # TODO add whether handled to ignore handle
     await handle(ctx)
     logging.debug($(ctx.response))
 
@@ -293,5 +301,5 @@ when isMainModule:
   app.addRoute("/login", doLogin, HttpPost)
   app.addRoute("/hello/{name}", helloName, HttpGet)
   app.serveStaticFile("static")
-  app.generateDocs()
+  app.serveDocs()
   app.run()

@@ -16,5 +16,4 @@ var
   app = newApp(settings = settings, middlewares = @[debugRequestMiddleware()])
 
 app.addRoute(urls.urlPatterns, "")
-app.generateDocs()
 app.run()

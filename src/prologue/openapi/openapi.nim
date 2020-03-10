@@ -1,137 +1,77 @@
-import os, json
+import asyncdispatch, httpcore
 
-when defined(windows) or defined(usestd):
-  import ../naive/server
-else:
-  import ../beast/server
-
-import ../core/constants
-
-export json
+from ../core/context import Context, setHeader
+from ../core/response import htmlResponse, resp
 
 
-type
-  OpenApi* = object
-    version*: string
-    info*: Info
-    servers*: seq[Servers]
-    paths*: Paths
-    components*: Components
-    security*: Security
-    tags*: Tags
-    externalDocs*: ExternalDocs
-  Info* = object
-    title*: string
-    description*: string
-    termsOfService*: string
-    contact*: Contact
-    license*: License
-    version*: string
-  Contact = object
-    name, url, email: string
-  License* = object
-    name*, url*: string
-  Servers = object
-    url, description: string
-    # variables: Variable
-  # Variable = object
-  #   enum: seq[string]
-  Paths = object
-  Components = object
-  Security = object
-  Tags = object
-  ExternalDocs = object
-  Schema* = object
-    schemaType: string
-    title: string
-    multipleOf: string
-    maximum: string
-    exclusiveMaximum: string
-    minimum: string
-    exclusiveMinimum: string
-    maxLength: string
-    minLength: string
-    pattern: string
-    maxItems: string
-    minItems: string
-    uniqueItems: string
-    maxProperties: string
-    minProperties: string
-    required: string
-    shemaEnum: string
-
-proc initContact*(name, url, email = ""): Contact =
-  Contact(name: name, url: url, email: email)
-
-proc `$`*(contact: Contact): string =
-  $ %* contact
-
-proc initLicense*(name: string, url = ""): License =
-  License(name: name, url: url)
-
-proc `$`*(license: License): string =
-  $ %* license
-
-proc initInfo*(title, licenseName, version: string; description, termsOfService = ""; contactName, contactUrl, contactEmail = "";
-     licenseUrl = ""): Info =
-  Info(title: title, description: description, termsOfService: termsOfService,
-      contact: initContact(contactName, contactUrl, contactEmail),
-          license: initLicense(licenseName, licenseUrl), version: version)
-
-proc `$`*(info: Info): string =
-  $ %* {
-    "title": info.title,
-    "description": info.description,
-    "termsOfService": info.termsOfService,
-    "contact": info.contact,
-    "license": info.license,
-    "version": info.version
-  }
-
-proc writeDocs*(description: string; fileName = "openapi.json"; dirs = "docs") =
-  if not existsDir(dirs):
-    createDir(dirs)
-  let f = open(dirs / fileName, fmWrite)
-  defer: f.close()
-  f.write(description)
-
-proc generateDocs*(app: Prologue) =
+const 
+  swaggerDocs* = """<!DOCTYPE html>
+  <html>
   
-  if not app.settings.debug:
-    return
+  <head>
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swagger-ui-dist@3/swagger-ui.css">
+    <link rel="shortcut icon">
+    <title>Prologue API - Swagger UI</title>
+  </head>
   
-  let
-    version = OpenApiVersion
-    license = initLicense("MIT", "https://www.mit-license.org")
-    description = "My Conquest is the Sea of Stars."
-    info = initInfo(title = app.settings.appName, description = description,
-        licenseName = license.name,
-        licenseUrl = license.url, version = PrologueVersion)
-    descriptionJson = %* {
-      "openapi": version,
-      "info": info,
-      "paths": {
-      "/": {
-        "get": {
-          "summary": "Root",
-          "operationId": "root__get",
-          "responses": {
-            "200": {
-              "description": "Successful Response",
-              "content": {
-                "application/json": {
-                  "schema": {}
-                  }
-                }
-              }
-            }
-          }
+  <body>
+    <div id="swagger-ui">
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/swagger-ui-dist@3/swagger-ui-bundle.js"></script>
+    <!-- `SwaggerUIBundle` is now available on the page -->
+    <script>
+      const ui = SwaggerUIBundle({
+        url: '/openapi.json',
+        oauth2RedirectUrl: window.location.origin + '/docs/oauth2-redirect',
+        dom_id: '#swagger-ui',
+        presets: [
+          SwaggerUIBundle.presets.apis,
+          SwaggerUIBundle.SwaggerUIStandalonePreset
+        ],
+        layout: "BaseLayout",
+        deepLinking: true
+      })
+    </script>
+  </body>
+  
+  </html>
+"""
+
+  redocs* = """<!DOCTYPE html>
+  <html>
+    <head>
+      <title>ReDoc</title>
+      <!-- needed for adaptive design -->
+      <meta charset="utf-8"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700" rel="stylesheet">
+  
+      <!--
+      ReDoc doesn't change outer page styles
+      -->
+      <style>
+        body {
+          margin: 0;
+          padding: 0;
         }
-      }
-    }
-    descriptionDoc = $descriptionJson
+      </style>
+    </head>
+    <body>
+      <redoc spec-url='/openapi.json'></redoc>
+      <script src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"> </script>
+    </body>
+  </html> 
+"""
 
-  writeDocs(descriptionDoc)
+proc openapiHandler*(ctx: Context) {.async.} =
+  let text = readFile("docs/openapi.json")
+  ctx.response.body = text
+  ctx.response.status = Http200
+  ctx.setHeader("Content-Type", "text/json")
 
-proc generateRouterDocs(app: Prologue): string {.used.} =
-  discard
+proc swaggerHandler*(ctx: Context) {.async.} =
+  resp htmlResponse(swaggerDocs)
+
+proc redocsHandler*(ctx: Context) {.async.} =
+  resp htmlResponse(redocs)
+  
