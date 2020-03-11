@@ -3,7 +3,7 @@
 version       = "0.1.4"
 author        = "flywind"
 description   = "Full-Stack Web Framework."
-license       = "BSD-3-Clause"
+license       = "Apache-2.0"
 srcDir        = "src"
 
 
