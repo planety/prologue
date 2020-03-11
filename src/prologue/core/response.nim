@@ -20,26 +20,26 @@ proc initResponse*(httpVersion: HttpVersion, status: HttpCode, httpHeaders =
         body = ""): Response =
   Response(httpVersion: httpVersion, status: status, httpHeaders: httpHeaders, body: body)
 
-proc hasHeader*(response: var Response; key: string): bool {.inline.} =
+proc hasHeader*(response: var Response, key: string): bool {.inline.} =
   response.httpHeaders.hasKey(key)
 
-proc setHeader*(response: var Response; key, value: string) {.inline.} =
+proc setHeader*(response: var Response, key, value: string) {.inline.} =
   response.httpHeaders[key] = value
 
-proc setHeader*(response: var Response; key: string, value: sink seq[string]) {.inline.} =
+proc setHeader*(response: var Response, key: string, value: sink seq[string]) {.inline.} =
   response.httpHeaders[key] = value
 
-proc addHeader*(response: var Response; key, value: string) {.inline.} =
+proc addHeader*(response: var Response, key, value: string) {.inline.} =
   response.httpHeaders.add(key, value)
 
-proc setCookie*(response: var Response; key, value: string, expires = "",
+proc setCookie*(response: var Response, key, value: string, expires = "",
     maxAge: Option[int] = none(int), domain = "", path = "", secure = false,
         httpOnly = false, sameSite = Lax) {.inline.} =
   let cookies = setCookie(key, value, expires, maxAge, domain, path, secure,
       httpOnly, sameSite)
   response.addHeader("Set-Cookie", cookies)
 
-proc setCookie*(response: var Response; key, value: string,
+proc setCookie*(response: var Response, key, value: string,
     expires: DateTime|Time, maxAge: Option[int] = none(int), domain = "",
         path = "", secure = false, httpOnly = false, sameSite = Lax) {.inline.} =
   let cookies = setCookie(key, value, expires, maxAge, domain, path, secure,

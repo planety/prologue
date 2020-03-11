@@ -120,35 +120,35 @@ proc newContext*(request: Request, response: Response,
 proc handle*(ctx: Context): Future[void] {.inline.} =
   result = ctx.request.respond(ctx.response)
 
-proc send*(ctx: Context; content: string): Future[void] {.inline.} =
+proc send*(ctx: Context, content: string): Future[void] {.inline.} =
   result = ctx.request.send(content)
 
-proc respond*(ctx: Context; status: HttpCode; body: string;
+proc respond*(ctx: Context, status: HttpCode, body: string,
   headers: HttpHeaders = newHttpHeaders()): Future[void] {.inline.} =
   result = ctx.request.respond(status, body, headers)
 
-proc hasHeader*(ctx: Context; key: string): bool {.inline.} =
+proc hasHeader*(ctx: Context, key: string): bool {.inline.} =
   ctx.response.hasHeader(key)
 
-proc setHeader*(ctx: Context; key, value: string) {.inline.} =
+proc setHeader*(ctx: Context, key, value: string) {.inline.} =
   ctx.response.setHeader(key, value)
 
-proc setHeader*(ctx: Context; key: string, value: sink seq[string]) {.inline.} =
+proc setHeader*(ctx: Context, key: string, value: sink seq[string]) {.inline.} =
   ctx.response.setHeader(key, value)
 
-proc addHeader*(ctx: Context; key, value: string) {.inline.} =
+proc addHeader*(ctx: Context, key, value: string) {.inline.} =
   ctx.response.addHeader(key, value)
 
-proc getCookie*(ctx: Context; key: string, default: string = ""): string {.inline.} =
+proc getCookie*(ctx: Context, key: string, default: string = ""): string {.inline.} =
   getCookie(ctx.request, key, default)
 
-proc setCookie*(ctx: Context; key, value: string, expires = "", maxAge: Option[
+proc setCookie*(ctx: Context, key, value: string, expires = "", maxAge: Option[
     int] = none(int),
   domain = "", path = "", secure = false, httpOnly = false, sameSite = Lax) {.inline.} =
   ctx.response.setCookie(key, value, expires, maxAge, domain, path, secure,
       httpOnly, sameSite)
 
-proc setCookie*(ctx: Context; key, value: string, expires: DateTime|Time,
+proc setCookie*(ctx: Context, key, value: string, expires: DateTime|Time,
     maxAge: Option[int] = none(int),
     domain = "", path = "", secure = false, httpOnly = false, sameSite = Lax) {.inline.} =
   ctx.response.setCookie(key, value, domain, expires, maxAge, path, secure,

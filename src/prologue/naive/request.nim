@@ -50,7 +50,7 @@ proc headers*(request: Request): HttpHeaders {.inline.} =
 proc reqMethod*(request: Request): HttpMethod {.inline.} =
   request.nativeRequest.reqMethod
 
-proc getCookie*(request: Request; key: string, default: string = ""): string {.inline.} =
+proc getCookie*(request: Request, key: string, default: string = ""): string {.inline.} =
   request.cookies.getOrDefault(key, default)
 
 proc contentType*(request: Request): string {.inline.} =
@@ -94,17 +94,17 @@ proc send*(request: Request, content: string): Future[void] {.inline.} =
   # TODO can't use asyncCheck
   result = request.nativeRequest.client.send(content)
 
-proc respond*(request: Request; status: HttpCode; body: string;
+proc respond*(request: Request, status: HttpCode, body: string,
   headers: HttpHeaders = newHttpHeaders()): Future[void] {.inline.} =
   result = request.nativeRequest.respond(status, body, headers)
 
-proc respond*(request: Request; response: Response): Future[void] {.inline.} =
+proc respond*(request: Request, response: Response): Future[void] {.inline.} =
   result = request.respond(response.status, response.body,
       response.httpHeaders)
 
-proc initRequest*(nativeRequest: NativeRequest; cookies = newStringTable();
-    pathParams = newStringTable(); queryParams = newStringTable();
-        postParams = newStringTable(); settings = newSettings()): Request {.inline.} =
+proc initRequest*(nativeRequest: NativeRequest, cookies = newStringTable(),
+    pathParams = newStringTable(), queryParams = newStringTable(),
+        postParams = newStringTable(), settings = newSettings()): Request {.inline.} =
   Request(nativeRequest: nativeRequest, cookies: cookies,
       pathParams: pathParams, queryParams: queryParams, postParams: postParams,
       settings: settings)

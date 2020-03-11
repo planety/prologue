@@ -61,7 +61,7 @@ proc headers*(request: Request): HttpHeaders {.inline.} =
 proc reqMethod*(request: Request): HttpMethod {.inline.} =
   request.nativeRequest.httpMethod.get()
 
-proc getCookie*(request: Request; key: string; default: string): string {.inline.} =
+proc getCookie*(request: Request, key: string, default: string): string {.inline.} =
   request.cookies.getOrDefault(key, default)
 
 proc contentType*(request: Request): string {.inline.} =
@@ -101,13 +101,13 @@ proc hostName*(request: Request): string {.inline.} =
   if headers.hasKey("x-forwarded-for"):
     result = headers["x-forwarded-for", 0]
 
-proc send*(request: Request; content: string): Future[void] {.inline.} =
+proc send*(request: Request, content: string): Future[void] {.inline.} =
   request.nativeRequest.unsafeSend(content)
   var fut = newFuture[void]()
   complete(fut)
   return fut
 
-proc respond*(request: Request; status: HttpCode; body: string;
+proc respond*(request: Request, status: HttpCode, body: string,
   headers: HttpHeaders = newHttpHeaders()): Future[void] {.inline.} =
 
   let h = headers.createHeaders
@@ -116,12 +116,12 @@ proc respond*(request: Request; status: HttpCode; body: string;
   complete(fut)
   return fut
 
-proc respond*(request: Request; response: Response): Future[void] {.inline.} =
+proc respond*(request: Request, response: Response): Future[void] {.inline.} =
   request.respond(response.status, response.body, response.httpHeaders)
 
-proc initRequest*(nativeRequest: NativeRequest; cookies = newStringTable();
-  pathParams = newStringTable(); queryParams = newStringTable();
-      postParams = newStringTable(); settings = newSettings()): Request {.inline.} =
+proc initRequest*(nativeRequest: NativeRequest, cookies = newStringTable(),
+  pathParams = newStringTable(), queryParams = newStringTable(),
+      postParams = newStringTable(), settings = newSettings()): Request {.inline.} =
   Request(nativeRequest: nativeRequest, url: parseUri(nativeRequest.path.get()), cookies: cookies,
       pathParams: pathParams, queryParams: queryParams, postParams: postParams,
       settings: settings)
