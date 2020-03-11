@@ -45,6 +45,7 @@ type
     reRouter*: ReRouter
     size*: int
     first*: bool
+    handled*: bool
     middlewares*: seq[HandlerAsync]
     session*: Session
     cleanedData*: StringTableRef
@@ -110,6 +111,7 @@ proc newContext*(request: Request, response: Response,
   Context(request: request, response: response, router: router,
           reversedRouter: reversedRouter, reRouter: reRouter, size: 0,
           first: true,
+          handled: false,
           session: initSession(data = newStringTable()),
           cleanedData: newStringTable(),
           attributes: newStringTable()
@@ -256,14 +258,14 @@ proc staticFileResponse*(ctx: Context, fileName, root: string, mimetype = "",
 
   # exists -> have access -> can open
   if not existsFile(filePath):
-    await ctx.request.respond(error404(headers = headers))
+    resp error404(headers = headers)
     return
 
   var filePermission = getFilePermissions(filePath)
   if fpOthersRead notin filePermission:
-    await ctx.request.respond(abort(status = Http403,
+    resp abort(status = Http403,
         body = "You do not have permission to access this file.",
-        headers = headers))
+        headers = headers)
     return
 
   var
@@ -296,15 +298,15 @@ proc staticFileResponse*(ctx: Context, fileName, root: string, mimetype = "",
     ctx.attachment(downloadName)
     download = true
 
-
   if contentLength < 20_000_000:
     # if ctx.request.headers.hasKey("If-None-Match") and ctx.request.headers[
     #     "If-None-Match"] == etag and download == true:
       # await ctx.request.respond(Http304, "")
     # else:
     let body = readFile(filePath)
-    await ctx.request.respond(Http200, body, headers)
+    resp initResponse(HttpVer11, Http200, headers, body)
   else:
+    # stream
     await ctx.request.respond(Http200, "", headers)
     var
       fileStream = newFutureStream[string]("staticFileResponse")
@@ -319,3 +321,4 @@ proc staticFileResponse*(ctx: Context, fileName, root: string, mimetype = "",
         await ctx.request.send(value)
       else:
         break
+    ctx.handled = true

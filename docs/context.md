@@ -12,6 +12,7 @@ type
     reRouter*: ReRouter
     size*: int
     first*: bool
+    handled*: bool
     middlewares*: seq[HandlerAsync]
     session*: Session
     cleanedData*: StringTableRef

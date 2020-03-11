@@ -220,11 +220,11 @@ proc run*(app: Prologue) =
     let staticFileFlag = isStaticFile(ctx.request.path,
         ctx.request.settings.staticDirs)
 
+    # TODO move to function
     try:
       if staticFileFlag.hasValue:
         await staticFileResponse(ctx, staticFileFlag.fileName,
             staticFileFlag.root)
-        return
       else:
         await switch(ctx)
     except Exception as e:
@@ -242,8 +242,8 @@ proc run*(app: Prologue) =
 
     # central processing
     # all context processed here except static file
-    # TODO add whether handled to ignore handle
-    await handle(ctx)
+    if not ctx.handled:
+      await handle(ctx)
     logging.debug($(ctx.response))
 
   # TODO maybe should read settings from file

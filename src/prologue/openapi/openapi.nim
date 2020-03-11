@@ -1,6 +1,6 @@
 import asyncdispatch, httpcore
 
-from ../core/context import Context, setHeader
+from ../core/context import Context, setHeader, staticFileResponse
 from ../core/response import htmlResponse, resp
 
 
@@ -64,10 +64,7 @@ const
 """
 
 proc openapiHandler*(ctx: Context) {.async.} =
-  let text = readFile("docs/openapi.json")
-  ctx.response.body = text
-  ctx.response.status = Http200
-  ctx.setHeader("Content-Type", "text/json")
+  await staticFileResponse(ctx, "openapi.json", "docs")
 
 proc swaggerHandler*(ctx: Context) {.async.} =
   resp htmlResponse(swaggerDocs)
