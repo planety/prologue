@@ -1,10 +1,10 @@
-import asyncdispatch, httpcore
+import asyncdispatch
 
 from ../core/context import Context, setHeader, staticFileResponse
 from ../core/response import htmlResponse, resp
 
 
-const 
+const
   swaggerDocs* = """<!DOCTYPE html>
   <html>
   
@@ -71,4 +71,3 @@ proc swaggerHandler*(ctx: Context) {.async.} =
 
 proc redocsHandler*(ctx: Context) {.async.} =
   resp htmlResponse(redocs)
-  

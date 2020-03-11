@@ -11,7 +11,8 @@ from route import pattern, initPath, initRePath, newPathHandler, newRouter,
 
 from form import parseFormParams
 
-from ../openapi/openapi import swaggerDocs, redocs, openapiHandler, swaggerHandler, redocsHandler
+from ../openapi/openapi import swaggerDocs, redocs, openapiHandler,
+    swaggerHandler, redocsHandler
 
 import ../middlewares/middlewares, ../signing/signing
 import ../cache/cache, ../configure/configure, ../security/hasher
@@ -230,7 +231,7 @@ proc run*(app: Prologue) =
     except Exception as e:
       logging.error e.msg
       ctx.response.status = Http500
-      ctx.response.body = fmt"{e.msg}"
+      ctx.response.body = e.msg
       ctx.setHeader("content-type", "text/plain; charset=UTF-8")
 
     if ctx.request.settings.debug and ctx.response.status == Http500:

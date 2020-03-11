@@ -120,6 +120,13 @@ proc newContext*(request: Request, response: Response,
 proc handle*(ctx: Context): Future[void] {.inline.} =
   result = ctx.request.respond(ctx.response)
 
+proc send*(ctx: Context; content: string): Future[void] {.inline.} =
+  result = ctx.request.send(content)
+
+proc respond*(ctx: Context; status: HttpCode; body: string;
+  headers: HttpHeaders = newHttpHeaders()): Future[void] {.inline.} =
+  result = ctx.request.respond(status, body, headers)
+
 proc hasHeader*(ctx: Context; key: string): bool {.inline.} =
   ctx.response.hasHeader(key)
 
@@ -301,13 +308,13 @@ proc staticFileResponse*(ctx: Context, fileName, root: string, mimetype = "",
   if contentLength < 20_000_000:
     # if ctx.request.headers.hasKey("If-None-Match") and ctx.request.headers[
     #     "If-None-Match"] == etag and download == true:
-      # await ctx.request.respond(Http304, "")
+      # await ctx.respond(Http304, "")
     # else:
     let body = readFile(filePath)
     resp initResponse(HttpVer11, Http200, headers, body)
   else:
     # stream
-    await ctx.request.respond(Http200, "", headers)
+    await ctx.respond(Http200, "", headers)
     var
       fileStream = newFutureStream[string]("staticFileResponse")
       file = openAsync(filePath, fmRead)
@@ -318,7 +325,7 @@ proc staticFileResponse*(ctx: Context, fileName, root: string, mimetype = "",
     while true:
       let (hasValue, value) = await fileStream.read()
       if hasValue:
-        await ctx.request.send(value)
+        await ctx.send(value)
       else:
         break
     ctx.handled = true
