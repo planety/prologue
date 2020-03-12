@@ -2,10 +2,14 @@ import strutils, parseutils
 
 
 proc isInt*(value: string): bool {.inline.} =
+  if value.len == 0:
+    return false
   var ignoreMe = 0
   result = parseInt(value, ignoreMe) == value.len
 
 proc isNumeric*(value: string): bool {.inline.} =
+  if value.len == 0:
+    return false
   var ignoreMe = 0.0
   result = parseFloat(value, ignoreMe) == value.len
 

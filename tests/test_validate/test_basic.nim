@@ -9,6 +9,7 @@ suite "Test Is Utils":
       isInt("12")
       isInt("-753")
       isInt("0")
+      not isInt("")
       not isInt("912.6")
       not isInt("a912")
 
@@ -19,6 +20,7 @@ suite "Test Is Utils":
       isNumeric("0")
       isNumeric("0.5")
       isNumeric("-912.6")
+      not isNumeric("")
       not isNumeric("a912")
       not isNumeric("0.91.2")
 
@@ -30,4 +32,5 @@ suite "Test Is Utils":
       isBool("n")
       isBool("False")
       isBool("Off")
+      not isBool("")
       not isBool("wrong")

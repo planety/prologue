@@ -1,5 +1,7 @@
 import tables, strtabs, strutils
 
+from ./basic import nil
+
 
 type
   Info* = tuple[hasValue: bool, msg: string]
@@ -37,17 +39,32 @@ proc validate*(formValidation: FormValidation, textTable: StringTableRef,
     return (false, msgs)
   return (true, msgs)
 
-proc accepted*(msg: string = "Can't accept this value!"): ValidateHandler {.inline.} =
+proc isInt*(msg: string): ValidateHandler {.inline.} =
+  result = proc(text: string): Info =
+    if basic.isInt(text):
+      result = (true, "")
+    else:
+      result = (false, msg)
+
+proc isNumeric*(msg: string): ValidateHandler {.inline.} =
+  result = proc(text: string): Info =
+    if basic.isNumeric(text):
+      result = (true, "")
+    else:
+      result = (false, msg)
+
+proc isBool*(msg: string): ValidateHandler {.inline.} =
+  result = proc(text: string): Info =
+    if basic.isBool(text):
+      result = (true, "")
+    else:
+      result = (false, msg)
+
+proc accepted*(msg: string): ValidateHandler {.inline.} =
   ## if lowerAscii input in {"yes", "on", "1", or "true"}, return true
   result = proc(text: string): Info =
     case text.toLowerAscii
-    of "yes":
-      return (true, "")
-    of "on":
-      return (true, "")
-    of "1":
-      return (true, "")
-    of "true":
+    of "yes", "y", "on", "1", "true":
       return (true, "")
     else:
       return (false, msg)
