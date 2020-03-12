@@ -25,10 +25,10 @@ proc initFormPart*(): FormPart {.inline.} =
   FormPart(data: newOrderedTable[string, (StringTableRef, string)]())
 
 proc `[]`*(formPart: FormPart, key: string): tuple[params: StringTableRef,
-    body: string] =
+    body: string] {.inline.} =
   formPart.data[key]
 
-proc `[]=`*(formPart: FormPart, key: string, body: string) =
+proc `[]=`*(formPart: FormPart, key: string, body: string) {.inline.} =
   formPart.data[key] = (newStringTable(), body)
 
 proc tryParseInt(value: sink string, default: int): int {.inline.} =
@@ -62,33 +62,33 @@ proc parseValue*[T: BaseType](value: string, default: T): T {.inline.} =
   elif T is string:
     result = value
 
-proc len*(secretKey: SecretKey): int =
+proc len*(secretKey: SecretKey): int {.inline.} =
   string(secretKey).len
 
-proc `$`*(secretKey: SecretKey): string =
+proc `$`*(secretKey: SecretKey): string {.inline.} =
   ## Hide secretKey's value
   "SecretKey(********)"
 
 proc initSession*(data: StringTableRef, newCreated = false, modified = false,
-    accessed = false): Session =
+    accessed = false): Session {.inline.} =
   Session(data: data, modified: modified)
 
-proc update*(session: Session) =
+proc update*(session: Session) {.inline.} =
   session.accessed = true
   session.modified = true
 
-proc `[]`*(session: Session, key: string): string =
+proc `[]`*(session: Session, key: string): string {.inline.} =
   result = session.data[key]
   session.accessed = true
 
-proc `[]=`*(session: Session, key, value: string) =
+proc `[]=`*(session: Session, key, value: string) {.inline.} =
   session.data[key] = value
   update(session)
 
-proc len*(session: Session): int =
+proc len*(session: Session): int {.inline.} =
   session.data.len
 
-proc getOrDefault*(session: Session, key: string, default = ""): string =
+proc getOrDefault*(session: Session, key: string, default = ""): string {.inline.} =
   if session.data.hasKey(key):
     result = session.data[key]
   else:
@@ -103,7 +103,7 @@ proc clear*(session: Session) {.inline.} =
   session.data.clear(modeCaseSensitive)
   update(session)
 
-proc `$`*(session: Session): string =
+proc `$`*(session: Session): string {.inline.} =
   $session.data
 
 proc parseStringTable*(tabs: StringTableRef, s: string) {.inline.} =
@@ -132,7 +132,7 @@ proc parseStringTable*(tabs: StringTableRef, s: string) {.inline.} =
     if pos >= s.len:
       break
 
-proc parseStringTable*(s: string): StringTableRef =
+proc parseStringTable*(s: string): StringTableRef {.inline.} =
   result = newStringTable()
   parseStringTable(result, s)
 

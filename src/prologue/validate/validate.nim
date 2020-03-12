@@ -1,4 +1,4 @@
-import tables, strtabs, strutils
+import tables, strtabs, strutils, strformat
 
 from ./basic import nil
 
@@ -39,39 +39,104 @@ proc validate*(formValidation: FormValidation, textTable: StringTableRef,
     return (false, msgs)
   return (true, msgs)
 
-proc isInt*(msg: string): ValidateHandler {.inline.} =
+proc isInt*(msg = ""): ValidateHandler {.inline.} =
   result = proc(text: string): Info =
     if basic.isInt(text):
       result = (true, "")
+    elif msg.len == 0:
+      result = (false, fmt"{text} is not an integer!")
     else:
       result = (false, msg)
 
-proc isNumeric*(msg: string): ValidateHandler {.inline.} =
+proc isNumeric*(msg = ""): ValidateHandler {.inline.} =
   result = proc(text: string): Info =
     if basic.isNumeric(text):
       result = (true, "")
+    elif msg.len == 0:
+      result = (false, fmt"{text} is not a number!")
     else:
       result = (false, msg)
 
-proc isBool*(msg: string): ValidateHandler {.inline.} =
+proc isBool*(msg = ""): ValidateHandler {.inline.} =
   result = proc(text: string): Info =
     if basic.isBool(text):
       result = (true, "")
+    elif msg.len == 0:
+      result = (false, fmt"{text} is not a boolean!")
     else:
       result = (false, msg)
 
-proc accepted*(msg: string): ValidateHandler {.inline.} =
+proc minValue*(min: float, msg = ""): ValidateHandler {.inline.} =
+  result = proc(text: string): Info =
+    var value: float
+    try:
+      value = parseFloat(text)
+    except ValueError:
+      return (false, fmt"{text} is not a number!")
+
+    if value >= min:
+      result = (true, "")
+    elif msg.len == 0:
+      result = (false, fmt"{text} is not greater than or equal to {min}!")
+    else:
+      result = (false, msg)
+
+proc maxValue*(max: float, msg = ""): ValidateHandler {.inline.} =
+  result = proc(text: string): Info =
+    var value: float
+    try:
+      value = parseFloat(text)
+    except ValueError:
+      return (false, fmt"{text} is not a number!")
+
+    if value <= max:
+      result = (true, "")
+    elif msg.len == 0:
+      result = (false, fmt"{text} is not less than or equal to {max}!")
+    else:
+      result = (false, msg)
+
+proc inRange*(min, max: float, msg = ""): ValidateHandler {.inline.} =
+  result = proc(text: string): Info =
+    var value: float
+    try:
+      value = parseFloat(text)
+    except ValueError:
+      return (false, fmt"{text} is not a number!")
+
+    if value <= max and value >= min:
+      result = (true, "")
+    elif msg.len == 0:
+      result = (false, fmt"{text} is not in range from {min} to {max}!")
+    else:
+      result = (false, msg)
+
+proc equals*(value: string, msg = ""): ValidateHandler {.inline.} =
+  result = proc(text: string): Info =
+    if text == value:
+      result = (true, "")
+    elif msg.len == 0:
+      result = (false, fmt"{text} is not equal to {value}!")
+    else:
+      result = (false, msg)
+
+proc accepted*(msg = ""): ValidateHandler {.inline.} =
   ## if lowerAscii input in {"yes", "on", "1", or "true"}, return true
   result = proc(text: string): Info =
     case text.toLowerAscii
     of "yes", "y", "on", "1", "true":
-      return (true, "")
+      result = (true, "")
     else:
-      return (false, msg)
+      if msg.len == 0:
+        result = (false, fmt"""{text} is not in "yes", "y", "on", "1", "true"!""")
+      else:
+        result = (false, msg)
 
-proc required*(msg: string): ValidateHandler {.inline.} =
+proc required*(msg = ""): ValidateHandler {.inline.} =
   result = proc(text: string): Info =
     if text.len != 0:
       result = (true, "")
+    elif msg.len == 0:
+      result = (false, "Field is required!")
     else:
       result = (false, msg)
