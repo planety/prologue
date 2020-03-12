@@ -28,5 +28,6 @@ suite "Test Cookies":
     # setCookie*(key, value: string, expires = "", maxAge: Option[int] = none(int), domain = "", path = "",
     # secure = false, httpOnly = false, sameSite = Lax)
   test "can set cookies":
-    check setCookie("username", "flywind") == "username=flywind; SameSite=Lax"
-    check setCookie("password", "root", maxAge = some(120)).startsWith("password=root; Max-Age=")
+    check:
+      setCookie("username", "flywind") == "username=flywind; SameSite=Lax"
+      setCookie("password", "root", maxAge = some(120)).startsWith("password=root; Max-Age=")

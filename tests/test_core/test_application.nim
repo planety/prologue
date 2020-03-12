@@ -63,50 +63,57 @@ suite "Test Application":
     let
       route = "/"
       response = waitFor client.get(fmt"http://{address}:{port}{route}")
-    check response.code == Http200
-    check (waitFor response.body) == "<h1>Home</h1>"
+    check:
+      response.code == Http200
+      (waitFor response.body) == "<h1>Home</h1>"
 
   test "can get /hello":
     let
       route = "/hello"
       response = waitFor client.get(fmt"http://{address}:{port}{route}")
-    check response.code == Http200
-    check (waitFor response.body) == "<h1>Hello, Prologue!</h1>"
+    check:
+      response.code == Http200
+      (waitFor response.body) == "<h1>Hello, Prologue!</h1>"
 
   test "can get /home":
     let
       route = "/home"
       response = waitFor client.get(fmt"http://{address}:{port}{route}")
-    check response.code == Http200
-    check (waitFor response.body) == "<h1>Home</h1>"
+    check:
+      response.code == Http200
+      (waitFor response.body) == "<h1>Home</h1>"
 
   test "can get /hello/{name} with name = Starlight":
     let
       route = "/hello/Starlight!"
       response = waitFor client.get(fmt"http://{address}:{port}{route}")
-    check response.code == Http200
-    check (waitFor response.body) == "<h1>Hello, Starlight!</h1>"
+    check:
+      response.code == Http200
+      (waitFor response.body) == "<h1>Hello, Starlight!</h1>"
 
   test "can get /hello/{name} with name = ":
     let
       route = "/hello/"
       response = waitFor client.get(fmt"http://{address}:{port}{route}")
-    check response.code == Http200
-    check (waitFor response.body) == "<h1>Hello, Prologue!</h1>"
+    check:
+      response.code == Http200
+      (waitFor response.body) == "<h1>Hello, Prologue!</h1>"
 
   test "can redirect /home":
     let
       route = "/redirect"
       response = waitFor client.get(fmt"http://{address}:{port}{route}")
-    check response.code == Http200
-    check (waitFor response.body) == "<h1>Home</h1>"
+    check:
+      response.code == Http200
+      (waitFor response.body) == "<h1>Home</h1>"
 
   test "can get /loginget using get method":
     let
       route = "/loginget"
       response = waitFor client.get(fmt"http://{address}:{port}{route}")
-    check response.code == Http200
-    check (waitFor response.body) == loginGetPage()
+    check:
+      response.code == Http200
+      (waitFor response.body) == loginGetPage()
 
   when defined(windows) or defined(usestd):
     test "can get /loginpage":
@@ -122,8 +129,9 @@ suite "Test Application":
     let
       route = "/login"
       response = waitFor client.get(fmt"http://{address}:{port}{route}")
-    check response.code == Http200
-    check (waitFor response.body) == loginPage()
+    check:
+      response.code == Http200
+      (waitFor response.body) == loginPage()
 
   when defined(windows) or defined(usestd):
     test "can post /login":

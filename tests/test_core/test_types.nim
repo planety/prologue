@@ -1,4 +1,4 @@
-from ../../src/prologue/core/types import SecretKey, parseValue, `$`, 
+from ../../src/prologue/core/types import SecretKey, parseValue, `$`,
     parseStringTable, isInt, isNumeric, isBool
 
 import unittest, strtabs
@@ -6,28 +6,32 @@ import unittest, strtabs
 
 suite "Test Is Utils":
   test "isInt can work":
-    check isInt("12")
-    check isInt("-753")
-    check isInt("0")
-    check not isInt("912.6")
-    check not isInt("a912")
-  
+    check:
+      isInt("12")
+      isInt("-753")
+      isInt("0")
+      not isInt("912.6")
+      not isInt("a912")
+
   test "isNumeric can work":
-    check isNumeric("12")
-    check isNumeric("-753")
-    check isNumeric("0")
-    check isNumeric("0.5")
-    check isNumeric("-912.6")
-    check not isNumeric("a912")
-    check not isNumeric("0.91.2")
+    check:
+      isNumeric("12")
+      isNumeric("-753")
+      isNumeric("0")
+      isNumeric("0.5")
+      isNumeric("-912.6")
+      not isNumeric("a912")
+      not isNumeric("0.91.2")
 
   test "isBool can work":
-    check isBool("true")
-    check isBool("1")
-    check isBool("yes")
-    check isBool("n")
-    check isBool("False")
-    check isBool("Off")
+    check:
+      isBool("true")
+      isBool("1")
+      isBool("yes")
+      isBool("n")
+      isBool("False")
+      isBool("Off")
+      not isBool("wrong")
 
 
 suite "Test Parse Utils":
@@ -43,8 +47,8 @@ suite "Test Parse Utils":
 
   test "can parse bool":
     check:
-      parseValue("true", true) == true
-      parseValue("s", false) == false
+      parseValue("true", true)
+      not parseValue("s", false)
 
   test "can parse string":
     check parseValue("fight", "") == "fight"

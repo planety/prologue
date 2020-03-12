@@ -27,18 +27,20 @@ suite "Application Func Test":
     let settings = newSettings()
     var app = newApp(settings)
     app.serveStaticFile("templates")
-    check app.settings.staticDirs.len == 2
-    check app.settings.staticDirs[0] == "static"
-    check app.settings.staticDirs[1] == "templates"
+    check:
+      app.settings.staticDirs.len == 2
+      app.settings.staticDirs[0] == "static"
+      app.settings.staticDirs[1] == "templates"
 
   test "serveStaticFiles can work":
     let settings = newSettings()
     var app = newApp(settings)
     app.serveStaticFile(@["templates", "css"])
-    check app.settings.staticDirs.len == 3
-    check app.settings.staticDirs[0] == "static"
-    check app.settings.staticDirs[1] == "templates"
-    check app.settings.staticDirs[2] == "css"
+    check:
+      app.settings.staticDirs.len == 3
+      app.settings.staticDirs[0] == "static"
+      app.settings.staticDirs[1] == "templates"
+      app.settings.staticDirs[2] == "css"
 
   test "registErrorHandler can work":
     let settings = newSettings()
@@ -46,9 +48,10 @@ suite "Application Func Test":
     app.registerErrorHandler(Http404, go404)
     app.registerErrorHandler({Http200 .. Http204}, go20x)
     app.registerErrorHandler(@[Http301, Http304, Http307], go30x)
-    check app.errorHandlerTable[Http404] == go404
-    check app.errorHandlerTable[Http202] == go20x
-    check app.errorHandlerTable[Http304] == go30x
+    check:
+      app.errorHandlerTable[Http404] == go404
+      app.errorHandlerTable[Http202] == go20x
+      app.errorHandlerTable[Http304] == go30x
 
   test "addRoute can work":
     let settings = newSettings()
@@ -56,10 +59,11 @@ suite "Application Func Test":
     app.addRoute("/", hello)
     app.addRoute("/hello/{name}", helloName, @[HttpGet, HttpPost])
     app.addRoute(re"/post(?P<num>[\d]+)", articles, HttpGet)
-    check app.router.callable[initPath("/", HttpGet)].handler == hello
-    check app.router.callable[initPath("/", HttpHead)].handler == hello
-    check app.router.callable[initPath("/hello/{name}", HttpPost)].handler == helloName
-    check app.reRouter.callable[0][1].handler == articles
+    check:
+      app.router.callable[initPath("/", HttpGet)].handler == hello
+      app.router.callable[initPath("/", HttpHead)].handler == hello
+      app.router.callable[initPath("/hello/{name}", HttpPost)].handler == helloName
+      app.reRouter.callable[0][1].handler == articles
 
 
 suite "Restful Function Test":
@@ -73,8 +77,9 @@ suite "Restful Function Test":
     let settings = newSettings()
     var app = newApp(settings)
     app.get("/hi", hello)
-    check app.router.callable[initPath("/hi", HttpGet)].handler == hello
-    check app.router.callable[initPath("/hi", HttpHead)].handler == hello
+    check:
+      app.router.callable[initPath("/hi", HttpGet)].handler == hello
+      app.router.callable[initPath("/hi", HttpHead)].handler == hello
 
   test "restful post can work":
     let settings = newSettings()
@@ -122,12 +127,13 @@ suite "Restful Function Test":
     let settings = newSettings()
     var app = newApp(settings)
     app.all("/hi", hello)
-    check app.router.callable[initPath("/hi", HttpGet)].handler == hello
-    check app.router.callable[initPath("/hi", HttpHead)].handler == hello
-    check app.router.callable[initPath("/hi", HttpPost)].handler == hello
-    check app.router.callable[initPath("/hi", HttpPut)].handler == hello
-    check app.router.callable[initPath("/hi", HttpDelete)].handler == hello
-    check app.router.callable[initPath("/hi", HttpTrace)].handler == hello
-    check app.router.callable[initPath("/hi", HttpOptions)].handler == hello
-    check app.router.callable[initPath("/hi", HttpConnect)].handler == hello
-    check app.router.callable[initPath("/hi", HttpPatch)].handler == hello
+    check:
+      app.router.callable[initPath("/hi", HttpGet)].handler == hello
+      app.router.callable[initPath("/hi", HttpHead)].handler == hello
+      app.router.callable[initPath("/hi", HttpPost)].handler == hello
+      app.router.callable[initPath("/hi", HttpPut)].handler == hello
+      app.router.callable[initPath("/hi", HttpDelete)].handler == hello
+      app.router.callable[initPath("/hi", HttpTrace)].handler == hello
+      app.router.callable[initPath("/hi", HttpOptions)].handler == hello
+      app.router.callable[initPath("/hi", HttpConnect)].handler == hello
+      app.router.callable[initPath("/hi", HttpPatch)].handler == hello

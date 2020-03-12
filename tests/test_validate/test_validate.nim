@@ -6,6 +6,9 @@ import unittest
 
 suite "Test Validate":
   test "required can work":
-    let decide = required()
-    check decide("prologue")
-    check not decide("")
+    let
+      msg = "Keywords required"
+      decide = required(msg)
+    check:
+      decide("prologue") == (true, "")
+      decide("") == (false, msg)
