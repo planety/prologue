@@ -10,7 +10,7 @@ srcDir        = "src"
 
 # Dependencies
 # Nim support begin from v1.2
-requires "nim >= 1.0.6"
+requires "nim >= 1.0.0"
 requires "regex >= 0.13.1"
 requires "nimcrypto >= 0.4.10"
 
