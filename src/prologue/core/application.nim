@@ -49,6 +49,7 @@ export middlewaresbase
 export options
 export cache
 export urandom
+export types
 
 
 proc registerErrorHandler*(app: Prologue, status: HttpCode,

@@ -9,14 +9,16 @@ type
     data: OrderedTableRef[string, seq[ValidateHandler]]
 
 
-proc newFormValidation*(validator: openArray[(string, seq[ValidateHandler])]): FormValidation {.inline.} =
+proc newFormValidation*(validator: openArray[(string, seq[
+    ValidateHandler])]): FormValidation {.inline.} =
   FormValidation(data: validator.newOrderedTable)
 
-proc validate*(formValidation: FormValidation, textTable: StringTableRef, allMsgs = true): Info =
+proc validate*(formValidation: FormValidation, textTable: StringTableRef,
+    allMsgs = true): Info =
   var msgs = ""
   for (key, handlers) in formValidation.data.pairs:
     for handler in handlers:
-      var 
+      var
         hasValue: bool
         msg: string
       if not textTable.hasKey(key):
@@ -27,7 +29,7 @@ proc validate*(formValidation: FormValidation, textTable: StringTableRef, allMsg
       if hasValue:
         continue
       msgs.add msg
-      msgs.add "\n" 
+      msgs.add "\n"
       if not allMsgs:
         return (false, msgs)
 
@@ -49,7 +51,7 @@ proc accepted*(msg: string = "Can't accept this value!"): ValidateHandler {.inli
       return (true, "")
     else:
       return (false, msg)
-    
+
 proc required*(msg: string): ValidateHandler {.inline.} =
   result = proc(text: string): Info =
     if text.len != 0:
