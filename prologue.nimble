@@ -25,6 +25,9 @@ when not defined(windows):
 task test, "Run all tests":
   exec "nim c -r tests/alltests.nim"
 
+task examples, "Test examples":
+  exec "nim c -r tests/test_compile/test_compile"
+
 task test_std, "Run all tests use asynchttpserver":
   exec "nim c -r -d:usestd tests/alltests.nim"
 

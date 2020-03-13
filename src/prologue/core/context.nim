@@ -1,5 +1,5 @@
 import httpcore, asyncdispatch, asyncfile, mimetypes, md5, uri
-import strtabs, macros, tables, strformat, os, times, options, parseutils
+import strtabs, tables, strformat, os, times, options, parseutils
 
 import response, pages, constants
 import ./cookies
@@ -228,22 +228,18 @@ proc multiMatch*(s: string, replacements: StringTableRef): string =
 proc multiMatch*(s: string, replacements: varargs[(string, string)]): string {.inline.} =
   multiMatch(s, replacements.newStringTable)
 
-macro urlFor*(handler: string, parameters: sink openArray[(string,
+proc urlFor*(ctx: Context, handler: string, parameters: sink openArray[(string,
     string)] = @[], queryParams: sink openArray[(string, string)] = @[],
-        usePlus = true, omitEq = true): string =
+        usePlus = true, omitEq = true): string {.inline.} =
+  
   ## { } can't appear in url
-  var ctx = ident"ctx"
+  if handler in ctx.reversedRouter:
+    result = ctx.reversedRouter[handler]
 
-  result = quote do:
-    var res: string
-    if `handler` in `ctx`.reversedRouter:
-      res = `ctx`.reversedRouter[`handler`]
-
-    res = multiMatch(res, `parameters`)
-    let queryString = encodeQuery(`queryParams`, `usePlus`, `omitEq`)
-    if queryString.len != 0:
-      res = multiMatch(res, `parameters`) & "?" & queryString
-    res
+  result = multiMatch(result, parameters)
+  let queryString = encodeQuery(queryParams, usePlus, omitEq)
+  if queryString.len != 0:
+    result = multiMatch(result, parameters) & "?" & queryString
 
 proc attachment*(ctx: Context, downloadName = "", charset = "utf-8") {.inline.} =
   if downloadName.len == 0:

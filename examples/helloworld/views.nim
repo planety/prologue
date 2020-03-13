@@ -19,10 +19,10 @@ proc helloName*(ctx: Context) {.async.} =
   resp "<h1>Hello, " & ctx.getPathParams("name", "World") & "</h1>"
 
 proc home*(ctx: Context) {.async.} =
-  logging.debug urlFor("index")
-  logging.debug urlFor("helloname", @[("name", "flywind")], @{"age": "20"})
+  logging.debug urlFor(ctx, "index")
+  logging.debug urlFor(ctx, "helloname", {"name": "flywind"}, {"age": "20"})
   logging.debug ctx.request.queryParams.getOrDefault("name", "")
-  resp redirect(urlFor("helloname", @{"name": "flywind"}, @{"age": "20", "hobby": "Nim"}), Http302)
+  resp redirect(urlFor(ctx, "helloname", {"name": "flywind"}, {"age": "20", "hobby": "Nim"}), Http302)
 
 proc testRedirect*(ctx: Context) {.async.} =
   resp redirect("/hello", Http302)

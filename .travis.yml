@@ -52,3 +52,4 @@ script:
     - nimble install -y
     - nimble test
     - nimble test_std
+    - nimble examples

@@ -5,7 +5,6 @@ import ../../src/prologue
 import templates / [loginPage, registerPage]
 
 
-
 # /login
 proc login*(ctx: Context) {.async.} =
   let db = open(ctx.request.settings.dbPath, "", "", "")
@@ -66,7 +65,7 @@ proc register*(ctx: Context) {.async.} =
     if error.len == 0:
       db.exec(sql"INSERT INTO user (username, password) VALUES (?, ?)",
           userName, password)
-      resp redirect(urlFor("login"), Http301)
+      resp redirect(urlFor(ctx, "login"), Http301)
     else:
       resp error
   else:

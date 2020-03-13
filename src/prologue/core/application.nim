@@ -165,7 +165,7 @@ proc all*(app: Prologue, route: string, handler: HandlerAsync, name = "",
 proc serveStaticFile*(app: Prologue, staticDir: string) {.inline.} =
   app.settings.staticDirs.add(staticDir)
 
-proc serveStaticFile*(app: Prologue, staticDir: sink seq[string]) {.inline.} =
+proc serveStaticFile*(app: Prologue, staticDir: varargs[string]) {.inline.} =
   app.settings.staticDirs.add(staticDir)
 
 proc newApp*(settings: Settings, middlewares: sink seq[HandlerAsync] = @[],

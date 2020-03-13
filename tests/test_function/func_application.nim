@@ -35,7 +35,7 @@ suite "Application Func Test":
   test "serveStaticFiles can work":
     let settings = newSettings()
     var app = newApp(settings)
-    app.serveStaticFile(@["templates", "css"])
+    app.serveStaticFile("templates", "css")
     check:
       app.settings.staticDirs.len == 3
       app.settings.staticDirs[0] == "static"

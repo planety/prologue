@@ -1,6 +1,5 @@
 import tables
 import lists
-import macros
 
 import common
 
