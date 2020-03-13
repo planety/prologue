@@ -228,8 +228,8 @@ proc multiMatch*(s: string, replacements: StringTableRef): string =
 proc multiMatch*(s: string, replacements: varargs[(string, string)]): string {.inline.} =
   multiMatch(s, replacements.newStringTable)
 
-proc urlFor*(ctx: Context, handler: string, parameters: sink openArray[(string,
-    string)] = @[], queryParams: sink openArray[(string, string)] = @[],
+proc urlFor*(ctx: Context, handler: string, parameters: openArray[(string,
+    string)] = @[], queryParams: openArray[(string, string)] = @[],
         usePlus = true, omitEq = true): string {.inline.} =
   
   ## { } can't appear in url
