@@ -228,8 +228,8 @@ proc multiMatch*(s: string, replacements: StringTableRef): string =
 proc multiMatch*(s: string, replacements: varargs[(string, string)]): string {.inline.} =
   multiMatch(s, replacements.newStringTable)
 
-macro urlFor*(handler: string, parameters: sink seq[(string,
-    string)] = @[], queryParams: sink seq[(string, string)] = @[],
+macro urlFor*(handler: string, parameters: sink openArray[(string,
+    string)] = @[], queryParams: sink openArray[(string, string)] = @[],
         usePlus = true, omitEq = true): string =
   ## { } can't appear in url
   var ctx = ident"ctx"
