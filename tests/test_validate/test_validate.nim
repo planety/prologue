@@ -4,7 +4,7 @@ from ../../src/prologue/validate/validate import required, accepted, isInt,
     isNumeric, isBool, equals, minValue, maxValue, inRange, matchRegex,
         newFormValidation, validate
 
-from ../../src/prologue/core/basicRegex import re
+from ../../src/prologue/core/basicregex import re
 
 
 import unittest
