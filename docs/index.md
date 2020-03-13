@@ -20,6 +20,7 @@ web services.
 - Form Data
 - Static Files
 - Middleware
+- Data Validation
 - Startup and Shutdown Events
 - Simple Route
 - Regex Route

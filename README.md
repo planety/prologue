@@ -40,6 +40,7 @@ You can read documentation in https://planety.github.io/prologue.
   - [x] Cache
   - [x] Startup and Shutdown Events
   - [x] URL Building
+  - [x] Data Validation
   - [x] Exception Handler
   - [x] Cross-Site Request Forgery
   - [x] Cross-Site Scripting (XSS) Protection(Karax quote string automatically)
