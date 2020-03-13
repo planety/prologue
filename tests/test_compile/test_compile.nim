@@ -9,6 +9,7 @@ suite "Test Examples":
     todoListDir = "examples/todoList"
     blogDir = "examples/blog"
     app = "app.nim"
+  echo helloWorldDir
   test "helloworld can compile":
     let (_, errC) = execCmdEx(fmt"nim c --hints:off {helloWorldDir / app}")
     check errC == 0
