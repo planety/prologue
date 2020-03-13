@@ -161,6 +161,7 @@ proc all*(app: Prologue, route: string, handler: HandlerAsync, name = "",
   app.addRoute(route, handler, @[HttpGet, HttpPost, HttpPut, HttpDelete,
       HttpTrace, HttpOptions, HttpConnect, HttpPatch], name, middlewares)
 
+# TODO add download parameter
 proc serveStaticFile*(app: Prologue, staticDir: string) {.inline.} =
   app.settings.staticDirs.add(staticDir)
 

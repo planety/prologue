@@ -1,6 +1,7 @@
 import tables, strtabs, strutils, strformat
 
 from ./basic import nil
+from ../core/basicregex import match, re, Regex, RegexMatch
 
 
 type
@@ -25,15 +26,16 @@ proc validate*(formValidation: FormValidation, textTable: StringTableRef,
         msg: string
       if not textTable.hasKey(key):
         hasValue = false
-        msg = "Can't find key: " & key
+        msgs.add &"Can't find key: {key}\n"
+        if not allMsgs:
+          return (false, msgs)
+        break
       else:
         (hasValue, msg) = handler(textTable[key])
-      if hasValue:
-        continue
-      msgs.add msg
-      msgs.add "\n"
-      if not allMsgs:
-        return (false, msgs)
+      if not hasValue:
+        msgs.add &"{msg}\n"
+        if not allMsgs:
+          return (false, msgs)
 
   if msgs.len != 0:
     return (false, msgs)
@@ -138,5 +140,15 @@ proc required*(msg = ""): ValidateHandler {.inline.} =
       result = (true, "")
     elif msg.len == 0:
       result = (false, "Field is required!")
+    else:
+      result = (false, msg)
+
+proc matchRegex*(value: Regex, msg = ""): ValidateHandler {.inline.} =
+  result = proc(text: string): Info =
+    var m: RegexMatch
+    if text.match(value, m):
+      result = (true, "")
+    elif msg.len == 0:
+      result = (false, fmt"{text} doesn't match Regex")
     else:
       result = (false, msg)

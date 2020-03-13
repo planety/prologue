@@ -1,5 +1,10 @@
+import strtabs
+
 from ../../src/prologue/validate/validate import required, accepted, isInt,
-    isNumeric, isBool, equals, minValue, maxValue, inRange
+    isNumeric, isBool, equals, minValue, maxValue, inRange, matchRegex,
+        newFormValidation, validate
+
+from ../../src/prologue/core/basicRegex import re
 
 
 import unittest
@@ -125,6 +130,44 @@ suite "Test Validate":
       decide("") == (false, msg)
       decide("off") == (false, msg)
       decide("12") == (false, msg)
-      decideDefaultMsg("") == (false,""" is not in "yes", "y", "on", "1", "true"!""")
+      decideDefaultMsg("") == (false, """ is not in "yes", "y", "on", "1", "true"!""")
       decideDefaultMsg("off") == (false, """off is not in "yes", "y", "on", "1", "true"!""")
       decideDefaultMsg("12") == (false, """12 is not in "yes", "y", "on", "1", "true"!""")
+
+  test "matchRegex can work":
+    let
+      msg = "Regex doesn't match!"
+      decide = matchRegex(re"(?P<greet>hello) (?:(?P<who>[^\s]+)\s?)+", msg)
+      decideDefaultMsg = matchRegex(re"abc")
+    check:
+      decide("hello beautiful world") == (true, "")
+      decide("time") == (false, msg)
+      decideDefaultMsg("abc") == (true, "")
+      decideDefaultMsg("abcd") == (false, "abcd doesn't match Regex")
+
+  test "validate can work":
+    var validater = newFormValidation({
+        "accepted": @[required(), accepted()],
+        "required": @[required()],
+        "requiredInt": @[required(), isInt()],
+        "minValue": @[required(), isInt(), minValue(12), maxValue(19)]
+      })
+    let
+      chk1 = validater.validate({"required": "on", "accepted": "true",
+          "requiredInt": "12", "minValue": "15"}.newStringTable)
+      chk2 = validater.validate({"requird": "on", "time": "555",
+          "minValue": "10"}.newStringTable)
+      chk3 = validater.validate({"requird": "on", "time": "555",
+          "minValue": "10"}.newStringTable, allMsgs = false)
+      chk4 = validater.validate({"required": "on", "accepted": "true",
+      "requiredInt": "12.5", "minValue": "13"}.newStringTable, allMsgs = false)
+
+    check:
+      chk1 == (true, "")
+      not chk2.hasValue
+      chk2.msg == "Can\'t find key: accepted\nCan\'t find key: " &
+            "required\nCan\'t find key: requiredInt\n10 is not greater than or equal to 12.0!\n"
+      not chk3.hasValue
+      chk3.msg == "Can\'t find key: accepted\n"
+      not chk4.hasValue
+      chk4.msg == "12.5 is not an integer!\n"
