@@ -11,16 +11,13 @@ suite "Test Examples":
     app = "app.nim"
 
   test "helloworld can compile":
-    let (o, errC) = execCmdEx(fmt"nim c --hints:off {helloWorldDir / app}")
-    echo o
+    let (_, errC) = execCmdEx(fmt"nim c --hints:off {helloWorldDir / app}")
     check errC == 0
 
   test "todolist can compile":
-    let (o, errC) = execCmdEx(fmt"nim c --hints:off {todoListDir / app}")
-    echo o
+    let (_, errC) = execCmdEx(fmt"nim c --hints:off {todoListDir / app}")
     check errC == 0
 
   test "blog can compile":
-    let (o, errC) = execCmdEx(fmt"nim c --hints:off {blogDir / app}")
-    echo o
+    let (_, errC) = execCmdEx(fmt"nim c --hints:off {blogDir / app}")
     check errC == 0
