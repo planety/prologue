@@ -20,7 +20,7 @@ template beforeApi*(version, body: untyped) {.dirty.} =
   when (NimMajor, NimMinor) <= version:
     body
 
-proc isStaticFile*(path: string, dirs: sink openArray[string]): tuple[hasValue: bool,
+proc isStaticFile*(path: string, dirs: openArray[string]): tuple[hasValue: bool,
     fileName, root: string] {.inline.} =
   let file = splitFile(path.strip(chars = {'/'}, trailing = false))
 
