@@ -2,7 +2,7 @@ import strtabs
 
 from ../../src/prologue/validate/validate import required, accepted, isInt,
     isNumeric, isBool, equals, minValue, maxValue, rangeValue, matchRegex,
-        newFormValidation, validate
+        newFormValidation, validate, minLength, maxLength, rangeLength
 
 from ../../src/prologue/core/basicregex import re
 
@@ -105,6 +105,39 @@ suite "Test Validate":
       decide("abc") == (false, "abc is not a number!")
       decideDefaultMsg("") == (false, " is not a number!")
       decideDefaultMsg("-29") == (false, "-29 is not in range from -5.5 to 77.0!")
+
+  test "minLength can work":
+    let
+      msg = "lower than"
+      decide = minLength(12, msg)
+      decideDefaultMsg = minLength(7)
+    check:
+      decide("Welcome to use Prologue!") == (true, "")
+      decide("Not True") == (false, msg)
+      decideDefaultMsg("Prologue") == (true, "")
+      decideDefaultMsg("Not") == (false, "Length 3 is not greater than or equal to 7!")
+
+  test "maxLength can work":
+    let
+      msg = "greater than"
+      decide = maxLength(12, msg)
+      decideDefaultMsg = maxLength(5)
+    check:
+      decide("True") == (true, "")
+      decide("Welcome to use Prologue!") == (false, msg)
+      decideDefaultMsg("True") == (true, "")
+      decideDefaultMsg("Prologue") == (false, "Length 8 is not less than or equal to 5!")
+
+  test "rangeLength can work":
+    let
+      msg = "not in Range"
+      decide = rangeLength(9, 13, msg)
+      decideDefaultMsg = rangeLength(5, 17)
+    check:
+      decide("use Prologue") == (true, "")
+      decide("Prologue") == (false, msg)
+      decideDefaultMsg("prologue") == (true, "")
+      decideDefaultMsg("use") == (false, "Length 3 is not in range from 5 to 17!")
 
   test "required can work":
     let

@@ -113,6 +113,36 @@ proc rangeValue*(min, max: float, msg = ""): ValidateHandler {.inline.} =
     else:
       result = (false, msg)
 
+proc minLength*(min: Natural, msg = ""): ValidateHandler {.inline.} =
+  result = proc(text: string): Info =
+    let length = text.len
+    if length >= min:
+      result = (true, "")
+    elif msg.len == 0:
+      result = (false, fmt"Length {length} is not greater than or equal to {min}!")
+    else:
+      result = (false, msg)
+
+proc maxLength*(max: Natural, msg = ""): ValidateHandler {.inline.} =
+  result = proc(text: string): Info =
+    let length = text.len
+    if length <= max:
+      result = (true, "")
+    elif msg.len == 0:
+      result = (false, fmt"Length {length} is not less than or equal to {max}!")
+    else:
+      result = (false, msg)
+
+proc rangeLength*(min, max: Natural, msg = ""): ValidateHandler {.inline.} =
+  result = proc(text: string): Info =
+    let length = text.len
+    if length <= max and length >= min:
+      result = (true, "")
+    elif msg.len == 0:
+      result = (false, fmt"Length {length} is not in range from {min} to {max}!")
+    else:
+      result = (false, msg)
+
 proc equals*(value: string, msg = ""): ValidateHandler {.inline.} =
   result = proc(text: string): Info =
     if text == value:
