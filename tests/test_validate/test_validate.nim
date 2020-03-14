@@ -1,7 +1,7 @@
 import strtabs
 
 from ../../src/prologue/validate/validate import required, accepted, isInt,
-    isNumeric, isBool, equals, minValue, maxValue, inRange, matchRegex,
+    isNumeric, isBool, equals, minValue, maxValue, rangeValue, matchRegex,
         newFormValidation, validate
 
 from ../../src/prologue/core/basicregex import re
@@ -94,11 +94,11 @@ suite "Test Validate":
       decideDefaultMsg("") == (false, " is not a number!")
       decideDefaultMsg("2") == (false, "2 is not less than or equal to -5.5!")
 
-  test "inRange can work":
+  test "rangeValue can work":
     let
-      msg = "not inRange"
-      decide = inRange(-9, 13, msg)
-      decideDefaultMsg = inRange(-5.5, 77)
+      msg = "not in Range"
+      decide = rangeValue(-9, 13, msg)
+      decideDefaultMsg = rangeValue(-5.5, 77)
     check:
       decide("2.7") == (true, "")
       decide("18.5") == (false, msg)

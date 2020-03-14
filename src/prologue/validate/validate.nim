@@ -98,7 +98,7 @@ proc maxValue*(max: float, msg = ""): ValidateHandler {.inline.} =
     else:
       result = (false, msg)
 
-proc inRange*(min, max: float, msg = ""): ValidateHandler {.inline.} =
+proc rangeValue*(min, max: float, msg = ""): ValidateHandler {.inline.} =
   result = proc(text: string): Info =
     var value: float
     try:
