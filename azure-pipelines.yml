@@ -1,48 +1,32 @@
 strategy:
   maxParallel: 10
   matrix:
-    # Windows_devel_32bit:
-    #   VM: 'windows-latest'
-    #   ARCH: x86
-    #   UCPU: i686
-    #   PLATFORM: x86
-    #   CHANNEL: devel
-    #   TEST_LANG: c
-    # Windows_devel_64bit:
-    #   VM: 'windows-latest'
-    #   UCPU: amd64
-    #   PLATFORM: x64
-    #   CHANNEL: devel
-    #   TEST_LANG: c
-    # Windows_cpp_devel_64bit:
-    #   VM: 'windows-latest'
-    #   UCPU: amd64
-    #   PLATFORM: x64
-    #   CHANNEL: devel
-    #   TEST_LANG: cpp
+    Windows_devel_64bit:
+      VM: 'windows-latest'
+      UCPU: amd64
+      PLATFORM: x64
+      CHANNEL: devel
+      TEST_LANG: c
+    Windows_cpp_devel_64bit:
+      VM: 'windows-latest'
+      UCPU: amd64
+      PLATFORM: x64
+      CHANNEL: devel
+      TEST_LANG: cpp
     Linux_devel_64bit:
-      VM: 'ubuntu-16.04'
+      VM: 'ubuntu-latest'
       UCPU: amd64
       PLATFORM: x64
       CHANNEL: devel
       TEST_LANG: c
     Linux_cpp_devel_64bit:
-      VM: 'ubuntu-16.04'
+      VM: 'ubuntu-latest'
       UCPU: amd64
       PLATFORM: x64
       CHANNEL: devel
       WEAVE_TEST_LANG: cpp
-
-    # Linux_devel_32bit:
-    #   VM: 'ubuntu-16.04'
-    #   ARCH: x86
-    #   PLATFORM: x86
-    #   UCPU: i686
-    #   CHANNEL: devel
-    #   TEST_LANG: c
-
     MacOS_devel_64bit:
-      VM: 'macOS-10.14'
+      VM: 'macOS-latest'
       UCPU: amd64
       PLATFORM: x64
       CHANNEL: devel
