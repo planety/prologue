@@ -2,7 +2,7 @@ import strtabs
 
 from ../../src/prologue/validate/validate import required, accepted, isInt,
     isNumeric, isBool, equals, minValue, maxValue, rangeValue, matchRegex,
-        newFormValidation, validate, minLength, maxLength, rangeLength
+        matchUrl, newFormValidation, validate, minLength, maxLength, rangeLength
 
 from ../../src/prologue/core/basicregex import re
 
@@ -177,6 +177,19 @@ suite "Test Validate":
       decide("time") == (false, msg)
       decideDefaultMsg("abc") == (true, "")
       decideDefaultMsg("abcd") == (false, "abcd doesn't match Regex")
+
+  test "matchUrl can work":
+    let
+      msg = "Regex doesn't match!"
+      decide = matchUrl(msg)
+      decideDefaultMsg = matchUrl()
+    check:
+      decide("https://www.google.com") == (true, "")
+      decide("https://127.0.0.1") == (true, "")
+      decide("127.0.0.1") == (false, msg)
+      decideDefaultMsg("file:///prologue/starlight.nim") == (true, "")
+      decideDefaultMsg("https:/www.prologue.com") == (false,
+                "https:/www.prologue.com doesn't match url")
 
   test "validate can work":
     var validater = newFormValidation({

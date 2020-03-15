@@ -182,3 +182,13 @@ proc matchRegex*(value: Regex, msg = ""): ValidateHandler {.inline.} =
       result = (false, fmt"{text} doesn't match Regex")
     else:
       result = (false, msg)
+
+proc matchUrl*(msg = ""): ValidateHandler {.inline.} =
+  result = proc(text: string): Info =
+    var m: RegexMatch
+    if text.match(re"(https?|ftp|file)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]", m):
+      result = (true, "")
+    elif msg.len == 0:
+      result = (false, fmt"{text} doesn't match url")
+    else:
+      result = (false, msg)
