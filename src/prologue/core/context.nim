@@ -7,7 +7,7 @@ from types import BaseType, Session, SameSite, `[]`, initSession
 from ../configure/configure import parseValue
 
 from basicregex import Regex
-from ./nativeSettings import Settings, CtxSettings, getOrDefault, hasKey, `[]`
+from ./nativesettings import Settings, CtxSettings, getOrDefault, hasKey, `[]`
 
 
 when defined(windows) or defined(usestd):

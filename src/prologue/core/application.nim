@@ -11,7 +11,7 @@ from route import pattern, initPath, initRePath, newPathHandler, newRouter,
     newReRouter, DuplicatedRouteError, DuplicatedReveredRouteError, UrlPattern
 
 from form import parseFormParams
-from ./nativeSettings import newCtxSettings
+from ./nativesettings import newCtxSettings
 
 from ../openapi/openapi import swaggerDocs, redocs, openapiHandler,
     swaggerHandler, redocsHandler
