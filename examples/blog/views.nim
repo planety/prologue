@@ -4,10 +4,11 @@ import ../../src/prologue
 
 import templates / [loginPage, registerPage]
 
+import consts
 
 # /login
 proc login*(ctx: Context) {.async.} =
-  let db = open(ctx.settings.getOrDefault("dbPath").getStr, "", "", "")
+  let db = open(consts.dbPath, "", "", "")
   if ctx.request.reqMethod == HttpPost:
     var
       error: string
@@ -46,7 +47,7 @@ proc logout*(ctx: Context) {.async.} =
 
 # /register
 proc register*(ctx: Context) {.async.} =
-  let db = open(ctx.settings.getOrDefault("dbPath").getStr, "", "", "")
+  let db = open(consts.dbPath, "", "", "")
   defer: db.close()
   if ctx.request.reqMethod == HttpPost:
     var error: string

@@ -9,7 +9,7 @@ let
                 debug = env.getOrDefault("debug", true),
                 port = Port(env.getOrDefault("port", 8080)),
                 staticDirs = env.get("staticDir"),
-                secretKey = SecretKey(env.getOrDefault("secretKey", ""))
+                secretKey = env.getOrDefault("secretKey", "")
     )
 
 var
