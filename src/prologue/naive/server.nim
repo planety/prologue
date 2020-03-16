@@ -2,7 +2,7 @@ import asyncdispatch, httpcore
 from asynchttpserver import newAsyncHttpServer, serve, close, AsyncHttpServer
 
 from ./request import NativeRequest
-from ../core/nativesettings import Settings
+from ../core/nativesettings import Settings, CtxSettings
 from ../core/context import Router, ReversedRouter, ReRouter, HandlerAsync,
     Event, ErrorHandlerTable
 
@@ -13,6 +13,7 @@ type
   Prologue* = ref object
     server*: Server
     settings*: Settings
+    ctxSettings*: CtxSettings
     router*: Router
     reversedRouter*: ReversedRouter
     reRouter*: ReRouter
@@ -21,9 +22,6 @@ type
     shutdown*: seq[Event]
     errorHandlerTable*: ErrorHandlerTable
 
-
-proc appName*(app: Prologue): string {.inline.} =
-  app.settings.appName
 
 proc serve*(app: Prologue, port: Port,
   callback: proc (request: NativeRequest): Future[void] {.closure, gcsafe.},

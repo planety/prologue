@@ -23,24 +23,24 @@ proc go30x*(ctx: Context) {.async.} =
 
 
 suite "Application Func Test":
-  test "serveStaticFile can work":
-    let settings = newSettings()
-    var app = newApp(settings)
-    app.serveStaticFile("templates")
-    check:
-      app.settings.staticDirs.len == 2
-      app.settings.staticDirs[0] == "static"
-      app.settings.staticDirs[1] == "templates"
+  # test "serveStaticFile can work":
+  #   let settings = newSettings()
+  #   var app = newApp(settings)
+  #   app.serveStaticFile("templates")
+  #   check:
+  #     app.settings.staticDirs.len == 2
+  #     app.settings.staticDirs[0] == "static"
+  #     app.settings.staticDirs[1] == "templates"
 
-  test "serveStaticFiles can work":
-    let settings = newSettings()
-    var app = newApp(settings)
-    app.serveStaticFile("templates", "css")
-    check:
-      app.settings.staticDirs.len == 3
-      app.settings.staticDirs[0] == "static"
-      app.settings.staticDirs[1] == "templates"
-      app.settings.staticDirs[2] == "css"
+  # test "serveStaticFiles can work":
+  #   let settings = newSettings()
+  #   var app = newApp(settings)
+  #   app.serveStaticFile("templates", "css")
+  #   check:
+  #     app.settings.staticDirs.len == 3
+  #     app.settings.staticDirs[0] == "static"
+  #     app.settings.staticDirs[1] == "templates"
+  #     app.settings.staticDirs[2] == "css"
 
   test "registErrorHandler can work":
     let settings = newSettings()

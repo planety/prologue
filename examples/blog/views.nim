@@ -7,7 +7,7 @@ import templates / [loginPage, registerPage]
 
 # /login
 proc login*(ctx: Context) {.async.} =
-  let db = open(ctx.request.settings.dbPath, "", "", "")
+  let db = open(ctx.settings.getOrDefault("dbPath").getStr, "", "", "")
   if ctx.request.reqMethod == HttpPost:
     var
       error: string
@@ -46,7 +46,7 @@ proc logout*(ctx: Context) {.async.} =
 
 # /register
 proc register*(ctx: Context) {.async.} =
-  let db = open(ctx.request.settings.dbPath, "", "", "")
+  let db = open(ctx.settings.getOrDefault("dbPath").getStr, "", "", "")
   defer: db.close()
   if ctx.request.reqMethod == HttpPost:
     var error: string
@@ -70,4 +70,3 @@ proc register*(ctx: Context) {.async.} =
       resp error
   else:
     resp htmlResponse(registerPage(ctx))
-

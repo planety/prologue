@@ -1,5 +1,5 @@
 import httpcore, asyncdispatch, asyncfile, mimetypes, md5, uri
-import strtabs, tables, strformat, os, times, options, parseutils
+import strtabs, tables, strformat, os, times, options, parseutils, json
 
 import response, pages, constants
 import ./cookies
@@ -7,6 +7,7 @@ from types import BaseType, Session, SameSite, `[]`, initSession
 from ../configure/configure import parseValue
 
 from basicregex import Regex
+from ./nativeSettings import Settings, CtxSettings, getOrDefault, hasKey, `[]`
 
 
 when defined(windows) or defined(usestd):
@@ -19,6 +20,7 @@ type
   PathHandler* = ref object
     handler*: HandlerAsync
     middlewares*: seq[HandlerAsync]
+    settings*: Settings
 
   Path* = object
     route*: string
@@ -49,7 +51,9 @@ type
     middlewares*: seq[HandlerAsync]
     session*: Session
     cleanedData*: StringTableRef
-    attributes*: StringTableRef # for extension
+    settings*: Settings
+    localSettings*: Settings
+    ctxSettings: CtxSettings
 
   AsyncEvent* = proc(): Future[void] {.closure, gcsafe.}
   SyncEvent* = proc() {.closure, gcsafe.}
@@ -83,7 +87,7 @@ proc getUploadFile*(ctx: Context, name: string): UpLoadFile {.inline.} =
   initUploadFile(fileName = file.params["filename"], body = file.body)
 
 proc save*(uploadFile: UpLoadFile, dir: string, fileName: string,
-    useDefault = false) =
+    useDefault = false) {.inline.} =
   # TODO use time or random string as filename
   if useDefault:
     writeFile(dir / uploadFile.fileName, uploadFile.body)
@@ -107,15 +111,26 @@ proc initEvent*(handler: SyncEvent): Event =
 
 proc newContext*(request: Request, response: Response,
     router: Router, reversedRouter: ReversedRouter,
-        reRouter: ReRouter): Context {.inline.} =
+        reRouter: ReRouter, settings: Settings,
+            ctxSettings: CtxSettings): Context {.inline.} =
   Context(request: request, response: response, router: router,
           reversedRouter: reversedRouter, reRouter: reRouter, size: 0,
           first: true,
           handled: false,
           session: initSession(data = newStringTable()),
           cleanedData: newStringTable(),
-          attributes: newStringTable()
+          settings: settings,
+          localSettings: nil,  
+          ctxSettings: ctxSettings
     )
+
+proc getSettings*(ctx: Context, key: string): JsonNode {.inline.} =
+  if ctx.localSettings == nil:
+    result = ctx.settings.getOrDefault(key)
+  elif not ctx.localSettings.hasKey(key):
+    result = ctx.settings.getOrDefault(key)
+  else:
+    result = ctx.localSettings[key]
 
 proc handle*(ctx: Context): Future[void] {.inline.} =
   result = ctx.request.respond(ctx.response)
@@ -231,7 +246,7 @@ proc multiMatch*(s: string, replacements: varargs[(string, string)]): string {.i
 proc urlFor*(ctx: Context, handler: string, parameters: openArray[(string,
     string)] = @[], queryParams: openArray[(string, string)] = @[],
         usePlus = true, omitEq = true): string {.inline.} =
-  
+
   ## { } can't appear in url
   if handler in ctx.reversedRouter:
     result = ctx.reversedRouter[handler]
@@ -248,7 +263,7 @@ proc attachment*(ctx: Context, downloadName = "", charset = "utf-8") {.inline.} 
   var ext = downloadName.splitFile.ext
   if ext.len > 0:
     ext = ext[1 .. ^1]
-    let mimes = ctx.request.settings.mimeDB.getMimetype(ext)
+    let mimes = ctx.ctxSettings.mimeDB.getMimetype(ext)
     if mimes.len != 0:
       ctx.setHeader("Content-Type", fmt"{mimes}; charset={charset}")
 
@@ -279,7 +294,7 @@ proc staticFileResponse*(ctx: Context, fileName, root: string, mimetype = "",
     var ext = fileName.splitFile.ext
     if ext.len > 0:
       ext = ext[1 .. ^ 1]
-    mimetype = ctx.request.settings.mimeDB.getMimetype(ext)
+    mimetype = ctx.ctxSettings.mimeDB.getMimetype(ext)
 
   let
     info = getFileInfo(filePath)
