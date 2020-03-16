@@ -2,25 +2,22 @@ import asyncdispatch, uri, httpcore
 import strutils, strtabs, options
 
 
-from ../core/nativesettings import Settings, newSettings
-from ../core/types import FormPart
-from ../core/response import Response
-
 import httpbeast except Settings
 
-type
-  NativeRequest* = httpBeast.Request
+from ../core/response import Response
+from ../core/types import FormPart
 
+
+type
+  NativeRequest* = httpbeast.Request
   Request* = object
-    nativeRequest: NativeRequest
-    url: Uri
+    nativeRequest*: NativeRequest
     cookies*: StringTableRef
+    url: Uri
     postParams*: StringTableRef
     queryParams*: StringTableRef # Only use queryParams for all url params
     formParams*: FormPart
     pathParams*: StringTableRef
-    settings*: Settings
-
 
 proc createHeaders(headers: HttpHeaders): string =
 
@@ -32,7 +29,7 @@ proc createHeaders(headers: HttpHeaders): string =
 # TODO sometime modify
 proc url*(request: Request): Uri {.inline.} =
   request.url
-  
+
 proc port*(request: Request): string {.inline.} =
   request.url.port
 
@@ -121,10 +118,10 @@ proc respond*(request: Request, response: Response): Future[void] {.inline.} =
 
 proc initRequest*(nativeRequest: NativeRequest, cookies = newStringTable(),
   pathParams = newStringTable(), queryParams = newStringTable(),
-      postParams = newStringTable(), settings = newSettings()): Request {.inline.} =
-  Request(nativeRequest: nativeRequest, url: parseUri(nativeRequest.path.get()), cookies: cookies,
-      pathParams: pathParams, queryParams: queryParams, postParams: postParams,
-      settings: settings)
+      postParams = newStringTable()): Request {.inline.} =
+  Request(nativeRequest: nativeRequest, url: parseUri(nativeRequest.path.get()),
+      cookies: cookies, pathParams: pathParams, queryParams: queryParams,
+          postParams: postParams)
 
 proc close*(request: Request) =
   request.nativeRequest.forget()

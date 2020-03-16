@@ -28,11 +28,11 @@ proc switch*(ctx: Context) {.async.} =
       handler = findHandler(ctx)
       lastHandler = handler.handler
       middlewares = handler.middlewares
+    ctx.localSettings = handler.settings
     ctx.middlewares = ctx.middlewares & middlewares & lastHandler
     ctx.first = false
     let next = ctx.middlewares[ctx.size - 1]
     await next(ctx)
-
 
 proc doNothingClosureMiddleware*(): HandlerAsync =
   result = proc(ctx: Context) {.async.} =

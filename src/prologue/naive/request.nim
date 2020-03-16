@@ -1,22 +1,22 @@
-import asyncdispatch, asynchttpserver, asyncnet, uri
+import asyncdispatch, asyncnet, uri
 import strutils, strtabs, uri
 
-from ../core/nativesettings import Settings, newSettings
-from ../core/types import FormPart
+import asynchttpserver
+
+
 from ../core/response import Response
+from ../core/types import FormPart
 
 
 type
-  NativeRequest* = asynchttpserver.Request
-
+  NativeRequest* = asyncHttpServer.Request
   Request* = object
-    nativeRequest: NativeRequest
+    nativeRequest*: NativeRequest
     cookies*: StringTableRef
     postParams*: StringTableRef
     queryParams*: StringTableRef # Only use queryParams for all url params
     formParams*: FormPart
     pathParams*: StringTableRef
-    settings*: Settings
 
 
 proc url*(request: Request): Uri {.inline.} =
@@ -102,12 +102,11 @@ proc respond*(request: Request, response: Response): Future[void] {.inline.} =
   result = request.respond(response.status, response.body,
       response.httpHeaders)
 
-proc initRequest*(nativeRequest: NativeRequest, cookies = newStringTable(),
-    pathParams = newStringTable(), queryParams = newStringTable(),
-        postParams = newStringTable(), settings = newSettings()): Request {.inline.} =
-  Request(nativeRequest: nativeRequest, cookies: cookies,
-      pathParams: pathParams, queryParams: queryParams, postParams: postParams,
-      settings: settings)
-
 proc close*(request: Request) =
   request.nativeRequest.client.close()
+
+proc initRequest*(nativeRequest: NativeRequest, cookies = newStringTable(),
+  pathParams = newStringTable(), queryParams = newStringTable(),
+      postParams = newStringTable()): Request {.inline.} =
+  Request(nativeRequest: nativeRequest, cookies: cookies,
+    pathParams: pathParams, queryParams: queryParams, postParams: postParams)

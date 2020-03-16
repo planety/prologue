@@ -89,7 +89,6 @@ proc loadPrologueEnv*(fileName: string): Env =
       else:
         raise newException(EnvWrongFormatError, ".env file only support key-value pair")
 
-
 proc setPrologueEnv*(env: Env, key, value: string) =
   env.data[key] = value
 

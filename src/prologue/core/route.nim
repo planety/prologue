@@ -1,7 +1,8 @@
 import httpcore, cgi
 import hashes, strutils, strtabs, tables
 
-import context
+import ./context
+from ./nativesettings import Settings
 
 from basicregex import Regex, RegexMatch, match, groupNames, groupFirstCapture
 
@@ -47,8 +48,8 @@ proc hash*(x: Path): Hash =
   result = !$h
 
 proc newPathHandler*(handler: HandlerAsync, middlewares: sink seq[
-    HandlerAsync] = @[]): PathHandler =
-  PathHandler(handler: handler, middlewares: middlewares)
+    HandlerAsync] = @[], settings: Settings = nil): PathHandler =
+  PathHandler(handler: handler, middlewares: middlewares, settings: settings)
 
 proc newRouter*(): Router =
   Router(callable: initTable[Path, PathHandler]())
