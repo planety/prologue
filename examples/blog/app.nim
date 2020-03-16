@@ -7,8 +7,7 @@ let
                 debug = env.getOrDefault("debug", true),
                 port = Port(env.getOrDefault("port", 8080)),
                 staticDirs = env.get("staticDir"),
-                secretKey = SecretKey(env.getOrDefault("secretKey", "")),
-                dbPath = "blog.db"
+                secretKey = env.getOrDefault("secretKey", ""),
     )
 
 var

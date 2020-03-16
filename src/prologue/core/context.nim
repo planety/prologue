@@ -6,9 +6,8 @@ import ./cookies
 from types import BaseType, Session, SameSite, `[]`, initSession
 from ../configure/configure import parseValue
 
-from basicregex import Regex
+from ./basicregex import Regex
 from ./nativesettings import Settings, CtxSettings, getOrDefault, hasKey, `[]`
-
 
 when defined(windows) or defined(usestd):
   import ../naive/request
@@ -100,13 +99,13 @@ proc newErrorHandlerTable*(pairs: openArray[(HttpCode,
     ErrorHandler)]): ErrorHandlerTable {.inline.} =
   newTable[HttpCode, ErrorHandler](pairs)
 
-proc newReversedRouter*(): ReversedRouter =
+proc newReversedRouter*(): ReversedRouter {.inline.} =
   newStringTable()
 
-proc initEvent*(handler: AsyncEvent): Event =
+proc initEvent*(handler: AsyncEvent): Event {.inline.} =
   Event(async: true, asyncHandler: handler)
 
-proc initEvent*(handler: SyncEvent): Event =
+proc initEvent*(handler: SyncEvent): Event {.inline.} =
   Event(async: false, syncHandler: handler)
 
 proc newContext*(request: Request, response: Response,
@@ -120,7 +119,7 @@ proc newContext*(request: Request, response: Response,
           session: initSession(data = newStringTable()),
           cleanedData: newStringTable(),
           settings: settings,
-          localSettings: nil,  
+          localSettings: nil,
           ctxSettings: ctxSettings
     )
 
