@@ -13,6 +13,7 @@ type
   Request* = object
     nativeRequest*: NativeRequest
     cookies*: StringTableRef
+    url: Uri
     postParams*: StringTableRef
     queryParams*: StringTableRef # Only use queryParams for all url params
     formParams*: FormPart
