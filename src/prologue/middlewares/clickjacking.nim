@@ -1,16 +1,14 @@
 import asyncdispatch
+import json
 
-from ../core/context import Context, HandlerAsync, setHeader
+from ../core/context import Context, HandlerAsync, setHeader, getSettings
 from ../core/middlewaresbase import switch
 
 
-type
-  XframeOption* = enum
-    Deny = "deny", SameOrigin = "sameorigin"
-
-
-# TODO all should in settings later[namely xFrameOption]
-proc clickjackingMiddleWare*(xFrameOption = Deny): HandlerAsync =
+proc clickjackingMiddleWare*(): HandlerAsync =
   result = proc(ctx: Context) {.async.} =
     await switch(ctx)
-    ctx.setHeader("X-Frame-Options", $xFrameOption)
+    var option = ctx.getSettings("X-Frame-Options").getStr
+    if option != "deny" or option != "sameorigin":
+      option = "deny"
+    ctx.setHeader("X-Frame-Options", option)
