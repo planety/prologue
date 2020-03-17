@@ -1,5 +1,5 @@
 import prologue/core/application
-import prologue/middlewares/middlewares, prologue/signing/signing
+import prologue/middlewares/middlewares
 import prologue/cache/cache, prologue/security/hasher
 import prologue/validate/validate
 import prologue/i18n/i18n
@@ -9,7 +9,6 @@ from prologue/openapi/openapi import serveDocs
 
 export application
 export cache
-export signing
 export hasher
 export middlewares
 export validate
