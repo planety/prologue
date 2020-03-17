@@ -13,6 +13,8 @@ from ./route import pattern, initPath, initRePath, newPathHandler, newRouter,
 from ./form import parseFormParams
 from ./nativesettings import newCtxSettings
 
+import signing/signing
+
 
 from ./cookies import parseCookies
 from ./types import SameSite
@@ -38,6 +40,7 @@ export asyncdispatch except register
 export options
 export json
 
+export signing
 export basicregex
 export configure
 export constants

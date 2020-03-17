@@ -1,8 +1,10 @@
+import asyncdispatch
 import httpcore, strutils, strformat
 
 
 from ../core/context import Context, HandlerAsync, setHeader, hasHeader
 from ../core/encode import base64Decode
+from ../core/middlewaresbase import switch
 
 
 type
@@ -13,7 +15,8 @@ proc unauthenticate*(ctx: Context, realm: string, charset = "UTF-8") {.inline.} 
   ctx.response.status = Http401
   ctx.setHeader("WWW-Authenticate", fmt"realm={realm}, charset={charset}")
 
-proc basicAuth*(ctx: Context, realm: string, verify: VerifyHandler, charset = "UTF-8"): bool =
+proc basicAuth*(ctx: Context, realm: string, verify: VerifyHandler,
+    charset = "UTF-8"): bool =
   if not ctx.hasHeader("Authorization"):
     unauthenticate(ctx, realm, charset)
     return false
@@ -43,3 +46,8 @@ proc basicAuth*(ctx: Context, realm: string, verify: VerifyHandler, charset = "U
     userName = user[0]
     password = user[1]
   return ctx.verify(userName, password)
+
+proc basicAuthMiddleware*(realm: string, verifyHandler: VerifyHandler,
+  charset = "UTF-8"): HandlerAsync =
+  result = proc(ctx: Context) {.async.} =
+    await switch(ctx)
