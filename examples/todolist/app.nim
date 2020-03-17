@@ -1,4 +1,5 @@
 import ../../src/prologue
+import ../../src/prologue/middlewares/middlewares
 
 
 import urls

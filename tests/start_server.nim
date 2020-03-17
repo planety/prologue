@@ -1,4 +1,6 @@
 import ../src/prologue except loginPage
+import ../src/prologue/middlewares/middlewares
+import ../src/prologue/i18n/i18n
 import logging, os
 
 import test_core/utils

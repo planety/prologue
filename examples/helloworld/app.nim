@@ -1,4 +1,5 @@
 import ../../src/prologue
+from ../../src/prologue/openapi/openapi import serveDocs
 
 
 import views, urls

@@ -1,6 +1,7 @@
 import db_sqlite, strformat
 
 import ../../src/prologue
+import ../../src/prologue/security/hasher
 
 import templates / [loginPage, registerPage]
 
