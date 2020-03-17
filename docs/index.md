@@ -35,6 +35,7 @@ web services.
 - Cache
 - URL Building
 - Authentication
+- i18n
 - Minimal OpenApi support
 - Template(Using Karax Native or Using Nim Filter)
 - Test Client(Using httpclient)

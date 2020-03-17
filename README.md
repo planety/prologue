@@ -46,6 +46,7 @@ You can read documentation in https://planety.github.io/prologue.
   - [x] Cross-Site Scripting (XSS) Protection(Karax quote string automatically)
   - [x] Clickjacking Protection
   - [x] Authentication
+  - [x] I18n
 
 - Plugin
   - [x] Minimal OpenApi support
