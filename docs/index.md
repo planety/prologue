@@ -75,6 +75,7 @@ Run **app.nim**.Now the server is running at localhost:8080.
 ```nim
 # app.nim
 import prologue
+import prologue/middlewares/middlewares
 
 
 # Async Function
@@ -153,7 +154,7 @@ let
                 secretKey = env.getOrDefault("secretKey", "")
                 )
 
-var app = newApp(settings = settings, middlewares = @[])
+var app = newApp(settings = settings)
 app.addRoute(urls.urlPatterns, "/api")
 app.addRoute("/", index, HttpGet)
 app.run()

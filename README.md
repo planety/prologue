@@ -90,6 +90,7 @@ Run **app.nim**.Now the server is running at localhost:8080.
 ```nim
 # app.nim
 import prologue
+import prologue/middlewares/middlewares
 
 
 # Async Function
