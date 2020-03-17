@@ -1,5 +1,5 @@
 import ../src/prologue except loginPage
-import logging
+import logging, os
 
 import test_core/utils
 
@@ -27,7 +27,7 @@ proc loginGet*(ctx: Context) {.async.} =
 proc doLoginGet*(ctx: Context) {.async.} =
   logging.debug "doLogin get"
   resp redirect("/hello/Nim")
-  
+
 proc login*(ctx: Context) {.async.} =
   logging.debug "log post"
   resp loginPage()
@@ -35,6 +35,15 @@ proc login*(ctx: Context) {.async.} =
 proc doLogin*(ctx: Context) {.async.} =
   logging.debug "doLogin post"
   resp redirect("/hello/Nim")
+
+proc translate*(ctx: Context) {.async.} =
+  let zh_CN = ctx.setLanguage("zh_CN")
+  assert zh_CN.Tr("Hello") == "你好"
+  let ja = ctx.setLanguage("ja")
+  assert ja.Tr("Hello") == "こんにちは"
+  assert ctx.translate("Hello", "zh_CN") == "你好"
+  assert ctx.translate("Hello", "ja") == "こんにちは"
+  resp "I'm ok."
 
 
 let settings = newSettings(appName = "StarLight", debug = true)
@@ -49,4 +58,6 @@ app.addRoute("/loginpage", doLoginGet, HttpGet)
 app.addRoute("/login", login, HttpGet)
 app.addRoute("/login", doLogin, HttpPost)
 app.addRoute("/hello/{name}", helloName, HttpGet)
+app.addRoute("/translate", translate)
+app.loadTranslate(expandFileName("tests/i18n/trans.ini"))
 app.run()

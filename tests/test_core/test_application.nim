@@ -7,21 +7,25 @@ import unittest
 import ./utils
 
 
+var process: Process
 when defined(windows):
   if not existsFile("start_server.exe"):
     let code = execCmd("nim c --hints:off --verbosity=0 tests/start_server.nim")
     if code != 0:
       raise newException(IOError, "can't compile tests/start_server.nim")
+    process = startProcess(expandFileName("tests/start_server.exe"))
 elif not defined(windows) and defined(usestd):
   if not existsFile("start_server"):
     let code = execCmd("nim c --hints:off -d:usestd tests/start_server.nim")
     if code != 0:
       raise newException(IOError, "can't compile tests/start_server.nim")
+    process = startProcess(expandFileName("tests/start_server"))
 else:
   if not existsFile("start_server"):
     let code = execCmd("nim c --hints:off tests/start_server.nim")
     if code != 0:
       raise newException(IOError, "can't compile tests/start_server.nim")
+    process = startProcess(expandFileName("tests/start_server"))
 
 proc start() {.async.} =
   let address = "http://127.0.0.1:8080/home"
@@ -38,7 +42,7 @@ proc start() {.async.} =
     else: echo fut.error.msg
     client.close()
 
-let process = startProcess("tests/start_server")
+
 waitFor start()
 
 
@@ -143,6 +147,14 @@ suite "Test Application":
       data["password"] = "prologue"
       check (waitFor client.postContent(fmt"http://{address}:{port}{route}",
           multipart = data)) == "<h1>Hello, Nim</h1>"
+
+  test "can get /translate":
+    let
+      route = "/translate"
+      response = waitFor client.get(fmt"http://{address}:{port}{route}")
+    check:
+      response.code == Http200
+      (waitFor response.body) == "I'm ok."
 
   client.close()
   process.terminate()
