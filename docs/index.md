@@ -150,7 +150,7 @@ let
                 debug = env.getOrDefault("debug", true), 
                 port = Port(env.getOrDefault("port", 8080)),
                 staticDir = env.get("staticDir"),
-                secretKey = SecretKey(env.getOrDefault("secretKey", ""))
+                secretKey = env.getOrDefault("secretKey", "")
                 )
 
 var app = newApp(settings = settings, middlewares = @[])
