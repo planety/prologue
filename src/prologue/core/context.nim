@@ -1,10 +1,10 @@
 import httpcore, asyncdispatch, asyncfile, mimetypes, md5, uri
 import strtabs, tables, strformat, os, times, options, parseutils, json
 
-import response, pages, constants
+import ./response, ./pages, ./constants
 import ./cookies
-from types import BaseType, Session, SameSite, `[]`, initSession
-from ../configure/configure import parseValue
+from ./types import BaseType, Session, SameSite, `[]`, initSession
+from ./configure import parseValue
 
 from ./basicregex import Regex
 from ./nativesettings import Settings, CtxSettings, getOrDefault, hasKey, `[]`

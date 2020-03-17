@@ -1,7 +1,10 @@
-import asyncdispatch
+import asyncdispatch, json
 
-from ../core/context import Context, setHeader, staticFileResponse
+
+from ../core/application import Prologue, addRoute
 from ../core/response import htmlResponse, resp
+from ../core/context import Context, setHeader, staticFileResponse
+from ../core/nativesettings import getOrDefault
 
 
 const
@@ -71,3 +74,10 @@ proc swaggerHandler*(ctx: Context) {.async.} =
 
 proc redocsHandler*(ctx: Context) {.async.} =
   resp htmlResponse(redocs)
+
+proc serveDocs*(app: Prologue, onlyDebug = false) {.inline.} =
+  if onlyDebug and not app.settings.getOrDefault("debug").getBool:
+    return
+  app.addRoute("/openapi.json", openapiHandler)
+  app.addRoute("/docs", swaggerHandler)
+  app.addRoute("/redocs", redocsHandler)

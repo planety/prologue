@@ -5,23 +5,22 @@ from nativeSockets import Port, `$`
 import response, context, pages, urandom,
     nativesettings, middlewaresbase
 
-from utils import isStaticFile
+from ./utils import isStaticFile
 
-from route import pattern, initPath, initRePath, newPathHandler, newRouter,
+from ./route import pattern, initPath, initRePath, newPathHandler, newRouter,
     newReRouter, DuplicatedRouteError, DuplicatedReveredRouteError, UrlPattern
 
-from form import parseFormParams
+from ./form import parseFormParams
 from ./nativesettings import newCtxSettings
 
-from ../openapi/openapi import swaggerDocs, redocs, openapiHandler,
-    swaggerHandler, redocsHandler
 
-import ../middlewares/middlewares, ../signing/signing
-import ../cache/cache, ../configure/configure, ../security/hasher
 from ./cookies import parseCookies
-from types import SameSite
-
-import basicregex
+from ./types import SameSite
+import ./configure
+import ./constants
+import ./cookies
+import ./basicregex
+import ./encode
 
 
 when defined(windows) or defined(usestd):
@@ -36,23 +35,23 @@ export httpcore
 export strtabs
 export tables
 export asyncdispatch except register
-export middlewares
+export options
+export json
+
+export basicregex
+export configure
+export constants
+export context
+export cookies
+export encode
+export middlewaresbase
+export nativesettings
 export pages
 export response
-export context
 export route
-export nativesettings
-export configure
-export basicregex
-export utils
-export signing
-export hasher
-export middlewaresbase
-export options
-export cache
-export urandom
 export types
-export json
+export urandom
+export utils
 
 
 proc registerErrorHandler*(app: Prologue, status: HttpCode,
@@ -196,12 +195,6 @@ proc newApp*(settings: Settings, middlewares: sink seq[HandlerAsync] = @[],
             middlewares: middlewares, startup: startup, shutdown: shutdown,
                 errorHandlerTable: errorHandlerTable)
 
-proc serveDocs*(app: Prologue, onlyDebug = false) {.inline.} =
-  if onlyDebug and not app.settings.getOrDefault("debug").getBool:
-    return
-  app.addRoute("/openapi.json", openapiHandler)
-  app.addRoute("/docs", swaggerHandler)
-  app.addRoute("/redocs", redocsHandler)
 
 proc run*(app: Prologue) =
   for event in app.startup:
@@ -318,15 +311,15 @@ when isMainModule:
     resp redirect("/hello/Nim")
 
   let settings = newSettings(appName = "StarLight", debug = true)
-  var app = newApp(settings = settings, middlewares = @[stripPathMiddleware()])
+  var app = newApp(settings = settings)
   app.addRoute("/", home, HttpGet)
   app.addRoute("/", home, HttpPost)
-  app.addRoute("/home", home, HttpGet, middlewares = @[debugRequestMiddleware()])
+  app.addRoute("/home", home, HttpGet)
   app.addRoute("/hello", hello, HttpGet)
   app.addRoute("/redirect", testRedirect, HttpGet)
   app.addRoute("/login", login, HttpGet)
   app.addRoute("/login", doLogin, HttpPost)
   app.addRoute("/hello/{name}", helloName, HttpGet)
   # app.serveStaticFile("static")
-  app.serveDocs()
+  # app.serveDocs()
   app.run()

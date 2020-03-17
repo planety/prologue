@@ -1,4 +1,5 @@
-import ../../src/prologue/configure/configure
+import ../../src/prologue/core/configure
+
 
 import unittest, os
 

@@ -1,11 +1,8 @@
 import parsecfg, tables, strtabs, streams
 
-from ../core/context import Context
 
-when defined(windows) or defined(usestd):
-  from ../naive/server import Prologue
-else:
-  from ../beast/server import Prologue
+from ../core/application import Prologue
+from ../core/context import Context
 
 
 type

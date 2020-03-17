@@ -1,9 +1,10 @@
 import httpclient, asyncdispatch, nativesockets
 import strformat, os, osproc, terminal
 
+
 import unittest
 
-import utils
+import ./utils
 
 
 when defined(windows):
