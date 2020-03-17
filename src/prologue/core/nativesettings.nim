@@ -1,4 +1,4 @@
-import mimetypes, json
+import mimetypes, json, tables, strtabs
 from nativeSockets import Port
 
 from types import SecretKey, EmptySecretKeyError, len
@@ -11,6 +11,7 @@ type
 
   CtxSettings* = ref object
     mimeDB*: MimeDB
+    config*: TableRef[string, StringTableRef]
 
 
 proc hasKey*(settings: Settings, key: string): bool {.inline.} =
@@ -23,7 +24,7 @@ proc getOrDefault*(settings: Settings, key: string): JsonNode {.inline.} =
   settings.data.getOrDefault(key)
 
 proc newCtxSettings*(): CtxSettings {.inline.} =
-  CtxSettings(mimeDB: newMimetypes())
+  CtxSettings(mimeDB: newMimetypes(), config: newTable[string, StringTableRef]())
 
 proc newSettings*(port = Port(8080), debug = true, reusePort = true,
     staticDirs = "static", secretKey = randomString(8),
