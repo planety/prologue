@@ -52,7 +52,7 @@ type
     cleanedData*: StringTableRef
     settings*: Settings
     localSettings*: Settings
-    ctxSettings: CtxSettings
+    ctxSettings*: CtxSettings
 
   AsyncEvent* = proc(): Future[void] {.closure, gcsafe.}
   SyncEvent* = proc() {.closure, gcsafe.}
