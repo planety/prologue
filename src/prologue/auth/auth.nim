@@ -11,15 +11,16 @@ type
   AuthMethod* = enum
     Basic = "Basic"
     Digest = "Digest"
-  VerifyHandler* = proc(ctx: Context, userName, password: string): bool {.gcsafe.} 
+  VerifyHandler* = proc(ctx: Context, userName, password: string): bool {.gcsafe.}
 
 
-proc unauthenticate*(ctx: Context, authMethod: AuthMethod, realm: string, charset = "UTF-8") {.inline.} =
+proc unauthenticate*(ctx: Context, authMethod: AuthMethod, realm: string,
+    charset = "UTF-8") {.inline.} =
   ctx.response.status = Http401
-  ctx.setHeader("WWW-Authenticate", fmt"realm={realm}, charset={charset}")
+  ctx.setHeader("WWW-Authenticate", fmt"{authMethod} realm={realm}, charset={charset}")
 
-proc basicAuth*(ctx: Context, authMethod: AuthMethod, realm: string, verify: VerifyHandler,
-    charset = "UTF-8"): bool =
+proc basicAuth*(ctx: Context, authMethod: AuthMethod, realm: string,
+    verify: VerifyHandler, charset = "UTF-8"): bool =
   if not ctx.hasHeader("Authorization"):
     unauthenticate(ctx, authMethod, realm, charset)
     return false
@@ -56,8 +57,8 @@ proc basicAuth*(ctx: Context, authMethod: AuthMethod, realm: string, verify: Ver
     ctx.response.body = "Forbidden"
     return false
 
-proc basicAuthMiddleware*(realm: string, verifyHandler: VerifyHandler, authMethod = Basic,
-  charset = "UTF-8"): HandlerAsync =
+proc basicAuthMiddleware*(realm: string, verifyHandler: VerifyHandler,
+    authMethod = Basic, charset = "UTF-8"): HandlerAsync =
   result = proc(ctx: Context) {.async.} =
     if not basicAuth(ctx, authMethod, realm, verifyHandler, charset):
       return
