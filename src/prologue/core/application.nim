@@ -1,6 +1,6 @@
 import asyncdispatch, uri, httpcore
 import tables, strutils, strformat, logging, strtabs, options, json
-from nativeSockets import Port, `$`
+from nativesockets import Port, `$`
 
 
 from ./utils import isStaticFile
