@@ -5,19 +5,18 @@ from types import SameSite
 
 proc parseCookies*(s: string): StringTableRef =
   result = newStringTable(modeCaseInsensitive)
-  var pos = 0
+  var 
+    pos = 0
+    key, value: string
   while true:
     pos += skipWhile(s, {' ', '\t'}, pos)
-    var keyStart = pos
-    pos += skipUntil(s, {'='}, pos)
-    var keyEnd = pos - 1
-    if pos >= len(s):
+    pos += parseUntil(s, key, '=', pos)
+    if pos >= s.len:
       break
     inc(pos) # skip '='
-    var valueStart = pos
-    pos += skipUntil(s, {';'}, pos)
-    result[s[keyStart .. keyEnd]] = s[valueStart ..< pos]
-    if pos >= len(s):
+    pos += parseUntil(s, value, ';', pos)
+    result[key] = value
+    if pos >= s.len:
       break
     inc(pos) # skip ';'
 
