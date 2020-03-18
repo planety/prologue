@@ -13,6 +13,18 @@ strategy:
     #   PLATFORM: x64
     #   CHANNEL: devel
     #   TEST_LANG: cpp
+    Linux_stable_64bit:
+      VM: 'ubuntu-latest'
+      UCPU: amd64
+      PLATFORM: x64
+      CHANNEL: stable
+      TEST_LANG: c
+    Linux_cpp_stable_64bit:
+      VM: 'ubuntu-latest'
+      UCPU: amd64
+      PLATFORM: x64
+      CHANNEL: stable
+      WEAVE_TEST_LANG: cpp
     Linux_devel_64bit:
       VM: 'ubuntu-latest'
       UCPU: amd64
@@ -25,12 +37,12 @@ strategy:
       PLATFORM: x64
       CHANNEL: devel
       WEAVE_TEST_LANG: cpp
-    MacOS_stable_64bit:
-      VM: 'macOS-latest'
-      UCPU: amd64
-      PLATFORM: x64
-      CHANNEL: stable
-      TEST_LANG: c
+    # MacOS_stable_64bit:
+    #   VM: 'macOS-latest'
+    #   UCPU: amd64
+    #   PLATFORM: x64
+    #   CHANNEL: stable
+    #   TEST_LANG: c
 pool:
   vmImage: $(VM)
 
@@ -136,11 +148,11 @@ steps:
       nimble refresh
       nimble install -y
     displayName: 'Building the package dependencies'
-  # - bash: |
-  #     echo "PATH=${PATH}"
-  #     export ucpu=${UCPU}
-  #     nimble test
-  #   displayName: 'Testing the package'
+  - bash: |
+      echo "PATH=${PATH}"
+      export ucpu=${UCPU}
+      nimble test
+    displayName: 'Testing the package'
   - bash: |
       echo "PATH=${PATH}"
       export ucpu=${UCPU}
