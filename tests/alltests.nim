@@ -1,3 +1,4 @@
+import test_compile/test_import
 import test_security/test_hasher
 import test_utils/test_utils
 import test_validate / [test_basic, test_validate]

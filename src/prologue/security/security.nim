@@ -1,0 +1,3 @@
+import ./hasher
+
+export hasher
