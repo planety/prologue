@@ -136,11 +136,11 @@ steps:
       nimble refresh
       nimble install -y
     displayName: 'Building the package dependencies'
-  - bash: |
-      echo "PATH=${PATH}"
-      export ucpu=${UCPU}
-      nimble test
-    displayName: 'Testing the package'
+  # - bash: |
+  #     echo "PATH=${PATH}"
+  #     export ucpu=${UCPU}
+  #     nimble test
+  #   displayName: 'Testing the package'
   - bash: |
       echo "PATH=${PATH}"
       export ucpu=${UCPU}
