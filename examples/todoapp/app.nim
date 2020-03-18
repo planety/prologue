@@ -2,7 +2,7 @@ import ../../src/prologue
 
 
 proc home(ctx: Context) {.async.} =
-  resp redirect("/templates/todoapp.html")
+  resp redirect("/templates/todoapp.html", Http307)
 
 
 let settings = newSettings(staticDirs = @["templates"])

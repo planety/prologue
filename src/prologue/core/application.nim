@@ -211,7 +211,7 @@ proc run*(app: Prologue) =
     request.parseFormParams(contentType)
 
     var
-      response = initResponse(HttpVer11, Http200, httpHeaders = {
+      response = initResponse(HttpVer11, Http200, headers = {
         "Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders)
       ctx = newContext(request = request, response = response,
         router = app.router, reversedRouter = app.reversedRouter,
@@ -244,7 +244,7 @@ proc run*(app: Prologue) =
       logging.error e.msg
       ctx.response.status = Http500
       ctx.response.body = e.msg
-      ctx.setHeader("content-type", "text/plain; charset=UTF-8")
+      ctx.response.setHeader("content-type", "text/plain; charset=UTF-8")
 
     if ctx.settings.getOrDefault("debug").getBool and ctx.response.status == Http500:
       discard

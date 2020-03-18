@@ -50,6 +50,7 @@ type
     middlewares*: seq[HandlerAsync]
     session*: Session
     cleanedData*: StringTableRef
+    ctxData*: StringTableRef
     settings*: Settings
     localSettings*: Settings
     ctxSettings*: CtxSettings
@@ -118,6 +119,7 @@ proc newContext*(request: Request, response: Response,
           handled: false,
           session: initSession(data = newStringTable()),
           cleanedData: newStringTable(),
+          ctxData: newStringTable(),
           settings: settings,
           localSettings: nil,
           ctxSettings: ctxSettings
@@ -141,17 +143,17 @@ proc respond*(ctx: Context, status: HttpCode, body: string,
   headers: HttpHeaders = newHttpHeaders()): Future[void] {.inline.} =
   result = ctx.request.respond(status, body, headers)
 
-proc hasHeader*(ctx: Context, key: string): bool {.inline.} =
-  ctx.response.hasHeader(key)
+proc hasHeader*(request: var Request, key: string): bool {.inline.} =
+  request.headers.hasKey(key)
 
-proc setHeader*(ctx: Context, key, value: string) {.inline.} =
-  ctx.response.setHeader(key, value)
+proc setHeader*(request: var Request, key, value: string) {.inline.} =
+  request.headers[key] = value
 
-proc setHeader*(ctx: Context, key: string, value: sink seq[string]) {.inline.} =
-  ctx.response.setHeader(key, value)
+proc setHeader*(request: var Request, key: string, value: sink seq[string]) {.inline.} =
+  request.headers[key] = value
 
-proc addHeader*(ctx: Context, key, value: string) {.inline.} =
-  ctx.response.addHeader(key, value)
+proc addHeader*(request: var Request, key, value: string) {.inline.} =
+  request.headers.add(key, value)
 
 proc getCookie*(ctx: Context, key: string, default: string = ""): string {.inline.} =
   getCookie(ctx.request, key, default)
@@ -176,11 +178,11 @@ proc defaultHandler*(ctx: Context) {.async.} =
 
 proc default404Handler*(ctx: Context) {.async.} =
   ctx.response.body = errorPage("404 Not Found!", PrologueVersion)
-  ctx.setHeader("content-type", "text/html; charset=UTF-8")
+  ctx.response.setHeader("content-type", "text/html; charset=UTF-8")
 
 proc default500Handler*(ctx: Context) {.async.} =
   ctx.response.body = internalServerErrorPage()
-  ctx.setHeader("content-type", "text/html; charset=UTF-8")
+  ctx.response.setHeader("content-type", "text/html; charset=UTF-8")
 
 proc getPostParams*(ctx: Context, key: string, default = ""): string {.inline.} =
   case ctx.request.reqMethod
@@ -205,7 +207,7 @@ proc setResponse*(ctx: Context, status: HttpCode, httpHeaders =
       body = "", version = HttpVer11) {.inline.} =
   ## handy to make ctx's response
   let response = initResponse(httpVersion = version, status = status,
-    httpHeaders = {"Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders,
+    headers = {"Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders,
         body = body)
   ctx.response = response
 
@@ -264,9 +266,9 @@ proc attachment*(ctx: Context, downloadName = "", charset = "utf-8") {.inline.} 
     ext = ext[1 .. ^1]
     let mimes = ctx.ctxSettings.mimeDB.getMimetype(ext)
     if mimes.len != 0:
-      ctx.setHeader("Content-Type", fmt"{mimes}; charset={charset}")
+      ctx.response.setHeader("Content-Type", fmt"{mimes}; charset={charset}")
 
-  ctx.setHeader("Content-Disposition", fmt"""attachment; filename="{downloadName}"""")
+  ctx.response.setHeader("Content-Disposition", fmt"""attachment; filename="{downloadName}"""")
 
 proc staticFileResponse*(ctx: Context, filename, root: string, mimetype = "",
     downloadName = "", charset = "utf-8", headers = newHttpHeaders()) {.async.} =
@@ -302,14 +304,14 @@ proc staticFileResponse*(ctx: Context, filename, root: string, mimetype = "",
     etagBase = fmt"{filename}-{lastModified}-{contentLength}"
     etag = getMD5(etagBase)
 
-  ctx.response.httpHeaders = headers
+  ctx.response.headers = headers
 
   if mimetype.len != 0:
-    ctx.setHeader("Content-Type", fmt"{mimetype}; {charset}")
+    ctx.response.setHeader("Content-Type", fmt"{mimetype}; {charset}")
 
-  ctx.setHeader("Content-Length", $contentLength)
-  ctx.setHeader("Last-Modified", $lastModified)
-  ctx.setHeader("Etag", etag)
+  ctx.response.setHeader("Content-Length", $contentLength)
+  ctx.response.setHeader("Last-Modified", $lastModified)
+  ctx.response.setHeader("Etag", etag)
 
   if downloadName.len != 0:
     ctx.attachment(downloadName)

@@ -16,7 +16,7 @@ suite "Test Response":
     check:
       response.httpVersion == version
       response.status == status
-      response.httpHeaders["Content-Type"] == "text/html; charset=UTF-8"
+      response.headers["Content-Type"] == "text/html; charset=UTF-8"
       response.body == body
 
   test "can set response header":
@@ -25,7 +25,7 @@ suite "Test Response":
 
     response.setHeader("Content-Type", "text/plain")
     check:
-      response.httpHeaders["content-type"] == "text/plain"
+      response.headers["content-type"] == "text/plain"
 
   test "can add response header":
     var
@@ -33,7 +33,7 @@ suite "Test Response":
 
     response.addHeader("Content-Type", "text/plain")
     check:
-      seq[string](response.httpHeaders["CONTENT-TYPE"]) == @[
+      seq[string](response.headers["CONTENT-TYPE"]) == @[
           "text/html; charset=UTF-8", "text/plain"]
 
   test "can set response cookie":
@@ -43,6 +43,6 @@ suite "Test Response":
     response.setCookie("username", "flywind")
     response.setCookie("password", "root")
     check:
-      seq[string](response.httpHeaders["set-cookie"]).join("; ") ==
+      seq[string](response.headers["set-cookie"]).join("; ") ==
           "username=flywind; SameSite=Lax; password=root; SameSite=Lax"
 

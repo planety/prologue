@@ -100,7 +100,7 @@ proc respond*(request: Request, status: HttpCode, body: string,
 
 proc respond*(request: Request, response: Response): Future[void] {.inline.} =
   result = request.respond(response.status, response.body,
-      response.httpHeaders)
+      response.headers)
 
 proc close*(request: Request) =
   request.nativeRequest.client.close()

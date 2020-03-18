@@ -8,29 +8,29 @@ type
   Response* = object
     httpVersion*: HttpVersion
     status*: HttpCode
-    httpHeaders*: HttpHeaders
+    headers*: HttpHeaders
     body*: string
 
 
 proc `$`*(response: Response): string =
-  fmt"{response.status} {response.httpHeaders}"
+  fmt"{response.status} {response.headers}"
 
-proc initResponse*(httpVersion: HttpVersion, status: HttpCode, httpHeaders =
+proc initResponse*(httpVersion: HttpVersion, status: HttpCode, headers =
     {"Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders,
         body = ""): Response =
-  Response(httpVersion: httpVersion, status: status, httpHeaders: httpHeaders, body: body)
+  Response(httpVersion: httpVersion, status: status, headers: headers, body: body)
 
 proc hasHeader*(response: var Response, key: string): bool {.inline.} =
-  response.httpHeaders.hasKey(key)
+  response.headers.hasKey(key)
 
 proc setHeader*(response: var Response, key, value: string) {.inline.} =
-  response.httpHeaders[key] = value
+  response.headers[key] = value
 
 proc setHeader*(response: var Response, key: string, value: sink seq[string]) {.inline.} =
-  response.httpHeaders[key] = value
+  response.headers[key] = value
 
 proc addHeader*(response: var Response, key, value: string) {.inline.} =
-  response.httpHeaders.add(key, value)
+  response.headers.add(key, value)
 
 proc setCookie*(response: var Response, key, value: string, expires = "",
     maxAge: Option[int] = none(int), domain = "", path = "", secure = false,
@@ -54,7 +54,7 @@ proc deleteCookie*(response: var Response, key: string, value = "", path = "",
 proc abort*(status = Http401, body = "", headers = newHttpHeaders(),
     version = HttpVer11): Response {.inline.} =
   result = initResponse(version, status = status, body = body,
-      httpHeaders = headers)
+      headers = headers)
 
 proc redirect*(url: string, status = Http301,
     body = "", delay = 0, headers = newHttpHeaders(),
@@ -64,13 +64,13 @@ proc redirect*(url: string, status = Http301,
     headers.add("Location", url)
   else:
     headers.add("refresh", fmt"""{delay};url="{url}"""")
-  result = initResponse(version, status = status, httpHeaders = headers, body = body)
+  result = initResponse(version, status = status, headers = headers, body = body)
 
 proc error404*(status = Http404,
     body = "<h1>404 Not Found!</h1>", headers = newHttpHeaders(),
         version = HttpVer11): Response {.inline.} =
   result = initResponse(version, status = status, body = body,
-      httpHeaders = headers)
+      headers = headers)
 
 proc htmlResponse*(text: string, status = Http200, headers = newHttpHeaders(),
     version = HttpVer11): Response {.inline.} =
@@ -99,7 +99,7 @@ macro resp*(body: string, status = Http200) =
 
   result = quote do:
     let response = initResponse(httpVersion = HttpVer11, status = `status`,
-      httpHeaders = {"Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders,
+      headers = {"Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders,
           body = `body`)
     `ctx`.response = response
 

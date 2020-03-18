@@ -3,7 +3,8 @@ import asyncdispatch, options
 
 from ../../core/types import BadSecretKeyError, SecretKey, SameSite, loads, dumps, len
 from ../../core/context import Context, HandlerAsync, getCookie, setCookie,
-    deleteCookie, addHeader
+    deleteCookie
+from ../../core/response import addHeader
 from ../../core/signing/signing import DefaultSep, DefaultKeyDerivation,
     BadTimeSignatureError, SignatureExpiredError, DefaultDigestMethodType,
         initTimedSigner, unsign, sign
@@ -47,7 +48,7 @@ proc sessionMiddleware*(
       return
 
     if ctx.session.accessed:
-      ctx.addHeader("vary", "Cookie")
+      ctx.response.addHeader("vary", "Cookie")
 
     # TODO add refresh every request[in permanent session]
     if ctx.session.modified:

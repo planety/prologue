@@ -2,8 +2,8 @@ import asyncdispatch, httpcore
 from strutils import toLowerAscii, join
 
 from ../core/middlewaresbase import switch
-from ../core/context import Context, HandlerAsync, setHeader, addHeader
-from ../core/response import plainTextResponse, resp
+from ../core/context import Context, HandlerAsync
+from ../core/response import plainTextResponse, resp, setHeader, addHeader
 from ../core/basicregex import re, Regex, RegexMatch, match
 
 # TODO move request method to ctx
@@ -129,17 +129,17 @@ proc CorsMiddleware*(
     await switch(ctx)
 
     if "*" in allowOrigins:
-      ctx.setHeader("Access-Control-Allow-Origin", "*")
+      ctx.response.setHeader("Access-Control-Allow-Origin", "*")
 
     if allowCredentials:
-      ctx.setHeader("Access-Control-Allow-Credentials", "true")
+      ctx.response.setHeader("Access-Control-Allow-Credentials", "true")
 
     if exposeHeaders.len != 0:
-      ctx.setHeader("Access-Control-Expose-Headers", exposeHeaders)
+      ctx.response.setHeader("Access-Control-Expose-Headers", exposeHeaders)
 
     if allowAllOrigins and hasCookie:
-      ctx.setHeader("Access-Control-Allow-Origin", origin)
+      ctx.response.setHeader("Access-Control-Allow-Origin", origin)
     elif not allowAllOrigins and isAllowedOrigin(origin, allowAllOrigins,
         allowOrigins, allowOriginRegex):
-      ctx.setHeader("Access-Control-Allow-Origin", origin)
-      ctx.addHeader("vary", "Origin")
+      ctx.response.setHeader("Access-Control-Allow-Origin", origin)
+      ctx.response.addHeader("vary", "Origin")
