@@ -25,11 +25,11 @@ strategy:
       PLATFORM: x64
       CHANNEL: devel
       WEAVE_TEST_LANG: cpp
-    MacOS_devel_64bit:
+    MacOS_stable_64bit:
       VM: 'macOS-latest'
       UCPU: amd64
       PLATFORM: x64
-      CHANNEL: devel
+      CHANNEL: stable
       TEST_LANG: c
 pool:
   vmImage: $(VM)
