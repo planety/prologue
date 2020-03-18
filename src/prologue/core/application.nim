@@ -2,25 +2,23 @@ import asyncdispatch, uri, httpcore
 import tables, strutils, strformat, logging, strtabs, options, json
 from nativeSockets import Port, `$`
 
-import response, context, pages, urandom,
-    nativesettings, middlewaresbase
 
 from ./utils import isStaticFile
-
 from ./route import pattern, initPath, initRePath, newPathHandler, newRouter,
     newReRouter, DuplicatedRouteError, DuplicatedReveredRouteError, UrlPattern
-
 from ./form import parseFormParams
-from ./nativesettings import newCtxSettings
-
-import signing/signing
-
-
+from ./nativesettings import newSettings, newCtxSettings, getOrDefault, Settings
 from ./cookies import parseCookies
 from ./types import SameSite
+
+import ./signing/signing
+import ./response
+import ./context
+import ./pages
+import ./urandom
+import ./middlewaresbase
 import ./configure
 import ./constants
-import ./cookies
 import ./basicregex
 import ./encode
 

@@ -101,7 +101,7 @@ proc writePrologueEnv*(fileName: string, env: Env) =
 
 
 when isMainModule:
-  import ../core/constants
+  import ./constants
 
 
   let prefix = ProloguePrefix
