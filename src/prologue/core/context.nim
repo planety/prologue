@@ -318,7 +318,7 @@ proc staticFileResponse*(ctx: Context, filename, root: string, mimetype = "",
     download = true
 
   if contentLength < 20_000_000:
-    # if ctx.request.headers.hasKey("If-None-Match") and ctx.request.headers[
+    # if ctx.request.hasHeader("If-None-Match") and ctx.request.headers[
     #     "If-None-Match"] == etag and download == true:
       # await ctx.respond(Http304, "")
     # else:
