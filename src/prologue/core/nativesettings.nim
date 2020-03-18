@@ -27,13 +27,13 @@ proc newCtxSettings*(): CtxSettings {.inline.} =
   CtxSettings(mimeDB: newMimetypes(), config: newTable[string, StringTableRef]())
 
 proc newSettings*(port = Port(8080), debug = true, reusePort = true,
-    staticDirs = "static", secretKey = randomString(8),
+    staticDirs: openArray[string] = ["static"], secretKey = randomString(8),
         appName = ""): Settings {.inline.} =
   if secretKey.len == 0:
     raise newException(EmptySecretKeyError, "Secret key can't be empty!")
 
   result = Settings(data: %* {"port": port.int, "debug": debug,
-            "reusePort": reusePort, "staticDirs": [staticDirs],
+            "reusePort": reusePort, "staticDirs": staticDirs,
             "secretKey": secretKey, "appName": appName
     })
 

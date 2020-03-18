@@ -6,7 +6,8 @@ import unittest
 suite "Test Examples":
   let
     helloWorldDir = "./examples/helloworld"
-    todoListDir = "./examples/todolist"
+    todolistDir = "./examples/todolist"
+    todoappDir = "./examples/todoapp"
     blogDir = "./examples/blog"
     app = "app.nim"
 
@@ -15,7 +16,11 @@ suite "Test Examples":
     check errC == 0
 
   test "todolist can compile":
-    let (_, errC) = execCmdEx(fmt"nim c --hints:off {todoListDir / app}")
+    let (_, errC) = execCmdEx(fmt"nim c --hints:off {todolistDir / app}")
+    check errC == 0
+
+  test "todoapp can compile":
+    let (_, errC) = execCmdEx(fmt"nim c --hints:off {todoappDir / app}")
     check errC == 0
 
   test "blog can compile":
