@@ -60,7 +60,7 @@ First you should install [Nim](https://nim-lang.org/) language which is an elega
 Then you can use `nimble` command to install prologue.
 
 ```bash
-nimble install prologue@#3727439
+nimble install prologue@#a2ebb48
 ```
 
 ## Usage
@@ -111,12 +111,12 @@ proc do_login*(ctx: Context) {.async.} =
 
 
 let settings = newSettings(appName = "StarLight")
-var app = newApp(settings = settings, middlewares = @[debugRequestMiddleware])
+var app = newApp(settings = settings, middlewares = @[debugRequestMiddleware()])
 app.addRoute("/", home, @[HttpGet, HttpPost])
 app.addRoute("/home", home, HttpGet)
 app.addRoute("/redirect", doRedirect, HttpGet)
 app.addRoute("/login", login, HttpGet)
-app.addRoute("/login", do_login, HttpPost, @[debugRequestMiddleware])
+app.addRoute("/login", do_login, HttpPost, @[debugRequestMiddleware()])
 app.addRoute("/hello/{name}", helloName, HttpGet)
 app.run()
 ```

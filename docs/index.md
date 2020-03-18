@@ -93,12 +93,12 @@ proc do_login*(ctx: Context) {.async.} =
 
 
 let settings = newSettings(appName = "StarLight")
-var app = newApp(settings = settings, middlewares = @[debugRequestMiddleware])
+var app = newApp(settings = settings, middlewares = @[debugRequestMiddleware()])
 app.addRoute("/", home, @[HttpGet, HttpPost])
 app.addRoute("/home", home, HttpGet)
 app.addRoute("/redirect", testRedirect, HttpGet)
 app.addRoute("/login", login, HttpGet)
-app.addRoute("/login", do_login, HttpPost, @[debugRequestMiddleware])
+app.addRoute("/login", do_login, HttpPost, @[debugRequestMiddleware()])
 app.addRoute("/hello/{name}", helloName, HttpGet)
 app.run()
 ```
