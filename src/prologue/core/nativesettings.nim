@@ -1,8 +1,8 @@
 import mimetypes, json, tables, strtabs
 from nativesockets import Port
 
-from types import SecretKey, EmptySecretKeyError, len
-from urandom import randomString
+from ./types import SecretKey, EmptySecretKeyError, len
+from ./urandom import randomString
 
 
 type

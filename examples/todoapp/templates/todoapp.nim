@@ -76,18 +76,18 @@ proc selected(v: Filter): cstring =
 
 proc createEntry(id: int; d: cstring; completed, selected: bool): VNode {.compact.} =
   result = buildHtml(tr):
-    li(class=toClass(completed)):
+    li(class = toClass(completed)):
       if not selected:
         tdiv(class = "view"):
           input(class = "toggle", `type` = "checkbox", checked = toChecked(completed),
-                onclick=toggleEntry, index=id)
-          label(onDblClick=editHandler, index=id):
+                onclick = toggleEntry, index = id)
+          label(onDblClick = editHandler, index = id):
             text d
-          button(class = "destroy", index=id, onclick=removeHandler)
+          button(class = "destroy", index = id, onclick = removeHandler)
       else:
-        input(class = "edit", name = "title", index=id,
+        input(class = "edit", name = "title", index = id,
           onblur = focusLost,
-          onkeyupenter = editEntry, value = d, setFocus=true)
+          onkeyupenter = editEntry, value = d, setFocus = true)
 
 proc makeFooter(entriesCount, completedCount: int): VNode =
   result = buildHtml(footer(class = "footer")):
@@ -112,18 +112,19 @@ proc makeHeader(): VNode {.compact.} =
   result = buildHtml(header(class = "header")):
     h1:
       text "todos"
-    input(class = "new-todo", placeholder="What needs to be done?", name = "newTodo",
+    input(class = "new-todo", placeholder = "What needs to be done?", name = "newTodo",
           onkeyupenter = onTodoEnter, setFocus)
 
 proc createDom(data: RouterData): VNode =
   if data.hashPart == "#/": filter = all
   elif data.hashPart == "#/completed": filter = completed
   elif data.hashPart == "#/active": filter = active
-  result = buildHtml(tdiv(class="todomvc-wrapper")):
+  result = buildHtml(tdiv(class = "todomvc-wrapper")):
     section(class = "todoapp"):
       makeHeader()
       section(class = "main"):
-        input(class = "toggle-all", `type` = "checkbox", id = "toggle", onclick = onAllDone)
+        input(class = "toggle-all", `type` = "checkbox", id = "toggle",
+            onclick = onAllDone)
         label(`for` = "toggle"):
           text "Mark all as complete"
         var entriesCount = 0
@@ -135,9 +136,9 @@ proc createDom(data: RouterData): VNode =
             var d1 = isCompleted(i)
             if d0 != nil:
               let b = case filter
-                      of all: true
-                      of active: not d1
-                      of completed: d1
+                of all: true
+                of active: not d1
+                of completed: d1
               if b:
                 createEntry(i, d0, d1, i == selectedEntry)
               inc completedCount, ord(d1)

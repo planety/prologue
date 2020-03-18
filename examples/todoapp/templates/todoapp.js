@@ -3605,32 +3605,32 @@ function create_dom_14200192(data_14200194) {
     set_attr_13125105(tmp_14200200, "type", "checkbox");
     F.line = 126;
     tmp_14200200.id = "toggle";
-    F.line = 126;
+    F.line = 127;
     add_event_handler_14080118(tmp_14200200, 0, on_all_done_14160100, kxi_13532326[0]);
-    F.line = 126;
+    F.line = 127;
     add_13175072(tmp_14200199, tmp_14200200);
-    F.line = 127;
+    F.line = 128;
     var tmp_14200201 = tree_13185445(104, []);
-    F.line = 127;
+    F.line = 128;
     set_attr_13125105(tmp_14200201, "for", "toggle");
-    F.line = 128;
-    add_13175072(tmp_14200201, text_13185548(makeNimstrLit("Mark all as complete")));
-    F.line = 128;
-    add_13175072(tmp_14200199, tmp_14200201);
     F.line = 129;
-    var entries_count_14205026 = 0;
+    add_13175072(tmp_14200201, text_13185548(makeNimstrLit("Mark all as complete")));
+    F.line = 129;
+    add_13175072(tmp_14200199, tmp_14200201);
     F.line = 130;
+    var entries_count_14205026 = 0;
+    F.line = 131;
     var completed_count_14205028 = 0;
-    F.line = 131;
+    F.line = 132;
     var tmp_14200202 = tree_13185445(36, []);
-    F.line = 131;
+    F.line = 132;
     tmp_14200202.class = "todo-list";
     L1: do {
-      F.line = 133;
+      F.line = 134;
       var i_14205041 = 0;
       F.line = 66;
       var colontmp__14210085 = 0;
-      F.line = 133;
+      F.line = 134;
       colontmp__14210085 = subInt(entries_len_14157022[0], 1);
       F.line = 77;
       var res_14210086 = 0;
@@ -3638,15 +3638,15 @@ function create_dom_14200192(data_14200194) {
         F.line = 78;
           L3: while (true) {
           if (!(res_14210086 <= colontmp__14210085)) break L3;
-            F.line = 133;
-            i_14205041 = res_14210086;
             F.line = 134;
-            var d0_14205042 = get_entry_content_14157055(i_14205041);
+            i_14205041 = res_14210086;
             F.line = 135;
+            var d0_14205042 = get_entry_content_14157055(i_14205041);
+            F.line = 136;
             var d1_14205043 = is_completed_14157072(i_14205041);
             if (!((d0_14205042 == null))) {
-            F.line = 137;
-            F.line = 137;
+            F.line = 138;
+            F.line = 138;
             switch (filter_14157021[0]) {
             case 0:
               Tmp4 = true;
@@ -3660,15 +3660,15 @@ function create_dom_14200192(data_14200194) {
             }
             var b_14210001 = Tmp4;
             if (b_14210001) {
-            F.line = 142;
+            F.line = 143;
             var tmp_14200203 = vthunk_13090312("createEntry", [vn_13090220(i_14205041), vn_13090290(d0_14205042), vn_13090268(d1_14205043), vn_13090268((i_14205041 == selected_entry_14157020[0]))]);
-            F.line = 142;
+            F.line = 143;
             add_13175072(tmp_14200202, tmp_14200203);
             }
             
-            F.line = 143;
-            completed_count_14205028 = addInt(completed_count_14205028, (d1_14205043 ? 1:0));
             F.line = 144;
+            completed_count_14205028 = addInt(completed_count_14205028, (d1_14205043 ? 1:0));
+            F.line = 145;
             entries_count_14205026 = addInt(entries_count_14205026, 1);
             }
             
@@ -3677,13 +3677,13 @@ function create_dom_14200192(data_14200194) {
           }
       } while(false);
     } while(false);
-    F.line = 144;
+    F.line = 145;
     add_13175072(tmp_14200199, tmp_14200202);
-    F.line = 144;
+    F.line = 145;
     add_13175072(tmp_14200197, tmp_14200199);
-    F.line = 145;
+    F.line = 146;
     add_13175072(tmp_14200197, make_footer_14180351(entries_count_14205026, completed_count_14205028));
-    F.line = 145;
+    F.line = 146;
     add_13175072(tmp_14200196, tmp_14200197);
     result_14200195 = tmp_14200196;
   framePtr = F.prev;

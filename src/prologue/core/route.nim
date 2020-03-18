@@ -1,10 +1,10 @@
 import httpcore, cgi
 import hashes, strutils, strtabs, tables
 
-import ./context
+from ./context import Context, HandlerAsync, Path, RePath, Router, ReRouter, PathHandler, defaultHandler
 from ./nativesettings import Settings
 
-from basicregex import Regex, RegexMatch, match, groupNames, groupFirstCapture
+from ./basicregex import Regex, RegexMatch, match, groupNames, groupFirstCapture
 
 when defined(windows) or defined(usestd):
   import ../naive/request

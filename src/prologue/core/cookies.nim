@@ -1,6 +1,6 @@
 import strtabs, parseutils, times, options
 
-from types import SameSite
+from ./types import SameSite
 
 
 proc parseCookies*(s: string): StringTableRef =

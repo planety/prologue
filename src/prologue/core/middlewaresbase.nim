@@ -1,7 +1,7 @@
 import asyncdispatch
 
-from context import HandlerAsync, Context
-from route import findHandler
+from ./context import HandlerAsync, Context
+from ./route import findHandler
 
 
 proc doNothingClosureMiddleware*(): HandlerAsync
