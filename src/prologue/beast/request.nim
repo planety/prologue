@@ -114,7 +114,7 @@ proc respond*(request: Request, status: HttpCode, body: string,
   return fut
 
 proc respond*(request: Request, response: Response): Future[void] {.inline.} =
-  request.respond(response.status, response.body, response.httpHeaders)
+  request.respond(response.status, response.body, response.headers)
 
 proc initRequest*(nativeRequest: NativeRequest, cookies = newStringTable(),
   pathParams = newStringTable(), queryParams = newStringTable(),
