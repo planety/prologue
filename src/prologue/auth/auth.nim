@@ -11,7 +11,7 @@ type
   AuthMethod* = enum
     Basic = "Basic"
     Digest = "Digest"
-  VerifyHandler* = proc(ctx: Context, userName, password: string): bool {.gcsafe.}
+  VerifyHandler* = proc(ctx: Context, username, password: string): bool {.gcsafe.}
 
 
 proc unauthenticate*(ctx: Context, authMethod: AuthMethod, realm: string,
@@ -47,10 +47,10 @@ proc basicAuth*(ctx: Context, authMethod: AuthMethod, realm: string,
 
   let
     user = decoded.split(":", maxsplit = 1)
-    userName = user[0]
+    username = user[0]
     password = user[1]
 
-  if ctx.verify(userName, password):
+  if ctx.verify(username, password):
     return true
   else:
     ctx.response.status = Http403

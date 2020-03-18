@@ -70,12 +70,12 @@ proc existsPrologueEnv*(key: string, prefix: string): bool {.inline.} =
 proc delPrologueEnv*(key: string, prefix: string) {.inline.} =
   delEnv(prefix & key)
 
-proc loadPrologueEnv*(fileName: string): Env =
+proc loadPrologueEnv*(filename: string): Env =
   result = initEnv()
-  var f = newFileStream(fileName, fmRead)
+  var f = newFileStream(filename, fmRead)
   if f != nil:
     var p: CfgParser
-    open(p, f, fileName)
+    open(p, f, filename)
     defer:
       f.close()
       p.close()
@@ -92,8 +92,8 @@ proc loadPrologueEnv*(fileName: string): Env =
 proc setPrologueEnv*(env: Env, key, value: string) =
   env.data[key] = value
 
-proc writePrologueEnv*(fileName: string, env: Env) =
-  var f = newFileStream(fileName, fmWrite)
+proc writePrologueEnv*(filename: string, env: Env) =
+  var f = newFileStream(filename, fmWrite)
   defer: f.close()
   if f != nil:
     for key, value in env.data:

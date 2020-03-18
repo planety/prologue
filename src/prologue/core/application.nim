@@ -222,7 +222,7 @@ proc run*(app: Prologue) =
     logging.debug(fmt"{ctx.request.reqMethod} {ctx.request.url.path}")
 
     let dirsJson = ctx.settings.getOrDefault("staticDirs")
-    var staticFileFlag: tuple[hasValue: bool, fileName, root: string]
+    var staticFileFlag: tuple[hasValue: bool, filename, root: string]
     if dirsJson.kind == JArray:
       var
         dirs = newSeq[string](dirsJson.len)
@@ -236,7 +236,7 @@ proc run*(app: Prologue) =
     # TODO move to function
     try:
       if staticFileFlag.hasValue:
-        await staticFileResponse(ctx, staticFileFlag.fileName,
+        await staticFileResponse(ctx, staticFileFlag.filename,
             staticFileFlag.root)
       else:
         await switch(ctx)

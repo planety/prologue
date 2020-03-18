@@ -71,26 +71,26 @@ type
   ErrorHandlerTable* = TableRef[HttpCode, ErrorHandler]
 
   UpLoadFile* = object
-    fileName*: string
+    filename*: string
     body*: string
 
 proc default404Handler*(ctx: Context) {.async.}
 proc default500Handler*(ctx: Context) {.async.}
 
 
-proc initUploadFile*(fileName, body: string): UpLoadFile {.inline.} =
-  UpLoadFile(fileName: fileName, body: body)
+proc initUploadFile*(filename, body: string): UpLoadFile {.inline.} =
+  UpLoadFile(filename: filename, body: body)
 
 proc getUploadFile*(ctx: Context, name: string): UpLoadFile {.inline.} =
   let file = ctx.request.formParams[name]
-  initUploadFile(fileName = file.params["filename"], body = file.body)
+  initUploadFile(filename = file.params["filename"], body = file.body)
 
-proc save*(uploadFile: UpLoadFile, dir: string, fileName: string,
+proc save*(uploadFile: UpLoadFile, dir: string, filename: string,
     useDefault = false) {.inline.} =
   # TODO use time or random string as filename
   if useDefault:
-    writeFile(dir / uploadFile.fileName, uploadFile.body)
-  writeFile(dir / fileName, uploadFile.body)
+    writeFile(dir / uploadFile.filename, uploadFile.body)
+  writeFile(dir / filename, uploadFile.body)
 
 proc newErrorHandlerTable*(initialSize = defaultInitialSize): ErrorHandlerTable {.inline.} =
   newTable[HttpCode, ErrorHandler](initialSize)
@@ -268,10 +268,10 @@ proc attachment*(ctx: Context, downloadName = "", charset = "utf-8") {.inline.} 
 
   ctx.setHeader("Content-Disposition", fmt"""attachment; filename="{downloadName}"""")
 
-proc staticFileResponse*(ctx: Context, fileName, root: string, mimetype = "",
+proc staticFileResponse*(ctx: Context, filename, root: string, mimetype = "",
     downloadName = "", charset = "utf-8", headers = newHttpHeaders()) {.async.} =
   let
-    filePath = root / fileName
+    filePath = root / filename
 
   # exists -> have access -> can open
   if not existsFile(filePath):
@@ -290,7 +290,7 @@ proc staticFileResponse*(ctx: Context, fileName, root: string, mimetype = "",
     download = false
 
   if mimetype.len == 0:
-    var ext = fileName.splitFile.ext
+    var ext = filename.splitFile.ext
     if ext.len > 0:
       ext = ext[1 .. ^ 1]
     mimetype = ctx.ctxSettings.mimeDB.getMimetype(ext)
@@ -299,7 +299,7 @@ proc staticFileResponse*(ctx: Context, fileName, root: string, mimetype = "",
     info = getFileInfo(filePath)
     contentLength = info.size
     lastModified = info.lastWriteTime
-    etagBase = fmt"{fileName}-{lastModified}-{contentLength}"
+    etagBase = fmt"{filename}-{lastModified}-{contentLength}"
     etag = getMD5(etagBase)
 
   ctx.response.httpHeaders = headers

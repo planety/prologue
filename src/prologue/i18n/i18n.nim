@@ -11,14 +11,14 @@ type
     ctx*: Context
 
 
-proc loadTranslate*(stream: Stream, fileName: string = "[stream]"): TableRef[
+proc loadTranslate*(stream: Stream, filename: string = "[stream]"): TableRef[
     string, StringTableRef] =
   var
     currentSection = ""
     p: CfgParser
 
   result = newTable[string, StringTableRef]()
-  open(p, stream, fileName)
+  open(p, stream, filename)
   defer: p.close()
   while true:
     var e = p.next
@@ -36,14 +36,14 @@ proc loadTranslate*(stream: Stream, fileName: string = "[stream]"): TableRef[
     of cfgError:
       break
 
-proc loadTranslate*(fileName: string): TableRef[string, StringTableRef] {.inline.} =
+proc loadTranslate*(filename: string): TableRef[string, StringTableRef] {.inline.} =
   let
     file = open(filename, fmRead)
     fileStream = newFileStream(file)
   defer: fileStream.close()
   result = fileStream.loadTranslate(filename)
 
-proc loadTranslate*(app: Prologue, fileName: string) {.inline.} =
+proc loadTranslate*(app: Prologue, filename: string) {.inline.} =
   let res = loadTranslate(filename)
   app.ctxSettings.config = res
 

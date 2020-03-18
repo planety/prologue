@@ -21,7 +21,7 @@ template beforeApi*(version, body: untyped) {.dirty.} =
     body
 
 proc isStaticFile*(path: string, dirs: openArray[string]): tuple[hasValue: bool,
-    fileName, root: string] {.inline.} =
+    filename, root: string] {.inline.} =
   let file = splitFile(path.strip(chars = {'/'}, trailing = false))
 
   for dir in dirs:

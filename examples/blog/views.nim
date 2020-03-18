@@ -16,9 +16,9 @@ proc login*(ctx: Context) {.async.} =
       id: string
       encoded: string
     let
-      userName = ctx.getPostParams("username")
+      username = ctx.getPostParams("username")
       password = SecretKey(ctx.getPostParams("password"))
-      row = db.getRow(sql"SELECT * FROM user WHERE username = ?", userName)
+      row = db.getRow(sql"SELECT * FROM user WHERE username = ?", username)
 
     if row.len == 0:
       error = "Incorrect username"
@@ -53,20 +53,20 @@ proc register*(ctx: Context) {.async.} =
   if ctx.request.reqMethod == HttpPost:
     var error: string
     let
-      userName = ctx.getPostParams("username")
+      username = ctx.getPostParams("username")
       password = pbkdf2_sha256encode(SecretKey(ctx.getPostParams(
           "password")), "Prologue")
-    if userName.len == 0:
-      error = "userName required"
+    if username.len == 0:
+      error = "username required"
     elif password.len == 0:
       error = "password required"
     elif db.getValue(sql"SELECT id FROM user WHERE username = ?",
-        userName).len != 0:
-      error = fmt"username {userName} registered already"
+        username).len != 0:
+      error = fmt"username {username} registered already"
 
     if error.len == 0:
       db.exec(sql"INSERT INTO user (username, password) VALUES (?, ?)",
-          userName, password)
+          username, password)
       resp redirect(urlFor(ctx, "login"), Http301)
     else:
       resp error

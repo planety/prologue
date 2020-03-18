@@ -5,7 +5,7 @@ import unittest, os
 
 
 suite "Test Config":
-  let fileName = "tests/.env"
+  let filename = "tests/.env"
 
   test "can write config":
     let
@@ -14,8 +14,8 @@ suite "Test Config":
     env.setPrologueEnv("port", "8080")
     env.setPrologueEnv("appName", "Starlight")
     env.setPrologueEnv("staticDir", "static")
-    writePrologueEnv(fileName, env)
-    check existsFile(fileName)
+    writePrologueEnv(filename, env)
+    check existsFile(filename)
 
   test "can load config":
     let env = loadPrologueEnv("tests/.env")
@@ -25,5 +25,5 @@ suite "Test Config":
       env["appName"] == "Starlight"
       env["staticDir"] == "static"
 
-  if existsFile(fileName):
-    removeFile(fileName)
+  if existsFile(filename):
+    removeFile(filename)
