@@ -139,9 +139,9 @@ proc handle*(ctx: Context): Future[void] {.inline.} =
 proc send*(ctx: Context, content: string): Future[void] {.inline.} =
   result = ctx.request.send(content)
 
-proc respond*(ctx: Context, status: HttpCode, body: string,
+proc respond*(ctx: Context, code: HttpCode, body: string,
   headers: HttpHeaders = newHttpHeaders()): Future[void] {.inline.} =
-  result = ctx.request.respond(status, body, headers)
+  result = ctx.request.respond(code, body, headers)
 
 proc hasHeader*(request: var Request, key: string): bool {.inline.} =
   request.headers.hasKey(key)
@@ -174,7 +174,7 @@ proc deleteCookie*(ctx: Context, key: string, path = "", domain = "") {.inline.}
   ctx.deleteCookie(key = key, path = path, domain = domain)
 
 proc defaultHandler*(ctx: Context) {.async.} =
-  ctx.response.status = Http404
+  ctx.response.code = Http404
 
 proc default404Handler*(ctx: Context) {.async.} =
   ctx.response.body = errorPage("404 Not Found!", PrologueVersion)
@@ -202,11 +202,11 @@ proc getPathParams*[T: BaseType](ctx: Context, key: sink string,
   let pathParams = ctx.request.pathParams.getOrDefault(key)
   parseValue(pathParams, default)
 
-proc setResponse*(ctx: Context, status: HttpCode, httpHeaders =
+proc setResponse*(ctx: Context, code: HttpCode, httpHeaders =
   {"Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders,
       body = "", version = HttpVer11) {.inline.} =
   ## handy to make ctx's response
-  let response = initResponse(httpVersion = version, status = status,
+  let response = initResponse(httpVersion = version, code = code,
     headers = {"Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders,
         body = body)
   ctx.response = response
@@ -283,7 +283,7 @@ proc staticFileResponse*(ctx: Context, filename, root: string, mimetype = "",
 
   var filePermission = getFilePermissions(filePath)
   if fpOthersRead notin filePermission:
-    resp abort(status = Http403,
+    resp abort(code = Http403,
         body = "You do not have permission to access this file.",
         headers = headers)
     return

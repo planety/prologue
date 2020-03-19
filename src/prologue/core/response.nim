@@ -7,18 +7,18 @@ from ./types import SameSite
 type
   Response* = object
     httpVersion*: HttpVersion
-    status*: HttpCode
+    code*: HttpCode
     headers*: HttpHeaders
     body*: string
 
 
 proc `$`*(response: Response): string =
-  fmt"{response.status} {response.headers}"
+  fmt"{response.code} {response.headers}"
 
-proc initResponse*(httpVersion: HttpVersion, status: HttpCode, headers =
+proc initResponse*(httpVersion: HttpVersion, code: HttpCode, headers =
     {"Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders,
         body = ""): Response =
-  Response(httpVersion: httpVersion, status: status, headers: headers, body: body)
+  Response(httpVersion: httpVersion, code: code, headers: headers, body: body)
 
 proc hasHeader*(response: var Response, key: string): bool {.inline.} =
   response.headers.hasKey(key)
@@ -51,12 +51,12 @@ proc deleteCookie*(response: var Response, key: string, value = "", path = "",
   response.setCookie(key, value, expires = secondsForward(0), maxAge = some(0),
       path = path, domain = domain)
 
-proc abort*(status = Http401, body = "", headers = newHttpHeaders(),
+proc abort*(code = Http401, body = "", headers = newHttpHeaders(),
     version = HttpVer11): Response {.inline.} =
-  result = initResponse(version, status = status, body = body,
+  result = initResponse(version, code = code, body = body,
       headers = headers)
 
-proc redirect*(url: string, status = Http301,
+proc redirect*(url: string, code = Http301,
     body = "", delay = 0, headers = newHttpHeaders(),
         version = HttpVer11): Response {.inline.} =
   ## redirect to new url.
@@ -64,41 +64,41 @@ proc redirect*(url: string, status = Http301,
     headers.add("Location", url)
   else:
     headers.add("refresh", fmt"""{delay};url="{url}"""")
-  result = initResponse(version, status = status, headers = headers, body = body)
+  result = initResponse(version, code = code, headers = headers, body = body)
 
-proc error404*(status = Http404,
+proc error404*(code = Http404,
     body = "<h1>404 Not Found!</h1>", headers = newHttpHeaders(),
         version = HttpVer11): Response {.inline.} =
-  result = initResponse(version, status = status, body = body,
+  result = initResponse(version, code = code, body = body,
       headers = headers)
 
-proc htmlResponse*(text: string, status = Http200, headers = newHttpHeaders(),
+proc htmlResponse*(text: string, code = Http200, headers = newHttpHeaders(),
     version = HttpVer11): Response {.inline.} =
   ## Content-Type": "text/html; charset=UTF-8
   headers["Content-Type"] = "text/html; charset=UTF-8"
-  result = initResponse(version, status, headers,
+  result = initResponse(version, code, headers,
       body = text)
 
-proc plainTextResponse*(text: string, status = Http200,
+proc plainTextResponse*(text: string, code = Http200,
     headers = newHttpHeaders(), version = HttpVer11): Response {.inline.} =
   ## Content-Type": "text/plain
   headers["Content-Type"] = "text/plain"
-  initResponse(version, status, headers,
+  initResponse(version, code, headers,
       body = text)
 
-proc jsonResponse*(text: JsonNode, status = Http200, headers = newHttpHeaders(),
+proc jsonResponse*(text: JsonNode, code = Http200, headers = newHttpHeaders(),
     version = HttpVer11): Response {.inline.} =
   ## Content-Type": "application/json
   headers["Content-Type"] = "text/json"
-  initResponse(version, status, headers,
+  initResponse(version, code, headers,
       body = $text)
 
-macro resp*(body: string, status = Http200) =
+macro resp*(body: string, code = Http200) =
   ## handy to make ctx's response
   var ctx = ident"ctx"
 
   result = quote do:
-    let response = initResponse(httpVersion = HttpVer11, status = `status`,
+    let response = initResponse(httpVersion = HttpVer11, code = `code`,
       headers = {"Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders,
           body = `body`)
     `ctx`.response = response

@@ -104,17 +104,17 @@ proc send*(request: Request, content: string): Future[void] {.inline.} =
   complete(fut)
   return fut
 
-proc respond*(request: Request, status: HttpCode, body: string,
+proc respond*(request: Request, code: HttpCode, body: string,
   headers: HttpHeaders = newHttpHeaders()): Future[void] {.inline.} =
 
   let h = headers.createHeaders
-  request.nativeRequest.send(status, body, h)
+  request.nativeRequest.send(code, body, h)
   var fut = newFuture[void]()
   complete(fut)
   return fut
 
 proc respond*(request: Request, response: Response): Future[void] {.inline.} =
-  request.respond(response.status, response.body, response.headers)
+  request.respond(response.code, response.body, response.headers)
 
 proc initRequest*(nativeRequest: NativeRequest, cookies = newStringTable(),
   pathParams = newStringTable(), queryParams = newStringTable(),

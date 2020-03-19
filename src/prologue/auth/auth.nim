@@ -23,7 +23,7 @@ type
 
 proc unauthenticate*(ctx: Context, authMethod: AuthMethod, realm: string,
     charset = "UTF-8") {.inline.} =
-  ctx.response.status = Http401
+  ctx.response.code = Http401
   ctx.response.setHeader("WWW-Authenticate",
       fmt"{authMethod} realm={realm}, charset={charset}")
 
@@ -49,7 +49,7 @@ proc basicAuth*(ctx: Context, realm: string,
   try:
     decoded = base64Decode(authData)
   except ValueError:
-    ctx.response.status = Http403
+    ctx.response.code = Http403
     ctx.response.body = "Base64 Decode Fails"
     return
 

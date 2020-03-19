@@ -6,7 +6,7 @@ Response object
 type
   Response* = object
     httpVersion*: HttpVersion
-    status*: HttpCode
+    code*: HttpCode
     httpHeaders*: HttpHeaders
     body*: string
 ```

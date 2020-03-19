@@ -7,21 +7,21 @@ import unittest, httpcore, strutils
 suite "Test Response":
   let
     version = HttpVer11
-    status = Http200
+    code = Http200
     body = "<h1>Hello, Prologue!</h1>"
 
   test "can init response":
     let
-      response = initResponse(version, status, body = body)
+      response = initResponse(version, code, body = body)
     check:
       response.httpVersion == version
-      response.status == status
+      response.code == code
       response.headers["Content-Type"] == "text/html; charset=UTF-8"
       response.body == body
 
   test "can set response header":
     var
-      response = initResponse(version, status, body = body)
+      response = initResponse(version, code, body = body)
 
     response.setHeader("Content-Type", "text/plain")
     check:
@@ -29,7 +29,7 @@ suite "Test Response":
 
   test "can add response header":
     var
-      response = initResponse(version, status, body = body)
+      response = initResponse(version, code, body = body)
 
     response.addHeader("Content-Type", "text/plain")
     check:
@@ -38,7 +38,7 @@ suite "Test Response":
 
   test "can set response cookie":
     var
-      response = initResponse(version, status, body = body)
+      response = initResponse(version, code, body = body)
 
     response.setCookie("username", "flywind")
     response.setCookie("password", "root")

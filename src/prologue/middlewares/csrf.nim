@@ -26,7 +26,7 @@ proc setToken*(ctx: Context, value: string, tokenName = DefaultTokenName) {.inli
   ctx.setCookie(tokenName, value)
 
 proc reject(ctx: Context) {.inline.} =
-  ctx.response.status = Http403
+  ctx.response.code = Http403
 
 proc makeToken(secret: openArray[byte]): string {.inline.} =
   var

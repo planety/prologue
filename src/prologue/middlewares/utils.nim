@@ -68,4 +68,4 @@ proc httpRedirectMiddleWare*(): HandlerAsync =
     else:
       return
     await switch(ctx)
-    ctx.response.status = Http307
+    ctx.response.code = Http307

@@ -55,18 +55,18 @@ export urandom
 export utils
 
 
-proc registerErrorHandler*(app: Prologue, status: HttpCode,
+proc registerErrorHandler*(app: Prologue, code: HttpCode,
     handler: ErrorHandler) {.inline.} =
-  app.errorHandlerTable[status] = handler
+  app.errorHandlerTable[code] = handler
 
-proc registerErrorHandler*(app: Prologue, status: set[HttpCode],
+proc registerErrorHandler*(app: Prologue, code: set[HttpCode],
     handler: ErrorHandler) {.inline.} =
-  for idx in status:
+  for idx in code:
     app.registerErrorHandler(idx, handler)
 
-proc registerErrorHandler*(app: Prologue, status: openArray[HttpCode],
+proc registerErrorHandler*(app: Prologue, code: openArray[HttpCode],
     handler: ErrorHandler) {.inline.} =
-  for idx in status:
+  for idx in code:
     app.registerErrorHandler(idx, handler)
 
 proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
@@ -242,16 +242,16 @@ proc run*(app: Prologue) =
         await switch(ctx)
     except Exception as e:
       logging.error e.msg
-      ctx.response.status = Http500
+      ctx.response.code = Http500
       ctx.response.body = e.msg
       ctx.response.setHeader("content-type", "text/plain; charset=UTF-8")
 
-    if ctx.settings.getOrDefault("debug").getBool and ctx.response.status == Http500:
+    if ctx.settings.getOrDefault("debug").getBool and ctx.response.code == Http500:
       discard
-    elif ctx.response.status in app.errorHandlerTable:
+    elif ctx.response.code in app.errorHandlerTable:
       # TODO Maybe async and sync
       # TODO Maybe change to Future[void] reduce async
-      await (app.errorHandlerTable[ctx.response.status])(ctx)
+      await (app.errorHandlerTable[ctx.response.code])(ctx)
 
     # central processing
     # all context processed here except static file

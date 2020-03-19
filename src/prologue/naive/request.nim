@@ -94,12 +94,12 @@ proc send*(request: Request, content: string): Future[void] {.inline.} =
   # TODO can't use asyncCheck
   result = request.nativeRequest.client.send(content)
 
-proc respond*(request: Request, status: HttpCode, body: string,
+proc respond*(request: Request, code: HttpCode, body: string,
   headers: HttpHeaders = newHttpHeaders()): Future[void] {.inline.} =
-  result = request.nativeRequest.respond(status, body, headers)
+  result = request.nativeRequest.respond(code, body, headers)
 
 proc respond*(request: Request, response: Response): Future[void] {.inline.} =
-  result = request.respond(response.status, response.body,
+  result = request.respond(response.code, response.body,
       response.headers)
 
 proc close*(request: Request) =
