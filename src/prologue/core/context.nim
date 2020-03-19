@@ -268,7 +268,8 @@ proc attachment*(ctx: Context, downloadName = "", charset = "utf-8") {.inline.} 
     if mimes.len != 0:
       ctx.response.setHeader("Content-Type", fmt"{mimes}; charset={charset}")
 
-  ctx.response.setHeader("Content-Disposition", fmt"""attachment; filename="{downloadName}"""")
+  ctx.response.setHeader("Content-Disposition",
+      fmt"""attachment; filename="{downloadName}"""")
 
 proc staticFileResponse*(ctx: Context, filename, root: string, mimetype = "",
     downloadName = "", charset = "utf-8", headers = newHttpHeaders()) {.async.} =
@@ -293,7 +294,7 @@ proc staticFileResponse*(ctx: Context, filename, root: string, mimetype = "",
   if mimetype.len == 0:
     var ext = filename.splitFile.ext
     if ext.len > 0:
-      ext = ext[1 .. ^ 1]
+      ext = ext[1 .. ^1]
     mimetype = ctx.ctxSettings.mimeDB.getMimetype(ext)
 
   let
