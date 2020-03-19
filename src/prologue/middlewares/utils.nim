@@ -13,42 +13,50 @@ else:
 
 proc loggingMiddleware*(appName = "Starlight"): HandlerAsync =
   result = proc(ctx: Context) {.async.} =
-    logging.info "logging->begin"
+    logging.info "loggingMiddleware->begin"
     logging.debug "============================"
     logging.debug appName
-    logging.debug "from logging middleware"
     logging.debug "route: " & ctx.request.path
     logging.debug "headers: " & $ctx.request.headers
     logging.debug "============================"
+    logging.info "loggingMiddleware->end"
     await switch(ctx)
-    logging.info "logging->end"
 
 proc debugRequestMiddleware*(appName = "Starlight"): HandlerAsync =
   result = proc(ctx: Context) {.async.} =
-    logging.info "debug->begin"
+    logging.info "debugRequestMiddleware->begin"
     logging.debug "============================"
     logging.debug appName
-    logging.debug "from debugRequestMiddleware"
     logging.debug "url: " & $ctx.request.url
     logging.debug "queryParams: " & $ctx.request.queryParams
     logging.debug "method: " & $ctx.request.reqMethod
     logging.debug "headers: " & $ctx.request.headers
     logging.debug "body: " & ctx.request.body
     logging.debug "============================"
+    logging.info "debugRequestMiddleware->end"
     await switch(ctx)
-    logging.info "debug->end"
+
+proc debugResponseMiddleware*(appName = "Starlight"): HandlerAsync =
+  result = proc(ctx: Context) {.async.} =
+    await switch(ctx)
+    logging.info "debugResponseMiddleware->begin"
+    logging.debug "============================"
+    logging.debug appName
+    logging.debug "headers: " & $ctx.response.headers
+    logging.debug "body: " & ctx.response.body
+    logging.debug "============================"
+    logging.info "debugResponseMiddleware->end"
 
 proc stripPathMiddleware*(appName = "Starlight"): HandlerAsync =
   result = proc(ctx: Context) {.async.} =
-    logging.info "strip->begin"
+    logging.info "stripPathMiddleware->begin"
     logging.debug "============================"
     logging.debug appName
-    logging.debug "from stripPathMiddleware"
     ctx.request.stripPath()
     logging.debug ctx.request.path
     logging.debug "============================"
+    logging.info "stripPathMiddleware->end"
     await switch(ctx)
-    logging.info "strip->end"
 
 proc httpRedirectMiddleWare*(): HandlerAsync =
   result = proc(ctx: Context) {.async.} =

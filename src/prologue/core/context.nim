@@ -289,7 +289,6 @@ proc staticFileResponse*(ctx: Context, filename, root: string, mimetype = "",
 
   var
     mimetype = mimetype
-    download = false
 
   if mimetype.len == 0:
     var ext = filename.splitFile.ext
@@ -315,15 +314,14 @@ proc staticFileResponse*(ctx: Context, filename, root: string, mimetype = "",
 
   if downloadName.len != 0:
     ctx.attachment(downloadName)
-    download = true
 
   if contentLength < 20_000_000:
-    # if ctx.request.hasHeader("If-None-Match") and ctx.request.headers[
-    #     "If-None-Match"] == etag and download == true:
-      # await ctx.respond(Http304, "")
-    # else:
-    let body = readFile(filePath)
-    resp initResponse(HttpVer11, Http200, headers, body)
+    if ctx.request.hasHeader("If-None-Match") and ctx.request.headers[
+        "If-None-Match"] == etag:
+      await ctx.respond(Http304, "")
+    else:
+      let body = readFile(filePath)
+      resp initResponse(HttpVer11, Http200, headers, body)
   else:
     # stream
     await ctx.respond(Http200, "", headers)
