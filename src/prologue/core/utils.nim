@@ -22,7 +22,11 @@ template beforeApi*(version, body: untyped) {.dirty.} =
 
 proc isStaticFile*(path: string, dirs: openArray[string]): tuple[hasValue: bool,
     filename, root: string] {.inline.} =
-  let file = splitFile(path.strip(chars = {'/'}, trailing = false))
+  result = (false, "", "")
+  var path = path.strip(chars = {'/'}, trailing = false)
+  if not existsFile(path):
+    return
+  let file = splitFile(path)
 
   for dir in dirs:
     if dir.len == 0:
@@ -30,5 +34,3 @@ proc isStaticFile*(path: string, dirs: openArray[string]): tuple[hasValue: bool,
     if file.dir.startsWith(dir.strip(chars = {'/'},
         trailing = false)):
       return (true, file.name & file.ext, file.dir)
-
-  return (false, "", "")

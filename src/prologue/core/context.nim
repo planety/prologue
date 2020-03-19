@@ -277,9 +277,6 @@ proc staticFileResponse*(ctx: Context, filename, root: string, mimetype = "",
     filePath = root / filename
 
   # exists -> have access -> can open
-  if not existsFile(filePath):
-    resp error404(headers = headers)
-    return
 
   var filePermission = getFilePermissions(filePath)
   if fpOthersRead notin filePermission:
