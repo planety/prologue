@@ -1,7 +1,5 @@
 ### prefer `len` to `default` 
-switch to `isDefault` when this pr is accepted.
 
-https://github.com/nim-lang/Nim/pull/13526
 ```nim
 # use len
 let 
@@ -14,4 +12,17 @@ assert b.len != 0
 # don't use
 assert a != ""
 assert b != ""
+```
+
+### prefer plain function to macro
+
+You can avoid `macro`.If necessary, you should only use simple ones.
+
+```nim
+macro resp*(response: Response) =
+  ## handy to make ctx's response
+  var ctx = ident"ctx"
+
+  result = quote do:
+    `ctx`.response = `response`
 ```
