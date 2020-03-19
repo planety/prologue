@@ -12,7 +12,7 @@ else:
   import ../beast/request
 
 type
-  PrologueError* = object of Exception
+  PrologueError* = object of ValueError
   RouteError* = object of PrologueError
   RouteResetError* = object of RouteError
   DuplicatedRouteError* = object of RouteError
