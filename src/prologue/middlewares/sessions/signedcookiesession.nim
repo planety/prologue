@@ -1,6 +1,7 @@
-import asyncdispatch, options
+import options
 
 
+import ../../core/dispatch
 from ../../core/types import BadSecretKeyError, SecretKey, SameSite, loads, dumps, len
 from ../../core/context import Context, HandlerAsync, getCookie, setCookie,
     deleteCookie

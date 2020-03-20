@@ -1,6 +1,7 @@
-import httpcore, asyncdispatch, asyncfile, mimetypes, md5, uri
+import httpcore, asyncfile, mimetypes, md5, uri
 import strtabs, tables, strformat, os, times, options, parseutils, json
 
+import ./dispatch
 import ./response, ./pages, ./constants
 import ./cookies
 from ./types import BaseType, Session, SameSite, `[]`, initSession
@@ -9,10 +10,7 @@ from ./configure import parseValue
 from ./basicregex import Regex
 from ./nativesettings import Settings, CtxSettings, getOrDefault, hasKey, `[]`
 
-when defined(windows) or defined(usestd):
-  import ../naive/request
-else:
-  import ../beast/request
+import ./request
 
 
 type

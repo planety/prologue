@@ -1,6 +1,7 @@
-import asyncdispatch, json
+import json
 
 
+import ../core/dispatch
 from ../core/application import Prologue, addRoute
 from ../core/response import htmlResponse, resp
 from ../core/context import Context, setHeader, staticFileResponse

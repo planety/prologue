@@ -1,5 +1,4 @@
-import asyncdispatch
-
+import ./dispatch
 from ./context import HandlerAsync, Context
 from ./route import findHandler
 

@@ -1,16 +1,13 @@
-import asyncdispatch, httpcore
+import httpcore
 from strutils import toLowerAscii, join
 
+
+import ../core/dispatch
 from ../core/middlewaresbase import switch
 from ../core/context import Context, HandlerAsync
 from ../core/response import plainTextResponse, resp, setHeader, addHeader
 from ../core/basicregex import re, Regex, RegexMatch, match
-
-# TODO move request method to ctx
-when defined(windows) or defined(usestd):
-  import ../naive/request
-else:
-  import ../beast/request
+import ../core/request
 
 
 const

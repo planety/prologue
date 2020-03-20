@@ -1,14 +1,11 @@
-import asyncdispatch, httpcore
+import httpcore
 import logging, strtabs, strutils
 
+
+import ../core/dispatch
 from ../core/context import Context, HandlerAsync
 from ../core/middlewaresbase import switch
-
-
-when defined(windows) or defined(usestd):
-  import ../naive/request
-else:
-  import ../beast/request
+import ../core/request
 
 
 proc loggingMiddleware*(appName = "Starlight"): HandlerAsync =

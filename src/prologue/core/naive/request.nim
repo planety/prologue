@@ -1,11 +1,12 @@
-import asyncdispatch, asyncnet, uri
+import asyncnet, uri
 import strutils, strtabs, uri
 
 import asynchttpserver
 
 
-from ../core/response import Response
-from ../core/types import FormPart
+import ../dispatch
+from ../response import Response
+from ../types import FormPart
 
 
 type

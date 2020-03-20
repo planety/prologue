@@ -1,9 +1,11 @@
-import asyncdispatch, httpcore
+import httpcore
 from asynchttpserver import newAsyncHttpServer, serve, close, AsyncHttpServer
 
+
+import ../dispatch
 from ./request import NativeRequest
-from ../core/nativesettings import Settings, CtxSettings
-from ../core/context import Router, ReversedRouter, ReRouter, HandlerAsync,
+from ../nativesettings import Settings, CtxSettings
+from ../context import Router, ReversedRouter, ReRouter, HandlerAsync,
     Event, ErrorHandlerTable
 
 

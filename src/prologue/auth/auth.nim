@@ -1,17 +1,12 @@
-import asyncdispatch
 import httpcore, strutils, strformat, strtabs
 
 
+import ../core/dispatch
 from ../core/context import Context, HandlerAsync, setHeader, hasHeader
 from ../core/response import setHeader, hasHeader
 from ../core/encode import base64Decode
 from ../core/middlewaresbase import switch
-
-
-when defined(windows) or defined(usestd):
-  import ../naive/request
-else:
-  import ../beast/request
+import ../core/request
 
 
 type

@@ -1,16 +1,13 @@
-import asyncdispatch, httpcore, strtabs
+import httpcore, strtabs
 from htmlgen import input
 
+
+import ../core/dispatch
 from ../core/urandom import randomBytesSeq, randomString, DefaultEntropy
 from ../core/encode import urlsafeBase64Encode, urlsafeBase64Decode
 from ../core/middlewaresbase import switch
 from ../core/context import Context, HandlerAsync, getCookie, setCookie, deleteCookie
-
-
-when defined(windows) or defined(usestd):
-  import ../naive/request
-else:
-  import ../beast/request
+import ../core/request
 
 
 const

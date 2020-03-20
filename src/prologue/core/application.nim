@@ -1,4 +1,4 @@
-import asyncdispatch, uri, httpcore
+import uri, httpcore
 import tables, strutils, strformat, logging, strtabs, options, json
 from nativesockets import Port, `$`
 
@@ -11,6 +11,7 @@ from ./nativesettings import newSettings, newCtxSettings, getOrDefault, Settings
 from ./cookies import parseCookies
 from ./types import SameSite
 
+import ./dispatch
 import ./signing/signing
 import ./response
 import ./context
@@ -23,18 +24,15 @@ import ./basicregex
 import ./encode
 
 
-when defined(windows) or defined(usestd):
-  import ../ naive / [request, server]
-  export request, server
-else:
-  import ../ beast / [request, server]
-  export request, server
+import ./request
+import ./server
+export request, server
 
 
 export httpcore
 export strtabs
 export tables
-export asyncdispatch except register
+export dispatch except register
 export options
 export json
 
@@ -249,7 +247,6 @@ proc run*(app: Prologue) =
     if ctx.settings.getOrDefault("debug").getBool and ctx.response.code == Http500:
       discard
     elif ctx.response.code in app.errorHandlerTable:
-      # TODO Maybe async and sync
       # TODO Maybe change to Future[void] reduce async
       await (app.errorHandlerTable[ctx.response.code])(ctx)
 
@@ -264,7 +261,6 @@ proc run*(app: Prologue) =
     addHandler(logging.newConsoleLogger())
     setLogFilter(if app.settings.getOrDefault(
         "debug").getBool: lvlDebug else: lvlInfo)
-  # defer: app.close()
 
   when defined(windows):
     logging.debug(fmt"Prologue is serving at 127.0.0.1:{app.appPort} {app.appName}")

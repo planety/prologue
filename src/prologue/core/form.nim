@@ -4,12 +4,7 @@ import strtabs, strutils, strformat, parseutils, tables
 from cgi import decodeData
 
 from ./types import FormPart, initFormPart, `[]=`
-
-
-when defined(windows) or defined(usestd):
-  import ../naive/request
-else:
-  import ../beast/request
+import ./request
 
 
 proc parseFormPart*(body, contentType: string): FormPart {.inline.} =

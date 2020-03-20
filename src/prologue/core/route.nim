@@ -6,10 +6,8 @@ from ./nativesettings import Settings
 
 from ./basicregex import Regex, RegexMatch, match, groupNames, groupFirstCapture
 
-when defined(windows) or defined(usestd):
-  import ../naive/request
-else:
-  import ../beast/request
+import ./request
+
 
 type
   PrologueError* = object of ValueError
