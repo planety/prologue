@@ -60,7 +60,7 @@ First you should install [Nim](https://nim-lang.org/) language which is an elega
 Then you can use `nimble` command to install prologue.
 
 ```bash
-nimble install prologue@#a2ebb48
+nimble install prologue@#b0a48d6
 ```
 
 ## Usage
