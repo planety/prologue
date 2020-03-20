@@ -187,7 +187,6 @@ proc newApp*(settings: Settings, middlewares: sink seq[HandlerAsync] = @[],
             middlewares: middlewares, startup: startup, shutdown: shutdown,
                 errorHandlerTable: errorHandlerTable)
 
-
 proc run*(app: Prologue) =
   for event in app.startup:
     if event.async:
@@ -231,7 +230,6 @@ proc run*(app: Prologue) =
     else:
       staticFileFlag = (false, "", "")
 
-    # TODO move to function
     try:
       if staticFileFlag.hasValue:
         await staticFileResponse(ctx, staticFileFlag.filename,

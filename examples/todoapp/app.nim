@@ -12,5 +12,5 @@ proc staticFileMiddleware*(path: string): HandlerAsync =
 
 let settings = newSettings(staticDirs = @["templates"])
 var app = newApp(settings)
-app.addRoute("/templates/home", home)
+app.addRoute("/home", home)
 app.run()
