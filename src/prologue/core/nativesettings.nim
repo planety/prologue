@@ -45,4 +45,8 @@ proc newSettings*(configPath: string): Settings {.inline.} =
       "appName"]:
     if not result.hasKey(key):
       data[key] = defaultSettings[key]
+
+  let secretKey = data.getOrDefault("secretKey").getStr
+  if secretKey.len == 0:
+    raise newException(EmptySecretKeyError, "Secret key can't be empty!")
   result = Settings(data: data)
