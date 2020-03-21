@@ -7,6 +7,11 @@ from ./urandom import randomString
 
 type
   Settings* = ref object
+    port*: Port
+    debug*: bool
+    reusePort*: bool
+    staticDirs*: seq[string]
+    appName*: string
     data: JsonNode
 
   CtxSettings* = ref object
@@ -32,21 +37,15 @@ proc newSettings*(port = Port(8080), debug = true, reusePort = true,
   if secretKey.len == 0:
     raise newException(EmptySecretKeyError, "Secret key can't be empty!")
 
-  result = Settings(data: %* {"port": port.int, "debug": debug,
-            "reusePort": reusePort, "staticDirs": staticDirs,
-            "secretKey": secretKey, "appName": appName
-    })
+  result = Settings(port: port, debug: debug, reusePort: reusePort,
+            staticDirs: @staticDirs, appName: appName,
+            data: %* {"secretKey": secretKey})
 
-proc newSettings*(configPath: string): Settings {.inline.} =
+proc newSettings*(configPath: string, port = Port(8080), debug = true, reusePort = true,
+      staticDirs: openArray[string] = ["static"],
+        appName = ""): Settings {.inline.} =
   # make sure reserved keys must appear in settings
   var data = parseFile(configPath)
-  let defaultSettings = newSettings()
-  for key in ["port", "debug", "reusePort", "staticDirs", "secretKey",
-      "appName"]:
-    if not result.hasKey(key):
-      data[key] = defaultSettings[key]
-
-  let secretKey = data.getOrDefault("secretKey").getStr
-  if secretKey.len == 0:
-    raise newException(EmptySecretKeyError, "Secret key can't be empty!")
-  result = Settings(data: data)
+  result = Settings(port: port, debug: debug, reusePort: reusePort,
+            staticDirs: @staticDirs, appName: appName,
+            data: data)

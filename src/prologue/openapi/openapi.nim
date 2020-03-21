@@ -2,10 +2,9 @@ import json
 
 
 import ../core/dispatch
-from ../core/application import Prologue, addRoute
+from ../core/application import Prologue, addRoute, appDebug
 from ../core/response import htmlResponse, resp
 from ../core/context import Context, setHeader, staticFileResponse
-from ../core/nativesettings import getOrDefault
 
 
 const
@@ -77,7 +76,7 @@ proc redocsHandler*(ctx: Context) {.async.} =
   resp htmlResponse(redocs)
 
 proc serveDocs*(app: Prologue, onlyDebug = false) {.inline.} =
-  if onlyDebug and not app.settings.getOrDefault("debug").getBool:
+  if onlyDebug and not app.appDebug:
     return
   app.addRoute("/openapi.json", openapiHandler)
   app.addRoute("/docs", swaggerHandler)

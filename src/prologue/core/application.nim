@@ -165,11 +165,14 @@ proc all*(app: Prologue, route: string, handler: HandlerAsync, name = "",
   app.addRoute(route, handler, @[HttpGet, HttpPost, HttpPut, HttpDelete,
       HttpTrace, HttpOptions, HttpConnect, HttpPatch], name, middlewares, settings)
 
+proc appDebug*(app: Prologue): bool {.inline.} =
+  app.settings.debug
+
 proc appName*(app: Prologue): string {.inline.} =
-  app.settings.getOrDefault("appName").getStr
+  app.settings.appName
 
 proc appPort*(app: Prologue): Port {.inline.} =
-  app.settings.getOrDefault("port").getInt.Port
+  app.settings.port
 
 proc newApp*(settings: Settings, middlewares: sink seq[HandlerAsync] = @[],
     startup: sink seq[Event] = @[], shutdown: sink seq[Event] = @[],
@@ -218,15 +221,9 @@ proc run*(app: Prologue) =
     ctx.middlewares = app.middlewares
     logging.debug(fmt"{ctx.request.reqMethod} {ctx.request.url.path}")
 
-    let dirsJson = ctx.settings.getOrDefault("staticDirs")
     var staticFileFlag: tuple[hasValue: bool, filename, root: string]
-    if dirsJson.kind == JArray:
-      var
-        dirs = newSeq[string](dirsJson.len)
-        idx = 0
-      for value in dirsJson:
-        dirs[idx] = value.getStr
-      staticFileFlag = isStaticFile(ctx.request.path, dirs)
+    if ctx.settings.staticDirs.len != 0:
+      staticFileFlag = isStaticFile(ctx.request.path, ctx.settings.staticDirs)
     else:
       staticFileFlag = (false, "", "")
 
@@ -242,7 +239,7 @@ proc run*(app: Prologue) =
       ctx.response.body = e.msg
       ctx.response.setHeader("content-type", "text/plain; charset=UTF-8")
 
-    if ctx.settings.getOrDefault("debug").getBool and ctx.response.code == Http500:
+    if ctx.settings.debug and ctx.response.code == Http500:
       discard
     elif ctx.response.code in app.errorHandlerTable:
       # TODO Maybe change to Future[void] reduce async
@@ -254,11 +251,9 @@ proc run*(app: Prologue) =
       await handle(ctx)
     logging.debug($(ctx.response))
 
-  # TODO maybe should read settings from file
   if logging.getHandlers().len == 0:
-    addHandler(logging.newConsoleLogger())
-    setLogFilter(if app.settings.getOrDefault(
-        "debug").getBool: lvlDebug else: lvlInfo)
+    addHandler(newConsoleLogger())
+    setLogFilter(if app.appDebug: lvlDebug else: lvlInfo)
 
   when defined(windows):
     logging.debug(fmt"Prologue is serving at 127.0.0.1:{app.appPort} {app.appName}")
