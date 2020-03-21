@@ -193,7 +193,7 @@ proc newApp*(settings: Settings, middlewares: sink seq[HandlerAsync] = @[],
 proc run*(app: Prologue) =
   for event in app.startup:
     if event.async:
-      asyncCheck event.asyncHandler()
+      waitFor event.asyncHandler()
     else:
       event.syncHandler()
 
@@ -263,7 +263,7 @@ proc run*(app: Prologue) =
 
   for event in app.shutdown:
     if event.async:
-      asyncCheck event.asyncHandler()
+      waitFor event.asyncHandler()
     else:
       event.syncHandler()
 

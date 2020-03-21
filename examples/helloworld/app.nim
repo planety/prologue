@@ -1,6 +1,8 @@
 import ../../src/prologue
+import ../../src/prologue/middlewares/middlewares
 from ../../src/prologue/openapi/openapi import serveDocs
 
+import logging
 
 import views, urls
 
@@ -13,8 +15,16 @@ let
                 secretKey = env.getOrDefault("secretKey", "")
     )
 
+
+proc setLoggingLevel() =
+  addHandler(newConsoleLogger())
+  logging.setLogFilter(lvlInfo)
+
+
+let 
+  event = initEvent(setLoggingLevel)
 var
-  app = newApp(settings = settings, middlewares = @[])
+  app = newApp(settings = settings, middlewares = @[debugRequestMiddleware()], startup = @[event])
 
 
 app.addRoute(urls.urlPatterns, "/todolist")
