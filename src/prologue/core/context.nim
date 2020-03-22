@@ -304,7 +304,6 @@ proc staticFileResponse*(ctx: Context, filename, root: string, mimetype = "",
   if mimetype.len != 0:
     ctx.response.setHeader("Content-Type", fmt"{mimetype}; {charset}")
 
-  ctx.response.setHeader("Content-Length", $contentLength)
   ctx.response.setHeader("Last-Modified", $lastModified)
   ctx.response.setHeader("Etag", etag)
 
@@ -315,11 +314,13 @@ proc staticFileResponse*(ctx: Context, filename, root: string, mimetype = "",
     if ctx.request.hasHeader("If-None-Match") and ctx.request.headers[
         "If-None-Match"] == etag:
       await ctx.respond(Http304, "")
+      ctx.handled = true
     else:
       let body = readFile(filePath)
       resp initResponse(HttpVer11, Http200, headers, body)
   else:
-    # stream
+    # TODO stream
+    # ctx.response.setHeader("Content-Length", $contentLength)
     await ctx.respond(Http200, "", headers)
     var
       fileStream = newFutureStream[string]("staticFileResponse")
