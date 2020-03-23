@@ -28,7 +28,7 @@ else:
     process = startProcess(expandFileName("tests/start_server"))
 
 proc start() {.async.} =
-  let address = "http://127.0.0.1:8080/home"
+  let address = "http://127.0.0.1:8787/home"
   for i in 0 .. 10:
     var client = newAsyncHttpClient()
     styledEcho(fgBlue, "Getting ", address)
