@@ -1,5 +1,5 @@
 import httpclient, asyncdispatch, nativesockets
-import strformat, os, osproc, terminal
+import strformat, os, osproc, terminal, strutils
 
 
 import unittest
@@ -55,7 +55,7 @@ suite "Test Application":
   let
     client = newAsyncHttpClient()
     address = "127.0.0.1"
-    port = Port(8080)
+    port = Port(8787)
 
   # test "can handle houndreds of reuqest":
   #   let
@@ -155,6 +155,28 @@ suite "Test Application":
     check:
       response.code == Http200
       (waitFor response.body) == "I'm ok."
+
+  test "can get /upload":
+    let
+      route = "/upload"
+      response = waitFor client.get(fmt"http://{address}:{port}{route}")
+    check:
+      response.code == Http200
+      (waitFor response.body) == readFile("tests/static/upload.html")
+
+  test "can post /upload":
+    let
+      route = "/upload"
+      filename = "test.txt"
+      text = readFile("tests/static" / filename)
+    var data = newMultipartData()
+    data["file"] = (filename, "text/plain", text)
+    let response = (waitFor client.post(fmt"http://{address}:{port}{route}",
+        multipart = data))
+    check:
+      response.code == Http200
+      (waitFor response.body) == fmt"<html><h1>{filename}</h1><p>{text.strip()}</p></html>"
+
 
   client.close()
   process.terminate()

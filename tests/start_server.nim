@@ -1,7 +1,7 @@
 import ../src/prologue except loginPage
 import ../src/prologue/middlewares/middlewares
 import ../src/prologue/i18n/i18n
-import logging, os
+import logging, os, strformat, strutils
 
 import test_core/utils
 
@@ -47,8 +47,16 @@ proc translate*(ctx: Context) {.async.} =
   assert ctx.translate("Hello", "ja") == "こんにちは"
   resp "I'm ok."
 
+proc upload(ctx: Context) {.async.} =
+  if ctx.request.reqMethod == HttpGet:
+    await ctx.staticFileResponse("tests/static/upload.html", "")
+  elif ctx.request.reqMethod == HttpPost:
+    let 
+      file = ctx.getUploadFile("file")
+    resp fmt"<html><h1>{file.filename}</h1><p>{file.body.strip()}</p></html>"
 
-let settings = newSettings(appName = "StarLight", debug = true)
+
+let settings = newSettings(appName = "StarLight", debug = true, port = Port(8787))
 var app = newApp(settings = settings, middlewares = @[])
 app.addRoute("", home, HttpGet)
 app.addRoute("/", home, HttpGet)
@@ -61,5 +69,6 @@ app.addRoute("/login", login, HttpGet)
 app.addRoute("/login", doLogin, HttpPost)
 app.addRoute("/hello/{name}", helloName, HttpGet)
 app.addRoute("/translate", translate)
+app.addRoute("/upload", upload, @[HttpGet, HttpPost])
 app.loadTranslate(expandFileName("tests/i18n/trans.ini"))
 app.run()

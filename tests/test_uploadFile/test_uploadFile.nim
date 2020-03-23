@@ -1,4 +1,5 @@
 import ../../src/prologue
+import ../../src/prologue/middlewares/middlewares
 import strformat
 
 
@@ -9,7 +10,7 @@ proc upload(ctx: Context) {.async.} =
     let file = ctx.getUploadFile("file")
     resp fmt"<html><h1>{file.filename}</h1><p>{file.body}</p></html>"
 
-let settings = newSettings()
-var app = newApp(settings)
+let settings = newSettings(port = Port(8000))
+var app = newApp(settings, middlewares = @[debugRequestMiddleware()])
 app.addRoute("/upload", upload, @[HttpGet, HttpPost])
 app.run()

@@ -330,7 +330,7 @@ proc staticFileResponse*(ctx: Context, filename, root: string, mimetype = "",
     await file.readToStream(fileStream)
 
     while true:
-      let (hasValue, value) = await fileStream.read()
+      let (hasValue, value) = await fileStream.read
       if hasValue:
         await ctx.send(value)
       else:
