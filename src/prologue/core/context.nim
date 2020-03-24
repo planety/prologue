@@ -48,6 +48,7 @@ type
     middlewares*: seq[HandlerAsync]
     session*: Session
     cleanedData*: StringTableRef
+    appData*: StringTableRef
     ctxData*: StringTableRef
     settings*: Settings
     localSettings*: Settings
@@ -110,7 +111,7 @@ proc initEvent*(handler: SyncEvent): Event {.inline.} =
 
 proc newContext*(request: Request, response: Response,
     router: Router, reversedRouter: ReversedRouter,
-        reRouter: ReRouter, settings: Settings,
+        reRouter: ReRouter, appData: StringTableRef, settings: Settings,
             ctxSettings: CtxSettings): Context {.inline.} =
   Context(request: request, response: response, router: router,
           reversedRouter: reversedRouter, reRouter: reRouter, size: 0,
@@ -118,6 +119,7 @@ proc newContext*(request: Request, response: Response,
           handled: false,
           session: initSession(data = newStringTable()),
           cleanedData: newStringTable(),
+          appData: appData,
           ctxData: newStringTable(),
           settings: settings,
           localSettings: nil,

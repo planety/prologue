@@ -176,18 +176,19 @@ proc appPort*(app: Prologue): Port {.inline.} =
 proc newApp*(settings: Settings, middlewares: sink seq[HandlerAsync] = @[],
     startup: sink seq[Event] = @[], shutdown: sink seq[Event] = @[],
         errorHandlerTable = {Http404: default404Handler,
-            Http500: default500Handler}.newErrorHandlerTable): Prologue {.inline.} =
+            Http500: default500Handler}.newErrorHandlerTable,
+        appData = newStringTable()): Prologue {.inline.} =
   if settings == nil:
     raise newException(ValueError, "Settings can't be nil!")
   when defined(windows) or defined(usestd):
     Prologue(server: newPrologueServer(true, settings.getOrDefault(
         "reusePort").getBool), settings: settings, ctxSettings: newCtxSettings(), router: newRouter(), reversedRouter: newReversedRouter(), reRouter: newReRouter(),
                 middlewares: middlewares, startup: startup, shutdown: shutdown,
-                    errorHandlerTable: errorHandlerTable)
+                    errorHandlerTable: errorHandlerTable, appData: appData)
   else:
     Prologue(settings: settings, ctxSettings: newCtxSettings(), router: newRouter(), reversedRouter: newReversedRouter(), reRouter: newReRouter(),
             middlewares: middlewares, startup: startup, shutdown: shutdown,
-                errorHandlerTable: errorHandlerTable)
+                errorHandlerTable: errorHandlerTable, appData: appData)
 
 proc run*(app: Prologue) =
   for event in app.startup:
@@ -214,7 +215,7 @@ proc run*(app: Prologue) =
         "Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders)
       ctx = newContext(request = request, response = response,
         router = app.router, reversedRouter = app.reversedRouter,
-        reRouter = app.reRouter, settings = app.settings,
+        reRouter = app.reRouter, appData = app.appData, settings = app.settings,
         ctxSettings = app.ctxSettings)
 
     ctx.middlewares = app.middlewares

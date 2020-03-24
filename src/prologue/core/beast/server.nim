@@ -1,4 +1,4 @@
-import httpcore
+import httpcore, strtabs
 
 
 import ../dispatch
@@ -11,6 +11,7 @@ import httpbeast except Settings, Request
 
 type
   Prologue* = ref object
+    appData*: StringTableRef
     settings*: Settings
     ctxSettings*: CtxSettings
     router*: Router

@@ -92,7 +92,6 @@ proc hostName*(request: Request): string {.inline.} =
     result = headers["x-forwarded-for", 0]
 
 proc send*(request: Request, content: string): Future[void] {.inline.} =
-  # TODO can't use asyncCheck
   result = request.nativeRequest.client.send(content)
 
 proc respond*(request: Request, code: HttpCode, body: string,

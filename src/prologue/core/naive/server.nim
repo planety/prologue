@@ -1,4 +1,4 @@
-import httpcore
+import httpcore, strtabs
 from asynchttpserver import newAsyncHttpServer, serve, close, AsyncHttpServer
 
 
@@ -14,6 +14,7 @@ type
 
   Prologue* = ref object
     server*: Server
+    appData*: StringTableRef
     settings*: Settings
     ctxSettings*: CtxSettings
     router*: Router
