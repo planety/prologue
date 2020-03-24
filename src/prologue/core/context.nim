@@ -42,8 +42,6 @@ type
     router*: Router
     reversedRouter*: ReversedRouter
     reRouter*: ReRouter
-    size*: int
-    first*: bool
     handled*: bool
     middlewares*: seq[HandlerAsync]
     session*: Session
@@ -53,6 +51,8 @@ type
     settings*: Settings
     localSettings*: Settings
     ctxSettings*: CtxSettings
+    size: int
+    first: bool
 
   AsyncEvent* = proc(): Future[void] {.closure, gcsafe.}
   SyncEvent* = proc() {.closure, gcsafe.}
@@ -77,6 +77,18 @@ type
 proc default404Handler*(ctx: Context) {.async.}
 proc default500Handler*(ctx: Context) {.async.}
 
+
+proc size*(ctx: Context): int {.inline.} =
+  ctx.size
+
+proc incSize*(ctx: Context, num = 1) {.inline.} =
+  inc(ctx.size, num)
+
+proc first*(ctx: Context): bool {.inline.} =
+  ctx.first
+
+proc `first=`*(ctx: Context, first: bool) {.inline.} =
+  ctx.first = first
 
 proc initUploadFile*(filename, body: string): UpLoadFile {.inline.} =
   UpLoadFile(filename: filename, body: body)

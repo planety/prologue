@@ -1,5 +1,5 @@
 import ./dispatch
-from ./context import HandlerAsync, Context
+from ./context import HandlerAsync, Context, size, incSize, first, `first=`
 from ./route import findHandler
 
 
@@ -18,7 +18,7 @@ proc switch*(ctx: Context) {.async.} =
     ctx.middlewares = middlewares & next
     ctx.first = false
 
-  ctx.size += 1
+  incSize(ctx)
   if ctx.size <= ctx.middlewares.len:
     let next = ctx.middlewares[ctx.size - 1]
     await next(ctx)

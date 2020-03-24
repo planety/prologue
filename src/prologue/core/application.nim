@@ -40,7 +40,7 @@ export signing
 export basicregex
 export configure
 export constants
-export context
+export context except size, incSize, first, `first=`
 export cookies
 export encode
 export middlewaresbase
