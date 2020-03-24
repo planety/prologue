@@ -180,15 +180,11 @@ proc newApp*(settings: Settings, middlewares: sink seq[HandlerAsync] = @[],
         appData = newStringTable()): Prologue {.inline.} =
   if settings == nil:
     raise newException(ValueError, "Settings can't be nil!")
-  when defined(windows) or defined(usestd):
-    Prologue(server: newPrologueServer(true, settings.getOrDefault(
-        "reusePort").getBool), settings: settings, ctxSettings: newCtxSettings(), router: newRouter(), reversedRouter: newReversedRouter(), reRouter: newReRouter(),
-                middlewares: middlewares, startup: startup, shutdown: shutdown,
-                    errorHandlerTable: errorHandlerTable, appData: appData)
-  else:
-    Prologue(settings: settings, ctxSettings: newCtxSettings(), router: newRouter(), reversedRouter: newReversedRouter(), reRouter: newReRouter(),
-            middlewares: middlewares, startup: startup, shutdown: shutdown,
-                errorHandlerTable: errorHandlerTable, appData: appData)
+  result = newPrologue(settings = settings, ctxSettings = newCtxSettings(),
+      router = newRouter(), reversedRouter = newReversedRouter(),
+          reRouter = newReRouter(),
+      middlewares = middlewares, startup = startup, shutdown = shutdown,
+      errorHandlerTable = errorHandlerTable, appData = appData)
 
 proc run*(app: Prologue) =
   for event in app.startup:
