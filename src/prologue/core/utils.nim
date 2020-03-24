@@ -21,7 +21,7 @@ template beforeApi*(version, body: untyped) {.dirty.} =
     body
 
 proc isStaticFile*(path: string, dirs: openArray[string]): tuple[hasValue: bool,
-    filename, root: string] {.inline.} =
+    filename, dir: string] {.inline.} =
   result = (false, "", "")
   var path = path.strip(chars = {'/'}, trailing = false)
   if not existsFile(path):

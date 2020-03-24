@@ -14,13 +14,13 @@ suite "Tesst Utils":
     check:
       s1.hasValue
       s1.filename == "basic.css"
-      s1.root == "tests/test_utils/static/css"
+      s1.dir == "tests/test_utils/static/css"
       s2.hasValue
       s2.filename == "basic.css"
-      s2.root == "tests/test_utils/static/css"
+      s2.dir == "tests/test_utils/static/css"
       s3.hasValue
       s3.filename == "basic.html"
-      s3.root == "tests/test_utils/templates"
+      s3.dir == "tests/test_utils/templates"
       not s4.hasValue
       s4.filename.len == 0
-      s4.root.len == 0
+      s4.dir.len == 0

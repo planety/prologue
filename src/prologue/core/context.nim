@@ -84,12 +84,13 @@ proc getUploadFile*(ctx: Context, name: string): UpLoadFile {.inline.} =
   let file = ctx.request.formParams[name]
   initUploadFile(filename = file.params["filename"], body = file.body)
 
-proc save*(uploadFile: UpLoadFile, dir: string, filename: string,
-    useDefault = false) {.inline.} =
-  # TODO use time or random string as filename
-  if useDefault:
+proc save*(uploadFile: UpLoadFile, dir: string, filename = "") {.inline.} =
+  if not existsDir(dir):
+    raise newException(OSError, "Dir doesn't exist.")
+  if filename.len == 0:
     writeFile(dir / uploadFile.filename, uploadFile.body)
-  writeFile(dir / filename, uploadFile.body)
+  else:
+    writeFile(dir / filename, uploadFile.body)
 
 proc newErrorHandlerTable*(initialSize = defaultInitialSize): ErrorHandlerTable {.inline.} =
   newTable[HttpCode, ErrorHandler](initialSize)
@@ -269,10 +270,10 @@ proc attachment*(ctx: Context, downloadName = "", charset = "utf-8") {.inline.} 
   ctx.response.setHeader("Content-Disposition",
       fmt"""attachment; filename="{downloadName}"""")
 
-proc staticFileResponse*(ctx: Context, filename, root: string, mimetype = "",
+proc staticFileResponse*(ctx: Context, filename, dir: string, mimetype = "",
     downloadName = "", charset = "utf-8", headers = newHttpHeaders()) {.async.} =
   let
-    filePath = root / filename
+    filePath = dir / filename
 
   # exists -> have access -> can open
 

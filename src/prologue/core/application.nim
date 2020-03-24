@@ -99,7 +99,6 @@ proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
   ## check whether routes are duplicated
   let path = initPath(route = route, httpMethod = httpMethod)
   # automatically register HttpHead for HttpGet
-  # TODO space vs time
   if httpMethod == HttpGet:
     app.addRoute(route, handler, HttpHead, "", middlewares, settings)
 
@@ -221,7 +220,7 @@ proc run*(app: Prologue) =
     ctx.middlewares = app.middlewares
     logging.debug(fmt"{ctx.request.reqMethod} {ctx.request.url.path}")
 
-    var staticFileFlag: tuple[hasValue: bool, filename, root: string]
+    var staticFileFlag: tuple[hasValue: bool, filename, dir: string]
     if ctx.settings.staticDirs.len != 0:
       staticFileFlag = isStaticFile(ctx.request.path, ctx.settings.staticDirs)
     else:
@@ -230,7 +229,7 @@ proc run*(app: Prologue) =
     try:
       if staticFileFlag.hasValue:
         await staticFileResponse(ctx, staticFileFlag.filename,
-            staticFileFlag.root)
+            staticFileFlag.dir)
       else:
         await switch(ctx)
     except Exception as e:
@@ -242,7 +241,6 @@ proc run*(app: Prologue) =
     if ctx.settings.debug and ctx.response.code == Http500:
       discard
     elif ctx.response.code in app.errorHandlerTable:
-      # TODO Maybe change to Future[void] reduce async
       await (app.errorHandlerTable[ctx.response.code])(ctx)
 
     # central processing
