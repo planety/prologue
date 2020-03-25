@@ -41,10 +41,10 @@ suite "Application Func Test":
     app.addRoute("/hello/{name}", helloName, @[HttpGet, HttpPost])
     app.addRoute(re"/post(?P<num>[\d]+)", articles, HttpGet)
     check:
-      app.router.callable[initPath("/", HttpGet)].handler == hello
-      app.router.callable[initPath("/", HttpHead)].handler == hello
-      app.router.callable[initPath("/hello/{name}", HttpPost)].handler == helloName
-      app.reRouter.callable[0][1].handler == articles
+      app.gScope.router[initPath("/", HttpGet)].handler == hello
+      app.gScope.router[initPath("/", HttpHead)].handler == hello
+      app.gScope.router[initPath("/hello/{name}", HttpPost)].handler == helloName
+      app.gScope.reRouter.callable[0][1].handler == articles
 
 
 suite "Restful Function Test":
@@ -52,69 +52,69 @@ suite "Restful Function Test":
     let settings = newSettings()
     var app = newApp(settings)
     app.head("/hi", hello)
-    check app.router.callable[initPath("/hi", HttpHead)].handler == hello
+    check app.gScope.router[initPath("/hi", HttpHead)].handler == hello
 
   test "restful get can work":
     let settings = newSettings()
     var app = newApp(settings)
     app.get("/hi", hello)
     check:
-      app.router.callable[initPath("/hi", HttpGet)].handler == hello
-      app.router.callable[initPath("/hi", HttpHead)].handler == hello
+      app.gScope.router[initPath("/hi", HttpGet)].handler == hello
+      app.gScope.router[initPath("/hi", HttpHead)].handler == hello
 
   test "restful post can work":
     let settings = newSettings()
     var app = newApp(settings)
     app.post("/hi", hello)
-    check app.router.callable[initPath("/hi", HttpPost)].handler == hello
+    check app.gScope.router[initPath("/hi", HttpPost)].handler == hello
 
   test "restful put can work":
     let settings = newSettings()
     var app = newApp(settings)
     app.put("/hi", hello)
-    check app.router.callable[initPath("/hi", HttpPut)].handler == hello
+    check app.gScope.router[initPath("/hi", HttpPut)].handler == hello
 
   test "restful delete can work":
     let settings = newSettings()
     var app = newApp(settings)
     app.delete("/hi", hello)
-    check app.router.callable[initPath("/hi", HttpDelete)].handler == hello
+    check app.gScope.router[initPath("/hi", HttpDelete)].handler == hello
 
   test "restful trace can work":
     let settings = newSettings()
     var app = newApp(settings)
     app.trace("/hi", hello)
-    check app.router.callable[initPath("/hi", HttpTrace)].handler == hello
+    check app.gScope.router[initPath("/hi", HttpTrace)].handler == hello
 
   test "restful options can work":
     let settings = newSettings()
     var app = newApp(settings)
     app.options("/hi", hello)
-    check app.router.callable[initPath("/hi", HttpOptions)].handler == hello
+    check app.gScope.router[initPath("/hi", HttpOptions)].handler == hello
 
   test "restful connect can work":
     let settings = newSettings()
     var app = newApp(settings)
     app.connect("/hi", hello)
-    check app.router.callable[initPath("/hi", HttpConnect)].handler == hello
+    check app.gScope.router[initPath("/hi", HttpConnect)].handler == hello
 
   test "restful patch can work":
     let settings = newSettings()
     var app = newApp(settings)
     app.patch("/hi", hello)
-    check app.router.callable[initPath("/hi", HttpPatch)].handler == hello
+    check app.gScope.router[initPath("/hi", HttpPatch)].handler == hello
 
   test "restful all can work":
     let settings = newSettings()
     var app = newApp(settings)
     app.all("/hi", hello)
     check:
-      app.router.callable[initPath("/hi", HttpGet)].handler == hello
-      app.router.callable[initPath("/hi", HttpHead)].handler == hello
-      app.router.callable[initPath("/hi", HttpPost)].handler == hello
-      app.router.callable[initPath("/hi", HttpPut)].handler == hello
-      app.router.callable[initPath("/hi", HttpDelete)].handler == hello
-      app.router.callable[initPath("/hi", HttpTrace)].handler == hello
-      app.router.callable[initPath("/hi", HttpOptions)].handler == hello
-      app.router.callable[initPath("/hi", HttpConnect)].handler == hello
-      app.router.callable[initPath("/hi", HttpPatch)].handler == hello
+      app.gScope.router[initPath("/hi", HttpGet)].handler == hello
+      app.gScope.router[initPath("/hi", HttpHead)].handler == hello
+      app.gScope.router[initPath("/hi", HttpPost)].handler == hello
+      app.gScope.router[initPath("/hi", HttpPut)].handler == hello
+      app.gScope.router[initPath("/hi", HttpDelete)].handler == hello
+      app.gScope.router[initPath("/hi", HttpTrace)].handler == hello
+      app.gScope.router[initPath("/hi", HttpOptions)].handler == hello
+      app.gScope.router[initPath("/hi", HttpConnect)].handler == hello
+      app.gScope.router[initPath("/hi", HttpPatch)].handler == hello

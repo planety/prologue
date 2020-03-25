@@ -5,7 +5,8 @@ from nativesockets import Port, `$`
 
 from ./utils import isStaticFile
 from ./route import pattern, initPath, initRePath, newPathHandler, newRouter,
-    newReRouter, DuplicatedRouteError, DuplicatedReveredRouteError, UrlPattern
+    newReRouter, DuplicatedRouteError, DuplicatedReveredRouteError, UrlPattern, 
+    add, `[]`, `[]=`, hasKey
 from ./form import parseFormParams
 from ./nativesettings import newSettings, newCtxSettings, getOrDefault, Settings
 from ./cookies import parseCookies
@@ -77,7 +78,7 @@ proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
   if httpMethod == HttpGet:
     app.addRoute(route, handler, HttpHead, middlewares)
   let path = initRePath(route = route, httpMethod = httpMethod)
-  app.reRouter.callable.add (path, newPathHandler(handler, middlewares))
+  app.gScope.reRouter.add (path, newPathHandler(handler, middlewares))
 
 proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
     httpMethod: sink seq[HttpMethod], middlewares: sink seq[HandlerAsync] = @[],
@@ -87,10 +88,10 @@ proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
 
 proc addReversedRoute(app: Prologue, name, route: string) {.inline.} =
   if name.len != 0:
-    if app.reversedRouter.hasKey(name):
+    if app.gScope.reversedRouter.hasKey(name):
       raise newException(DuplicatedReveredRouteError,
           fmt"Revered Route {name} is duplicated!")
-    app.reversedRouter[name] = route
+    app.gScope.reversedRouter[name] = route
 
 proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
     httpMethod = HttpGet, name = "", middlewares: sink seq[HandlerAsync] = @[],
@@ -102,9 +103,9 @@ proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
   if httpMethod == HttpGet:
     app.addRoute(route, handler, HttpHead, "", middlewares, settings)
 
-  if path in app.router.callable:
+  if app.gScope.router.hasKey(path):
     raise newException(DuplicatedRouteError, fmt"Route {route} is duplicated!")
-  app.router.callable[path] = newPathHandler(handler, middlewares, settings)
+  app.gScope.router[path] = newPathHandler(handler, middlewares, settings)
   app.addReversedRoute(name, route)
 
 proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
@@ -165,13 +166,13 @@ proc all*(app: Prologue, route: string, handler: HandlerAsync, name = "",
       HttpTrace, HttpOptions, HttpConnect, HttpPatch], name, middlewares, settings)
 
 proc appDebug*(app: Prologue): bool {.inline.} =
-  app.settings.debug
+  app.gScope.settings.debug
 
 proc appName*(app: Prologue): string {.inline.} =
-  app.settings.appName
+  app.gScope.settings.appName
 
 proc appPort*(app: Prologue): Port {.inline.} =
-  app.settings.port
+  app.gScope.settings.port
 
 proc newApp*(settings: Settings, middlewares: sink seq[HandlerAsync] = @[],
     startup: sink seq[Event] = @[], shutdown: sink seq[Event] = @[],
@@ -210,16 +211,14 @@ proc run*(app: Prologue) =
       response = initResponse(HttpVer11, Http200, headers = {
         "Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders)
       ctx = newContext(request = request, response = response,
-        router = app.router, reversedRouter = app.reversedRouter,
-        reRouter = app.reRouter, appData = app.appData, settings = app.settings,
-        ctxSettings = app.ctxSettings)
+        gScope = app.gScope)
 
     ctx.middlewares = app.middlewares
     logging.debug(fmt"{ctx.request.reqMethod} {ctx.request.url.path}")
 
     var staticFileFlag: tuple[hasValue: bool, filename, dir: string]
-    if ctx.settings.staticDirs.len != 0:
-      staticFileFlag = isStaticFile(ctx.request.path, ctx.settings.staticDirs)
+    if ctx.gScope.settings.staticDirs.len != 0:
+      staticFileFlag = isStaticFile(ctx.request.path, ctx.gScope.settings.staticDirs)
     else:
       staticFileFlag = (false, "", "")
 
@@ -235,7 +234,7 @@ proc run*(app: Prologue) =
       ctx.response.body = e.msg
       ctx.response.setHeader("content-type", "text/plain; charset=UTF-8")
 
-    if ctx.settings.debug and ctx.response.code == Http500:
+    if ctx.gScope.settings.debug and ctx.response.code == Http500:
       discard
     elif ctx.response.code in app.errorHandlerTable:
       await (app.errorHandlerTable[ctx.response.code])(ctx)

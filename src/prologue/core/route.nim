@@ -46,14 +46,34 @@ proc hash*(x: Path): Hash =
   result = !$h
 
 proc newPathHandler*(handler: HandlerAsync, middlewares: sink seq[
-    HandlerAsync] = @[], settings: Settings = nil): PathHandler =
+    HandlerAsync] = @[], settings: Settings = nil): PathHandler {.inline.} =
   PathHandler(handler: handler, middlewares: middlewares, settings: settings)
 
-proc newRouter*(): Router =
+proc newRouter*(): Router {.inline.} =
   Router(callable: initTable[Path, PathHandler]())
 
-proc newReRouter*(): ReRouter =
+proc newReRouter*(): ReRouter {.inline.} =
   ReRouter(callable: newSeq[(RePath, PathHandler)]())
+
+proc add*(reRouter: ReRouter, pairs: (RePath, PathHandler)) {.inline.} =
+  reRouter.callable.add(pairs)
+
+proc `[]`*(router: Router, path: Path): PathHandler {.inline.} =
+  router.callable[path]
+
+proc `[]=`*(router: Router, path: Path, pathHandler: PathHandler) {.inline.} =
+  router.callable[path] = pathHandler
+
+proc hasKey*(router: Router, path: Path): bool {.inline.} =
+  router.callable.hasKey(path)
+
+iterator pairs*(router: Router): (Path, PathHandler) {.inline.} =
+  for pair in router.callable.pairs:
+    yield pair
+
+iterator items*(reRouter: ReRouter): (RePath, PathHandler) {.inline.} =
+  for item in reRouter.callable.items:
+    yield item
 
 proc findHandler*(ctx: Context): PathHandler =
   ## fixed route -> regex route -> params route
@@ -62,11 +82,11 @@ proc findHandler*(ctx: Context): PathHandler =
     httpMethod = ctx.request.reqMethod)
 
   # find fixed route
-  if rawPath in ctx.router.callable:
-    return ctx.router.callable[rawPath]
+  if ctx.gScope.router.hasKey(rawPath):
+    return ctx.gScope.router[rawPath]
 
   # find regex route
-  for (path, pathHandler) in ctx.reRouter.callable:
+  for (path, pathHandler) in ctx.gScope.reRouter:
     if path.httpMethod != rawPath.httpMethod:
       continue
     var m: RegexMatch
@@ -80,7 +100,7 @@ proc findHandler*(ctx: Context): PathHandler =
     pathList = rawPath.route.split("/")
 
   # find params route
-  for route, handler in ctx.router.callable.pairs:
+  for route, handler in ctx.gScope.router:
     let routeList = route.route.split("/")
     var flag = true
     if pathList.len == routeList.len:

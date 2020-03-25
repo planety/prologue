@@ -36,21 +36,24 @@ type
 
   ReversedRouter* = StringTableRef
 
-  Context* = ref object
-    request*: Request
-    response*: Response
+  GlobalScope* = ref object
     router*: Router
     reversedRouter*: ReversedRouter
     reRouter*: ReRouter
+    appData*: StringTableRef
+    settings*: Settings
+    ctxSettings*: CtxSettings
+
+  Context* = ref object
+    request*: Request
+    response*: Response
     handled*: bool
     middlewares*: seq[HandlerAsync]
     session*: Session
     cleanedData*: StringTableRef
-    appData*: StringTableRef
     ctxData*: StringTableRef
-    settings*: Settings
     localSettings*: Settings
-    ctxSettings*: CtxSettings
+    gScope*: GlobalScope
     size: int
     first: bool
 
@@ -122,27 +125,21 @@ proc initEvent*(handler: SyncEvent): Event {.inline.} =
   Event(async: false, syncHandler: handler)
 
 proc newContext*(request: Request, response: Response,
-    router: Router, reversedRouter: ReversedRouter,
-        reRouter: ReRouter, appData: StringTableRef, settings: Settings,
-            ctxSettings: CtxSettings): Context {.inline.} =
-  Context(request: request, response: response, router: router,
-          reversedRouter: reversedRouter, reRouter: reRouter, size: 0,
-          first: true,
-          handled: false,
-          session: initSession(data = newStringTable()),
+              gScope: GlobalScope): Context {.inline.} =
+  Context(request: request, response: response,
+          handled: false, session: initSession(data = newStringTable()),
           cleanedData: newStringTable(),
-          appData: appData,
           ctxData: newStringTable(),
-          settings: settings,
           localSettings: nil,
-          ctxSettings: ctxSettings
+          gScope: gScope,
+          size: 0, first: true,
     )
 
 proc getSettings*(ctx: Context, key: string): JsonNode {.inline.} =
   if ctx.localSettings == nil:
-    result = ctx.settings.getOrDefault(key)
+    result = ctx.gScope.settings.getOrDefault(key)
   elif not ctx.localSettings.hasKey(key):
-    result = ctx.settings.getOrDefault(key)
+    result = ctx.gScope.settings.getOrDefault(key)
   else:
     result = ctx.localSettings[key]
 
@@ -262,8 +259,8 @@ proc urlFor*(ctx: Context, handler: string, parameters: openArray[(string,
         usePlus = true, omitEq = true): string {.inline.} =
 
   ## { } can't appear in url
-  if handler in ctx.reversedRouter:
-    result = ctx.reversedRouter[handler]
+  if handler in ctx.gScope.reversedRouter:
+    result = ctx.gScope.reversedRouter[handler]
 
   result = multiMatch(result, parameters)
   let queryString = encodeQuery(queryParams, usePlus, omitEq)
@@ -277,7 +274,7 @@ proc attachment*(ctx: Context, downloadName = "", charset = "utf-8") {.inline.} 
   var ext = downloadName.splitFile.ext
   if ext.len > 0:
     ext = ext[1 .. ^1]
-    let mimes = ctx.ctxSettings.mimeDB.getMimetype(ext)
+    let mimes = ctx.gScope.ctxSettings.mimeDB.getMimetype(ext)
     if mimes.len != 0:
       ctx.response.setHeader("Content-Type", fmt"{mimes}; charset={charset}")
 
@@ -305,7 +302,7 @@ proc staticFileResponse*(ctx: Context, filename, dir: string, mimetype = "",
     var ext = filename.splitFile.ext
     if ext.len > 0:
       ext = ext[1 .. ^1]
-    mimetype = ctx.ctxSettings.mimeDB.getMimetype(ext)
+    mimetype = ctx.gScope.ctxSettings.mimeDB.getMimetype(ext)
 
   let
     info = getFileInfo(filePath)

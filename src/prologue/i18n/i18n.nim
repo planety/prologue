@@ -45,13 +45,13 @@ proc loadTranslate*(filename: string): TableRef[string, StringTableRef] {.inline
 
 proc loadTranslate*(app: Prologue, filename: string) {.inline.} =
   let res = loadTranslate(filename)
-  app.ctxSettings.config = res
+  app.gScope.ctxSettings.config = res
 
 proc setLanguage*(ctx: Context, language: string): Translator {.inline.} =
   Translator(ctx: ctx, language: language)
 
 proc translate*(t: Translator, text: string): string {.inline.} =
-  let config = t.ctx.ctxSettings.config
+  let config = t.ctx.gScope.ctxSettings.config
   if not config.hasKey(text):
     return text
   let trans = config[text]
@@ -63,7 +63,7 @@ proc Tr*(t: Translator, text: string): string {.inline.} =
   t.translate(text)
 
 proc translate*(ctx: Context, text: string, language: string): string {.inline.} =
-  let config = ctx.ctxSettings.config
+  let config = ctx.gScope.ctxSettings.config
   if not config.hasKey(text):
     return text
   let trans = config[text]

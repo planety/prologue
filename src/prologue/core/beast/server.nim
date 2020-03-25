@@ -5,19 +5,14 @@ import ../dispatch
 from ./request import NativeRequest
 from ../nativesettings import Settings, CtxSettings
 from ../context import Router, ReversedRouter, ReRouter, HandlerAsync,
-    Event, ErrorHandlerTable
+    Event, ErrorHandlerTable, GlobalScope
 
 import httpbeast except Settings, Request
 
 
 type
   Prologue* = ref object
-    appData*: StringTableRef
-    settings*: Settings
-    ctxSettings*: CtxSettings
-    router*: Router
-    reversedRouter*: ReversedRouter
-    reRouter*: ReRouter
+    gScope*: GlobalScope
     middlewares*: seq[HandlerAsync]
     startup*: seq[Event]
     shutdown*: seq[Event]
@@ -32,7 +27,7 @@ proc newPrologue*(settings: Settings, ctxSettings: CtxSettings, router: Router,
               reversedRouter: ReversedRouter, reRouter: ReRouter, middlewares: seq[HandlerAsync], 
               startup: seq[Event], shutdown: seq[Event],
               errorHandlerTable: ErrorHandlerTable, appData: StringTableRef): Prologue {.inline.} =
-  Prologue(settings: settings, ctxSettings: ctxSettings, router: router, 
-          reversedRouter: reversedRouter, reRouter: reRouter,
+  Prologue(gScope: GlobalScope(settings: settings, ctxSettings: ctxSettings, router: router, 
+        reversedRouter: reversedRouter, reRouter: reRouter, appData: appData),
             middlewares: middlewares, startup: startup, shutdown: shutdown,
-                errorHandlerTable: errorHandlerTable, appData: appData)
+                errorHandlerTable: errorHandlerTable)
