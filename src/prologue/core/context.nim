@@ -6,6 +6,7 @@ import ./response, ./pages, ./constants
 import ./cookies
 from ./types import BaseType, Session, SameSite, `[]`, initSession
 from ./configure import parseValue
+from ./httpexception import AbortError
 
 from ./basicregex import Regex
 from ./nativesettings import Settings, CtxSettings, getOrDefault, hasKey, `[]`
@@ -269,6 +270,12 @@ proc urlFor*(ctx: Context, handler: string, parameters: openArray[(string,
   let queryString = encodeQuery(queryParams, usePlus, omitEq)
   if queryString.len != 0:
     result = multiMatch(result, parameters) & "?" & queryString
+
+proc abortExit*(ctx: Context, code = Http401, body = "",
+    headers = newHttpHeaders(),
+  version = HttpVer11) {.inline.} =
+  ctx.response = abort(code, body, headers, version)
+  raise newException(AbortError, "abort exit")
 
 proc attachment*(ctx: Context, downloadName = "", charset = "utf-8") {.inline.} =
   if downloadName.len == 0:

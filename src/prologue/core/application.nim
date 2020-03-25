@@ -11,6 +11,7 @@ from ./form import parseFormParams
 from ./nativesettings import newSettings, newCtxSettings, getOrDefault, Settings
 from ./cookies import parseCookies
 from ./types import SameSite
+from ./httpexception import HttpError, AbortError
 
 import ./dispatch
 import ./signing/signing
@@ -229,12 +230,19 @@ proc run*(app: Prologue) =
             staticFileFlag.dir)
       else:
         await switch(ctx)
+    except HttpError as e:
+      # catch abort error
+      logging.debug e.msg
+    except AbortError as e:
+      # catch abort error
+      logging.debug e.msg
     except Exception as e:
       logging.error e.msg
       ctx.response.code = Http500
       ctx.response.body = e.msg
       ctx.response.setHeader("content-type", "text/plain; charset=UTF-8")
 
+    # display error messages only in debug mode
     if ctx.gScope.settings.debug and ctx.response.code == Http500:
       discard
     elif ctx.response.code in app.errorHandlerTable:
