@@ -33,7 +33,7 @@ proc parseFormPart*(body, contentType: string): FormPart {.inline.} =
       formKey, formValue: string
 
     pos += parseUntil(data, head, "\c\L\c\L")
-    pos += 4
+    inc(pos, 4)
     tail = data[pos ..< ^1]
 
     if not head.startsWith("Content-Disposition"):
@@ -67,7 +67,7 @@ proc parseFormPart*(body, contentType: string): FormPart {.inline.} =
           result.data[name].params["filenameStar"] = move(formValue)
         else:
           discard
-        times += 1
+        inc(times)
         if times >= 3:
           break
 
