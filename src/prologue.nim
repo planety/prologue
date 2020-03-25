@@ -4,4 +4,5 @@ export application
 
 
 when isMainModule:
-  import prologue/command/init
+  from prologue/command/init import main
+  main()

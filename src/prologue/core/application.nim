@@ -183,8 +183,8 @@ proc newApp*(settings: Settings, middlewares: sink seq[HandlerAsync] = @[],
     raise newException(ValueError, "Settings can't be nil!")
   result = newPrologue(settings = settings, ctxSettings = newCtxSettings(),
       router = newRouter(), reversedRouter = newReversedRouter(),
-          reRouter = newReRouter(),
-      middlewares = middlewares, startup = startup, shutdown = shutdown,
+      reRouter = newReRouter(), middlewares = middlewares, 
+      startup = startup, shutdown = shutdown,
       errorHandlerTable = errorHandlerTable, appData = appData)
 
 proc run*(app: Prologue) =
