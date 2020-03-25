@@ -1,8 +1,8 @@
-import parseopt 
+import parseopt
 
 
 proc main*() =
-  var 
+  var
     op = initOptParser()
 
   while true:
@@ -12,9 +12,9 @@ proc main*() =
       case op.key
       of "help", "h":
         stdout.write("This is help.")
-      else: 
+      else:
         discard
-    of cmdArgument: 
+    of cmdArgument:
       discard
-    of cmdEnd: 
+    of cmdEnd:
       break

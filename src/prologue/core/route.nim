@@ -1,7 +1,7 @@
 import httpcore, cgi
 import hashes, strutils, strtabs, tables
 
-from ./context import Context, HandlerAsync, Path, RePath, Router, ReRouter, 
+from ./context import Context, HandlerAsync, Path, RePath, Router, ReRouter,
         PathHandler, defaultHandler, gScope
 from ./nativesettings import Settings
 

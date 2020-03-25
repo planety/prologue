@@ -25,7 +25,6 @@ proc login*(ctx: Context) {.async.} =
     elif row.len < 3:
       error = "Incorrect username"
     else:
-      # TODO process IndexError
       id = row[0]
       encoded = row[2]
 

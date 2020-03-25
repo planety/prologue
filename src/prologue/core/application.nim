@@ -5,7 +5,7 @@ from nativesockets import Port, `$`
 
 from ./utils import isStaticFile
 from ./route import pattern, initPath, initRePath, newPathHandler, newRouter,
-    newReRouter, DuplicatedRouteError, DuplicatedReveredRouteError, UrlPattern, 
+    newReRouter, DuplicatedRouteError, DuplicatedReveredRouteError, UrlPattern,
     add, `[]`, `[]=`, hasKey
 from ./form import parseFormParams
 from ./nativesettings import newSettings, newCtxSettings, getOrDefault, Settings
@@ -183,7 +183,7 @@ proc newApp*(settings: Settings, middlewares: sink seq[HandlerAsync] = @[],
     raise newException(ValueError, "Settings can't be nil!")
   result = newPrologue(settings = settings, ctxSettings = newCtxSettings(),
       router = newRouter(), reversedRouter = newReversedRouter(),
-      reRouter = newReRouter(), middlewares = middlewares, 
+      reRouter = newReRouter(), middlewares = middlewares,
       startup = startup, shutdown = shutdown,
       errorHandlerTable = errorHandlerTable, appData = appData)
 
@@ -218,7 +218,8 @@ proc run*(app: Prologue) =
 
     var staticFileFlag: tuple[hasValue: bool, filename, dir: string]
     if ctx.gScope.settings.staticDirs.len != 0:
-      staticFileFlag = isStaticFile(ctx.request.path, ctx.gScope.settings.staticDirs)
+      staticFileFlag = isStaticFile(ctx.request.path,
+          ctx.gScope.settings.staticDirs)
     else:
       staticFileFlag = (false, "", "")
 
