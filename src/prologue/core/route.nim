@@ -1,7 +1,8 @@
 import httpcore, cgi
 import hashes, strutils, strtabs, tables
 
-from ./context import Context, HandlerAsync, Path, RePath, Router, ReRouter, PathHandler, defaultHandler
+from ./context import Context, HandlerAsync, Path, RePath, Router, ReRouter, 
+        PathHandler, defaultHandler, gScope
 from ./nativesettings import Settings
 
 from ./basicregex import Regex, RegexMatch, match, groupNames, groupFirstCapture

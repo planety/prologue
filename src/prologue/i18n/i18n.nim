@@ -2,7 +2,7 @@ import parsecfg, tables, strtabs, streams
 
 
 from ../core/application import Prologue
-from ../core/context import Context
+from ../core/context import Context, gScope
 
 
 type

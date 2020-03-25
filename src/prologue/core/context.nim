@@ -53,7 +53,7 @@ type
     cleanedData*: StringTableRef
     ctxData*: StringTableRef
     localSettings*: Settings
-    gScope*: GlobalScope
+    gScope: GlobalScope
     size: int
     first: bool
 
@@ -80,6 +80,9 @@ type
 proc default404Handler*(ctx: Context) {.async.}
 proc default500Handler*(ctx: Context) {.async.}
 
+
+proc gScope*(ctx: Context): lent GlobalScope {.inline.} =
+  ctx.gScope
 
 proc size*(ctx: Context): int {.inline.} =
   ctx.size
