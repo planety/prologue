@@ -140,7 +140,7 @@ proc newContext*(request: Request, response: Response,
     )
 
 proc getSettings*(ctx: Context, key: string): JsonNode {.inline.} =
-  if ctx.localSettings == nil:
+  if ctx.localSettings.isNil:
     result = ctx.gScope.settings.getOrDefault(key)
   elif not ctx.localSettings.hasKey(key):
     result = ctx.gScope.settings.getOrDefault(key)

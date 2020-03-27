@@ -244,7 +244,7 @@ proc unsign*(s: TimedSigner, signedValue: string, max_age: Natural): string =
   let sep = s.sep
 
   if sep notin signedValue:
-    if exception != nil:
+    if not exception.isNil:
       raise exception
     raise newException(BadTimeSignatureError, "timestamp missing")
 
@@ -254,7 +254,7 @@ proc unsign*(s: TimedSigner, signedValue: string, max_age: Natural): string =
 
   var timestamp = temp[1]
 
-  if exception != nil:
+  if not exception.isNil:
     raise exception
 
   if timestamp.len == 0:

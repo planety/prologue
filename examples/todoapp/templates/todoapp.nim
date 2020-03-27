@@ -134,7 +134,7 @@ proc createDom(data: RouterData): VNode =
           for i in 0..entriesLen-1:
             var d0 = getEntryContent(i)
             var d1 = isCompleted(i)
-            if d0 != nil:
+            if not d0.isNil:
               let b = case filter
                 of all: true
                 of active: not d1

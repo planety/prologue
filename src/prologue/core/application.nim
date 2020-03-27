@@ -180,7 +180,7 @@ proc newApp*(settings: Settings, middlewares: sink seq[HandlerAsync] = @[],
         errorHandlerTable = {Http404: default404Handler,
             Http500: default500Handler}.newErrorHandlerTable,
         appData = newStringTable()): Prologue {.inline.} =
-  if settings == nil:
+  if settings.isNil:
     raise newException(ValueError, "Settings can't be nil!")
   result = newPrologue(settings = settings, ctxSettings = newCtxSettings(),
       router = newRouter(), reversedRouter = newReversedRouter(),
