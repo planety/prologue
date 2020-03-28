@@ -13,17 +13,17 @@ strategy:
     #   PLATFORM: x64
     #   CHANNEL: devel
     #   TEST_LANG: cpp
-    Linux_stable_64bit:
+    Linux_devel_64bit:
       VM: 'ubuntu-latest'
       UCPU: amd64
       PLATFORM: x64
-      CHANNEL: stable
+      CHANNEL: devel
       TEST_LANG: c
-    Linux_cpp_stable_64bit:
+    Linux_cpp_devel_64bit:
       VM: 'ubuntu-latest'
       UCPU: amd64
       PLATFORM: x64
-      CHANNEL: stable
+      CHANNEL: devel
       WEAVE_TEST_LANG: cpp
     Linux_devel_64bit:
       VM: 'ubuntu-latest'
@@ -151,7 +151,7 @@ steps:
   - bash: |
       echo "PATH=${PATH}"
       export ucpu=${UCPU}
-      nimble test
+      nimble tests
     displayName: 'Testing the package'
   - bash: |
       echo "PATH=${PATH}"

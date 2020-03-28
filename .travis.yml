@@ -51,6 +51,6 @@ install:
 script:
     - nimble install -y
     - nimble install karax -y
-    - nimble test
+    - nimble tests
     - nimble test_std
     - nimble examples

@@ -22,7 +22,7 @@ when not defined(windows):
 #   exec "nim c -r examples/helloworld/app.nim"
 
 # tests
-task test, "Run all tests":
+task tests, "Run all tests":
   exec "nim c -r tests/alltests.nim"
 
 task examples, "Test examples":
@@ -30,9 +30,6 @@ task examples, "Test examples":
 
 task test_std, "Run all tests use asynchttpserver":
   exec "nim c -r -d:usestd tests/alltests.nim"
-
-task test_arc, "Run all tests with arc":
-  exec "nim c -r --gc:arc tests/alltests.nim"
 
 task docs, "Only for gh-pages, not for users":
   exec "mkdocs build"

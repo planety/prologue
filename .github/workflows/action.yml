@@ -51,6 +51,6 @@ jobs:
     - name: Install Packages
       run: nimble install -y
     - name: Test command
-      run: nimble test
+      run: nimble tests
     - name: Test asynchttpserver command
       run: nimble test_std
