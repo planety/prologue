@@ -70,7 +70,7 @@ proc registerErrorHandler*(app: Prologue, code: openArray[HttpCode],
     app.registerErrorHandler(idx, handler)
 
 proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
-    httpMethod = HttpGet, middlewares: sink seq[HandlerAsync] = @[],
+    httpMethod = HttpGet, middlewares: seq[HandlerAsync] = @[],
         settings: Settings = nil) {.inline.} =
   ## add single handler route
   ## don't check whether regex routes are duplicated
@@ -82,7 +82,7 @@ proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
   app.gScope.reRouter.add (path, newPathHandler(handler, middlewares))
 
 proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
-    httpMethod: sink seq[HttpMethod], middlewares: sink seq[HandlerAsync] = @[],
+    httpMethod: seq[HttpMethod], middlewares: seq[HandlerAsync] = @[],
     settings: Settings = nil) {.inline.} =
   for m in httpMethod:
     app.addRoute(route, handler, m, middlewares, settings)
@@ -95,7 +95,7 @@ proc addReversedRoute(app: Prologue, name, route: string) {.inline.} =
     app.gScope.reversedRouter[name] = route
 
 proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
-    httpMethod = HttpGet, name = "", middlewares: sink seq[HandlerAsync] = @[],
+    httpMethod = HttpGet, name = "", middlewares: seq[HandlerAsync] = @[],
         settings: Settings = nil) {.inline.} =
   ## add single handler route
   ## check whether routes are duplicated
@@ -110,7 +110,7 @@ proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
   app.addReversedRoute(name, route)
 
 proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
-    httpMethod: sink seq[HttpMethod], name = "", middlewares: sink seq[
+    httpMethod: seq[HttpMethod], name = "", middlewares: seq[
         HandlerAsync] = @[], settings: Settings = nil) {.inline.} =
   ## add single handler route with multi http method
   ## check whether routes are duplicated
@@ -118,7 +118,7 @@ proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
   for m in httpMethod:
     app.addRoute(route, handler, m, "", middlewares, settings)
 
-proc addRoute*(app: Prologue, patterns: sink seq[UrlPattern],
+proc addRoute*(app: Prologue, patterns: seq[UrlPattern],
     baseRoute = "", settings: Settings = nil) {.inline.} =
   ## add multi handler route
   for pattern in patterns:
