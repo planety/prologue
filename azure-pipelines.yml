@@ -13,17 +13,17 @@ strategy:
     #   PLATFORM: x64
     #   CHANNEL: devel
     #   TEST_LANG: cpp
-    Linux_devel_64bit:
+    Linux_stable_64bit:
       VM: 'ubuntu-latest'
       UCPU: amd64
       PLATFORM: x64
-      CHANNEL: devel
+      CHANNEL: stable
       TEST_LANG: c
-    Linux_cpp_devel_64bit:
+    Linux_cpp_stable_64bit:
       VM: 'ubuntu-latest'
       UCPU: amd64
       PLATFORM: x64
-      CHANNEL: devel
+      CHANNEL: stable
       WEAVE_TEST_LANG: cpp
     Linux_devel_64bit:
       VM: 'ubuntu-latest'
