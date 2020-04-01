@@ -28,7 +28,7 @@ proc setCookie*(key, value: string, expires = "", maxAge: Option[int] = none(int
   if path.len != 0:
     result.add("; Path=" & path)
   if maxAge.isSome:
-    result.add("; Max-Age=" & $maxAge)
+    result.add("; Max-Age=" & $maxAge.get())
   if expires.len != 0:
     result.add("; Expires=" & expires)
   if secure:

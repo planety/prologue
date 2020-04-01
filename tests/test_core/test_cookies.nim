@@ -2,7 +2,7 @@ from ../../src/prologue/core/cookies import parseCookie, secondsForward,
     daysForward, timesForward, setCookie
 
 
-import unittest, strtabs, options, strutils
+import unittest, strtabs, options, strutils, strformat
 
 
 suite "Test Cookies":
@@ -32,3 +32,18 @@ suite "Test Cookies":
     check:
       setCookie("username", "flywind") == "username=flywind; SameSite=Lax"
       setCookie("password", "root", maxAge = some(120)).startsWith("password=root; Max-Age=")
+
+suite "Test Set Cookie":
+  let
+    username = "admin"
+    password = "root"
+
+  test "Key-Value":
+    let cookie = setCookie(username, password)
+    check cookie == fmt"{username}={password}; SameSite=Lax"
+
+  test "Max-Age":
+    let 
+      maxAge = 10
+      cookie = setCookie(username, password, maxAge = some(maxAge))
+    check cookie == fmt"{username}={password}; Max-Age={maxAge}; SameSite=Lax"
