@@ -7,22 +7,22 @@ proc parseCookie*(s: string): StringTableRef =
   result = newStringTable(modeCaseInsensitive)
   var 
     pos = 0
-    key, value: string
+    name, value: string
   while true:
     pos += skipWhile(s, {' ', '\t'}, pos)
-    pos += parseUntil(s, key, '=', pos)
+    pos += parseUntil(s, name, '=', pos)
     if pos >= s.len:
       break
     inc(pos) # skip '='
     pos += parseUntil(s, value, ';', pos)
-    result[key] = value
+    result[name] = value
     if pos >= s.len:
       break
     inc(pos) # skip ';'
 
-proc setCookie*(key, value: string, expires = "", maxAge: Option[int] = none(int), domain = "", path = "",
+proc setCookie*(name, value: string, expires = "", maxAge: Option[int] = none(int), domain = "", path = "",
                  secure = false, httpOnly = false, sameSite = Lax): string {.inline.} =
-  result.add key & "=" & value
+  result.add name & "=" & value
   if domain.len != 0:
     result.add("; Domain=" & domain)
   if path.len != 0:
@@ -38,10 +38,10 @@ proc setCookie*(key, value: string, expires = "", maxAge: Option[int] = none(int
   if sameSite != None:
     result.add("; SameSite=" & $sameSite)
 
-proc setCookie*(key, value: string, expires: DateTime|Time, maxAge: Option[
+proc setCookie*(name, value: string, expires: DateTime|Time, maxAge: Option[
     int] = none(int), domain = "", path = "", secure = false, httpOnly = false,
     sameSite = Lax): string {.inline.} =
-  result = setCookie(key, value, format(expires.utc,
+  result = setCookie(name, value, format(expires.utc,
       "ddd',' dd MMM yyyy HH:mm:ss 'GMT'"), maxAge, domain, path, secure,
       httpOnly, sameSite)
 

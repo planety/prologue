@@ -4,7 +4,7 @@ from ../../src/prologue/core/cookies import parseCookie, secondsForward,
 from ../../src/prologue/core/types import Strict
 
 
-import unittest, strtabs, options, strutils, strformat
+import unittest, strtabs, options, strutils, strformat, times
 
 
 suite "Test Cookies":
@@ -28,12 +28,11 @@ suite "Test Cookies":
     discard daysForward(10)
     discard timesForward(1, 2, 3, 4, 5, 6, 7, 8)
 
-    # setCookie*(key, value: string, expires = "", maxAge: Option[int] = none(int), domain = "", path = "",
-    # secure = false, httpOnly = false, sameSite = Lax)
   test "can set cookies":
     check:
       setCookie("username", "flywind") == "username=flywind; SameSite=Lax"
       setCookie("password", "root", maxAge = some(120)).startsWith("password=root; Max-Age=")
+
 
 suite "Test Set Cookie":
   let
@@ -61,6 +60,24 @@ suite "Test Set Cookie":
       httpOnly = true
       cookie = setCookie(username, password, httpOnly = httpOnly)
     check cookie == fmt"{username}={password}; HttpOnly; SameSite=Lax"
+
+  test "Domain":
+    let 
+      domain = "www.netkit.com"
+      cookie = setCookie(username, password, domain = domain)
+    check cookie == fmt"{username}={password}; Domain={domain}; SameSite=Lax"
+    
+  test "path":
+    let 
+      path = "/index"
+      cookie = setCookie(username, password, path = path)
+    check cookie == fmt"{username}={password}; Path={path}; SameSite=Lax"
+
+  test "expires":
+    let 
+      expires = DateTime.default
+      cookie = setCookie(username, password, expires)
+    check cookie == fmt"{username}={password}; Expires=Tue, 30 Nov 0002 00:00:00 GMT; SameSite=Lax"
 
   test "sameSite":
     let 
