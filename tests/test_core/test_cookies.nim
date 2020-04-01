@@ -1,6 +1,8 @@
 from ../../src/prologue/core/cookies import parseCookie, secondsForward,
     daysForward, timesForward, setCookie
 
+from ../../src/prologue/core/types import Strict
+
 
 import unittest, strtabs, options, strutils, strformat
 
@@ -47,3 +49,21 @@ suite "Test Set Cookie":
       maxAge = 10
       cookie = setCookie(username, password, maxAge = some(maxAge))
     check cookie == fmt"{username}={password}; Max-Age={maxAge}; SameSite=Lax"
+
+  test "Secure":
+    let 
+      secure = true
+      cookie = setCookie(username, password, secure = secure)
+    check cookie == fmt"{username}={password}; Secure; SameSite=Lax"
+
+  test "Http-Only":
+    let 
+      httpOnly = true
+      cookie = setCookie(username, password, httpOnly = httpOnly)
+    check cookie == fmt"{username}={password}; HttpOnly; SameSite=Lax"
+
+  test "sameSite":
+    let 
+      sameSite = Strict 
+      cookie = setCookie(username, password, sameSite = sameSite)
+    check cookie == fmt"{username}={password}; SameSite={sameSite}"
