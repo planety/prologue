@@ -3,7 +3,7 @@ import strtabs, parseutils, times, options
 from ./types import SameSite
 
 
-proc parseCookies*(s: string): StringTableRef =
+proc parseCookie*(s: string): StringTableRef =
   result = newStringTable(modeCaseInsensitive)
   var 
     pos = 0
@@ -62,4 +62,4 @@ proc timesForward*(nanoseconds, microseconds, milliseconds, seconds, minutes,
 
 when isMainModule:
   echo setCookie("useName", "xzsd")
-  echo parseCookies("uid=1; kp=2")
+  echo parseCookie("uid=1; kp=2")

@@ -1,4 +1,4 @@
-from ../../src/prologue/core/cookies import parseCookies, secondsForward,
+from ../../src/prologue/core/cookies import parseCookie, secondsForward,
     daysForward, timesForward, setCookie
 
 
@@ -6,19 +6,19 @@ import unittest, strtabs, options, strutils
 
 
 suite "Test Cookies":
-  test "can parse cookies with one element":
-    let tabs = parseCookies("username=flywind ")
+  test "can parse cookie with one element":
+    let tabs = parseCookie("username=flywind ")
     check:
       tabs["username"] == "flywind "
 
-  test "can parse cookies with two elements":
-    let tabs = parseCookies("username=flywind; password=root")
+  test "can parse cookie with two elements":
+    let tabs = parseCookie("username=flywind; password=root")
     check:
       tabs["username"] == "flywind"
       tabs["password"] == "root"
 
   test "can parse empty cookies":
-    let tabs = parseCookies("")
+    let tabs = parseCookie("")
     check $tabs == $newStringTable()
 
   test "timesForward can work":

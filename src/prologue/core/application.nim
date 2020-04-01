@@ -9,7 +9,7 @@ from ./route import pattern, initPath, initRePath, newPathHandler, newRouter,
     add, `[]`, `[]=`, hasKey
 from ./form import parseFormParams
 from ./nativesettings import newSettings, newCtxSettings, getOrDefault, Settings
-from ./cookies import parseCookies
+from ./cookies import parseCookie
 from ./types import SameSite
 from ./httpexception import HttpError, AbortError
 
@@ -200,7 +200,7 @@ proc run*(app: Prologue) =
 
     if request.hasHeader("cookie"):
       request.cookies = seq[string](request.headers.getOrDefault(
-          "cookie")).join("; ").parseCookies
+          "cookie")).join("; ").parseCookie
 
     var contentType: string
     if request.hasHeader("content-type"):
