@@ -15,7 +15,7 @@ proc parseCookie*(s: string): StringTableRef =
       break
     inc(pos) # skip '='
     pos += parseUntil(s, value, ';', pos)
-    result[name] = value
+    result[name] = move(value)
     if pos >= s.len:
       break
     inc(pos) # skip ';'

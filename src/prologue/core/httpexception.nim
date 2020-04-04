@@ -1,3 +1,3 @@
 type
-  HttpError* = object of ValueError
+  HttpError* = object of CatchableError
   AbortError* = object of HttpError

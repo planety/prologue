@@ -9,7 +9,7 @@ export Config, loadConfig, writeConfig, setSectionKey, types
 type
   Env* = object
     data: OrderedTableRef[string, string]
-  EnvError* = object of ValueError
+  EnvError* = object of CatchableError
   EnvWrongFormatError* = object of EnvError
 
 

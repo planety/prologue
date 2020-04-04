@@ -2,8 +2,8 @@ import strutils, strtabs, parseutils, tables
 
 
 type
-  BadSecretKeyError* = object of ValueError
-  EmptySecretKeyError* = object of ValueError
+  BadSecretKeyError* = object of CatchableError
+  EmptySecretKeyError* = object of CatchableError
   BaseType* = int | float | bool | string
   SecretKey* = distinct string
   SecretUrl* = distinct string

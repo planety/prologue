@@ -11,7 +11,7 @@ import ./request
 
 
 type
-  PrologueError* = object of ValueError
+  PrologueError* = object of CatchableError
   RouteError* = object of PrologueError
   RouteResetError* = object of RouteError
   DuplicatedRouteError* = object of RouteError
