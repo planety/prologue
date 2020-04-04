@@ -29,11 +29,11 @@ else:
 
 proc start() {.async.} =
   let address = "http://127.0.0.1:8787/home"
-  for i in 0 .. 10:
+  for i in 0 .. 20:
     var client = newAsyncHttpClient()
     styledEcho(fgBlue, "Getting ", address)
     let fut = client.get(address)
-    yield fut or sleepAsync(3000)
+    yield fut or sleepAsync(4000)
     if not fut.finished:
       styledEcho(fgYellow, "Timed out")
     elif not fut.failed:
