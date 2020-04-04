@@ -15,6 +15,12 @@ Prologue is a Full-Stack Web Framework which is
 ideal for building elegant and high performance
 web services.
 
+## Current Work
+Now we are working on rewriting `asyncHttpServer` and network infrastructure.
+https://github.com/iocrate/org/blob/master/README_en.md
+
+https://github.com/iocrate/netkit
+
 
 ## Documentation
 
