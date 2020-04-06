@@ -23,13 +23,13 @@ when not defined(windows):
 
 # tests
 task tests, "Run all tests":
-  exec "nim c -r tests/alltests.nim"
+  exec "nim c -r tests/test_all.nim"
 
 task examples, "Test examples":
   exec "nim c -r tests/test_compile/test_compile.nim"
 
 task test_std, "Run all tests use asynchttpserver":
-  exec "nim c -r -d:usestd tests/alltests.nim"
+  exec "nim c -r -d:usestd tests/test_all.nim"
 
 task docs, "Only for gh-pages, not for users":
   exec "mkdocs build"
