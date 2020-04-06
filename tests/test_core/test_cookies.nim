@@ -73,11 +73,18 @@ suite "Test Set Cookie":
       cookie = setCookie(username, password, path = path)
     check cookie == fmt"{username}={password}; Path={path}; SameSite=Lax"
 
-  test "expires":
-    let 
-      expires = DateTime.default
+  test "expires String":
+    let
+      expires = "Mon, 6 Apr 2020 12:55:00 GMT"
       cookie = setCookie(username, password, expires)
-    check cookie == fmt"{username}={password}; Expires=Tue, 30 Nov 0002 00:00:00 GMT; SameSite=Lax"
+    check cookie == fmt"{username}={password}; Expires={expires}; SameSite=Lax"
+
+  test "expires DateTime":
+    let 
+      dt = initDateTime(6, mApr, 2020, 13, 3, 0, 0, utc())
+      expires = format(dt, "ddd',' dd MMM yyyy HH:mm:ss 'GMT'")
+      cookie = setCookie(username, password, expires)
+    check cookie == fmt"{username}={password}; Expires={expires}; SameSite=Lax"
 
   test "sameSite":
     let 
