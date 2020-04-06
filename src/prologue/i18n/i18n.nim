@@ -28,7 +28,7 @@ proc loadTranslate*(stream: Stream, filename: string = "[stream]"): TableRef[
     of cfgSectionStart:
       currentSection = e.section
     of {cfgKeyValuePair, cfgOption}:
-      var t = newStringTable()
+      var t = newStringTable(mode = modeStyleInsensitive)
       if result.hasKey(currentSection):
         t = result[currentSection]
       t[e.key] = e.value

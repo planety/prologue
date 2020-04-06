@@ -37,7 +37,7 @@ suite "Test Secret Key":
 
 suite "Deserialize StringTable":
   test "can parse stringTable from empty stringTable":
-    let tabs = newStringTable()
+    let tabs = newStringTable(mode = modeCaseSensitive)
     check $parseStringTable($(tabs)) == $tabs
 
   test "can parse stringTable from stringTable with elements":

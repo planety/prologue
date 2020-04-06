@@ -21,7 +21,7 @@ suite "Test Cookies":
 
   test "can parse empty cookies":
     let tabs = parseCookie("")
-    check $tabs == $newStringTable()
+    check $tabs == $newStringTable(mode = modeCaseSensitive)
 
   test "timesForward can work":
     discard secondsForward(0)

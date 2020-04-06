@@ -60,7 +60,7 @@ proc parseFormPart*(body, contentType: string): FormPart {.inline.} =
         case formKey
         of "name":
           name = move(formValue)
-          result.data[name] = (newStringTable(), "")
+          result.data[name] = (newStringTable(mode = modeCaseSensitive), "")
         of "filename":
           result.data[name].params["filename"] = move(formValue)
         of "filename*":

@@ -4,7 +4,7 @@ from ./types import SameSite
 
 
 proc parseCookie*(s: string): StringTableRef =
-  result = newStringTable(modeCaseInsensitive)
+  result = newStringTable(modeCaseSensitive)
   var 
     pos = 0
     name, value: string

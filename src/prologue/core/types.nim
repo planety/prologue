@@ -29,7 +29,7 @@ proc `[]`*(formPart: FormPart, key: string): tuple[params: StringTableRef,
   formPart.data[key]
 
 proc `[]=`*(formPart: FormPart, key: string, body: string) {.inline.} =
-  formPart.data[key] = (newStringTable(), body)
+  formPart.data[key] = (newStringTable(mode = modeCaseSensitive), body)
 
 proc tryParseInt(value: sink string, default: int): int {.inline.} =
   try:
@@ -133,7 +133,7 @@ proc parseStringTable*(tabs: StringTableRef, s: string) {.inline.} =
       break
 
 proc parseStringTable*(s: string): StringTableRef {.inline.} =
-  result = newStringTable()
+  result = newStringTable(mode = modeCaseSensitive)
   parseStringTable(result, s)
 
 proc loads*(session: Session, s: string) {.inline.} =

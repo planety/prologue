@@ -64,7 +64,7 @@ proc redirect*(url: string, code = Http301,
   if delay == 0:
     headers.add("Location", url)
   else:
-    headers.add("refresh", fmt"""{delay};url="{url}"""")
+    headers.add("refresh", &"{delay};url=\"{url}\"")
   result = initResponse(version, code = code, headers = headers, body = body)
 
 proc error404*(code = Http404,

@@ -1,3 +1,3 @@
 switch("path", "$projectDir/../src")
-when (NimMajor, NimMinor) >= (1, 1):
+when (NimMajor, NimMinor) >= (1, 2):
   switch("gc", "arc")

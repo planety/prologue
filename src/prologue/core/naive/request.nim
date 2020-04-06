@@ -105,8 +105,10 @@ proc respond*(request: Request, response: Response): Future[void] {.inline.} =
 proc close*(request: Request) =
   request.nativeRequest.client.close()
 
-proc initRequest*(nativeRequest: NativeRequest, cookies = newStringTable(),
-  pathParams = newStringTable(), queryParams = newStringTable(),
-      postParams = newStringTable()): Request {.inline.} =
+proc initRequest*(nativeRequest: NativeRequest, 
+    cookies = newStringTable(modeCaseSensitive),
+    pathParams = newStringTable(modeCaseSensitive), 
+    queryParams = newStringTable(modeCaseSensitive),
+    postParams = newStringTable(modeCaseSensitive)): Request {.inline.} =
   Request(nativeRequest: nativeRequest, cookies: cookies,
     pathParams: pathParams, queryParams: queryParams, postParams: postParams)

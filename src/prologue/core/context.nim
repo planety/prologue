@@ -120,7 +120,7 @@ proc newErrorHandlerTable*(pairs: openArray[(HttpCode,
   newTable[HttpCode, ErrorHandler](pairs)
 
 proc newReversedRouter*(): ReversedRouter {.inline.} =
-  newStringTable()
+  newStringTable(mode = modeCaseSensitive)
 
 proc initEvent*(handler: AsyncEvent): Event {.inline.} =
   Event(async: true, asyncHandler: handler)
@@ -131,9 +131,9 @@ proc initEvent*(handler: SyncEvent): Event {.inline.} =
 proc newContext*(request: Request, response: Response,
               gScope: GlobalScope): Context {.inline.} =
   Context(request: request, response: response,
-          handled: false, session: initSession(data = newStringTable()),
-          cleanedData: newStringTable(),
-          ctxData: newStringTable(),
+          handled: false, session: initSession(data = newStringTable(mode = modeCaseSensitive)),
+          cleanedData: newStringTable(mode = modeCaseSensitive),
+          ctxData: newStringTable(mode = modeCaseSensitive),
           localSettings: nil,
           gScope: gScope,
           size: 0, first: true,

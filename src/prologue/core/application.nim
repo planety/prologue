@@ -179,7 +179,7 @@ proc newApp*(settings: Settings, middlewares: sink seq[HandlerAsync] = @[],
     startup: sink seq[Event] = @[], shutdown: sink seq[Event] = @[],
         errorHandlerTable = {Http404: default404Handler,
             Http500: default500Handler}.newErrorHandlerTable,
-        appData = newStringTable()): Prologue {.inline.} =
+        appData = newStringTable(mode = modeCaseSensitive)): Prologue {.inline.} =
   if settings.isNil:
     raise newException(ValueError, "Settings can't be nil!")
   result = newPrologue(settings = settings, ctxSettings = newCtxSettings(),
