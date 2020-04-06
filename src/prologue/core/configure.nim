@@ -74,7 +74,7 @@ proc delPrologueEnv*(key: string, prefix: string) {.inline.} =
 proc loadPrologueEnv*(filename: string): Env =
   result = initEnv()
   var f = newFileStream(filename, fmRead)
-  if not f.isNil:
+  if f != nil:
     var p: CfgParser
     open(p, f, filename)
     defer:
@@ -96,7 +96,7 @@ proc setPrologueEnv*(env: Env, key, value: string) =
 proc writePrologueEnv*(filename: string, env: Env) =
   var f = newFileStream(filename, fmWrite)
   defer: f.close()
-  if not f.isNil:
+  if f != nil:
     for key, value in env.data:
       f.writeLine(key & "=" & value)
 
