@@ -66,12 +66,14 @@ suite "Test Set Cookie":
       domain = "www.netkit.com"
       cookie = setCookie(username, password, domain = domain)
     check cookie == fmt"{username}={password}; Domain={domain}; SameSite=Lax"
+    check setCookie(username, password, domain = "   ") == fmt"{username}={password}; SameSite=Lax"
     
   test "path":
     let 
       path = "/index"
       cookie = setCookie(username, password, path = path)
     check cookie == fmt"{username}={password}; Path={path}; SameSite=Lax"
+    check setCookie(username, password, path = "   ") == fmt"{username}={password}; SameSite=Lax"
 
   test "expires String":
     let
@@ -85,6 +87,7 @@ suite "Test Set Cookie":
       expires = format(dt, "ddd',' dd MMM yyyy HH:mm:ss 'GMT'")
       cookie = setCookie(username, password, expires)
     check cookie == fmt"{username}={password}; Expires={expires}; SameSite=Lax"
+    check setCookie(username, password, expires = "   ") == fmt"{username}={password}; SameSite=Lax"
 
   test "sameSite":
     let 
