@@ -11,7 +11,7 @@ const
 
 
 proc pbkdf2_sha256encode*(password: SecretKey, salt: string,
-    iterations = 24400): string {.inline.} =
+                          iterations = 24400): string {.inline.} =
   assert salt.len != 0 and '$' notin salt
   let output = base64Encode(pbkdf2(sha256, string(password), salt, iterations, outLen))
   result = fmt"pdkdf2_sha256${salt}${iterations}${output}"

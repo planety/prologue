@@ -28,7 +28,9 @@ proc sessionMiddleware*(
 
   if secretKey.len == 0:
     raise newException(BadSecretKeyError, "The length of secret key can't be zero")
+  
   let signer = initTimedSigner(secretKey, salt, sep, keyDerivation, digestMethodType)
+  
   result = proc(ctx: Context) {.async.} =
     # TODO make sure {':', ',', '}'} notin key or value
     let
@@ -45,7 +47,7 @@ proc sessionMiddleware*(
     if ctx.session.len == 0: # empty or modified(del or clear)
       if ctx.session.modified: # modified
         ctx.deleteCookie(sessionName, domain = domain,
-            path = path) # delete session data in cookie
+                         path = path) # delete session data in cookie
       return
 
     if ctx.session.accessed:
@@ -53,6 +55,6 @@ proc sessionMiddleware*(
 
     # TODO add refresh every request[in permanent session]
     if ctx.session.modified:
-      ctx.setCookie(sessionName, signer.sign(dumps(ctx.session)), maxAge = some(
-          maxAge), path = path, domain = domain, sameSite = sameSite,
-          httpOnly = httpOnly)
+      ctx.setCookie(sessionName, signer.sign(dumps(ctx.session)), 
+                    maxAge = some(maxAge), path = path, domain = domain, 
+                    sameSite = sameSite, httpOnly = httpOnly)

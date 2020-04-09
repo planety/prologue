@@ -21,7 +21,7 @@ proc parseCookie*(s: string): StringTableRef =
     inc(pos) # skip ';'
 
 proc setCookie*(name, value: string, expires = "", maxAge: Option[int] = none(int), domain = "", path = "",
-                 secure = false, httpOnly = false, sameSite = Lax): string {.inline.} =
+                secure = false, httpOnly = false, sameSite = Lax): string {.inline.} =
   result.add name & "=" & value
   if domain.strip.len != 0:
     result.add("; Domain=" & domain)
@@ -38,12 +38,13 @@ proc setCookie*(name, value: string, expires = "", maxAge: Option[int] = none(in
   if sameSite != None:
     result.add("; SameSite=" & $sameSite)
 
-proc setCookie*(name, value: string, expires: DateTime|Time, maxAge: Option[
-    int] = none(int), domain = "", path = "", secure = false, httpOnly = false,
-    sameSite = Lax): string {.inline.} =
+proc setCookie*(name, value: string, expires: DateTime|Time, 
+                maxAge: Option[int] = none(int), domain = "", 
+                path = "", secure = false, httpOnly = false, 
+                sameSite = Lax): string {.inline.} =
   result = setCookie(name, value, format(expires.utc,
-      "ddd',' dd MMM yyyy HH:mm:ss 'GMT'"), maxAge, domain, path, secure,
-      httpOnly, sameSite)
+                    "ddd',' dd MMM yyyy HH:mm:ss 'GMT'"), maxAge, domain, path, secure,
+                    httpOnly, sameSite)
 
 proc secondsForward*(seconds: Natural): DateTime =
   ## in seconds

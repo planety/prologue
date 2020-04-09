@@ -116,7 +116,7 @@ proc newErrorHandlerTable*(initialSize = defaultInitialSize): ErrorHandlerTable 
   newTable[HttpCode, ErrorHandler](initialSize)
 
 proc newErrorHandlerTable*(pairs: openArray[(HttpCode,
-    ErrorHandler)]): ErrorHandlerTable {.inline.} =
+                           ErrorHandler)]): ErrorHandlerTable {.inline.} =
   newTable[HttpCode, ErrorHandler](pairs)
 
 proc newReversedRouter*(): ReversedRouter {.inline.} =
@@ -129,7 +129,7 @@ proc initEvent*(handler: SyncEvent): Event {.inline.} =
   Event(async: false, syncHandler: handler)
 
 proc newContext*(request: Request, response: Response,
-              gScope: GlobalScope): Context {.inline.} =
+                 gScope: GlobalScope): Context {.inline.} =
   Context(request: request, response: response,
           handled: false, session: initSession(data = newStringTable(mode = modeCaseSensitive)),
           cleanedData: newStringTable(mode = modeCaseSensitive),
@@ -172,15 +172,15 @@ proc addHeader*(request: var Request, key, value: string) {.inline.} =
 proc getCookie*(ctx: Context, key: string, default: string = ""): string {.inline.} =
   getCookie(ctx.request, key, default)
 
-proc setCookie*(ctx: Context, key, value: string, expires = "", maxAge: Option[
-    int] = none(int),
-  domain = "", path = "", secure = false, httpOnly = false, sameSite = Lax) {.inline.} =
+proc setCookie*(ctx: Context, key, value: string, expires = "", 
+                maxAge: Option[int] = none(int), domain = "", 
+                path = "", secure = false, httpOnly = false, sameSite = Lax) {.inline.} =
   ctx.response.setCookie(key, value, expires, maxAge, domain, path, secure,
       httpOnly, sameSite)
 
 proc setCookie*(ctx: Context, key, value: string, expires: DateTime|Time,
-    maxAge: Option[int] = none(int),
-    domain = "", path = "", secure = false, httpOnly = false, sameSite = Lax) {.inline.} =
+                maxAge: Option[int] = none(int), domain = "", 
+                path = "", secure = false, httpOnly = false, sameSite = Lax) {.inline.} =
   ctx.response.setCookie(key, value, domain, expires, maxAge, path, secure,
       httpOnly, sameSite)
 
@@ -212,17 +212,18 @@ proc getPathParams*(ctx: Context, key: string): string {.inline.} =
   ctx.request.pathParams.getOrDefault(key)
 
 proc getPathParams*[T: BaseType](ctx: Context, key: sink string,
-    default: T): T {.inline.} =
+                    default: T): T {.inline.} =
   let pathParams = ctx.request.pathParams.getOrDefault(key)
   parseValue(pathParams, default)
 
 proc setResponse*(ctx: Context, code: HttpCode, httpHeaders =
-  {"Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders,
-      body = "", version = HttpVer11) {.inline.} =
+                  {"Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders,
+                  body = "", version = HttpVer11) {.inline.} =
   ## handy to make ctx's response
-  let response = initResponse(httpVersion = version, code = code,
-    headers = {"Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders,
-        body = body)
+  let 
+    response = initResponse(httpVersion = version, code = code,
+                            headers = {"Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders,
+                            body = body)
   ctx.response = response
 
 proc setResponse*(ctx: Context, response: Response) {.inline.} =
@@ -259,8 +260,8 @@ proc multiMatch*(s: string, replacements: varargs[(string, string)]): string {.i
   multiMatch(s, replacements.newStringTable)
 
 proc urlFor*(ctx: Context, handler: string, parameters: openArray[(string,
-    string)] = @[], queryParams: openArray[(string, string)] = @[],
-        usePlus = true, omitEq = true): string {.inline.} =
+             string)] = @[], queryParams: openArray[(string, string)] = @[],
+             usePlus = true, omitEq = true): string {.inline.} =
 
   ## { } can't appear in url
   if handler in ctx.gScope.reversedRouter:
@@ -272,8 +273,8 @@ proc urlFor*(ctx: Context, handler: string, parameters: openArray[(string,
     result = multiMatch(result, parameters) & "?" & queryString
 
 proc abortExit*(ctx: Context, code = Http401, body = "",
-    headers = newHttpHeaders(),
-  version = HttpVer11) {.inline.} =
+                headers = newHttpHeaders(),
+                version = HttpVer11) {.inline.} =
   ctx.response = abort(code, body, headers, version)
   raise newException(AbortError, "abort exit")
 
@@ -289,10 +290,11 @@ proc attachment*(ctx: Context, downloadName = "", charset = "utf-8") {.inline.} 
       ctx.response.setHeader("Content-Type", fmt"{mimes}; charset={charset}")
 
   ctx.response.setHeader("Content-Disposition",
-      fmt"""attachment; filename="{downloadName}"""")
+                          &"attachment; filename=\"{downloadName}\"")
 
 proc staticFileResponse*(ctx: Context, filename, dir: string, mimetype = "",
-    downloadName = "", charset = "utf-8", headers = newHttpHeaders()) {.async.} =
+                         downloadName = "", charset = "utf-8", 
+                         headers = newHttpHeaders()) {.async.} =
   let
     filePath = dir / filename
 
@@ -301,8 +303,8 @@ proc staticFileResponse*(ctx: Context, filename, dir: string, mimetype = "",
   var filePermission = getFilePermissions(filePath)
   if fpOthersRead notin filePermission:
     resp abort(code = Http403,
-        body = "You do not have permission to access this file.",
-        headers = headers)
+               body = "You do not have permission to access this file.",
+               headers = headers)
     return
 
   var

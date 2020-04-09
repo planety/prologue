@@ -118,10 +118,10 @@ proc respond*(request: Request, response: Response): Future[void] {.inline.} =
   request.respond(response.code, response.body, response.headers)
 
 proc initRequest*(nativeRequest: NativeRequest, 
-    cookies = newStringTable(modeCaseSensitive),
-    pathParams = newStringTable(modeCaseSensitive), 
-    queryParams = newStringTable(modeCaseSensitive),
-    postParams = newStringTable(modeCaseSensitive)): Request {.inline.} =
+                  cookies = newStringTable(modeCaseSensitive),
+                  pathParams = newStringTable(modeCaseSensitive), 
+                  queryParams = newStringTable(modeCaseSensitive),
+                  postParams = newStringTable(modeCaseSensitive)): Request {.inline.} =
   Request(nativeRequest: nativeRequest, url: parseUri(nativeRequest.path.get()),
       cookies: cookies, pathParams: pathParams, queryParams: queryParams,
           postParams: postParams)

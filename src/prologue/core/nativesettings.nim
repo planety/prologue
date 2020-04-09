@@ -32,20 +32,20 @@ proc newCtxSettings*(): CtxSettings {.inline.} =
   CtxSettings(mimeDB: newMimetypes(), config: newTable[string, StringTableRef]())
 
 proc newSettings*(port = Port(8080), debug = true, reusePort = true,
-    staticDirs: openArray[string] = ["static"], secretKey = randomString(8),
-        appName = ""): Settings {.inline.} =
+                  staticDirs: openArray[string] = ["static"], secretKey = randomString(8),
+                  appName = ""): Settings {.inline.} =
   if secretKey.len == 0:
     raise newException(EmptySecretKeyError, "Secret key can't be empty!")
 
   result = Settings(port: port, debug: debug, reusePort: reusePort,
-            staticDirs: @staticDirs, appName: appName,
-            data: %* {"secretKey": secretKey})
+                    staticDirs: @staticDirs, appName: appName,
+                    data: %* {"secretKey": secretKey})
 
 proc newSettings*(configPath: string, port = Port(8080), debug = true, reusePort = true,
-      staticDirs: openArray[string] = ["static"],
-        appName = ""): Settings {.inline.} =
+                  staticDirs: openArray[string] = ["static"],
+                  appName = ""): Settings {.inline.} =
   # make sure reserved keys must appear in settings
   var data = parseFile(configPath)
   result = Settings(port: port, debug: debug, reusePort: reusePort,
-            staticDirs: @staticDirs, appName: appName,
-            data: data)
+                    staticDirs: @staticDirs, appName: appName,
+                    data: data)

@@ -11,8 +11,8 @@ type
     ctx*: Context
 
 
-proc loadTranslate*(stream: Stream, filename: string = "[stream]"): TableRef[
-    string, StringTableRef] =
+proc loadTranslate*(stream: Stream, 
+                    filename = "[stream]"): TableRef[string, StringTableRef] =
   var
     currentSection = ""
     p: CfgParser

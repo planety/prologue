@@ -17,11 +17,11 @@ proc `$`*(response: Response): string =
   fmt"{response.code} {response.headers}"
 
 proc initResponse*(httpVersion: HttpVersion, code: HttpCode, headers =
-    {"Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders,
-        body = ""): Response =
+                   {"Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders,
+                   body = ""): Response =
   Response(httpVersion: httpVersion, code: code, headers: headers, body: body)
 
-proc hasHeader*(response: var Response, key: string): bool {.inline.} =
+proc hasHeader*(response: Response, key: string): bool {.inline.} =
   response.headers.hasKey(key)
 
 proc setHeader*(response: var Response, key, value: string) {.inline.} =
@@ -34,32 +34,32 @@ proc addHeader*(response: var Response, key, value: string) {.inline.} =
   response.headers.add(key, value)
 
 proc setCookie*(response: var Response, key, value: string, expires = "",
-    maxAge: Option[int] = none(int), domain = "", path = "", secure = false,
-        httpOnly = false, sameSite = Lax) {.inline.} =
-  let cookies = setCookie(key, value, expires, maxAge, domain, path, secure,
-      httpOnly, sameSite)
+                maxAge: Option[int] = none(int), domain = "", path = "", secure = false,
+                httpOnly = false, sameSite = Lax) {.inline.} =
+  let cookies = setCookie(key, value, expires, maxAge, domain, 
+                          path, secure, httpOnly, sameSite)
   response.addHeader("Set-Cookie", cookies)
 
-proc setCookie*(response: var Response, key, value: string,
-    expires: DateTime|Time, maxAge: Option[int] = none(int), domain = "",
-        path = "", secure = false, httpOnly = false, sameSite = Lax) {.inline.} =
-  let cookies = setCookie(key, value, expires, maxAge, domain, path, secure,
-      httpOnly, sameSite)
+proc setCookie*(response: var Response, key, value: string, expires: DateTime|Time, 
+                maxAge: Option[int] = none(int), domain = "",
+                path = "", secure = false, httpOnly = false, sameSite = Lax) {.inline.} =
+  let cookies = setCookie(key, value, expires, maxAge, domain, 
+                          path, secure, httpOnly, sameSite)
   response.addHeader("Set-Cookie", cookies)
 
 proc deleteCookie*(response: var Response, key: string, value = "", path = "",
-    domain = "") {.inline.} =
+                   domain = "") {.inline.} =
   response.setCookie(key, value, expires = secondsForward(0), maxAge = some(0),
-      path = path, domain = domain)
+                     path = path, domain = domain)
 
 proc abort*(code = Http401, body = "", headers = newHttpHeaders(),
-    version = HttpVer11): Response {.inline.} =
+            version = HttpVer11): Response {.inline.} =
   result = initResponse(version, code = code, body = body,
-      headers = headers)
+                        headers = headers)
 
 proc redirect*(url: string, code = Http301,
-    body = "", delay = 0, headers = newHttpHeaders(),
-        version = HttpVer11): Response {.inline.} =
+               body = "", delay = 0, headers = newHttpHeaders(),
+               version = HttpVer11): Response {.inline.} =
   ## redirect to new url.
   if delay == 0:
     headers.add("Location", url)
@@ -68,31 +68,27 @@ proc redirect*(url: string, code = Http301,
   result = initResponse(version, code = code, headers = headers, body = body)
 
 proc error404*(code = Http404,
-    body = "<h1>404 Not Found!</h1>", headers = newHttpHeaders(),
-        version = HttpVer11): Response {.inline.} =
-  result = initResponse(version, code = code, body = body,
-      headers = headers)
+               body = "<h1>404 Not Found!</h1>", headers = newHttpHeaders(),
+               version = HttpVer11): Response {.inline.} =
+  result = initResponse(version, code = code, body = body, headers = headers)
 
 proc htmlResponse*(text: string, code = Http200, headers = newHttpHeaders(),
-    version = HttpVer11): Response {.inline.} =
+                   version = HttpVer11): Response {.inline.} =
   ## Content-Type": "text/html; charset=UTF-8
   headers["Content-Type"] = "text/html; charset=UTF-8"
-  result = initResponse(version, code, headers,
-      body = text)
+  result = initResponse(version, code, headers, body = text)
 
 proc plainTextResponse*(text: string, code = Http200,
-    headers = newHttpHeaders(), version = HttpVer11): Response {.inline.} =
+                        headers = newHttpHeaders(), version = HttpVer11): Response {.inline.} =
   ## Content-Type": "text/plain
   headers["Content-Type"] = "text/plain"
-  initResponse(version, code, headers,
-      body = text)
+  result = initResponse(version, code, headers, body = text)
 
 proc jsonResponse*(text: JsonNode, code = Http200, headers = newHttpHeaders(),
     version = HttpVer11): Response {.inline.} =
   ## Content-Type": "application/json
   headers["Content-Type"] = "text/json"
-  initResponse(version, code, headers,
-      body = $text)
+  result = initResponse(version, code, headers, body = $text)
 
 macro resp*(body: string, code = Http200) =
   ## handy to make ctx's response
@@ -100,8 +96,8 @@ macro resp*(body: string, code = Http200) =
 
   result = quote do:
     let response = initResponse(httpVersion = HttpVer11, code = `code`,
-      headers = {"Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders,
-          body = `body`)
+                                headers = {"Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders,
+                                body = `body`)
     `ctx`.response = response
 
 macro resp*(response: Response) =

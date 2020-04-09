@@ -95,7 +95,7 @@ proc send*(request: Request, content: string): Future[void] {.inline.} =
   result = request.nativeRequest.client.send(content)
 
 proc respond*(request: Request, code: HttpCode, body: string,
-  headers: HttpHeaders = newHttpHeaders()): Future[void] {.inline.} =
+              headers: HttpHeaders = newHttpHeaders()): Future[void] {.inline.} =
   result = request.nativeRequest.respond(code, body, headers)
 
 proc respond*(request: Request, response: Response): Future[void] {.inline.} =
@@ -106,9 +106,9 @@ proc close*(request: Request) =
   request.nativeRequest.client.close()
 
 proc initRequest*(nativeRequest: NativeRequest, 
-    cookies = newStringTable(modeCaseSensitive),
-    pathParams = newStringTable(modeCaseSensitive), 
-    queryParams = newStringTable(modeCaseSensitive),
-    postParams = newStringTable(modeCaseSensitive)): Request {.inline.} =
+                  cookies = newStringTable(modeCaseSensitive),
+                  pathParams = newStringTable(modeCaseSensitive), 
+                  queryParams = newStringTable(modeCaseSensitive),
+                  postParams = newStringTable(modeCaseSensitive)): Request {.inline.} =
   Request(nativeRequest: nativeRequest, cookies: cookies,
     pathParams: pathParams, queryParams: queryParams, postParams: postParams)

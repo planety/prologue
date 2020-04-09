@@ -12,7 +12,7 @@ srcDir        = "src"
 # Nim support begin from v1.2
 requires "nim >= 1.0.6"
 requires "regex >= 0.13.1 & < 0.14.0"
-requires "nimcrypto >= 0.4.10"
+requires "nimcrypto >= 0.4.11"
 
 when not defined(windows):
   requires "httpbeast >= 0.2.2"

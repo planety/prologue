@@ -12,12 +12,12 @@ type
     data: OrderedTableRef[string, seq[ValidateHandler]]
 
 
-proc newFormValidation*(validator: openArray[(string, seq[
-    ValidateHandler])]): FormValidation {.inline.} =
+proc newFormValidation*(validator: openArray[(string, seq[ValidateHandler])]
+                        ): FormValidation {.inline.} =
   FormValidation(data: validator.newOrderedTable)
 
 proc validate*(formValidation: FormValidation, textTable: StringTableRef,
-    allMsgs = true): Info =
+                allMsgs = true): Info =
   var msgs = ""
   for (key, handlers) in formValidation.data.pairs:
     for handler in handlers:

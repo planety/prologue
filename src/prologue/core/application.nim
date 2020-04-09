@@ -55,23 +55,27 @@ export urandom
 export utils
 
 
+let
+  DefaultErrorHandler = newErrorHandlerTable({Http404: default404Handler, Http500: default500Handler})
+
+
 proc registerErrorHandler*(app: Prologue, code: HttpCode,
-    handler: ErrorHandler) {.inline.} =
+                           handler: ErrorHandler) {.inline.} =
   app.errorHandlerTable[code] = handler
 
 proc registerErrorHandler*(app: Prologue, code: set[HttpCode],
-    handler: ErrorHandler) {.inline.} =
+                           handler: ErrorHandler) {.inline.} =
   for idx in code:
     app.registerErrorHandler(idx, handler)
 
 proc registerErrorHandler*(app: Prologue, code: openArray[HttpCode],
-    handler: ErrorHandler) {.inline.} =
+                           handler: ErrorHandler) {.inline.} =
   for idx in code:
     app.registerErrorHandler(idx, handler)
 
 proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
-    httpMethod = HttpGet, middlewares: seq[HandlerAsync] = @[],
-        settings: Settings = nil) {.inline.} =
+               httpMethod = HttpGet, middlewares: seq[HandlerAsync] = @[],
+               settings: Settings = nil) {.inline.} =
   ## add single handler route
   ## don't check whether regex routes are duplicated
   # for group in route.namedGroups.keys:
@@ -82,8 +86,8 @@ proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
   app.gScope.reRouter.add (path, newPathHandler(handler, middlewares))
 
 proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
-    httpMethod: seq[HttpMethod], middlewares: seq[HandlerAsync] = @[],
-    settings: Settings = nil) {.inline.} =
+               httpMethod: seq[HttpMethod], middlewares: seq[HandlerAsync] = @[],
+               settings: Settings = nil) {.inline.} =
   for m in httpMethod:
     app.addRoute(route, handler, m, middlewares, settings)
 
@@ -95,8 +99,8 @@ proc addReversedRoute(app: Prologue, name, route: string) {.inline.} =
     app.gScope.reversedRouter[name] = route
 
 proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
-    httpMethod = HttpGet, name = "", middlewares: seq[HandlerAsync] = @[],
-        settings: Settings = nil) {.inline.} =
+               httpMethod = HttpGet, name = "", middlewares: seq[HandlerAsync] = @[],
+               settings: Settings = nil) {.inline.} =
   ## add single handler route
   ## check whether routes are duplicated
   let path = initPath(route = route, httpMethod = httpMethod)
@@ -110,8 +114,8 @@ proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
   app.addReversedRoute(name, route)
 
 proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
-    httpMethod: seq[HttpMethod], name = "", middlewares: seq[
-        HandlerAsync] = @[], settings: Settings = nil) {.inline.} =
+               httpMethod: seq[HttpMethod], name = "", 
+               middlewares: seq[HandlerAsync] = @[], settings: Settings = nil) {.inline.} =
   ## add single handler route with multi http method
   ## check whether routes are duplicated
   app.addReversedRoute(name, route)
@@ -119,52 +123,52 @@ proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
     app.addRoute(route, handler, m, "", middlewares, settings)
 
 proc addRoute*(app: Prologue, patterns: seq[UrlPattern],
-    baseRoute = "", settings: Settings = nil) {.inline.} =
+               baseRoute = "", settings: Settings = nil) {.inline.} =
   ## add multi handler route
   for pattern in patterns:
     app.addRoute(baseRoute & pattern.route, pattern.matcher, pattern.httpMethod,
-        pattern.name, pattern.middlewares, settings)
+                 pattern.name, pattern.middlewares, settings)
 
 proc head*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-    middlewares: sink seq[HandlerAsync] = @[], settings: Settings = nil) {.inline.} =
+           middlewares: sink seq[HandlerAsync] = @[], settings: Settings = nil) {.inline.} =
   app.addRoute(route, handler, HttpHead, name, middlewares, settings)
 
 proc get*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-    middlewares: sink seq[HandlerAsync] = @[], settings: Settings = nil) {.inline.} =
+          middlewares: sink seq[HandlerAsync] = @[], settings: Settings = nil) {.inline.} =
   app.addRoute(route, handler, HttpGet, name, middlewares, settings)
 
 proc post*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-    middlewares: sink seq[HandlerAsync] = @[], settings: Settings = nil) {.inline.} =
+           middlewares: sink seq[HandlerAsync] = @[], settings: Settings = nil) {.inline.} =
   app.addRoute(route, handler, HttpPost, name, middlewares, settings)
 
 proc put*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-    middlewares: sink seq[HandlerAsync] = @[], settings: Settings = nil) {.inline.} =
+          middlewares: sink seq[HandlerAsync] = @[], settings: Settings = nil) {.inline.} =
   app.addRoute(route, handler, HttpPut, name, middlewares, settings)
 
 proc delete*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-    middlewares: sink seq[HandlerAsync] = @[], settings: Settings = nil) {.inline.} =
+             middlewares: sink seq[HandlerAsync] = @[], settings: Settings = nil) {.inline.} =
   app.addRoute(route, handler, HttpDelete, name, middlewares, settings)
 
 proc trace*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-    middlewares: sink seq[HandlerAsync] = @[], settings: Settings = nil) {.inline.} =
+            middlewares: sink seq[HandlerAsync] = @[], settings: Settings = nil) {.inline.} =
   app.addRoute(route, handler, HttpTrace, name, middlewares, settings)
 
 proc options*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-    middlewares: sink seq[HandlerAsync] = @[], settings: Settings = nil) {.inline.} =
+              middlewares: sink seq[HandlerAsync] = @[], settings: Settings = nil) {.inline.} =
   app.addRoute(route, handler, HttpOptions, name, middlewares, settings)
 
 proc connect*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-  middlewares: sink seq[HandlerAsync] = @[], settings: Settings = nil) {.inline.} =
+              middlewares: sink seq[HandlerAsync] = @[], settings: Settings = nil) {.inline.} =
   app.addRoute(route, handler, HttpConnect, name, middlewares, settings)
 
 proc patch*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-  middlewares: sink seq[HandlerAsync] = @[], settings: Settings = nil) {.inline.} =
+            middlewares: sink seq[HandlerAsync] = @[], settings: Settings = nil) {.inline.} =
   app.addRoute(route, handler, HttpPatch, name, middlewares, settings)
 
 proc all*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-  middlewares: sink seq[HandlerAsync] = @[], settings: Settings = nil) {.inline.} =
+          middlewares: sink seq[HandlerAsync] = @[], settings: Settings = nil) {.inline.} =
   app.addRoute(route, handler, @[HttpGet, HttpPost, HttpPut, HttpDelete,
-      HttpTrace, HttpOptions, HttpConnect, HttpPatch], name, middlewares, settings)
+               HttpTrace, HttpOptions, HttpConnect, HttpPatch], name, middlewares, settings)
 
 proc appDebug*(app: Prologue): bool {.inline.} =
   app.gScope.settings.debug
@@ -176,17 +180,16 @@ proc appPort*(app: Prologue): Port {.inline.} =
   app.gScope.settings.port
 
 proc newApp*(settings: Settings, middlewares: sink seq[HandlerAsync] = @[],
-    startup: sink seq[Event] = @[], shutdown: sink seq[Event] = @[],
-        errorHandlerTable = {Http404: default404Handler,
-            Http500: default500Handler}.newErrorHandlerTable,
-        appData = newStringTable(mode = modeCaseSensitive)): Prologue {.inline.} =
+             startup: sink seq[Event] = @[], shutdown: sink seq[Event] = @[],
+             errorHandlerTable = DefaultErrorHandler,
+             appData = newStringTable(mode = modeCaseSensitive)): Prologue {.inline.} =
   if settings == nil:
     raise newException(ValueError, "Settings can't be nil!")
   result = newPrologue(settings = settings, ctxSettings = newCtxSettings(),
-      router = newRouter(), reversedRouter = newReversedRouter(),
-      reRouter = newReRouter(), middlewares = middlewares,
-      startup = startup, shutdown = shutdown,
-      errorHandlerTable = errorHandlerTable, appData = appData)
+                       router = newRouter(), reversedRouter = newReversedRouter(),
+                       reRouter = newReRouter(), middlewares = middlewares,
+                       startup = startup, shutdown = shutdown,
+                       errorHandlerTable = errorHandlerTable, appData = appData)
 
 proc run*(app: Prologue) =
   for event in app.startup:
@@ -199,8 +202,7 @@ proc run*(app: Prologue) =
     var request = initRequest(nativeRequest = nativeRequest)
 
     if request.hasHeader("cookie"):
-      request.cookies = seq[string](request.headers.getOrDefault(
-          "cookie")).join("; ").parseCookie
+      request.cookies = parseCookie(seq[string](request.headers.getOrDefault("cookie")).join("; "))
 
     var contentType: string
     if request.hasHeader("content-type"):
@@ -210,9 +212,9 @@ proc run*(app: Prologue) =
 
     var
       response = initResponse(HttpVer11, Http200, headers = {
-        "Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders)
+                             "Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders)
       ctx = newContext(request = request, response = response,
-        gScope = app.gScope)
+                       gScope = app.gScope)
 
     ctx.middlewares = app.middlewares
     logging.debug(fmt"{ctx.request.reqMethod} {ctx.request.url.path}")
@@ -220,14 +222,14 @@ proc run*(app: Prologue) =
     var staticFileFlag: tuple[hasValue: bool, filename, dir: string]
     if ctx.gScope.settings.staticDirs.len != 0:
       staticFileFlag = isStaticFile(ctx.request.path,
-          ctx.gScope.settings.staticDirs)
+                                    ctx.gScope.settings.staticDirs)
     else:
       staticFileFlag = (false, "", "")
 
     try:
       if staticFileFlag.hasValue:
         await staticFileResponse(ctx, staticFileFlag.filename,
-            staticFileFlag.dir)
+                                 staticFileFlag.dir)
       else:
         await switch(ctx)
     except HttpError as e:

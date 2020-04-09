@@ -48,51 +48,58 @@ const
 
 
 proc initSigner*(secretKey: SecretKey, salt = DefaultSalt, sep = DefaultSep,
-    keyDerivation = DefaultKeyDerivation,
-        digestMethod = DefaultDigestMethodType): Signer =
+                 keyDerivation = DefaultKeyDerivation,
+                 digestMethod = DefaultDigestMethodType): Signer =
 
   if sep in Base64Alphabet:
     raise newException(ValueError, "The given separator cannot be used because it may be " &
-                "contained in the signature itself. Alphanumeric " &
-                "characters and `-_=` must not be used.")
+                       "contained in the signature itself. Alphanumeric " &
+                       "characters and `-_=` must not be used.")
 
   Signer(secretKey: secretKey, salt: salt, sep: sep,
-      keyDerivation: keyDerivation, digestMethod: digestMethod)
+         keyDerivation: keyDerivation, digestMethod: digestMethod)
 
 proc initTimedSigner*(secretKey: SecretKey, salt = DefaultSalt,
-    sep = DefaultSep, keyDerivation = DefaultKeyDerivation,
-        digestMethod = DefaultDigestMethodType): TimedSigner =
+                      sep = DefaultSep, keyDerivation = DefaultKeyDerivation,
+                      digestMethod = DefaultDigestMethodType): TimedSigner =
 
   if sep in Base64Alphabet:
     raise newException(ValueError, "The given separator cannot be used because it may be " &
-                "contained in the signature itself. Alphanumeric " &
-                "characters and `-_=` must not be used. ")
+                       "contained in the signature itself. Alphanumeric " &
+                       "characters and `-_=` must not be used. ")
 
   TimedSigner(secretKey: secretKey, salt: salt, sep: sep,
-      keyDerivation: keyDerivation, digestMethod: digestMethod)
+              keyDerivation: keyDerivation, digestMethod: digestMethod)
 
-proc getKeyDerivationEncode[T: BaseDigestType](s: Signer | TimedSigner,
-    digestMethodType: typedesc[T], value: openArray[byte]): string =
+proc getKeyDerivationEncode[T: BaseDigestType](s: Signer | TimedSigner, 
+                            digestMethodType: typedesc[T], value: openArray[byte]): string =
   let secretKey = string(s.secretKey)
   case s.keyDerivation
   of Concat:
     let key = digestMethodType.digest(s.salt & secretKey)
-    result = digestMethodType.hmac(key.data,
-        value).data.urlsafeBase64Encode.strip(leading = false, chars = {'='})
+    result = digestMethodType.hmac(key.data, value)
+                             .data
+                             .urlsafeBase64Encode
+                             .strip(leading = false, chars = {'='})
   of MoreConcat:
     let key = digestMethodType.digest(s.salt & "signer" & secretKey)
-    result = digestMethodType.hmac(key.data,
-        value).data.urlsafeBase64Encode.strip(leading = false, chars = {'='})
+    result = digestMethodType.hmac(key.data,value)
+                             .data.urlsafeBase64Encode
+                             .strip(leading = false, chars = {'='})
   of KeyHmac:
     var hctx: Hmac[digestMethodType]
     hctx.init(secretKey)
     hctx.update(s.salt)
     let key = finish(hctx)
-    result = digestMethodType.hmac(key.data,
-        value).data.urlsafeBase64Encode.strip(leading = false, chars = {'='})
+    result = digestMethodType.hmac(key.data, value)
+                             .data
+                             .urlsafeBase64Encode
+                             .strip(leading = false, chars = {'='})
   of None:
-    result = digestMethodType.hmac(secretKey,
-        value).data.urlsafeBase64Encode.strip(leading = false, chars = {'='})
+    result = digestMethodType.hmac(secretKey, value)
+                             .data
+                             .urlsafeBase64Encode
+                             .strip(leading = false, chars = {'='})
 
 proc getKeyDerivationDecode[T: BaseDigestType](s: Signer | TimedSigner,
     digestMethodType: typedesc[T]): string =

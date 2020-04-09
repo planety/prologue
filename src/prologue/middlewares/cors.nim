@@ -15,7 +15,8 @@ const
 
 
 proc isAllowedOrigin(origin: string, allowAllOrigins: bool,
-    allowOrigins: sink seq[string], allowOriginRegex: sink Regex): bool =
+                     allowOrigins: sink seq[string], 
+                     allowOriginRegex: sink Regex): bool =
   if allowAllOrigins:
     return true
 
