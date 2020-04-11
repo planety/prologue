@@ -1,48 +1,46 @@
 strategy:
   maxParallel: 10
   matrix:
-    # Windows_devel_64bit:
-    #   VM: 'windows-latest'
-    #   UCPU: amd64
-    #   PLATFORM: x64
-    #   CHANNEL: devel
-    #   TEST_LANG: c
-    # Windows_cpp_devel_64bit:
-    #   VM: 'windows-latest'
-    #   UCPU: amd64
-    #   PLATFORM: x64
-    #   CHANNEL: devel
-    #   TEST_LANG: cpp
+    Windows_stable_64bit:
+      VM: 'windows-latest'
+      UCPU: amd64
+      CHANNEL: stable
+      TEST_LANG: c
+    Windows_devel_64bit:
+      VM: 'windows-latest'
+      UCPU: amd64
+      CHANNEL: devel
+      TEST_LANG: c
+    Windows_cpp_devel_64bit:
+      VM: 'windows-latest'
+      UCPU: amd64
+      CHANNEL: devel
+      TEST_LANG: cpp
     Linux_stable_64bit:
       VM: 'ubuntu-latest'
       UCPU: amd64
-      PLATFORM: x64
       CHANNEL: stable
       TEST_LANG: c
-    Linux_cpp_stable_64bit:
-      VM: 'ubuntu-latest'
-      UCPU: amd64
-      PLATFORM: x64
-      CHANNEL: stable
-      WEAVE_TEST_LANG: cpp
     Linux_devel_64bit:
       VM: 'ubuntu-latest'
       UCPU: amd64
-      PLATFORM: x64
       CHANNEL: devel
       TEST_LANG: c
     Linux_cpp_devel_64bit:
       VM: 'ubuntu-latest'
       UCPU: amd64
-      PLATFORM: x64
       CHANNEL: devel
-      WEAVE_TEST_LANG: cpp
-    # MacOS_stable_64bit:
-    #   VM: 'macOS-latest'
-    #   UCPU: amd64
-    #   PLATFORM: x64
-    #   CHANNEL: stable
-    #   TEST_LANG: c
+      TEST_LANG: cpp
+    MacOS_stable_64bit:
+      VM: 'macOS-latest'
+      UCPU: amd64
+      CHANNEL: stable
+      TEST_LANG: c
+    MacOS_devel_64bit:
+      VM: 'macOS-latest'
+      UCPU: amd64
+      CHANNEL: devel
+      TEST_LANG: c
 pool:
   vmImage: $(VM)
 
@@ -50,13 +48,13 @@ steps:
   - task: CacheBeta@1
     displayName: 'cache Nim binaries'
     inputs:
-      key: NimBinaries | $(Agent.OS) | $(CHANNEL) | $(PLATFORM)
+      key: NimBinaries | $(Agent.OS) | $(CHANNEL) | $(UCPU)
       path: NimBinaries
 
   - task: CacheBeta@1
     displayName: 'cache MinGW-w64'
     inputs:
-      key: mingwCache | 8_1_0 | $(PLATFORM)
+      key: mingwCache | 8_1_0 | $(UCPU)
       path: mingwCache
     condition: eq(variables['Agent.OS'], 'Windows_NT')
 
@@ -68,7 +66,7 @@ steps:
       echo "PATH=${PATH}"
       set -e
       echo "Installing MinGW-w64"
-      if [[ $PLATFORM == "x86" ]]; then
+      if [[ $UCPU == "i686" ]]; then
         MINGW_FILE="i686-8.1.0-release-posix-dwarf-rt_v6-rev0.7z"
         MINGW_URL="https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win32/Personal%20Builds/mingw-builds/8.1.0/threads-posix/dwarf/${MINGW_FILE}"
         MINGW_DIR="mingw32"
@@ -87,8 +85,16 @@ steps:
       mkdir -p /c/custom
       mv "$MINGW_DIR" /c/custom/
       popd
-      echo "##vso[task.prependpath]/c/custom/${MINGW_DIR}/bin"
+      # Workaround https://developercommunity.visualstudio.com/content/problem/891929/windows-2019-cygheap-base-mismatch-detected-git-ba.html
+      echo "##vso[task.prependpath]/usr/bin"
+      echo "##vso[task.prependpath]/mingw64/bin"
+      echo "##vso[task.setvariable variable=MINGW_DIR;]$MINGW_DIR"
     displayName: 'Install dependencies (Windows)'
+    condition: eq(variables['Agent.OS'], 'Windows_NT')
+  - powershell: |
+      # export custom mingw PATH to other tasks
+      echo "##vso[task.prependpath]c:\custom\$(MINGW_DIR)\bin"
+    displayName: 'Mingw PATH (Windows)'
     condition: eq(variables['Agent.OS'], 'Windows_NT')
   - bash: |
       echo "PATH=${PATH}"
@@ -111,7 +117,7 @@ steps:
   - bash: |
       echo "PATH=${PATH}"
       gcc -v
-      echo "UCPU=${UCPU}"
+      export ucpu=${UCPU}
       if [ "${CHANNEL}" = stable ]; then
         BRANCH="v$(curl https://nim-lang.org/channels/stable)"
       else
@@ -139,10 +145,17 @@ steps:
           ./koch tools
         fi
       fi
-      popd # exit nim-CHANNEL
+      popd # exit nim-${CHANNEL}
       popd # exit NimBinaries
-      echo "##vso[task.prependpath]$PWD/NimBinaries/nim-${CHANNEL}/bin"
     displayName: 'Building Nim'
+  - powershell: |
+      echo "##vso[task.prependpath]$pwd\NimBinaries\nim-$(CHANNEL)\bin"
+    displayName: 'Set env variable (Windows)'
+    condition: eq(variables['Agent.OS'], 'Windows_NT')
+  - bash: |
+      echo "##vso[task.prependpath]$PWD/NimBinaries/nim-${CHANNEL}/bin"
+    displayName: 'Set env variable (Posix)'
+    condition: ne(variables['Agent.OS'], 'Windows_NT')
   - bash: |
       echo "PATH=${PATH}"
       nimble refresh
