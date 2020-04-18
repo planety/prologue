@@ -16,10 +16,13 @@ ideal for building elegant and high performance
 web services.
 
 ## Current Work
-Now we are working on rewriting `asyncHttpServer` and network infrastructure.
-https://github.com/iocrate/org/blob/master/README_en.md
+Now we are working on rewriting network infrastructure.
 
 https://github.com/iocrate/netkit
+
+Also working on http2.
+
+https://github.com/nimlight/zest
 
 
 ## Documentation
@@ -133,3 +136,7 @@ Run **app.nim**.Now the server is running at localhost:8080.
 - [HelloWorld](https://github.com/planety/prologue/tree/master/examples/helloworld)
 - [ToDoList](https://github.com/planety/prologue/tree/master/examples/todolist)
 - [Blog](https://github.com/planety/prologue/tree/master/examples/blog)
+
+
+### Stars
+[![Stargazers over time](https://starchart.cc/planety/prologue.svg)](https://starchart.cc/planety/prologue)
