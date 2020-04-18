@@ -80,7 +80,7 @@ proc findHandler*(ctx: Context): PathHandler =
   ## fixed route -> regex route -> params route
   ## Follow the order of addition
   let rawPath = initPath(route = ctx.request.url.path,
-    httpMethod = ctx.request.reqMethod)
+                         httpMethod = ctx.request.reqMethod)
 
   # find fixed route
   if ctx.gScope.router.hasKey(rawPath):

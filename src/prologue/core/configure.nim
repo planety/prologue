@@ -77,9 +77,7 @@ proc loadPrologueEnv*(filename: string): Env =
   if f != nil:
     var p: CfgParser
     open(p, f, filename)
-    defer:
-      f.close()
-      p.close()
+
     while true:
       var e = p.next
       case e.kind
@@ -90,15 +88,18 @@ proc loadPrologueEnv*(filename: string): Env =
       else:
         raise newException(EnvWrongFormatError, ".env file only support key-value pair")
 
+    f.close()
+    p.close()
+
 proc setPrologueEnv*(env: Env, key, value: string) =
   env.data[key] = value
 
 proc writePrologueEnv*(filename: string, env: Env) =
   var f = newFileStream(filename, fmWrite)
-  defer: f.close()
   if f != nil:
     for key, value in env.data:
       f.writeLine(key & "=" & value)
+    f.close()
 
 
 when isMainModule:

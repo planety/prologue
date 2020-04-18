@@ -19,7 +19,7 @@ proc loadTranslate*(stream: Stream,
 
   result = newTable[string, StringTableRef]()
   open(p, stream, filename)
-  defer: p.close()
+
   while true:
     var e = p.next
     case e.kind
@@ -35,13 +35,14 @@ proc loadTranslate*(stream: Stream,
       result[currentSection] = t
     of cfgError:
       break
+  p.close()
 
 proc loadTranslate*(filename: string): TableRef[string, StringTableRef] {.inline.} =
   let
     file = open(filename, fmRead)
     fileStream = newFileStream(file)
-  defer: fileStream.close()
   result = fileStream.loadTranslate(filename)
+  fileStream.close()
 
 proc loadTranslate*(app: Prologue, filename: string) {.inline.} =
   let res = loadTranslate(filename)

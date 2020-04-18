@@ -344,12 +344,11 @@ proc staticFileResponse*(ctx: Context, filename, dir: string, mimetype = "",
       resp initResponse(HttpVer11, Http200, headers, body)
   else:
     # TODO stream
-    # ctx.response.setHeader("Content-Length", $contentLength)
+    ctx.response.setHeader("Content-Length", $contentLength)
     await ctx.respond(Http200, "", headers)
     var
       fileStream = newFutureStream[string]("staticFileResponse")
       file = openAsync(filePath, fmRead)
-    defer: file.close()
 
     await file.readToStream(fileStream)
 
@@ -359,4 +358,6 @@ proc staticFileResponse*(ctx: Context, filename, dir: string, mimetype = "",
         await ctx.send(value)
       else:
         break
+
+    file.close()
     ctx.handled = true

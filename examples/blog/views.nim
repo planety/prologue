@@ -48,7 +48,7 @@ proc logout*(ctx: Context) {.async.} =
 # /register
 proc register*(ctx: Context) {.async.} =
   let db = open(consts.dbPath, "", "", "")
-  defer: db.close()
+
   if ctx.request.reqMethod == HttpPost:
     var error: string
     let
@@ -71,3 +71,5 @@ proc register*(ctx: Context) {.async.} =
       resp error
   else:
     resp htmlResponse(registerPage(ctx))
+
+  db.close()
