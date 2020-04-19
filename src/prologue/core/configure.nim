@@ -74,10 +74,14 @@ proc delPrologueEnv*(key: string, prefix: string) {.inline.} =
 proc loadPrologueEnv*(filename: string): Env =
   result = initEnv()
   var f = newFileStream(filename, fmRead)
+
   if f != nil:
     var p: CfgParser
     open(p, f, filename)
-
+    # TODO buggy in --gc:arc
+    defer:
+      p.close()
+      f.close()
     while true:
       var e = p.next
       case e.kind
@@ -87,9 +91,6 @@ proc loadPrologueEnv*(filename: string): Env =
         result.data[e.key] = e.value
       else:
         raise newException(EnvWrongFormatError, ".env file only support key-value pair")
-
-    f.close()
-    p.close()
 
 proc setPrologueEnv*(env: Env, key, value: string) =
   env.data[key] = value

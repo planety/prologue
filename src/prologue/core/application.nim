@@ -204,9 +204,11 @@ proc run*(app: Prologue) =
     if request.hasHeader("cookie"):
       request.cookies = parseCookie(seq[string](request.headers.getOrDefault("cookie")).join("; "))
 
-    var contentType: string
-    if request.hasHeader("content-type"):
-      contentType = request.headers["content-type", 0]
+
+    let contentType = if request.hasHeader("content-type"): 
+        request.headers["content-type", 0]
+      else:
+        ""
 
     request.parseFormParams(contentType)
 
@@ -219,12 +221,10 @@ proc run*(app: Prologue) =
     ctx.middlewares = app.middlewares
     logging.debug(fmt"{ctx.request.reqMethod} {ctx.request.url.path}")
 
-    var staticFileFlag: tuple[hasValue: bool, filename, dir: string]
-    if ctx.gScope.settings.staticDirs.len != 0:
-      staticFileFlag = isStaticFile(ctx.request.path,
-                                    ctx.gScope.settings.staticDirs)
-    else:
-      staticFileFlag = (false, "", "")
+    let staticFileFlag = if ctx.gScope.settings.staticDirs.len != 0:
+        isStaticFile(ctx.request.path, ctx.gScope.settings.staticDirs)
+      else:
+        (false, "", "")
 
     try:
       if staticFileFlag.hasValue:

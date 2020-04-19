@@ -70,11 +70,9 @@ proc isBool*(msg = ""): ValidateHandler {.inline.} =
 
 proc minValue*(min: float, msg = ""): ValidateHandler {.inline.} =
   result = proc(text: string): Info =
-    var value: float
-    try:
-      value = parseFloat(text)
-    except ValueError:
-      return (false, fmt"{text} is not a number!")
+    let value = try: parseFloat(text)
+      except ValueError:
+        return (false, fmt"{text} is not a number!")
 
     if value >= min:
       result = (true, "")
@@ -85,11 +83,9 @@ proc minValue*(min: float, msg = ""): ValidateHandler {.inline.} =
 
 proc maxValue*(max: float, msg = ""): ValidateHandler {.inline.} =
   result = proc(text: string): Info =
-    var value: float
-    try:
-      value = parseFloat(text)
-    except ValueError:
-      return (false, fmt"{text} is not a number!")
+    let value = try: parseFloat(text)
+      except ValueError:
+        return (false, fmt"{text} is not a number!")
 
     if value <= max:
       result = (true, "")
@@ -100,11 +96,9 @@ proc maxValue*(max: float, msg = ""): ValidateHandler {.inline.} =
 
 proc rangeValue*(min, max: float, msg = ""): ValidateHandler {.inline.} =
   result = proc(text: string): Info =
-    var value: float
-    try:
-      value = parseFloat(text)
-    except ValueError:
-      return (false, fmt"{text} is not a number!")
+    let value = try: parseFloat(text)
+      except ValueError:
+        return (false, fmt"{text} is not a number!")
 
     if value <= max and value >= min:
       result = (true, "")
