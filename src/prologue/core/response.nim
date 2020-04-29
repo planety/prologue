@@ -1,7 +1,7 @@
 import httpcore
 import times, json, strformat, options, macros
 
-import cookies / cookies
+import cookiejar
 
 
 type

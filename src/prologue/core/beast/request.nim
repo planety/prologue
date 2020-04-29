@@ -1,7 +1,7 @@
 import uri, httpcore
 import strutils, strtabs, options
 
-import cookies / cookies
+import cookiejar
 
 
 import ../dispatch

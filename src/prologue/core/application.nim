@@ -1,7 +1,7 @@
 import uri, httpcore
 import tables, strutils, strformat, logging, strtabs, options, json
 from nativesockets import Port, `$`
-import cookies / cookies
+import cookiejar
 
 
 from ./utils import isStaticFile
@@ -43,7 +43,7 @@ export basicregex
 export configure
 export constants
 export context except size, incSize, first, `first=`
-export cookies
+export cookiejar
 export encode
 export middlewaresbase
 export nativesettings

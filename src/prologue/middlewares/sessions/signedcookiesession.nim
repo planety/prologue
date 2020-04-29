@@ -1,6 +1,8 @@
 import options
 
-import cookies / cookies
+
+from cookiejar import SameSite
+
 import ../../core/dispatch
 from ../../core/types import BadSecretKeyError, SecretKey, loads, dumps, len
 from ../../core/context import Context, HandlerAsync, getCookie, setCookie,

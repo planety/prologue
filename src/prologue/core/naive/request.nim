@@ -1,9 +1,9 @@
 import asyncnet, uri
-import strutils, strtabs, uri
+import strutils, strtabs
 
 import asynchttpserver
 
-import cookies / cookies
+import cookiejar
 
 
 import ../dispatch

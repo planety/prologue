@@ -3,7 +3,7 @@ import strtabs, tables, strformat, os, times, options, parseutils, json
 
 import ./dispatch
 import ./response, ./pages, ./constants
-import cookies / cookies
+import cookiejar
 from ./types import BaseType, Session, `[]`, initSession
 from ./configure import parseValue
 from ./httpexception import AbortError
