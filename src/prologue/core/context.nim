@@ -3,8 +3,8 @@ import strtabs, tables, strformat, os, times, options, parseutils, json
 
 import ./dispatch
 import ./response, ./pages, ./constants
-import ./cookies
-from ./types import BaseType, Session, SameSite, `[]`, initSession
+import cookies / cookies
+from ./types import BaseType, Session, `[]`, initSession
 from ./configure import parseValue
 from ./httpexception import AbortError
 

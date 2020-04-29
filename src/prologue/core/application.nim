@@ -1,6 +1,7 @@
 import uri, httpcore
 import tables, strutils, strformat, logging, strtabs, options, json
 from nativesockets import Port, `$`
+import cookies / cookies
 
 
 from ./utils import isStaticFile
@@ -9,8 +10,6 @@ from ./route import pattern, initPath, initRePath, newPathHandler, newRouter,
     add, `[]`, `[]=`, hasKey
 from ./form import parseFormParams
 from ./nativesettings import newSettings, newCtxSettings, getOrDefault, Settings
-from ./cookies import parseCookie
-from ./types import SameSite
 from ./httpexception import HttpError, AbortError
 
 import ./dispatch
@@ -24,6 +23,7 @@ import ./configure
 import ./constants
 import ./basicregex
 import ./encode
+import ./types
 
 
 import ./request
@@ -202,7 +202,7 @@ proc run*(app: Prologue) =
     var request = initRequest(nativeRequest = nativeRequest)
 
     if request.hasHeader("cookie"):
-      request.cookies = parseCookie(seq[string](request.headers.getOrDefault("cookie")).join("; "))
+      request.cookies.parse(seq[string](request.headers.getOrDefault("cookie")).join("; "))
 
 
     let contentType = if request.hasHeader("content-type"): 

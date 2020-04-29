@@ -1,6 +1,8 @@
 import uri, httpcore
 import strutils, strtabs, options
 
+import cookies / cookies
+
 
 import ../dispatch
 from ../response import Response
@@ -13,7 +15,7 @@ type
   NativeRequest* = httpbeast.Request
   Request* = object
     nativeRequest*: NativeRequest
-    cookies*: StringTableRef
+    cookies*: CookieJar
     url: Uri
     postParams*: StringTableRef
     queryParams*: StringTableRef # Only use queryParams for all url params
@@ -118,7 +120,7 @@ proc respond*(request: Request, response: Response): Future[void] {.inline.} =
   request.respond(response.code, response.body, response.headers)
 
 proc initRequest*(nativeRequest: NativeRequest, 
-                  cookies = newStringTable(modeCaseSensitive),
+                  cookies = initCookieJar(),
                   pathParams = newStringTable(modeCaseSensitive), 
                   queryParams = newStringTable(modeCaseSensitive),
                   postParams = newStringTable(modeCaseSensitive)): Request {.inline.} =

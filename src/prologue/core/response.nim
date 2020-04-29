@@ -1,8 +1,7 @@
 import httpcore
 import times, json, strformat, options, macros
 
-from ./cookies import setCookie, secondsForward
-from ./types import SameSite
+import cookies / cookies
 
 
 type
@@ -36,16 +35,16 @@ proc addHeader*(response: var Response, key, value: string) {.inline.} =
 proc setCookie*(response: var Response, key, value: string, expires = "",
                 maxAge: Option[int] = none(int), domain = "", path = "", secure = false,
                 httpOnly = false, sameSite = Lax) {.inline.} =
-  let cookies = setCookie(key, value, expires, maxAge, domain, 
-                          path, secure, httpOnly, sameSite)
-  response.addHeader("Set-Cookie", cookies)
+  let cookies = initCookie(key, value, expires, maxAge, domain, 
+                           path, secure, httpOnly, sameSite)
+  response.addHeader("Set-Cookie", $cookies)
 
 proc setCookie*(response: var Response, key, value: string, expires: DateTime|Time, 
                 maxAge: Option[int] = none(int), domain = "",
                 path = "", secure = false, httpOnly = false, sameSite = Lax) {.inline.} =
-  let cookies = setCookie(key, value, expires, maxAge, domain, 
+  let cookies = initCookie(key, value, expires, maxAge, domain, 
                           path, secure, httpOnly, sameSite)
-  response.addHeader("Set-Cookie", cookies)
+  response.addHeader("Set-Cookie", $cookies)
 
 proc deleteCookie*(response: var Response, key: string, value = "", path = "",
                    domain = "") {.inline.} =

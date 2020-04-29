@@ -1,8 +1,8 @@
 import options
 
-
+import cookies / cookies
 import ../../core/dispatch
-from ../../core/types import BadSecretKeyError, SecretKey, SameSite, loads, dumps, len
+from ../../core/types import BadSecretKeyError, SecretKey, loads, dumps, len
 from ../../core/context import Context, HandlerAsync, getCookie, setCookie,
     deleteCookie
 from ../../core/response import addHeader

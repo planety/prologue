@@ -8,8 +8,6 @@ type
   SecretKey* = distinct string
   SecretUrl* = distinct string
 
-  SameSite* = enum
-    None, Lax, Strict
 
   Session* = ref object
     data: StringTableRef

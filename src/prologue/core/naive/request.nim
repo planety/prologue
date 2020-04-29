@@ -3,6 +3,8 @@ import strutils, strtabs, uri
 
 import asynchttpserver
 
+import cookies / cookies
+
 
 import ../dispatch
 from ../response import Response
@@ -13,7 +15,7 @@ type
   NativeRequest* = asyncHttpServer.Request
   Request* = object
     nativeRequest*: NativeRequest
-    cookies*: StringTableRef
+    cookies*: CookieJar
     postParams*: StringTableRef
     queryParams*: StringTableRef # Only use queryParams for all url params
     formParams*: FormPart
@@ -106,7 +108,7 @@ proc close*(request: Request) =
   request.nativeRequest.client.close()
 
 proc initRequest*(nativeRequest: NativeRequest, 
-                  cookies = newStringTable(modeCaseSensitive),
+                  cookies = initCookieJar(),
                   pathParams = newStringTable(modeCaseSensitive), 
                   queryParams = newStringTable(modeCaseSensitive),
                   postParams = newStringTable(modeCaseSensitive)): Request {.inline.} =
