@@ -52,3 +52,4 @@ script:
     - nimble install -y
     - nimble install karax -y
     - nimble tests
+    - nimble examples

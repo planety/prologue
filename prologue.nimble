@@ -27,7 +27,7 @@ task tests, "Run all tests":
   exec "testament cat /"
 
 task examples, "Test examples":
-  exec "testament r tests/test_compile/test_compile.nim"
+  exec "testament r tests/test_examples/examples.nim"
 
 task docs, "Only for gh-pages, not for users":
   exec "mkdocs build"

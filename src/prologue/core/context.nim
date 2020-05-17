@@ -222,7 +222,7 @@ proc setResponse*(ctx: Context, code: HttpCode, httpHeaders =
   ## handy to make ctx's response
   let 
     response = initResponse(httpVersion = version, code = code,
-                            headers = {"Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders,
+                            headers = httpHeaders,
                             body = body)
   ctx.response = response
 
