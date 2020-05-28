@@ -343,18 +343,14 @@ proc staticFileResponse*(ctx: Context, filename, dir: string, mimetype = "",
       let body = readFile(filePath)
       resp initResponse(HttpVer11, Http200, headers, body)
   else:
-    # TODO stream
     ctx.response.setHeader("Content-Length", $contentLength)
     await ctx.respond(Http200, "", headers)
     var
-      fileStream = newFutureStream[string]("staticFileResponse")
       file = openAsync(filePath, fmRead)
 
-    await file.readToStream(fileStream)
-
     while true:
-      let (hasValue, value) = await fileStream.read
-      if hasValue:
+      let value = await file.read(4096)
+      if value.len > 0:
         await ctx.send(value)
       else:
         break
