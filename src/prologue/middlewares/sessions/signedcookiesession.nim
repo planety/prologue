@@ -9,7 +9,7 @@ from ../../core/context import Context, HandlerAsync, getCookie, setCookie,
     deleteCookie
 from ../../core/response import addHeader
 from ../../core/signing/signing import DefaultSep, DefaultKeyDerivation,
-    BadTimeSignatureError, SignatureExpiredError, DefaultDigestMethodType,
+    BadTimeSignatureError,BadSignatureError, SignatureExpiredError, DefaultDigestMethodType,
         initTimedSigner, unsign, sign
 from ../../core/middlewaresbase import switch
 
@@ -40,7 +40,7 @@ proc sessionMiddleware*(
 
     try:
       ctx.session.loads(signer.unsign(data, maxAge))
-    except BadTimeSignatureError, SignatureExpiredError, ValueError:
+    except BadSignatureError,BadTimeSignatureError, SignatureExpiredError, ValueError:
       # BadTimeSignature, SignatureExpired or ValueError
       discard
 

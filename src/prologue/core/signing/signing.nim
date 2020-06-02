@@ -4,6 +4,8 @@ import signingbase
 
 import nimcrypto
 
+import ../../security/encryption
+
 from ../types import SecretKey
 from ../encode import urlsafeBase64Encode
 
@@ -214,14 +216,14 @@ proc getSignatureDecode*(s: Signer | TimedSigner): string =
 
 # TODO May support compress
 proc sign*(s: Signer, value: string): string =
-  value & s.sep & s.getSignatureEncode(value.toOpenArrayByte(0, value.len - 1))
+  encrypt(s.secretKey.string,s.salt,value) & s.sep & s.getSignatureEncode(value.toOpenArrayByte(0, value.len - 1))
 
 proc sign*(s: TimedSigner, value: string): string =
   let
     sep = s.sep
     timestamp = $int(cpuTime())
     value = value & sep & timestamp
-  value & sep & s.getSignatureEncode(value.toOpenArrayByte(0, value.len - 1))
+  encrypt(s.secretKey.string,s.salt,value) & sep & s.getSignatureEncode(value.toOpenArrayByte(0, value.len - 1))
 
 proc verifySignature(s: Signer | TimedSigner, value, sig: string): bool =
   return sig == s.getSignatureEncode(value.toOpenArrayByte(0, value.len - 1))
@@ -232,7 +234,7 @@ proc unsign*(s: Signer | TimedSigner, signedValue: string): string =
     raise newException(BadSignatureError, fmt"No {$sep} found in value")
   let
     temp = signedValue.rsplit({sep}, maxsplit = 1)
-    value = temp[0]
+    value = decrypt(s.secretKey.string,s.salt,temp[0])
     sig = temp[1]
   if verifySignature(s, value, sig):
     return value
@@ -288,29 +290,30 @@ when isMainModule:
 
   block:
     let
-      key = SecretKey("secret-key")
+      key = SecretKey("1234123412ABCDEF")
       s = initSigner(key, salt = "itsdangerous.Signer")
       sig = s.sign("my string")
     echo sig
-    assert sig == "my string.wh6tMHxLgJqB6oY1uT73iMlyrOA"
+    assert sig == "FB61F4ED527EB6A722D3FFE4A68CE51E.PCGWYl-k02AneM2cErEX6ajBLE4"
     assert s.unsign(sig) == "my string"
     assert validate(s, sig)
 
   block:
     let
-      key = SecretKey("secret-key")
-      s = initTimedSigner(key, salt = "activate",
+      key = SecretKey("1234123412ABCDEF")
+      s = initTimedSigner(key, salt = "08090A0B0C0D0E0F",
           digestMethod = Sha1Type)
       sig = s.sign("my string")
+    echo sig
     sleep(6000)
     doAssertRaises(SignatureExpiredError):
       discard s.unsign(sig, 5) == "my string"
 
   block:
     let
-      key = SecretKey("secret-key")
-      s = initSigner(key, salt = "activate",
+      key = SecretKey("1234123412ABCDEF")
+      s = initSigner(key, salt = "08090A0B0C0D0E0F",
           digestMethod = Sha1Type)
       sig {.used.} = s.sign( $ %*[1, 2, 3])
     doAssertRaises(BadSignatureError):
-      discard s.unsign("[1, 2, 3].sdhfghjkjhdfghjigf")
+      discard s.unsign("89F749CD0D66E29525586E11E62CB4A8.sdhfghjkjhdfghjigf")

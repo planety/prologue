@@ -1,4 +1,4 @@
-import httpcore, strtabs
+import httpcore, strtabs,json
 from htmlgen import input
 
 
@@ -6,9 +6,10 @@ import ../core/dispatch
 from ../core/urandom import randomBytesSeq, randomString, DefaultEntropy
 from ../core/encode import urlsafeBase64Encode, urlsafeBase64Decode
 from ../core/middlewaresbase import switch
-from ../core/context import Context, HandlerAsync, getCookie, setCookie, deleteCookie
+from ../core/context import Context, HandlerAsync,getPostParams
 import ../core/request
-
+import ../core/types
+import uuids
 
 const
   DefaultTokenName* = "CSRFToken"
@@ -17,53 +18,24 @@ const
 
 
 proc getToken*(ctx: Context, tokenName = DefaultTokenName): string {.inline.} =
-  ctx.getCookie(tokenName)
+  ctx.session.getOrDefault(tokenName)
 
 proc setToken*(ctx: Context, value: string, tokenName = DefaultTokenName) {.inline.} =
-  ctx.setCookie(tokenName, value)
+  ctx.session[tokenName] = value
 
-proc reject(ctx: Context) {.inline.} =
+proc reject*(ctx: Context) {.inline.} =
   ctx.response.code = Http403
 
-proc makeToken(secret: openArray[byte]): string {.inline.} =
-  var
-    mask = randomBytesSeq(DefaultSecretSize)
-    token = newSeq[byte](DefaultTokenSize)
-
-  for idx in DefaultSecretSize ..< DefaultTokenSize:
-    token[idx] = mask[idx] + secret[idx]
-
-  token[0 ..< DefaultSecretSize] = move mask
-
-  result = token.urlsafeBase64Encode
-
-proc recoverToken(token: string): seq[byte] {.inline.} =
-  let
-    token = token.urlsafeBase64Decode
-
-  result = newSeq[byte](DefaultSecretSize)
-  for idx in 0 ..< DefaultSecretSize:
-    result[idx] = byte(token[idx]) - byte(token[DefaultSecretSize + idx])
-
 proc generateToken*(ctx: Context, tokenName = DefaultTokenName): string {.inline.} =
-  let tok = ctx.getToken(tokenName)
-  if tok.len == 0:
-    let secret = randomBytesSeq(DefaultSecretSize)
-    result = makeToken(secret)
-    ctx.setToken(result, tokenName)
-  else:
-    let secret = recoverToken(tok)
-    result = makeToken(secret)
-
-proc checkToken*(checked, secret: string): bool {.inline.} =
-  let
-    checked = checked.recoverToken
-    secret = secret.recoverToken
-
-  checked == secret
-
-proc csrfToken*(ctx: Context, tokenName = DefaultTokenName): string {.inline.} =
-  input(`type` = "hidden", name = tokenName, value = generateToken(ctx, tokenName))
+  let 
+      token = $genUUid()
+  result = token.urlsafeBase64Encode()
+  ctx.session[tokenName] = result
+   
+proc checkToken*(checked:string,token:string): bool {.inline.} =
+  echo "checking token checked: ",checked," ",token
+  result = checked == token
+  echo result
 
 # logging potential csrf attack
 proc csrfMiddleWare*(tokenName = DefaultTokenName): HandlerAsync =
@@ -73,11 +45,11 @@ proc csrfMiddleWare*(tokenName = DefaultTokenName): HandlerAsync =
       await switch(ctx)
       return
 
-    # don't submit forms multi-times
-    if ctx.request.cookies.hasKey("csrf_used"):
-      ctx.deleteCookie("csrf_used")
-      reject(ctx)
-      return
+    # # don't submit forms multi-times
+    # if ctx.request.cookies.hasKey("csrf_used"):
+    #   ctx.deleteCookie("csrf_used")
+    #   reject(ctx)
+    #   return
 
     # forms don't send hidden values
     if not ctx.request.postParams.hasKey(tokenName):
@@ -94,7 +66,7 @@ proc csrfMiddleWare*(tokenName = DefaultTokenName): HandlerAsync =
       reject(ctx)
       return
 
-    # pass
-    ctx.setCookie("csrf_used", "")
+    # # pass
+    ctx.session.del(tokenName)
 
     await switch(ctx)
