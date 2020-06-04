@@ -10,17 +10,14 @@ srcDir        = "src"
 
 # Dependencies
 requires "nim >= 1.2.0"
-requires "regex >= 0.13.1 & < 0.14.0"
+requires "regex >= 0.15.0"
 requires "nimcrypto >= 0.4.11"
 requires "karax >= 1.1.2"
-requires "https://github.com/planety/cookies"
+requires "cookies >= 0.2.0"
 
 when not defined(windows):
   requires "httpbeast >= 0.2.2"
 
-# # examples
-# task helloworld, "helloworld":
-#   exec "nim c -r examples/helloworld/app.nim"
 
 # tests
 task tests, "Run all tests":

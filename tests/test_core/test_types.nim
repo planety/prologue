@@ -2,59 +2,70 @@ from ../../src/prologue/core/types import SecretKey, parseValue, `$`,
     parseStringTable
 
 
-import unittest, strtabs
+import strtabs
 
 
-suite "Test Parse Utils":
-  test "can parse int":
-    check:
-      parseValue("12", 3) == 12
-      parseValue("x", 1) == 1
+# "Test Parse Utils"
+block:
+  # "can parse int"
+  block:
+    doAssert parseValue("12", 3) == 12
+    doAssert parseValue("x", 1) == 1
 
-  test "can parse float":
-    check:
-      parseValue("12.5", 3.4) == 12.5
-      parseValue("z", 1.4) == 1.4
+  # "can parse float"
+  block:
+    doAssert parseValue("12.5", 3.4) == 12.5
+    doAssert parseValue("z", 1.4) == 1.4
 
-  test "can parse bool":
-    check:
-      parseValue("true", true)
-      not parseValue("s", false)
+  # "can parse bool"
+  block:
+    doAssert parseValue("true", true)
+    doAssert not parseValue("s", false)
 
-  test "can parse string":
-    check parseValue("fight", "") == "fight"
+  # "can parse string"
+  block:
+    doAssert parseValue("fight", "") == "fight"
 
 
-suite "Test Secret Key":
-  test "can hide secret key":
+# "Test Secret Key"
+block:
+  # "can hide secret key"
+  block:
     let secretKey = SecretKey("PrologueSecretKey")
-    check $secretKey == "SecretKey(********)"
+    doAssert $secretKey == "SecretKey(********)"
 
-  test "can expose secret key":
+  # "can expose secret key"
+  block:
     let secretKey = SecretKey("PrologueSecretKey")
-    check string(secretKey) == "PrologueSecretKey"
+    doAssert string(secretKey) == "PrologueSecretKey"
 
 
-suite "Deserialize StringTable":
-  test "can parse stringTable from empty stringTable":
+# "Deserialize StringTable"
+block:
+  # "can parse stringTable from empty stringTable"
+  block:
     let tabs = newStringTable(mode = modeCaseSensitive)
-    check $parseStringTable($(tabs)) == $tabs
+    doAssert $parseStringTable($(tabs)) == $tabs
 
-  test "can parse stringTable from stringTable with elements":
+  # "can parse stringTable from stringTable with elements"
+  block:
     let tabs = {"username": "flywind", "password": "root"}.newStringTable()
-    check $parseStringTable($tabs) == $tabs
+    doAssert $parseStringTable($tabs) == $tabs
 
-  test "can parse stringTable from stringTable with empty value":
+  # "can parse stringTable from stringTable with empty value"
+  block:
     let tabs = {"username": "flywind", "password": "",
         "day": "one"}.newStringTable()
-    check $parseStringTable($tabs) == $tabs
+    doAssert $parseStringTable($tabs) == $tabs
 
-  test "can parse stringTable from stringTable with empty key":
+  # "can parse stringTable from stringTable with empty key"
+  block:
     let tabs = {"username": "flywind", "password": "root",
         "": "one"}.newStringTable()
-    check $parseStringTable($tabs) == $tabs
+    doAssert $parseStringTable($tabs) == $tabs
 
-  test "can parse stringTable from stringTable with space key or value":
+  # "can parse stringTable from stringTable with space key or value"
+  block:
     let tabs = {"user    name": "   flywind", "password": " ro  ot  ",
         "": "    o ne"}.newStringTable()
-    check $parseStringTable($tabs) == $tabs
+    doAssert $parseStringTable($tabs) == $tabs

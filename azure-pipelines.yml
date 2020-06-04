@@ -166,8 +166,3 @@ steps:
       export ucpu=${UCPU}
       nimble tests
     displayName: 'Testing the package'
-  # - bash: |
-  #     echo "PATH=${PATH}"
-  #     export ucpu=${UCPU}
-  #     nimble test_std
-  #   displayName: 'Testing the package with asynchttpserver'

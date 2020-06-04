@@ -7,191 +7,204 @@ from ../../src/prologue/validate/validate import required, accepted, isInt,
 from ../../src/prologue/core/basicregex import re
 
 
-import unittest
-
-
-suite "Test Validate":
-  test "isInt can work":
+# "Test Validate"
+block:
+  # "isInt can work"
+  block:
     let
       msg = "Int required"
       decide = isInt(msg)
       decideDefaultMsg = isInt()
-    check:
-      decide("12") == (true, "")
-      decide("-753") == (true, "")
-      decide("0") == (true, "")
-      decide("912.6") == (false, msg)
-      decide("a912") == (false, msg)
-      decide("") == (false, msg)
-      decideDefaultMsg("a912") == (false, "a912 is not an integer!")
-      decideDefaultMsg("") == (false, " is not an integer!")
 
-  test "isNumeric can work":
+    doAssert decide("12") == (true, "")
+    doAssert decide("-753") == (true, "")
+    doAssert decide("0") == (true, "")
+    doAssert decide("912.6") == (false, msg)
+    doAssert decide("a912") == (false, msg)
+    doAssert decide("") == (false, msg)
+    doAssert decideDefaultMsg("a912") == (false, "a912 is not an integer!")
+    doAssert decideDefaultMsg("") == (false, " is not an integer!")
+
+  # "isNumeric can work"
+  block:
     let
       msg = "Numeric required"
       decide = isNumeric(msg)
       decideDefaultMsg = isNumeric()
-    check:
-      decide("12") == (true, "")
-      decide("-753") == (true, "")
-      decide("0") == (true, "")
-      decide("0.5") == (true, "")
-      decide("-912.6") == (true, "")
-      decide("a912") == (false, msg)
-      decide("0.91.2") == (false, msg)
-      decide("") == (false, msg)
-      decideDefaultMsg("0.91.2") == (false, "0.91.2 is not a number!")
-      decideDefaultMsg("") == (false, " is not a number!")
 
-  test "isBool can work":
+    doAssert decide("12") == (true, "")
+    doAssert decide("-753") == (true, "")
+    doAssert decide("0") == (true, "")
+    doAssert decide("0.5") == (true, "")
+    doAssert decide("-912.6") == (true, "")
+    doAssert decide("a912") == (false, msg)
+    doAssert decide("0.91.2") == (false, msg)
+    doAssert decide("") == (false, msg)
+    doAssert decideDefaultMsg("0.91.2") == (false, "0.91.2 is not a number!")
+    doAssert decideDefaultMsg("") == (false, " is not a number!")
+
+  # "isBool can work"
+  block:
     let
       msg = "Bool required"
       decide = isBool(msg)
       decideDefaultMsg = isBool()
-    check:
-      decide("true") == (true, "")
-      decide("1") == (true, "")
-      decide("yes") == (true, "")
-      decide("n") == (true, "")
-      decide("False") == (true, "")
-      decide("Off") == (true, "")
-      decide("wrong") == (false, msg)
-      decide("") == (false, msg)
-      decideDefaultMsg("wrong") == (false, "wrong is not a boolean!")
-      decideDefaultMsg("") == (false, " is not a boolean!")
 
-  test "equals can work":
+    doAssert decide("true") == (true, "")
+    doAssert decide("1") == (true, "")
+    doAssert decide("yes") == (true, "")
+    doAssert decide("n") == (true, "")
+    doAssert decide("False") == (true, "")
+    doAssert decide("Off") == (true, "")
+    doAssert decide("wrong") == (false, msg)
+    doAssert decide("") == (false, msg)
+    doAssert decideDefaultMsg("wrong") == (false, "wrong is not a boolean!")
+    doAssert decideDefaultMsg("") == (false, " is not a boolean!")
+
+  # "equals can work"
+  block:
     let
       msg = "not equal"
       decide = equals("prologue", msg)
       decideDefaultMsg = equals("starlight")
-    check:
-      decide("prologue") == (true, "")
-      decide("") == (false, msg)
-      decideDefaultMsg("prologue") == (false, "prologue is not equal to starlight!")
 
-  test "minValue can work":
+    doAssert decide("prologue") == (true, "")
+    doAssert decide("") == (false, msg)
+    doAssert decideDefaultMsg("prologue") == (false, "prologue is not equal to starlight!")
+
+  # "minValue can work"
+  block:
     let
       msg = "lower than"
       decide = minValue(12, msg)
       decideDefaultMsg = minValue(-5.5)
-    check:
-      decide("27") == (true, "")
-      decide("8.5") == (false, msg)
-      decide("abc") == (false, "abc is not a number!")
-      decideDefaultMsg("") == (false, " is not a number!")
-      decideDefaultMsg("-12") == (false, "-12 is not greater than or equal to -5.5!")
 
-  test "maxValue can work":
+    doAssert decide("27") == (true, "")
+    doAssert decide("8.5") == (false, msg)
+    doAssert decide("abc") == (false, "abc is not a number!")
+    doAssert decideDefaultMsg("") == (false, " is not a number!")
+    doAssert decideDefaultMsg("-12") == (false, "-12 is not greater than or equal to -5.5!")
+
+  # "maxValue can work"
+  block:
     let
       msg = "greater than"
       decide = maxValue(12, msg)
       decideDefaultMsg = maxValue(-5.5)
-    check:
-      decide("2.7") == (true, "")
-      decide("18.5") == (false, msg)
-      decide("abc") == (false, "abc is not a number!")
-      decideDefaultMsg("") == (false, " is not a number!")
-      decideDefaultMsg("2") == (false, "2 is not less than or equal to -5.5!")
 
-  test "rangeValue can work":
+    doAssert decide("2.7") == (true, "")
+    doAssert decide("18.5") == (false, msg)
+    doAssert decide("abc") == (false, "abc is not a number!")
+    doAssert decideDefaultMsg("") == (false, " is not a number!")
+    doAssert decideDefaultMsg("2") == (false, "2 is not less than or equal to -5.5!")
+
+  # "rangeValue can work"
+  block:
     let
       msg = "not in Range"
       decide = rangeValue(-9, 13, msg)
       decideDefaultMsg = rangeValue(-5.5, 77)
-    check:
-      decide("2.7") == (true, "")
-      decide("18.5") == (false, msg)
-      decide("abc") == (false, "abc is not a number!")
-      decideDefaultMsg("") == (false, " is not a number!")
-      decideDefaultMsg("-29") == (false, "-29 is not in range from -5.5 to 77.0!")
 
-  test "minLength can work":
+    doAssert decide("2.7") == (true, "")
+    doAssert decide("18.5") == (false, msg)
+    doAssert decide("abc") == (false, "abc is not a number!")
+    doAssert decideDefaultMsg("") == (false, " is not a number!")
+    doAssert decideDefaultMsg("-29") == (false, "-29 is not in range from -5.5 to 77.0!")
+
+  # "minLength can work"
+  block:
     let
       msg = "lower than"
       decide = minLength(12, msg)
       decideDefaultMsg = minLength(7)
-    check:
-      decide("Welcome to use Prologue!") == (true, "")
-      decide("Not True") == (false, msg)
-      decideDefaultMsg("Prologue") == (true, "")
-      decideDefaultMsg("Not") == (false, "Length 3 is not greater than or equal to 7!")
 
-  test "maxLength can work":
+    doAssert decide("Welcome to use Prologue!") == (true, "")
+    doAssert decide("Not True") == (false, msg)
+    doAssert decideDefaultMsg("Prologue") == (true, "")
+    doAssert decideDefaultMsg("Not") == (false, "Length 3 is not greater than or equal to 7!")
+
+  # "maxLength can work"
+  block:
     let
       msg = "greater than"
       decide = maxLength(12, msg)
       decideDefaultMsg = maxLength(5)
-    check:
-      decide("True") == (true, "")
-      decide("Welcome to use Prologue!") == (false, msg)
-      decideDefaultMsg("True") == (true, "")
-      decideDefaultMsg("Prologue") == (false, "Length 8 is not less than or equal to 5!")
 
-  test "rangeLength can work":
+    doAssert decide("True") == (true, "")
+    doAssert decide("Welcome to use Prologue!") == (false, msg)
+    doAssert decideDefaultMsg("True") == (true, "")
+    doAssert decideDefaultMsg("Prologue") == (false, "Length 8 is not less than or equal to 5!")
+
+  # "rangeLength can work"
+  block:
     let
       msg = "not in Range"
       decide = rangeLength(9, 13, msg)
       decideDefaultMsg = rangeLength(5, 17)
-    check:
-      decide("use Prologue") == (true, "")
-      decide("Prologue") == (false, msg)
-      decideDefaultMsg("prologue") == (true, "")
-      decideDefaultMsg("use") == (false, "Length 3 is not in range from 5 to 17!")
 
-  test "required can work":
+    doAssert decide("use Prologue") == (true, "")
+    doAssert decide("Prologue") == (false, msg)
+    doAssert decideDefaultMsg("prologue") == (true, "")
+    doAssert decideDefaultMsg("use") == (false, "Length 3 is not in range from 5 to 17!")
+
+  # "required can work"
+  block:
     let
       msg = "Keywords required"
       decide = required(msg)
       decideDefaultMsg = required()
-    check:
-      decide("prologue") == (true, "")
-      decide("") == (false, msg)
-      decideDefaultMsg("") == (false, "Field is required!")
 
-  test "accepted can work":
+    doAssert decide("prologue") == (true, "")
+    doAssert decide("") == (false, msg)
+    doAssert decideDefaultMsg("") == (false, "Field is required!")
+
+  # "accepted can work"
+  block:
     let
       msg = "Not accepted"
       decide = accepted(msg)
       decideDefaultMsg = accepted()
-    check:
-      decide("on") == (true, "")
-      decide("y") == (true, "")
-      decide("1") == (true, "")
-      decide("yes") == (true, "")
-      decide("true") == (true, "")
-      decide("") == (false, msg)
-      decide("off") == (false, msg)
-      decide("12") == (false, msg)
-      decideDefaultMsg("") == (false, """ is not in "yes", "y", "on", "1", "true"!""")
-      decideDefaultMsg("off") == (false, """off is not in "yes", "y", "on", "1", "true"!""")
-      decideDefaultMsg("12") == (false, """12 is not in "yes", "y", "on", "1", "true"!""")
 
-  test "matchRegex can work":
+    doAssert decide("on") == (true, "")
+    doAssert decide("y") == (true, "")
+    doAssert decide("1") == (true, "")
+    doAssert decide("yes") == (true, "")
+    doAssert decide("true") == (true, "")
+    doAssert decide("") == (false, msg)
+    doAssert decide("off") == (false, msg)
+    doAssert decide("12") == (false, msg)
+    doAssert decideDefaultMsg("") == (false, """ is not in "yes", "y", "on", "1", "true"!""")
+    doAssert decideDefaultMsg("off") == (false, """off is not in "yes", "y", "on", "1", "true"!""")
+    doAssert decideDefaultMsg("12") == (false, """12 is not in "yes", "y", "on", "1", "true"!""")
+
+  # "matchRegex can work"
+  block:
     let
       msg = "Regex doesn't match!"
       decide = matchRegex(re"(?P<greet>hello) (?:(?P<who>[^\s]+)\s?)+", msg)
       decideDefaultMsg = matchRegex(re"abc")
-    check:
-      decide("hello beautiful world") == (true, "")
-      decide("time") == (false, msg)
-      decideDefaultMsg("abc") == (true, "")
-      decideDefaultMsg("abcd") == (false, "abcd doesn't match Regex")
 
-  test "matchUrl can work":
+    doAssert decide("hello beautiful world") == (true, "")
+    doAssert decide("time") == (false, msg)
+    doAssert decideDefaultMsg("abc") == (true, "")
+    doAssert decideDefaultMsg("abcd") == (false, "abcd doesn't match Regex")
+
+  # "matchUrl can work"
+  block:
     let
       msg = "Regex doesn't match!"
       decide = matchUrl(msg)
       decideDefaultMsg = matchUrl()
-    check:
-      decide("https://www.google.com") == (true, "")
-      decide("https://127.0.0.1") == (true, "")
-      decide("127.0.0.1") == (false, msg)
-      decideDefaultMsg("file:///prologue/starlight.nim") == (true, "")
-      decideDefaultMsg("https:/www.prologue.com") == (false,
+
+    doAssert decide("https://www.google.com") == (true, "")
+    doAssert decide("https://127.0.0.1") == (true, "")
+    doAssert decide("127.0.0.1") == (false, msg)
+    doAssert decideDefaultMsg("file:///prologue/starlight.nim") == (true, "")
+    doAssert decideDefaultMsg("https:/www.prologue.com") == (false,
                 "https:/www.prologue.com doesn't match url")
 
-  test "validate can work":
+  # "validate can work"
+  block:
     var validater = newFormValidation({
         "accepted": @[required(), accepted()],
         "required": @[required()],
@@ -208,12 +221,11 @@ suite "Test Validate":
       chk4 = validater.validate({"required": "on", "accepted": "true",
       "requiredInt": "12.5", "minValue": "13"}.newStringTable, allMsgs = false)
 
-    check:
-      chk1 == (true, "")
-      not chk2.hasValue
-      chk2.msg == "Can\'t find key: accepted\nCan\'t find key: " &
+    doAssert chk1 == (true, "")
+    doAssert not chk2.hasValue
+    doAssert chk2.msg == "Can\'t find key: accepted\nCan\'t find key: " &
             "required\nCan\'t find key: requiredInt\n10 is not greater than or equal to 12.0!\n"
-      not chk3.hasValue
-      chk3.msg == "Can\'t find key: accepted\n"
-      not chk4.hasValue
-      chk4.msg == "12.5 is not an integer!\n"
+    doAssert not chk3.hasValue
+    doAssert chk3.msg == "Can\'t find key: accepted\n"
+    doAssert not chk4.hasValue
+    doAssert chk4.msg == "12.5 is not an integer!\n"

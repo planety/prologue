@@ -2,12 +2,12 @@ from ../../src/prologue/core/types import SecretKey, len
 from ../../src/prologue/core/urandom import randomString, randomSecretKey
 
 
-import unittest
+# "Test Urandom"
+block:
+  # "randomString can work"
+  block:
+    doAssert randomString(8).len != 0
 
-
-suite "Test Urandom":
-  test "randomString can work":
-    check randomString(8).len != 0
-
-  test "randomSecretKey can work":
-    check randomSecretKey(8).len != 0
+  # "randomSecretKey can work"
+  block:
+    doAssert randomSecretKey(8).len != 0

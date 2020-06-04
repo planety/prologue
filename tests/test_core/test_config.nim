@@ -1,13 +1,15 @@
 import ../../src/prologue/core/configure
 
 
-import unittest, os
+import os
 
 
-suite "Test Config":
+# "Test Config"
+block:
   let filename = "tests/.env"
 
-  test "can write config":
+  # "can write config"
+  block:
     let
       env = initEnv()
     env.setPrologueEnv("debug", "true")
@@ -15,15 +17,15 @@ suite "Test Config":
     env.setPrologueEnv("appName", "Starlight")
     env.setPrologueEnv("staticDir", "static")
     writePrologueEnv(filename, env)
-    check existsFile(filename)
+    doAssert existsFile(filename)
 
-  test "can load config":
+  # "can load config"
+  block:
     let env = loadPrologueEnv("tests/.env")
-    check: 
-      env["debug"] == "true"
-      env["port"] == "8080"
-      env["appName"] == "Starlight"
-      env["staticDir"] == "static"
+    doAssert env["debug"] == "true"
+    doAssert env["port"] == "8080"
+    doAssert env["appName"] == "Starlight"
+    doAssert env["staticDir"] == "static"
 
   if existsFile(filename):
     removeFile(filename)

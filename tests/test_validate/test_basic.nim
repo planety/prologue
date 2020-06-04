@@ -1,36 +1,35 @@
 from ../../src/prologue/validate/basic import isInt, isNumeric, isBool
 
-import unittest
 
+# "Test Is Utils"
+block:
+  # "isInt can work"
+  block:
+    doAssert isInt("12")
+    doAssert isInt("-753")
+    doAssert isInt("0")
+    doAssert not isInt("")
+    doAssert not isInt("912.6")
+    doAssert not isInt("a912")
 
-suite "Test Is Utils":
-  test "isInt can work":
-    check:
-      isInt("12")
-      isInt("-753")
-      isInt("0")
-      not isInt("")
-      not isInt("912.6")
-      not isInt("a912")
+  # "isNumeric can work"
+  block:
+    doAssert isNumeric("12")
+    doAssert isNumeric("-753")
+    doAssert isNumeric("0")
+    doAssert isNumeric("0.5")
+    doAssert isNumeric("-912.6")
+    doAssert not isNumeric("")
+    doAssert not isNumeric("a912")
+    doAssert not isNumeric("0.91.2")
 
-  test "isNumeric can work":
-    check:
-      isNumeric("12")
-      isNumeric("-753")
-      isNumeric("0")
-      isNumeric("0.5")
-      isNumeric("-912.6")
-      not isNumeric("")
-      not isNumeric("a912")
-      not isNumeric("0.91.2")
-
-  test "isBool can work":
-    check:
-      isBool("true")
-      isBool("1")
-      isBool("yes")
-      isBool("n")
-      isBool("False")
-      isBool("Off")
-      not isBool("")
-      not isBool("wrong")
+  # "isBool can work"
+  block:
+    doAssert isBool("true")
+    doAssert isBool("1")
+    doAssert isBool("yes")
+    doAssert isBool("n")
+    doAssert isBool("False")
+    doAssert isBool("Off")
+    doAssert not isBool("")
+    doAssert not isBool("wrong")

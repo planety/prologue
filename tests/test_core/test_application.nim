@@ -2,8 +2,6 @@ import httpclient, asyncdispatch, nativesockets
 import strformat, os, osproc, terminal, strutils
 
 
-import unittest
-
 import ./utils
 
 
@@ -51,7 +49,8 @@ waitFor start()
 #     echo await client.getContent(fmt"http://{address}:{port}{route}")
 #     echo i
 
-suite "Test Application":
+# "Test Application"
+block:
   let
     client = newAsyncHttpClient()
     address = "127.0.0.1"
@@ -64,107 +63,120 @@ suite "Test Application":
   #   waitFor client.houndredsRequest(address, port, route)
   #   echo "end"
 
-  test "can get /":
+  # "can get /"
+  block:
     let
       route = "/"
       response = waitFor client.get(fmt"http://{address}:{port}{route}")
-    check:
-      response.code == Http200
-      (waitFor response.body) == "<h1>Home</h1>"
 
-  test "can get /hello":
+    doAssert response.code == Http200
+    doAssert (waitFor response.body) == "<h1>Home</h1>"
+
+  # "can get /hello"
+  block:
     let
       route = "/hello"
       response = waitFor client.get(fmt"http://{address}:{port}{route}")
-    check:
-      response.code == Http200
-      (waitFor response.body) == "<h1>Hello, Prologue!</h1>"
 
-  test "can get /home":
+    doAssert response.code == Http200
+    doAssert (waitFor response.body) == "<h1>Hello, Prologue!</h1>"
+
+  # "can get /home"
+  block:
     let
       route = "/home"
       response = waitFor client.get(fmt"http://{address}:{port}{route}")
-    check:
-      response.code == Http200
-      (waitFor response.body) == "<h1>Home</h1>"
 
-  test "can get /hello/{name} with name = Starlight":
+    doAssert response.code == Http200
+    doassert (waitFor response.body) == "<h1>Home</h1>"
+
+  # "can get /hello/{name} with name = Starlight"
+  block:
     let
       route = "/hello/Starlight!"
       response = waitFor client.get(fmt"http://{address}:{port}{route}")
-    check:
-      response.code == Http200
-      (waitFor response.body) == "<h1>Hello, Starlight!</h1>"
 
-  test "can get /hello/{name} with name = ":
+    doAssert response.code == Http200
+    doAssert (waitFor response.body) == "<h1>Hello, Starlight!</h1>"
+
+  # "can get /hello/{name} with name = "
+  block:
     let
       route = "/hello/"
       response = waitFor client.get(fmt"http://{address}:{port}{route}")
-    check:
-      response.code == Http200
-      (waitFor response.body) == "<h1>Hello, Prologue!</h1>"
+    
+    doAssert response.code == Http200
+    doAssert (waitFor response.body) == "<h1>Hello, Prologue!</h1>"
 
-  test "can redirect /home":
+  # "can redirect /home"
+  block:
     let
       route = "/redirect"
       response = waitFor client.get(fmt"http://{address}:{port}{route}")
-    check:
-      response.code == Http200
-      (waitFor response.body) == "<h1>Home</h1>"
 
-  test "can get /loginget using get method":
+    doAssert response.code == Http200
+    doAssert (waitFor response.body) == "<h1>Home</h1>"
+
+  # "can get /loginget using get method"
+  block:
     let
       route = "/loginget"
       response = waitFor client.get(fmt"http://{address}:{port}{route}")
-    check:
-      response.code == Http200
-      (waitFor response.body) == loginGetPage()
+
+    doAssert response.code == Http200
+    doAssert (waitFor response.body) == loginGetPage()
 
   when defined(windows) or defined(usestd):
-    test "can get /loginpage":
+    # "can get /loginpage"
+    block:
       let
         route = "/loginpage"
       var data = newMultipartData()
       data["username"] = "starlight"
       data["password"] = "prologue"
-      check (waitFor client.postContent(fmt"http://{address}:{port}{route}",
-          multipart = data)) == "<h1>Hello, Nim</h1>"
+      doAssert (waitFor client.postContent(fmt"http://{address}:{port}{route}",
+                multipart = data)) == "<h1>Hello, Nim</h1>"
 
-  test "can get /login using post method":
+  # "can get /login using post method"
+  block:
     let
       route = "/login"
       response = waitFor client.get(fmt"http://{address}:{port}{route}")
-    check:
-      response.code == Http200
-      (waitFor response.body) == loginPage()
+
+    doassert response.code == Http200
+    doAssert (waitFor response.body) == loginPage()
 
   when defined(windows) or defined(usestd):
-    test "can post /login":
+    # "can post /login"
+    block:
       let
         route = "/login"
       var data = newMultipartData()
       data["username"] = "starlight"
       data["password"] = "prologue"
-      check (waitFor client.postContent(fmt"http://{address}:{port}{route}",
+      doAssert (waitFor client.postContent(fmt"http://{address}:{port}{route}",
           multipart = data)) == "<h1>Hello, Nim</h1>"
 
-  test "can get /translate":
+  # "can get /translate"
+  block:
     let
       route = "/translate"
       response = waitFor client.get(fmt"http://{address}:{port}{route}")
-    check:
-      response.code == Http200
-      (waitFor response.body) == "I'm ok."
 
-  test "can get /upload":
+    doAssert response.code == Http200
+    doAssert (waitFor response.body) == "I'm ok."
+
+  # "can get /upload"
+  block:
     let
       route = "/upload"
       response = waitFor client.get(fmt"http://{address}:{port}{route}")
-    check:
-      response.code == Http200
-      (waitFor response.body) == readFile("tests/static/upload.html")
 
-  test "can post /upload":
+    doassert response.code == Http200
+    doAssert (waitFor response.body) == readFile("tests/static/upload.html")
+
+  # "can post /upload"
+  block:
     let
       route = "/upload"
       filename = "test.txt"
@@ -173,9 +185,9 @@ suite "Test Application":
     data["file"] = (filename, "text/plain", text)
     let response = (waitFor client.post(fmt"http://{address}:{port}{route}",
         multipart = data))
-    check:
-      response.code == Http200
-      (waitFor response.body) == fmt"<html><h1>{filename}</h1><p>{text.strip()}</p></html>"
+
+    doAssert response.code == Http200
+    doAssert (waitFor response.body) == fmt"<html><h1>{filename}</h1><p>{text.strip()}</p></html>"
 
 
   client.close()

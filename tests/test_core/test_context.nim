@@ -1,13 +1,11 @@
 from ../../src/prologue/core/context import multiMatch
 
 
-import unittest
+# "Test Context"
+block:
+  # "multiMatch can work"
 
-
-suite "Test Context":
-  test "multiMatch can work":
-    check:
-      multiMatch("/hello/{name}/ok/{age}/io", @{"name": "flywind",
-        "age": "20"}) == "/hello/flywind/ok/20/io"
-      multiMatch("/api/homepage") == "/api/homepage"
-      multiMatch("", @{"name": "flywind"}) == ""
+  doAssert multiMatch("/hello/{name}/ok/{age}/io", @{"name": "flywind",
+                      "age": "20"}) == "/hello/flywind/ok/20/io"
+  doAssert multiMatch("/api/homepage") == "/api/homepage"
+  doAssert multiMatch("", @{"name": "flywind"}) == ""
