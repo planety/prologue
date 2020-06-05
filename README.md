@@ -15,6 +15,8 @@ Prologue is a Full-Stack Web Framework which is
 ideal for building elegant and high performance
 web services.
 
+**Reduce magic. Reduce surprise.**
+
 ## Current Work
 Now we are working on rewriting network infrastructure.
 
