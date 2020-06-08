@@ -6,26 +6,13 @@ on:
       - master
 
 jobs:
-  test_windows:
-    runs-on: windows-latest
+  test:
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        version:
-          - stable
-    steps:
-    - uses: actions/checkout@v1
-    - uses: jiro4989/setup-nim-action@v1
-      with:
-        nim-version: ${{ matrix.version }}
-    - name: Install Packages
-      run: nimble install -y
-    - name: Test command
-      run: nimble tests
-
-  test_ubuntu:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
+        os:
+          - ubuntu-latest
+          - windows-latest
         version:
           - stable
     steps:
