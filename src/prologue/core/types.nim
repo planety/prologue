@@ -135,7 +135,9 @@ proc parseStringTable*(s: string): StringTableRef {.inline.} =
   parseStringTable(result, s)
 
 proc loads*(session: Session, s: string) {.inline.} =
+  ## Loads session from strings.
   session.data.parseStringTable(s)
 
 proc dumps*(session: Session): string {.inline.} =
+  ## Dumps session to strings.
   $session

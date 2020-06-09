@@ -1,9 +1,10 @@
 language: c
 
-cache: ccache
-cache:
-  directories:
-  - .cache
+## disable cache
+# cache: ccache
+# cache:
+#   directories:
+#   - .cache
 
 matrix:
   include:
@@ -22,10 +23,11 @@ matrix:
       compiler: gcc
 
 
-  allow_failures:
-    # Ignore failures when building against the devel Nim branch
-    # Also ignore OSX, due to very long build queue
-    - os: osx
+  # allow_failures:
+  #   # Ignore failures when building against the devel Nim branch
+  #   # Also ignore OSX, due to very long build queue
+  #   - os: windows
+
   fast_finish: true
 
 # BEGIN: Assuming you rely on external dependencies

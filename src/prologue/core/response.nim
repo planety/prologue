@@ -51,12 +51,12 @@ proc deleteCookie*(response: var Response, key: string, value = "", path = "",
   response.setCookie(key, value, expires = secondsForward(0), maxAge = some(0),
                      path = path, domain = domain)
 
-proc abort*(code = Http401, body = "", headers = newHttpHeaders(),
+func abort*(code = Http401, body = "", headers = newHttpHeaders(),
             version = HttpVer11): Response {.inline.} =
   result = initResponse(version, code = code, body = body,
                         headers = headers)
 
-proc redirect*(url: string, code = Http301,
+func redirect*(url: string, code = Http301,
                body = "", delay = 0, headers = newHttpHeaders(),
                version = HttpVer11): Response {.inline.} =
   ## redirect to new url.
@@ -66,31 +66,31 @@ proc redirect*(url: string, code = Http301,
     headers.add("refresh", &"{delay};url=\"{url}\"")
   result = initResponse(version, code = code, headers = headers, body = body)
 
-proc error404*(code = Http404,
+func error404*(code = Http404,
                body = "<h1>404 Not Found!</h1>", headers = newHttpHeaders(),
                version = HttpVer11): Response {.inline.} =
   result = initResponse(version, code = code, body = body, headers = headers)
 
-proc htmlResponse*(text: string, code = Http200, headers = newHttpHeaders(),
+func htmlResponse*(text: string, code = Http200, headers = newHttpHeaders(),
                    version = HttpVer11): Response {.inline.} =
-  ## Content-Type": "text/html; charset=UTF-8
+  ## Content-Type: text/html; charset=UTF-8.
   headers["Content-Type"] = "text/html; charset=UTF-8"
   result = initResponse(version, code, headers, body = text)
 
-proc plainTextResponse*(text: string, code = Http200,
+func plainTextResponse*(text: string, code = Http200,
                         headers = newHttpHeaders(), version = HttpVer11): Response {.inline.} =
-  ## Content-Type": "text/plain
+  ## Content-Type: text/plain.
   headers["Content-Type"] = "text/plain"
   result = initResponse(version, code, headers, body = text)
 
-proc jsonResponse*(text: JsonNode, code = Http200, headers = newHttpHeaders(),
-    version = HttpVer11): Response {.inline.} =
-  ## Content-Type": "application/json
+func jsonResponse*(text: JsonNode, code = Http200, headers = newHttpHeaders(),
+                   version = HttpVer11): Response {.inline.} =
+  ## Content-Type: application/json.
   headers["Content-Type"] = "text/json"
   result = initResponse(version, code, headers, body = $text)
 
 macro resp*(body: string, code = Http200) =
-  ## handy to make ctx's response
+  ## Handy to make a response of ctx.
   var ctx = ident"ctx"
 
   result = quote do:
@@ -100,7 +100,7 @@ macro resp*(body: string, code = Http200) =
     `ctx`.response = response
 
 macro resp*(response: Response) =
-  ## handy to make ctx's response
+  ## Handy to make a response of ctx.
   var ctx = ident"ctx"
 
   result = quote do:

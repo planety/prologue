@@ -20,11 +20,10 @@ proc unauthenticate*(ctx: Context, authMethod: AuthMethod, realm: string,
     charset = "UTF-8") {.inline.} =
   ctx.response.code = Http401
   ctx.response.setHeader("WWW-Authenticate",
-      fmt"{authMethod} realm={realm}, charset={charset}")
+                         fmt"{authMethod} realm={realm}, charset={charset}")
 
-proc basicAuth*(ctx: Context, realm: string,
-    verify: VerifyHandler, charset = "UTF-8"): tuple[hasValue: bool, username,
-        password: string] =
+proc basicAuth*(ctx: Context, realm: string, verify: VerifyHandler, 
+                charset = "UTF-8"): tuple[hasValue: bool, username, password: string] =
   result = (false, "", "")
   if not ctx.request.hasHeader("Authorization"):
     unauthenticate(ctx, Basic, realm, charset)

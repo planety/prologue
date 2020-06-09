@@ -1,7 +1,7 @@
 import htmlgen
 
 
-proc errorPage*(errorMsg: string, version: string): string =
+func errorPage*(errorMsg: string, version: string): string =
   result = html(head(title(errorMsg)),
                 body(h1(errorMsg),
                      "<hr/>",
@@ -9,7 +9,7 @@ proc errorPage*(errorMsg: string, version: string): string =
                      style = "text-align: center;"),
                 xmlns = "http://www.w3.org/1999/xhtml")
 
-proc loginPage*(): string =
+func loginPage*(): string =
   result = html(form(action = "/login",
                 `method` = "post",
                 "Username: ", input(name = "username", `type` = "text"),
@@ -17,7 +17,7 @@ proc loginPage*(): string =
                 input(value = "login", `type` = "submit")),
                 xmlns = "http://www.w3.org/1999/xhtml")
 
-proc multiPartPage*(): string =
+func multiPartPage*(): string =
   result = html(form(action = "/multipart?firstname=red green&lastname=tenth",
                `method` = "post", enctype = "multipart/form-data",
                 input(name = "username", `type` = "text", value = "play game"),
@@ -25,7 +25,7 @@ proc multiPartPage*(): string =
                 input(value = "submit", `type` = "submit")),
                 xmlns = "http://www.w3.org/1999/xhtml")
 
-proc internalServerErrorPage*(): string {.inline.} =
+func internalServerErrorPage*(): string {.inline.} =
   result = """<html>
 
 <head>

@@ -1,5 +1,4 @@
 import ../../src/prologue
-import ../../src/prologue/middlewares/middlewares
 
 
 proc home(ctx: Context) {.async.} =
