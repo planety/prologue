@@ -1,10 +1,10 @@
 language: c
 
-## disable cache
-# cache: ccache
-# cache:
-#   directories:
-#   - .cache
+# disable cache
+cache: ccache
+cache:
+  directories:
+  - .cache
 
 matrix:
   include:
