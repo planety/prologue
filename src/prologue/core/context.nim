@@ -185,7 +185,7 @@ proc setCookie*(ctx: Context, key, value: string, expires: DateTime|Time,
       httpOnly, sameSite)
 
 proc deleteCookie*(ctx: Context, key: string, path = "", domain = "") {.inline.} =
-  ctx.deleteCookie(key = key, path = path, domain = domain)
+  ctx.response.deleteCookie(key = key, path = path, domain = domain)
 
 proc defaultHandler*(ctx: Context) {.async.} =
   ctx.response.code = Http404
@@ -343,14 +343,18 @@ proc staticFileResponse*(ctx: Context, filename, dir: string, mimetype = "",
       let body = readFile(filePath)
       resp initResponse(HttpVer11, Http200, headers, body)
   else:
+    # TODO stream
     ctx.response.setHeader("Content-Length", $contentLength)
     await ctx.respond(Http200, "", headers)
     var
+      fileStream = newFutureStream[string]("staticFileResponse")
       file = openAsync(filePath, fmRead)
 
+    await file.readToStream(fileStream)
+
     while true:
-      let value = await file.read(4096)
-      if value.len > 0:
+      let (hasValue, value) = await fileStream.read
+      if hasValue:
         await ctx.send(value)
       else:
         break
