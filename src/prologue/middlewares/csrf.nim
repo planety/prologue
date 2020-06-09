@@ -10,6 +10,9 @@ from ../core/context import Context, HandlerAsync, getCookie, setCookie, deleteC
 import ../core/request
 
 
+import cookiejar
+
+
 const
   DefaultTokenName* = "CSRFToken"
   DefaultSecretSize* = 32

@@ -74,7 +74,7 @@ type
 
   ErrorHandlerTable* = TableRef[HttpCode, ErrorHandler]
 
-  UpLoadFile* = object
+  UploadFile* = object
     filename*: string
     body*: string
 
@@ -98,13 +98,16 @@ proc `first=`*(ctx: Context, first: bool) {.inline.} =
   ctx.first = first
 
 proc initUploadFile*(filename, body: string): UpLoadFile {.inline.} =
-  UpLoadFile(filename: filename, body: body)
+  ## Initiates UploadFile.
+  UploadFile(filename: filename, body: body)
 
 proc getUploadFile*(ctx: Context, name: string): UpLoadFile {.inline.} =
+  ## Gets UploadFile from request.
   let file = ctx.request.formParams[name]
   initUploadFile(filename = file.params["filename"], body = file.body)
 
 proc save*(uploadFile: UpLoadFile, dir: string, filename = "") {.inline.} =
+  ## Saves UploadFile to ``dir``.
   if not existsDir(dir):
     raise newException(OSError, "Dir doesn't exist.")
   if filename.len == 0:
@@ -130,6 +133,7 @@ proc initEvent*(handler: SyncEvent): Event {.inline.} =
 
 proc newContext*(request: Request, response: Response,
                  gScope: GlobalScope): Context {.inline.} =
+  ## Creates new Context.
   Context(request: request, response: response,
           handled: false, session: initSession(data = newStringTable(mode = modeCaseSensitive)),
           cleanedData: newStringTable(mode = modeCaseSensitive),
@@ -140,6 +144,7 @@ proc newContext*(request: Request, response: Response,
     )
 
 proc getSettings*(ctx: Context, key: string): JsonNode {.inline.} =
+  ## Get settings(First lookup localSettings then lookup globalSettings).
   if ctx.localSettings == nil:
     result = ctx.gScope.settings.getOrDefault(key)
   elif not ctx.localSettings.hasKey(key):
@@ -170,22 +175,26 @@ proc addHeader*(request: var Request, key, value: string) {.inline.} =
   request.headers.add(key, value)
 
 proc getCookie*(ctx: Context, key: string, default: string = ""): string {.inline.} =
+  ## Gets Cookie from Request.
   getCookie(ctx.request, key, default)
 
 proc setCookie*(ctx: Context, key, value: string, expires = "", 
                 maxAge: Option[int] = none(int), domain = "", 
                 path = "", secure = false, httpOnly = false, sameSite = Lax) {.inline.} =
+  ## Sets Cookie for Response.
   ctx.response.setCookie(key, value, expires, maxAge, domain, path, secure,
       httpOnly, sameSite)
 
 proc setCookie*(ctx: Context, key, value: string, expires: DateTime|Time,
                 maxAge: Option[int] = none(int), domain = "", 
                 path = "", secure = false, httpOnly = false, sameSite = Lax) {.inline.} =
+  ## Sets Cookie for Response.
   ctx.response.setCookie(key, value, domain, expires, maxAge, path, secure,
       httpOnly, sameSite)
 
 proc deleteCookie*(ctx: Context, key: string, path = "", domain = "") {.inline.} =
-  ctx.deleteCookie(key = key, path = path, domain = domain)
+  ## Deletes Cookie from Response.
+  ctx.response.deleteCookie(key = key, path = path, domain = domain)
 
 proc defaultHandler*(ctx: Context) {.async.} =
   ctx.response.code = Http404
@@ -295,6 +304,7 @@ proc attachment*(ctx: Context, downloadName = "", charset = "utf-8") {.inline.} 
 proc staticFileResponse*(ctx: Context, filename, dir: string, mimetype = "",
                          downloadName = "", charset = "utf-8", 
                          headers = newHttpHeaders()) {.async.} =
+  ## Serves Static File.
   let
     filePath = dir / filename
 

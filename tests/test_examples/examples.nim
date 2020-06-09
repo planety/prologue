@@ -9,23 +9,24 @@ block:
     todoappDir = "./examples/todoapp"
     blogDir = "./examples/blog"
     app = "app.nim"
+    execCommand = "nim c --gc:arc --d:release --hints:off"
 
   # helloworld can compile
   block:
-    let (outp, errC) = execCmdEx(fmt"nim c --hints:off {helloWorldDir / app}")
+    let (outp, errC) = execCmdEx(fmt"{execCommand} {helloWorldDir / app}")
     doAssert errC == 0, outp
 
   # todolist can compile
   block:
-    let (outp, errC) = execCmdEx(fmt"nim c --hints:off {todolistDir / app}")
+    let (outp, errC) = execCmdEx(fmt"{execCommand} {todolistDir / app}")
     doAssert errC == 0, outp
 
   # todoapp can compile
   block:
-    let (outp, errC) = execCmdEx(fmt"nim c --hints:off {todoappDir / app}")
+    let (outp, errC) = execCmdEx(fmt"{execCommand} {todoappDir / app}")
     doAssert errC == 0, outp
 
   # blog can compile
   block:
-    let (outp, errC) = execCmdEx(fmt"nim c --hints:off {blogDir / app}")
+    let (outp, errC) = execCmdEx(fmt"{execCommand} {blogDir / app}")
     doAssert errC == 0, outp

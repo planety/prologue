@@ -73,4 +73,5 @@ proc translate*(ctx: Context, text: string, language: string): string {.inline.}
   return trans[language]
 
 proc Tr*(ctx: Context, text: string, language: string): string {.inline.} =
+  ## Helper function fro ``translate``.
   ctx.translate(text, language)

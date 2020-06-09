@@ -14,6 +14,9 @@ from ../../core/signing/signing import DefaultSep, DefaultKeyDerivation,
 from ../../core/middlewaresbase import switch
 
 
+export cookiejar
+
+
 proc sessionMiddleware*(
   secretKey: SecretKey,
   sessionName: string = "session",

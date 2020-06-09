@@ -183,6 +183,7 @@ proc newApp*(settings: Settings, middlewares: sink seq[HandlerAsync] = @[],
              startup: sink seq[Event] = @[], shutdown: sink seq[Event] = @[],
              errorHandlerTable = DefaultErrorHandler,
              appData = newStringTable(mode = modeCaseSensitive)): Prologue {.inline.} =
+  ## Creates a new App instance.
   if settings == nil:
     raise newException(ValueError, "Settings can't be nil!")
   result = newPrologue(settings = settings, ctxSettings = newCtxSettings(),
@@ -192,6 +193,7 @@ proc newApp*(settings: Settings, middlewares: sink seq[HandlerAsync] = @[],
                        errorHandlerTable = errorHandlerTable, appData = appData)
 
 proc run*(app: Prologue) =
+  ## Starts Application.
   for event in app.startup:
     if event.async:
       waitFor event.asyncHandler()
