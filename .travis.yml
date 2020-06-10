@@ -1,7 +1,5 @@
 language: c
 
-# disable cache
-cache: ccache
 cache:
   directories:
   - .cache
