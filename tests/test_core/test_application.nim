@@ -191,11 +191,8 @@ block:
 
   block static_file_cache:
     let
-      filename = "upload.html"
       route = "/upload"
-      text = readFile("tests/static" / filename)
       response = waitFor client.get(fmt"http://{address}:{port}{route}")
-
     client.headers = newHttpHeaders({ "If-None-Match": response.headers["etag", 0] })
 
     let
