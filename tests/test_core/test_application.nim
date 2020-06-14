@@ -7,23 +7,23 @@ import ./utils
 
 var process: Process
 when defined(windows):
-  if not existsFile("start_server.exe"):
+  if not existsFile("tests/start_server.exe"):
     let code = execCmd("nim c --hints:off --verbosity=0 tests/start_server.nim")
     if code != 0:
       raise newException(IOError, "can't compile tests/start_server.nim")
-    process = startProcess(expandFileName("tests/start_server.exe"))
+  process = startProcess(expandFileName("tests/start_server.exe"))
 elif not defined(windows) and defined(usestd):
-  if not existsFile("start_server"):
+  if not existsFile("tests/start_server"):
     let code = execCmd("nim c --hints:off -d:usestd tests/start_server.nim")
     if code != 0:
       raise newException(IOError, "can't compile tests/start_server.nim")
-    process = startProcess(expandFileName("tests/start_server"))
+  process = startProcess(expandFileName("tests/start_server"))
 else:
-  if not existsFile("start_server"):
+  if not existsFile("tests/start_server"):
     let code = execCmd("nim c --hints:off tests/start_server.nim")
     if code != 0:
       raise newException(IOError, "can't compile tests/start_server.nim")
-    process = startProcess(expandFileName("tests/start_server"))
+  process = startProcess(expandFileName("tests/start_server"))
 
 proc start() {.async.} =
   let address = "http://127.0.0.1:8787/home"
@@ -188,6 +188,20 @@ block:
 
     doAssert response.code == Http200
     doAssert (waitFor response.body) == fmt"<html><h1>{filename}</h1><p>{text.strip()}</p></html>"
+
+  block static_file_cache:
+    let
+      filename = "upload.html"
+      route = "/upload"
+      text = readFile("tests/static" / filename)
+      response = waitFor client.get(fmt"http://{address}:{port}{route}")
+
+    client.headers = newHttpHeaders({ "If-None-Match": response.headers["etag", 0] })
+
+    let
+      cacheResponse = waitFor client.get(fmt"http://{address}:{port}{route}")
+
+    doAssert cacheResponse.code == Http304
 
 
   client.close()
