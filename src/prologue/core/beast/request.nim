@@ -27,7 +27,8 @@ proc createHeaders(headers: HttpHeaders): string =
   for (key, value) in headers.pairs:
     result.add(key & ": " & value & "\c\L")
 
-  result = result[0 .. ^3] # Strip trailing \c\L
+  if result.len > 2:
+    result = result[0 .. ^3] # Strip trailing \c\L
 
 # TODO sometime modify
 proc url*(request: Request): Uri {.inline.} =
