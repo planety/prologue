@@ -23,12 +23,12 @@ type
     pathParams*: StringTableRef
 
 proc createHeaders(headers: HttpHeaders): string =
+  result = ""
+  if headers.len > 0:
+    for (key, value) in headers.pairs:
+      result.add(key & ": " & value & "\c\L")
 
-  for (key, value) in headers.pairs:
-    result.add(key & ": " & value & "\c\L")
-
-  if result.len > 2:
-    result = result[0 .. ^3] # Strip trailing \c\L
+    result.setLen(result.len - 2) # Strip trailing \c\L
 
 # TODO sometime modify
 proc url*(request: Request): Uri {.inline.} =
@@ -75,7 +75,8 @@ proc charset*(request: Request): string {.inline.} =
   let
     findStr = "charset="
     contentType = request.contentType
-  let pos = find(contentType, findStr)
+    pos = find(contentType, findStr)
+
   if pos == -1:
     return ""
   else:
@@ -109,7 +110,7 @@ proc send*(request: Request, content: string): Future[void] {.inline.} =
   return fut
 
 proc respond*(request: Request, code: HttpCode, body: string,
-  headers: HttpHeaders = newHttpHeaders()): Future[void] {.inline.} =
+              headers: HttpHeaders = newHttpHeaders()): Future[void] {.inline.} =
 
   let h = headers.createHeaders
   request.nativeRequest.send(code, body, h)
@@ -126,7 +127,7 @@ proc initRequest*(nativeRequest: NativeRequest,
                   queryParams = newStringTable(modeCaseSensitive),
                   postParams = newStringTable(modeCaseSensitive)): Request {.inline.} =
   Request(nativeRequest: nativeRequest, url: parseUri(nativeRequest.path.get()),
-      cookies: cookies, pathParams: pathParams, queryParams: queryParams,
+          cookies: cookies, pathParams: pathParams, queryParams: queryParams,
           postParams: postParams)
 
 proc close*(request: Request) =
