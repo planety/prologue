@@ -127,7 +127,7 @@ app.addRoute("/", home, @[HttpGet, HttpPost])
 app.addRoute("/home", home, HttpGet)
 app.addRoute("/redirect", doRedirect, HttpGet)
 app.addRoute("/login", login, HttpGet)
-app.addRoute("/login", do_login, HttpPost, @[debugRequestMiddleware()])
+app.addRoute("/login", do_login, HttpPost, middlewares = @[debugRequestMiddleware()])
 app.addRoute("/hello/{name}", helloName, HttpGet)
 app.run()
 ```
