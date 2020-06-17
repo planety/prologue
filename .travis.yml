@@ -52,3 +52,4 @@ script:
     - nimble install -y
     - nimble tests
     - nimble examples
+    - nimble readme

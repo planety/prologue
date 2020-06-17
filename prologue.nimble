@@ -1,6 +1,6 @@
 # Package
 
-version       = "0.2.0"
+version       = "0.2.2"
 author        = "flywind"
 description   = "Full-Stack Web Framework."
 license       = "Apache-2.0"
@@ -25,6 +25,9 @@ task tests, "Run all tests":
 
 task examples, "Test examples":
   exec "testament r tests/test_examples/examples.nim"
+
+task readme, "Test Readme":
+  exec "testament r tests/test_readme/readme.nim"
 
 task docs, "Only for gh-pages, not for users":
   exec "mkdocs build"

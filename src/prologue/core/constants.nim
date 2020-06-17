@@ -1,3 +1,3 @@
 const
-  PrologueVersion* = "0.2.0"
+  PrologueVersion* = "0.2.2"
   ProloguePrefix* = "PROLOGUE_"

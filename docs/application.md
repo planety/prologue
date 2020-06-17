@@ -4,28 +4,9 @@
 
 Prologue object
 
-```nim
-type
-  Prologue* = ref object
-    settings*: Settings
-    router*: Router
-    reversedRouter*: ReversedRouter
-    reRouter*: ReRouter
-    middlewares*: seq[HandlerAsync]
-    startup*: seq[Event]
-    shutdown*: seq[Event]
-    errorHandlerTable*: ErrorHandlerTable
-```
 ## Create a Prologue object
 
 Use `newApp` to get Prologue instance.
-
-```nim
-proc newApp*(settings: Settings, middlewares: seq[HandlerAsync] = @[],
-    startup: seq[Event] = @[], shutdown: seq[Event] = @[],
-        errorHandlerTable = {Http404: default404Handler,
-            Http500: default500Handler}.newErrorHandlerTable)
-```
 
 ### Settings
 
@@ -49,4 +30,3 @@ type
 ### Error Handler
 
 Map status code to error handler.
-
