@@ -2,6 +2,7 @@ import uri, httpcore
 import tables, strutils, strformat, logging, strtabs, options, json
 from nativesockets import Port, `$`
 import cookiejar
+from cgi import CgiError
 
 
 from ./utils import isStaticFile
@@ -212,7 +213,12 @@ proc run*(app: Prologue) =
       else:
         ""
 
-    request.parseFormParams(contentType)
+    try:
+      request.parseFormParams(contentType)
+    except CgiError:
+      logging.warn(fmt"Malformed query params: Got ?{request.query}")
+    except Exception as e:
+      logging.error(&"Malformed form params:\n{e.msg}")
 
     var
       response = initResponse(HttpVer11, Http200, headers = {

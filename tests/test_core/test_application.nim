@@ -90,6 +90,15 @@ block:
     doAssert response.code == Http200
     doassert (waitFor response.body) == "<h1>Home</h1>"
 
+  # "can get /home?json"
+  block:
+    let
+      route = "/home?json"
+      response = waitFor client.get(fmt"http://{address}:{port}{route}")
+
+    doAssert response.code == Http200
+    doAssert (waitFor response.body) == "<h1>Home</h1>"
+
   # "can get /hello/{name} with name = Starlight"
   block:
     let
