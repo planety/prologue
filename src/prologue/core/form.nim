@@ -1,7 +1,8 @@
 import httpcore
 import strtabs, strutils, strformat, parseutils, tables
 
-from cgi import decodeData
+from cgi import decodeData, CgiError
+import logging
 
 from ./types import FormPart, initFormPart, `[]=`
 import ./request
@@ -79,10 +80,13 @@ proc parseFormParams*(request: var Request, contentType: string) =
     request.formParams = initFormPart()
     case request.reqMethod
     of HttpPost:
-      for (key, value) in decodeData(request.body):
-        # formPrams and postParams for secret event
-        request.formParams[key] = value
-        request.postParams[key] = value
+      try:
+        for (key, value) in decodeData(request.body):
+          # formPrams and postParams for secret event
+          request.formParams[key] = value
+          request.postParams[key] = value
+      except CgiError:
+        logging.warn("Malformed formParams. Got $1" % [request.body])
     else:
       discard
 
@@ -91,5 +95,8 @@ proc parseFormParams*(request: var Request, contentType: string) =
 
   # /student?name=simon&age=sixteen
   # query -> name=simon&age=sixteen
-  for (key, value) in decodeData(request.query):
-    request.queryParams[key] = value
+  try:
+    for (key, value) in decodeData(request.query):
+      request.queryParams[key] = value
+  except CgiError:
+    logging.warn("Malformed queryParams. Got $1" % [request.query])
