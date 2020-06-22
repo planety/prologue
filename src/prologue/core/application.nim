@@ -7,7 +7,7 @@ from cgi import CgiError
 
 from ./utils import isStaticFile
 from ./route import pattern, initPath, initRePath, newPathHandler, newRouter,
-    newReRouter, DuplicatedRouteError, DuplicatedReveredRouteError, UrlPattern,
+    newReRouter, DuplicatedRouteError, DuplicatedReversedRouteError, UrlPattern,
     add, `[]`, `[]=`, hasKey
 from ./form import parseFormParams
 from ./nativesettings import newSettings, newCtxSettings, getOrDefault, Settings
@@ -95,7 +95,7 @@ proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
 proc addReversedRoute(app: Prologue, name, route: string) {.inline.} =
   if name.len != 0:
     if app.gScope.reversedRouter.hasKey(name):
-      raise newException(DuplicatedReveredRouteError,
+      raise newException(DuplicatedReversedRouteError,
           fmt"Revered Route {name} is duplicated!")
     app.gScope.reversedRouter[name] = route
 

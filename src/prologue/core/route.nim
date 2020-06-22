@@ -15,7 +15,7 @@ type
   RouteError* = object of PrologueError
   RouteResetError* = object of RouteError
   DuplicatedRouteError* = object of RouteError
-  DuplicatedReveredRouteError* = object of RouteError
+  DuplicatedReversedRouteError* = object of RouteError
 
   UrlPattern* = tuple
     route: string
