@@ -102,6 +102,9 @@ proc findHandler*(ctx: Context): PathHandler =
 
   # find params route
   for route, handler in ctx.gScope.router:
+    if route.httpMethod != rawPath.httpMethod:
+      continue
+
     let routeList = route.route.split("/")
     var flag = true
     if pathList.len == routeList.len:
