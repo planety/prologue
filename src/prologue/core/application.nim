@@ -96,7 +96,7 @@ proc addReversedRoute(app: Prologue, name, route: string) {.inline.} =
   if name.len != 0:
     if app.gScope.reversedRouter.hasKey(name):
       raise newException(DuplicatedReversedRouteError,
-          fmt"Revered Route {name} is duplicated!")
+          fmt"Reversed Route {name} is duplicated!")
     app.gScope.reversedRouter[name] = route
 
 proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
