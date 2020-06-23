@@ -1,6 +1,6 @@
 discard """
   cmd:      "nim c -r --styleCheck:hint --panics:on $options $file"
-  matrix:   "--gc:arc; --gc:arc --d:release"
+  matrix:   "--gc:refc"
   targets:  "c"
   nimout:   ""
   action:   "run"
@@ -97,7 +97,7 @@ block:
       response = waitFor client.get(fmt"http://{address}:{port}{route}")
 
     doAssert response.code == Http200, $response.code
-    doassert (waitFor response.body) == "<h1>Home</h1>"
+    doAssert (waitFor response.body) == "<h1>Home</h1>"
 
   # "can get /home?json"
   block:
@@ -161,7 +161,7 @@ block:
       route = "/login"
       response = waitFor client.get(fmt"http://{address}:{port}{route}")
 
-    doassert response.code == Http200, $response.code
+    doAssert response.code == Http200, $response.code
     doAssert (waitFor response.body) == loginPage()
 
   when defined(windows) or defined(usestd):
@@ -190,7 +190,7 @@ block:
       route = "/upload"
       response = waitFor client.get(fmt"http://{address}:{port}{route}")
 
-    doassert response.code == Http200, $response.code
+    doAssert response.code == Http200, $response.code
     doAssert (waitFor response.body) == readFile("tests/static/upload.html")
 
   # "can post /upload"
