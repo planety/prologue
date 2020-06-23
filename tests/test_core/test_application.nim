@@ -1,3 +1,12 @@
+discard """
+  cmd:      "nim c -r --styleCheck:hint --panics:on $options $file"
+  matrix:   "--gc:arc; --gc:arc --d:release"
+  targets:  "c"
+  nimout:   ""
+  action:   "run"
+  exitcode: 0
+  timeout:  60.0
+"""
 import httpclient, asyncdispatch, nativesockets
 import strformat, os, osproc, terminal, strutils
 
@@ -69,7 +78,7 @@ block:
       route = "/"
       response = waitFor client.get(fmt"http://{address}:{port}{route}")
 
-    doAssert response.code == Http200
+    doAssert response.code == Http200, $response.code
     doAssert (waitFor response.body) == "<h1>Home</h1>"
 
   # "can get /hello"
@@ -78,7 +87,7 @@ block:
       route = "/hello"
       response = waitFor client.get(fmt"http://{address}:{port}{route}")
 
-    doAssert response.code == Http200
+    doAssert response.code == Http200, $response.code
     doAssert (waitFor response.body) == "<h1>Hello, Prologue!</h1>"
 
   # "can get /home"
@@ -87,7 +96,7 @@ block:
       route = "/home"
       response = waitFor client.get(fmt"http://{address}:{port}{route}")
 
-    doAssert response.code == Http200
+    doAssert response.code == Http200, $response.code
     doassert (waitFor response.body) == "<h1>Home</h1>"
 
   # "can get /home?json"
@@ -96,7 +105,7 @@ block:
       route = "/home?json"
       response = waitFor client.get(fmt"http://{address}:{port}{route}")
 
-    doAssert response.code == Http200
+    doAssert response.code == Http200, $response.code
     doAssert (waitFor response.body) == "<h1>Home</h1>"
 
   # "can get /hello/{name} with name = Starlight"
@@ -105,7 +114,7 @@ block:
       route = "/hello/Starlight!"
       response = waitFor client.get(fmt"http://{address}:{port}{route}")
 
-    doAssert response.code == Http200
+    doAssert response.code == Http200, $response.code
     doAssert (waitFor response.body) == "<h1>Hello, Starlight!</h1>"
 
   # "can get /hello/{name} with name = "
@@ -114,7 +123,7 @@ block:
       route = "/hello/"
       response = waitFor client.get(fmt"http://{address}:{port}{route}")
     
-    doAssert response.code == Http200
+    doAssert response.code == Http200, $response.code
     doAssert (waitFor response.body) == "<h1>Hello, Prologue!</h1>"
 
   # "can redirect /home"
@@ -123,7 +132,7 @@ block:
       route = "/redirect"
       response = waitFor client.get(fmt"http://{address}:{port}{route}")
 
-    doAssert response.code == Http200
+    doAssert response.code == Http200, $response.code
     doAssert (waitFor response.body) == "<h1>Home</h1>"
 
   # "can get /loginget using get method"
@@ -132,11 +141,11 @@ block:
       route = "/loginget"
       response = waitFor client.get(fmt"http://{address}:{port}{route}")
 
-    doAssert response.code == Http200
+    doAssert response.code == Http200, $response.code
     doAssert (waitFor response.body) == loginGetPage()
 
   when defined(windows) or defined(usestd):
-    # "can get /loginpage"
+    # "can post /loginpage"
     block:
       let
         route = "/loginpage"
@@ -152,7 +161,7 @@ block:
       route = "/login"
       response = waitFor client.get(fmt"http://{address}:{port}{route}")
 
-    doassert response.code == Http200
+    doassert response.code == Http200, $response.code
     doAssert (waitFor response.body) == loginPage()
 
   when defined(windows) or defined(usestd):
@@ -172,7 +181,7 @@ block:
       route = "/translate"
       response = waitFor client.get(fmt"http://{address}:{port}{route}")
 
-    doAssert response.code == Http200
+    doAssert response.code == Http200, $response.code
     doAssert (waitFor response.body) == "I'm ok."
 
   # "can get /upload"
@@ -181,7 +190,7 @@ block:
       route = "/upload"
       response = waitFor client.get(fmt"http://{address}:{port}{route}")
 
-    doassert response.code == Http200
+    doassert response.code == Http200, $response.code
     doAssert (waitFor response.body) == readFile("tests/static/upload.html")
 
   # "can post /upload"
@@ -195,7 +204,7 @@ block:
     let response = (waitFor client.post(fmt"http://{address}:{port}{route}",
         multipart = data))
 
-    doAssert response.code == Http200
+    doAssert response.code == Http200, $response.code
     doAssert (waitFor response.body) == fmt"<html><h1>{filename}</h1><p>{text.strip()}</p></html>"
 
   block static_file_cache:
