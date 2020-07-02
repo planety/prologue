@@ -17,16 +17,6 @@ web services.
 
 **Reduce magic. Reduce surprise.**
 
-## Current Work
-Now we are working on rewriting network infrastructure.
-
-https://github.com/iocrate/netkit
-
-Also working on http2.
-
-https://github.com/nimlight/zest
-
-
 ## Documentation
 
 You can read documentation in https://planety.github.io/prologue.
@@ -44,6 +34,7 @@ You can read documentation in https://planety.github.io/prologue.
   - [x] Middleware
   - [x] Simple Route
   - [x] Regex Route
+  - [x] DSL Route
   - [x] CORS Response
   - [x] Signing
   - [x] Cookie
@@ -94,7 +85,7 @@ app.addRoute("/", hello)
 app.run()
 ```
 
-Run **app.nim**.Now the server is running at localhost:8080.
+Run **app.nim**. Now the server is running at localhost:8080.
 
 ### Another example
 
@@ -134,7 +125,7 @@ app.run()
 
 #### DSL for routes  
 
-Routes are equivalent to the example above
+Routes are equivalent to the example above:
 
 ``` nim
 app.route:
@@ -146,9 +137,9 @@ app.route:
   get "/hello/{name}" helloName
 ```  
 
-Full examples in: [tests/test_readme/example3.nim](tests/test_readme/example3.nim)  
+Full examples in: [tests/test_readme/example3.nim](tests/test_readme/example3.nim).
 
-Run **app.nim**.Now the server is running at localhost:8080.
+Run **app.nim**. Now the server is running at localhost:8080.
 
 ### More examples
 - [HelloWorld](https://github.com/planety/prologue/tree/master/examples/helloworld)
