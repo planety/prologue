@@ -280,7 +280,6 @@ proc run*(app: Prologue) =
     else:
       event.syncHandler()
 
-
 when isMainModule:
   proc hello*(ctx: Context) {.async.} =
     logging.debug "hello"
@@ -308,6 +307,7 @@ when isMainModule:
 
   let settings = newSettings(appName = "StarLight", debug = true)
   var app = newApp(settings = settings)
+
   app.addRoute("/", home, HttpGet)
   app.addRoute("/", home, HttpPost)
   app.addRoute("/home", home, HttpGet)

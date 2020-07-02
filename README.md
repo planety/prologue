@@ -132,6 +132,22 @@ app.addRoute("/hello/{name}", helloName, HttpGet)
 app.run()
 ```
 
+#### DSL for routes  
+
+Routes are equivalent to the example above
+
+``` nim
+app.route:
+  get post "/" home
+  get post "/home" home
+  get "/redirect" doRedirect
+  get "/login" login  
+  post "/login" login debugRequestMiddleware()
+  get "/hello/{name}" helloName
+```  
+
+Full examples in: [tests/test_readme/example3.nim](tests/test_readme/example3.nim)  
+
 Run **app.nim**.Now the server is running at localhost:8080.
 
 ### More examples
