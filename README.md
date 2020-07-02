@@ -136,10 +136,12 @@ app.run()
 
 ``` nim
 app.route:
-  get "/" home
-  get post "/hello" hello
-  post "/login"  do_login  debugRequestMiddleware()
-  get re"/post(?P<num>[\d]+)" home
+  get post "/" home
+  get post "/home" home
+  get "/redirect" doRedirect
+  get "/login" login  
+  post "/login" login debugRequestMiddleware()
+  get "/hello/{name}" helloName
 ```  
 
 Run **app.nim**.Now the server is running at localhost:8080.

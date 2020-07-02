@@ -307,13 +307,6 @@ when isMainModule:
 
   let settings = newSettings(appName = "StarLight", debug = true)
   var app = newApp(settings = settings)
-  # import ../middlewares/middlewares
-  # from ./route_dsl import route
-  # app.route:
-  #   get "/" home
-  #   get post "/hello" hello
-  #   post "/login"  do_login  debugRequestMiddleware()
-  #   get re"/post(?P<num>[\d]+)" home
   app.addRoute("/hello", hello, @[HttpGet, HttpPost])
   app.addRoute("/", home, HttpGet)
   app.addRoute("/", home, HttpPost)
