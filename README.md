@@ -139,6 +139,22 @@ app.route:
 
 Full examples in: [tests/test_readme/example3.nim](tests/test_readme/example3.nim).
 
+or 
+```nim
+import std/with
+
+
+with app:
+  get "/", home
+  post "/", home
+  get "/home", home
+  get "/home", home
+  get "/redirect", doRedirect
+  get "/login", login  
+  post("/login", login, middlewares = debugRequestMiddleware())
+  get "/hello/{name}", helloName
+```
+
 Run **app.nim**. Now the server is running at localhost:8080.
 
 ### More examples
