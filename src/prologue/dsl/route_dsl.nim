@@ -1,4 +1,4 @@
-from ./application import Prologue
+from ../core/application import Prologue
 import macros,strutils
 
 proc collectMethods(node:NimNode, o:var NimNode) {.compileTime.} = 

@@ -134,6 +134,8 @@ app.run()
 
 #### DSL for routes  
 
+Routes are equivalent to the example above
+
 ``` nim
 app.route:
   get post "/" home
@@ -143,6 +145,8 @@ app.route:
   post "/login" login debugRequestMiddleware()
   get "/hello/{name}" helloName
 ```  
+
+Full examples in: [tests/test_readme/example3.nim](tests/test_readme/example3.nim)  
 
 Run **app.nim**.Now the server is running at localhost:8080.
 

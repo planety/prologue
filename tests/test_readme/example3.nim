@@ -1,7 +1,7 @@
 # app.nim
 import ../../src/prologue
 import ../../src/prologue/middlewares/middlewares
-import ../../src/prologue/core/route_dsl
+import ../../src/prologue/dsl/route_dsl
 
 
 # Async Function
