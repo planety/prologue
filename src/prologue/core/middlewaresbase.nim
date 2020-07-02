@@ -28,7 +28,7 @@ proc switch*(ctx: Context) {.async.} =
       lastHandler = handler.handler
       middlewares = handler.middlewares
     ctx.localSettings = handler.settings
-    ctx.middlewares = ctx.middlewares & middlewares & lastHandler
+    ctx.middlewares.add middlewares & lastHandler
     ctx.first = false
     let next = ctx.middlewares[ctx.size - 1]
     await next(ctx)

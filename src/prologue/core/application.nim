@@ -10,7 +10,9 @@ from ./route import pattern, initPath, initRePath, newPathHandler, newRouter,
     newReRouter, DuplicatedRouteError, DuplicatedReversedRouteError, UrlPattern,
     add, `[]`, `[]=`, hasKey
 from ./form import parseFormParams
-from ./nativesettings import newSettings, newCtxSettings, getOrDefault, Settings
+from ./nativesettings import newSettings, newCtxSettings, 
+                             getOrDefault, Settings, LocalSettings,
+                             newLocalSettings
 from ./httpexception import HttpError, AbortError
 
 import ./dispatch
@@ -74,9 +76,15 @@ proc registerErrorHandler*(app: Prologue, code: openArray[HttpCode],
   for idx in code:
     app.registerErrorHandler(idx, handler)
 
+
+proc newSettings*(settings: Settings, localSettings: LocalSettings): Settings {.inline.} =
+  result = newSettings(localSettings.data, settings.port, settings.debug, settings.reusePort,
+                       settings.staticDirs, settings.appName)
+  
+
 proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
                httpMethod = HttpGet, middlewares: seq[HandlerAsync] = @[],
-               settings: Settings = nil) {.inline.} =
+               settings: LocalSettings = nil) {.inline.} =
   ## add single handler route
   ## don't check whether regex routes are duplicated
   # for group in route.namedGroups.keys:
@@ -88,7 +96,7 @@ proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
 
 proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
                httpMethod: seq[HttpMethod], middlewares: seq[HandlerAsync] = @[],
-               settings: Settings = nil) {.inline.} =
+               settings: LocalSettings = nil) {.inline.} =
   for m in httpMethod:
     app.addRoute(route, handler, m, middlewares, settings)
 
@@ -101,7 +109,7 @@ proc addReversedRoute(app: Prologue, name, route: string) {.inline.} =
 
 proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
                httpMethod = HttpGet, name = "", middlewares: seq[HandlerAsync] = @[],
-               settings: Settings = nil) {.inline.} =
+               settings: LocalSettings = nil) {.inline.} =
   ## add single handler route
   ## check whether routes are duplicated
   let path = initPath(route = route, httpMethod = httpMethod)
@@ -111,12 +119,16 @@ proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
 
   if app.gScope.router.hasKey(path):
     raise newException(DuplicatedRouteError, fmt"Route {route} is duplicated!")
-  app.gScope.router[path] = newPathHandler(handler, middlewares, settings)
+  if settings == nil:
+    app.gScope.router[path] = newPathHandler(handler, middlewares, nil)
+  else:
+    app.gScope.router[path] = newPathHandler(handler, middlewares, 
+                                             newSettings(app.gScope.settings, settings))
   app.addReversedRoute(name, route)
 
 proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
                httpMethod: seq[HttpMethod], name = "", 
-               middlewares: seq[HandlerAsync] = @[], settings: Settings = nil) {.inline.} =
+               middlewares: seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
   ## add single handler route with multi http method
   ## check whether routes are duplicated
   app.addReversedRoute(name, route)
@@ -124,50 +136,50 @@ proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
     app.addRoute(route, handler, m, "", middlewares, settings)
 
 proc addRoute*(app: Prologue, patterns: seq[UrlPattern],
-               baseRoute = "", settings: Settings = nil) {.inline.} =
+               baseRoute = "", settings: LocalSettings = nil) {.inline.} =
   ## add multi handler route
   for pattern in patterns:
     app.addRoute(baseRoute & pattern.route, pattern.matcher, pattern.httpMethod,
                  pattern.name, pattern.middlewares, settings)
 
 proc head*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-           middlewares: sink seq[HandlerAsync] = @[], settings: Settings = nil) {.inline.} =
+           middlewares: sink seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
   app.addRoute(route, handler, HttpHead, name, middlewares, settings)
 
 proc get*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-          middlewares: sink seq[HandlerAsync] = @[], settings: Settings = nil) {.inline.} =
+          middlewares: sink seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
   app.addRoute(route, handler, HttpGet, name, middlewares, settings)
 
 proc post*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-           middlewares: sink seq[HandlerAsync] = @[], settings: Settings = nil) {.inline.} =
+           middlewares: sink seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
   app.addRoute(route, handler, HttpPost, name, middlewares, settings)
 
 proc put*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-          middlewares: sink seq[HandlerAsync] = @[], settings: Settings = nil) {.inline.} =
+          middlewares: sink seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
   app.addRoute(route, handler, HttpPut, name, middlewares, settings)
 
 proc delete*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-             middlewares: sink seq[HandlerAsync] = @[], settings: Settings = nil) {.inline.} =
+             middlewares: sink seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
   app.addRoute(route, handler, HttpDelete, name, middlewares, settings)
 
 proc trace*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-            middlewares: sink seq[HandlerAsync] = @[], settings: Settings = nil) {.inline.} =
+            middlewares: sink seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
   app.addRoute(route, handler, HttpTrace, name, middlewares, settings)
 
 proc options*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-              middlewares: sink seq[HandlerAsync] = @[], settings: Settings = nil) {.inline.} =
+              middlewares: sink seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
   app.addRoute(route, handler, HttpOptions, name, middlewares, settings)
 
 proc connect*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-              middlewares: sink seq[HandlerAsync] = @[], settings: Settings = nil) {.inline.} =
+              middlewares: sink seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
   app.addRoute(route, handler, HttpConnect, name, middlewares, settings)
 
 proc patch*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-            middlewares: sink seq[HandlerAsync] = @[], settings: Settings = nil) {.inline.} =
+            middlewares: sink seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
   app.addRoute(route, handler, HttpPatch, name, middlewares, settings)
 
 proc all*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-          middlewares: sink seq[HandlerAsync] = @[], settings: Settings = nil) {.inline.} =
+          middlewares: sink seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
   app.addRoute(route, handler, @[HttpGet, HttpPost, HttpPut, HttpDelete,
                HttpTrace, HttpOptions, HttpConnect, HttpPatch], name, middlewares, settings)
 

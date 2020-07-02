@@ -125,21 +125,10 @@ app.run()
 
 #### DSL for routes  
 
-Routes are equivalent to the example above:
+You can read docs in https://nim-lang.github.io/Nim/with.html and construct your own DSL.
 
-``` nim
-app.route:
-  get post "/" home
-  get post "/home" home
-  get "/redirect" doRedirect
-  get "/login" login  
-  post "/login" login debugRequestMiddleware()
-  get "/hello/{name}" helloName
-```  
+Pseudocode:
 
-Full examples in: [tests/test_readme/example3.nim](tests/test_readme/example3.nim).
-
-or 
 ```nim
 import std/with
 
@@ -153,6 +142,7 @@ with app:
   get "/login", login  
   post("/login", login, middlewares = debugRequestMiddleware())
   get "/hello/{name}", helloName
+  addRoute [HttpGet, HttpPost], helloRoute
 ```
 
 Run **app.nim**. Now the server is running at localhost:8080.
