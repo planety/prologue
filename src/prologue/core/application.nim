@@ -307,7 +307,7 @@ when isMainModule:
 
   let settings = newSettings(appName = "StarLight", debug = true)
   var app = newApp(settings = settings)
-  app.addRoute("/hello", hello, @[HttpGet, HttpPost])
+
   app.addRoute("/", home, HttpGet)
   app.addRoute("/", home, HttpPost)
   app.addRoute("/home", home, HttpGet)
