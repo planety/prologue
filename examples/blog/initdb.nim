@@ -4,7 +4,7 @@ import consts
 
 
 
-if not existsFile(consts.dbPath):
+if not fileExists(consts.dbPath):
   let
     db = open(consts.dbPath, "", "", "")
     schema = readFile(schemaPath)

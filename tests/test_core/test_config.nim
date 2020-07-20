@@ -17,7 +17,7 @@ block:
     env.setPrologueEnv("appName", "Starlight")
     env.setPrologueEnv("staticDir", "static")
     writePrologueEnv(filename, env)
-    doAssert existsFile(filename)
+    doAssert fileExists(filename)
 
   # "can load config"
   block:
@@ -27,5 +27,5 @@ block:
     doAssert env["appName"] == "Starlight"
     doAssert env["staticDir"] == "static"
 
-  if existsFile(filename):
+  if fileExists(filename):
     removeFile(filename)

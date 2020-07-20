@@ -108,7 +108,7 @@ proc getUploadFile*(ctx: Context, name: string): UpLoadFile {.inline.} =
 
 proc save*(uploadFile: UpLoadFile, dir: string, filename = "") {.inline.} =
   ## Saves UploadFile to ``dir``.
-  if not existsDir(dir):
+  if not dirExists(dir):
     raise newException(OSError, "Dir doesn't exist.")
   if filename.len == 0:
     writeFile(dir / uploadFile.filename, uploadFile.body)
