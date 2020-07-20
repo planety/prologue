@@ -21,7 +21,7 @@ when not defined(windows):
 
 # tests
 task tests, "Run all tests":
-  exec "testament cat /"
+  exec "testament all"
 
 task examples, "Test examples":
   exec "testament r tests/test_examples/examples.nim"
