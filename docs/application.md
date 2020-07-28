@@ -1,32 +1,28 @@
 # application
 
-## Prologue Object
+## Prologue object
 
 Prologue object
 
 ## Create a Prologue object
 
-Use `newApp` to get Prologue instance.
+Use `newApp` to create a Prologue instance.
 
 ### Settings
 
-Use `newSettings` to create application settings.
+Use `newSettings` to create the application settings.
 
 ### Middlewares
 
-Register `middlewares` for the whole application.The middlewares will 
+Register `middlewares` for the whole application. The middlewares will 
 apply to every handler.
 
-### Startup and ShutUp
+### Startup and Shutdown
 
-Register event for startup and shutup.Support both sync and async proc.
+Register events for startup and shutdown.
 
-```nim
-type
-  AsyncEvent* = proc(): Future[void] {.closure, gcsafe.}
-  SyncEvent* = proc() {.closure, gcsafe.}
-```
+You can find the [full usage](https://planety.github.io/prologue/event).
 
 ### Error Handler
 
-Map status code to error handler.
+Map status codes to error handlers.
