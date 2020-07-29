@@ -32,3 +32,14 @@ task readme, "Test Readme":
 task docs, "Only for gh-pages, not for users":
   exec "mkdocs build"
   exec "mkdocs gh-deploy"
+
+task apis, "Only for api":
+  exec "nim doc --project --index:on " &
+    "--git.url:https://github.com/planety/prologue " &
+    "--git.commit:master " &
+    # "--git.devel:master " &
+    # "-o:docs/api/theindex.html " &
+    "-o:docs/api " &
+    "src/prologue.nim"
+
+  exec "nim buildIndex -o:docs/api/theindex.html docs/api"
