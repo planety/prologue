@@ -69,6 +69,34 @@ nimble install prologue
 
 ## Usage
 
+### Notes(important)
+
+If you use Linux or MacOS, you can use `--threads:on` to enable multi-threads HTTP Server.
+If you want to benchmark `prologue` or release you programs, make sure set `settings.debug` = false.
+
+```nim
+let
+  # debug attributes must be false
+  env = loadPrologueEnv(".env")
+  settings = newSettings(appName = env.getOrDefault("appName", "Prologue"),
+                         debug = false,
+                         port = Port(env.getOrDefault("port", 8787)),
+                         staticDirs = [env.get("staticDir")],
+                         secretKey = env.getOrDefault("secretKey", "")
+    )
+```
+
+or in `.env` file, set `debug = false`.
+
+```nim
+# Don't commit this to source control.
+# Eg. Make sure ".env" in your ".gitignore" file.
+debug=false # change this
+port=8787
+appName=HelloWorld
+staticDir=/static
+secretKey=Pr435ol67ogue
+```
 
 ### Hello World
 
