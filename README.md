@@ -56,6 +56,7 @@ API docs in https://planety.github.io/prologue/api/theindex.html.
   - [x] Minimal OpenApi support
   - [x] Template(Using Karax Native)
   - [x] Test Client(Using httpclient)
+  - [x] Command line tools(https://github.com/planety/logue)
 
 ## Installation
 
