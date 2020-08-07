@@ -101,7 +101,8 @@ proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
 
 proc stripRoute*(route: string): string =
   result = route
-  if result.len > 0:
+  # Don't strip single slash
+  if result.len > 1:
     if result[^1] == '/':
       result.setLen(result.len - 1)
 
