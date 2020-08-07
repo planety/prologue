@@ -7,7 +7,6 @@ license       = "Apache-2.0"
 srcDir        = "src"
 
 
-
 # Dependencies
 requires "nim >= 1.2.0"
 requires "regex >= 0.15.0"

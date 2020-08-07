@@ -189,6 +189,10 @@ proc all*(app: Prologue, route: string, handler: HandlerAsync, name = "",
   app.addRoute(route, handler, @[HttpGet, HttpPost, HttpPut, HttpDelete,
                HttpTrace, HttpOptions, HttpConnect, HttpPatch], name, middlewares, settings)
 
+proc printRoute*(app: Prologue) {.inline.} =
+  for key in app.gScope.router.callable.keys:
+    echo key
+
 proc appAddress*(app: Prologue): string {.inline.} =
   app.gScope.settings.address
 

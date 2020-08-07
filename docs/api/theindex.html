@@ -72,7 +72,7 @@ function main() {
 <div class="document" id="documentId">
   <div class="container">
     <h1 class="title">Index</h1>
-    Modules: <a href="prologue/command/init.html">prologue/command/init</a>, <a href="prologue/core/application.html">prologue/core/application</a>, <a href="prologue/core/beast/request.html">prologue/core/beast/request</a>, <a href="prologue/core/configure.html">prologue/core/configure</a>, <a href="prologue/core/constants.html">prologue/core/constants</a>, <a href="prologue/core/context.html">prologue/core/context</a>, <a href="prologue/core/encode.html">prologue/core/encode</a>, <a href="prologue/core/form.html">prologue/core/form</a>, <a href="prologue/core/httpexception.html">prologue/core/httpexception</a>, <a href="prologue/core/middlewaresbase.html">prologue/core/middlewaresbase</a>, <a href="prologue/core/naive/request.html">prologue/core/naive/request</a>, <a href="prologue/core/naive/server.html">prologue/core/naive/server</a>, <a href="prologue/core/nativesettings.html">prologue/core/nativesettings</a>, <a href="prologue/core/pages.html">prologue/core/pages</a>, <a href="prologue/core/response.html">prologue/core/response</a>, <a href="prologue/core/route.html">prologue/core/route</a>, <a href="prologue/core/signing/signing.html">prologue/core/signing/signing</a>, <a href="prologue/core/signing/signingbase.html">prologue/core/signing/signingbase</a>, <a href="prologue/core/types.html">prologue/core/types</a>, <a href="prologue/core/urandom.html">prologue/core/urandom</a>, <a href="prologue/core/utils.html">prologue/core/utils</a>.<br/><p /><h2>API symbols</h2>
+    Modules: <a href="prologue/command/init.html">prologue/command/init</a>, <a href="prologue/core/application.html">prologue/core/application</a>, <a href="prologue/core/beast/request.html">prologue/core/beast/request</a>, <a href="prologue/core/beast/server.html">prologue/core/beast/server</a>, <a href="prologue/core/configure.html">prologue/core/configure</a>, <a href="prologue/core/constants.html">prologue/core/constants</a>, <a href="prologue/core/context.html">prologue/core/context</a>, <a href="prologue/core/encode.html">prologue/core/encode</a>, <a href="prologue/core/form.html">prologue/core/form</a>, <a href="prologue/core/httpexception.html">prologue/core/httpexception</a>, <a href="prologue/core/middlewaresbase.html">prologue/core/middlewaresbase</a>, <a href="prologue/core/naive/request.html">prologue/core/naive/request</a>, <a href="prologue/core/naive/server.html">prologue/core/naive/server</a>, <a href="prologue/core/nativesettings.html">prologue/core/nativesettings</a>, <a href="prologue/core/pages.html">prologue/core/pages</a>, <a href="prologue/core/response.html">prologue/core/response</a>, <a href="prologue/core/route.html">prologue/core/route</a>, <a href="prologue/core/signing/signing.html">prologue/core/signing/signing</a>, <a href="prologue/core/signing/signingbase.html">prologue/core/signing/signingbase</a>, <a href="prologue/core/types.html">prologue/core/types</a>, <a href="prologue/core/urandom.html">prologue/core/urandom</a>, <a href="prologue/core/utils.html">prologue/core/utils</a>.<br/><p /><h2>API symbols</h2>
 <dl><dt><a name="%60%24%60" href="#%60%24%60"><span>`$`:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="configure: `$`(env: Env): string" href="prologue/core/configure.html#%24%2CEnv">configure: `$`(env: Env): string</a></li>
@@ -747,6 +747,16 @@ function main() {
             reversedRouter: ReversedRouter; reRouter: ReRouter;
             middlewares: seq[HandlerAsync]; startup: seq[Event];
             shutdown: seq[Event]; errorHandlerTable: ErrorHandlerTable;
+            appData: StringTableRef): Prologue" href="prologue/core/beast/server.html#newPrologue%2CSettings%2CCtxSettings%2CRouter%2CReversedRouter%2CReRouter%2Cseq%5BHandlerAsync%5D%2Cseq%5BEvent%5D%2Cseq%5BEvent%5D%2CErrorHandlerTable%2CStringTableRef">server: newPrologue(settings: Settings; ctxSettings: CtxSettings; router: Router;
+            reversedRouter: ReversedRouter; reRouter: ReRouter;
+            middlewares: seq[HandlerAsync]; startup: seq[Event];
+            shutdown: seq[Event]; errorHandlerTable: ErrorHandlerTable;
+            appData: StringTableRef): Prologue</a></li>
+          <li><a class="reference external"
+          data-doc-search-tag="server: newPrologue(settings: Settings; ctxSettings: CtxSettings; router: Router;
+            reversedRouter: ReversedRouter; reRouter: ReRouter;
+            middlewares: seq[HandlerAsync]; startup: seq[Event];
+            shutdown: seq[Event]; errorHandlerTable: ErrorHandlerTable;
             appData: StringTableRef): Prologue" href="prologue/core/naive/server.html#newPrologue%2CSettings%2CCtxSettings%2CRouter%2CReversedRouter%2CReRouter%2Cseq%5BHandlerAsync%5D%2Cseq%5BEvent%5D%2Cseq%5BEvent%5D%2CErrorHandlerTable%2CStringTableRef">server: newPrologue(settings: Settings; ctxSettings: CtxSettings; router: Router;
             reversedRouter: ReversedRouter; reRouter: ReRouter;
             middlewares: seq[HandlerAsync]; startup: seq[Event];
@@ -873,6 +883,8 @@ function main() {
           </ul></dd>
 <dt><a name="Prologue" href="#Prologue"><span>Prologue:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
+          data-doc-search-tag="server: Prologue" href="prologue/core/beast/server.html#Prologue">server: Prologue</a></li>
+          <li><a class="reference external"
           data-doc-search-tag="server: Prologue" href="prologue/core/naive/server.html#Prologue">server: Prologue</a></li>
           </ul></dd>
 <dt><a name="PrologueError" href="#PrologueError"><span>PrologueError:</span></a></dt><dd><ul class="simple">
@@ -1049,6 +1061,12 @@ function main() {
 <li><a class="reference external"
           data-doc-search-tag="server: serve(app: Prologue; port: Port;
       callback: proc (request: NativeRequest): Future[void] {.closure, gcsafe.};
+      address = &quot;&quot;)" href="prologue/core/beast/server.html#serve%2CPrologue%2CPort%2Cproc%28Request%29%2Cstring">server: serve(app: Prologue; port: Port;
+      callback: proc (request: NativeRequest): Future[void] {.closure, gcsafe.};
+      address = &quot;&quot;)</a></li>
+          <li><a class="reference external"
+          data-doc-search-tag="server: serve(app: Prologue; port: Port;
+      callback: proc (request: NativeRequest): Future[void] {.closure, gcsafe.};
       address = &quot;&quot;)" href="prologue/core/naive/server.html#serve%2CPrologue%2CPort%2Cproc%28Request%29%2Cstring">server: serve(app: Prologue; port: Port;
       callback: proc (request: NativeRequest): Future[void] {.closure, gcsafe.};
       address = &quot;&quot;)</a></li>
@@ -1201,6 +1219,10 @@ function main() {
           <li><a class="reference external"
           data-doc-search-tag="request: stripPath(request: var Request)" href="prologue/core/naive/request.html#stripPath%2CRequest">request: stripPath(request: var Request)</a></li>
           </ul></dd>
+<dt><a name="stripRoute" href="#stripRoute"><span>stripRoute:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="application: stripRoute(route: string): string" href="prologue/core/application.html#stripRoute%2Cstring">application: stripRoute(route: string): string</a></li>
+          </ul></dd>
 <dt><a name="switch" href="#switch"><span>switch:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="middlewaresbase: switch(ctx: Context): owned(Future[void])" href="prologue/core/middlewaresbase.html#switch%2CContext">middlewaresbase: switch(ctx: Context): owned(Future[void])</a></li>
@@ -1278,7 +1300,7 @@ function main() {
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-08-07 07:02:22 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-08-07 12:18:09 UTC</small>
       </div>
     </div>
   </div>

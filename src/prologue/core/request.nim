@@ -1,6 +1,15 @@
-when defined(windows) or defined(usestd):
-  import naive/request
+import asyncdispatch
+
+
+when compiles(getGlobalDispatcher().handles):
+  when defined(usestd):
+    import naive/request
+  else:
+    import beast/request
 else:
-  import beast/request
+  when defined(windows) or defined(usestd):
+    import naive/request
+  else:
+    import beast/request
 
 export request

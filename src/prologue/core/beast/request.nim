@@ -8,8 +8,8 @@ import ../dispatch
 from ../response import Response
 from ../types import FormPart
 
+# import httpx except Settings
 import httpbeast except Settings
-
 
 type
   NativeRequest* = httpbeast.Request
