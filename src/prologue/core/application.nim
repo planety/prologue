@@ -80,7 +80,7 @@ proc registerErrorHandler*(app: Prologue, code: openArray[HttpCode],
 proc newSettings*(settings: Settings, localSettings: LocalSettings): Settings {.inline.} =
   result = newSettings(localSettings.data, settings.address, settings.port, settings.debug, settings.reusePort,
                        settings.staticDirs, settings.appName)
-  
+
 
 proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
                httpMethod = HttpGet, middlewares: seq[HandlerAsync] = @[],
@@ -105,7 +105,7 @@ proc addReversedRoute(app: Prologue, name, route: string) {.inline.} =
     if app.gScope.reversedRouter.hasKey(name):
       raise newException(DuplicatedReversedRouteError,
           fmt"Reversed Route {name} is duplicated!")
-    app.gScope.reversedRouter[name] = route
+    app.gScope.reversedRouter[name] = route.strip(leading = false, chars = {'\\'})
 
 proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
                httpMethod = HttpGet, name = "", middlewares: seq[HandlerAsync] = @[],
@@ -124,7 +124,7 @@ proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
   else:
     app.gScope.router[path] = newPathHandler(handler, middlewares, 
                                              newSettings(app.gScope.settings, settings))
-  app.addReversedRoute(name, route)
+  app.addReversedRoute(name, route.strip(leading = false, chars = {'\\'}))
 
 proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
                httpMethod: seq[HttpMethod], name = "", 
