@@ -6,7 +6,7 @@ block:
   let
     todoappDir = "./examples/todoapp"
     app = "app.nim"
-    execCommand = "nim c --gc:arc --d:release --hints:off"
+    execCommand = "nim c --d:release"
 
   # todoapp can compile
   block:

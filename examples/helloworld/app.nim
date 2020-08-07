@@ -10,6 +10,7 @@ let
   env = loadPrologueEnv(".env")
   settings = newSettings(appName = env.getOrDefault("appName", "Prologue"),
                          debug = env.getOrDefault("debug", true),
+                         address = env.getOrDefault("address", ""),
                          port = Port(env.getOrDefault("port", 8787)),
                          staticDirs = [env.get("staticDir")],
                          secretKey = env.getOrDefault("secretKey", "")
@@ -17,8 +18,9 @@ let
 
 
 proc setLoggingLevel() =
-  addHandler(newConsoleLogger())
-  logging.setLogFilter(lvlInfo)
+  discard
+  # addHandler(newConsoleLogger())
+  # logging.setLogFilter(lvlInfo)
 
 
 let 

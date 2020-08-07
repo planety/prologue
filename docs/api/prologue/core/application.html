@@ -20,7 +20,7 @@
 <title>prologue/core/application</title>
 <link rel="stylesheet" type="text/css" href="../../nimdoc.out.css">
 
-<script type="text/javascript" src="../../dochack.js"></script>
+<script type="text/javascript" src="dochack.js"></script>
 
 <script type="text/javascript">
 function main() {
@@ -47,12 +47,21 @@ function main() {
 
   toggleSwitch.addEventListener('change', switchTheme, false);
 
-  const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
-  if (currentTheme) {
-    document.documentElement.setAttribute('data-theme', currentTheme);
 
-    if (currentTheme === 'dark') {
-      toggleSwitch.checked = true;
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    document.documentElement.setAttribute('data-theme', "dark");
+    toggleSwitch.checked = true;
+  } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+    document.documentElement.setAttribute('data-theme', "light");
+    toggleSwitch.checked = false;
+  } else {
+    const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
+    if (currentTheme) {
+      document.documentElement.setAttribute('data-theme', currentTheme);
+
+      if (currentTheme === 'dark') {
+        toggleSwitch.checked = true;
+      }
     }
   }
 }
@@ -74,9 +83,6 @@ function main() {
   </div>
   <div id="global-links">
     <ul class="simple">
-    <li>
-      <a href="../../theindex.html">Index</a>
-    </li>
     </ul>
   </div>
   <div id="searchInputDiv">
@@ -155,6 +161,8 @@ function main() {
   <li><a class="reference" href="#all%2CPrologue%2Cstring%2CHandlerAsync%2Cstring%2CLocalSettings"
     title="all(app: Prologue; route: string; handler: HandlerAsync; name = &quot;&quot;;
     middlewares: sink seq[HandlerAsync] = @[]; settings: LocalSettings = nil)"><wbr />all<span class="attachedType"></span></a></li>
+  <li><a class="reference" href="#appAddress%2CPrologue"
+    title="appAddress(app: Prologue): string"><wbr />app<wbr />Address<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#appDebug%2CPrologue"
     title="appDebug(app: Prologue): bool"><wbr />app<wbr />Debug<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#appName%2CPrologue"
@@ -463,8 +471,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L181" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="appDebug,Prologue"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#appDebug%2CPrologue"><span class="Identifier">appDebug</span></a><span class="Other">(</span><span class="Identifier">app</span><span class="Other">:</span> <a href="naive/server.html#Prologue"><span class="Identifier">Prologue</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<a id="appAddress,Prologue"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#appAddress%2CPrologue"><span class="Identifier">appAddress</span></a><span class="Other">(</span><span class="Identifier">app</span><span class="Other">:</span> <a href="naive/server.html#Prologue"><span class="Identifier">Prologue</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 
@@ -474,8 +482,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L186" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="appName,Prologue"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#appName%2CPrologue"><span class="Identifier">appName</span></a><span class="Other">(</span><span class="Identifier">app</span><span class="Other">:</span> <a href="naive/server.html#Prologue"><span class="Identifier">Prologue</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<a id="appDebug,Prologue"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#appDebug%2CPrologue"><span class="Identifier">appDebug</span></a><span class="Other">(</span><span class="Identifier">app</span><span class="Other">:</span> <a href="naive/server.html#Prologue"><span class="Identifier">Prologue</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 
@@ -485,8 +493,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L189" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="appPort,Prologue"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#appPort%2CPrologue"><span class="Identifier">appPort</span></a><span class="Other">(</span><span class="Identifier">app</span><span class="Other">:</span> <a href="naive/server.html#Prologue"><span class="Identifier">Prologue</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Port</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<a id="appName,Prologue"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#appName%2CPrologue"><span class="Identifier">appName</span></a><span class="Other">(</span><span class="Identifier">app</span><span class="Other">:</span> <a href="naive/server.html#Prologue"><span class="Identifier">Prologue</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 
@@ -494,6 +502,17 @@ class="link-seesrc" target="_blank">Source</a>
 href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L192"
 class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L192" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="appPort,Prologue"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#appPort%2CPrologue"><span class="Identifier">appPort</span></a><span class="Other">(</span><span class="Identifier">app</span><span class="Other">:</span> <a href="naive/server.html#Prologue"><span class="Identifier">Prologue</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Port</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L195"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L195" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="newApp,Settings"></a>
@@ -506,21 +525,22 @@ class="link-seesrc" target="_blank">Source</a>
 
 Creates a new App instance.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L195"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L198"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L195" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L198" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="run,Prologue"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#run%2CPrologue"><span class="Identifier">run</span></a><span class="Other">(</span><span class="Identifier">app</span><span class="Other">:</span> <a href="naive/server.html#Prologue"><span class="Identifier">Prologue</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">ValueError</span><span class="Other">,</span> <span class="Identifier">OSError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">,</span>
-    <span class="Identifier">TimeEffect</span><span class="Other">,</span> <span class="Identifier">WriteIOEffect</span><span class="Other">,</span> <span class="Identifier">ReadIOEffect</span><span class="Other">,</span> <span class="Identifier">ReadDirEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dt><pre><span class="Keyword">proc</span> <a href="#run%2CPrologue"><span class="Identifier">run</span></a><span class="Other">(</span><span class="Identifier">app</span><span class="Other">:</span> <a href="naive/server.html#Prologue"><span class="Identifier">Prologue</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">ValueError</span><span class="Other">,</span> <span class="Identifier">FutureError</span><span class="Other">,</span> <span class="Identifier">UnpackError</span><span class="Other">,</span>
+                               <span class="Identifier">OSError</span><span class="Other">,</span> <span class="Identifier">IndexError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">,</span> <span class="Identifier">TimeEffect</span><span class="Other">,</span>
+    <span class="Identifier">WriteIOEffect</span><span class="Other">,</span> <span class="Identifier">ReadIOEffect</span><span class="Other">,</span> <span class="Identifier">ReadDirEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 Starts Application.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L208"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L211"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L208" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L211" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -538,7 +558,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-07-29 00:03:45 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-08-07 07:02:22 UTC</small>
       </div>
     </div>
   </div>

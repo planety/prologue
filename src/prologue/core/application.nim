@@ -78,7 +78,7 @@ proc registerErrorHandler*(app: Prologue, code: openArray[HttpCode],
 
 
 proc newSettings*(settings: Settings, localSettings: LocalSettings): Settings {.inline.} =
-  result = newSettings(localSettings.data, settings.port, settings.debug, settings.reusePort,
+  result = newSettings(localSettings.data, settings.address, settings.port, settings.debug, settings.reusePort,
                        settings.staticDirs, settings.appName)
   
 
@@ -183,6 +183,9 @@ proc all*(app: Prologue, route: string, handler: HandlerAsync, name = "",
   app.addRoute(route, handler, @[HttpGet, HttpPost, HttpPut, HttpDelete,
                HttpTrace, HttpOptions, HttpConnect, HttpPatch], name, middlewares, settings)
 
+proc appAddress*(app: Prologue): string {.inline.} =
+  app.gScope.settings.address
+
 proc appDebug*(app: Prologue): bool {.inline.} =
   app.gScope.settings.debug
 
@@ -280,11 +283,16 @@ proc run*(app: Prologue) =
     addHandler(newConsoleLogger())
     setLogFilter(if app.appDebug: lvlDebug else: lvlInfo)
 
-  when defined(windows):
-    logging.debug(fmt"Prologue is serving at 127.0.0.1:{app.appPort} {app.appName}")
+
+  if app.appAddress.len == 0:
+    when defined(windows):
+      logging.debug(fmt"Prologue is serving at 127.0.0.1:{app.appPort} {app.appName}")
+    else:
+      logging.debug(fmt"Prologue is serving at 0.0.0.0:{app.appPort} {app.appName}")
   else:
-    logging.debug(fmt"Prologue is serving at 0.0.0.0:{app.appPort} {app.appName}")
-  app.serve(app.appPort, handleRequest)
+    logging.debug(fmt"Prologue is serving at {app.appAddress}:{app.appPort} {app.appName}")
+
+  app.serve(app.appPort, handleRequest, app.appAddress)
 
   for event in app.shutdown:
     if event.async:

@@ -7,6 +7,7 @@ from ./urandom import randomString
 
 type
   Settings* = ref object
+    address*: string
     port*: Port
     debug*: bool
     reusePort*: bool
@@ -41,29 +42,29 @@ proc newLocalSettings*(configPath: string): LocalSettings {.inline.} =
   var data = parseFile(configPath)
   result = LocalSettings(data: data)
 
-proc newSettings*(port = Port(8080), debug = true, reusePort = true,
+proc newSettings*(address = "", port = Port(8080), debug = true, reusePort = true,
                   staticDirs: openArray[string] = ["static"], secretKey = randomString(8),
                   appName = ""): Settings {.inline.} =
   if secretKey.len == 0:
     raise newException(EmptySecretKeyError, "Secret key can't be empty!")
 
-  result = Settings(port: port, debug: debug, reusePort: reusePort,
+  result = Settings(address: address, port: port, debug: debug, reusePort: reusePort,
                     staticDirs: @staticDirs, appName: appName,
                     data: %* {"secretKey": secretKey})
 
 
-proc newSettings*(data: JsonNode, port = Port(8080), debug = true, reusePort = true,
+proc newSettings*(data: JsonNode, address = "", port = Port(8080), debug = true, reusePort = true,
                   staticDirs: openArray[string] = ["static"],
                   appName = ""): Settings {.inline.} =
-  result = Settings(port: port, debug: debug, reusePort: reusePort,
+  result = Settings(address: address, port: port, debug: debug, reusePort: reusePort,
                     staticDirs: @staticDirs, appName: appName,
                     data: data)
 
-proc newSettings*(configPath: string, port = Port(8080), debug = true, reusePort = true,
+proc newSettings*(configPath: string, address = "", port = Port(8080), debug = true, reusePort = true,
                   staticDirs: openArray[string] = ["static"],
                   appName = ""): Settings {.inline.} =
   # make sure reserved keys must appear in settings
   var data = parseFile(configPath)
-  result = Settings(port: port, debug: debug, reusePort: reusePort,
+  result = Settings(address: address, port: port, debug: debug, reusePort: reusePort,
                     staticDirs: @staticDirs, appName: appName,
                     data: data)
