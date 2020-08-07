@@ -71,8 +71,9 @@ nimble install prologue
 
 ### Notes(important)
 
-If you use Linux or MacOS, you can use `--threads:on` to enable multi-threads HTTP Server.
-If you want to benchmark `prologue` or release you programs, make sure set `settings.debug` = false.
+1. If you use Linux or MacOS, you can use `--threads:on` to enable multi-threads HTTP Server.
+
+2. If you want to benchmark `prologue` or release you programs, make sure set `settings.debug` = false.
 
 ```nim
 let
