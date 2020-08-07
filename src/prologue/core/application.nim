@@ -99,19 +99,25 @@ proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
   for m in httpMethod:
     app.addRoute(route, handler, m, middlewares, settings)
 
+proc stripRoute*(route: string): string =
+  result = route
+  if result.len > 0:
+    if result[^1] == '/':
+      result.setLen(result.len - 1)
+
 proc addReversedRoute(app: Prologue, name, route: string) {.inline.} =
   if name.len != 0:
     if app.gScope.reversedRouter.hasKey(name):
       raise newException(DuplicatedReversedRouteError,
           fmt"Reversed Route {name} is duplicated!")
-    app.gScope.reversedRouter[name] = route.strip(leading = false, chars = {'/'})
+    app.gScope.reversedRouter[name] = route.stripRoute
 
 proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
                httpMethod = HttpGet, name = "", middlewares: seq[HandlerAsync] = @[],
                settings: LocalSettings = nil) {.inline.} =
   ## add single handler route
   ## check whether routes are duplicated
-  let path = initPath(route = route.strip(leading = false, chars = {'/'}), httpMethod = httpMethod)
+  let path = initPath(route = route.stripRoute, httpMethod = httpMethod)
   # automatically register HttpHead for HttpGet
   if httpMethod == HttpGet:
     app.addRoute(route, handler, HttpHead, "", middlewares, settings)
