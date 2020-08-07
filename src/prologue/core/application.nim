@@ -76,7 +76,6 @@ proc registerErrorHandler*(app: Prologue, code: openArray[HttpCode],
   for idx in code:
     app.registerErrorHandler(idx, handler)
 
-
 proc newSettings*(settings: Settings, localSettings: LocalSettings): Settings {.inline.} =
   result = newSettings(localSettings.data, settings.address, settings.port, settings.debug, settings.reusePort,
                        settings.staticDirs, settings.appName)
@@ -105,14 +104,14 @@ proc addReversedRoute(app: Prologue, name, route: string) {.inline.} =
     if app.gScope.reversedRouter.hasKey(name):
       raise newException(DuplicatedReversedRouteError,
           fmt"Reversed Route {name} is duplicated!")
-    app.gScope.reversedRouter[name] = route.strip(leading = false, chars = {'\\'})
+    app.gScope.reversedRouter[name] = route.strip(leading = false, chars = {'/'})
 
 proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
                httpMethod = HttpGet, name = "", middlewares: seq[HandlerAsync] = @[],
                settings: LocalSettings = nil) {.inline.} =
   ## add single handler route
   ## check whether routes are duplicated
-  let path = initPath(route = route.strip(leading = false, chars = {'\\'}), httpMethod = httpMethod)
+  let path = initPath(route = route.strip(leading = false, chars = {'/'}), httpMethod = httpMethod)
   # automatically register HttpHead for HttpGet
   if httpMethod == HttpGet:
     app.addRoute(route, handler, HttpHead, "", middlewares, settings)
