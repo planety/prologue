@@ -112,7 +112,7 @@ proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
                settings: LocalSettings = nil) {.inline.} =
   ## add single handler route
   ## check whether routes are duplicated
-  let path = initPath(route = route, httpMethod = httpMethod)
+  let path = initPath(route = route.strip(leading = false, chars = {'\\'}), httpMethod = httpMethod)
   # automatically register HttpHead for HttpGet
   if httpMethod == HttpGet:
     app.addRoute(route, handler, HttpHead, "", middlewares, settings)
@@ -124,7 +124,7 @@ proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
   else:
     app.gScope.router[path] = newPathHandler(handler, middlewares, 
                                              newSettings(app.gScope.settings, settings))
-  app.addReversedRoute(name, route.strip(leading = false, chars = {'\\'}))
+  app.addReversedRoute(name, route)
 
 proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
                httpMethod: seq[HttpMethod], name = "", 
