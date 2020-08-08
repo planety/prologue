@@ -17,7 +17,7 @@ import httpcore
 from strutils import toLowerAscii, join
 
 
-import ../core/dispatch
+import asyncdispatch
 from ../core/middlewaresbase import switch
 from ../core/context import Context, HandlerAsync
 from ../core/response import plainTextResponse, resp, setHeader, addHeader

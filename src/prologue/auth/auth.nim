@@ -1,7 +1,7 @@
 import httpcore, strutils, strformat, strtabs
 
 
-import ../core/dispatch
+import asyncdispatch
 from ../core/context import Context, HandlerAsync, setHeader, hasHeader
 from ../core/response import setHeader, hasHeader
 from ../core/encode import base64Decode

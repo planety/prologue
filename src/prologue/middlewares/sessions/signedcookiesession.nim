@@ -3,7 +3,7 @@ import options
 
 from cookiejar import SameSite
 
-import ../../core/dispatch
+import asyncdispatch
 from ../../core/types import BadSecretKeyError, SecretKey, loads, dumps, len
 from ../../core/context import Context, HandlerAsync, getCookie, setCookie,
     deleteCookie

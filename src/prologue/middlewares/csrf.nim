@@ -17,7 +17,7 @@ import httpcore, strtabs
 from htmlgen import input
 
 
-import ../core/dispatch
+import asyncdispatch
 from ../core/urandom import randomBytesSeq, randomString, DefaultEntropy
 from ../core/encode import urlsafeBase64Encode, urlsafeBase64Decode
 from ../core/middlewaresbase import switch

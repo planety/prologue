@@ -15,7 +15,7 @@
 
 import json
 
-import ../core/dispatch
+import asyncdispatch
 from ../core/response import setHeader
 from ../core/context import Context, HandlerAsync, getSettings
 from ../core/middlewaresbase import switch
