@@ -20,7 +20,7 @@
 <title>prologue/core/urandom</title>
 <link rel="stylesheet" type="text/css" href="../../nimdoc.out.css">
 
-<script type="text/javascript" src="dochack.js"></script>
+<script type="text/javascript" src="../../dochack.js"></script>
 
 <script type="text/javascript">
 function main() {
@@ -47,21 +47,12 @@ function main() {
 
   toggleSwitch.addEventListener('change', switchTheme, false);
 
+  const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
+  if (currentTheme) {
+    document.documentElement.setAttribute('data-theme', currentTheme);
 
-  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    document.documentElement.setAttribute('data-theme', "dark");
-    toggleSwitch.checked = true;
-  } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-    document.documentElement.setAttribute('data-theme', "light");
-    toggleSwitch.checked = false;
-  } else {
-    const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
-    if (currentTheme) {
-      document.documentElement.setAttribute('data-theme', currentTheme);
-
-      if (currentTheme === 'dark') {
-        toggleSwitch.checked = true;
-      }
+    if (currentTheme === 'dark') {
+      toggleSwitch.checked = true;
     }
   }
 }
@@ -83,6 +74,9 @@ function main() {
   </div>
   <div id="global-links">
     <ul class="simple">
+    <li>
+      <a href="../../theindex.html">Index</a>
+    </li>
     </ul>
   </div>
   <div id="searchInputDiv">
@@ -145,9 +139,9 @@ function main() {
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/urandom.nim#L9"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/urandom.nim#L24"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/urandom.nim#L9" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/urandom.nim#L24" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -162,9 +156,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Generates System Random sequence of bytes.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/urandom.nim#L12"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/urandom.nim#L27"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/urandom.nim#L12" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/urandom.nim#L27" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="randomString"></a>
@@ -174,9 +168,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Generates System Random strings.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/urandom.nim#L17"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/urandom.nim#L32"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/urandom.nim#L17" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/urandom.nim#L32" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="randomSecretKey"></a>
@@ -186,9 +180,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Generates System Random SecretKey.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/urandom.nim#L22"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/urandom.nim#L37"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/urandom.nim#L22" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/urandom.nim#L37" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -201,7 +195,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-08-08 07:08:46 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-08-08 07:35:42 UTC</small>
       </div>
     </div>
   </div>

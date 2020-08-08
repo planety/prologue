@@ -13,27 +13,37 @@
 # limitations under the License.
 
 
-## This module contains basic operating system facilities like
-## retrieving environment variables, reading command line arguments,
-## working with directories, running shell commands, etc.
-##
-## .. code-block::
-##   import os
-##
-##   let myFile = "/path/to/my/file.nim"
-##
-##   let pathSplit = splitPath(myFile)
-##   assert pathSplit.head == "/path/to/my"
-##   assert pathSplit.tail == "file.nim"
-##
-##   assert parentDir(myFile) == "/path/to/my"
-##
-##   let fileSplit = splitFile(myFile)
-##   assert fileSplit.dir == "/path/to/my"
-##   assert fileSplit.name == "file"
-##   assert fileSplit.ext == ".nim"
-##
-##   assert myFile.changeFileExt("c") == "/path/to/my/file.c"
+## This module contains basic configure facilities like
+## retrieving, setting environment variables and so on.
+
+runnableExamples:
+  import os, tables, streams
+
+
+  let prefix = "PROLOGUE_"
+  # only work in application scope
+  putPrologueEnv("debug", "true", prefix)
+  putPrologueEnv("port", "8080", prefix)
+  putPrologueEnv("appName", "Starlight", prefix)
+  putPrologueEnv("staticDir", "static", prefix)
+
+
+  let res = getAllPrologueEnv(prefix)
+
+  doAssert(res.len == 4, "got: " & $res)
+
+  let config = newStringStream("""[Prologue]
+debug=true
+port=8080
+appName=Starlight
+staticDir=static
+""")
+
+  let tab = loadConfig(config)["Prologue"]
+  doAssert tab["appName"] == "Starlight"
+  doAssert tab["staticDir"] == "static"
+  doAssert tab["debug"] == "true"
+  doAssert tab["port"] == "8080"
 
 
 import os, tables, strutils, parsecfg, streams
@@ -141,32 +151,3 @@ proc writePrologueEnv*(filename: string, env: Env) =
     for key, value in env.data:
       f.writeLine(key & "=" & value)
     f.close()
-
-
-when isMainModule:
-  import ./constants
-
-
-  let prefix = ProloguePrefix
-  # only work in application scope
-  putPrologueEnv("debug", "true", prefix)
-  putPrologueEnv("port", "8080", prefix)
-  putPrologueEnv("appName", "Starlight", prefix)
-  putPrologueEnv("staticDir", "static", prefix)
-
-
-  for k, v in envPairs():
-    echo k, "->", v
-
-  let res = getAllPrologueEnv(prefix)
-
-  assert(res.len == 4, "got: " & $res)
-
-  let config = newStringStream("""[Prologue]
-debug=true
-port=8080
-appName=Starlight
-staticDir=static
-""")
-
-  echo loadConfig(config)["Prologue"]

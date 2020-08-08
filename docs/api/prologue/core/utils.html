@@ -20,7 +20,7 @@
 <title>prologue/core/utils</title>
 <link rel="stylesheet" type="text/css" href="../../nimdoc.out.css">
 
-<script type="text/javascript" src="dochack.js"></script>
+<script type="text/javascript" src="../../dochack.js"></script>
 
 <script type="text/javascript">
 function main() {
@@ -47,21 +47,12 @@ function main() {
 
   toggleSwitch.addEventListener('change', switchTheme, false);
 
+  const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
+  if (currentTheme) {
+    document.documentElement.setAttribute('data-theme', currentTheme);
 
-  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    document.documentElement.setAttribute('data-theme', "dark");
-    toggleSwitch.checked = true;
-  } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-    document.documentElement.setAttribute('data-theme', "light");
-    toggleSwitch.checked = false;
-  } else {
-    const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
-    if (currentTheme) {
-      document.documentElement.setAttribute('data-theme', currentTheme);
-
-      if (currentTheme === 'dark') {
-        toggleSwitch.checked = true;
-      }
+    if (currentTheme === 'dark') {
+      toggleSwitch.checked = true;
     }
   }
 }
@@ -83,6 +74,9 @@ function main() {
   </div>
   <div id="global-links">
     <ul class="simple">
+    <li>
+      <a href="../../theindex.html">Index</a>
+    </li>
     </ul>
   </div>
   <div id="searchInputDiv">
@@ -136,9 +130,9 @@ function main() {
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/utils.nim#L22"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/utils.nim#L37"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/utils.nim#L22" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/utils.nim#L37" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -152,9 +146,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 limitation: can't be used to annotate a template (eg typetraits.get), would error: cannot attach a custom pragma.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/utils.nim#L4"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/utils.nim#L19"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/utils.nim#L4" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/utils.nim#L19" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="sinceApi.t,untyped,untyped"></a>
@@ -163,9 +157,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 limitation: can't be used to annotate a template (eg typetraits.get), would error: cannot attach a custom pragma.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/utils.nim#L10"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/utils.nim#L25"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/utils.nim#L10" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/utils.nim#L25" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="beforeApi.t,untyped,untyped"></a>
@@ -174,9 +168,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 limitation: can't be used to annotate a template (eg typetraits.get), would error: cannot attach a custom pragma.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/utils.nim#L16"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/utils.nim#L31"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/utils.nim#L16" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/utils.nim#L31" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -189,7 +183,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-08-08 07:08:42 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-08-08 07:35:35 UTC</small>
       </div>
     </div>
   </div>
