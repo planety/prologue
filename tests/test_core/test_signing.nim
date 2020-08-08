@@ -1,5 +1,5 @@
 from ../../src/prologue/core/types import SecretKey
-from ../../src/prologue/signing/signing import initSigner, initTimedSigner,
+from ../../src/prologue/signing import initSigner, initTimedSigner,
     BaseDigestMethodType, BadSignatureError, sign, unsign, validate
 
 import json

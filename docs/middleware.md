@@ -44,5 +44,5 @@ You can put your middleware plugin in [collections](https://github.com/planety/a
 `prologue` also supplies some middleware plugins, you can directly import them.
 
 ```nim
-import prologue/middlewares/middlewares
+import prologue/middlewares
 ```

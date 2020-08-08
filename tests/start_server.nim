@@ -1,6 +1,6 @@
 import ../src/prologue except loginPage
-import ../src/prologue/middlewares/middlewares
-import ../src/prologue/i18n/i18n
+import ../src/prologue/middlewares
+import ../src/prologue/i18n
 import logging, os, strformat, strutils
 
 import test_core/utils

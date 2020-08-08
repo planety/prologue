@@ -1,6 +1,6 @@
 import logging
 import prologue
-import prologue/middlewares/middlewares
+import prologue/middlewares
 
 
 proc hello(ctx: Context) {.async.} =

@@ -1,6 +1,6 @@
 # app.nim
 import ../../src/prologue
-import ../../src/prologue/middlewares/middlewares
+import ../../src/prologue/middlewares
 
 
 # Async Function

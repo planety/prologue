@@ -1,6 +1,6 @@
 import ../../src/prologue
-import ../../src/prologue/middlewares/middlewares
-from ../../src/prologue/openapi/openapi import serveDocs
+import ../../src/prologue/middlewares
+from ../../src/prologue/openapi import serveDocs
 
 import logging
 

@@ -1,1 +1,1 @@
-import ../../src/prologue/i18n/i18n
+import ../../src/prologue/i18n

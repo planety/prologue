@@ -1,5 +1,5 @@
 import ../../src/prologue
-import ../../src/prologue/middlewares/middlewares
+import ../../src/prologue/middlewares
 
 
 proc index(ctx: Context) {.async.} =

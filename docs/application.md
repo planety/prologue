@@ -1,28 +1,24 @@
 # application
 
-## Prologue object
+`Prologue` object is used to configure the application, do some preparations before requests.
 
-Prologue object
+The [hello world](https://github.com/planety/prologue/blob/master/examples/helloworld/app.nim) example is 
+suitable for learning `Prologue` object.
 
-## Create a Prologue object
+## startup and shutdown events
 
-Use `newApp` to create a Prologue instance.
+You can set `startup` events which executes before the application starts and `shutdown` events after
+the application stops. You can read [events](https://planety.github.io/prologue/event) documents later.
 
-### Settings
+## serve static files
 
-Use `newSettings` to create the application settings.
+`Prologue` can serve static files, you can read [staticFile](https://planety.github.io/prologue/staticfiles) documents later.
 
-### Middlewares
+## add routes
 
-Register `middlewares` for the whole application. The middlewares will 
-apply to every handler.
+You can add all kinds of routes to route table, you can read [routes](https://planety.github.io/prologue/route) document later.
 
-### Startup and Shutdown
+## middlewares
 
-Register events for startup and shutdown.
+You can use and write [middlewares](https://planety.github.io/prologue/middleware) too.
 
-You can find the [full usage](https://planety.github.io/prologue/event).
-
-### Error Handler
-
-Map status codes to error handlers.

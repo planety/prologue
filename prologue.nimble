@@ -33,12 +33,12 @@ task docs, "Only for gh-pages, not for users":
   exec "mkdocs gh-deploy"
 
 task apis, "Only for api":
-  exec "nim doc --verbosity:0 --warnings:off --docCmd:\"--hints:off\" --project --index:on " &
+  exec "nim doc --verbosity:0 --warnings:off --project --index:on " &
     "--git.url:https://github.com/planety/prologue " &
     "--git.commit:master " &
     # "--git.devel:master " &
     # "-o:docs/api/theindex.html " &
     "-o:docs/api " &
-    "src/prologue.nim"
+    "index.nim"
 
   exec "nim buildIndex -o:docs/api/theindex.html docs/api"

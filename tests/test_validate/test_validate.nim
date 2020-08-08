@@ -1,6 +1,6 @@
 import strtabs
 
-from ../../src/prologue/validate/validate import required, accepted, isInt,
+from ../../src/prologue/validater import required, accepted, isInt,
     isNumeric, isBool, equals, minValue, maxValue, rangeValue, matchRegex,
         matchUrl, newFormValidation, validate, minLength, maxLength, rangeLength
 

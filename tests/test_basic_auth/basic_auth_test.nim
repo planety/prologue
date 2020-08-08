@@ -1,8 +1,8 @@
 import logging
 
 import ../../src/prologue
-import ../../src/prologue/auth/auth
-import ../../src/prologue/middlewares/middlewares
+import ../../src/prologue/auth
+import ../../src/prologue/middlewares
 
 
 proc verify(ctx: Context, username, password: string): bool =
