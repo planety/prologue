@@ -163,6 +163,8 @@ function main() {
   <li><a class="reference" href="#all%2CPrologue%2Cstring%2CHandlerAsync%2Cstring%2CLocalSettings"
     title="all(app: Prologue; route: string; handler: HandlerAsync; name = &quot;&quot;;
     middlewares: sink seq[HandlerAsync] = @[]; settings: LocalSettings = nil)"><wbr />all<span class="attachedType"></span></a></li>
+  <li><a class="reference" href="#printRoute%2CPrologue"
+    title="printRoute(app: Prologue)"><wbr />print<wbr />Route<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#appAddress%2CPrologue"
     title="appAddress(app: Prologue): string"><wbr />app<wbr />Address<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#appDebug%2CPrologue"
@@ -484,8 +486,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L187" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="appAddress,Prologue"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#appAddress%2CPrologue"><span class="Identifier">appAddress</span></a><span class="Other">(</span><span class="Identifier">app</span><span class="Other">:</span> <a href="naive/server.html#Prologue"><span class="Identifier">Prologue</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<a id="printRoute,Prologue"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#printRoute%2CPrologue"><span class="Identifier">printRoute</span></a><span class="Other">(</span><span class="Identifier">app</span><span class="Other">:</span> <a href="naive/server.html#Prologue"><span class="Identifier">Prologue</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 
@@ -495,15 +497,26 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L192" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
+<a id="appAddress,Prologue"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#appAddress%2CPrologue"><span class="Identifier">appAddress</span></a><span class="Other">(</span><span class="Identifier">app</span><span class="Other">:</span> <a href="naive/server.html#Prologue"><span class="Identifier">Prologue</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L196"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L196" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
 <a id="appDebug,Prologue"></a>
 <dt><pre><span class="Keyword">proc</span> <a href="#appDebug%2CPrologue"><span class="Identifier">appDebug</span></a><span class="Other">(</span><span class="Identifier">app</span><span class="Other">:</span> <a href="naive/server.html#Prologue"><span class="Identifier">Prologue</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L195"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L199"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L195" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L199" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="appName,Prologue"></a>
@@ -512,9 +525,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L198"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L202"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L198" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L202" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="appPort,Prologue"></a>
@@ -523,9 +536,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L201"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L205"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L201" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L205" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="newApp,Settings"></a>
@@ -538,9 +551,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Creates a new App instance.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L204"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L208"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L204" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L208" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="run,Prologue"></a>
@@ -551,9 +564,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Starts Application.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L217"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L221"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L217" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L221" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -571,7 +584,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-08-07 12:18:09 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-08-08 05:42:20 UTC</small>
       </div>
     </div>
   </div>

@@ -17,10 +17,11 @@ web services.
 
 **Reduce magic. Reduce surprise.**
 
-
 ## Documentation
 
 You can read documentation in https://planety.github.io/prologue.
+
+API docs in https://planety.github.io/prologue/api/theindex.html.
 
 
 ## Feature
@@ -35,6 +36,7 @@ You can read documentation in https://planety.github.io/prologue.
   - [x] Middleware
   - [x] Simple Route
   - [x] Regex Route
+  - [x] DSL Route
   - [x] CORS Response
   - [x] Signing
   - [x] Cookie
@@ -54,6 +56,7 @@ You can read documentation in https://planety.github.io/prologue.
   - [x] Minimal OpenApi support
   - [x] Template(Using Karax Native)
   - [x] Test Client(Using httpclient)
+  - [x] Command line tools(https://github.com/planety/logue)
 
 ## Installation
 
@@ -67,6 +70,35 @@ nimble install prologue
 
 ## Usage
 
+### Notes(important)
+
+1. If you use Linux or MacOS, you can use `--threads:on` to enable multi-threads HTTP Server.
+
+2. If you want to benchmark `prologue` or release you programs, make sure set `settings.debug` = false.
+
+```nim
+let
+  # debug attributes must be false
+  env = loadPrologueEnv(".env")
+  settings = newSettings(appName = env.getOrDefault("appName", "Prologue"),
+                         debug = false,
+                         port = Port(env.getOrDefault("port", 8787)),
+                         staticDirs = [env.get("staticDir")],
+                         secretKey = env.getOrDefault("secretKey", "")
+    )
+```
+
+or in `.env` file, set `debug = false`.
+
+```nim
+# Don't commit this to source control.
+# Eg. Make sure ".env" in your ".gitignore" file.
+debug=false # change this
+port=8787
+appName=HelloWorld
+staticDir=/static
+secretKey=Pr435ol67ogue
+```
 
 ### Hello World
 
@@ -85,7 +117,7 @@ app.addRoute("/", hello)
 app.run()
 ```
 
-Run **app.nim**.Now the server is running at localhost:8080.
+Run **app.nim**. Now the server is running at localhost:8080.
 
 ### Another example
 
@@ -123,12 +155,42 @@ app.addRoute("/hello/{name}", helloName, HttpGet)
 app.run()
 ```
 
-Run **app.nim**.Now the server is running at localhost:8080.
+#### DSL for routes  
+
+You can read docs in https://nim-lang.github.io/Nim/with.html and construct your own DSL.
+
+Pseudocode:
+
+```nim
+import std/with
+
+
+with app:
+  get "/", home
+  post "/", home
+  get "/home", home
+  get "/home", home
+  get "/redirect", doRedirect
+  get "/login", login  
+  post("/login", login, middlewares = debugRequestMiddleware())
+  get "/hello/{name}", helloName
+  addRoute [HttpGet, HttpPost], helloRoute
+```
+
+Run **app.nim**. Now the server is running at localhost:8080.
 
 ### More examples
 - [HelloWorld](https://github.com/planety/prologue/tree/master/examples/helloworld)
 - [ToDoList](https://github.com/planety/prologue/tree/master/examples/todolist)
 - [Blog](https://github.com/planety/prologue/tree/master/examples/blog)
+
+### Donate
+
+Thanks for supporting me.
+
+[by me a coffee](https://www.buymeacoffee.com/flywind)
+
+[patreon](https://www.patreon.com/flywind)
 
 
 ### Stars
