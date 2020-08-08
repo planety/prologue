@@ -21,7 +21,7 @@ from ./urandom import randomString
 
 
 type
-  Settings* = ref object
+  Settings* = ref object ## Global settings for all handlers.
     address*: string
     port*: Port
     debug*: bool
@@ -30,11 +30,11 @@ type
     appName*: string
     data: JsonNode
 
-  CtxSettings* = ref object
+  CtxSettings* = ref object ## Context settings.
     mimeDB*: MimeDB
     config*: TableRef[string, StringTableRef]
 
-  LocalSettings* = ref object
+  LocalSettings* = ref object ## local settings for corresponding handlers.
     data*: JsonNode
 
 
@@ -48,18 +48,22 @@ proc getOrDefault*(settings: Settings, key: string): JsonNode {.inline.} =
   settings.data.getOrDefault(key)
 
 proc newCtxSettings*(): CtxSettings {.inline.} =
+  # Ctretes a new context settings.
   CtxSettings(mimeDB: newMimetypes(), config: newTable[string, StringTableRef]())
 
 proc newLocalSettings*(data: JsonNode): LocalSettings {.inline.} =
+  ## Creates a new localSettings.
   result = LocalSettings(data: data)
 
 proc newLocalSettings*(configPath: string): LocalSettings {.inline.} =
+  ## Creates a new localSettings.
   var data = parseFile(configPath)
   result = LocalSettings(data: data)
 
 proc newSettings*(address = "", port = Port(8080), debug = true, reusePort = true,
                   staticDirs: openArray[string] = ["static"], secretKey = randomString(8),
                   appName = ""): Settings {.inline.} =
+  ## Creates a new settings.
   if secretKey.len == 0:
     raise newException(EmptySecretKeyError, "Secret key can't be empty!")
 
@@ -71,6 +75,7 @@ proc newSettings*(address = "", port = Port(8080), debug = true, reusePort = tru
 proc newSettings*(data: JsonNode, address = "", port = Port(8080), debug = true, reusePort = true,
                   staticDirs: openArray[string] = ["static"],
                   appName = ""): Settings {.inline.} =
+  ## Creates a new settings.
   result = Settings(address: address, port: port, debug: debug, reusePort: reusePort,
                     staticDirs: @staticDirs, appName: appName,
                     data: data)
@@ -78,6 +83,7 @@ proc newSettings*(data: JsonNode, address = "", port = Port(8080), debug = true,
 proc newSettings*(configPath: string, address = "", port = Port(8080), debug = true, reusePort = true,
                   staticDirs: openArray[string] = ["static"],
                   appName = ""): Settings {.inline.} =
+  ## Creates a new settings.
   # make sure reserved keys must appear in settings
   var data = parseFile(configPath)
   result = Settings(address: address, port: port, debug: debug, reusePort: reusePort,

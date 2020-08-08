@@ -13,11 +13,13 @@ type
 
 
 proc `$`*(response: Response): string =
+  ## Stringify response.
   fmt"{response.code} {response.headers}"
 
 proc initResponse*(httpVersion: HttpVersion, code: HttpCode, headers =
                    {"Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders,
                    body = ""): Response =
+  ## Initializes response.
   Response(httpVersion: httpVersion, code: code, headers: headers, body: body)
 
 proc hasHeader*(response: Response, key: string): bool {.inline.} =

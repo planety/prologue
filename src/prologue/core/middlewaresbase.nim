@@ -22,7 +22,7 @@ proc doNothingClosureMiddleware*(): HandlerAsync
 
 
 proc switch*(ctx: Context) {.async.} =
-  ## TODO make middlewares checked
+  # TODO make middlewares checked
   if ctx.middlewares.len == 0:
     let
       handler = findHandler(ctx)

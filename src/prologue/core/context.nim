@@ -97,6 +97,7 @@ proc default500Handler*(ctx: Context) {.async.}
 
 
 proc gScope*(ctx: Context): lent GlobalScope {.inline.} =
+  ## Gets the gScope attribute of Context.
   ctx.gScope
 
 proc size*(ctx: Context): int {.inline.} =
@@ -147,7 +148,7 @@ proc initEvent*(handler: SyncEvent): Event {.inline.} =
 
 proc newContext*(request: Request, response: Response,
                  gScope: GlobalScope): Context {.inline.} =
-  ## Creates new Context.
+  ## Creates a new Context.
   Context(request: request, response: response,
           handled: false, session: initSession(data = newStringTable(mode = modeCaseSensitive)),
           cleanedData: newStringTable(mode = modeCaseSensitive),
@@ -158,7 +159,7 @@ proc newContext*(request: Request, response: Response,
     )
 
 proc getSettings*(ctx: Context, key: string): JsonNode {.inline.} =
-  ## Get settings(First lookup localSettings then lookup globalSettings).
+  ## Get context.settings(First lookup localSettings then lookup globalSettings).
   if ctx.localSettings == nil:
     result = ctx.gScope.settings.getOrDefault(key)
   elif not ctx.localSettings.hasKey(key):
@@ -302,6 +303,7 @@ proc abortExit*(ctx: Context, code = Http401, body = "",
   raise newException(AbortError, "abort exit")
 
 proc attachment*(ctx: Context, downloadName = "", charset = "utf-8") {.inline.} =
+  ## Downloads files.
   if downloadName.len == 0:
     return
 
@@ -318,7 +320,7 @@ proc attachment*(ctx: Context, downloadName = "", charset = "utf-8") {.inline.} 
 proc staticFileResponse*(ctx: Context, filename, dir: string, mimetype = "",
                          downloadName = "", charset = "utf-8", 
                          headers = newHttpHeaders()) {.async.} =
-  ## Serves Static File.
+  ## Serves static files.
   let
     filePath = dir / filename
 
