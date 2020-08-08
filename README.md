@@ -186,7 +186,7 @@ Run **app.nim**. Now the server is running at localhost:8080.
 
 ### Donate
 
-Thanks for supporting me.
+Thanks for supporting me!
 
 [by me a coffee](https://www.buymeacoffee.com/flywind)
 

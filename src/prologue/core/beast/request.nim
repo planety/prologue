@@ -4,7 +4,7 @@ import strutils, strtabs, options
 import cookiejar
 
 
-import ../dispatch
+import .asyncdispatch
 from ../response import Response
 from ../types import FormPart
 

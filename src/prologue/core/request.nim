@@ -1,6 +1,3 @@
-import asyncdispatch
-
-
 # when compiles(getGlobalDispatcher().handles):
 #   when defined(usestd):
 #     import naive/request

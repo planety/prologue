@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-import ./dispatch
+import asyncdispatch
 from ./context import HandlerAsync, Context, size, incSize, first, `first=`
 from ./route import findHandler
 

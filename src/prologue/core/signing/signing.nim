@@ -1,3 +1,38 @@
+## This module implements basic signing operations.
+
+
+##.. code-block::
+##  import os, json
+##
+##  block:
+##    let
+##      key = SecretKey("secret-key")
+##      s = initSigner(key, salt = "itsdangerous.Signer")
+##      sig = s.sign("my string")
+##    doAssert sig == "my string.wh6tMHxLgJqB6oY1uT73iMlyrOA"
+##    doAssert s.unsign(sig) == "my string"
+##    doAssert validate(s, sig)
+##
+##  block:
+##    let
+##      key = SecretKey("secret-key")
+##      s = initTimedSigner(key, salt = "activate",
+##          digestMethod = Sha1Type)
+##      sig = s.sign("my string")
+##    sleep(6000)
+##    doAssertRaises(SignatureExpiredError):
+##      discard s.unsign(sig, 5) == "my string"
+##
+##  block:
+##    let
+##      key = SecretKey("secret-key")
+##      s = initSigner(key, salt = "activate",
+##          digestMethod = Sha1Type)
+##      sig {.used.} = s.sign( $ %*[1, 2, 3])
+##    doAssertRaises(BadSignatureError):
+##      discard s.unsign("[1, 2, 3].sdhfghjkjhdfghjigf")
+
+
 import strutils, tables, strformat, times
 
 import signingbase
@@ -281,36 +316,3 @@ proc validate*(s: Signer, signedValue: string): bool =
     discard s.unsign(signedValue)
   except BadSignatureError:
     result = false
-
-
-when isMainModule:
-  import os, json
-
-  block:
-    let
-      key = SecretKey("secret-key")
-      s = initSigner(key, salt = "itsdangerous.Signer")
-      sig = s.sign("my string")
-    echo sig
-    assert sig == "my string.wh6tMHxLgJqB6oY1uT73iMlyrOA"
-    assert s.unsign(sig) == "my string"
-    assert validate(s, sig)
-
-  block:
-    let
-      key = SecretKey("secret-key")
-      s = initTimedSigner(key, salt = "activate",
-          digestMethod = Sha1Type)
-      sig = s.sign("my string")
-    sleep(6000)
-    doAssertRaises(SignatureExpiredError):
-      discard s.unsign(sig, 5) == "my string"
-
-  block:
-    let
-      key = SecretKey("secret-key")
-      s = initSigner(key, salt = "activate",
-          digestMethod = Sha1Type)
-      sig {.used.} = s.sign( $ %*[1, 2, 3])
-    doAssertRaises(BadSignatureError):
-      discard s.unsign("[1, 2, 3].sdhfghjkjhdfghjigf")

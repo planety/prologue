@@ -15,7 +15,7 @@
 import httpcore, asyncfile, mimetypes, md5, uri
 import strtabs, tables, strformat, os, times, options, parseutils, json
 
-import ./dispatch
+import asyncdispatch
 import ./response, ./pages, ./constants
 import cookiejar
 from ./types import BaseType, Session, `[]`, initSession

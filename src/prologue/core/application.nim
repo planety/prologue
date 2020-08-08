@@ -29,7 +29,7 @@ from ./nativesettings import newSettings, newCtxSettings,
                              newLocalSettings
 from ./httpexception import HttpError, AbortError
 
-import ./dispatch
+import asyncdispatch
 import ./signing/signing
 import ./response
 import ./context
@@ -51,7 +51,7 @@ export request, server
 export httpcore
 export strtabs
 export tables
-export dispatch except register
+export asyncdispatch except register
 export options
 export json
 

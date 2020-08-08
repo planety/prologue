@@ -1,7 +1,7 @@
 import httpcore, strtabs
 
 
-import ../dispatch
+import .asyncdispatch
 from ./request import NativeRequest
 from ../nativesettings import Settings, CtxSettings
 from ../context import Router, ReversedRouter, ReRouter, HandlerAsync,

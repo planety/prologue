@@ -2,7 +2,7 @@ import httpcore, strtabs, json
 from asynchttpserver import newAsyncHttpServer, serve, close, AsyncHttpServer
 
 
-import ../dispatch
+import asyncdispatch
 from ./request import NativeRequest
 from ../nativesettings import Settings, CtxSettings, getOrDefault
 from ../context import Router, ReversedRouter, ReRouter, HandlerAsync,
