@@ -26,6 +26,7 @@ block:
     doAssert env["port"] == "8080"
     doAssert env["appName"] == "Starlight"
     doAssert env["staticDir"] == "static"
+    doAssert env.getOrDefault("address", "127.0.0.2") == "127.0.0.2"
 
   if fileExists(filename):
     removeFile(filename)
