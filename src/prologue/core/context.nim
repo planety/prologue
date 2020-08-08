@@ -113,16 +113,16 @@ proc `first=`*(ctx: Context, first: bool) {.inline.} =
   ctx.first = first
 
 proc initUploadFile*(filename, body: string): UpLoadFile {.inline.} =
-  ## Initiates UploadFile.
+  ## Initiates a UploadFile.
   UploadFile(filename: filename, body: body)
 
 proc getUploadFile*(ctx: Context, name: string): UpLoadFile {.inline.} =
-  ## Gets UploadFile from request.
+  ## Gets the UploadFile from request.
   let file = ctx.request.formParams[name]
   initUploadFile(filename = file.params["filename"], body = file.body)
 
 proc save*(uploadFile: UpLoadFile, dir: string, filename = "") {.inline.} =
-  ## Saves UploadFile to ``dir``.
+  ## Saves the UploadFile to ``dir``.
   if not dirExists(dir):
     raise newException(OSError, "Dir doesn't exist.")
   if filename.len == 0:
@@ -223,6 +223,7 @@ proc default500Handler*(ctx: Context) {.async.} =
   ctx.response.setHeader("content-type", "text/html; charset=UTF-8")
 
 proc getPostParams*(ctx: Context, key: string, default = ""): string {.inline.} =
+  ## Gets the parameters by HttpPost.
   case ctx.request.reqMethod
   of HttpPost:
     result = ctx.request.postParams.getOrDefault(key, default)
@@ -230,20 +231,23 @@ proc getPostParams*(ctx: Context, key: string, default = ""): string {.inline.} 
     result = ""
 
 proc getQueryParams*(ctx: Context, key: string, default = ""): string {.inline.} =
+  ## Gets the query strings(for example, "www.google.com/hello?name=12", `name=12`).
   result = ctx.request.queryParams.getOrDefault(key, default)
 
 proc getPathParams*(ctx: Context, key: string): string {.inline.} =
+  ## Gets the route parameters(for example, "/hello/{name}").
   ctx.request.pathParams.getOrDefault(key)
 
 proc getPathParams*[T: BaseType](ctx: Context, key: sink string,
                     default: T): T {.inline.} =
+  ## Gets the route parameters(for example, "/hello/{name}").
   let pathParams = ctx.request.pathParams.getOrDefault(key)
   parseValue(pathParams, default)
 
 proc setResponse*(ctx: Context, code: HttpCode, httpHeaders =
                   {"Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders,
                   body = "", version = HttpVer11) {.inline.} =
-  ## handy to make ctx's response
+  ## Handy to make the response of `ctx`.
   let 
     response = initResponse(httpVersion = version, code = code,
                             headers = httpHeaders,
@@ -251,7 +255,7 @@ proc setResponse*(ctx: Context, code: HttpCode, httpHeaders =
   ctx.response = response
 
 proc setResponse*(ctx: Context, response: Response) {.inline.} =
-  ## handy to make ctx's response
+  ## Handy to make the response of `ctx`.
   ctx.response = response
 
 proc multiMatch*(s: string, replacements: StringTableRef): string =
@@ -299,11 +303,12 @@ proc urlFor*(ctx: Context, handler: string, parameters: openArray[(string,
 proc abortExit*(ctx: Context, code = Http401, body = "",
                 headers = newHttpHeaders(),
                 version = HttpVer11) {.inline.} =
+  ## Abort the program.
   ctx.response = abort(code, body, headers, version)
   raise newException(AbortError, "abort exit")
 
 proc attachment*(ctx: Context, downloadName = "", charset = "utf-8") {.inline.} =
-  ## Downloads files.
+  ## `attachment` is used to specify the file will be downloaded.
   if downloadName.len == 0:
     return
 

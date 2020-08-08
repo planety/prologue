@@ -23,20 +23,25 @@ proc initResponse*(httpVersion: HttpVersion, code: HttpCode, headers =
   Response(httpVersion: httpVersion, code: code, headers: headers, body: body)
 
 proc hasHeader*(response: Response, key: string): bool {.inline.} =
+  ## Returns true if key is in the `response`.
   response.headers.hasKey(key)
 
 proc setHeader*(response: var Response, key, value: string) {.inline.} =
+  ## Sets the header values of the response.
   response.headers[key] = value
 
 proc setHeader*(response: var Response, key: string, value: sink seq[string]) {.inline.} =
+  ## Sets the header values of the response.
   response.headers[key] = value
 
 proc addHeader*(response: var Response, key, value: string) {.inline.} =
+  ## Adds header values to the existing `HttpHeaders`.
   response.headers.add(key, value)
 
 proc setCookie*(response: var Response, key, value: string, expires = "",
                 maxAge: Option[int] = none(int), domain = "", path = "", secure = false,
                 httpOnly = false, sameSite = Lax) {.inline.} =
+  ## Sets the cookie of response.
   let cookies = initCookie(key, value, expires, maxAge, domain, 
                            path, secure, httpOnly, sameSite)
   response.addHeader("Set-Cookie", $cookies)
@@ -44,6 +49,7 @@ proc setCookie*(response: var Response, key, value: string, expires = "",
 proc setCookie*(response: var Response, key, value: string, expires: DateTime|Time, 
                 maxAge: Option[int] = none(int), domain = "",
                 path = "", secure = false, httpOnly = false, sameSite = Lax) {.inline.} =
+  ## Sets the cookie of response.
   let cookies = initCookie(key, value, expires, maxAge, domain, 
                           path, secure, httpOnly, sameSite)
   response.addHeader("Set-Cookie", $cookies)
@@ -71,6 +77,7 @@ func redirect*(url: string, code = Http301,
 func error404*(code = Http404,
                body = "<h1>404 Not Found!</h1>", headers = newHttpHeaders(),
                version = HttpVer11): Response {.inline.} =
+  ## 404 HTML.
   result = initResponse(version, code = code, body = body, headers = headers)
 
 func htmlResponse*(text: string, code = Http200, headers = newHttpHeaders(),

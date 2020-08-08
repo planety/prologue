@@ -231,7 +231,7 @@ class="link-seesrc" target="_blank">Source</a>
 <dt><pre><span class="Keyword">proc</span> <a href="#hasHeader%2CResponse%2Cstring"><span class="Identifier">hasHeader</span></a><span class="Other">(</span><span class="Identifier">response</span><span class="Other">:</span> <a href="response.html#Response"><span class="Identifier">Response</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-
+Returns true if key is in the <tt class="docutils literal"><span class="pre">response</span></tt>.
 &nbsp;&nbsp;<a
 href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L25"
 class="link-seesrc" target="_blank">Source</a>
@@ -242,11 +242,11 @@ class="link-seesrc" target="_blank">Source</a>
 <dt><pre><span class="Keyword">proc</span> <a href="#setHeader%2CResponse%2Cstring%2Cstring"><span class="Identifier">setHeader</span></a><span class="Other">(</span><span class="Identifier">response</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="response.html#Response"><span class="Identifier">Response</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">,</span> <span class="Identifier">value</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-
+Sets the header values of the response.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L28"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L29"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L28" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L29" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="setHeader,Response,string,"></a>
@@ -254,11 +254,11 @@ class="link-seesrc" target="_blank">Source</a>
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-
+Sets the header values of the response.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L31"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L33"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L31" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L33" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="addHeader,Response,string,string"></a>
@@ -266,11 +266,11 @@ class="link-seesrc" target="_blank">Source</a>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-
+Adds header values to the existing <tt class="docutils literal"><span class="pre">HttpHeaders</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L34"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L37"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L34" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L37" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="setCookie,Response,string,string,string,Option[int],string,string"></a>
@@ -280,11 +280,11 @@ class="link-seesrc" target="_blank">Source</a>
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">,</span> <span class="Identifier">UnpackError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-
+Sets the cookie of response.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L37"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L41"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L37" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L41" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="setCookie,Response,string,string,,Option[int],string,string"></a>
@@ -293,11 +293,11 @@ class="link-seesrc" target="_blank">Source</a>
               <span class="Identifier">httpOnly</span> <span class="Other">=</span> <span class="Identifier">false</span><span class="Other">;</span> <span class="Identifier">sameSite</span> <span class="Other">=</span> <span class="Identifier">Lax</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-
+Sets the cookie of response.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L44"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L49"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L44" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L49" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="deleteCookie,Response,string,string,string,string"></a>
@@ -307,9 +307,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L51"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L57"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L51" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L57" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -324,9 +324,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L56"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L62"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L56" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L62" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="redirect,string,string,int"></a>
@@ -337,9 +337,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 redirect to new url.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L61"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L67"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L61" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L67" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="error404,string"></a>
@@ -348,11 +348,11 @@ class="link-seesrc" target="_blank">Source</a>
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-
+404 HTML.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L71"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L77"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L71" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L77" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="htmlResponse,string"></a>
@@ -362,9 +362,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Content-Type: text/html; charset=UTF-8.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L76"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L83"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L76" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L83" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="plainTextResponse,string"></a>
@@ -374,9 +374,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Content-Type: text/plain.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L82"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L89"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L82" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L89" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="jsonResponse,JsonNode"></a>
@@ -386,9 +386,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Content-Type: application/json.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L88"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L95"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L88" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L95" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -402,9 +402,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Handy to make a response of ctx.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L94"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L101"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L94" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L101" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="resp.m,Response"></a>
@@ -413,9 +413,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Handy to make a response of ctx.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L104"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L111"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L104" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L111" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -428,7 +428,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-08-08 11:36:23 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-08-08 12:48:33 UTC</small>
       </div>
     </div>
   </div>
