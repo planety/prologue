@@ -30,7 +30,7 @@ from ./nativesettings import newSettings, newCtxSettings,
 from ./httpexception import HttpError, AbortError
 
 import asyncdispatch
-import ./signing/signing
+# import ./signing/signing
 import ./response
 import ./context
 import ./pages
@@ -55,7 +55,7 @@ export asyncdispatch except register
 export options
 export json
 
-export signing
+# export signing
 export basicregex
 export configure
 export constants

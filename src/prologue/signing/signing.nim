@@ -39,8 +39,8 @@ import signingbase
 
 import nimcrypto
 
-from ../types import SecretKey
-from ../encode import urlsafeBase64Encode
+from ../core/types import SecretKey
+from ../core/encode import urlsafeBase64Encode
 
 export signingbase
 

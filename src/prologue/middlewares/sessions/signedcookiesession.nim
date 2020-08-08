@@ -8,7 +8,7 @@ from ../../core/types import BadSecretKeyError, SecretKey, loads, dumps, len
 from ../../core/context import Context, HandlerAsync, getCookie, setCookie,
     deleteCookie
 from ../../core/response import addHeader
-from ../../core/signing/signing import DefaultSep, DefaultKeyDerivation,
+from ../../signing/signing import DefaultSep, DefaultKeyDerivation,
     BadTimeSignatureError, SignatureExpiredError, DefaultDigestMethodType,
         initTimedSigner, unsign, sign
 from ../../core/middlewaresbase import switch

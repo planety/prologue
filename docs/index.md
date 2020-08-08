@@ -27,36 +27,36 @@ API docs in https://planety.github.io/prologue/api/theindex.html.
 ## Feature
 
 - Core
-  - [x] Base on httpbeast and asynchttpserver
-  - [x] Configure and Settings
-  - [x] Context
-  - [x] Param and Query Data
-  - [x] Form Data
-  - [x] Static Files
-  - [x] Middleware
-  - [x] Simple Route
-  - [x] Regex Route
-  - [x] DSL Route
-  - [x] CORS Response
-  - [x] Signing
-  - [x] Cookie
-  - [x] Session
-  - [x] Cache
-  - [x] Startup and Shutdown Events
-  - [x] URL Building
-  - [x] Data Validation
-  - [x] Exception Handler
-  - [x] Cross-Site Request Forgery
-  - [x] Cross-Site Scripting (XSS) Protection(Karax quote string automatically)
-  - [x] Clickjacking Protection
-  - [x] Authentication
-  - [x] I18n
+  - Base on httpbeast and asynchttpserver
+  - Configure and Settings
+  - Context
+  - Param and Query Data
+  - Form Data
+  - Static Files
+  - Middleware
+  - Simple Route
+  - Regex Route
+  - DSL Route
+  - CORS Response
+  - Signing
+  - Cookie
+  - Session
+  - Cache
+  - Startup and Shutdown Events
+  - URL Building
+  - Data Validation
+  - Exception Handler
+  - Cross-Site Request Forgery
+  - Cross-Site Scripting (XSS) Protection(Karax quote string automatically)
+  - Clickjacking Protection
+  - Authentication
+  - I18n
 
 - Plugin
-  - [x] Minimal OpenApi support
-  - [x] Template(Using Karax Native)
-  - [x] Test Client(Using httpclient)
-  - [x] Command line tools(https://github.com/planety/logue)
+  - Minimal OpenApi support
+  - Template(Using Karax Native)
+  - Test Client(Using httpclient)
+  - Command line tools(https://github.com/planety/logue)
 
 ## Installation
 
