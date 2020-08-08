@@ -38,7 +38,17 @@ task apis, "Only for api":
     "--git.commit:master " &
     # "--git.devel:master " &
     # "-o:docs/api/theindex.html " &
-    "-o:docs/api " &
+    "-o:docs/coreapi " &
+    "src/prologue.nim"
+
+  exec "nim buildIndex -o:docs/coreapi/theindex.html docs/coreapi"
+
+  exec "nim doc --verbosity:0 --warnings:off --project --index:on " &
+    "--git.url:https://github.com/planety/prologue " &
+    "--git.commit:master " &
+    # "--git.devel:master " &
+    # "-o:docs/api/theindex.html " &
+    "-o:docs/plugin " &
     "index.nim"
 
-  exec "nim buildIndex -o:docs/api/theindex.html docs/api"
+  exec "nim buildIndex -o:docs/plugin/theindex.html docs/plugin"

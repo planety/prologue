@@ -21,8 +21,9 @@ web services.
 
 You can read documentation in https://planety.github.io/prologue.
 
-API docs in https://planety.github.io/prologue/api/theindex.html.
+Core API docs in https://planety.github.io/prologue/coreapi/theindex.html.
 
+Plugin API docs in https://planety.github.io/prologue/plugin/theindex.html.
 
 ## Feature
 
