@@ -121,8 +121,6 @@ function main() {
     title="addRoute(app: Prologue; route: Regex; handler: HandlerAsync;
          httpMethod: seq[HttpMethod]; middlewares: seq[HandlerAsync] = @[];
          settings: LocalSettings = nil)"><wbr />add<wbr />Route<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#stripRoute%2Cstring"
-    title="stripRoute(route: string): string"><wbr />strip<wbr />Route<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#addRoute%2CPrologue%2Cstring%2CHandlerAsync%2Cstring%2Cseq%5BHandlerAsync%5D%2CLocalSettings"
     title="addRoute(app: Prologue; route: string; handler: HandlerAsync; httpMethod = HttpGet;
          name = &quot;&quot;; middlewares: seq[HandlerAsync] = @[]; settings: LocalSettings = nil)"><wbr />add<wbr />Route<span class="attachedType"></span></a></li>
@@ -210,7 +208,7 @@ function main() {
     <span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-
+Registers a user-defined error handler. You can specify HttpCode and its corresponding handler. For example, if response's HttpCode is euqal to this, Framework will execute corresponding function.
 &nbsp;&nbsp;<a
 href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L65"
 class="link-seesrc" target="_blank">Source</a>
@@ -222,11 +220,11 @@ class="link-seesrc" target="_blank">Source</a>
     <span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-
+Register the same handler for a set of HttpCode.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L69"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L73"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L69" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L73" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="registerErrorHandler,Prologue,openArray[HttpCode],ErrorHandler"></a>
@@ -235,11 +233,30 @@ class="link-seesrc" target="_blank">Source</a>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
+Register the same handler for a sequence of HttpCode. This is a helper function.
+<p><strong class="examples_text">Examples:</strong></p>
+<pre class="listing"><span class="Comment">## Examples for all registerErrorHandler</span>
+<span class="Keyword">proc</span> <span class="Identifier">go404</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">ctx</span><span class="Other">:</span> <span class="Identifier">Context</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">async</span></span><span class="Other">.}</span></span> <span class="Other">=</span>
+  <span class="Identifier">resp</span> <span class="StringLit">&quot;Something wrong!&quot;</span>
 
+<span class="Keyword">proc</span> <span class="Identifier">go20x</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">ctx</span><span class="Other">:</span> <span class="Identifier">Context</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">async</span></span><span class="Other">.}</span></span> <span class="Other">=</span>
+  <span class="Identifier">resp</span> <span class="StringLit">&quot;Ok!&quot;</span>
+
+<span class="Keyword">proc</span> <span class="Identifier">go30x</span><span class="Operator">*</span><span class="Other">(</span><span class="Identifier">ctx</span><span class="Other">:</span> <span class="Identifier">Context</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">async</span></span><span class="Other">.}</span></span> <span class="Other">=</span>
+  <span class="Identifier">resp</span> <span class="StringLit">&quot;EveryThing else?&quot;</span>
+
+<span class="Keyword">let</span> <span class="Identifier">settings</span> <span class="Other">=</span> <span class="Identifier">newSettings</span><span class="Other">(</span><span class="Other">)</span>
+<span class="Keyword">var</span> <span class="Identifier">app</span> <span class="Other">=</span> <span class="Identifier">newApp</span><span class="Other">(</span><span class="Identifier">settings</span><span class="Other">)</span>
+<span class="Identifier">app</span><span class="Other">.</span><span class="Identifier">registerErrorHandler</span><span class="Other">(</span><span class="Identifier">Http404</span><span class="Other">,</span> <span class="Identifier">go404</span><span class="Other">)</span>
+<span class="Identifier">app</span><span class="Other">.</span><span class="Identifier">registerErrorHandler</span><span class="Other">(</span><span class="Other">{</span><span class="Identifier">Http200</span> <span class="Operator">..</span> <span class="Identifier">Http204</span><span class="Other">}</span><span class="Other">,</span> <span class="Identifier">go20x</span><span class="Other">)</span>
+<span class="Identifier">app</span><span class="Other">.</span><span class="Identifier">registerErrorHandler</span><span class="Other">(</span><span class="Operator">@</span><span class="Other">[</span><span class="Identifier">Http301</span><span class="Other">,</span> <span class="Identifier">Http304</span><span class="Other">,</span> <span class="Identifier">Http307</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">go30x</span><span class="Other">)</span>
+<span class="Identifier">doAssert</span> <span class="Identifier">app</span><span class="Other">.</span><span class="Identifier">errorHandlerTable</span><span class="Other">[</span><span class="Identifier">Http404</span><span class="Other">]</span> <span class="Operator">==</span> <span class="Identifier">go404</span>
+<span class="Identifier">doAssert</span> <span class="Identifier">app</span><span class="Other">.</span><span class="Identifier">errorHandlerTable</span><span class="Other">[</span><span class="Identifier">Http202</span><span class="Other">]</span> <span class="Operator">==</span> <span class="Identifier">go20x</span>
+<span class="Identifier">doAssert</span> <span class="Identifier">app</span><span class="Other">.</span><span class="Identifier">errorHandlerTable</span><span class="Other">[</span><span class="Identifier">Http304</span><span class="Other">]</span> <span class="Operator">==</span> <span class="Identifier">go30x</span></pre>
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L74"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L79"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L74" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L79" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="newSettings,Settings,LocalSettings"></a>
@@ -247,11 +264,17 @@ class="link-seesrc" target="_blank">Source</a>
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
+Creates a new settings.<dl class="docutils"><dt>Params:</dt>
+<dd><ul class="simple"><li><tt class="docutils literal"><span class="pre">settings</span></tt> is a global immutable setting for all handlers.</li>
+<li><tt class="docutils literal"><span class="pre">localSettings</span></tt> is a local immutable setting for corresponding handler or handler group.</li>
+</ul>
+</dd>
+</dl>
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L79"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L107"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L79" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L107" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="addRoute,Prologue,Regex,HandlerAsync,seq[HandlerAsync],LocalSettings"></a>
@@ -260,11 +283,13 @@ class="link-seesrc" target="_blank">Source</a>
     <span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-add single handler route don't check whether regex routes are duplicated
+<p>Adds a single regex <tt class="docutils literal"><span class="pre">route</span></tt> with <tt class="docutils literal"><span class="pre">handler</span></tt> and don't check whether route is duplicated.</p>
+<p>Notes: The framework will automatically register <tt class="docutils literal"><span class="pre">HttpHead</span></tt> method, if HttpMethod is <tt class="docutils literal"><span class="pre">HttpGet</span></tt>.</p>
+
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L84"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L118"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L84" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L118" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="addRoute,Prologue,Regex,HandlerAsync,seq[HttpMethod],seq[HandlerAsync],LocalSettings"></a>
@@ -273,22 +298,11 @@ class="link-seesrc" target="_blank">Source</a>
              <span class="Identifier">settings</span><span class="Other">:</span> <a href="nativesettings.html#LocalSettings"><span class="Identifier">LocalSettings</span></a> <span class="Other">=</span> <span class="Keyword">nil</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-
+Adds a single regex <tt class="docutils literal"><span class="pre">route</span></tt> and <tt class="docutils literal"><span class="pre">handler</span></tt>, but supports a set of HttpMethod.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L96"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L133"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L96" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<a id="stripRoute,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#stripRoute%2Cstring"><span class="Identifier">stripRoute</span></a><span class="Other">(</span><span class="Identifier">route</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L102"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L102" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L133" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="addRoute,Prologue,string,HandlerAsync,string,seq[HandlerAsync],LocalSettings"></a>
@@ -299,11 +313,13 @@ class="link-seesrc" target="_blank">Source</a>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-add single handler route check whether routes are duplicated
+<p>Adds a single route and handler. It checks whether route is duplicated.</p>
+<p>Notes: The framework will automatically register <tt class="docutils literal"><span class="pre">HttpHead</span></tt> method, if HttpMethod is <tt class="docutils literal"><span class="pre">HttpGet</span></tt>.</p>
+
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L116"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L158"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L116" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L158" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="addRoute,Prologue,string,HandlerAsync,seq[HttpMethod],string,seq[HandlerAsync],LocalSettings"></a>
@@ -315,11 +331,11 @@ class="link-seesrc" target="_blank">Source</a>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-add single handler route with multi http method check whether routes are duplicated
+Adds a single regex <tt class="docutils literal"><span class="pre">route</span></tt> and <tt class="docutils literal"><span class="pre">handler</span></tt>, but supports a set of HttpMethod. It also checks whether route is duplicated
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L135"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L179"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L135" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L179" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="addRoute,Prologue,seq[UrlPattern],string,LocalSettings"></a>
@@ -329,11 +345,11 @@ class="link-seesrc" target="_blank">Source</a>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-add multi handler route
+Adds multiple routes with handlers.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L144"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L188"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L144" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L188" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="head,Prologue,string,HandlerAsync,string,LocalSettings"></a>
@@ -344,11 +360,11 @@ class="link-seesrc" target="_blank">Source</a>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-
+Adds <tt class="docutils literal"><span class="pre">route</span></tt> and <tt class="docutils literal"><span class="pre">handler</span></tt> with <tt class="docutils literal"><span class="pre">HttpHead</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L151"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L195"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L151" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L195" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="get,Prologue,string,HandlerAsync,string,LocalSettings"></a>
@@ -359,11 +375,11 @@ class="link-seesrc" target="_blank">Source</a>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-
+Adds <tt class="docutils literal"><span class="pre">route</span></tt> and <tt class="docutils literal"><span class="pre">handler</span></tt> with <tt class="docutils literal"><span class="pre">HttpGet</span></tt> and <tt class="docutils literal"><span class="pre">HttpHead</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L155"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L200"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L155" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L200" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="post,Prologue,string,HandlerAsync,string,LocalSettings"></a>
@@ -374,11 +390,11 @@ class="link-seesrc" target="_blank">Source</a>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-
+Adds <tt class="docutils literal"><span class="pre">route</span></tt> and <tt class="docutils literal"><span class="pre">handler</span></tt> with <tt class="docutils literal"><span class="pre">HttpPost</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L159"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L205"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L159" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L205" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="put,Prologue,string,HandlerAsync,string,LocalSettings"></a>
@@ -389,11 +405,11 @@ class="link-seesrc" target="_blank">Source</a>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-
+Adds <tt class="docutils literal"><span class="pre">route</span></tt> and <tt class="docutils literal"><span class="pre">handler</span></tt> with <tt class="docutils literal"><span class="pre">HttpPut</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L163"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L210"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L163" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L210" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="delete,Prologue,string,HandlerAsync,string,LocalSettings"></a>
@@ -404,11 +420,11 @@ class="link-seesrc" target="_blank">Source</a>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-
+Adds <tt class="docutils literal"><span class="pre">route</span></tt> and <tt class="docutils literal"><span class="pre">handler</span></tt> with <tt class="docutils literal"><span class="pre">HttpDelete</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L167"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L215"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L167" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L215" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="trace,Prologue,string,HandlerAsync,string,LocalSettings"></a>
@@ -419,11 +435,11 @@ class="link-seesrc" target="_blank">Source</a>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-
+Adds <tt class="docutils literal"><span class="pre">route</span></tt> and <tt class="docutils literal"><span class="pre">handler</span></tt> with <tt class="docutils literal"><span class="pre">HttpTrace</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L171"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L220"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L171" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L220" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="options,Prologue,string,HandlerAsync,string,LocalSettings"></a>
@@ -434,11 +450,11 @@ class="link-seesrc" target="_blank">Source</a>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-
+Adds <tt class="docutils literal"><span class="pre">route</span></tt> and <tt class="docutils literal"><span class="pre">handler</span></tt> with <tt class="docutils literal"><span class="pre">HttpOptions</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L175"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L225"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L175" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L225" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="connect,Prologue,string,HandlerAsync,string,LocalSettings"></a>
@@ -449,11 +465,11 @@ class="link-seesrc" target="_blank">Source</a>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-
+Adds <tt class="docutils literal"><span class="pre">route</span></tt> and <tt class="docutils literal"><span class="pre">handler</span></tt> with <tt class="docutils literal"><span class="pre">HttpConnect</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L179"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L230"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L179" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L230" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="patch,Prologue,string,HandlerAsync,string,LocalSettings"></a>
@@ -464,11 +480,11 @@ class="link-seesrc" target="_blank">Source</a>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-
+Adds <tt class="docutils literal"><span class="pre">route</span></tt> and <tt class="docutils literal"><span class="pre">handler</span></tt> with <tt class="docutils literal"><span class="pre">HttpPatch</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L183"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L235"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L183" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L235" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="all,Prologue,string,HandlerAsync,string,LocalSettings"></a>
@@ -479,66 +495,66 @@ class="link-seesrc" target="_blank">Source</a>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-
+Adds <tt class="docutils literal"><span class="pre">route</span></tt> and <tt class="docutils literal"><span class="pre">handler</span></tt> with all <tt class="docutils literal"><span class="pre">HttppMethod</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L187"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L240"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L187" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L240" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="printRoute,Prologue"></a>
 <dt><pre><span class="Keyword">proc</span> <a href="#printRoute%2CPrologue"><span class="Identifier">printRoute</span></a><span class="Other">(</span><span class="Identifier">app</span><span class="Other">:</span> <a href="naive/server.html#Prologue"><span class="Identifier">Prologue</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-
+A helper function for printing all route names.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L192"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L246"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L192" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L246" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="appAddress,Prologue"></a>
 <dt><pre><span class="Keyword">proc</span> <a href="#appAddress%2CPrologue"><span class="Identifier">appAddress</span></a><span class="Other">(</span><span class="Identifier">app</span><span class="Other">:</span> <a href="naive/server.html#Prologue"><span class="Identifier">Prologue</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-
+Gets the address from the settings.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L196"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L251"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L196" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L251" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="appDebug,Prologue"></a>
 <dt><pre><span class="Keyword">proc</span> <a href="#appDebug%2CPrologue"><span class="Identifier">appDebug</span></a><span class="Other">(</span><span class="Identifier">app</span><span class="Other">:</span> <a href="naive/server.html#Prologue"><span class="Identifier">Prologue</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-
+Gets the debug attributes from the settings.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L199"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L255"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L199" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L255" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="appName,Prologue"></a>
 <dt><pre><span class="Keyword">proc</span> <a href="#appName%2CPrologue"><span class="Identifier">appName</span></a><span class="Other">(</span><span class="Identifier">app</span><span class="Other">:</span> <a href="naive/server.html#Prologue"><span class="Identifier">Prologue</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-
+Gets the appName attributes from the settings.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L202"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L259"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L202" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L259" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="appPort,Prologue"></a>
 <dt><pre><span class="Keyword">proc</span> <a href="#appPort%2CPrologue"><span class="Identifier">appPort</span></a><span class="Other">(</span><span class="Identifier">app</span><span class="Other">:</span> <a href="naive/server.html#Prologue"><span class="Identifier">Prologue</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Port</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-
+Gets the port from the settings.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L205"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L263"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L205" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L263" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="newApp,Settings"></a>
@@ -549,11 +565,21 @@ class="link-seesrc" target="_blank">Source</a>
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-Creates a new App instance.
+Creates a new App instance.<dl class="docutils"><dt>Params:</dt>
+<dd><ul class="simple"><li><tt class="docutils literal"><span class="pre">settings</span></tt> is a global immutable setting which is visible all handlers.</li>
+<li><tt class="docutils literal"><span class="pre">middlewares</span></tt> is a global middlewares collections.</li>
+<li><tt class="docutils literal"><span class="pre">startup</span></tt> is used to execute tasks before the application starts.</li>
+<li><tt class="docutils literal"><span class="pre">shutdown</span></tt> is used to execute tasks after the application stops.</li>
+<li><tt class="docutils literal"><span class="pre">errorHandlerTable</span></tt> stores Httpcodes and corresponding handlers.</li>
+<li><tt class="docutils literal"><span class="pre">appData</span></tt> is a global user-defined data.</li>
+</ul>
+</dd>
+</dl>
+
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L208"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L267"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L208" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L267" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="run,Prologue"></a>
@@ -562,11 +588,11 @@ class="link-seesrc" target="_blank">Source</a>
     <span class="Identifier">WriteIOEffect</span><span class="Other">,</span> <span class="Identifier">ReadIOEffect</span><span class="Other">,</span> <span class="Identifier">ReadDirEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-Starts Application.
+Starts an Application.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L221"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/application.nim#L288"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L221" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L288" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -584,7 +610,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-08-08 05:42:20 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-08-08 07:08:57 UTC</small>
       </div>
     </div>
   </div>

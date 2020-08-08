@@ -1,3 +1,17 @@
+# Copyright 2020 Zeshen Xing
+# 
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+# 
+#     http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 import uri, httpcore
 import tables, strutils, strformat, logging, strtabs, options, json
 from nativesockets import Port, `$`
@@ -64,19 +78,53 @@ let
 
 proc registerErrorHandler*(app: Prologue, code: HttpCode,
                            handler: ErrorHandler) {.inline.} =
+  ## Registers a user-defined error handler. You can specify
+  ## HttpCode and its corresponding handler. For example,
+  ## if response's HttpCode is euqal to this, Framework will execute
+  ## corresponding function.
   app.errorHandlerTable[code] = handler
 
 proc registerErrorHandler*(app: Prologue, code: set[HttpCode],
                            handler: ErrorHandler) {.inline.} =
+  ## Register the same handler for a set of HttpCode.
   for idx in code:
     app.registerErrorHandler(idx, handler)
 
 proc registerErrorHandler*(app: Prologue, code: openArray[HttpCode],
                            handler: ErrorHandler) {.inline.} =
+  ## Register the same handler for a sequence of HttpCode.
+  ## This is a helper function.
+  runnableExamples:
+    ## Examples for all registerErrorHandler
+    proc go404*(ctx: Context) {.async.} =
+      resp "Something wrong!"
+
+    proc go20x*(ctx: Context) {.async.} =
+      resp "Ok!"
+
+    proc go30x*(ctx: Context) {.async.} =
+      resp "EveryThing else?"
+
+    let settings = newSettings()
+    var app = newApp(settings)
+    app.registerErrorHandler(Http404, go404)
+    app.registerErrorHandler({Http200 .. Http204}, go20x)
+    app.registerErrorHandler(@[Http301, Http304, Http307], go30x)
+
+    doAssert app.errorHandlerTable[Http404] == go404
+    doAssert app.errorHandlerTable[Http202] == go20x
+    doAssert app.errorHandlerTable[Http304] == go30x
+
   for idx in code:
     app.registerErrorHandler(idx, handler)
 
 proc newSettings*(settings: Settings, localSettings: LocalSettings): Settings {.inline.} =
+  ## Creates a new settings.
+  ##
+  ## Params:
+  ##        - `settings` is a global immutable setting for all handlers.
+  ##        - `localSettings` is a local immutable setting for corresponding handler or handler group.
+
   result = newSettings(localSettings.data, settings.address, settings.port, settings.debug, settings.reusePort,
                        settings.staticDirs, settings.appName)
 
@@ -84,8 +132,11 @@ proc newSettings*(settings: Settings, localSettings: LocalSettings): Settings {.
 proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
                httpMethod = HttpGet, middlewares: seq[HandlerAsync] = @[],
                settings: LocalSettings = nil) {.inline.} =
-  ## add single handler route
-  ## don't check whether regex routes are duplicated
+  ## Adds a single regex `route` with `handler` and don't check whether route is duplicated.
+  ## 
+  ## Notes: The framework will automatically register `HttpHead` method, if
+  ## HttpMethod is `HttpGet`.
+
   # for group in route.namedGroups.keys:
   #   echo group
   if httpMethod == HttpGet:
@@ -96,10 +147,11 @@ proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
 proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
                httpMethod: seq[HttpMethod], middlewares: seq[HandlerAsync] = @[],
                settings: LocalSettings = nil) {.inline.} =
+  ## Adds a single regex `route` and `handler`, but supports a set of HttpMethod.
   for m in httpMethod:
     app.addRoute(route, handler, m, middlewares, settings)
 
-proc stripRoute*(route: string): string =
+proc stripRoute(route: string): string =
   result = route
   # Don't strip single slash
   if result.len > 1:
@@ -107,6 +159,10 @@ proc stripRoute*(route: string): string =
       result.setLen(result.len - 1)
 
 proc addReversedRoute(app: Prologue, name, route: string) {.inline.} =
+  ## Adds reversed route.
+  ## 
+  ## Params:
+  ##        - `name` is the user-defined name for `route`.
   if name.len != 0:
     if app.gScope.reversedRouter.hasKey(name):
       raise newException(DuplicatedReversedRouteError,
@@ -116,8 +172,10 @@ proc addReversedRoute(app: Prologue, name, route: string) {.inline.} =
 proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
                httpMethod = HttpGet, name = "", middlewares: seq[HandlerAsync] = @[],
                settings: LocalSettings = nil) {.inline.} =
-  ## add single handler route
-  ## check whether routes are duplicated
+  ## Adds a single route and handler. It checks whether route is duplicated.
+  ## 
+  ## Notes: The framework will automatically register `HttpHead` method, if
+  ## HttpMethod is `HttpGet`.
   let path = initPath(route = route.stripRoute, httpMethod = httpMethod)
   # automatically register HttpHead for HttpGet
   if httpMethod == HttpGet:
@@ -135,74 +193,89 @@ proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
 proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
                httpMethod: seq[HttpMethod], name = "", 
                middlewares: seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
-  ## add single handler route with multi http method
-  ## check whether routes are duplicated
+  ## Adds a single regex `route` and `handler`, but supports a set of HttpMethod.
+  ## It also checks whether route is duplicated
   app.addReversedRoute(name, route)
   for m in httpMethod:
     app.addRoute(route, handler, m, "", middlewares, settings)
 
 proc addRoute*(app: Prologue, patterns: seq[UrlPattern],
                baseRoute = "", settings: LocalSettings = nil) {.inline.} =
-  ## add multi handler route
+  ## Adds multiple routes with handlers.
   for pattern in patterns:
     app.addRoute(baseRoute & pattern.route, pattern.matcher, pattern.httpMethod,
                  pattern.name, pattern.middlewares, settings)
 
 proc head*(app: Prologue, route: string, handler: HandlerAsync, name = "",
            middlewares: sink seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
+  ## Adds `route` and `handler` with `HttpHead`.
   app.addRoute(route, handler, HttpHead, name, middlewares, settings)
 
 proc get*(app: Prologue, route: string, handler: HandlerAsync, name = "",
           middlewares: sink seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
+  ## Adds `route` and `handler` with `HttpGet` and `HttpHead`.
   app.addRoute(route, handler, HttpGet, name, middlewares, settings)
 
 proc post*(app: Prologue, route: string, handler: HandlerAsync, name = "",
            middlewares: sink seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
+  ## Adds `route` and `handler` with `HttpPost`.
   app.addRoute(route, handler, HttpPost, name, middlewares, settings)
 
 proc put*(app: Prologue, route: string, handler: HandlerAsync, name = "",
           middlewares: sink seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
+  ## Adds `route` and `handler` with `HttpPut`.
   app.addRoute(route, handler, HttpPut, name, middlewares, settings)
 
 proc delete*(app: Prologue, route: string, handler: HandlerAsync, name = "",
              middlewares: sink seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
+  ## Adds `route` and `handler` with `HttpDelete`.
   app.addRoute(route, handler, HttpDelete, name, middlewares, settings)
 
 proc trace*(app: Prologue, route: string, handler: HandlerAsync, name = "",
             middlewares: sink seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
+  ## Adds `route` and `handler` with `HttpTrace`.
   app.addRoute(route, handler, HttpTrace, name, middlewares, settings)
 
 proc options*(app: Prologue, route: string, handler: HandlerAsync, name = "",
               middlewares: sink seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
+  ## Adds `route` and `handler` with `HttpOptions`.
   app.addRoute(route, handler, HttpOptions, name, middlewares, settings)
 
 proc connect*(app: Prologue, route: string, handler: HandlerAsync, name = "",
               middlewares: sink seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
+  ## Adds `route` and `handler` with `HttpConnect`.
   app.addRoute(route, handler, HttpConnect, name, middlewares, settings)
 
 proc patch*(app: Prologue, route: string, handler: HandlerAsync, name = "",
             middlewares: sink seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
+  ## Adds `route` and `handler` with `HttpPatch`.
   app.addRoute(route, handler, HttpPatch, name, middlewares, settings)
 
 proc all*(app: Prologue, route: string, handler: HandlerAsync, name = "",
           middlewares: sink seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
+  ## Adds `route` and `handler` with all `HttppMethod`.
   app.addRoute(route, handler, @[HttpGet, HttpPost, HttpPut, HttpDelete,
                HttpTrace, HttpOptions, HttpConnect, HttpPatch], name, middlewares, settings)
 
 proc printRoute*(app: Prologue) {.inline.} =
+  ## A helper function for printing all route names.
   for key in app.gScope.router.callable.keys:
     echo key
 
 proc appAddress*(app: Prologue): string {.inline.} =
+  ## Gets the address from the settings.
   app.gScope.settings.address
 
 proc appDebug*(app: Prologue): bool {.inline.} =
+  ## Gets the debug attributes from the settings.
   app.gScope.settings.debug
 
 proc appName*(app: Prologue): string {.inline.} =
+  ## Gets the appName attributes from the settings.
   app.gScope.settings.appName
 
 proc appPort*(app: Prologue): Port {.inline.} =
+  ## Gets the port from the settings.
   app.gScope.settings.port
 
 proc newApp*(settings: Settings, middlewares: sink seq[HandlerAsync] = @[],
@@ -210,6 +283,14 @@ proc newApp*(settings: Settings, middlewares: sink seq[HandlerAsync] = @[],
              errorHandlerTable = DefaultErrorHandler,
              appData = newStringTable(mode = modeCaseSensitive)): Prologue {.inline.} =
   ## Creates a new App instance.
+  ## 
+  ## Params:
+  ##        - `settings` is a global immutable setting which is visible all handlers.
+  ##        - `middlewares` is a global middlewares collections.
+  ##        - `startup` is used to execute tasks before the application starts.
+  ##        - `shutdown` is used to execute tasks after the application stops.
+  ##        - `errorHandlerTable` stores Httpcodes and corresponding handlers.
+  ##        - `appData` is a global user-defined data.
   if settings == nil:
     raise newException(ValueError, "Settings can't be nil!")
   result = newPrologue(settings = settings, ctxSettings = newCtxSettings(),
@@ -219,16 +300,20 @@ proc newApp*(settings: Settings, middlewares: sink seq[HandlerAsync] = @[],
                        errorHandlerTable = errorHandlerTable, appData = appData)
 
 proc run*(app: Prologue) =
-  ## Starts Application.
+  ## Starts an Application.
+  
+  # start event
   for event in app.startup:
     if event.async:
       waitFor event.asyncHandler()
     else:
       event.syncHandler()
 
+  # handle requests
   proc handleRequest(nativeRequest: NativeRequest) {.async.} =
     var request = initRequest(nativeRequest = nativeRequest)
 
+    # process cookie
     if request.hasHeader("cookie"):
       request.cookies.parse(seq[string](request.headers.getOrDefault("cookie")).join("; "))
 
@@ -238,6 +323,7 @@ proc run*(app: Prologue) =
       else:
         ""
 
+    # parse form params
     try:
       request.parseFormParams(contentType)
     except CgiError:
@@ -246,6 +332,7 @@ proc run*(app: Prologue) =
       logging.error(&"Malformed form params:\n{e.msg}")
 
     var
+      # initialize response
       response = initResponse(HttpVer11, Http200, headers = {
                              "Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders)
       ctx = newContext(request = request, response = response,
@@ -254,6 +341,7 @@ proc run*(app: Prologue) =
     ctx.middlewares = app.middlewares
     logging.debug(fmt"{ctx.request.reqMethod} {ctx.request.url.path}")
 
+    # whether request.path in the static path of settings.
     let staticFileFlag = if ctx.gScope.settings.staticDirs.len != 0:
         isStaticFile(ctx.request.path, ctx.gScope.settings.staticDirs)
       else:
@@ -261,12 +349,14 @@ proc run*(app: Prologue) =
 
     try:
       if staticFileFlag.hasValue:
+        # serve static files
         await staticFileResponse(ctx, staticFileFlag.filename,
                                  staticFileFlag.dir)
       else:
+        # serve dynamic contents
         await switch(ctx)
     except HttpError as e:
-      # catch abort error
+      # catch general http error
       logging.debug e.msg
     except AbortError as e:
       # catch abort error
@@ -285,10 +375,14 @@ proc run*(app: Prologue) =
 
     # central processing
     # all context processed here except static file
+
+    # Only process the context when `ctx.handled` is false.
     if not ctx.handled:
       await handle(ctx)
     logging.debug($(ctx.response))
 
+  # set the level of logging
+  # Notes that you can set `app.appDebug=false` to disable logging printing.
   if logging.getHandlers().len == 0:
     addHandler(newConsoleLogger())
     setLogFilter(if app.appDebug: lvlDebug else: lvlInfo)
@@ -304,6 +398,7 @@ proc run*(app: Prologue) =
 
   app.serve(app.appPort, handleRequest, app.appAddress)
 
+  # shutdown events
   for event in app.shutdown:
     if event.async:
       waitFor event.asyncHandler()

@@ -1,3 +1,41 @@
+# Copyright 2020 Zeshen Xing
+# 
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+# 
+#     http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+## This module contains basic operating system facilities like
+## retrieving environment variables, reading command line arguments,
+## working with directories, running shell commands, etc.
+##
+## .. code-block::
+##   import os
+##
+##   let myFile = "/path/to/my/file.nim"
+##
+##   let pathSplit = splitPath(myFile)
+##   assert pathSplit.head == "/path/to/my"
+##   assert pathSplit.tail == "file.nim"
+##
+##   assert parentDir(myFile) == "/path/to/my"
+##
+##   let fileSplit = splitFile(myFile)
+##   assert fileSplit.dir == "/path/to/my"
+##   assert fileSplit.name == "file"
+##   assert fileSplit.ext == ".nim"
+##
+##   assert myFile.changeFileExt("c") == "/path/to/my/file.c"
+
+
 import os, tables, strutils, parsecfg, streams
 
 import ./types

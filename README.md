@@ -60,7 +60,7 @@ API docs in https://planety.github.io/prologue/api/theindex.html.
 
 ## Installation
 
-First you should install [Nim](https://nim-lang.org/) language which is an elegant and high performance language.Follow the [instructions](https://nim-lang.org/install.html) and set environment variables correctly.
+First you should install [Nim](https://nim-lang.org/) language which is an elegant and high performance language. Follow the [instructions](https://nim-lang.org/install.html) and set environment variables correctly.
 
 Then you can use `nimble` command to install prologue.
 
