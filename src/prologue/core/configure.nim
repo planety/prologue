@@ -34,10 +34,12 @@ proc contains*(env: Env, key: string): bool =
   else:
     result = false
 
-proc get*(env: Env, key: string): string =
+proc get*(env: Env, key: string): string {.inline.} =
   result = env.data[key]
 
-proc getOrDefault*[T: BaseType](env: Env, key: sink string, default: T): T =
+proc getOrDefault*[T: BaseType](env: Env, key: sink string, default: T): T {.inline.} =
+  if key notin env.data:
+    return default
   parseValue(env.data[key], default)
 
 iterator keys*(env: Env): string =

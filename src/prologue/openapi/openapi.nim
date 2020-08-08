@@ -1,10 +1,10 @@
-import json
+import json, strtabs
 
 
 import ../core/dispatch
 from ../core/application import Prologue, addRoute, appDebug
-from ../core/response import htmlResponse, resp
-from ../core/context import Context, setHeader, staticFileResponse
+from ../core/response import htmlResponse, resp, jsonResponse
+from ../core/context import Context, setHeader, staticFileResponse, gScope
 
 
 const
@@ -67,7 +67,7 @@ const
 """
 
 proc openapiHandler*(ctx: Context) {.async.} =
-  await staticFileResponse(ctx, "openapi.json", "docs")
+  resp jsonResponse(parseJson(readFile(ctx.gScope.appData["openApiDocsPath"])))
 
 proc swaggerHandler*(ctx: Context) {.async.} =
   resp htmlResponse(swaggerDocs)
@@ -75,9 +75,10 @@ proc swaggerHandler*(ctx: Context) {.async.} =
 proc redocsHandler*(ctx: Context) {.async.} =
   resp htmlResponse(redocs)
 
-proc serveDocs*(app: Prologue, onlyDebug = false) {.inline.} =
+proc serveDocs*(app: Prologue, source: string, onlyDebug = false) {.inline.} =
   if onlyDebug and not app.appDebug:
     return
+  app.gScope.appData["openApiDocsPath"] = source
   app.addRoute("/openapi.json", openapiHandler)
   app.addRoute("/docs", swaggerHandler)
   app.addRoute("/redocs", redocsHandler)
