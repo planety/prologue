@@ -308,7 +308,7 @@ proc run*(app: Prologue) =
 
     # process cookie
     if request.hasHeader("cookie"):
-      request.cookies.parse(seq[string](request.headers.getOrDefault("cookie")).join("; "))
+      request.cookies.parse(toString(request.headers.getOrDefault("cookie")))
 
 
     let contentType = if request.hasHeader("content-type"): 
@@ -370,8 +370,10 @@ proc run*(app: Prologue) =
     # all context processed here except static file
 
     # Only process the context when `ctx.handled` is false.
+
     if not ctx.handled:
       await handle(ctx)
+
     logging.debug($(ctx.response))
 
   # set the level of logging

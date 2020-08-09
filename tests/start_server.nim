@@ -55,8 +55,16 @@ proc upload(ctx: Context) {.async.} =
       file = ctx.getUploadFile("file")
     resp fmt"<html><h1>{file.filename}</h1><p>{file.body.strip()}</p></html>"
 
+proc cookie(ctx: Context) {.async.} =
+  ctx.setCookie("One", "ok")
+  ctx.setCookie("Two", "done")
+  resp "Hello"
 
-let settings = newSettings(appName = "StarLight", debug = true, port = Port(8787))
+  doAssert seq[string](ctx.response.headers["Set-Cookie"]) == 
+            @["One=ok; SameSite=Lax", "Two=done; SameSite=Lax"]
+
+
+let settings = newSettings(appName = "StarLight", debug = false, port = Port(8787))
 var app = newApp(settings = settings, middlewares = @[])
 app.addRoute("", home, HttpGet)
 app.addRoute("/", home, HttpGet)
@@ -70,5 +78,6 @@ app.addRoute("/login", doLogin, HttpPost)
 app.addRoute("/hello/{name}", helloName, HttpGet)
 app.addRoute("/translate", translate)
 app.addRoute("/upload", upload, @[HttpGet, HttpPost])
+app.get("/cookie", cookie)
 app.loadTranslate(expandFileName("tests/i18n/trans.ini"))
 app.run()

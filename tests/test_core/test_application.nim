@@ -218,6 +218,13 @@ block:
 
     doAssert cacheResponse.code == Http304
 
+  block cookie_works_fine:
+    let
+      route = "/cookie"
+      response = waitFor client.get(fmt"http://{address}:{port}{route}")
+
+    doAssert response.code == Http200, $response.code
+    doAssert (waitFor response.body) == "Hello"
 
   client.close()
   process.terminate()

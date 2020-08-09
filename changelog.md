@@ -1,3 +1,11 @@
+## 0.3.2
+
+Fixes `resp "Hello"` will clear all attributes.
+
+Reduces unnecessary operations.
+
+Adds tests for cookie.
+
 ## 0.3.0
 
 Windows support multi-thread HTTP server(httpx).
