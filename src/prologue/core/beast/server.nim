@@ -7,7 +7,7 @@ from ../nativesettings import Settings, CtxSettings
 from ../context import Router, ReversedRouter, ReRouter, HandlerAsync,
     Event, ErrorHandlerTable, GlobalScope
 
-import httpbeast except Settings, Request
+import httpx except Settings, Request
 
 
 type
@@ -21,7 +21,7 @@ type
 proc serve*(app: Prologue, port: Port,
             callback: proc (request: NativeRequest): Future[void] {.closure, gcsafe.},
             address = "") {.inline.} =
-  run(callback, httpbeast.initSettings(port, address))
+  run(callback, httpx.initSettings(port, address))
 
 proc newPrologue*(settings: Settings, ctxSettings: CtxSettings, router: Router,
                   reversedRouter: ReversedRouter, reRouter: ReRouter, middlewares: seq[HandlerAsync], 

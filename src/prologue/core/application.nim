@@ -22,7 +22,7 @@ from cgi import CgiError
 from ./utils import isStaticFile
 from ./route import pattern, initPath, initRePath, newPathHandler, newRouter,
     newReRouter, DuplicatedRouteError, DuplicatedReversedRouteError, UrlPattern,
-    add, `[]`, `[]=`, hasKey
+    add, `[]`, `[]=`, hasKey, stripRoute
 from ./form import parseFormParams
 from ./nativesettings import newSettings, newCtxSettings, 
                              getOrDefault, Settings, LocalSettings,
@@ -150,13 +150,6 @@ proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
   ## Adds a single regex `route` and `handler`, but supports a set of HttpMethod.
   for m in httpMethod:
     app.addRoute(route, handler, m, middlewares, settings)
-
-proc stripRoute(route: string): string =
-  result = route
-  # Don't strip single slash
-  if result.len > 1:
-    if result[^1] == '/':
-      result.setLen(result.len - 1)
 
 proc addReversedRoute(app: Prologue, name, route: string) {.inline.} =
   ## Adds reversed route.

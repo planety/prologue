@@ -6,7 +6,7 @@ proc hello*(ctx: Context) {.async.} =
   resp "<h1>Hello, Prologue!</h1>"
 
 
-let settings = newSettings()
+let settings = newSettings(debug = false)
 var app = newApp(settings = settings)
 app.addRoute("/", hello)
 app.run()

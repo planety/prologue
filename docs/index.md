@@ -28,7 +28,7 @@ Plugin API docs in https://planety.github.io/prologue/plugin/theindex.html.
 ## Feature
 
 - Core
-  - Base on httpbeast and asynchttpserver
+  - Base on httpx and asynchttpserver
   - Configure and Settings
   - Context
   - Param and Query Data

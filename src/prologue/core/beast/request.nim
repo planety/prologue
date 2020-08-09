@@ -8,11 +8,10 @@ import asyncdispatch
 from ../response import Response
 from ../types import FormPart
 
-# import httpx except Settings
-import httpbeast except Settings
+import httpx except Settings
 
 type
-  NativeRequest* = httpbeast.Request
+  NativeRequest* = httpx.Request
   Request* = object
     nativeRequest*: NativeRequest
     cookies*: CookieJar

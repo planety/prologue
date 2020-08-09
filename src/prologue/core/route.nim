@@ -40,6 +40,13 @@ type
     middlewares: seq[HandlerAsync]
 
 
+proc stripRoute*(route: string): string {.inline.} =
+  result = route
+  # Don't strip single slash
+  if result.len > 1:
+    if result[^1] == '/':
+      result.setLen(result.len - 1)
+
 proc initPath*(route: string, httpMethod = HttpGet): Path =
   Path(route: route, httpMethod: httpMethod)
 
@@ -93,8 +100,14 @@ iterator items*(reRouter: ReRouter): (RePath, PathHandler) {.inline.} =
 
 proc findHandler*(ctx: Context): PathHandler =
   ## fixed route -> regex route -> params route
-  ## Follow the order of addition
-  let rawPath = initPath(route = ctx.request.url.path,
+  ## Follow the order of addition.
+  
+  # Notes path will be striped one slash.
+  # Such as 
+  # /hello/ -> /hello
+  # /hello -> /hello
+  # / -> /
+  let rawPath = initPath(route = ctx.request.url.path.stripRoute,
                          httpMethod = ctx.request.reqMethod)
 
   # find fixed route

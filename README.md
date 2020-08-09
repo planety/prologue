@@ -28,7 +28,7 @@ Plugin API docs in https://planety.github.io/prologue/plugin/theindex.html.
 ## Feature
 
 - Core
-  - [x] Base on httpbeast and asynchttpserver
+  - [x] Base on httpx and asynchttpserver
   - [x] Configure and Settings
   - [x] Context
   - [x] Param and Query Data
@@ -73,9 +73,14 @@ nimble install prologue
 
 ### Notes(important)
 
-1. If you use Linux or MacOS, you can use `--threads:on` to enable multi-threads HTTP Server.
+1. If you use Linux or MacOS, you can use `--threads:on` to enable multi-threads HTTP server.
 
-2. If you want to benchmark `prologue` or release you programs, make sure set `settings.debug` = false.
+2. If you use windows and want to use multi-threads HTTP server, make sure use
+latest Nim devel version, and enable `--threads:on`. In this situation, you can
+use `usestd` to use `asynchttpserver`.
+
+3. If you want to benchmark `prologue` or release you programs, make sure set `settings.debug` = false.
+
 
 ```nim
 let
