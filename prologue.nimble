@@ -1,6 +1,6 @@
 # Package
 
-version       = "0.3.0"
+version       = "0.3.2"
 author        = "flywind"
 description   = "Full-Stack Web Framework."
 license       = "Apache-2.0"

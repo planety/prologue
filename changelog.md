@@ -6,6 +6,8 @@ Reduces unnecessary operations.
 
 Adds tests for cookie.
 
+Reduces unnecessary imports and compilation time.
+
 ## 0.3.0
 
 Windows support multi-thread HTTP server(httpx).
