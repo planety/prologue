@@ -1,5 +1,9 @@
 ## 0.3.0
 
+Windows support multi-thread HTTP server(httpx).
+
+The route of the request is stripped. (/hello/ -> /hello)
+
 ## 0.2.8
 
 Adds `Settings.address`, user can specify listening `address`.
