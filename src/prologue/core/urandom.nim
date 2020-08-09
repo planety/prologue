@@ -14,7 +14,7 @@
 
 
 from strutils import strip
-from nimcrypto import randomBytes
+from nimcrypto/sysrand import randomBytes
 
 from ../core/types import SecretKey
 from ../core/encode import urlsafeBase64Encode

@@ -23,6 +23,13 @@ from ../core/middlewaresbase import switch
 import ../core/request
 
 
+proc testMiddleware*(): HandlerAsync =
+  result = proc(ctx: Context) {.async.} =
+    logging.info "debug->begin"
+    await switch(ctx)
+    logging.info "debug->end"
+
+
 proc loggingMiddleware*(appName = "Starlight"): HandlerAsync =
   result = proc(ctx: Context) {.async.} =
     logging.info "loggingMiddleware->begin"

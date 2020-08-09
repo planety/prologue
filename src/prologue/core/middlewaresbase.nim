@@ -27,13 +27,13 @@ proc switch*(ctx: Context) {.async.} =
     let
       handler = findHandler(ctx)
       next = handler.handler
-    var
-      middlewares = handler.middlewares
 
-    ctx.middlewares = middlewares & next
+    ctx.middlewares = handler.middlewares
+    ctx.middlewares.add next
     ctx.first = false
 
   incSize(ctx)
+
   if ctx.size <= ctx.middlewares.len:
     let next = ctx.middlewares[ctx.size - 1]
     await next(ctx)
@@ -41,10 +41,12 @@ proc switch*(ctx: Context) {.async.} =
     let
       handler = findHandler(ctx)
       lastHandler = handler.handler
-      middlewares = handler.middlewares
+
     ctx.localSettings = handler.settings
-    ctx.middlewares.add middlewares & lastHandler
+    ctx.middlewares.add handler.middlewares
+    ctx.middlewares.add lastHandler
     ctx.first = false
+
     let next = ctx.middlewares[ctx.size - 1]
     await next(ctx)
 

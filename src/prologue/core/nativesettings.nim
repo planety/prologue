@@ -57,8 +57,7 @@ proc newLocalSettings*(data: JsonNode): LocalSettings {.inline.} =
 
 proc newLocalSettings*(configPath: string): LocalSettings {.inline.} =
   ## Creates a new localSettings.
-  var data = parseFile(configPath)
-  result = LocalSettings(data: data)
+  result = LocalSettings(data: parseFile(configPath))
 
 proc newSettings*(address = "", port = Port(8080), debug = true, reusePort = true,
                   staticDirs: openArray[string] = ["static"], secretKey = randomString(8),
@@ -85,7 +84,6 @@ proc newSettings*(configPath: string, address = "", port = Port(8080), debug = t
                   appName = ""): Settings {.inline.} =
   ## Creates a new settings.
   # make sure reserved keys must appear in settings
-  var data = parseFile(configPath)
   result = Settings(address: address, port: port, debug: debug, reusePort: reusePort,
                     staticDirs: @staticDirs, appName: appName,
-                    data: data)
+                    data: parseFile(configPath))
