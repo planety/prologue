@@ -79,7 +79,9 @@ nimble install prologue
 latest Nim devel version, and enable `--threads:on`. In this situation, you can
 use `usestd` to use `asynchttpserver`.
 
-3. If you want to benchmark `prologue` or release you programs, make sure set `settings.debug` = false.
+3. Notes that multi-threads may be slower than single-thread!
+
+4. If you want to benchmark `prologue` or release you programs, make sure set `settings.debug` = false.
 
 
 ```nim
