@@ -103,10 +103,10 @@ macro resp*(body: string, code = Http200) =
   var ctx = ident"ctx"
 
   result = quote do:
-    let response = initResponse(httpVersion = HttpVer11, code = `code`,
-                                headers = {"Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders,
-                                body = `body`)
-    `ctx`.response = response
+    `ctx`.response.httpVersion = HttpVer11
+    `ctx`.response.code = `code`
+    `ctx`.response.body = `body`
+
 
 macro resp*(response: Response) =
   ## Handy to make a response of ctx.
