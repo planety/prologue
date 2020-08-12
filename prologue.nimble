@@ -14,7 +14,7 @@ requires "nimcrypto >= 0.4.11"
 requires "karax >= 1.1.2"
 requires "cookies >= 0.2.0"
 
-requires "https://github.com/xflywind/httpx"
+requires "httpx >= 0.1.0"
 
 
 # tests
