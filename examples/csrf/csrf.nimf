@@ -1,0 +1,10 @@
+#? stdtmpl | standard
+#import ../../src/prologue/middlewares/csrf
+#
+#proc alignForm(tok: string): string =                                         
+#  result = "" 
+<form method="post">
+  $tok
+<-- All other inputs -->
+</form>
+#end proc

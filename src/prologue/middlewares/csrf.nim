@@ -48,10 +48,10 @@ proc makeToken(secret: openArray[byte]): string {.inline.} =
     mask = randomBytesSeq(DefaultSecretSize)
     token = newSeq[byte](DefaultTokenSize)
 
-  for idx in DefaultSecretSize ..< DefaultTokenSize:
+  for idx in 0 ..< DefaultSecretSize:
     token[idx] = mask[idx] + secret[idx]
 
-  token[0 ..< DefaultSecretSize] = move mask
+  token[DefaultSecretSize ..< DefaultSecretSize] = move mask
 
   result = token.urlsafeBase64Encode
 

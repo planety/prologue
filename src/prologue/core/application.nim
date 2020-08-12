@@ -328,7 +328,7 @@ proc run*(app: Prologue) =
       # initialize response
       response = initResponse(HttpVer11, Http200, headers = {
                              "Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders)
-      ctx = newContext(request = request, response = response,
+      ctx = newContext(request = move(request), response = move(response),
                        gScope = app.gScope)
 
     ctx.middlewares = app.middlewares

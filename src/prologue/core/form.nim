@@ -92,15 +92,11 @@ proc parseFormParams*(request: var Request, contentType: string) =
   # get or post forms params
   if "form-urlencoded" in contentType:
     request.formParams = initFormPart()
-    case request.reqMethod
-    of HttpPost:
+    if request.reqMethod == HttpPost:
       for (key, value) in decodeData(request.body):
         # formPrams and postParams for secret event
         request.formParams[key] = value
         request.postParams[key] = value
-    else:
-      discard
-
   elif "multipart/form-data" in contentType and "boundary" in contentType:
     request.formParams = parseFormPart(request.body, contentType)
 
