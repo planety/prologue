@@ -1,3 +1,7 @@
+## 0.3.4
+
+Fixes "Always asked to install `cookiejar` when running" #36
+
 ## 0.3.2
 
 Fixes `resp "Hello"` will clear all attributes.

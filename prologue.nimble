@@ -1,6 +1,6 @@
 # Package
 
-version       = "0.3.2"
+version       = "0.3.4"
 author        = "flywind"
 description   = "Full-Stack Web Framework."
 license       = "Apache-2.0"
@@ -12,7 +12,7 @@ requires "nim >= 1.2.6"
 requires "regex >= 0.16.2"
 requires "nimcrypto >= 0.5.3"
 requires "karax >= 1.1.2"
-requires "https://github.com/planety/cookiejar >= 0.2.0"
+requires "cookiejar >= 0.2.0"
 requires "httpx >= 0.1.0"
 
 
