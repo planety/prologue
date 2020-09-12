@@ -216,10 +216,14 @@ proc defaultHandler*(ctx: Context) {.async.} =
 
 proc default404Handler*(ctx: Context) {.async.} =
   ctx.response.body = errorPage("404 Not Found!", PrologueVersion)
+  if unlikely(ctx.response.headers != nil):
+    ctx.response.headers = newHttpHeaders()
   ctx.response.setHeader("content-type", "text/html; charset=UTF-8")
 
 proc default500Handler*(ctx: Context) {.async.} =
   ctx.response.body = internalServerErrorPage()
+  if unlikely(ctx.response.headers != nil):
+    ctx.response.headers = newHttpHeaders()
   ctx.response.setHeader("content-type", "text/html; charset=UTF-8")
 
 proc getPostParams*(ctx: Context, key: string, default = ""): string {.inline.} =
@@ -248,11 +252,10 @@ proc setResponse*(ctx: Context, code: HttpCode, httpHeaders =
                   {"Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders,
                   body = "", version = HttpVer11) {.inline.} =
   ## Handy to make the response of `ctx`.
-  let 
-    response = initResponse(httpVersion = version, code = code,
-                            headers = httpHeaders,
-                            body = body)
-  ctx.response = response
+  ctx.response.httpVersion = version
+  ctx.response.code = code
+  ctx.response.headers = httpHeaders
+  ctx.response.body = body
 
 proc setResponse*(ctx: Context, response: Response) {.inline.} =
   ## Handy to make the response of `ctx`.
@@ -311,6 +314,9 @@ proc attachment*(ctx: Context, downloadName = "", charset = "utf-8") {.inline.} 
   ## `attachment` is used to specify the file will be downloaded.
   if downloadName.len == 0:
     return
+
+  if unlikely(ctx.response.headers == nil):
+    ctx.response.headers = newHttpHeaders()
 
   var ext = downloadName.splitFile.ext
   if ext.len > 0:

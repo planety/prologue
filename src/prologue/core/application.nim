@@ -360,7 +360,7 @@ proc run*(app: Prologue) =
       logging.error e.msg
       ctx.response.code = Http500
       ctx.response.body = e.msg
-      if ctx.response.headers == nil:
+      if unlikely(ctx.response.headers == nil):
         ctx.response.headers = newHttpHeaders()
       ctx.response.setHeader("content-type", "text/plain; charset=UTF-8")
 

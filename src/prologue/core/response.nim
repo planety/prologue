@@ -44,6 +44,8 @@ proc setCookie*(response: var Response, key, value: string, expires = "",
   ## Sets the cookie of response.
   let cookies = initCookie(key, value, expires, maxAge, domain, 
                            path, secure, httpOnly, sameSite)
+  if unlikely(response.headers == nil):
+    response.headers = newHttpHeaders()
   response.addHeader("Set-Cookie", $cookies)
 
 proc setCookie*(response: var Response, key, value: string, expires: DateTime|Time, 
@@ -52,6 +54,8 @@ proc setCookie*(response: var Response, key, value: string, expires: DateTime|Ti
   ## Sets the cookie of response.
   let cookies = initCookie(key, value, expires, maxAge, domain, 
                           path, secure, httpOnly, sameSite)
+  if unlikely(response.headers == nil):
+    response.headers = newHttpHeaders()
   response.addHeader("Set-Cookie", $cookies)
 
 proc deleteCookie*(response: var Response, key: string, value = "", path = "",
