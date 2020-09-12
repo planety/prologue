@@ -12,6 +12,54 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+## This module contains basic validation operations.
+## 
+## **The single text validation**
+runnableExamples:
+  import strtabs
+
+  let
+    msg = "Int required"
+    decide = isInt(msg)
+    decideDefaultMsg = isInt()
+
+  doAssert decide("12") == (true, "")
+  doAssert decide("-753") == (true, "")
+  doAssert decide("0") == (true, "")
+  doAssert decide("912.6") == (false, msg)
+  doAssert decide("a912") == (false, msg)
+  doAssert decide("") == (false, msg)
+  doAssert decideDefaultMsg("a912") == (false, "a912 is not an integer!")
+  doAssert decideDefaultMsg("") == (false, " is not an integer!")
+## **Multiple texts validation**
+runnableExamples:
+  import strtabs
+
+  var validater = newFormValidation({
+        "accepted": @[required(), accepted()],
+        "required": @[required()],
+        "requiredInt": @[required(), isInt()],
+        "minValue": @[required(), isInt(), minValue(12), maxValue(19)]
+      })
+  let
+    chk1 = validater.validate({"required": "on", "accepted": "true",
+        "requiredInt": "12", "minValue": "15"}.newStringTable)
+    chk2 = validater.validate({"requird": "on", "time": "555",
+        "minValue": "10"}.newStringTable)
+    chk3 = validater.validate({"requird": "on", "time": "555",
+        "minValue": "10"}.newStringTable, allMsgs = false)
+    chk4 = validater.validate({"required": "on", "accepted": "true",
+    "requiredInt": "12.5", "minValue": "13"}.newStringTable, allMsgs = false)
+
+  doAssert chk1 == (true, "")
+  doAssert not chk2.hasValue
+  doAssert chk2.msg == "Can\'t find key: accepted\nCan\'t find key: " &
+          "required\nCan\'t find key: requiredInt\n10 is not greater than or equal to 12.0!\n"
+  doAssert not chk3.hasValue
+  doAssert chk3.msg == "Can\'t find key: accepted\n"
+  doAssert not chk4.hasValue
+  doAssert chk4.msg == "12.5 is not an integer!\n"
+
 
 import tables, strtabs, strutils, strformat
 
@@ -29,10 +77,12 @@ type
 
 proc newFormValidation*(validator: openArray[(string, seq[ValidateHandler])]
                         ): FormValidation {.inline.} =
+  ## Creates a new ``Forvalidation``.
   FormValidation(data: validator.newOrderedTable)
 
 proc validate*(formValidation: FormValidation, textTable: StringTableRef,
                 allMsgs = true): Info =
+  ## Valiates all (key, value) pairs in ``textTable``.
   var msgs = ""
   for (key, handlers) in formValidation.data.pairs:
     for handler in handlers:
@@ -57,6 +107,8 @@ proc validate*(formValidation: FormValidation, textTable: StringTableRef,
   return (true, msgs)
 
 proc isInt*(msg = ""): ValidateHandler {.inline.} =
+  ## The value of ``text`` is a int. If the length of 
+  ## ``msg`` is more than 0, returns this ``msg`` when failed.
   result = proc(text: string): Info =
     if basic.isInt(text):
       result = (true, "")
@@ -66,6 +118,8 @@ proc isInt*(msg = ""): ValidateHandler {.inline.} =
       result = (false, msg)
 
 proc isNumeric*(msg = ""): ValidateHandler {.inline.} =
+  ## The value of ``text`` is  a number. If the length of 
+  ## ``msg`` is more than 0, returns this ``msg`` when failed.
   result = proc(text: string): Info =
     if basic.isNumeric(text):
       result = (true, "")
@@ -75,6 +129,8 @@ proc isNumeric*(msg = ""): ValidateHandler {.inline.} =
       result = (false, msg)
 
 proc isBool*(msg = ""): ValidateHandler {.inline.} =
+  ## The value of ``text`` is a bool. If the length of 
+  ## ``msg`` is more than 0, returns this ``msg`` when failed.
   result = proc(text: string): Info =
     if basic.isBool(text):
       result = (true, "")
@@ -84,6 +140,8 @@ proc isBool*(msg = ""): ValidateHandler {.inline.} =
       result = (false, msg)
 
 proc minValue*(min: float, msg = ""): ValidateHandler {.inline.} =
+  ## The value of ``text`` is more than or equal to ``min``. If the length of 
+  ## ``msg`` is more than 0, returns this ``msg`` when failed.
   result = proc(text: string): Info =
     let value = try: parseFloat(text)
       except ValueError:
@@ -97,6 +155,8 @@ proc minValue*(min: float, msg = ""): ValidateHandler {.inline.} =
       result = (false, msg)
 
 proc maxValue*(max: float, msg = ""): ValidateHandler {.inline.} =
+  ## The value of ``text`` is less than or equal to ``max``. If the length of 
+  ## ``msg`` is more than 0, returns this ``msg`` when failed.
   result = proc(text: string): Info =
     let value = try: parseFloat(text)
       except ValueError:
@@ -110,6 +170,8 @@ proc maxValue*(max: float, msg = ""): ValidateHandler {.inline.} =
       result = (false, msg)
 
 proc rangeValue*(min, max: float, msg = ""): ValidateHandler {.inline.} =
+  ## The value of ``text`` is between ``min`` and ``max``. If the length of 
+  ## ``msg`` is more than 0, returns this ``msg`` when failed.
   result = proc(text: string): Info =
     let value = try: parseFloat(text)
       except ValueError:
@@ -123,6 +185,8 @@ proc rangeValue*(min, max: float, msg = ""): ValidateHandler {.inline.} =
       result = (false, msg)
 
 proc minLength*(min: Natural, msg = ""): ValidateHandler {.inline.} =
+  ## The length of ``text`` is more than or equal to ``min``. If the length of 
+  ## ``msg`` is more than 0, returns this ``msg`` when failed.
   result = proc(text: string): Info =
     let length = text.len
     if length >= min:
@@ -133,6 +197,8 @@ proc minLength*(min: Natural, msg = ""): ValidateHandler {.inline.} =
       result = (false, msg)
 
 proc maxLength*(max: Natural, msg = ""): ValidateHandler {.inline.} =
+  ## The length of ``text`` is less than or equal to ``max``. If the length of 
+  ## ``msg`` is more than 0, returns this ``msg`` when failed.
   result = proc(text: string): Info =
     let length = text.len
     if length <= max:
@@ -143,6 +209,8 @@ proc maxLength*(max: Natural, msg = ""): ValidateHandler {.inline.} =
       result = (false, msg)
 
 proc rangeLength*(min, max: Natural, msg = ""): ValidateHandler {.inline.} =
+  ## The length of ``text`` is between ``min`` and ``max``. If the length of 
+  ## ``msg`` is more than 0, returns this ``msg`` when failed.
   result = proc(text: string): Info =
     let length = text.len
     if length <= max and length >= min:
@@ -153,6 +221,8 @@ proc rangeLength*(min, max: Natural, msg = ""): ValidateHandler {.inline.} =
       result = (false, msg)
 
 proc equals*(value: string, msg = ""): ValidateHandler {.inline.} =
+  ## The content of ``text`` is equal to ``value``. If the length of 
+  ## ``msg`` is more than 0, returns this ``msg`` when failed.
   result = proc(text: string): Info =
     if text == value:
       result = (true, "")
@@ -162,7 +232,9 @@ proc equals*(value: string, msg = ""): ValidateHandler {.inline.} =
       result = (false, msg)
 
 proc accepted*(msg = ""): ValidateHandler {.inline.} =
-  ## if lowerAscii input in {"yes", "on", "1", or "true"}, return true
+  ## If lowerAscii input in {"yes", "on", "1", or "true"}, return true
+  ## If the length of ``msg`` is more than 0, 
+  ## returns this ``msg`` when failed.
   result = proc(text: string): Info =
     case text.toLowerAscii
     of "yes", "y", "on", "1", "true":
@@ -174,6 +246,8 @@ proc accepted*(msg = ""): ValidateHandler {.inline.} =
         result = (false, msg)
 
 proc required*(msg = ""): ValidateHandler {.inline.} =
+  ## The content of ``text`` is not empty. If the length of 
+  ## ``msg`` is more than 0, returns this ``msg`` when failed.
   result = proc(text: string): Info =
     if text.len != 0:
       result = (true, "")
@@ -183,6 +257,8 @@ proc required*(msg = ""): ValidateHandler {.inline.} =
       result = (false, msg)
 
 proc matchRegex*(value: Regex, msg = ""): ValidateHandler {.inline.} =
+  ## The content of ``text`` matches the regex expression. If the length of 
+  ## ``msg`` is more than 0, returns this ``msg`` when failed.
   result = proc(text: string): Info =
     var m: RegexMatch
     if text.match(value, m):
@@ -193,6 +269,8 @@ proc matchRegex*(value: Regex, msg = ""): ValidateHandler {.inline.} =
       result = (false, msg)
 
 proc matchUrl*(msg = ""): ValidateHandler {.inline.} =
+  ## The content of ``text`` matches the url expression. If the length of 
+  ## ``msg`` is more than 0, returns this ``msg`` when failed.
   result = proc(text: string): Info =
     var m: RegexMatch
     if text.match(re"(https?|ftp|file)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]", m):
