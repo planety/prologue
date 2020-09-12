@@ -143,9 +143,11 @@ proc minValue*(min: float, msg = ""): ValidateHandler {.inline.} =
   ## The value of ``text`` is more than or equal to ``min``. If the length of 
   ## ``msg`` is more than 0, returns this ``msg`` when failed.
   result = proc(text: string): Info =
-    let value = try: parseFloat(text)
-      except ValueError:
-        return (false, fmt"{text} is not a number!")
+    var value: float
+    try: 
+      value = parseFloat(text)
+    except ValueError:
+      return (false, fmt"{text} is not a number!")
 
     if value >= min:
       result = (true, "")
@@ -158,9 +160,11 @@ proc maxValue*(max: float, msg = ""): ValidateHandler {.inline.} =
   ## The value of ``text`` is less than or equal to ``max``. If the length of 
   ## ``msg`` is more than 0, returns this ``msg`` when failed.
   result = proc(text: string): Info =
-    let value = try: parseFloat(text)
-      except ValueError:
-        return (false, fmt"{text} is not a number!")
+    var value: float
+    try: 
+      value = parseFloat(text)
+    except ValueError:
+      return (false, fmt"{text} is not a number!")
 
     if value <= max:
       result = (true, "")
@@ -173,9 +177,11 @@ proc rangeValue*(min, max: float, msg = ""): ValidateHandler {.inline.} =
   ## The value of ``text`` is between ``min`` and ``max``. If the length of 
   ## ``msg`` is more than 0, returns this ``msg`` when failed.
   result = proc(text: string): Info =
-    let value = try: parseFloat(text)
-      except ValueError:
-        return (false, fmt"{text} is not a number!")
+    var value: float
+    try:
+      value = parseFloat(text)
+    except ValueError:
+      return (false, fmt"{text} is not a number!")
 
     if value <= max and value >= min:
       result = (true, "")
