@@ -109,7 +109,7 @@ staticDir=/static
 secretKey=Pr435ol67ogue
 ```
 
-5. There are two ways to disable logging messages: 
+There are two ways to disable logging messages: 
 (1) set `settings.debug` = false and (2) set a startup event
 
 ```nim
