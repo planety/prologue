@@ -107,6 +107,20 @@ staticDir=/static
 secretKey=Pr435ol67ogue
 ```
 
+5. There are two ways to disable logging messages: (1) set `settings.debug` = false and (2) set a startup event
+
+```nim
+proc setLoggingLevel() =
+  addHandler(newConsoleLogger())
+  logging.setLogFilter(lvlInfo)
+
+
+let 
+  event = initEvent(setLoggingLevel)
+var
+  app = newApp(settings = settings, middlewares = @[debugRequestMiddleware()], startup = @[event])
+```
+
 ### Hello World
 
 ```nim
