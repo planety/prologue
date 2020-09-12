@@ -24,7 +24,7 @@ type
   SecretUrl* = distinct string
 
 
-  Session* = ref object
+  Session* = object
     data: StringTableRef
     newCreated*: bool
     modified*: bool
@@ -86,33 +86,33 @@ proc initSession*(data: StringTableRef, newCreated = false, modified = false,
     accessed = false): Session {.inline.} =
   Session(data: data, modified: modified)
 
-proc update*(session: Session) {.inline.} =
+proc update*(session: var Session) {.inline.} =
   session.accessed = true
   session.modified = true
 
-proc `[]`*(session: Session, key: string): string {.inline.} =
+proc `[]`*(session: var Session, key: string): string {.inline.} =
   result = session.data[key]
   session.accessed = true
 
-proc `[]=`*(session: Session, key, value: string) {.inline.} =
+proc `[]=`*(session: var Session, key, value: string) {.inline.} =
   session.data[key] = value
   update(session)
 
 proc len*(session: Session): int {.inline.} =
   session.data.len
 
-proc getOrDefault*(session: Session, key: string, default = ""): string {.inline.} =
+proc getOrDefault*(session: var Session, key: string, default = ""): string {.inline.} =
   if session.data.hasKey(key):
     result = session.data[key]
   else:
     result = default
   session.accessed = true
 
-proc del*(session: Session, key: string) {.inline.} =
+proc del*(session: var Session, key: string) {.inline.} =
   session.data.del(key)
   update(session)
 
-proc clear*(session: Session) {.inline.} =
+proc clear*(session: var Session) {.inline.} =
   session.data.clear(modeCaseSensitive)
   update(session)
 
