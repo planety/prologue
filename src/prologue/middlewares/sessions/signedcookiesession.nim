@@ -41,18 +41,19 @@ proc sessionMiddleware*(
     let
       data = ctx.getCookie(sessionName)
 
-    try:
-      ctx.session.loads(signer.unsign(data, maxAge))
-    except BadTimeSignatureError, SignatureExpiredError, ValueError:
-      # BadTimeSignature, SignatureExpired or ValueError
-      discard
+    if data.len != 0:
+      try:
+        ctx.session.loads(signer.unsign(data, maxAge))
+      except BadTimeSignatureError, SignatureExpiredError, ValueError:
+        # BadTimeSignature, SignatureExpired or ValueError
+        discard
 
     await switch(ctx)
 
     if ctx.session.len == 0: # empty or modified(del or clear)
       if ctx.session.modified: # modified
         ctx.deleteCookie(sessionName, domain = domain,
-                         path = path) # delete session data in cookie
+                        path = path) # delete session data in cookie
       return
 
     if ctx.session.accessed:
