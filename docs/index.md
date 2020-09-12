@@ -4,6 +4,7 @@
 
 [![License: BSD-3-Clause](https://img.shields.io/github/license/planety/prologue)](https://opensource.org/licenses/BSD-3-Clause)
 [![Version](https://img.shields.io/github/v/release/planety/prologue?include_prereleases)](https://github.com/planety/prologue/releases)
+[![buy me a coffee](https://img.shields.io/badge/donate-buy%20me%20a%20coffee-orange.svg)](https://github.com/planety/prologue#donate)
 
 
 # Prologue
@@ -55,6 +56,7 @@ Plugin API docs in https://planety.github.io/prologue/plugin/theindex.html.
 
 - Plugin
   - Minimal OpenApi support
+  - Websocket support(https://github.com/xflywind/websocketx)
   - Template(Using Karax Native)
   - Test Client(Using httpclient)
   - Command line tools(https://github.com/planety/logue)

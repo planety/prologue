@@ -57,6 +57,7 @@ Plugin API docs in https://planety.github.io/prologue/plugin/theindex.html.
 - Plugin
   - [x] Minimal OpenApi support
   - [x] Template(Using Karax Native)
+  - [x] Websocket support(https://github.com/xflywind/websocketx)
   - [x] Test Client(Using httpclient)
   - [x] Command line tools(https://github.com/planety/logue)
 
