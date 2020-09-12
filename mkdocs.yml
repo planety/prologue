@@ -19,6 +19,7 @@ nav:
     - Route: "route.md"
     - Middleware: "middleware.md"
     - Static Files: "staticfiles.md"
+    - Upload Files: "uploadfile.md"
 
 
 markdown_extensions:

@@ -8,17 +8,20 @@ suitable for learning `Prologue` object.
 ## startup and shutdown events
 
 You can set `startup` events which executes before the application starts and `shutdown` events after
-the application stops. You can read [events](https://planety.github.io/prologue/event) documents later.
+the application stops. You can read the [events](https://planety.github.io/prologue/event) document later.
 
 ## serve static files
 
-`Prologue` can serve static files, you can read [staticFile](https://planety.github.io/prologue/staticfiles) documents later.
+`Prologue` can serve static files, you can read the [staticFile](https://planety.github.io/prologue/staticfiles) documents later.
 
-## add routes
+## routes
 
-You can add all kinds of routes to route table, you can read [routes](https://planety.github.io/prologue/route) document later.
+You can add all kinds of routes to route table and read the [routes](https://planety.github.io/prologue/route) document later.
 
 ## middlewares
 
-You can use and write [middlewares](https://planety.github.io/prologue/middleware) too.
+You can use and write [middlewares](https://planety.github.io/prologue/middleware) .
 
+## upload files
+
+you can get the info of [uploadFile](https://planety.github.io/prologue/uploadfile) and save it to disks.

@@ -31,16 +31,16 @@ strategy:
       UCPU: amd64
       CHANNEL: devel
       TEST_LANG: cpp
-    # MacOS_stable_64bit:
-    #   VM: 'macOS-latest'
-    #   UCPU: amd64
-    #   CHANNEL: stable
-    #   TEST_LANG: c
-    # MacOS_devel_64bit:
-    #   VM: 'macOS-latest'
-    #   UCPU: amd64
-    #   CHANNEL: devel
-    #   TEST_LANG: c
+    MacOS_stable_64bit:
+      VM: 'macOS-latest'
+      UCPU: amd64
+      CHANNEL: stable
+      TEST_LANG: c
+    MacOS_devel_64bit:
+      VM: 'macOS-latest'
+      UCPU: amd64
+      CHANNEL: devel
+      TEST_LANG: c
 pool:
   vmImage: $(VM)
 
