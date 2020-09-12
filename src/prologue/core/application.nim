@@ -304,6 +304,7 @@ proc run*(app: Prologue) =
 
   # handle requests
   proc handleRequest(nativeRequest: NativeRequest) {.async.} =
+    ## TODO request.headers check nil or None
     var request = initRequest(nativeRequest = nativeRequest)
 
     # process cookie
@@ -326,10 +327,10 @@ proc run*(app: Prologue) =
 
     var
       # initialize response
-      response = initResponse(HttpVer11, Http200, headers = {
-                             "Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders)
-      ctx = newContext(request = move(request), response = move(response),
-                       gScope = app.gScope)
+      ctx = newContext(
+        request = move(request), 
+        response = initResponse(HttpVer11, Http200, headers = nil),
+        gScope = app.gScope)
 
     ctx.middlewares = app.middlewares
     logging.debug(fmt"{ctx.request.reqMethod} {ctx.request.url.path}")
@@ -358,6 +359,8 @@ proc run*(app: Prologue) =
       logging.error e.msg
       ctx.response.code = Http500
       ctx.response.body = e.msg
+      if ctx.response.headers == nil:
+        ctx.response.headers = newHttpHeaders()
       ctx.response.setHeader("content-type", "text/plain; charset=UTF-8")
 
     # display error messages only in debug mode

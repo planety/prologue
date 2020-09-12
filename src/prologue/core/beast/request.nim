@@ -106,7 +106,7 @@ proc send*(request: Request, content: string): Future[void] {.inline.} =
   request.nativeRequest.unsafeSend(content)
   var fut = newFuture[void]()
   complete(fut)
-  return fut
+  result = fut
 
 proc respond*(request: Request, code: HttpCode, body: string,
               headers: HttpHeaders = newHttpHeaders()): Future[void] {.inline.} =
@@ -115,7 +115,7 @@ proc respond*(request: Request, code: HttpCode, body: string,
   request.nativeRequest.send(code, body, h)
   var fut = newFuture[void]()
   complete(fut)
-  return fut
+  result = fut
 
 proc respond*(request: Request, response: Response): Future[void] {.inline.} =
   request.respond(response.code, response.body, response.headers)

@@ -324,7 +324,7 @@ proc attachment*(ctx: Context, downloadName = "", charset = "utf-8") {.inline.} 
 
 proc staticFileResponse*(ctx: Context, filename, dir: string, mimetype = "",
                          downloadName = "", charset = "utf-8", 
-                         headers = newHttpHeaders()) {.async.} =
+                         headers = newHttpHeaders()) {.async.} =  
   ## Serves static files.
   let
     filePath = dir / filename
@@ -355,6 +355,8 @@ proc staticFileResponse*(ctx: Context, filename, dir: string, mimetype = "",
     etag = getMD5(etagBase)
 
   ctx.response.headers = headers
+  if unlikely(ctx.response.headers == nil):
+    ctx.response.headers = newHttpHeaders()
 
   if mimetype.len != 0:
     ctx.response.setHeader("Content-Type", fmt"{mimetype}; {charset}")
@@ -368,14 +370,13 @@ proc staticFileResponse*(ctx: Context, filename, dir: string, mimetype = "",
   if contentLength < 20_000_000:
     if ctx.request.hasHeader("If-None-Match") and ctx.request.headers[
         "If-None-Match"] == etag:
-      await ctx.respond(Http304, "")
+      await ctx.respond(Http304, "", nil)
       ctx.handled = true
     else:
-      let body = readFile(filePath)
-      resp initResponse(HttpVer11, Http200, headers, body)
+      ctx.response.body = readFile(filePath)
   else:
     ctx.response.setHeader("Content-Length", $contentLength)
-    await ctx.respond(Http200, "", headers)
+    await ctx.respond(Http200, "", ctx.response.headers)
     var
       file = openAsync(filePath, fmRead)
 

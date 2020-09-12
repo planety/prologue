@@ -1,3 +1,8 @@
+## 0.3.6
+
+Fixes that sessionMiddleware doesn't work when user do not register session.
+Fixes HttpHeaders and adds nil check.
+
 ## 0.3.4
 
 Fixes "Always asked to install `cookiejar` when running" #36

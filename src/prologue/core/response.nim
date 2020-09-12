@@ -68,11 +68,14 @@ func redirect*(url: string, code = Http301,
                body = "", delay = 0, headers = newHttpHeaders(),
                version = HttpVer11): Response {.inline.} =
   ## redirect to new url.
-  if delay == 0:
-    headers.add("Location", url)
-  else:
-    headers.add("refresh", &"{delay};url=\"{url}\"")
   result = initResponse(version, code = code, headers = headers, body = body)
+  if unlikely(result.headers == nil):
+    result.headers = newHttpHeaders()
+  
+  if delay == 0:
+    result.headers.add("Location", url)
+  else:
+    result.headers.add("refresh", &"{delay};url=\"{url}\"")
 
 func error404*(code = Http404,
                body = "<h1>404 Not Found!</h1>", headers = newHttpHeaders(),
@@ -83,20 +86,26 @@ func error404*(code = Http404,
 func htmlResponse*(text: string, code = Http200, headers = newHttpHeaders(),
                    version = HttpVer11): Response {.inline.} =
   ## Content-Type: text/html; charset=UTF-8.
-  headers["Content-Type"] = "text/html; charset=UTF-8"
   result = initResponse(version, code, headers, body = text)
+  if unlikely(result.headers == nil):
+    result.headers = newHttpHeaders()
+  result.headers["Content-Type"] = "text/html; charset=UTF-8"
 
 func plainTextResponse*(text: string, code = Http200,
                         headers = newHttpHeaders(), version = HttpVer11): Response {.inline.} =
   ## Content-Type: text/plain.
-  headers["Content-Type"] = "text/plain"
   result = initResponse(version, code, headers, body = text)
+  if unlikely(result.headers == nil):
+    result.headers = newHttpHeaders()
+  result.headers["Content-Type"] = "text/plain"
 
 func jsonResponse*(text: JsonNode, code = Http200, headers = newHttpHeaders(),
                    version = HttpVer11): Response {.inline.} =
   ## Content-Type: application/json.
-  headers["Content-Type"] = "text/json"
   result = initResponse(version, code, headers, body = $text)
+  if unlikely(result.headers == nil):
+    result.headers = newHttpHeaders()
+  result.headers["Content-Type"] = "text/json"
 
 macro resp*(body: string, code = Http200) =
   ## Handy to make a response of ctx.
