@@ -23,7 +23,7 @@ type
 
 proc createHeaders(headers: HttpHeaders): string =
   result = ""
-  if headers.len > 0:
+  if headers != nil:
     for (key, value) in headers.pairs:
       result.add(key & ": " & value & "\c\L")
 
