@@ -109,8 +109,10 @@ staticDir=/static
 secretKey=Pr435ol67ogue
 ```
 
-There are two ways to disable logging messages: 
-(1) set `settings.debug` = false and (2) set a startup event
+There are two ways to disable logging messages:
+
+(1) set `settings.debug` = false
+(2) set a startup event
 
 ```nim
 proc setLoggingLevel() =

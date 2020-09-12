@@ -43,12 +43,12 @@ proc login*(ctx: Context) {.async.} =
 
 # /logout
 proc logout*(ctx: Context) {.async.} =
-  discard
+  echo ctx.session
+  echo "123456789"
 
 # /register
 proc register*(ctx: Context) {.async.} =
   let db = open(consts.dbPath, "", "", "")
-
   if ctx.request.reqMethod == HttpPost:
     var error: string
     let
