@@ -1,7 +1,7 @@
 import htmlgen
 
 
-func errorPage*(errorMsg: string, version: string): string =
+func errorPage*(errorMsg: string, version: string): string {.inline.} =
   result = html(head(title(errorMsg)),
                 body(h1(errorMsg),
                      "<hr/>",
@@ -9,7 +9,7 @@ func errorPage*(errorMsg: string, version: string): string =
                      style = "text-align: center;"),
                 xmlns = "http://www.w3.org/1999/xhtml")
 
-func loginPage*(): string =
+func loginPage*(): string {.inline.} =
   result = html(form(action = "/login",
                 `method` = "post",
                 "Username: ", input(name = "username", `type` = "text"),
@@ -17,7 +17,7 @@ func loginPage*(): string =
                 input(value = "login", `type` = "submit")),
                 xmlns = "http://www.w3.org/1999/xhtml")
 
-func multiPartPage*(): string =
+func multiPartPage*(): string {.inline.} =
   result = html(form(action = "/multipart?firstname=red green&lastname=tenth",
                `method` = "post", enctype = "multipart/form-data",
                 input(name = "username", `type` = "text", value = "play game"),

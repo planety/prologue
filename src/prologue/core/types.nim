@@ -145,12 +145,9 @@ proc parseStringTable*(tabs: StringTableRef, s: string) {.inline.} =
     if pos >= s.len:
       break
 
-proc parseStringTable*(s: string): StringTableRef {.inline.} =
-  result = newStringTable(mode = modeCaseSensitive)
-  parseStringTable(result, s)
-
-proc loads*(session: Session, s: string) {.inline.} =
+proc loads*(session: var Session, s: string) {.inline.} =
   ## Loads session from strings.
+  session.data = newStringTable(mode = modeCaseSensitive)
   session.data.parseStringTable(decode(s))
 
 proc dumps*(session: Session): string {.inline.} =

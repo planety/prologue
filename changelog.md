@@ -1,6 +1,6 @@
 ## 0.3.6
 
-Fixes that sessionMiddleware doesn't work when user do not register session.
+Fixes that sessionMiddleware doesn't work when user does not register session.
 Fixes HttpHeaders and adds nil check.
 Fixes cookies containing commas fail for asynchttpserver using base64 encode.
 

@@ -45,27 +45,37 @@ block:
   # "can parse stringTable from empty stringTable"
   block:
     let tabs = newStringTable(mode = modeCaseSensitive)
-    doAssert $parseStringTable($(tabs)) == $tabs
+    var newTabs = newStringTable(mode = modeCaseSensitive)
+    parseStringTable(newTabs, $tabs)
+    doAssert $newTabs == $tabs
 
   # "can parse stringTable from stringTable with elements"
   block:
     let tabs = {"username": "flywind", "password": "root"}.newStringTable()
-    doAssert $parseStringTable($tabs) == $tabs
+    var newTabs = newStringTable(mode = modeCaseSensitive)
+    parseStringTable(newTabs, $tabs)
+    doAssert $newTabs == $tabs
 
   # "can parse stringTable from stringTable with empty value"
   block:
     let tabs = {"username": "flywind", "password": "",
         "day": "one"}.newStringTable()
-    doAssert $parseStringTable($tabs) == $tabs
+    var newTabs = newStringTable(mode = modeCaseSensitive)
+    parseStringTable(newTabs, $tabs)
+    doAssert $newTabs == $tabs
 
   # "can parse stringTable from stringTable with empty key"
   block:
     let tabs = {"username": "flywind", "password": "root",
         "": "one"}.newStringTable()
-    doAssert $parseStringTable($tabs) == $tabs
+    var newTabs = newStringTable(mode = modeCaseSensitive)
+    parseStringTable(newTabs, $tabs)
+    doAssert $newTabs == $tabs
 
   # "can parse stringTable from stringTable with space key or value"
   block:
     let tabs = {"user    name": "   flywind", "password": " ro  ot  ",
         "": "    o ne"}.newStringTable()
-    doAssert $parseStringTable($tabs) == $tabs
+    var newTabs = newStringTable(mode = modeCaseSensitive)
+    parseStringTable(newTabs, $tabs)
+    doAssert $newTabs == $tabs
