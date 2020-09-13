@@ -183,7 +183,7 @@ proc hasHeader*(request: var Request, key: string): bool {.inline.} =
 proc setHeader*(request: var Request, key, value: string) {.inline.} =
   request.headers[key] = value
 
-proc setHeader*(request: var Request, key: string, value: sink seq[string]) {.inline.} =
+proc setHeader*(request: var Request, key: string, value: seq[string]) {.inline.} =
   request.headers[key] = value
 
 proc addHeader*(request: var Request, key, value: string) {.inline.} =
@@ -242,7 +242,7 @@ proc getPathParams*(ctx: Context, key: string): string {.inline.} =
   ## Gets the route parameters(for example, "/hello/{name}").
   ctx.request.pathParams.getOrDefault(key)
 
-proc getPathParams*[T: BaseType](ctx: Context, key: sink string,
+proc getPathParams*[T: BaseType](ctx: Context, key: string,
                     default: T): T {.inline.} =
   ## Gets the route parameters(for example, "/hello/{name}").
   let pathParams = ctx.request.pathParams.getOrDefault(key)

@@ -44,19 +44,19 @@ proc `[]`*(formPart: FormPart, key: string): tuple[params: StringTableRef,
 proc `[]=`*(formPart: FormPart, key: string, body: string) {.inline.} =
   formPart.data[key] = (newStringTable(mode = modeCaseSensitive), body)
 
-proc tryParseInt(value: sink string, default: int): int {.inline.} =
+proc tryParseInt(value: string, default: int): int {.inline.} =
   try:
     result = parseInt(value)
   except ValueError:
     result = default
 
-proc tryParseFloat(value: sink string, default: float): float {.inline.} =
+proc tryParseFloat(value: string, default: float): float {.inline.} =
   try:
     result = parseFloat(value)
   except ValueError:
     result = default
 
-proc tryParseBool(value: sink string, default: bool): bool {.inline.} =
+proc tryParseBool(value: string, default: bool): bool {.inline.} =
   try:
     result = parseBool(value)
   except ValueError:

@@ -54,12 +54,12 @@ proc initRePath*(route: Regex, httpMethod = HttpGet): RePath =
   RePath(route: route, httpMethod: httpMethod)
 
 proc pattern*(route: string, handler: HandlerAsync, httpMethod = HttpGet,
-              name = "", middlewares: sink seq[HandlerAsync] = @[]): UrlPattern =
+              name = "", middlewares: seq[HandlerAsync] = @[]): UrlPattern =
   (route, handler, @[httpMethod], name, middlewares)
 
 proc pattern*(route: string, handler: HandlerAsync, 
-              httpMethod: sink seq[HttpMethod], name = "", 
-              middlewares: sink seq[HandlerAsync] = @[]): UrlPattern =
+              httpMethod: seq[HttpMethod], name = "", 
+              middlewares: seq[HandlerAsync] = @[]): UrlPattern =
   (route, handler, httpMethod, name, middlewares)
 
 proc hash*(x: Path): Hash =
@@ -68,7 +68,7 @@ proc hash*(x: Path): Hash =
   h = h !& hash(x.httpMethod)
   result = !$h
 
-proc newPathHandler*(handler: HandlerAsync, middlewares: sink seq[HandlerAsync] = @[], 
+proc newPathHandler*(handler: HandlerAsync, middlewares: seq[HandlerAsync] = @[], 
                      settings: Settings = nil): PathHandler {.inline.} =
   PathHandler(handler: handler, middlewares: middlewares, settings: settings)
 

@@ -200,52 +200,52 @@ proc addRoute*(app: Prologue, patterns: seq[UrlPattern],
                  pattern.name, pattern.middlewares, settings)
 
 proc head*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-           middlewares: sink seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
+           middlewares: seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
   ## Adds `route` and `handler` with `HttpHead`.
   app.addRoute(route, handler, HttpHead, name, middlewares, settings)
 
 proc get*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-          middlewares: sink seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
+          middlewares: seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
   ## Adds `route` and `handler` with `HttpGet` and `HttpHead`.
   app.addRoute(route, handler, HttpGet, name, middlewares, settings)
 
 proc post*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-           middlewares: sink seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
+           middlewares: seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
   ## Adds `route` and `handler` with `HttpPost`.
   app.addRoute(route, handler, HttpPost, name, middlewares, settings)
 
 proc put*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-          middlewares: sink seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
+          middlewares: seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
   ## Adds `route` and `handler` with `HttpPut`.
   app.addRoute(route, handler, HttpPut, name, middlewares, settings)
 
 proc delete*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-             middlewares: sink seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
+             middlewares: seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
   ## Adds `route` and `handler` with `HttpDelete`.
   app.addRoute(route, handler, HttpDelete, name, middlewares, settings)
 
 proc trace*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-            middlewares: sink seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
+            middlewares: seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
   ## Adds `route` and `handler` with `HttpTrace`.
   app.addRoute(route, handler, HttpTrace, name, middlewares, settings)
 
 proc options*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-              middlewares: sink seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
+              middlewares: seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
   ## Adds `route` and `handler` with `HttpOptions`.
   app.addRoute(route, handler, HttpOptions, name, middlewares, settings)
 
 proc connect*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-              middlewares: sink seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
+              middlewares: seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
   ## Adds `route` and `handler` with `HttpConnect`.
   app.addRoute(route, handler, HttpConnect, name, middlewares, settings)
 
 proc patch*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-            middlewares: sink seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
+            middlewares: seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
   ## Adds `route` and `handler` with `HttpPatch`.
   app.addRoute(route, handler, HttpPatch, name, middlewares, settings)
 
 proc all*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-          middlewares: sink seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
+          middlewares: seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
   ## Adds `route` and `handler` with all `HttppMethod`.
   app.addRoute(route, handler, @[HttpGet, HttpPost, HttpPut, HttpDelete,
                HttpTrace, HttpOptions, HttpConnect, HttpPatch], name, middlewares, settings)
@@ -271,8 +271,8 @@ proc appPort*(app: Prologue): Port {.inline.} =
   ## Gets the port from the settings.
   app.gScope.settings.port
 
-proc newApp*(settings: Settings, middlewares: sink seq[HandlerAsync] = @[],
-             startup: sink seq[Event] = @[], shutdown: sink seq[Event] = @[],
+proc newApp*(settings: Settings, middlewares: seq[HandlerAsync] = @[],
+             startup: seq[Event] = @[], shutdown: seq[Event] = @[],
              errorHandlerTable = DefaultErrorHandler,
              appData = newStringTable(mode = modeCaseSensitive)): Prologue {.inline.} =
   ## Creates a new App instance.

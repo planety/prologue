@@ -30,8 +30,8 @@ const
 
 
 proc isAllowedOrigin(origin: string, allowAllOrigins: bool,
-                     allowOrigins: sink seq[string], 
-                     allowOriginRegex: sink Regex): bool =
+                     allowOrigins: seq[string], 
+                     allowOriginRegex: Regex): bool =
   if allowAllOrigins:
     return true
 
@@ -42,11 +42,11 @@ proc isAllowedOrigin(origin: string, allowAllOrigins: bool,
   return origin in allowOrigins
 
 proc CorsMiddleware*(
-  allowOrigins: sink seq[string] = @[],
-  allowOriginRegex: sink Regex = re"",
-  allowMethods: sink seq[string] = @["get"],
-  allowHeaders: sink seq[string] = @[],
-  exposeHeaders: sink seq[string] = @[],
+  allowOrigins: seq[string] = @[],
+  allowOriginRegex: Regex = re"",
+  allowMethods: seq[string] = @["get"],
+  allowHeaders: seq[string] = @[],
+  exposeHeaders: seq[string] = @[],
   allowCredentials = false,
   maxAge = 7200,
   excludeEndPoint: seq[string] = @[]
