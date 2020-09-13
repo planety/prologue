@@ -2,4 +2,4 @@
 *.bat
 *.db
 *.sqlite
-/.vscode
+**/.vscode/
