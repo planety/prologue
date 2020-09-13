@@ -14,6 +14,7 @@ const
   ]
   blogPatterns* = @[
     pattern("/create", views.create, @[HttpGet, HttpPost], name = "create"),
-    pattern("/update/{id}", views.update, @[HttpGet, HttpPost], name = "update"),
+    pattern("/update/{id}", views.update, @[HttpGet, HttpPost],
+        name = "update"),
     pattern("/delete/{id}", views.delete, @[HttpGet], name = "delete")
-  ]  
+  ]
