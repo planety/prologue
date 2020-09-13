@@ -1,5 +1,8 @@
 import jester
 
+settings:
+  port = Port(8080)
+
 routes:
-  get "/":
+  get "/hello":
     resp "Hello, jester!"

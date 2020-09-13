@@ -8,7 +8,7 @@ proc onRequest(req: Request): Future[void] =
     of "/json":
       const data = $(%*{"message": "Hello, World!"})
       req.send(Http200, data)
-    of "/plaintext":
+    of "/hello":
       const data = "Hello, World!"
       const headers = "Content-Type: text/plain"
       req.send(Http200, data, headers)

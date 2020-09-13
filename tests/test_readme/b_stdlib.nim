@@ -9,7 +9,7 @@ proc onRequest(req: Request): Future[void] {.async, gcsafe.} =
     of "/json":
       const data = $(%*{"message": "Hello, World!"})
       await req.respond(Http200, data)
-    of "/plaintext":
+    of "/hello":
       const data = "Hello, World!"
       let headers = newHttpHeaders([("Content-Type","text/plain")])
       await req.respond(Http200, data, headers)
@@ -17,3 +17,4 @@ proc onRequest(req: Request): Future[void] {.async, gcsafe.} =
       await req.respond(Http404, "")
 
 waitFor server.serve(Port(8080), onRequest)
+# 13000

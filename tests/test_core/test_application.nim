@@ -144,7 +144,7 @@ block:
     doAssert response.code == Http200, $response.code
     doAssert (waitFor response.body) == loginGetPage()
 
-  when defined(windows) or defined(usestd):
+  when defined(usestd):
     # "can post /loginpage"
     block:
       let
@@ -164,7 +164,7 @@ block:
     doAssert response.code == Http200, $response.code
     doAssert (waitFor response.body) == loginPage()
 
-  when defined(windows) or defined(usestd):
+  when defined(usestd):
     # "can post /login"
     block:
       let

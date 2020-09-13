@@ -15,6 +15,9 @@ type
   Request* = object
     nativeRequest*: NativeRequest
     cookies*: CookieJar
+    httpMethod: HttpMethod
+    headers: HttpHeaders
+    body: string
     url: Uri
     postParams*: StringTableRef
     queryParams*: StringTableRef # Only use queryParams for all url params
@@ -53,22 +56,21 @@ proc setScheme*(request: var Request, value: string) {.inline.} =
   request.url.scheme = value
 
 proc body*(request: Request): string {.inline.} =
-  request.nativeRequest.body.get()
+  request.body
 
 proc headers*(request: Request): HttpHeaders {.inline.} =
-  request.nativeRequest.headers.get()
+  request.headers
 
 proc reqMethod*(request: Request): HttpMethod {.inline.} =
-  request.nativeRequest.httpMethod.get()
+  request.httpMethod
 
 proc getCookie*(request: Request, key: string, default: string): string {.inline.} =
   request.cookies.getOrDefault(key, default)
 
 proc contentType*(request: Request): string {.inline.} =
-  let headers = request.nativeRequest.headers.get()
-  if not headers.hasKey("Content-Type"):
+  if not request.headers.hasKey("Content-Type"):
     return ""
-  result = headers["Content-Type", 0]
+  result = request.headers["Content-Type", 0]
 
 proc charset*(request: Request): string {.inline.} =
   let
@@ -82,11 +84,10 @@ proc charset*(request: Request): string {.inline.} =
     return contentType[pos + findStr.len .. ^1]
 
 proc secure*(request: Request): bool {.inline.} =
-  let headers = request.nativeRequest.headers.get()
-  if not headers.hasKey("X-Forwarded-Proto"):
+  if not request.headers.hasKey("X-Forwarded-Proto"):
     return false
 
-  case headers["X-Forwarded-Proto", 0]
+  case request.headers["X-Forwarded-Proto", 0]
   of "http":
     result = false
   of "https":
@@ -95,12 +96,10 @@ proc secure*(request: Request): bool {.inline.} =
     result = false
 
 proc hostName*(request: Request): string {.inline.} =
-  result = request.nativeRequest.ip
-  let headers = request.nativeRequest.headers.get()
-  if headers.hasKey("REMOTE_ADDR"):
-    result = headers["REMOTE_ADDR", 0]
-  if headers.hasKey("x-forwarded-for"):
-    result = headers["x-forwarded-for", 0]
+  if request.headers.hasKey("REMOTE_ADDR"):
+    result = request.headers["REMOTE_ADDR", 0]
+  if request.headers.hasKey("x-forwarded-for"):
+    result = request.headers["x-forwarded-for", 0]
 
 proc send*(request: Request, content: string): Future[void] {.inline.} =
   request.nativeRequest.unsafeSend(content)
@@ -125,8 +124,33 @@ proc initRequest*(nativeRequest: NativeRequest,
                   pathParams = newStringTable(modeCaseSensitive), 
                   queryParams = newStringTable(modeCaseSensitive),
                   postParams = newStringTable(modeCaseSensitive)): Request {.inline.} =
-  Request(nativeRequest: nativeRequest, url: parseUri(nativeRequest.path.get()),
-          cookies: cookies, pathParams: pathParams, queryParams: queryParams,
+
+  let url = 
+    if nativeRequest.path.isSome:
+      parseUri(nativeRequest.path.get)
+    else:
+      Uri()
+
+  let httpMethod =
+    if nativeRequest.httpMethod.isSome:
+       nativeRequest.httpMethod.get
+    else:
+      HttpGet
+  
+  let body = 
+    if nativeRequest.body.isSome:
+      nativeRequest.body.get
+    else:
+      ""
+
+  let headers = 
+    if nativeRequest.headers.isSome:
+      nativeRequest.headers.get
+    else:
+      newHttpHeaders()
+
+  Request(nativeRequest: nativeRequest, url: url, httpMethod: httpMethod, body: body,
+          headers: headers, cookies: cookies, pathParams: pathParams, queryParams: queryParams,
           postParams: postParams)
 
 proc close*(request: Request) =
