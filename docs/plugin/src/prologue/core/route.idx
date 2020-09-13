@@ -1,0 +1,22 @@
+PrologueError	src/prologue/core/route.html#PrologueError	route: PrologueError	
+RouteError	src/prologue/core/route.html#RouteError	route: RouteError	
+RouteResetError	src/prologue/core/route.html#RouteResetError	route: RouteResetError	
+DuplicatedRouteError	src/prologue/core/route.html#DuplicatedRouteError	route: DuplicatedRouteError	
+DuplicatedReversedRouteError	src/prologue/core/route.html#DuplicatedReversedRouteError	route: DuplicatedReversedRouteError	
+UrlPattern	src/prologue/core/route.html#UrlPattern	route: UrlPattern	
+stripRoute	src/prologue/core/route.html#stripRoute,string	route: stripRoute(route: string): string	
+initPath	src/prologue/core/route.html#initPath,string	route: initPath(route: string; httpMethod = HttpGet): Path	
+initRePath	src/prologue/core/route.html#initRePath,Regex	route: initRePath(route: Regex; httpMethod = HttpGet): RePath	
+pattern	src/prologue/core/route.html#pattern,string,HandlerAsync,string	route: pattern(route: string; handler: HandlerAsync; httpMethod = HttpGet; name = &quot;&quot;;\n        middlewares: sink seq[HandlerAsync] = @[]): UrlPattern	
+pattern	src/prologue/core/route.html#pattern,string,HandlerAsync,,string	route: pattern(route: string; handler: HandlerAsync; httpMethod: sink seq[HttpMethod];\n        name = &quot;&quot;; middlewares: sink seq[HandlerAsync] = @[]): UrlPattern	
+hash	src/prologue/core/route.html#hash,Path	route: hash(x: Path): Hash	
+newPathHandler	src/prologue/core/route.html#newPathHandler,HandlerAsync,Settings	route: newPathHandler(handler: HandlerAsync; middlewares: sink seq[HandlerAsync] = @[];\n               settings: Settings = nil): PathHandler	
+newRouter	src/prologue/core/route.html#newRouter	route: newRouter(): Router	
+newReRouter	src/prologue/core/route.html#newReRouter	route: newReRouter(): ReRouter	
+add	src/prologue/core/route.html#add,ReRouter,	route: add(reRouter: ReRouter; pairs: (RePath, PathHandler))	
+`[]`	src/prologue/core/route.html#[],Router,Path	route: `[]`(router: Router; path: Path): PathHandler	
+`[]=`	src/prologue/core/route.html#[]=,Router,Path,PathHandler	route: `[]=`(router: Router; path: Path; pathHandler: PathHandler)	
+hasKey	src/prologue/core/route.html#hasKey,Router,Path	route: hasKey(router: Router; path: Path): bool	
+pairs	src/prologue/core/route.html#pairs.i,Router	route: pairs(router: Router): (Path, PathHandler)	
+items	src/prologue/core/route.html#items.i,ReRouter	route: items(reRouter: ReRouter): (RePath, PathHandler)	
+findHandler	src/prologue/core/route.html#findHandler,Context	route: findHandler(ctx: Context): PathHandler	

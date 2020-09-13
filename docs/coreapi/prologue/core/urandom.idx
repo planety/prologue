@@ -1,0 +1,4 @@
+DefaultEntropy	prologue/core/urandom.html#DefaultEntropy	urandom: DefaultEntropy	
+randomBytesSeq	prologue/core/urandom.html#randomBytesSeq	urandom: randomBytesSeq(size = DefaultEntropy): seq[byte]	
+randomString	prologue/core/urandom.html#randomString	urandom: randomString(size = DefaultEntropy): string	
+randomSecretKey	prologue/core/urandom.html#randomSecretKey	urandom: randomSecretKey(size = DefaultEntropy): SecretKey	

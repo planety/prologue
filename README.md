@@ -214,7 +214,7 @@ Run **app.nim**. Now the server is running at localhost:8080.
 
 Thanks for supporting me!
 
-[by me a coffee](https://www.buymeacoffee.com/flywind)
+[buy me a coffee](https://www.buymeacoffee.com/flywind)
 
 [patreon](https://www.patreon.com/flywind)
 

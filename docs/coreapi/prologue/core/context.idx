@@ -1,0 +1,56 @@
+PathHandler	prologue/core/context.html#PathHandler	context: PathHandler	
+Path	prologue/core/context.html#Path	context: Path	
+Router	prologue/core/context.html#Router	context: Router	
+RePath	prologue/core/context.html#RePath	context: RePath	
+ReRouter	prologue/core/context.html#ReRouter	context: ReRouter	
+ReversedRouter	prologue/core/context.html#ReversedRouter	context: ReversedRouter	
+GlobalScope	prologue/core/context.html#GlobalScope	context: GlobalScope	
+Context	prologue/core/context.html#Context	context: Context	
+AsyncEvent	prologue/core/context.html#AsyncEvent	context: AsyncEvent	
+SyncEvent	prologue/core/context.html#SyncEvent	context: SyncEvent	
+Event	prologue/core/context.html#Event	context: Event	
+HandlerAsync	prologue/core/context.html#HandlerAsync	context: HandlerAsync	
+ErrorHandler	prologue/core/context.html#ErrorHandler	context: ErrorHandler	
+ErrorHandlerTable	prologue/core/context.html#ErrorHandlerTable	context: ErrorHandlerTable	
+UploadFile	prologue/core/context.html#UploadFile	context: UploadFile	
+gScope	prologue/core/context.html#gScope,Context	context: gScope(ctx: Context): lent GlobalScope	
+size	prologue/core/context.html#size,Context	context: size(ctx: Context): int	
+incSize	prologue/core/context.html#incSize,Context,int	context: incSize(ctx: Context; num = 1)	
+first	prologue/core/context.html#first,Context	context: first(ctx: Context): bool	
+first=	prologue/core/context.html#first=,Context,bool	context: first=(ctx: Context; first: bool)	
+initUploadFile	prologue/core/context.html#initUploadFile,string,string	context: initUploadFile(filename, body: string): UploadFile	
+getUploadFile	prologue/core/context.html#getUploadFile,Context,string	context: getUploadFile(ctx: Context; name: string): UploadFile	
+save	prologue/core/context.html#save,UploadFile,string,string	context: save(uploadFile: UploadFile; dir: string; filename = &quot;&quot;)	
+newErrorHandlerTable	prologue/core/context.html#newErrorHandlerTable	context: newErrorHandlerTable(initialSize = defaultInitialSize): ErrorHandlerTable	
+newErrorHandlerTable	prologue/core/context.html#newErrorHandlerTable,openArray[]	context: newErrorHandlerTable(pairs: openArray[(HttpCode, ErrorHandler)]): ErrorHandlerTable	
+newReversedRouter	prologue/core/context.html#newReversedRouter	context: newReversedRouter(): ReversedRouter	
+initEvent	prologue/core/context.html#initEvent,AsyncEvent	context: initEvent(handler: AsyncEvent): Event	
+initEvent	prologue/core/context.html#initEvent,SyncEvent	context: initEvent(handler: SyncEvent): Event	
+newContext	prologue/core/context.html#newContext,Request,Response,GlobalScope	context: newContext(request: Request; response: Response; gScope: GlobalScope): Context	
+getSettings	prologue/core/context.html#getSettings,Context,string	context: getSettings(ctx: Context; key: string): JsonNode	
+handle	prologue/core/context.html#handle,Context	context: handle(ctx: Context): Future[void]	
+send	prologue/core/context.html#send,Context,string	context: send(ctx: Context; content: string): Future[void]	
+respond	prologue/core/context.html#respond,Context,HttpCode,string,HttpHeaders	context: respond(ctx: Context; code: HttpCode; body: string;\n        headers: HttpHeaders = newHttpHeaders()): Future[void]	
+hasHeader	prologue/core/context.html#hasHeader,Request,string	context: hasHeader(request: var Request; key: string): bool	
+setHeader	prologue/core/context.html#setHeader,Request,string,string	context: setHeader(request: var Request; key, value: string)	
+setHeader	prologue/core/context.html#setHeader,Request,string,	context: setHeader(request: var Request; key: string; value: sink seq[string])	
+addHeader	prologue/core/context.html#addHeader,Request,string,string	context: addHeader(request: var Request; key, value: string)	
+getCookie	prologue/core/context.html#getCookie,Context,string,string	context: getCookie(ctx: Context; key: string; default: string = &quot;&quot;): string	
+setCookie	prologue/core/context.html#setCookie,Context,string,string,string,Option[int],string,string	context: setCookie(ctx: Context; key, value: string; expires = &quot;&quot;;\n          maxAge: Option[int] = none(int); domain = &quot;&quot;; path = &quot;&quot;; secure = false;\n          httpOnly = false; sameSite = Lax)	
+setCookie	prologue/core/context.html#setCookie,Context,string,string,,Option[int],string,string	context: setCookie(ctx: Context; key, value: string; expires: DateTime | Time;\n          maxAge: Option[int] = none(int); domain = &quot;&quot;; path = &quot;&quot;; secure = false;\n          httpOnly = false; sameSite = Lax)	
+deleteCookie	prologue/core/context.html#deleteCookie,Context,string,string,string	context: deleteCookie(ctx: Context; key: string; path = &quot;&quot;; domain = &quot;&quot;)	
+defaultHandler	prologue/core/context.html#defaultHandler,Context	context: defaultHandler(ctx: Context): owned(Future[void])	
+default404Handler	prologue/core/context.html#default404Handler,Context	context: default404Handler(ctx: Context): owned(Future[void])	
+default500Handler	prologue/core/context.html#default500Handler,Context	context: default500Handler(ctx: Context): owned(Future[void])	
+getPostParams	prologue/core/context.html#getPostParams,Context,string,string	context: getPostParams(ctx: Context; key: string; default = &quot;&quot;): string	
+getQueryParams	prologue/core/context.html#getQueryParams,Context,string,string	context: getQueryParams(ctx: Context; key: string; default = &quot;&quot;): string	
+getPathParams	prologue/core/context.html#getPathParams,Context,string	context: getPathParams(ctx: Context; key: string): string	
+getPathParams	prologue/core/context.html#getPathParams,Context,,T	context: getPathParams[T: BaseType](ctx: Context; key: sink string; default: T): T	
+setResponse	prologue/core/context.html#setResponse,Context,HttpCode,string	context: setResponse(ctx: Context; code: HttpCode; httpHeaders = [\n    (&quot;Content-Type&quot;, &quot;text/html; charset=UTF-8&quot;)].newHttpHeaders; body = &quot;&quot;;\n            version = HttpVer11)	
+setResponse	prologue/core/context.html#setResponse,Context,Response	context: setResponse(ctx: Context; response: Response)	
+multiMatch	prologue/core/context.html#multiMatch,string,StringTableRef	context: multiMatch(s: string; replacements: StringTableRef): string	
+multiMatch	prologue/core/context.html#multiMatch,string,varargs[]	context: multiMatch(s: string; replacements: varargs[(string, string)]): string	
+urlFor	prologue/core/context.html#urlFor,Context,string,openArray[],openArray[]	context: urlFor(ctx: Context; handler: string;\n       parameters: openArray[(string, string)] = @[];\n       queryParams: openArray[(string, string)] = @[]; usePlus = true; omitEq = true): string	
+abortExit	prologue/core/context.html#abortExit,Context,string	context: abortExit(ctx: Context; code = Http401; body = &quot;&quot;; headers = newHttpHeaders();\n          version = HttpVer11)	
+attachment	prologue/core/context.html#attachment,Context,string,string	context: attachment(ctx: Context; downloadName = &quot;&quot;; charset = &quot;utf-8&quot;)	
+staticFileResponse	prologue/core/context.html#staticFileResponse,Context,string,string,string,string,string	context: staticFileResponse(ctx: Context; filename, dir: string; mimetype = &quot;&quot;;\n                   downloadName = &quot;&quot;; charset = &quot;utf-8&quot;; headers = newHttpHeaders()): owned(\n    Future[void])	

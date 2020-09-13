@@ -63,7 +63,7 @@ function main() {
 <div class="document" id="documentId">
   <div class="container">
     <h1 class="title">Index</h1>
-    Modules: <a href="prologue/core/application.html">prologue/core/application</a>, <a href="prologue/core/beast/request.html">prologue/core/beast/request</a>, <a href="prologue/core/beast/server.html">prologue/core/beast/server</a>, <a href="prologue/core/configure.html">prologue/core/configure</a>, <a href="prologue/core/constants.html">prologue/core/constants</a>, <a href="prologue/core/context.html">prologue/core/context</a>, <a href="prologue/core/encode.html">prologue/core/encode</a>, <a href="prologue/core/form.html">prologue/core/form</a>, <a href="prologue/core/httpexception.html">prologue/core/httpexception</a>, <a href="prologue/core/middlewaresbase.html">prologue/core/middlewaresbase</a>, <a href="prologue/core/naive/request.html">prologue/core/naive/request</a>, <a href="prologue/core/naive/server.html">prologue/core/naive/server</a>, <a href="prologue/core/nativesettings.html">prologue/core/nativesettings</a>, <a href="prologue/core/pages.html">prologue/core/pages</a>, <a href="prologue/core/response.html">prologue/core/response</a>, <a href="prologue/core/route.html">prologue/core/route</a>, <a href="prologue/core/types.html">prologue/core/types</a>, <a href="prologue/core/urandom.html">prologue/core/urandom</a>, <a href="prologue/core/utils.html">prologue/core/utils</a>.<br/><p /><h2>API symbols</h2>
+    Modules: <a href="prologue/core/application.html">prologue/core/application</a>, <a href="prologue/core/beast/request.html">prologue/core/beast/request</a>, <a href="prologue/core/beast/server.html">prologue/core/beast/server</a>, <a href="prologue/core/configure.html">prologue/core/configure</a>, <a href="prologue/core/constants.html">prologue/core/constants</a>, <a href="prologue/core/context.html">prologue/core/context</a>, <a href="prologue/core/encode.html">prologue/core/encode</a>, <a href="prologue/core/form.html">prologue/core/form</a>, <a href="prologue/core/httpexception.html">prologue/core/httpexception</a>, <a href="prologue/core/middlewaresbase.html">prologue/core/middlewaresbase</a>, <a href="prologue/core/nativesettings.html">prologue/core/nativesettings</a>, <a href="prologue/core/pages.html">prologue/core/pages</a>, <a href="prologue/core/response.html">prologue/core/response</a>, <a href="prologue/core/route.html">prologue/core/route</a>, <a href="prologue/core/types.html">prologue/core/types</a>, <a href="prologue/core/urandom.html">prologue/core/urandom</a>, <a href="prologue/core/utils.html">prologue/core/utils</a>.<br/><p /><h2>API symbols</h2>
 <dl><dt><a name="%60%24%60" href="#%60%24%60"><span>`$`:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="configure: `$`(env: Env): string" href="prologue/core/configure.html#%24%2CEnv">configure: `$`(env: Env): string</a></li>
@@ -80,7 +80,7 @@ function main() {
           <li><a class="reference external"
           data-doc-search-tag="types: `[]=`(formPart: FormPart; key: string; body: string)" href="prologue/core/types.html#%5B%5D%3D%2CFormPart%2Cstring%2Cstring">types: `[]=`(formPart: FormPart; key: string; body: string)</a></li>
           <li><a class="reference external"
-          data-doc-search-tag="types: `[]=`(session: Session; key, value: string)" href="prologue/core/types.html#%5B%5D%3D%2CSession%2Cstring%2Cstring">types: `[]=`(session: Session; key, value: string)</a></li>
+          data-doc-search-tag="types: `[]=`(session: var Session; key, value: string)" href="prologue/core/types.html#%5B%5D%3D%2CSession%2Cstring%2Cstring">types: `[]=`(session: var Session; key, value: string)</a></li>
           </ul></dd>
 <dt><a name="%60%5B%5D%60" href="#%60%5B%5D%60"><span>`[]`:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -92,7 +92,7 @@ function main() {
           <li><a class="reference external"
           data-doc-search-tag="types: `[]`(formPart: FormPart; key: string): tuple[params: StringTableRef, body: string]" href="prologue/core/types.html#%5B%5D%2CFormPart%2Cstring">types: `[]`(formPart: FormPart; key: string): tuple[params: StringTableRef, body: string]</a></li>
           <li><a class="reference external"
-          data-doc-search-tag="types: `[]`(session: Session; key: string): string" href="prologue/core/types.html#%5B%5D%2CSession%2Cstring">types: `[]`(session: Session; key: string): string</a></li>
+          data-doc-search-tag="types: `[]`(session: var Session; key: string): string" href="prologue/core/types.html#%5B%5D%2CSession%2Cstring">types: `[]`(session: var Session; key: string): string</a></li>
           </ul></dd>
 <dt><a name="abort" href="#abort"><span>abort:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -116,7 +116,7 @@ function main() {
 <li><a class="reference external"
           data-doc-search-tag="context: addHeader(request: var Request; key, value: string)" href="prologue/core/context.html#addHeader%2CRequest%2Cstring%2Cstring">context: addHeader(request: var Request; key, value: string)</a></li>
           <li><a class="reference external"
-          data-doc-search-tag="response: addHeader(response: var Response; key, value: string)" href="prologue/core/response.html#addHeader%2CResponse%2Cstring%2Cstring">response: addHeader(response: var Response; key, value: string)</a></li>
+          data-doc-search-tag="response: addHeader(response: var Response; key, value: string)" href="prologue/core/response.html#addHeader.t%2CResponse%2Cstring%2Cstring">response: addHeader(response: var Response; key, value: string)</a></li>
           </ul></dd>
 <dt><a name="addRoute" href="#addRoute"><span>addRoute:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -199,24 +199,18 @@ function main() {
 <dt><a name="body" href="#body"><span>body:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="request: body(request: Request): string" href="prologue/core/beast/request.html#body%2CRequest">request: body(request: Request): string</a></li>
-          <li><a class="reference external"
-          data-doc-search-tag="request: body(request: Request): string" href="prologue/core/naive/request.html#body%2CRequest">request: body(request: Request): string</a></li>
           </ul></dd>
 <dt><a name="charset" href="#charset"><span>charset:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="request: charset(request: Request): string" href="prologue/core/beast/request.html#charset%2CRequest">request: charset(request: Request): string</a></li>
-          <li><a class="reference external"
-          data-doc-search-tag="request: charset(request: Request): string" href="prologue/core/naive/request.html#charset%2CRequest">request: charset(request: Request): string</a></li>
           </ul></dd>
 <dt><a name="clear" href="#clear"><span>clear:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="types: clear(session: Session)" href="prologue/core/types.html#clear%2CSession">types: clear(session: Session)</a></li>
+          data-doc-search-tag="types: clear(session: var Session)" href="prologue/core/types.html#clear%2CSession">types: clear(session: var Session)</a></li>
           </ul></dd>
 <dt><a name="close" href="#close"><span>close:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="request: close(request: Request)" href="prologue/core/beast/request.html#close%2CRequest">request: close(request: Request)</a></li>
-          <li><a class="reference external"
-          data-doc-search-tag="request: close(request: Request)" href="prologue/core/naive/request.html#close%2CRequest">request: close(request: Request)</a></li>
           </ul></dd>
 <dt><a name="connect" href="#connect"><span>connect:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -231,8 +225,6 @@ function main() {
 <dt><a name="contentType" href="#contentType"><span>contentType:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="request: contentType(request: Request): string" href="prologue/core/beast/request.html#contentType%2CRequest">request: contentType(request: Request): string</a></li>
-          <li><a class="reference external"
-          data-doc-search-tag="request: contentType(request: Request): string" href="prologue/core/naive/request.html#contentType%2CRequest">request: contentType(request: Request): string</a></li>
           </ul></dd>
 <dt><a name="Context" href="#Context"><span>Context:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -260,7 +252,7 @@ function main() {
           </ul></dd>
 <dt><a name="del" href="#del"><span>del:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="types: del(session: Session; key: string)" href="prologue/core/types.html#del%2CSession%2Cstring">types: del(session: Session; key: string)</a></li>
+          data-doc-search-tag="types: del(session: var Session; key: string)" href="prologue/core/types.html#del%2CSession%2Cstring">types: del(session: var Session; key: string)</a></li>
           </ul></dd>
 <dt><a name="delete" href="#delete"><span>delete:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -272,7 +264,7 @@ function main() {
 <li><a class="reference external"
           data-doc-search-tag="context: deleteCookie(ctx: Context; key: string; path = &quot;&quot;; domain = &quot;&quot;)" href="prologue/core/context.html#deleteCookie%2CContext%2Cstring%2Cstring%2Cstring">context: deleteCookie(ctx: Context; key: string; path = &quot;&quot;; domain = &quot;&quot;)</a></li>
           <li><a class="reference external"
-          data-doc-search-tag="response: deleteCookie(response: var Response; key: string; value = &quot;&quot;; path = &quot;&quot;; domain = &quot;&quot;)" href="prologue/core/response.html#deleteCookie%2CResponse%2Cstring%2Cstring%2Cstring%2Cstring">response: deleteCookie(response: var Response; key: string; value = &quot;&quot;; path = &quot;&quot;; domain = &quot;&quot;)</a></li>
+          data-doc-search-tag="response: deleteCookie(response: var Response; key: string; value = &quot;&quot;; path = &quot;&quot;; domain = &quot;&quot;)" href="prologue/core/response.html#deleteCookie.t%2CResponse%2Cstring%2Cstring%2Cstring%2Cstring">response: deleteCookie(response: var Response; key: string; value = &quot;&quot;; path = &quot;&quot;; domain = &quot;&quot;)</a></li>
           </ul></dd>
 <dt><a name="delPrologueEnv" href="#delPrologueEnv"><span>delPrologueEnv:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -369,8 +361,6 @@ function main() {
           data-doc-search-tag="request: getCookie(request: Request; key: string; default: string): string" href="prologue/core/beast/request.html#getCookie%2CRequest%2Cstring%2Cstring">request: getCookie(request: Request; key: string; default: string): string</a></li>
           <li><a class="reference external"
           data-doc-search-tag="context: getCookie(ctx: Context; key: string; default: string = &quot;&quot;): string" href="prologue/core/context.html#getCookie%2CContext%2Cstring%2Cstring">context: getCookie(ctx: Context; key: string; default: string = &quot;&quot;): string</a></li>
-          <li><a class="reference external"
-          data-doc-search-tag="request: getCookie(request: Request; key: string; default: string = &quot;&quot;): string" href="prologue/core/naive/request.html#getCookie%2CRequest%2Cstring%2Cstring">request: getCookie(request: Request; key: string; default: string = &quot;&quot;): string</a></li>
           </ul></dd>
 <dt><a name="getOrDefault" href="#getOrDefault"><span>getOrDefault:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -378,7 +368,7 @@ function main() {
           <li><a class="reference external"
           data-doc-search-tag="nativesettings: getOrDefault(settings: Settings; key: string): JsonNode" href="prologue/core/nativesettings.html#getOrDefault%2CSettings%2Cstring">nativesettings: getOrDefault(settings: Settings; key: string): JsonNode</a></li>
           <li><a class="reference external"
-          data-doc-search-tag="types: getOrDefault(session: Session; key: string; default = &quot;&quot;): string" href="prologue/core/types.html#getOrDefault%2CSession%2Cstring%2Cstring">types: getOrDefault(session: Session; key: string; default = &quot;&quot;): string</a></li>
+          data-doc-search-tag="types: getOrDefault(session: var Session; key: string; default = &quot;&quot;): string" href="prologue/core/types.html#getOrDefault%2CSession%2Cstring%2Cstring">types: getOrDefault(session: var Session; key: string; default = &quot;&quot;): string</a></li>
           </ul></dd>
 <dt><a name="getPathParams" href="#getPathParams"><span>getPathParams:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -430,7 +420,7 @@ function main() {
 <li><a class="reference external"
           data-doc-search-tag="context: hasHeader(request: var Request; key: string): bool" href="prologue/core/context.html#hasHeader%2CRequest%2Cstring">context: hasHeader(request: var Request; key: string): bool</a></li>
           <li><a class="reference external"
-          data-doc-search-tag="response: hasHeader(response: Response; key: string): bool" href="prologue/core/response.html#hasHeader%2CResponse%2Cstring">response: hasHeader(response: Response; key: string): bool</a></li>
+          data-doc-search-tag="response: hasHeader(response: Response; key: string): bool" href="prologue/core/response.html#hasHeader.t%2CResponse%2Cstring">response: hasHeader(response: Response; key: string): bool</a></li>
           </ul></dd>
 <dt><a name="hasKey" href="#hasKey"><span>hasKey:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -449,14 +439,10 @@ function main() {
 <dt><a name="headers" href="#headers"><span>headers:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="request: headers(request: Request): HttpHeaders" href="prologue/core/beast/request.html#headers%2CRequest">request: headers(request: Request): HttpHeaders</a></li>
-          <li><a class="reference external"
-          data-doc-search-tag="request: headers(request: Request): HttpHeaders" href="prologue/core/naive/request.html#headers%2CRequest">request: headers(request: Request): HttpHeaders</a></li>
           </ul></dd>
 <dt><a name="hostName" href="#hostName"><span>hostName:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="request: hostName(request: Request): string" href="prologue/core/beast/request.html#hostName%2CRequest">request: hostName(request: Request): string</a></li>
-          <li><a class="reference external"
-          data-doc-search-tag="request: hostName(request: Request): string" href="prologue/core/naive/request.html#hostName%2CRequest">request: hostName(request: Request): string</a></li>
           </ul></dd>
 <dt><a name="htmlResponse" href="#htmlResponse"><span>htmlResponse:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -500,14 +486,6 @@ function main() {
             pathParams = newStringTable(modeCaseSensitive);
             queryParams = newStringTable(modeCaseSensitive);
             postParams = newStringTable(modeCaseSensitive)): Request" href="prologue/core/beast/request.html#initRequest%2CRequest">request: initRequest(nativeRequest: NativeRequest; cookies = initCookieJar();
-            pathParams = newStringTable(modeCaseSensitive);
-            queryParams = newStringTable(modeCaseSensitive);
-            postParams = newStringTable(modeCaseSensitive)): Request</a></li>
-          <li><a class="reference external"
-          data-doc-search-tag="request: initRequest(nativeRequest: NativeRequest; cookies = initCookieJar();
-            pathParams = newStringTable(modeCaseSensitive);
-            queryParams = newStringTable(modeCaseSensitive);
-            postParams = newStringTable(modeCaseSensitive)): Request" href="prologue/core/naive/request.html#initRequest%2CRequest">request: initRequest(nativeRequest: NativeRequest; cookies = initCookieJar();
             pathParams = newStringTable(modeCaseSensitive);
             queryParams = newStringTable(modeCaseSensitive);
             postParams = newStringTable(modeCaseSensitive)): Request</a></li>
@@ -562,7 +540,7 @@ function main() {
           </ul></dd>
 <dt><a name="loads" href="#loads"><span>loads:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="types: loads(session: Session; s: string)" href="prologue/core/types.html#loads%2CSession%2Cstring">types: loads(session: Session; s: string)</a></li>
+          data-doc-search-tag="types: loads(session: var Session; s: string)" href="prologue/core/types.html#loads%2CSession%2Cstring">types: loads(session: var Session; s: string)</a></li>
           </ul></dd>
 <dt><a name="LocalSettings" href="#LocalSettings"><span>LocalSettings:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -585,8 +563,6 @@ function main() {
 <dt><a name="NativeRequest" href="#NativeRequest"><span>NativeRequest:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="request: NativeRequest" href="prologue/core/beast/request.html#NativeRequest">request: NativeRequest</a></li>
-          <li><a class="reference external"
-          data-doc-search-tag="request: NativeRequest" href="prologue/core/naive/request.html#NativeRequest">request: NativeRequest</a></li>
           </ul></dd>
 <dt><a name="newApp" href="#newApp"><span>newApp:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -635,20 +611,6 @@ function main() {
             middlewares: seq[HandlerAsync]; startup: seq[Event];
             shutdown: seq[Event]; errorHandlerTable: ErrorHandlerTable;
             appData: StringTableRef): Prologue</a></li>
-          <li><a class="reference external"
-          data-doc-search-tag="server: newPrologue(settings: Settings; ctxSettings: CtxSettings; router: Router;
-            reversedRouter: ReversedRouter; reRouter: ReRouter;
-            middlewares: seq[HandlerAsync]; startup: seq[Event];
-            shutdown: seq[Event]; errorHandlerTable: ErrorHandlerTable;
-            appData: StringTableRef): Prologue" href="prologue/core/naive/server.html#newPrologue%2CSettings%2CCtxSettings%2CRouter%2CReversedRouter%2CReRouter%2Cseq%5BHandlerAsync%5D%2Cseq%5BEvent%5D%2Cseq%5BEvent%5D%2CErrorHandlerTable%2CStringTableRef">server: newPrologue(settings: Settings; ctxSettings: CtxSettings; router: Router;
-            reversedRouter: ReversedRouter; reRouter: ReRouter;
-            middlewares: seq[HandlerAsync]; startup: seq[Event];
-            shutdown: seq[Event]; errorHandlerTable: ErrorHandlerTable;
-            appData: StringTableRef): Prologue</a></li>
-          </ul></dd>
-<dt><a name="newPrologueServer" href="#newPrologueServer"><span>newPrologueServer:</span></a></dt><dd><ul class="simple">
-<li><a class="reference external"
-          data-doc-search-tag="server: newPrologueServer(reuseAddr = true; reusePort = false; maxBody = 8388608): Server" href="prologue/core/naive/server.html#newPrologueServer%2Cint">server: newPrologueServer(reuseAddr = true; reusePort = false; maxBody = 8388608): Server</a></li>
           </ul></dd>
 <dt><a name="newReRouter" href="#newReRouter"><span>newReRouter:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -702,8 +664,6 @@ function main() {
           </ul></dd>
 <dt><a name="parseStringTable" href="#parseStringTable"><span>parseStringTable:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="types: parseStringTable(s: string): StringTableRef" href="prologue/core/types.html#parseStringTable%2Cstring">types: parseStringTable(s: string): StringTableRef</a></li>
-          <li><a class="reference external"
           data-doc-search-tag="types: parseStringTable(tabs: StringTableRef; s: string)" href="prologue/core/types.html#parseStringTable%2CStringTableRef%2Cstring">types: parseStringTable(tabs: StringTableRef; s: string)</a></li>
           </ul></dd>
 <dt><a name="parseValue" href="#parseValue"><span>parseValue:</span></a></dt><dd><ul class="simple">
@@ -723,10 +683,6 @@ function main() {
 <dt><a name="Path" href="#Path"><span>Path:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="context: Path" href="prologue/core/context.html#Path">context: Path</a></li>
-          </ul></dd>
-<dt><a name="path" href="#path"><span>path:</span></a></dt><dd><ul class="simple">
-<li><a class="reference external"
-          data-doc-search-tag="request: path(request: Request): string" href="prologue/core/naive/request.html#path%2CRequest">request: path(request: Request): string</a></li>
           </ul></dd>
 <dt><a name="PathHandler" href="#PathHandler"><span>PathHandler:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -751,8 +707,6 @@ function main() {
 <dt><a name="port" href="#port"><span>port:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="request: port(request: Request): string" href="prologue/core/beast/request.html#port%2CRequest">request: port(request: Request): string</a></li>
-          <li><a class="reference external"
-          data-doc-search-tag="request: port(request: Request): string" href="prologue/core/naive/request.html#port%2CRequest">request: port(request: Request): string</a></li>
           </ul></dd>
 <dt><a name="post" href="#post"><span>post:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -767,8 +721,6 @@ function main() {
 <dt><a name="Prologue" href="#Prologue"><span>Prologue:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="server: Prologue" href="prologue/core/beast/server.html#Prologue">server: Prologue</a></li>
-          <li><a class="reference external"
-          data-doc-search-tag="server: Prologue" href="prologue/core/naive/server.html#Prologue">server: Prologue</a></li>
           </ul></dd>
 <dt><a name="PrologueError" href="#PrologueError"><span>PrologueError:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -795,8 +747,6 @@ function main() {
 <dt><a name="query" href="#query"><span>query:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="request: query(request: Request): string" href="prologue/core/beast/request.html#query%2CRequest">request: query(request: Request): string</a></li>
-          <li><a class="reference external"
-          data-doc-search-tag="request: query(request: Request): string" href="prologue/core/naive/request.html#query%2CRequest">request: query(request: Request): string</a></li>
           </ul></dd>
 <dt><a name="randomBytesSeq" href="#randomBytesSeq"><span>randomBytesSeq:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -831,14 +781,10 @@ function main() {
 <dt><a name="reqMethod" href="#reqMethod"><span>reqMethod:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="request: reqMethod(request: Request): HttpMethod" href="prologue/core/beast/request.html#reqMethod%2CRequest">request: reqMethod(request: Request): HttpMethod</a></li>
-          <li><a class="reference external"
-          data-doc-search-tag="request: reqMethod(request: Request): HttpMethod" href="prologue/core/naive/request.html#reqMethod%2CRequest">request: reqMethod(request: Request): HttpMethod</a></li>
           </ul></dd>
 <dt><a name="Request" href="#Request"><span>Request:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="request: Request" href="prologue/core/beast/request.html#Request">request: Request</a></li>
-          <li><a class="reference external"
-          data-doc-search-tag="request: Request" href="prologue/core/naive/request.html#Request">request: Request</a></li>
           </ul></dd>
 <dt><a name="ReRouter" href="#ReRouter"><span>ReRouter:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -861,12 +807,6 @@ function main() {
           data-doc-search-tag="context: respond(ctx: Context; code: HttpCode; body: string;
         headers: HttpHeaders = newHttpHeaders()): Future[void]" href="prologue/core/context.html#respond%2CContext%2CHttpCode%2Cstring%2CHttpHeaders">context: respond(ctx: Context; code: HttpCode; body: string;
         headers: HttpHeaders = newHttpHeaders()): Future[void]</a></li>
-          <li><a class="reference external"
-          data-doc-search-tag="request: respond(request: Request; code: HttpCode; body: string;
-        headers: HttpHeaders = newHttpHeaders()): Future[void]" href="prologue/core/naive/request.html#respond%2CRequest%2CHttpCode%2Cstring%2CHttpHeaders">request: respond(request: Request; code: HttpCode; body: string;
-        headers: HttpHeaders = newHttpHeaders()): Future[void]</a></li>
-          <li><a class="reference external"
-          data-doc-search-tag="request: respond(request: Request; response: Response): Future[void]" href="prologue/core/naive/request.html#respond%2CRequest%2CResponse">request: respond(request: Request; response: Response): Future[void]</a></li>
           </ul></dd>
 <dt><a name="Response" href="#Response"><span>Response:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -899,8 +839,6 @@ function main() {
 <dt><a name="scheme" href="#scheme"><span>scheme:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="request: scheme(request: Request): string" href="prologue/core/beast/request.html#scheme%2CRequest">request: scheme(request: Request): string</a></li>
-          <li><a class="reference external"
-          data-doc-search-tag="request: scheme(request: Request): string" href="prologue/core/naive/request.html#scheme%2CRequest">request: scheme(request: Request): string</a></li>
           </ul></dd>
 <dt><a name="SecretKey" href="#SecretKey"><span>SecretKey:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -913,16 +851,12 @@ function main() {
 <dt><a name="secure" href="#secure"><span>secure:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="request: secure(request: Request): bool" href="prologue/core/beast/request.html#secure%2CRequest">request: secure(request: Request): bool</a></li>
-          <li><a class="reference external"
-          data-doc-search-tag="request: secure(request: Request): bool" href="prologue/core/naive/request.html#secure%2CRequest">request: secure(request: Request): bool</a></li>
           </ul></dd>
 <dt><a name="send" href="#send"><span>send:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="request: send(request: Request; content: string): Future[void]" href="prologue/core/beast/request.html#send%2CRequest%2Cstring">request: send(request: Request; content: string): Future[void]</a></li>
           <li><a class="reference external"
           data-doc-search-tag="context: send(ctx: Context; content: string): Future[void]" href="prologue/core/context.html#send%2CContext%2Cstring">context: send(ctx: Context; content: string): Future[void]</a></li>
-          <li><a class="reference external"
-          data-doc-search-tag="request: send(request: Request; content: string): Future[void]" href="prologue/core/naive/request.html#send%2CRequest%2Cstring">request: send(request: Request; content: string): Future[void]</a></li>
           </ul></dd>
 <dt><a name="serve" href="#serve"><span>serve:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -931,16 +865,6 @@ function main() {
       address = &quot;&quot;; numThreads = 0)" href="prologue/core/beast/server.html#serve%2CPrologue%2CPort%2Cproc%28Request%29%2Cstring%2Cint">server: serve(app: Prologue; port: Port;
       callback: proc (request: NativeRequest): Future[void] {.closure, gcsafe.};
       address = &quot;&quot;; numThreads = 0)</a></li>
-          <li><a class="reference external"
-          data-doc-search-tag="server: serve(app: Prologue; port: Port;
-      callback: proc (request: NativeRequest): Future[void] {.closure, gcsafe.};
-      address = &quot;&quot;)" href="prologue/core/naive/server.html#serve%2CPrologue%2CPort%2Cproc%28Request%29%2Cstring">server: serve(app: Prologue; port: Port;
-      callback: proc (request: NativeRequest): Future[void] {.closure, gcsafe.};
-      address = &quot;&quot;)</a></li>
-          </ul></dd>
-<dt><a name="Server" href="#Server"><span>Server:</span></a></dt><dd><ul class="simple">
-<li><a class="reference external"
-          data-doc-search-tag="server: Server" href="prologue/core/naive/server.html#Server">server: Server</a></li>
           </ul></dd>
 <dt><a name="Session" href="#Session"><span>Session:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -962,13 +886,13 @@ function main() {
           <li><a class="reference external"
           data-doc-search-tag="response: setCookie(response: var Response; key, value: string; expires: DateTime | Time;
           maxAge: Option[int] = none(int); domain = &quot;&quot;; path = &quot;&quot;; secure = false;
-          httpOnly = false; sameSite = Lax)" href="prologue/core/response.html#setCookie%2CResponse%2Cstring%2Cstring%2C%2COption%5Bint%5D%2Cstring%2Cstring">response: setCookie(response: var Response; key, value: string; expires: DateTime | Time;
+          httpOnly = false; sameSite = Lax)" href="prologue/core/response.html#setCookie.t%2CResponse%2Cstring%2Cstring%2C%2COption%5Bint%5D%2Cstring%2Cstring">response: setCookie(response: var Response; key, value: string; expires: DateTime | Time;
           maxAge: Option[int] = none(int); domain = &quot;&quot;; path = &quot;&quot;; secure = false;
           httpOnly = false; sameSite = Lax)</a></li>
           <li><a class="reference external"
           data-doc-search-tag="response: setCookie(response: var Response; key, value: string; expires = &quot;&quot;;
           maxAge: Option[int] = none(int); domain = &quot;&quot;; path = &quot;&quot;; secure = false;
-          httpOnly = false; sameSite = Lax)" href="prologue/core/response.html#setCookie%2CResponse%2Cstring%2Cstring%2Cstring%2COption%5Bint%5D%2Cstring%2Cstring">response: setCookie(response: var Response; key, value: string; expires = &quot;&quot;;
+          httpOnly = false; sameSite = Lax)" href="prologue/core/response.html#setCookie.t%2CResponse%2Cstring%2Cstring%2Cstring%2COption%5Bint%5D%2Cstring%2Cstring">response: setCookie(response: var Response; key, value: string; expires = &quot;&quot;;
           maxAge: Option[int] = none(int); domain = &quot;&quot;; path = &quot;&quot;; secure = false;
           httpOnly = false; sameSite = Lax)</a></li>
           </ul></dd>
@@ -978,9 +902,9 @@ function main() {
           <li><a class="reference external"
           data-doc-search-tag="context: setHeader(request: var Request; key, value: string)" href="prologue/core/context.html#setHeader%2CRequest%2Cstring%2Cstring">context: setHeader(request: var Request; key, value: string)</a></li>
           <li><a class="reference external"
-          data-doc-search-tag="response: setHeader(response: var Response; key: string; value: sink seq[string])" href="prologue/core/response.html#setHeader%2CResponse%2Cstring%2C">response: setHeader(response: var Response; key: string; value: sink seq[string])</a></li>
+          data-doc-search-tag="response: setHeader(response: var Response; key: string; value: seq[string])" href="prologue/core/response.html#setHeader.t%2CResponse%2Cstring%2Cseq%5Bstring%5D">response: setHeader(response: var Response; key: string; value: seq[string])</a></li>
           <li><a class="reference external"
-          data-doc-search-tag="response: setHeader(response: var Response; key, value: string)" href="prologue/core/response.html#setHeader%2CResponse%2Cstring%2Cstring">response: setHeader(response: var Response; key, value: string)</a></li>
+          data-doc-search-tag="response: setHeader(response: var Response; key, value: string)" href="prologue/core/response.html#setHeader.t%2CResponse%2Cstring%2Cstring">response: setHeader(response: var Response; key, value: string)</a></li>
           </ul></dd>
 <dt><a name="setPrologueEnv" href="#setPrologueEnv"><span>setPrologueEnv:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -999,8 +923,6 @@ function main() {
 <dt><a name="setScheme" href="#setScheme"><span>setScheme:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="request: setScheme(request: var Request; value: string)" href="prologue/core/beast/request.html#setScheme%2CRequest%2Cstring">request: setScheme(request: var Request; value: string)</a></li>
-          <li><a class="reference external"
-          data-doc-search-tag="request: setScheme(request: var Request; value: string)" href="prologue/core/naive/request.html#setScheme%2CRequest%2Cstring">request: setScheme(request: var Request; value: string)</a></li>
           </ul></dd>
 <dt><a name="Settings" href="#Settings"><span>Settings:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -1029,8 +951,6 @@ function main() {
 <dt><a name="stripPath" href="#stripPath"><span>stripPath:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="request: stripPath(request: var Request)" href="prologue/core/beast/request.html#stripPath%2CRequest">request: stripPath(request: var Request)</a></li>
-          <li><a class="reference external"
-          data-doc-search-tag="request: stripPath(request: var Request)" href="prologue/core/naive/request.html#stripPath%2CRequest">request: stripPath(request: var Request)</a></li>
           </ul></dd>
 <dt><a name="stripRoute" href="#stripRoute"><span>stripRoute:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -1052,7 +972,7 @@ function main() {
           </ul></dd>
 <dt><a name="update" href="#update"><span>update:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="types: update(session: Session)" href="prologue/core/types.html#update%2CSession">types: update(session: Session)</a></li>
+          data-doc-search-tag="types: update(session: var Session)" href="prologue/core/types.html#update%2CSession">types: update(session: var Session)</a></li>
           </ul></dd>
 <dt><a name="UploadFile" href="#UploadFile"><span>UploadFile:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -1061,8 +981,6 @@ function main() {
 <dt><a name="url" href="#url"><span>url:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="request: url(request: Request): Uri" href="prologue/core/beast/request.html#url%2CRequest">request: url(request: Request): Uri</a></li>
-          <li><a class="reference external"
-          data-doc-search-tag="request: url(request: Request): Uri" href="prologue/core/naive/request.html#url%2CRequest">request: url(request: Request): Uri</a></li>
           </ul></dd>
 <dt><a name="urlFor" href="#urlFor"><span>urlFor:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -1099,7 +1017,7 @@ function main() {
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-08-09 11:03:25 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-09-13 02:41:41 UTC</small>
       </div>
     </div>
   </div>

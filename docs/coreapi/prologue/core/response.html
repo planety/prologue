@@ -111,24 +111,6 @@ function main() {
   <li><a class="reference" href="#initResponse%2CHttpVersion%2CHttpCode%2Cstring"
     title="initResponse(httpVersion: HttpVersion; code: HttpCode; headers = [
     (&quot;Content-Type&quot;, &quot;text/html; charset=UTF-8&quot;)].newHttpHeaders; body = &quot;&quot;): Response"><wbr />init<wbr />Response<span class="attachedType">Response</span></a></li>
-  <li><a class="reference" href="#hasHeader%2CResponse%2Cstring"
-    title="hasHeader(response: Response; key: string): bool"><wbr />has<wbr />Header<span class="attachedType">Response</span></a></li>
-  <li><a class="reference" href="#setHeader%2CResponse%2Cstring%2Cstring"
-    title="setHeader(response: var Response; key, value: string)"><wbr />set<wbr />Header<span class="attachedType">Response</span></a></li>
-  <li><a class="reference" href="#setHeader%2CResponse%2Cstring%2C"
-    title="setHeader(response: var Response; key: string; value: sink seq[string])"><wbr />set<wbr />Header<span class="attachedType">Response</span></a></li>
-  <li><a class="reference" href="#addHeader%2CResponse%2Cstring%2Cstring"
-    title="addHeader(response: var Response; key, value: string)"><wbr />add<wbr />Header<span class="attachedType">Response</span></a></li>
-  <li><a class="reference" href="#setCookie%2CResponse%2Cstring%2Cstring%2Cstring%2COption%5Bint%5D%2Cstring%2Cstring"
-    title="setCookie(response: var Response; key, value: string; expires = &quot;&quot;;
-          maxAge: Option[int] = none(int); domain = &quot;&quot;; path = &quot;&quot;; secure = false;
-          httpOnly = false; sameSite = Lax)"><wbr />set<wbr />Cookie<span class="attachedType">Response</span></a></li>
-  <li><a class="reference" href="#setCookie%2CResponse%2Cstring%2Cstring%2C%2COption%5Bint%5D%2Cstring%2Cstring"
-    title="setCookie(response: var Response; key, value: string; expires: DateTime | Time;
-          maxAge: Option[int] = none(int); domain = &quot;&quot;; path = &quot;&quot;; secure = false;
-          httpOnly = false; sameSite = Lax)"><wbr />set<wbr />Cookie<span class="attachedType">Response</span></a></li>
-  <li><a class="reference" href="#deleteCookie%2CResponse%2Cstring%2Cstring%2Cstring%2Cstring"
-    title="deleteCookie(response: var Response; key: string; value = &quot;&quot;; path = &quot;&quot;; domain = &quot;&quot;)"><wbr />delete<wbr />Cookie<span class="attachedType">Response</span></a></li>
 
   </ul>
 </li>
@@ -162,6 +144,30 @@ function main() {
     title="resp(body: string; code = Http200)"><wbr />resp<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#resp.m%2CResponse"
     title="resp(response: Response)"><wbr />resp<span class="attachedType">Response</span></a></li>
+
+  </ul>
+</li>
+<li>
+  <a class="reference reference-toplevel" href="#18" id="68">Templates</a>
+  <ul class="simple simple-toc-section">
+      <li><a class="reference" href="#hasHeader.t%2CResponse%2Cstring"
+    title="hasHeader(response: Response; key: string): bool"><wbr />has<wbr />Header<span class="attachedType">Response</span></a></li>
+  <li><a class="reference" href="#setHeader.t%2CResponse%2Cstring%2Cstring"
+    title="setHeader(response: var Response; key, value: string)"><wbr />set<wbr />Header<span class="attachedType">Response</span></a></li>
+  <li><a class="reference" href="#setHeader.t%2CResponse%2Cstring%2Cseq%5Bstring%5D"
+    title="setHeader(response: var Response; key: string; value: seq[string])"><wbr />set<wbr />Header<span class="attachedType">Response</span></a></li>
+  <li><a class="reference" href="#addHeader.t%2CResponse%2Cstring%2Cstring"
+    title="addHeader(response: var Response; key, value: string)"><wbr />add<wbr />Header<span class="attachedType">Response</span></a></li>
+  <li><a class="reference" href="#setCookie.t%2CResponse%2Cstring%2Cstring%2Cstring%2COption%5Bint%5D%2Cstring%2Cstring"
+    title="setCookie(response: var Response; key, value: string; expires = &quot;&quot;;
+          maxAge: Option[int] = none(int); domain = &quot;&quot;; path = &quot;&quot;; secure = false;
+          httpOnly = false; sameSite = Lax)"><wbr />set<wbr />Cookie<span class="attachedType">Response</span></a></li>
+  <li><a class="reference" href="#setCookie.t%2CResponse%2Cstring%2Cstring%2C%2COption%5Bint%5D%2Cstring%2Cstring"
+    title="setCookie(response: var Response; key, value: string; expires: DateTime | Time;
+          maxAge: Option[int] = none(int); domain = &quot;&quot;; path = &quot;&quot;; secure = false;
+          httpOnly = false; sameSite = Lax)"><wbr />set<wbr />Cookie<span class="attachedType">Response</span></a></li>
+  <li><a class="reference" href="#deleteCookie.t%2CResponse%2Cstring%2Cstring%2Cstring%2Cstring"
+    title="deleteCookie(response: var Response; key: string; value = &quot;&quot;; path = &quot;&quot;; domain = &quot;&quot;)"><wbr />delete<wbr />Cookie<span class="attachedType">Response</span></a></li>
 
   </ul>
 </li>
@@ -211,7 +217,7 @@ class="link-seesrc" target="_blank">Source</a>
 <a id="initResponse,HttpVersion,HttpCode,string"></a>
 <dt><pre><span class="Keyword">proc</span> <a href="#initResponse%2CHttpVersion%2CHttpCode%2Cstring"><span class="Identifier">initResponse</span></a><span class="Other">(</span><span class="Identifier">httpVersion</span><span class="Other">:</span> <span class="Identifier">HttpVersion</span><span class="Other">;</span> <span class="Identifier">code</span><span class="Other">:</span> <span class="Identifier">HttpCode</span><span class="Other">;</span> <span class="Identifier">headers</span> <span class="Other">=</span> <span class="Other">[</span>
     <span class="Other">(</span><span class="StringLit">&quot;Content-Type&quot;</span><span class="Other">,</span> <span class="StringLit">&quot;text/html; charset=UTF-8&quot;</span><span class="Other">)</span><span class="Other">]</span><span class="Other">.</span><span class="Identifier">newHttpHeaders</span><span class="Other">;</span> <span class="Identifier">body</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">)</span><span class="Other">:</span> <a href="response.html#Response"><span class="Identifier">Response</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
-    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+    <span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 Initializes response.
@@ -219,90 +225,6 @@ Initializes response.
 href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L19"
 class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L19" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<a id="hasHeader,Response,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#hasHeader%2CResponse%2Cstring"><span class="Identifier">hasHeader</span></a><span class="Other">(</span><span class="Identifier">response</span><span class="Other">:</span> <a href="response.html#Response"><span class="Identifier">Response</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Returns true if key is in the <tt class="docutils literal"><span class="pre">response</span></tt>.
-&nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L25"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L25" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<a id="setHeader,Response,string,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#setHeader%2CResponse%2Cstring%2Cstring"><span class="Identifier">setHeader</span></a><span class="Other">(</span><span class="Identifier">response</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="response.html#Response"><span class="Identifier">Response</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">,</span> <span class="Identifier">value</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Sets the header values of the response.
-&nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L29"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L29" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<a id="setHeader,Response,string,"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#setHeader%2CResponse%2Cstring%2C"><span class="Identifier">setHeader</span></a><span class="Other">(</span><span class="Identifier">response</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="response.html#Response"><span class="Identifier">Response</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">value</span><span class="Other">:</span> <span class="Identifier">sink</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span>
-    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Sets the header values of the response.
-&nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L33"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L33" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<a id="addHeader,Response,string,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#addHeader%2CResponse%2Cstring%2Cstring"><span class="Identifier">addHeader</span></a><span class="Other">(</span><span class="Identifier">response</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="response.html#Response"><span class="Identifier">Response</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">,</span> <span class="Identifier">value</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Adds header values to the existing <tt class="docutils literal"><span class="pre">HttpHeaders</span></tt>.
-&nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L37"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L37" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<a id="setCookie,Response,string,string,string,Option[int],string,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#setCookie%2CResponse%2Cstring%2Cstring%2Cstring%2COption%5Bint%5D%2Cstring%2Cstring"><span class="Identifier">setCookie</span></a><span class="Other">(</span><span class="Identifier">response</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="response.html#Response"><span class="Identifier">Response</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">,</span> <span class="Identifier">value</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">expires</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">;</span>
-              <span class="Identifier">maxAge</span><span class="Other">:</span> <span class="Identifier">Option</span><span class="Other">[</span><span class="Identifier">int</span><span class="Other">]</span> <span class="Other">=</span> <span class="Identifier">none</span><span class="Other">(</span><span class="Identifier">int</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">domain</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">;</span> <span class="Identifier">path</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">;</span> <span class="Identifier">secure</span> <span class="Other">=</span> <span class="Identifier">false</span><span class="Other">;</span>
-              <span class="Identifier">httpOnly</span> <span class="Other">=</span> <span class="Identifier">false</span><span class="Other">;</span> <span class="Identifier">sameSite</span> <span class="Other">=</span> <span class="Identifier">Lax</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Sets the cookie of response.
-&nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L41"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L41" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<a id="setCookie,Response,string,string,,Option[int],string,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#setCookie%2CResponse%2Cstring%2Cstring%2C%2COption%5Bint%5D%2Cstring%2Cstring"><span class="Identifier">setCookie</span></a><span class="Other">(</span><span class="Identifier">response</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="response.html#Response"><span class="Identifier">Response</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">,</span> <span class="Identifier">value</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">expires</span><span class="Other">:</span> <span class="Identifier">DateTime</span> <span class="Operator">|</span> <span class="Identifier">Time</span><span class="Other">;</span>
-              <span class="Identifier">maxAge</span><span class="Other">:</span> <span class="Identifier">Option</span><span class="Other">[</span><span class="Identifier">int</span><span class="Other">]</span> <span class="Other">=</span> <span class="Identifier">none</span><span class="Other">(</span><span class="Identifier">int</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">domain</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">;</span> <span class="Identifier">path</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">;</span> <span class="Identifier">secure</span> <span class="Other">=</span> <span class="Identifier">false</span><span class="Other">;</span>
-              <span class="Identifier">httpOnly</span> <span class="Other">=</span> <span class="Identifier">false</span><span class="Other">;</span> <span class="Identifier">sameSite</span> <span class="Other">=</span> <span class="Identifier">Lax</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Sets the cookie of response.
-&nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L49"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L49" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<a id="deleteCookie,Response,string,string,string,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#deleteCookie%2CResponse%2Cstring%2Cstring%2Cstring%2Cstring"><span class="Identifier">deleteCookie</span></a><span class="Other">(</span><span class="Identifier">response</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="response.html#Response"><span class="Identifier">Response</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">value</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">;</span> <span class="Identifier">path</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">;</span> <span class="Identifier">domain</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
-    <span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">TimeEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L57"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L57" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -317,9 +239,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L62"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L66"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L62" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L66" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="redirect,string,string,int"></a>
@@ -330,9 +252,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 redirect to new url.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L67"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L71"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L67" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L71" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="error404,string"></a>
@@ -343,9 +265,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 404 HTML.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L77"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L84"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L77" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L84" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="htmlResponse,string"></a>
@@ -355,9 +277,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Content-Type: text/html; charset=UTF-8.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L83"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L90"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L83" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L90" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="plainTextResponse,string"></a>
@@ -367,9 +289,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Content-Type: text/plain.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L89"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L98"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L89" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L98" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="jsonResponse,JsonNode"></a>
@@ -379,9 +301,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Content-Type: application/json.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L95"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L106"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L95" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L106" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -395,9 +317,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Handy to make a response of ctx.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L101"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L114"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L101" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L114" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="resp.m,Response"></a>
@@ -406,9 +328,96 @@ class="link-seesrc" target="_blank">Source</a>
 
 Handy to make a response of ctx.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L111"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L124"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L111" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L124" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+
+</dl></div>
+<div class="section" id="18">
+<h1><a class="toc-backref" href="#18">Templates</a></h1>
+<dl class="item">
+<a id="hasHeader.t,Response,string"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#hasHeader.t%2CResponse%2Cstring"><span class="Identifier">hasHeader</span></a><span class="Other">(</span><span class="Identifier">response</span><span class="Other">:</span> <a href="response.html#Response"><span class="Identifier">Response</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span></pre></dt>
+<dd>
+
+Returns true if key is in the <tt class="docutils literal"><span class="pre">response</span></tt>.
+&nbsp;&nbsp;<a
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L25"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L25" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="setHeader.t,Response,string,string"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#setHeader.t%2CResponse%2Cstring%2Cstring"><span class="Identifier">setHeader</span></a><span class="Other">(</span><span class="Identifier">response</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="response.html#Response"><span class="Identifier">Response</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">,</span> <span class="Identifier">value</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span></pre></dt>
+<dd>
+
+Sets the header values of the response.
+&nbsp;&nbsp;<a
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L29"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L29" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="setHeader.t,Response,string,seq[string]"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#setHeader.t%2CResponse%2Cstring%2Cseq%5Bstring%5D"><span class="Identifier">setHeader</span></a><span class="Other">(</span><span class="Identifier">response</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="response.html#Response"><span class="Identifier">Response</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">value</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">)</span></pre></dt>
+<dd>
+
+Sets the header values of the response.
+&nbsp;&nbsp;<a
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L33"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L33" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="addHeader.t,Response,string,string"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#addHeader.t%2CResponse%2Cstring%2Cstring"><span class="Identifier">addHeader</span></a><span class="Other">(</span><span class="Identifier">response</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="response.html#Response"><span class="Identifier">Response</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">,</span> <span class="Identifier">value</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span></pre></dt>
+<dd>
+
+Adds header values to the existing <tt class="docutils literal"><span class="pre">HttpHeaders</span></tt>.
+&nbsp;&nbsp;<a
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L37"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L37" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="setCookie.t,Response,string,string,string,Option[int],string,string"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#setCookie.t%2CResponse%2Cstring%2Cstring%2Cstring%2COption%5Bint%5D%2Cstring%2Cstring"><span class="Identifier">setCookie</span></a><span class="Other">(</span><span class="Identifier">response</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="response.html#Response"><span class="Identifier">Response</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">,</span> <span class="Identifier">value</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">expires</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">;</span>
+                  <span class="Identifier">maxAge</span><span class="Other">:</span> <span class="Identifier">Option</span><span class="Other">[</span><span class="Identifier">int</span><span class="Other">]</span> <span class="Other">=</span> <span class="Identifier">none</span><span class="Other">(</span><span class="Identifier">int</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">domain</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">;</span> <span class="Identifier">path</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">;</span> <span class="Identifier">secure</span> <span class="Other">=</span> <span class="Identifier">false</span><span class="Other">;</span>
+                  <span class="Identifier">httpOnly</span> <span class="Other">=</span> <span class="Identifier">false</span><span class="Other">;</span> <span class="Identifier">sameSite</span> <span class="Other">=</span> <span class="Identifier">Lax</span><span class="Other">)</span></pre></dt>
+<dd>
+
+Sets the cookie of response.
+&nbsp;&nbsp;<a
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L41"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L41" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="setCookie.t,Response,string,string,,Option[int],string,string"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#setCookie.t%2CResponse%2Cstring%2Cstring%2C%2COption%5Bint%5D%2Cstring%2Cstring"><span class="Identifier">setCookie</span></a><span class="Other">(</span><span class="Identifier">response</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="response.html#Response"><span class="Identifier">Response</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">,</span> <span class="Identifier">value</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span>
+                  <span class="Identifier">expires</span><span class="Other">:</span> <span class="Identifier">DateTime</span> <span class="Operator">|</span> <span class="Identifier">Time</span><span class="Other">;</span> <span class="Identifier">maxAge</span><span class="Other">:</span> <span class="Identifier">Option</span><span class="Other">[</span><span class="Identifier">int</span><span class="Other">]</span> <span class="Other">=</span> <span class="Identifier">none</span><span class="Other">(</span><span class="Identifier">int</span><span class="Other">)</span><span class="Other">;</span>
+                  <span class="Identifier">domain</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">;</span> <span class="Identifier">path</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">;</span> <span class="Identifier">secure</span> <span class="Other">=</span> <span class="Identifier">false</span><span class="Other">;</span> <span class="Identifier">httpOnly</span> <span class="Other">=</span> <span class="Identifier">false</span><span class="Other">;</span> <span class="Identifier">sameSite</span> <span class="Other">=</span> <span class="Identifier">Lax</span><span class="Other">)</span></pre></dt>
+<dd>
+
+Sets the cookie of response.
+&nbsp;&nbsp;<a
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L51"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L51" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="deleteCookie.t,Response,string,string,string,string"></a>
+<dt><pre><span class="Keyword">template</span> <a href="#deleteCookie.t%2CResponse%2Cstring%2Cstring%2Cstring%2Cstring"><span class="Identifier">deleteCookie</span></a><span class="Other">(</span><span class="Identifier">response</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="response.html#Response"><span class="Identifier">Response</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">value</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">;</span> <span class="Identifier">path</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">;</span>
+                     <span class="Identifier">domain</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">)</span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/response.nim#L61"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/response.nim#L61" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -421,7 +430,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-08-09 11:03:14 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-09-13 02:41:27 UTC</small>
       </div>
     </div>
   </div>

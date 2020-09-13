@@ -1,0 +1,22 @@
+NativeRequest	prologue/core/beast/request.html#NativeRequest	request: NativeRequest	
+Request	prologue/core/beast/request.html#Request	request: Request	
+url	prologue/core/beast/request.html#url,Request	request: url(request: Request): Uri	
+port	prologue/core/beast/request.html#port,Request	request: port(request: Request): string	
+path	prologue/core/beast/request.html#path,Request	request: path(request: Request): string	
+stripPath	prologue/core/beast/request.html#stripPath,Request	request: stripPath(request: var Request)	
+query	prologue/core/beast/request.html#query,Request	request: query(request: Request): string	
+scheme	prologue/core/beast/request.html#scheme,Request	request: scheme(request: Request): string	
+setScheme	prologue/core/beast/request.html#setScheme,Request,string	request: setScheme(request: var Request; value: string)	
+body	prologue/core/beast/request.html#body,Request	request: body(request: Request): string	
+headers	prologue/core/beast/request.html#headers,Request	request: headers(request: Request): HttpHeaders	
+reqMethod	prologue/core/beast/request.html#reqMethod,Request	request: reqMethod(request: Request): HttpMethod	
+getCookie	prologue/core/beast/request.html#getCookie,Request,string,string	request: getCookie(request: Request; key: string; default: string): string	
+contentType	prologue/core/beast/request.html#contentType,Request	request: contentType(request: Request): string	
+charset	prologue/core/beast/request.html#charset,Request	request: charset(request: Request): string	
+secure	prologue/core/beast/request.html#secure,Request	request: secure(request: Request): bool	
+hostName	prologue/core/beast/request.html#hostName,Request	request: hostName(request: Request): string	
+send	prologue/core/beast/request.html#send,Request,string	request: send(request: Request; content: string): Future[void]	
+respond	prologue/core/beast/request.html#respond,Request,HttpCode,string,HttpHeaders	request: respond(request: Request; code: HttpCode; body: string;\n        headers: HttpHeaders = newHttpHeaders()): Future[void]	
+respond	prologue/core/beast/request.html#respond,Request,Response	request: respond(request: Request; response: Response): Future[void]	
+initRequest	prologue/core/beast/request.html#initRequest,Request	request: initRequest(nativeRequest: NativeRequest; cookies = initCookieJar();\n            pathParams = newStringTable(modeCaseSensitive);\n            queryParams = newStringTable(modeCaseSensitive);\n            postParams = newStringTable(modeCaseSensitive)): Request	
+close	prologue/core/beast/request.html#close,Request	request: close(request: Request)	
