@@ -1,0 +1,5 @@
+*.exe
+*.bat
+*.db
+*.sqlite
+/.vscode
