@@ -309,7 +309,7 @@ proc run*(app: Prologue) =
 
     # process cookie
     if request.hasHeader("cookie"):
-      request.cookies.parse(toString(request.headers.getOrDefault("cookie")))
+      request.cookies.parse(request.headers["cookie", 0])
 
 
     let contentType = if request.hasHeader("content-type"): 
@@ -337,7 +337,8 @@ proc run*(app: Prologue) =
     logging.debug(fmt"{ctx.request.reqMethod} {ctx.request.url.path}")
 
     # whether request.path in the static path of settings.
-    let staticFileFlag = if ctx.gScope.settings.staticDirs.len != 0:
+    let staticFileFlag = 
+      if ctx.gScope.settings.staticDirs.len != 0:
         isStaticFile(ctx.request.path, ctx.gScope.settings.staticDirs)
       else:
         (false, "", "")

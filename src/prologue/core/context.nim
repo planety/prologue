@@ -336,7 +336,6 @@ proc staticFileResponse*(ctx: Context, filename, dir: string, mimetype = "",
     filePath = dir / filename
 
   # exists -> have access -> can open
-
   var filePermission = getFilePermissions(filePath)
   if fpOthersRead notin filePermission:
     resp abort(code = Http403,
