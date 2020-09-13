@@ -340,7 +340,7 @@ proc run*(app: Prologue) =
     # whether request.path in the static path of settings.
     let staticFileFlag = 
       if ctx.gScope.settings.staticDirs.len != 0:
-        isStaticFile(ctx.request.path, ctx.gScope.settings.staticDirs)
+        isStaticFile(ctx.request.path.decodeUrl, ctx.gScope.settings.staticDirs)
       else:
         (false, "", "")
 

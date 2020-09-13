@@ -30,7 +30,7 @@ block:
   # "isStaticFile can work"
   block:
     let
-      s1 = isStaticFile("/tests///\\\\test_utils////static/////css////basic.css", @["/static", "tests"])
+      s1 = isStaticFile("/tests///test_utils////static/////css////basic.css", @["/static", "tests"])
       s2 = isStaticFile("///////////tests/test_utils/static/css/basic.css", @["tests"])
       s3 = isStaticFile("//tests/test_utils/templates///////basic.html", @["//templates", "tests"])
       s4 = isStaticFile("tests/test_utils/temp/basic.html", @["templates", "static"])
