@@ -312,7 +312,8 @@ proc run*(app: Prologue) =
       request.cookies.parse(request.headers["cookie", 0])
 
 
-    let contentType = if request.hasHeader("content-type"): 
+    let contentType = 
+      if request.hasHeader("content-type"):
         request.headers["content-type", 0]
       else:
         ""

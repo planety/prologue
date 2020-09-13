@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-import mimetypes, json, tables, strtabs
+import mimetypes, json, tables, strtabs, os, strutils
 from nativesockets import Port
 
 from ./types import SecretKey, EmptySecretKeyError, len
@@ -59,6 +59,12 @@ proc newLocalSettings*(configPath: string): LocalSettings {.inline.} =
   ## Creates a new localSettings.
   result = LocalSettings(data: parseFile(configPath))
 
+proc normalizedStaticDirs(dirs: openArray[string]): seq[string] =
+  result = newSeq[string](dirs.len)
+  for idx in 0 ..< result.len:
+    result[idx] = dirs[idx].strip(chars = {'/'}, trailing = false)
+    normalizePath(result[idx])
+
 proc newSettings*(address = "", port = Port(8080), debug = true, reusePort = true,
                   staticDirs: openArray[string] = ["static"], secretKey = randomString(8),
                   appName = ""): Settings {.inline.} =
@@ -67,7 +73,7 @@ proc newSettings*(address = "", port = Port(8080), debug = true, reusePort = tru
     raise newException(EmptySecretKeyError, "Secret key can't be empty!")
 
   result = Settings(address: address, port: port, debug: debug, reusePort: reusePort,
-                    staticDirs: @staticDirs, appName: appName,
+                    staticDirs: normalizedStaticDirs(staticDirs), appName: appName,
                     data: %* {"secretKey": secretKey})
 
 
@@ -76,7 +82,7 @@ proc newSettings*(data: JsonNode, address = "", port = Port(8080), debug = true,
                   appName = ""): Settings {.inline.} =
   ## Creates a new settings.
   result = Settings(address: address, port: port, debug: debug, reusePort: reusePort,
-                    staticDirs: @staticDirs, appName: appName,
+                    staticDirs: normalizedStaticDirs(staticDirs), appName: appName,
                     data: data)
 
 proc newSettings*(configPath: string, address = "", port = Port(8080), debug = true, reusePort = true,
@@ -85,5 +91,5 @@ proc newSettings*(configPath: string, address = "", port = Port(8080), debug = t
   ## Creates a new settings.
   # make sure reserved keys must appear in settings
   result = Settings(address: address, port: port, debug: debug, reusePort: reusePort,
-                    staticDirs: @staticDirs, appName: appName,
+                    staticDirs: normalizedStaticDirs(staticDirs), appName: appName,
                     data: parseFile(configPath))

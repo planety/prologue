@@ -38,6 +38,7 @@ proc isStaticFile*(path: string, dirs: openArray[string]): tuple[hasValue: bool,
     filename, dir: string] {.inline.} =
   result = (false, "", "")
   var path = path.strip(chars = {'/'}, trailing = false)
+  normalizePath(path)
   if not fileExists(path):
     return
   let file = splitFile(path)
@@ -45,6 +46,5 @@ proc isStaticFile*(path: string, dirs: openArray[string]): tuple[hasValue: bool,
   for dir in dirs:
     if dir.len == 0:
       continue
-    if file.dir.startsWith(dir.strip(chars = {'/'},
-        trailing = false)):
+    if file.dir.startsWith(dir):
       return (true, file.name & file.ext, file.dir)
