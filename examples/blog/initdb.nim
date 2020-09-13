@@ -9,7 +9,7 @@ proc initDb*() =
       db = open(consts.dbPath, "", "", "")
       schema = readFile(schemaPath)
     for line in schema.split(";"):
-      if line == "\c\n":
+      if line == "\c\n" or line == "\n":
         continue
       db.exec(sql(line.strip))
     db.close()
