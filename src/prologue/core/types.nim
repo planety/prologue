@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-import strutils, strtabs, parseutils, tables
+import strutils, strtabs, parseutils, tables, base64
 
 
 type
@@ -151,8 +151,8 @@ proc parseStringTable*(s: string): StringTableRef {.inline.} =
 
 proc loads*(session: Session, s: string) {.inline.} =
   ## Loads session from strings.
-  session.data.parseStringTable(s)
+  session.data.parseStringTable(decode(s))
 
 proc dumps*(session: Session): string {.inline.} =
   ## Dumps session to strings.
-  $session
+  encode($session)

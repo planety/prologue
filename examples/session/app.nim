@@ -13,6 +13,6 @@ let
     )
 
 
-var app = newApp(settings = settings, middlewares = @[sessionMiddleware(secretKey = secretKey.SecretKey)])
+var app = newApp(settings = settings, middlewares = @[debugRequestMiddleware(), sessionMiddleware(secretKey = secretKey.SecretKey)])
 app.addRoute(urls.urlPatterns, "")
 app.run()
