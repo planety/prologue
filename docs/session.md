@@ -3,7 +3,7 @@
 The session helps with storing users' state.
 
 ## Session based on signed cookie
-This session is based on signed cookie. **It is not safe**. You must not use it store sensitive or important information except for testing.
+This session is based on signed cookie. **It is not safe**. You must not use it to store sensitive or important infos except for testing.
 
 Prologue provides `sessionMiddleware` to you.
 
@@ -27,5 +27,5 @@ proc logout*(ctx: Context) {.async.} =
   resp $ctx.session
 ```
 
-More session examples in [Session](https://github.com/planety/prologue/tree/master/examples/session) and [Blog](https://github.com/planety/prologue/tree/master/examples/blog)
+More session examples are in [Session](https://github.com/planety/prologue/tree/master/examples/session) and [Blog](https://github.com/planety/prologue/tree/master/examples/blog)
 
