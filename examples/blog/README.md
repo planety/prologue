@@ -28,7 +28,7 @@ Every public assets stored in this folder.
 ### Templates folder
 This folder is for storing templates written with Karax DSL (domain specific language) which is kind of similar to the popular Pug template engine approach. 
 Each template file consist of two procs inside:
-- proc ended with `Page` name - it acts as a final template (e.g. `indexPage` or `loginPage` and etc). It's a common top level structure of our template (and generally it's the same across all pages.
+- proc ended with `Page` name - it acts as a final template (e.g. `indexPage` or `loginPage` and etc). It's a common top level structure of our template and generally it's the same across all pages.
 - proc ended with `Section` name - it is where our actual template layout and logic is written.
  
 There are also a commonly used blocks (or `chunks`/`partials` - whatever you call them) that are stored in `share` subfolder and we call them inside our templates to reduce duplication in our code.
