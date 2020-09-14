@@ -91,7 +91,6 @@ proc read*(ctx: Context) {.async.} =
   let db = open(consts.dbPath, "", "", "")
   var posts: seq[seq[string]] = @[]
   for x in db.fastRows(sql"SELECT * FROM posts"):
-    echo x
     posts.add(x)
 
   db.close()
