@@ -75,11 +75,11 @@ nimble install prologue
 
 ### Notes(important)
 
-1. If you use Linux or MacOS, you can use `--threads:on` to enable multi-threads HTTP server.
+1. If you use Linux or MacOS, you can use `--threads:on` to enable the multi-threads HTTP server.
 
 2. If you use windows and want to use multi-threads HTTP server, make sure use
-latest Nim devel version, and enable `--threads:on`. In this situation, you can
-use `usestd` to use `asynchttpserver`.
+latest Nim devel version and enable `--threads:on`. In this situation, you can
+use `-d:usestd` to use `asynchttpserver`.
 
 3. Notes that multi-threads may be slower than single-thread!
 
@@ -181,6 +181,8 @@ app.addRoute("/hello/{name}", helloName, HttpGet)
 app.run()
 ```
 
+Run **app.nim**. Now the server is running at localhost:8080.
+
 #### DSL for routes  
 
 You can read docs in https://nim-lang.github.io/Nim/with.html and construct your own DSL.
@@ -208,6 +210,7 @@ Run **app.nim**. Now the server is running at localhost:8080.
 ### More examples
 - [HelloWorld](https://github.com/planety/prologue/tree/master/examples/helloworld)
 - [ToDoList](https://github.com/planety/prologue/tree/master/examples/todolist)
+- [ToDoApp](https://github.com/planety/prologue/tree/master/examples/todoapp)
 - [Blog](https://github.com/planety/prologue/tree/master/examples/blog)
 
 ### Donate

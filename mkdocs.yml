@@ -1,5 +1,5 @@
 site_name: Prologue
-site_description:  Medium scale Web Framework.
+site_description:  Full stack Web Framework.
 
 theme:
     name: 'material'
@@ -20,6 +20,7 @@ nav:
     - Middleware: "middleware.md"
     - Static Files: "staticfiles.md"
     - Upload Files: "uploadfile.md"
+    - Session: "session.md"
 
 
 markdown_extensions:
