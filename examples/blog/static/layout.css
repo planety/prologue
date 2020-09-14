@@ -1,0 +1,133 @@
+body { max-width: 768px; margin: 0 auto;}
+
+header{
+    margin: 0;
+}
+
+.brand {
+    flex: auto;
+    font-weight: 700;
+    padding: 1rem 0;
+}
+.brand a {
+    color: #000;
+    text-decoration: none;
+    font-size: 1.5rem;
+    vertical-align: text-top;
+    font-weight: 500;
+    background-color: white;
+    filter: invert(1);
+    padding: 0.3rem 0.85rem 0.3rem 0.3rem;
+    border-radius: 0.35rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+.brand a:before {
+    content: "";
+    background: url(blob.svg) no-repeat;
+    height: 35px;
+    width: 35px;
+    display: inline-flex;
+}
+
+nav {display: flex; align-items: center;}
+nav ul  { 
+    display: flex; list-style: none; margin: 0; padding: 0; 
+}
+nav ul li a, 
+nav ul li span, 
+header .action { 
+    display: block; 
+    padding: 0.5rem; 
+    list-style: none;
+}
+
+main {
+    display: block;
+    margin: 0 auto;
+    max-width: 768px;
+    /* padding: 0 16px 16px; */
+    border: 1px solid #ccc;
+    border-radius: 0.35rem;
+    padding: 1rem 1rem 0 1rem;
+    margin-bottom: 2rem;
+}
+
+a.action:first-child:after {
+    content: "";
+    border-bottom: 1px solid #ccc;
+    display: block;
+    margin: 0 -1rem;
+    padding-bottom: 1rem;
+}
+a.action:first-child {
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.alert {
+    background-color: #000;
+    color: #fff;
+    margin: 1rem -1rem;
+    padding: 0.5rem 1rem;
+}
+.is-empty {
+    min-height: 10rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: #ccc;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.post {
+    /*margin-bottom: 3em;*/
+}
+.post:after {
+    content: "";
+    border-bottom: 1px solid #ccc;
+    display: block;
+    margin: 0 -1rem;
+    padding-top: 1rem;
+}
+.post:last-of-type {
+    margin-bottom: 0;
+}
+.post:last-of-type:after {
+    border: medium none;
+}
+.post h3 {
+    font-size: 1.4rem;
+}
+.post:first-of-type h3 {
+    margin-top: 0;
+}
+.post .about {     
+    color: #bfbfbf;
+    margin-bottom: 1rem; 
+}
+
+
+form,
+form input, 
+form textarea { 
+    margin-bottom: 1em; 
+}
+form textarea { 
+    min-height: 12em; 
+    resize: vertical; 
+}
+form input[type="submit"] {
+    margin-bottom: 0;
+    min-width: 10em; 
+}
+form a {
+    text-align: center;
+    font-weight: 400;
+    line-height: 1.5;
+    padding: 8px 16px;
+    vertical-align: middle;
+}
+
