@@ -1,6 +1,0 @@
-*.exe
-*.bat
-*.db
-*.sqlite
-**/.vscode/
-.gitignore
