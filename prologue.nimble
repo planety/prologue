@@ -14,6 +14,7 @@ requires "nimcrypto >= 0.5.3"
 requires "karax >= 1.1.2"
 requires "cookiejar >= 0.2.0"
 requires "httpx >= 0.1.0"
+requires "logue >= 0.1.8"
 
 
 # tests
@@ -52,7 +53,11 @@ task apis, "Only for api":
   exec "nim buildIndex -o:docs/plugin/theindex.html docs/plugin"
 
 task redis, "Install redis":
-  exec "nimble install redis@#c02d404"
+  exec "nimble install redis@#c02d404 -y"
+
+task karax, "Install karax":
+  exec """nimble install karax@">= 1.1.2" -y"""
 
 task extension, "Install all extensions":
   exec "nimble redis"
+  # exec "nimble karax"

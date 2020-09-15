@@ -23,5 +23,7 @@ jobs:
         nim-version: ${{ matrix.version }}
     - name: Install Packages
       run: nimble install -y
+    - name: Install extension
+      run: logue extension all
     - name: Test command
       run: nimble tests

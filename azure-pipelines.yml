@@ -164,5 +164,6 @@ steps:
   - bash: |
       echo "PATH=${PATH}"
       export ucpu=${UCPU}
+      logue extension all
       nimble tests
     displayName: 'Testing the package'
