@@ -14,7 +14,7 @@ requires "nimcrypto >= 0.5.3"
 requires "karax >= 1.1.2"
 requires "cookiejar >= 0.2.0"
 requires "httpx >= 0.1.0"
-requires "logue >= 0.1.8"
+requires "logue >= 0.2.0"
 
 
 # tests
