@@ -45,7 +45,7 @@ proc stripRoute*(route: string): string {.inline.} =
   # Don't strip single slash
   if result.len > 1:
     if result[^1] == '/':
-      result.setLen(result.len - 1)
+      result.setLen(result.high)
 
 proc initPath*(route: string, httpMethod = HttpGet): Path =
   Path(route: route, httpMethod: httpMethod)
