@@ -50,8 +50,7 @@ proc CorsMiddleware*(
   allowCredentials = false,
   maxAge = 7200,
   excludeEndPoint: seq[string] = @[]
-  ): HandlerAsync =
-
+): HandlerAsync =
   result = proc(ctx: Context) {.async.} =
     # just for example
     if ctx.request.path in excludeEndPoint:

@@ -29,7 +29,7 @@ proc sessionMiddleware*(
   domain = "",
   sameSite = Lax,
   httpOnly = false
-  ): HandlerAsync =
+): HandlerAsync =
 
   if secretKey.len == 0:
     raise newException(BadSecretKeyError, "The length of secret key can't be zero")

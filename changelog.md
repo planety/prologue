@@ -1,3 +1,8 @@
+## 0.3.8
+
+Move `basicAuthMiddleware` from `auth/auth.nim` to `middlewares/auth.nim`. Users need to change the import clause to `import prologue/middlewares/auth`.
+
+
 ## 0.3.6
 
 Fixes that sessionMiddleware doesn't work when user does not register session.
