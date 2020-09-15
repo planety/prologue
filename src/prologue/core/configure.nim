@@ -62,6 +62,7 @@ type
 
 
 proc initEnv*(): Env =
+  ## Initializes an `Env`.
   Env(data: newOrderedTable[string, string]())
 
 proc `$`*(env: Env): string =
@@ -104,12 +105,16 @@ iterator pairs*(env: Env): (string, string) =
 
 # please set env with prefix namely PROLOGUE
 proc putPrologueEnv*(key, val: string, prefix: string) {.inline.} =
+  ## Puts (``key``, ``val``) pairs with ``prefix`` to environment variables.
   putEnv(prefix & key, val)
 
 proc getPrologueEnv*(key: string, prefix: string, default = ""): string {.inline.} =
+  ## Gets (``key``, ``val``) pairs with ``prefix`` from environment variables. If
+  ## ``key`` can't be found, ``default`` will be returned.
   getEnv(prefix & key, default)
 
 proc getAllPrologueEnv*(prefix: string): OrderedTableRef[string, string] {.inline.} =
+  ## Gets all (``key``, ``val``) pairs with ``prefix`` from environment variables.
   result = newOrderedTable[string, string]()
   for k, v in envPairs():
     if k.startsWith(prefix):

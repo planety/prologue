@@ -1,5 +1,5 @@
 import ../../src/prologue
-import ../../src/prologue/middlewares
+import ../../src/prologue/middlewares/utils
 
 
 import urls

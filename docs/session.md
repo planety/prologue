@@ -12,7 +12,8 @@ Prologue provides `sessionMiddleware` to you.
 First you should register `sessionMiddleware` in global middlewares or hanler's middlewares.
 
 ```nim
-var app = newApp(settings = settings, middlewares = @[sessionMiddleware(secretKey = secretKey.SecretKey)])
+var app = newApp(settings = settings, 
+                 middlewares = @[sessionMiddleware(secretKey = secretKey.SecretKey)])
 ```
 
 Then you can use session in all handlers. You can set/get/clear session.

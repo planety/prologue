@@ -46,3 +46,13 @@ You can put your middleware plugin in [collections](https://github.com/planety/a
 ```nim
 import prologue/middlewares
 ```
+
+For better compilation time, you could import them directly.
+
+```nim
+import prologue/middlewares/signedcookiesession
+# or
+import prologue/middlewares/utils
+# or
+import prologue/middlewares/cors
+```

@@ -14,5 +14,5 @@ let
 
 
 var app = newApp(settings = settings)
-app.addRoute(urls.urlPatterns, "/")
+app.addRoute(urls.urlPatterns, "")
 app.run()

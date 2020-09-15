@@ -1,8 +1,8 @@
 import ../../src/prologue
-import ../../src/prologue/middlewares
+import ../../src/prologue/middlewares/utils
 from ../../src/prologue/openapi import serveDocs
 
-import logging
+# import logging
 
 import views, urls
 

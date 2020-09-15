@@ -1,5 +1,5 @@
 import utils, cors, clickjacking, csrf
 
-import sessions/signedcookiesession
+import signedcookiesession
 
 export utils, cors, signedcookiesession, clickjacking, csrf

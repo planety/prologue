@@ -1,5 +1,5 @@
 import ../src/prologue except loginPage
-import ../src/prologue/middlewares
+import ../src/prologue/middlewares/utils as ut
 import ../src/prologue/i18n
 import logging, os, strformat, strutils
 
