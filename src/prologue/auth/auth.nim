@@ -1,11 +1,9 @@
-import httpcore, strutils, strformat, strtabs
+import httpcore, strutils, strformat
 
 
-import asyncdispatch
 from ../core/context import Context, HandlerAsync, setHeader, hasHeader
 from ../core/response import setHeader, hasHeader
 from ../core/encode import base64Decode
-from ../core/middlewaresbase import switch
 import ../core/request
 
 
@@ -58,14 +56,3 @@ proc basicAuth*(ctx: Context, realm: string, verify: VerifyHandler,
     unauthenticate(ctx, Basic, realm, charset)
     ctx.response.body = "Forbidden"
     return
-
-proc basicAuthMiddleware*(realm: string, verifyHandler: VerifyHandler,
-    charset = "UTF-8"): HandlerAsync =
-  result = proc(ctx: Context) {.async.} =
-    let (hasValue, username, password) = basicAuth(ctx, realm,
-        verifyHandler, charset)
-    if not hasValue:
-      return
-    ctx.ctxData["basic_username"] = username
-    ctx.ctxData["basic_password"] = password
-    await switch(ctx)
