@@ -125,16 +125,16 @@ function main() {
     title="initPath(route: string; httpMethod = HttpGet): Path"><wbr />init<wbr />Path<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#initRePath%2CRegex"
     title="initRePath(route: Regex; httpMethod = HttpGet): RePath"><wbr />init<wbr />Re<wbr />Path<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#pattern%2Cstring%2CHandlerAsync%2Cstring"
+  <li><a class="reference" href="#pattern%2Cstring%2CHandlerAsync%2Cstring%2Cseq%5BHandlerAsync%5D"
     title="pattern(route: string; handler: HandlerAsync; httpMethod = HttpGet; name = &quot;&quot;;
-        middlewares: sink seq[HandlerAsync] = @[]): UrlPattern"><wbr />pattern<span class="attachedType">UrlPattern</span></a></li>
-  <li><a class="reference" href="#pattern%2Cstring%2CHandlerAsync%2C%2Cstring"
-    title="pattern(route: string; handler: HandlerAsync; httpMethod: sink seq[HttpMethod];
-        name = &quot;&quot;; middlewares: sink seq[HandlerAsync] = @[]): UrlPattern"><wbr />pattern<span class="attachedType">UrlPattern</span></a></li>
+        middlewares: seq[HandlerAsync] = @[]): UrlPattern"><wbr />pattern<span class="attachedType">UrlPattern</span></a></li>
+  <li><a class="reference" href="#pattern%2Cstring%2CHandlerAsync%2Cseq%5BHttpMethod%5D%2Cstring%2Cseq%5BHandlerAsync%5D"
+    title="pattern(route: string; handler: HandlerAsync; httpMethod: seq[HttpMethod]; name = &quot;&quot;;
+        middlewares: seq[HandlerAsync] = @[]): UrlPattern"><wbr />pattern<span class="attachedType">UrlPattern</span></a></li>
   <li><a class="reference" href="#hash%2CPath"
     title="hash(x: Path): Hash"><wbr />hash<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#newPathHandler%2CHandlerAsync%2CSettings"
-    title="newPathHandler(handler: HandlerAsync; middlewares: sink seq[HandlerAsync] = @[];
+  <li><a class="reference" href="#newPathHandler%2CHandlerAsync%2Cseq%5BHandlerAsync%5D%2CSettings"
+    title="newPathHandler(handler: HandlerAsync; middlewares: seq[HandlerAsync] = @[];
                settings: Settings = nil): PathHandler"><wbr />new<wbr />Path<wbr />Handler<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#newRouter"
     title="newRouter(): Router"><wbr />new<wbr />Router<span class="attachedType"></span></a></li>
@@ -284,10 +284,9 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/route.nim#L53" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="pattern,string,HandlerAsync,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#pattern%2Cstring%2CHandlerAsync%2Cstring"><span class="Identifier">pattern</span></a><span class="Other">(</span><span class="Identifier">route</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">handler</span><span class="Other">:</span> <a href="context.html#HandlerAsync"><span class="Identifier">HandlerAsync</span></a><span class="Other">;</span> <span class="Identifier">httpMethod</span> <span class="Other">=</span> <span class="Identifier">HttpGet</span><span class="Other">;</span> <span class="Identifier">name</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">;</span>
-            <span class="Identifier">middlewares</span><span class="Other">:</span> <span class="Identifier">sink</span> <span class="Identifier">seq</span><span class="Other">[</span><a href="context.html#HandlerAsync"><span class="Identifier">HandlerAsync</span></a><span class="Other">]</span> <span class="Other">=</span> <span class="Operator">@</span><span class="Other">[</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="route.html#UrlPattern"><span class="Identifier">UrlPattern</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<a id="pattern,string,HandlerAsync,string,seq[HandlerAsync]"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#pattern%2Cstring%2CHandlerAsync%2Cstring%2Cseq%5BHandlerAsync%5D"><span class="Identifier">pattern</span></a><span class="Other">(</span><span class="Identifier">route</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">handler</span><span class="Other">:</span> <a href="context.html#HandlerAsync"><span class="Identifier">HandlerAsync</span></a><span class="Other">;</span> <span class="Identifier">httpMethod</span> <span class="Other">=</span> <span class="Identifier">HttpGet</span><span class="Other">;</span> <span class="Identifier">name</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">;</span>
+            <span class="Identifier">middlewares</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><a href="context.html#HandlerAsync"><span class="Identifier">HandlerAsync</span></a><span class="Other">]</span> <span class="Other">=</span> <span class="Operator">@</span><span class="Other">[</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="route.html#UrlPattern"><span class="Identifier">UrlPattern</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 
@@ -297,10 +296,10 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/route.nim#L56" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="pattern,string,HandlerAsync,,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#pattern%2Cstring%2CHandlerAsync%2C%2Cstring"><span class="Identifier">pattern</span></a><span class="Other">(</span><span class="Identifier">route</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">handler</span><span class="Other">:</span> <a href="context.html#HandlerAsync"><span class="Identifier">HandlerAsync</span></a><span class="Other">;</span> <span class="Identifier">httpMethod</span><span class="Other">:</span> <span class="Identifier">sink</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">HttpMethod</span><span class="Other">]</span><span class="Other">;</span>
-            <span class="Identifier">name</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">;</span> <span class="Identifier">middlewares</span><span class="Other">:</span> <span class="Identifier">sink</span> <span class="Identifier">seq</span><span class="Other">[</span><a href="context.html#HandlerAsync"><span class="Identifier">HandlerAsync</span></a><span class="Other">]</span> <span class="Other">=</span> <span class="Operator">@</span><span class="Other">[</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="route.html#UrlPattern"><span class="Identifier">UrlPattern</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
-    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<a id="pattern,string,HandlerAsync,seq[HttpMethod],string,seq[HandlerAsync]"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#pattern%2Cstring%2CHandlerAsync%2Cseq%5BHttpMethod%5D%2Cstring%2Cseq%5BHandlerAsync%5D"><span class="Identifier">pattern</span></a><span class="Other">(</span><span class="Identifier">route</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">handler</span><span class="Other">:</span> <a href="context.html#HandlerAsync"><span class="Identifier">HandlerAsync</span></a><span class="Other">;</span> <span class="Identifier">httpMethod</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">HttpMethod</span><span class="Other">]</span><span class="Other">;</span>
+            <span class="Identifier">name</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">;</span> <span class="Identifier">middlewares</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><a href="context.html#HandlerAsync"><span class="Identifier">HandlerAsync</span></a><span class="Other">]</span> <span class="Other">=</span> <span class="Operator">@</span><span class="Other">[</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <a href="route.html#UrlPattern"><span class="Identifier">UrlPattern</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 
@@ -321,9 +320,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/route.nim#L65" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="newPathHandler,HandlerAsync,Settings"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#newPathHandler%2CHandlerAsync%2CSettings"><span class="Identifier">newPathHandler</span></a><span class="Other">(</span><span class="Identifier">handler</span><span class="Other">:</span> <a href="context.html#HandlerAsync"><span class="Identifier">HandlerAsync</span></a><span class="Other">;</span>
-                   <span class="Identifier">middlewares</span><span class="Other">:</span> <span class="Identifier">sink</span> <span class="Identifier">seq</span><span class="Other">[</span><a href="context.html#HandlerAsync"><span class="Identifier">HandlerAsync</span></a><span class="Other">]</span> <span class="Other">=</span> <span class="Operator">@</span><span class="Other">[</span><span class="Other">]</span><span class="Other">;</span>
+<a id="newPathHandler,HandlerAsync,seq[HandlerAsync],Settings"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#newPathHandler%2CHandlerAsync%2Cseq%5BHandlerAsync%5D%2CSettings"><span class="Identifier">newPathHandler</span></a><span class="Other">(</span><span class="Identifier">handler</span><span class="Other">:</span> <a href="context.html#HandlerAsync"><span class="Identifier">HandlerAsync</span></a><span class="Other">;</span> <span class="Identifier">middlewares</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><a href="context.html#HandlerAsync"><span class="Identifier">HandlerAsync</span></a><span class="Other">]</span> <span class="Other">=</span> <span class="Operator">@</span><span class="Other">[</span><span class="Other">]</span><span class="Other">;</span>
                    <span class="Identifier">settings</span><span class="Other">:</span> <a href="nativesettings.html#Settings"><span class="Identifier">Settings</span></a> <span class="Other">=</span> <span class="Keyword">nil</span><span class="Other">)</span><span class="Other">:</span> <a href="context.html#PathHandler"><span class="Identifier">PathHandler</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
@@ -450,7 +448,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-09-13 02:42:01 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-09-16 12:26:46 UTC</small>
       </div>
     </div>
   </div>

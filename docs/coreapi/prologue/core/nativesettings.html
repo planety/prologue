@@ -102,12 +102,12 @@ function main() {
   <ul class="simple simple-toc-section">
       <li><a class="reference" href="#Settings"
     title="Settings = ref object
-  address*: string
-  port*: Port
-  debug*: bool
-  reusePort*: bool
-  staticDirs*: seq[string]
-  appName*: string
+  address*: string             ## The address of socket.
+  port*: Port                  ## The port of socket.
+  debug*: bool                 ## Debug mode(true is yes).
+  reusePort*: bool             ## Use socket port in multiple times.
+  staticDirs*: seq[string]     ## The path of static directories.
+  appName*: string             ## The name of your application.
   data: JsonNode"><wbr />Settings<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#CtxSettings"
     title="CtxSettings = ref object
@@ -136,14 +136,14 @@ function main() {
     title="newLocalSettings(configPath: string): LocalSettings"><wbr />new<wbr />Local<wbr />Settings<span class="attachedType">LocalSettings</span></a></li>
   <li><a class="reference" href="#newSettings%2Cstring%2CopenArray%5Bstring%5D%2Cstring"
     title="newSettings(address = &quot;&quot;; port = Port(8080); debug = true; reusePort = true;
-            staticDirs: openArray[string] = [&quot;static&quot;]; secretKey = randomString(8);
+            staticDirs: openArray[string] = []; secretKey = randomString(8);
             appName = &quot;&quot;): Settings"><wbr />new<wbr />Settings<span class="attachedType">Settings</span></a></li>
   <li><a class="reference" href="#newSettings%2CJsonNode%2Cstring%2CopenArray%5Bstring%5D%2Cstring"
     title="newSettings(data: JsonNode; address = &quot;&quot;; port = Port(8080); debug = true;
-            reusePort = true; staticDirs: openArray[string] = [&quot;static&quot;]; appName = &quot;&quot;): Settings"><wbr />new<wbr />Settings<span class="attachedType">Settings</span></a></li>
+            reusePort = true; staticDirs: openArray[string] = []; appName = &quot;&quot;): Settings"><wbr />new<wbr />Settings<span class="attachedType">Settings</span></a></li>
   <li><a class="reference" href="#newSettings%2Cstring%2Cstring%2CopenArray%5Bstring%5D%2Cstring"
     title="newSettings(configPath: string; address = &quot;&quot;; port = Port(8080); debug = true;
-            reusePort = true; staticDirs: openArray[string] = [&quot;static&quot;]; appName = &quot;&quot;): Settings"><wbr />new<wbr />Settings<span class="attachedType">Settings</span></a></li>
+            reusePort = true; staticDirs: openArray[string] = []; appName = &quot;&quot;): Settings"><wbr />new<wbr />Settings<span class="attachedType">Settings</span></a></li>
 
   </ul>
 </li>
@@ -165,12 +165,12 @@ function main() {
 <dl class="item">
 <a id="Settings"></a>
 <dt><pre><a href="nativesettings.html#Settings"><span class="Identifier">Settings</span></a> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span>
-  <span class="Identifier">address</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">string</span>
-  <span class="Identifier">port</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">Port</span>
-  <span class="Identifier">debug</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">bool</span>
-  <span class="Identifier">reusePort</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">bool</span>
-  <span class="Identifier">staticDirs</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span>
-  <span class="Identifier">appName</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">string</span>
+  <span class="Identifier">address</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">string</span>             <span class="Comment">## The address of socket.</span>
+  <span class="Identifier">port</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">Port</span>                  <span class="Comment">## The port of socket.</span>
+  <span class="Identifier">debug</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">bool</span>                 <span class="Comment">## Debug mode(true is yes).</span>
+  <span class="Identifier">reusePort</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">bool</span>             <span class="Comment">## Use socket port in multiple times.</span>
+  <span class="Identifier">staticDirs</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span>     <span class="Comment">## The path of static directories.</span>
+  <span class="Identifier">appName</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">string</span>             <span class="Comment">## The name of your application.</span>
   <span class="Identifier">data</span><span class="Other">:</span> <span class="Identifier">JsonNode</span>
 </pre></dt>
 <dd>
@@ -286,36 +286,22 @@ class="link-seesrc" target="_blank">Source</a>
 </dd>
 <a id="newSettings,string,openArray[string],string"></a>
 <dt><pre><span class="Keyword">proc</span> <a href="#newSettings%2Cstring%2CopenArray%5Bstring%5D%2Cstring"><span class="Identifier">newSettings</span></a><span class="Other">(</span><span class="Identifier">address</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">;</span> <span class="Identifier">port</span> <span class="Other">=</span> <span class="Identifier">Port</span><span class="Other">(</span><span class="DecNumber">8080</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">debug</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">;</span> <span class="Identifier">reusePort</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">;</span>
-                <span class="Identifier">staticDirs</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span> <span class="Other">=</span> <span class="Other">[</span><span class="StringLit">&quot;static&quot;</span><span class="Other">]</span><span class="Other">;</span>
-                <span class="Identifier">secretKey</span> <span class="Other">=</span> <span class="Identifier">randomString</span><span class="Other">(</span><span class="DecNumber">8</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">appName</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">)</span><span class="Other">:</span> <a href="nativesettings.html#Settings"><span class="Identifier">Settings</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span>
-    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">EmptySecretKeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+                <span class="Identifier">staticDirs</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span> <span class="Other">=</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">secretKey</span> <span class="Other">=</span> <span class="Identifier">randomString</span><span class="Other">(</span><span class="DecNumber">8</span><span class="Other">)</span><span class="Other">;</span>
+                <span class="Identifier">appName</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">)</span><span class="Other">:</span> <a href="nativesettings.html#Settings"><span class="Identifier">Settings</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">EmptySecretKeyError</span><span class="Other">]</span><span class="Other">,</span>
+                                      <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 Creates a new settings.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/nativesettings.nim#L62"
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/nativesettings.nim#L71"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/nativesettings.nim#L62" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/nativesettings.nim#L71" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="newSettings,JsonNode,string,openArray[string],string"></a>
 <dt><pre><span class="Keyword">proc</span> <a href="#newSettings%2CJsonNode%2Cstring%2CopenArray%5Bstring%5D%2Cstring"><span class="Identifier">newSettings</span></a><span class="Other">(</span><span class="Identifier">data</span><span class="Other">:</span> <span class="Identifier">JsonNode</span><span class="Other">;</span> <span class="Identifier">address</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">;</span> <span class="Identifier">port</span> <span class="Other">=</span> <span class="Identifier">Port</span><span class="Other">(</span><span class="DecNumber">8080</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">debug</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">;</span>
-                <span class="Identifier">reusePort</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">;</span> <span class="Identifier">staticDirs</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span> <span class="Other">=</span> <span class="Other">[</span><span class="StringLit">&quot;static&quot;</span><span class="Other">]</span><span class="Other">;</span>
-                <span class="Identifier">appName</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">)</span><span class="Other">:</span> <a href="nativesettings.html#Settings"><span class="Identifier">Settings</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Creates a new settings.
-&nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/nativesettings.nim#L74"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/nativesettings.nim#L74" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<a id="newSettings,string,string,openArray[string],string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#newSettings%2Cstring%2Cstring%2CopenArray%5Bstring%5D%2Cstring"><span class="Identifier">newSettings</span></a><span class="Other">(</span><span class="Identifier">configPath</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">address</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">;</span> <span class="Identifier">port</span> <span class="Other">=</span> <span class="Identifier">Port</span><span class="Other">(</span><span class="DecNumber">8080</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">debug</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">;</span>
-                <span class="Identifier">reusePort</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">;</span> <span class="Identifier">staticDirs</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span> <span class="Other">=</span> <span class="Other">[</span><span class="StringLit">&quot;static&quot;</span><span class="Other">]</span><span class="Other">;</span>
-                <span class="Identifier">appName</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">)</span><span class="Other">:</span> <a href="nativesettings.html#Settings"><span class="Identifier">Settings</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">IOError</span><span class="Other">,</span> <span class="Identifier">OSError</span><span class="Other">,</span> <span class="Identifier">ValueError</span><span class="Other">,</span>
-    <span class="Identifier">JsonParsingError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ReadIOEffect</span><span class="Other">,</span> <span class="Identifier">WriteIOEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+                <span class="Identifier">reusePort</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">;</span> <span class="Identifier">staticDirs</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span> <span class="Other">=</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">appName</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">)</span><span class="Other">:</span> <a href="nativesettings.html#Settings"><span class="Identifier">Settings</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
+    <span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 Creates a new settings.
@@ -323,6 +309,20 @@ Creates a new settings.
 href="https://github.com/planety/prologue/tree/master/src/prologue/core/nativesettings.nim#L82"
 class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/nativesettings.nim#L82" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="newSettings,string,string,openArray[string],string"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#newSettings%2Cstring%2Cstring%2CopenArray%5Bstring%5D%2Cstring"><span class="Identifier">newSettings</span></a><span class="Other">(</span><span class="Identifier">configPath</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">address</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">;</span> <span class="Identifier">port</span> <span class="Other">=</span> <span class="Identifier">Port</span><span class="Other">(</span><span class="DecNumber">8080</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">debug</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">;</span>
+                <span class="Identifier">reusePort</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">;</span> <span class="Identifier">staticDirs</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span> <span class="Other">=</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">appName</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">)</span><span class="Other">:</span> <a href="nativesettings.html#Settings"><span class="Identifier">Settings</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
+    <span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">IOError</span><span class="Other">,</span> <span class="Identifier">OSError</span><span class="Other">,</span> <span class="Identifier">ValueError</span><span class="Other">,</span> <span class="Identifier">JsonParsingError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ReadIOEffect</span><span class="Other">,</span> <span class="Identifier">WriteIOEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+Creates a new settings.
+&nbsp;&nbsp;<a
+href="https://github.com/planety/prologue/tree/master/src/prologue/core/nativesettings.nim#L90"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/nativesettings.nim#L90" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -335,7 +335,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-09-13 02:41:32 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-09-16 12:26:15 UTC</small>
       </div>
     </div>
   </div>

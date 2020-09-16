@@ -33,7 +33,7 @@ send	src/prologue/core/context.html#send,Context,string	context: send(ctx: Conte
 respond	src/prologue/core/context.html#respond,Context,HttpCode,string,HttpHeaders	context: respond(ctx: Context; code: HttpCode; body: string;\n        headers: HttpHeaders = newHttpHeaders()): Future[void]	
 hasHeader	src/prologue/core/context.html#hasHeader,Request,string	context: hasHeader(request: var Request; key: string): bool	
 setHeader	src/prologue/core/context.html#setHeader,Request,string,string	context: setHeader(request: var Request; key, value: string)	
-setHeader	src/prologue/core/context.html#setHeader,Request,string,	context: setHeader(request: var Request; key: string; value: sink seq[string])	
+setHeader	src/prologue/core/context.html#setHeader,Request,string,seq[string]	context: setHeader(request: var Request; key: string; value: seq[string])	
 addHeader	src/prologue/core/context.html#addHeader,Request,string,string	context: addHeader(request: var Request; key, value: string)	
 getCookie	src/prologue/core/context.html#getCookie,Context,string,string	context: getCookie(ctx: Context; key: string; default: string = &quot;&quot;): string	
 setCookie	src/prologue/core/context.html#setCookie,Context,string,string,string,Option[int],string,string	context: setCookie(ctx: Context; key, value: string; expires = &quot;&quot;;\n          maxAge: Option[int] = none(int); domain = &quot;&quot;; path = &quot;&quot;; secure = false;\n          httpOnly = false; sameSite = Lax)	
@@ -45,7 +45,7 @@ default500Handler	src/prologue/core/context.html#default500Handler,Context	conte
 getPostParams	src/prologue/core/context.html#getPostParams,Context,string,string	context: getPostParams(ctx: Context; key: string; default = &quot;&quot;): string	
 getQueryParams	src/prologue/core/context.html#getQueryParams,Context,string,string	context: getQueryParams(ctx: Context; key: string; default = &quot;&quot;): string	
 getPathParams	src/prologue/core/context.html#getPathParams,Context,string	context: getPathParams(ctx: Context; key: string): string	
-getPathParams	src/prologue/core/context.html#getPathParams,Context,,T	context: getPathParams[T: BaseType](ctx: Context; key: sink string; default: T): T	
+getPathParams	src/prologue/core/context.html#getPathParams,Context,string,T	context: getPathParams[T: BaseType](ctx: Context; key: string; default: T): T	
 setResponse	src/prologue/core/context.html#setResponse,Context,HttpCode,string	context: setResponse(ctx: Context; code: HttpCode; httpHeaders = [\n    (&quot;Content-Type&quot;, &quot;text/html; charset=UTF-8&quot;)].newHttpHeaders; body = &quot;&quot;;\n            version = HttpVer11)	
 setResponse	src/prologue/core/context.html#setResponse,Context,Response	context: setResponse(ctx: Context; response: Response)	
 multiMatch	src/prologue/core/context.html#multiMatch,string,StringTableRef	context: multiMatch(s: string; replacements: StringTableRef): string	

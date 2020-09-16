@@ -211,8 +211,8 @@ function main() {
     title="hasHeader(request: var Request; key: string): bool"><wbr />has<wbr />Header<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#setHeader%2CRequest%2Cstring%2Cstring"
     title="setHeader(request: var Request; key, value: string)"><wbr />set<wbr />Header<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#setHeader%2CRequest%2Cstring%2C"
-    title="setHeader(request: var Request; key: string; value: sink seq[string])"><wbr />set<wbr />Header<span class="attachedType"></span></a></li>
+  <li><a class="reference" href="#setHeader%2CRequest%2Cstring%2Cseq%5Bstring%5D"
+    title="setHeader(request: var Request; key: string; value: seq[string])"><wbr />set<wbr />Header<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#addHeader%2CRequest%2Cstring%2Cstring"
     title="addHeader(request: var Request; key, value: string)"><wbr />add<wbr />Header<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#getCookie%2CContext%2Cstring%2Cstring"
@@ -239,8 +239,8 @@ function main() {
     title="getQueryParams(ctx: Context; key: string; default = &quot;&quot;): string"><wbr />get<wbr />Query<wbr />Params<span class="attachedType">Context</span></a></li>
   <li><a class="reference" href="#getPathParams%2CContext%2Cstring"
     title="getPathParams(ctx: Context; key: string): string"><wbr />get<wbr />Path<wbr />Params<span class="attachedType">Context</span></a></li>
-  <li><a class="reference" href="#getPathParams%2CContext%2C%2CT"
-    title="getPathParams[T: BaseType](ctx: Context; key: sink string; default: T): T"><wbr />get<wbr />Path<wbr />Params<span class="attachedType">Context</span></a></li>
+  <li><a class="reference" href="#getPathParams%2CContext%2Cstring%2CT"
+    title="getPathParams[T: BaseType](ctx: Context; key: string; default: T): T"><wbr />get<wbr />Path<wbr />Params<span class="attachedType">Context</span></a></li>
   <li><a class="reference" href="#setResponse%2CContext%2CHttpCode%2Cstring"
     title="setResponse(ctx: Context; code: HttpCode; httpHeaders = [
     (&quot;Content-Type&quot;, &quot;text/html; charset=UTF-8&quot;)].newHttpHeaders; body = &quot;&quot;;
@@ -706,8 +706,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 </dd>
 <a id="hasHeader,Request,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#hasHeader%2CRequest%2Cstring"><span class="Identifier">hasHeader</span></a><span class="Other">(</span><span class="Identifier">request</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="beast/request.html#Request"><span class="Identifier">Request</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dt><pre><span class="Keyword">proc</span> <a href="#hasHeader%2CRequest%2Cstring"><span class="Identifier">hasHeader</span></a><span class="Other">(</span><span class="Identifier">request</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="beast/request.html#Request"><span class="Identifier">Request</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 
@@ -718,8 +717,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 </dd>
 <a id="setHeader,Request,string,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#setHeader%2CRequest%2Cstring%2Cstring"><span class="Identifier">setHeader</span></a><span class="Other">(</span><span class="Identifier">request</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="beast/request.html#Request"><span class="Identifier">Request</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">,</span> <span class="Identifier">value</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dt><pre><span class="Keyword">proc</span> <a href="#setHeader%2CRequest%2Cstring%2Cstring"><span class="Identifier">setHeader</span></a><span class="Other">(</span><span class="Identifier">request</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="beast/request.html#Request"><span class="Identifier">Request</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">,</span> <span class="Identifier">value</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 
@@ -729,9 +727,9 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L183" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="setHeader,Request,string,"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#setHeader%2CRequest%2Cstring%2C"><span class="Identifier">setHeader</span></a><span class="Other">(</span><span class="Identifier">request</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="beast/request.html#Request"><span class="Identifier">Request</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">value</span><span class="Other">:</span> <span class="Identifier">sink</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span>
-    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<a id="setHeader,Request,string,seq[string]"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#setHeader%2CRequest%2Cstring%2Cseq%5Bstring%5D"><span class="Identifier">setHeader</span></a><span class="Other">(</span><span class="Identifier">request</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="beast/request.html#Request"><span class="Identifier">Request</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">value</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span>
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 
@@ -874,8 +872,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L241" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="getPathParams,Context,,T"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#getPathParams%2CContext%2C%2CT"><span class="Identifier">getPathParams</span></a><span class="Other">[</span><span class="Identifier">T</span><span class="Other">:</span> <a href="types.html#BaseType"><span class="Identifier">BaseType</span></a><span class="Other">]</span><span class="Other">(</span><span class="Identifier">ctx</span><span class="Other">:</span> <a href="context.html#Context"><span class="Identifier">Context</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">sink</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">default</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span></span><span class="Other">.}</span></span></pre></dt>
+<a id="getPathParams,Context,string,T"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#getPathParams%2CContext%2Cstring%2CT"><span class="Identifier">getPathParams</span></a><span class="Other">[</span><span class="Identifier">T</span><span class="Other">:</span> <a href="types.html#BaseType"><span class="Identifier">BaseType</span></a><span class="Other">]</span><span class="Other">(</span><span class="Identifier">ctx</span><span class="Other">:</span> <a href="context.html#Context"><span class="Identifier">Context</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">default</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 Gets the route parameters(for example, &quot;/hello/{name}&quot;).
@@ -995,7 +993,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-09-13 02:41:32 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-09-16 12:26:16 UTC</small>
       </div>
     </div>
   </div>

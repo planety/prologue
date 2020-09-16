@@ -147,8 +147,8 @@ function main() {
 <dt><a name="all" href="#all"><span>all:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="application: all(app: Prologue; route: string; handler: HandlerAsync; name = &quot;&quot;;
-    middlewares: sink seq[HandlerAsync] = @[]; settings: LocalSettings = nil)" href="prologue/core/application.html#all%2CPrologue%2Cstring%2CHandlerAsync%2Cstring%2CLocalSettings">application: all(app: Prologue; route: string; handler: HandlerAsync; name = &quot;&quot;;
-    middlewares: sink seq[HandlerAsync] = @[]; settings: LocalSettings = nil)</a></li>
+    middlewares: seq[HandlerAsync] = @[]; settings: LocalSettings = nil)" href="prologue/core/application.html#all%2CPrologue%2Cstring%2CHandlerAsync%2Cstring%2Cseq%5BHandlerAsync%5D%2CLocalSettings">application: all(app: Prologue; route: string; handler: HandlerAsync; name = &quot;&quot;;
+    middlewares: seq[HandlerAsync] = @[]; settings: LocalSettings = nil)</a></li>
           </ul></dd>
 <dt><a name="appAddress" href="#appAddress"><span>appAddress:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -215,8 +215,8 @@ function main() {
 <dt><a name="connect" href="#connect"><span>connect:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="application: connect(app: Prologue; route: string; handler: HandlerAsync; name = &quot;&quot;;
-        middlewares: sink seq[HandlerAsync] = @[]; settings: LocalSettings = nil)" href="prologue/core/application.html#connect%2CPrologue%2Cstring%2CHandlerAsync%2Cstring%2CLocalSettings">application: connect(app: Prologue; route: string; handler: HandlerAsync; name = &quot;&quot;;
-        middlewares: sink seq[HandlerAsync] = @[]; settings: LocalSettings = nil)</a></li>
+        middlewares: seq[HandlerAsync] = @[]; settings: LocalSettings = nil)" href="prologue/core/application.html#connect%2CPrologue%2Cstring%2CHandlerAsync%2Cstring%2Cseq%5BHandlerAsync%5D%2CLocalSettings">application: connect(app: Prologue; route: string; handler: HandlerAsync; name = &quot;&quot;;
+        middlewares: seq[HandlerAsync] = @[]; settings: LocalSettings = nil)</a></li>
           </ul></dd>
 <dt><a name="contains" href="#contains"><span>contains:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -257,8 +257,8 @@ function main() {
 <dt><a name="delete" href="#delete"><span>delete:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="application: delete(app: Prologue; route: string; handler: HandlerAsync; name = &quot;&quot;;
-       middlewares: sink seq[HandlerAsync] = @[]; settings: LocalSettings = nil)" href="prologue/core/application.html#delete%2CPrologue%2Cstring%2CHandlerAsync%2Cstring%2CLocalSettings">application: delete(app: Prologue; route: string; handler: HandlerAsync; name = &quot;&quot;;
-       middlewares: sink seq[HandlerAsync] = @[]; settings: LocalSettings = nil)</a></li>
+       middlewares: seq[HandlerAsync] = @[]; settings: LocalSettings = nil)" href="prologue/core/application.html#delete%2CPrologue%2Cstring%2CHandlerAsync%2Cstring%2Cseq%5BHandlerAsync%5D%2CLocalSettings">application: delete(app: Prologue; route: string; handler: HandlerAsync; name = &quot;&quot;;
+       middlewares: seq[HandlerAsync] = @[]; settings: LocalSettings = nil)</a></li>
           </ul></dd>
 <dt><a name="deleteCookie" href="#deleteCookie"><span>deleteCookie:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -347,8 +347,8 @@ function main() {
 <dt><a name="get" href="#get"><span>get:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="application: get(app: Prologue; route: string; handler: HandlerAsync; name = &quot;&quot;;
-    middlewares: sink seq[HandlerAsync] = @[]; settings: LocalSettings = nil)" href="prologue/core/application.html#get%2CPrologue%2Cstring%2CHandlerAsync%2Cstring%2CLocalSettings">application: get(app: Prologue; route: string; handler: HandlerAsync; name = &quot;&quot;;
-    middlewares: sink seq[HandlerAsync] = @[]; settings: LocalSettings = nil)</a></li>
+    middlewares: seq[HandlerAsync] = @[]; settings: LocalSettings = nil)" href="prologue/core/application.html#get%2CPrologue%2Cstring%2CHandlerAsync%2Cstring%2Cseq%5BHandlerAsync%5D%2CLocalSettings">application: get(app: Prologue; route: string; handler: HandlerAsync; name = &quot;&quot;;
+    middlewares: seq[HandlerAsync] = @[]; settings: LocalSettings = nil)</a></li>
           <li><a class="reference external"
           data-doc-search-tag="configure: get(env: Env; key: string): string" href="prologue/core/configure.html#get%2CEnv%2Cstring">configure: get(env: Env; key: string): string</a></li>
           </ul></dd>
@@ -364,7 +364,7 @@ function main() {
           </ul></dd>
 <dt><a name="getOrDefault" href="#getOrDefault"><span>getOrDefault:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="configure: getOrDefault[T: BaseType](env: Env; key: sink string; default: T): T" href="prologue/core/configure.html#getOrDefault%2CEnv%2C%2CT">configure: getOrDefault[T: BaseType](env: Env; key: sink string; default: T): T</a></li>
+          data-doc-search-tag="configure: getOrDefault[T: BaseType](env: Env; key: string; default: T): T" href="prologue/core/configure.html#getOrDefault%2CEnv%2Cstring%2CT">configure: getOrDefault[T: BaseType](env: Env; key: string; default: T): T</a></li>
           <li><a class="reference external"
           data-doc-search-tag="nativesettings: getOrDefault(settings: Settings; key: string): JsonNode" href="prologue/core/nativesettings.html#getOrDefault%2CSettings%2Cstring">nativesettings: getOrDefault(settings: Settings; key: string): JsonNode</a></li>
           <li><a class="reference external"
@@ -372,9 +372,9 @@ function main() {
           </ul></dd>
 <dt><a name="getPathParams" href="#getPathParams"><span>getPathParams:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="context: getPathParams[T: BaseType](ctx: Context; key: sink string; default: T): T" href="prologue/core/context.html#getPathParams%2CContext%2C%2CT">context: getPathParams[T: BaseType](ctx: Context; key: sink string; default: T): T</a></li>
-          <li><a class="reference external"
           data-doc-search-tag="context: getPathParams(ctx: Context; key: string): string" href="prologue/core/context.html#getPathParams%2CContext%2Cstring">context: getPathParams(ctx: Context; key: string): string</a></li>
+          <li><a class="reference external"
+          data-doc-search-tag="context: getPathParams[T: BaseType](ctx: Context; key: string; default: T): T" href="prologue/core/context.html#getPathParams%2CContext%2Cstring%2CT">context: getPathParams[T: BaseType](ctx: Context; key: string; default: T): T</a></li>
           </ul></dd>
 <dt><a name="getPostParams" href="#getPostParams"><span>getPostParams:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -433,8 +433,8 @@ function main() {
 <dt><a name="head" href="#head"><span>head:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="application: head(app: Prologue; route: string; handler: HandlerAsync; name = &quot;&quot;;
-     middlewares: sink seq[HandlerAsync] = @[]; settings: LocalSettings = nil)" href="prologue/core/application.html#head%2CPrologue%2Cstring%2CHandlerAsync%2Cstring%2CLocalSettings">application: head(app: Prologue; route: string; handler: HandlerAsync; name = &quot;&quot;;
-     middlewares: sink seq[HandlerAsync] = @[]; settings: LocalSettings = nil)</a></li>
+     middlewares: seq[HandlerAsync] = @[]; settings: LocalSettings = nil)" href="prologue/core/application.html#head%2CPrologue%2Cstring%2CHandlerAsync%2Cstring%2Cseq%5BHandlerAsync%5D%2CLocalSettings">application: head(app: Prologue; route: string; handler: HandlerAsync; name = &quot;&quot;;
+     middlewares: seq[HandlerAsync] = @[]; settings: LocalSettings = nil)</a></li>
           </ul></dd>
 <dt><a name="headers" href="#headers"><span>headers:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -566,11 +566,11 @@ function main() {
           </ul></dd>
 <dt><a name="newApp" href="#newApp"><span>newApp:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="application: newApp(settings: Settings; middlewares: sink seq[HandlerAsync] = @[];
-       startup: sink seq[Event] = @[]; shutdown: sink seq[Event] = @[];
+          data-doc-search-tag="application: newApp(settings: Settings; middlewares: seq[HandlerAsync] = @[];
+       startup: seq[Event] = @[]; shutdown: seq[Event] = @[];
        errorHandlerTable = DefaultErrorHandler;
-       appData = newStringTable(mode = modeCaseSensitive)): Prologue" href="prologue/core/application.html#newApp%2CSettings">application: newApp(settings: Settings; middlewares: sink seq[HandlerAsync] = @[];
-       startup: sink seq[Event] = @[]; shutdown: sink seq[Event] = @[];
+       appData = newStringTable(mode = modeCaseSensitive)): Prologue" href="prologue/core/application.html#newApp%2CSettings%2Cseq%5BHandlerAsync%5D%2Cseq%5BEvent%5D%2Cseq%5BEvent%5D">application: newApp(settings: Settings; middlewares: seq[HandlerAsync] = @[];
+       startup: seq[Event] = @[]; shutdown: seq[Event] = @[];
        errorHandlerTable = DefaultErrorHandler;
        appData = newStringTable(mode = modeCaseSensitive)): Prologue</a></li>
           </ul></dd>
@@ -596,8 +596,8 @@ function main() {
           </ul></dd>
 <dt><a name="newPathHandler" href="#newPathHandler"><span>newPathHandler:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="route: newPathHandler(handler: HandlerAsync; middlewares: sink seq[HandlerAsync] = @[];
-               settings: Settings = nil): PathHandler" href="prologue/core/route.html#newPathHandler%2CHandlerAsync%2CSettings">route: newPathHandler(handler: HandlerAsync; middlewares: sink seq[HandlerAsync] = @[];
+          data-doc-search-tag="route: newPathHandler(handler: HandlerAsync; middlewares: seq[HandlerAsync] = @[];
+               settings: Settings = nil): PathHandler" href="prologue/core/route.html#newPathHandler%2CHandlerAsync%2Cseq%5BHandlerAsync%5D%2CSettings">route: newPathHandler(handler: HandlerAsync; middlewares: seq[HandlerAsync] = @[];
                settings: Settings = nil): PathHandler</a></li>
           </ul></dd>
 <dt><a name="newPrologue" href="#newPrologue"><span>newPrologue:</span></a></dt><dd><ul class="simple">
@@ -629,24 +629,24 @@ function main() {
           data-doc-search-tag="application: newSettings(settings: Settings; localSettings: LocalSettings): Settings" href="prologue/core/application.html#newSettings%2CSettings%2CLocalSettings">application: newSettings(settings: Settings; localSettings: LocalSettings): Settings</a></li>
           <li><a class="reference external"
           data-doc-search-tag="nativesettings: newSettings(data: JsonNode; address = &quot;&quot;; port = Port(8080); debug = true;
-            reusePort = true; staticDirs: openArray[string] = [&quot;static&quot;]; appName = &quot;&quot;): Settings" href="prologue/core/nativesettings.html#newSettings%2CJsonNode%2Cstring%2CopenArray%5Bstring%5D%2Cstring">nativesettings: newSettings(data: JsonNode; address = &quot;&quot;; port = Port(8080); debug = true;
-            reusePort = true; staticDirs: openArray[string] = [&quot;static&quot;]; appName = &quot;&quot;): Settings</a></li>
+            reusePort = true; staticDirs: openArray[string] = []; appName = &quot;&quot;): Settings" href="prologue/core/nativesettings.html#newSettings%2CJsonNode%2Cstring%2CopenArray%5Bstring%5D%2Cstring">nativesettings: newSettings(data: JsonNode; address = &quot;&quot;; port = Port(8080); debug = true;
+            reusePort = true; staticDirs: openArray[string] = []; appName = &quot;&quot;): Settings</a></li>
           <li><a class="reference external"
           data-doc-search-tag="nativesettings: newSettings(address = &quot;&quot;; port = Port(8080); debug = true; reusePort = true;
-            staticDirs: openArray[string] = [&quot;static&quot;]; secretKey = randomString(8);
+            staticDirs: openArray[string] = []; secretKey = randomString(8);
             appName = &quot;&quot;): Settings" href="prologue/core/nativesettings.html#newSettings%2Cstring%2CopenArray%5Bstring%5D%2Cstring">nativesettings: newSettings(address = &quot;&quot;; port = Port(8080); debug = true; reusePort = true;
-            staticDirs: openArray[string] = [&quot;static&quot;]; secretKey = randomString(8);
+            staticDirs: openArray[string] = []; secretKey = randomString(8);
             appName = &quot;&quot;): Settings</a></li>
           <li><a class="reference external"
           data-doc-search-tag="nativesettings: newSettings(configPath: string; address = &quot;&quot;; port = Port(8080); debug = true;
-            reusePort = true; staticDirs: openArray[string] = [&quot;static&quot;]; appName = &quot;&quot;): Settings" href="prologue/core/nativesettings.html#newSettings%2Cstring%2Cstring%2CopenArray%5Bstring%5D%2Cstring">nativesettings: newSettings(configPath: string; address = &quot;&quot;; port = Port(8080); debug = true;
-            reusePort = true; staticDirs: openArray[string] = [&quot;static&quot;]; appName = &quot;&quot;): Settings</a></li>
+            reusePort = true; staticDirs: openArray[string] = []; appName = &quot;&quot;): Settings" href="prologue/core/nativesettings.html#newSettings%2Cstring%2Cstring%2CopenArray%5Bstring%5D%2Cstring">nativesettings: newSettings(configPath: string; address = &quot;&quot;; port = Port(8080); debug = true;
+            reusePort = true; staticDirs: openArray[string] = []; appName = &quot;&quot;): Settings</a></li>
           </ul></dd>
 <dt><a name="options" href="#options"><span>options:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="application: options(app: Prologue; route: string; handler: HandlerAsync; name = &quot;&quot;;
-        middlewares: sink seq[HandlerAsync] = @[]; settings: LocalSettings = nil)" href="prologue/core/application.html#options%2CPrologue%2Cstring%2CHandlerAsync%2Cstring%2CLocalSettings">application: options(app: Prologue; route: string; handler: HandlerAsync; name = &quot;&quot;;
-        middlewares: sink seq[HandlerAsync] = @[]; settings: LocalSettings = nil)</a></li>
+        middlewares: seq[HandlerAsync] = @[]; settings: LocalSettings = nil)" href="prologue/core/application.html#options%2CPrologue%2Cstring%2CHandlerAsync%2Cstring%2Cseq%5BHandlerAsync%5D%2CLocalSettings">application: options(app: Prologue; route: string; handler: HandlerAsync; name = &quot;&quot;;
+        middlewares: seq[HandlerAsync] = @[]; settings: LocalSettings = nil)</a></li>
           </ul></dd>
 <dt><a name="pairs" href="#pairs"><span>pairs:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -673,8 +673,8 @@ function main() {
 <dt><a name="patch" href="#patch"><span>patch:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="application: patch(app: Prologue; route: string; handler: HandlerAsync; name = &quot;&quot;;
-      middlewares: sink seq[HandlerAsync] = @[]; settings: LocalSettings = nil)" href="prologue/core/application.html#patch%2CPrologue%2Cstring%2CHandlerAsync%2Cstring%2CLocalSettings">application: patch(app: Prologue; route: string; handler: HandlerAsync; name = &quot;&quot;;
-      middlewares: sink seq[HandlerAsync] = @[]; settings: LocalSettings = nil)</a></li>
+      middlewares: seq[HandlerAsync] = @[]; settings: LocalSettings = nil)" href="prologue/core/application.html#patch%2CPrologue%2Cstring%2CHandlerAsync%2Cstring%2Cseq%5BHandlerAsync%5D%2CLocalSettings">application: patch(app: Prologue; route: string; handler: HandlerAsync; name = &quot;&quot;;
+      middlewares: seq[HandlerAsync] = @[]; settings: LocalSettings = nil)</a></li>
           </ul></dd>
 <dt><a name="path" href="#path"><span>path:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -690,13 +690,13 @@ function main() {
           </ul></dd>
 <dt><a name="pattern" href="#pattern"><span>pattern:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="route: pattern(route: string; handler: HandlerAsync; httpMethod: sink seq[HttpMethod];
-        name = &quot;&quot;; middlewares: sink seq[HandlerAsync] = @[]): UrlPattern" href="prologue/core/route.html#pattern%2Cstring%2CHandlerAsync%2C%2Cstring">route: pattern(route: string; handler: HandlerAsync; httpMethod: sink seq[HttpMethod];
-        name = &quot;&quot;; middlewares: sink seq[HandlerAsync] = @[]): UrlPattern</a></li>
+          data-doc-search-tag="route: pattern(route: string; handler: HandlerAsync; httpMethod: seq[HttpMethod]; name = &quot;&quot;;
+        middlewares: seq[HandlerAsync] = @[]): UrlPattern" href="prologue/core/route.html#pattern%2Cstring%2CHandlerAsync%2Cseq%5BHttpMethod%5D%2Cstring%2Cseq%5BHandlerAsync%5D">route: pattern(route: string; handler: HandlerAsync; httpMethod: seq[HttpMethod]; name = &quot;&quot;;
+        middlewares: seq[HandlerAsync] = @[]): UrlPattern</a></li>
           <li><a class="reference external"
           data-doc-search-tag="route: pattern(route: string; handler: HandlerAsync; httpMethod = HttpGet; name = &quot;&quot;;
-        middlewares: sink seq[HandlerAsync] = @[]): UrlPattern" href="prologue/core/route.html#pattern%2Cstring%2CHandlerAsync%2Cstring">route: pattern(route: string; handler: HandlerAsync; httpMethod = HttpGet; name = &quot;&quot;;
-        middlewares: sink seq[HandlerAsync] = @[]): UrlPattern</a></li>
+        middlewares: seq[HandlerAsync] = @[]): UrlPattern" href="prologue/core/route.html#pattern%2Cstring%2CHandlerAsync%2Cstring%2Cseq%5BHandlerAsync%5D">route: pattern(route: string; handler: HandlerAsync; httpMethod = HttpGet; name = &quot;&quot;;
+        middlewares: seq[HandlerAsync] = @[]): UrlPattern</a></li>
           </ul></dd>
 <dt><a name="plainTextResponse" href="#plainTextResponse"><span>plainTextResponse:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -711,8 +711,8 @@ function main() {
 <dt><a name="post" href="#post"><span>post:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="application: post(app: Prologue; route: string; handler: HandlerAsync; name = &quot;&quot;;
-     middlewares: sink seq[HandlerAsync] = @[]; settings: LocalSettings = nil)" href="prologue/core/application.html#post%2CPrologue%2Cstring%2CHandlerAsync%2Cstring%2CLocalSettings">application: post(app: Prologue; route: string; handler: HandlerAsync; name = &quot;&quot;;
-     middlewares: sink seq[HandlerAsync] = @[]; settings: LocalSettings = nil)</a></li>
+     middlewares: seq[HandlerAsync] = @[]; settings: LocalSettings = nil)" href="prologue/core/application.html#post%2CPrologue%2Cstring%2CHandlerAsync%2Cstring%2Cseq%5BHandlerAsync%5D%2CLocalSettings">application: post(app: Prologue; route: string; handler: HandlerAsync; name = &quot;&quot;;
+     middlewares: seq[HandlerAsync] = @[]; settings: LocalSettings = nil)</a></li>
           </ul></dd>
 <dt><a name="printRoute" href="#printRoute"><span>printRoute:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -737,8 +737,8 @@ function main() {
 <dt><a name="put" href="#put"><span>put:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="application: put(app: Prologue; route: string; handler: HandlerAsync; name = &quot;&quot;;
-    middlewares: sink seq[HandlerAsync] = @[]; settings: LocalSettings = nil)" href="prologue/core/application.html#put%2CPrologue%2Cstring%2CHandlerAsync%2Cstring%2CLocalSettings">application: put(app: Prologue; route: string; handler: HandlerAsync; name = &quot;&quot;;
-    middlewares: sink seq[HandlerAsync] = @[]; settings: LocalSettings = nil)</a></li>
+    middlewares: seq[HandlerAsync] = @[]; settings: LocalSettings = nil)" href="prologue/core/application.html#put%2CPrologue%2Cstring%2CHandlerAsync%2Cstring%2Cseq%5BHandlerAsync%5D%2CLocalSettings">application: put(app: Prologue; route: string; handler: HandlerAsync; name = &quot;&quot;;
+    middlewares: seq[HandlerAsync] = @[]; settings: LocalSettings = nil)</a></li>
           </ul></dd>
 <dt><a name="putPrologueEnv" href="#putPrologueEnv"><span>putPrologueEnv:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -898,7 +898,7 @@ function main() {
           </ul></dd>
 <dt><a name="setHeader" href="#setHeader"><span>setHeader:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="context: setHeader(request: var Request; key: string; value: sink seq[string])" href="prologue/core/context.html#setHeader%2CRequest%2Cstring%2C">context: setHeader(request: var Request; key: string; value: sink seq[string])</a></li>
+          data-doc-search-tag="context: setHeader(request: var Request; key: string; value: seq[string])" href="prologue/core/context.html#setHeader%2CRequest%2Cstring%2Cseq%5Bstring%5D">context: setHeader(request: var Request; key: string; value: seq[string])</a></li>
           <li><a class="reference external"
           data-doc-search-tag="context: setHeader(request: var Request; key, value: string)" href="prologue/core/context.html#setHeader%2CRequest%2Cstring%2Cstring">context: setHeader(request: var Request; key, value: string)</a></li>
           <li><a class="reference external"
@@ -967,8 +967,8 @@ function main() {
 <dt><a name="trace" href="#trace"><span>trace:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="application: trace(app: Prologue; route: string; handler: HandlerAsync; name = &quot;&quot;;
-      middlewares: sink seq[HandlerAsync] = @[]; settings: LocalSettings = nil)" href="prologue/core/application.html#trace%2CPrologue%2Cstring%2CHandlerAsync%2Cstring%2CLocalSettings">application: trace(app: Prologue; route: string; handler: HandlerAsync; name = &quot;&quot;;
-      middlewares: sink seq[HandlerAsync] = @[]; settings: LocalSettings = nil)</a></li>
+      middlewares: seq[HandlerAsync] = @[]; settings: LocalSettings = nil)" href="prologue/core/application.html#trace%2CPrologue%2Cstring%2CHandlerAsync%2Cstring%2Cseq%5BHandlerAsync%5D%2CLocalSettings">application: trace(app: Prologue; route: string; handler: HandlerAsync; name = &quot;&quot;;
+      middlewares: seq[HandlerAsync] = @[]; settings: LocalSettings = nil)</a></li>
           </ul></dd>
 <dt><a name="update" href="#update"><span>update:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -1017,7 +1017,7 @@ function main() {
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-09-13 02:41:41 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-09-16 12:26:25 UTC</small>
       </div>
     </div>
   </div>

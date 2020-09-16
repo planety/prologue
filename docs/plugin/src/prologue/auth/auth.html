@@ -116,8 +116,6 @@ function main() {
   <li><a class="reference" href="#basicAuth%2CContext%2Cstring%2CVerifyHandler%2Cstring"
     title="basicAuth(ctx: Context; realm: string; verify: VerifyHandler; charset = &quot;UTF-8&quot;): tuple[
     hasValue: bool, username, password: string]"><wbr />basic<wbr />Auth<span class="attachedType">VerifyHandler</span></a></li>
-  <li><a class="reference" href="#basicAuthMiddleware%2Cstring%2CVerifyHandler%2Cstring"
-    title="basicAuthMiddleware(realm: string; verifyHandler: VerifyHandler; charset = &quot;UTF-8&quot;): HandlerAsync"><wbr />basic<wbr />Auth<wbr />Middleware<span class="attachedType">VerifyHandler</span></a></li>
 
   </ul>
 </li>
@@ -132,7 +130,7 @@ function main() {
   <div class="section" id="6">
 <h1><a class="toc-backref" href="#6">Imports</a></h1>
 <dl class="item">
-<a class="reference external" href="../core/context.html">../core/context</a>, <a class="reference external" href="../core/response.html">../core/response</a>, <a class="reference external" href="../core/encode.html">../core/encode</a>, <a class="reference external" href="../core/middlewaresbase.html">../core/middlewaresbase</a>, <a class="reference external" href="../core/request.html">../core/request</a>
+<a class="reference external" href="../core/context.html">../core/context</a>, <a class="reference external" href="../core/response.html">../core/response</a>, <a class="reference external" href="../core/encode.html">../core/encode</a>, <a class="reference external" href="../core/request.html">../core/request</a>
 </dl></div>
 <div class="section" id="7">
 <h1><a class="toc-backref" href="#7">Types</a></h1>
@@ -144,9 +142,9 @@ function main() {
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/auth/auth.nim#L13"
+href="https://github.com/planety/prologue/tree/master/src/prologue/auth/auth.nim#L11"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/auth/auth.nim#L13" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/auth/auth.nim#L11" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="VerifyHandler"></a>
@@ -155,9 +153,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/auth/auth.nim#L16"
+href="https://github.com/planety/prologue/tree/master/src/prologue/auth/auth.nim#L14"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/auth/auth.nim#L16" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/auth/auth.nim#L14" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -172,34 +170,22 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/auth/auth.nim#L19"
+href="https://github.com/planety/prologue/tree/master/src/prologue/auth/auth.nim#L17"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/auth/auth.nim#L19" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/auth/auth.nim#L17" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="basicAuth,Context,string,VerifyHandler,string"></a>
 <dt><pre><span class="Keyword">proc</span> <a href="#basicAuth%2CContext%2Cstring%2CVerifyHandler%2Cstring"><span class="Identifier">basicAuth</span></a><span class="Other">(</span><span class="Identifier">ctx</span><span class="Other">:</span> <a href="../core/context.html#Context"><span class="Identifier">Context</span></a><span class="Other">;</span> <span class="Identifier">realm</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">verify</span><span class="Other">:</span> <a href="auth.html#VerifyHandler"><span class="Identifier">VerifyHandler</span></a><span class="Other">;</span> <span class="Identifier">charset</span> <span class="Other">=</span> <span class="StringLit">&quot;UTF-8&quot;</span><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">tuple</span><span class="Other">[</span>
-    <span class="Identifier">hasValue</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">,</span> <span class="Identifier">username</span><span class="Other">,</span> <span class="Identifier">password</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">]</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">,</span> <span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">hasValue</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">,</span> <span class="Identifier">username</span><span class="Other">,</span> <span class="Identifier">password</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">]</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">,</span> <span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/auth/auth.nim#L25"
+href="https://github.com/planety/prologue/tree/master/src/prologue/auth/auth.nim#L23"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/auth/auth.nim#L25" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<a id="basicAuthMiddleware,string,VerifyHandler,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#basicAuthMiddleware%2Cstring%2CVerifyHandler%2Cstring"><span class="Identifier">basicAuthMiddleware</span></a><span class="Other">(</span><span class="Identifier">realm</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">verifyHandler</span><span class="Other">:</span> <a href="auth.html#VerifyHandler"><span class="Identifier">VerifyHandler</span></a><span class="Other">;</span>
-                        <span class="Identifier">charset</span> <span class="Other">=</span> <span class="StringLit">&quot;UTF-8&quot;</span><span class="Other">)</span><span class="Other">:</span> <a href="../core/context.html#HandlerAsync"><span class="Identifier">HandlerAsync</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/auth/auth.nim#L62"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/auth/auth.nim#L62" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/auth/auth.nim#L23" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -212,7 +198,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-09-13 02:42:13 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-09-16 12:26:57 UTC</small>
       </div>
     </div>
   </div>

@@ -7,10 +7,10 @@ UrlPattern	src/prologue/core/route.html#UrlPattern	route: UrlPattern
 stripRoute	src/prologue/core/route.html#stripRoute,string	route: stripRoute(route: string): string	
 initPath	src/prologue/core/route.html#initPath,string	route: initPath(route: string; httpMethod = HttpGet): Path	
 initRePath	src/prologue/core/route.html#initRePath,Regex	route: initRePath(route: Regex; httpMethod = HttpGet): RePath	
-pattern	src/prologue/core/route.html#pattern,string,HandlerAsync,string	route: pattern(route: string; handler: HandlerAsync; httpMethod = HttpGet; name = &quot;&quot;;\n        middlewares: sink seq[HandlerAsync] = @[]): UrlPattern	
-pattern	src/prologue/core/route.html#pattern,string,HandlerAsync,,string	route: pattern(route: string; handler: HandlerAsync; httpMethod: sink seq[HttpMethod];\n        name = &quot;&quot;; middlewares: sink seq[HandlerAsync] = @[]): UrlPattern	
+pattern	src/prologue/core/route.html#pattern,string,HandlerAsync,string,seq[HandlerAsync]	route: pattern(route: string; handler: HandlerAsync; httpMethod = HttpGet; name = &quot;&quot;;\n        middlewares: seq[HandlerAsync] = @[]): UrlPattern	
+pattern	src/prologue/core/route.html#pattern,string,HandlerAsync,seq[HttpMethod],string,seq[HandlerAsync]	route: pattern(route: string; handler: HandlerAsync; httpMethod: seq[HttpMethod]; name = &quot;&quot;;\n        middlewares: seq[HandlerAsync] = @[]): UrlPattern	
 hash	src/prologue/core/route.html#hash,Path	route: hash(x: Path): Hash	
-newPathHandler	src/prologue/core/route.html#newPathHandler,HandlerAsync,Settings	route: newPathHandler(handler: HandlerAsync; middlewares: sink seq[HandlerAsync] = @[];\n               settings: Settings = nil): PathHandler	
+newPathHandler	src/prologue/core/route.html#newPathHandler,HandlerAsync,seq[HandlerAsync],Settings	route: newPathHandler(handler: HandlerAsync; middlewares: seq[HandlerAsync] = @[];\n               settings: Settings = nil): PathHandler	
 newRouter	src/prologue/core/route.html#newRouter	route: newRouter(): Router	
 newReRouter	src/prologue/core/route.html#newReRouter	route: newReRouter(): ReRouter	
 add	src/prologue/core/route.html#add,ReRouter,	route: add(reRouter: ReRouter; pairs: (RePath, PathHandler))	

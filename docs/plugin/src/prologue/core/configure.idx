@@ -7,7 +7,7 @@ initEnv	src/prologue/core/configure.html#initEnv	configure: initEnv(): Env
 hasKey	src/prologue/core/configure.html#hasKey,Env,string	configure: hasKey(env: Env; key: string): bool	
 contains	src/prologue/core/configure.html#contains,Env,string	configure: contains(env: Env; key: string): bool	
 get	src/prologue/core/configure.html#get,Env,string	configure: get(env: Env; key: string): string	
-getOrDefault	src/prologue/core/configure.html#getOrDefault,Env,,T	configure: getOrDefault[T: BaseType](env: Env; key: sink string; default: T): T	
+getOrDefault	src/prologue/core/configure.html#getOrDefault,Env,string,T	configure: getOrDefault[T: BaseType](env: Env; key: string; default: T): T	
 keys	src/prologue/core/configure.html#keys.i,Env	configure: keys(env: Env): string	
 values	src/prologue/core/configure.html#values.i,Env	configure: values(env: Env): string	
 pairs	src/prologue/core/configure.html#pairs.i,Env	configure: pairs(env: Env): (string, string)	
