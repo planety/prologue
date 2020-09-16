@@ -21,13 +21,13 @@ from ./urandom import randomString
 
 
 type
-  Settings* = ref object ## Global settings for all handlers.
-    address*: string
-    port*: Port
-    debug*: bool
-    reusePort*: bool
-    staticDirs*: seq[string]
-    appName*: string
+  Settings* = ref object     ## Global settings for all handlers.
+    address*: string         ## The address of socket.
+    port*: Port              ## The port of socket.
+    debug*: bool             ## Debug mode(true is yes).
+    reusePort*: bool         ## Use socket port in multiple times.
+    staticDirs*: seq[string] ## The path of static directories.
+    appName*: string         ## The name of your application.
     data: JsonNode
 
   CtxSettings* = ref object ## Context settings.
@@ -60,13 +60,16 @@ proc newLocalSettings*(configPath: string): LocalSettings {.inline.} =
   result = LocalSettings(data: parseFile(configPath))
 
 proc normalizedStaticDirs(dirs: openArray[string]): seq[string] =
-  result = newSeq[string](dirs.len)
-  for idx in 0 ..< result.len:
-    result[idx] = dirs[idx].strip(chars = {'/'}, trailing = false)
-    normalizePath(result[idx])
+  result = newSeqOfCap[string](dirs.len)
+  for item in dirs:
+    let dir = item.strip(chars = {'/'}, trailing = false)
+    # 
+    if dir.len != 0:
+      result.add dir
+    normalizePath(result[^1])
 
 proc newSettings*(address = "", port = Port(8080), debug = true, reusePort = true,
-                  staticDirs: openArray[string] = ["static"], secretKey = randomString(8),
+                  staticDirs: openArray[string] = [], secretKey = randomString(8),
                   appName = ""): Settings {.inline.} =
   ## Creates a new settings.
   if secretKey.len == 0:
@@ -76,9 +79,8 @@ proc newSettings*(address = "", port = Port(8080), debug = true, reusePort = tru
                     staticDirs: normalizedStaticDirs(staticDirs), appName: appName,
                     data: %* {"secretKey": secretKey})
 
-
 proc newSettings*(data: JsonNode, address = "", port = Port(8080), debug = true, reusePort = true,
-                  staticDirs: openArray[string] = ["static"],
+                  staticDirs: openArray[string] = [],
                   appName = ""): Settings {.inline.} =
   ## Creates a new settings.
   result = Settings(address: address, port: port, debug: debug, reusePort: reusePort,
@@ -86,7 +88,7 @@ proc newSettings*(data: JsonNode, address = "", port = Port(8080), debug = true,
                     data: data)
 
 proc newSettings*(configPath: string, address = "", port = Port(8080), debug = true, reusePort = true,
-                  staticDirs: openArray[string] = ["static"],
+                  staticDirs: openArray[string] = [],
                   appName = ""): Settings {.inline.} =
   ## Creates a new settings.
   # make sure reserved keys must appear in settings
