@@ -294,7 +294,6 @@ proc newApp*(settings: Settings, middlewares: seq[HandlerAsync] = @[],
 
 proc run*(app: Prologue) =
   ## Starts an Application.
-  let DefaultHeaders = newHttpHeaders({"Content-Type": "text/html; charset=UTF-8"})
 
   # start event
   for event in app.startup:
@@ -331,8 +330,9 @@ proc run*(app: Prologue) =
       # initialize response
       ctx = newContext(
         request = move(request), 
-        response = initResponse(HttpVer11, Http200, headers = DefaultHeaders),
-        gScope = app.gScope)
+        response = initResponse(HttpVer11, Http200, headers = 
+                                newHttpHeaders({"Content-Type": "text/html; charset=UTF-8"})),
+                                gScope = app.gScope)
 
     ## Todo Optimization
     ctx.middlewares = app.middlewares
