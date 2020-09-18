@@ -150,8 +150,7 @@ proc newContext*(request: Request, response: Response,
                  gScope: GlobalScope): Context {.inline.} =
   ## Creates a new Context.
   Context(request: request, response: response,
-          handled: false, session: initSession(data = newStringTable(mode = modeCaseSensitive)),
-          cleanedData: newStringTable(mode = modeCaseSensitive),
+          handled: false, cleanedData: newStringTable(mode = modeCaseSensitive),
           ctxData: newStringTable(mode = modeCaseSensitive),
           localSettings: nil,
           gScope: gScope,

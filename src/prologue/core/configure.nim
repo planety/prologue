@@ -23,7 +23,7 @@ runnableExamples:
   let prefix = "PROLOGUE_"
   # only work in application scope
   putPrologueEnv("debug", "true", prefix)
-  putPrologueEnv("port", "8080", prefix)
+  putPrologueEnv("port", "8787", prefix)
   putPrologueEnv("appName", "Starlight", prefix)
   putPrologueEnv("staticDir", "static", prefix)
 
@@ -34,7 +34,7 @@ runnableExamples:
 
   let config = newStringStream("""[Prologue]
 debug=true
-port=8080
+port=8787
 appName=Starlight
 staticDir=static
 """)
@@ -43,7 +43,7 @@ staticDir=static
   doAssert tab["appName"] == "Starlight"
   doAssert tab["staticDir"] == "static"
   doAssert tab["debug"] == "true"
-  doAssert tab["port"] == "8080"
+  doAssert tab["port"] == "8787"
 
 
 import os, tables, strutils, parsecfg, streams

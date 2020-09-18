@@ -1,10 +1,10 @@
-import options
+import options, strtabs
 
 
 from cookiejar import SameSite
 
 import asyncdispatch
-from ../../core/types import BadSecretKeyError, SecretKey, loads, dumps, len
+from ../../core/types import BadSecretKeyError, SecretKey, loads, dumps, len, initSession
 from ../../core/context import Context, HandlerAsync, getCookie, setCookie,
     deleteCookie
 from ../../core/response import addHeader
@@ -38,6 +38,7 @@ proc sessionMiddleware*(
   
   result = proc(ctx: Context) {.async.} =
     # TODO make sure {':', ',', '}'} notin key or value
+    ctx.session = initSession(data = newStringTable(modeCaseSensitive))
     let
       data = ctx.getCookie(sessionName)
 
