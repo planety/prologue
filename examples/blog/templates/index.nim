@@ -12,7 +12,8 @@ import
 proc indexSection*(ctx: Context, posts: seq[seq[string]]): VNode =
   result = buildHtml(main(class = "content")):
     #h3: text "Posts"
-    if ctx.session.getOrDefault("userId").len != 0:
+    let poi = ctx.session.getOrDefault("userId")
+    if poi.len != 0:
       a(class = "action", href = "/blog/create"): text "Create new post"
 
     if posts.len > 0:
@@ -22,7 +23,7 @@ proc indexSection*(ctx: Context, posts: seq[seq[string]]): VNode =
             h3: text post[3]
             tdiv(class = "about"): text fmt"""by {post[1]} on {post[2]}"""
           p(class = "body"): text post[4]
-          if ctx.session.getOrDefault("userId") == post[1]:
+          if poi == post[1]:
             a(class = "action", href = fmt"""/blog/update/{post[0]}"""): text "Edit"
     else:
       tdiv(class = "is-empty"):
