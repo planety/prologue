@@ -60,6 +60,10 @@ proc recoverToken(token: string): seq[byte] {.inline.} =
     token = token.urlsafeBase64Decode
 
   result = newSeq[byte](DefaultSecretSize)
+
+  if token.len != DefaultTokenSize:
+    return
+
   for idx in 0 ..< DefaultSecretSize:
     result[idx] = byte(token[idx]) - byte(token[DefaultSecretSize + idx])
 
@@ -78,12 +82,12 @@ proc checkToken*(checked, secret: string): bool {.inline.} =
     checked = checked.recoverToken
     secret = secret.recoverToken
 
-  checked == secret
+  result = checked == secret
 
 proc csrfToken*(ctx: Context, tokenName = DefaultTokenName): string {.inline.} =
   input(`type` = "hidden", name = tokenName, value = generateToken(ctx, tokenName))
 
-# logging potential csrf attack
+# TODO logging potential csrf attack
 proc csrfMiddleWare*(tokenName = DefaultTokenName): HandlerAsync =
   result = proc(ctx: Context) {.async.} =
     # "safe method"
@@ -103,6 +107,7 @@ proc csrfMiddleWare*(tokenName = DefaultTokenName): HandlerAsync =
       return
 
     # forms don't use csrfToken
+    # TODO
     if ctx.getToken(tokenName).len == 0:
       reject(ctx)
       return
