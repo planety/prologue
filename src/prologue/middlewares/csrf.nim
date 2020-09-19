@@ -108,12 +108,13 @@ proc csrfMiddleWare*(tokenName = DefaultTokenName): HandlerAsync =
 
     # forms don't use csrfToken
     # TODO
-    if ctx.getToken(tokenName).len == 0:
+    let token = ctx.getToken(tokenName)
+    if token.len == 0:
       reject(ctx)
       return
 
     # not equal
-    if not checkToken(ctx.request.postParams[tokenName], ctx.getToken(tokenName)):
+    if not checkToken(ctx.request.postParams[tokenName], token):
       reject(ctx)
       return
 
