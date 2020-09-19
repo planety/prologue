@@ -6,7 +6,11 @@ proc hello*(ctx: Context) {.async.} =
 proc login*(ctx: Context) {.async.} =
   ctx.session["flywind"] = "123"
   ctx.session["ordontfly"] = "345"
-  resp "<h1>Hello, Prologue!</h1>"
+  resp redirect("/print", Http302)
+
+proc print*(ctx: Context) {.async.} =
+  resp $ctx.session
 
 proc logout*(ctx: Context) {.async.} =
-  resp $ctx.session
+  ctx.session.clear()
+  resp redirect("/print", Http302)
