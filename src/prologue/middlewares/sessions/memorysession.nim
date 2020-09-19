@@ -41,8 +41,6 @@ proc sessionMiddleware*(
   
 
   result = proc(ctx: Context) {.async.} =
-    # TODO make sure {':', ',', '}'} notin key or value
-    
     var
       data = ctx.getCookie(sessionName)
 
