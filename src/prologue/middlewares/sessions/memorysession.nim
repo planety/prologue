@@ -38,7 +38,6 @@ proc sessionMiddleware*(
     raise newException(BadSecretKeyError, "The length of secret key can't be zero")
 
   var memorySessionTable = newTable[string, Session]()
-  
 
   result = proc(ctx: Context) {.async.} =
     var

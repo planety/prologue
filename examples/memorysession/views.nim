@@ -6,11 +6,13 @@ proc hello*(ctx: Context) {.async.} =
 proc login*(ctx: Context) {.async.} =
   ctx.session["flywind"] = "123"
   ctx.session["ordontfly"] = "345"
-  resp redirect("/print", Http302)
+  ## Be careful when using session or csrf middlewares,
+  ## Response object will cover the headers of before.
+  resp htmlResponse("<h1>Login</h1>", headers = ctx.response.headers)
 
 proc print*(ctx: Context) {.async.} =
   resp $ctx.session
 
 proc logout*(ctx: Context) {.async.} =
   ctx.session.clear()
-  resp redirect("/print", Http302)
+  resp htmlResponse("<h1>Logout</h1>", headers = ctx.response.headers)

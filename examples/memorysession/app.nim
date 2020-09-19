@@ -1,5 +1,6 @@
 import ../../src/prologue
 import ../../src/prologue/middlewares/sessions/memorysession
+import ../../src/prologue/middlewares/utils
 import ./urls
 
 let
@@ -13,6 +14,6 @@ let
 
 
 var app = newApp(settings = settings, middlewares = 
-                 @[sessionMiddleware(secretKey = secretKey.SecretKey)])
+                 @[debugResponseMiddleware(), sessionMiddleware(secretKey = secretKey.SecretKey)])
 app.addRoute(urls.urlPatterns, "")
 app.run()
