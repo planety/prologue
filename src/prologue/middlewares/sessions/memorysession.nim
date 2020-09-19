@@ -1,32 +1,20 @@
-import redis, asyncdispatch
-
-proc main() {.async.} =
-  ## Open a connection to Redis running on localhost on the default port (6379)
-  
-
-  ## Set the key `nim_redis:test` to the value `Hello, World`
-  await redisClient.setk("nim_redis:test", "Hello, World")
-
-  ## Get the value of the key `nim_redis:test`
-  let value = await redisClient.get("nim_redis:test")
-
-  assert(value == "Hello, World")
-
-
 import options, strtabs
 
 
 from cookiejar import SameSite
 
 import asyncdispatch
-from ../../core/types import BadSecretKeyError, SecretKey, loads, dumps, len, initSession
+from ../../core/types import BadSecretKeyError, SecretKey, loads, dumps, len, Session, initSession
 from ../../core/context import Context, HandlerAsync, getCookie, setCookie,
     deleteCookie
+from ../../core/urandom import randomString
 from ../../core/response import addHeader
 from ../../signing/signing import DefaultSep, DefaultKeyDerivation,
     BadTimeSignatureError, SignatureExpiredError, DefaultDigestMethodType,
         initTimedSigner, unsign, sign
 from ../../core/middlewaresbase import switch
+
+import tables
 
 
 export cookiejar
@@ -49,27 +37,31 @@ proc sessionMiddleware*(
   if secretKey.len == 0:
     raise newException(BadSecretKeyError, "The length of secret key can't be zero")
 
-  let redisClient = await openAsync()
+  var memorySessionTable = newTable[string, Session]()
   
-  let signer = initTimedSigner(secretKey, salt, sep, keyDerivation, digestMethodType)
-  
+
   result = proc(ctx: Context) {.async.} =
     # TODO make sure {':', ',', '}'} notin key or value
-    ctx.session = initSession(data = newStringTable(modeCaseSensitive))
-    let
+    
+    var
       data = ctx.getCookie(sessionName)
 
-    if data.len != 0:
-      try:
-        ctx.session.loads(signer.unsign(data, maxAge))
-      except BadTimeSignatureError, SignatureExpiredError, ValueError:
-        # BadTimeSignature, SignatureExpired or ValueError
-        discard
+    if data.len != 0 and memorySessionTable.hasKey(data):
+      ctx.session = memorySessionTable[data]
+    else:
+      ctx.session = initSession(data = newStringTable(modeCaseSensitive))
+
+      data = randomString(16)
+      ctx.setCookie(sessionName, data, 
+              maxAge = some(maxAge), path = path, domain = domain, 
+              sameSite = sameSite, httpOnly = httpOnly)
+      memorySessionTable[data] = ctx.session
 
     await switch(ctx)
 
     if ctx.session.len == 0: # empty or modified(del or clear)
       if ctx.session.modified: # modified
+        memorySessionTable.del(data)
         ctx.deleteCookie(sessionName, domain = domain,
                         path = path) # delete session data in cookie
       return
@@ -79,6 +71,4 @@ proc sessionMiddleware*(
 
     # TODO add refresh every request[in permanent session]
     if ctx.session.modified:
-      ctx.setCookie(sessionName, signer.sign(dumps(ctx.session)), 
-                    maxAge = some(maxAge), path = path, domain = domain, 
-                    sameSite = sameSite, httpOnly = httpOnly)
+      memorySessionTable[data] = ctx.session
