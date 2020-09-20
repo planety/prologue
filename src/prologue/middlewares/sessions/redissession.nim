@@ -4,7 +4,7 @@ import options, strtabs
 from cookiejar import SameSite
 
 import asyncdispatch
-from ../../core/types import BadSecretKeyError, SecretKey, loads, dumps, len, Session, initSession, pairs
+from ../../core/types import BadSecretKeyError, SecretKey, len, Session, initSession, pairs
 from ../../core/context import Context, HandlerAsync, getCookie, setCookie,
     deleteCookie
 from ../../core/urandom import randomString

@@ -126,15 +126,17 @@ proc `$`*(session: Session): string {.inline.} =
 proc parseStringTable*(tabs: StringTableRef, s: string) {.inline.} =
   # """{username: flywind, password: root}"""
   # {:}
-  # make sure {':', ',', '}'} notin key or value
+  # TODO make sure {':', ',', '}'} notin key or value
   if s.len <= 3:
     return
   var
     pos = 0
     key, value: string
-  assert(s[pos] == '{', "StringTable String starts with '{'")
+  # assert(s[pos] == '{', "StringTable String starts with '{'")
+
+  pos += skipWhile(s, {'{'})
   # ignore '{'
-  inc(pos)
+  # inc(pos)
   while true:
     pos += s.parseUntil(key, ':', pos)
     # ignore ':'
