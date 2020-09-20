@@ -249,17 +249,17 @@ proc getSignatureDecode*(s: Signer | TimedSigner): string =
 
 # TODO May support compress
 proc sign*(s: Signer, value: string): string =
-  value & s.sep & s.getSignatureEncode(value.toOpenArrayByte(0, value.len - 1))
+  value & s.sep & s.getSignatureEncode(value.toOpenArrayByte(0, value.high))
 
 proc sign*(s: TimedSigner, value: string): string =
   let
     sep = s.sep
     timestamp = $int(cpuTime())
     value = value & sep & timestamp
-  value & sep & s.getSignatureEncode(value.toOpenArrayByte(0, value.len - 1))
+  value & sep & s.getSignatureEncode(value.toOpenArrayByte(0, value.high))
 
 proc verifySignature(s: Signer | TimedSigner, value, sig: string): bool =
-  return sig == s.getSignatureEncode(value.toOpenArrayByte(0, value.len - 1))
+  return sig == s.getSignatureEncode(value.toOpenArrayByte(0, value.high))
 
 proc unsign*(s: Signer | TimedSigner, signedValue: string): string =
   let sep = s.sep

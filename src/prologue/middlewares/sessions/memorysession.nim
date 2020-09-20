@@ -66,6 +66,5 @@ proc sessionMiddleware*(
     if ctx.session.accessed:
       ctx.response.addHeader("vary", "Cookie")
 
-    # TODO add refresh every request[in permanent session]
     if ctx.session.modified:
       memorySessionTable[data] = ctx.session
