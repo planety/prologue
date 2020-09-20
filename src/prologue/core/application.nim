@@ -18,6 +18,8 @@ from nativesockets import Port, `$`
 import cookiejar
 from cgi import CgiError
 
+# from os import sleep
+
 
 from ./utils import isStaticFile
 from ./route import pattern, initPath, initRePath, newPathHandler, newRouter,
@@ -74,6 +76,9 @@ export utils
 
 let
   DefaultErrorHandler = newErrorHandlerTable({Http404: default404Handler, Http500: default500Handler})
+
+# shutdown events
+var dontUseThisShutDownEvents: seq[Event]
 
 
 proc registerErrorHandler*(app: Prologue, code: HttpCode,
@@ -302,6 +307,25 @@ proc run*(app: Prologue) =
     else:
       event.syncHandler()
 
+  dontUseThisShutDownEvents = app.shutdown
+  proc handler() {.noconv.} =
+    # shutdown events
+
+    when defined(windows) and compileOption("threads"):
+      # workaround for https://github.com/nim-lang/Nim/issues/4057
+      setupForeignThreadGc()
+
+    for event in dontUseThisShutDownEvents:
+      if event.async:
+        waitFor event.asyncHandler()
+      else:
+        event.syncHandler()
+
+    echo "Shutting down Events are done after having received SIGINT!\n"
+
+
+  setControlCHook(handler)
+
   # handle requests
   proc handleRequest(nativeRequest: NativeRequest) {.async.} =
     ## TODO request.headers check nil or None
@@ -400,12 +424,6 @@ proc run*(app: Prologue) =
 
   app.serve(app.appPort, handleRequest, app.appAddress)
 
-  # shutdown events
-  for event in app.shutdown:
-    if event.async:
-      waitFor event.asyncHandler()
-    else:
-      event.syncHandler()
 
 when isMainModule:
   proc hello*(ctx: Context) {.async.} =
