@@ -291,6 +291,7 @@ proc shutDownHandler() {.noconv.} =
       event.syncHandler()
 
   echo "Shutting down Events are done after having received SIGINT!\n"
+  quit(QuitSuccess)
 
 proc newApp*(settings: Settings, middlewares: seq[HandlerAsync] = @[],
              startup: seq[Event] = @[], shutdown: seq[Event] = @[],
