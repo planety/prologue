@@ -22,4 +22,4 @@ proc upload(ctx: Context) {.async.} =
     resp fmt"<html><h1>{file.filename}</h1><p>{file.body}</p></html>"
 ```
 
-The full [example](https://github.com/planety/prologue/blob/master/tests/test_uploadFile)
+The full [example](https://github.com/planety/prologue/blob/devel/tests/test_uploadFile)

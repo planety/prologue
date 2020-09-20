@@ -6,7 +6,7 @@ cache:
 
 matrix:
   include:
-    # Build and test against the master (stable) and devel branches of Nim
+    # Build and test against the devel (stable) and devel branches of Nim
     - os: linux
       env: CHANNEL=stable
       compiler: gcc

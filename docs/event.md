@@ -34,7 +34,7 @@ proc newApp*(settings: Settings, middlewares: sink seq[HandlerAsync] = @[],
              appData = newStringTable(mode = modeCaseSensitive)): Prologue =
 ```
 
-Here is an [example](https://github.com/planety/prologue/tree/master/examples/helloworld) for a `startup` event(A `shutdown` event has the same usage as a `startup` event).
+Here is an [example](https://github.com/planety/prologue/tree/devel/examples/helloworld) for a `startup` event(A `shutdown` event has the same usage as a `startup` event).
 
 ```nim
 proc setLoggingLevel() =

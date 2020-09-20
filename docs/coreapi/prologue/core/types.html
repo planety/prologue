@@ -105,7 +105,7 @@ function main() {
   <li><a class="reference" href="#SecretUrl"
     title="SecretUrl = distinct string"><wbr />Secret<wbr />Url<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#Session"
-    title="Session = object
+    title="Session = ref object
   data: StringTableRef
   newCreated*: bool
   modified*: bool
@@ -134,27 +134,35 @@ function main() {
   <li><a class="reference" href="#initSession%2CStringTableRef"
     title="initSession(data: StringTableRef; newCreated = false; modified = false; accessed = false): Session"><wbr />init<wbr />Session<span class="attachedType">Session</span></a></li>
   <li><a class="reference" href="#update%2CSession"
-    title="update(session: var Session)"><wbr />update<span class="attachedType">Session</span></a></li>
+    title="update(session: Session)"><wbr />update<span class="attachedType">Session</span></a></li>
   <li><a class="reference" href="#%5B%5D%2CSession%2Cstring"
-    title="`[]`(session: var Session; key: string): string"><wbr />`[]`<span class="attachedType">Session</span></a></li>
+    title="`[]`(session: Session; key: string): string"><wbr />`[]`<span class="attachedType">Session</span></a></li>
   <li><a class="reference" href="#%5B%5D%3D%2CSession%2Cstring%2Cstring"
-    title="`[]=`(session: var Session; key, value: string)"><wbr />`[]=`<span class="attachedType">Session</span></a></li>
+    title="`[]=`(session: Session; key, value: string)"><wbr />`[]=`<span class="attachedType">Session</span></a></li>
   <li><a class="reference" href="#len%2CSession"
     title="len(session: Session): int"><wbr />len<span class="attachedType">Session</span></a></li>
   <li><a class="reference" href="#getOrDefault%2CSession%2Cstring%2Cstring"
-    title="getOrDefault(session: var Session; key: string; default = &quot;&quot;): string"><wbr />get<wbr />Or<wbr />Default<span class="attachedType">Session</span></a></li>
+    title="getOrDefault(session: Session; key: string; default = &quot;&quot;): string"><wbr />get<wbr />Or<wbr />Default<span class="attachedType">Session</span></a></li>
   <li><a class="reference" href="#del%2CSession%2Cstring"
-    title="del(session: var Session; key: string)"><wbr />del<span class="attachedType">Session</span></a></li>
+    title="del(session: Session; key: string)"><wbr />del<span class="attachedType">Session</span></a></li>
   <li><a class="reference" href="#clear%2CSession"
-    title="clear(session: var Session)"><wbr />clear<span class="attachedType">Session</span></a></li>
+    title="clear(session: Session)"><wbr />clear<span class="attachedType">Session</span></a></li>
   <li><a class="reference" href="#%24%2CSession"
     title="`$`(session: Session): string"><wbr />`$`<span class="attachedType">Session</span></a></li>
   <li><a class="reference" href="#parseStringTable%2CStringTableRef%2Cstring"
     title="parseStringTable(tabs: StringTableRef; s: string)"><wbr />parse<wbr />String<wbr />Table<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#loads%2CSession%2Cstring"
-    title="loads(session: var Session; s: string)"><wbr />loads<span class="attachedType">Session</span></a></li>
+    title="loads(session: Session; s: string)"><wbr />loads<span class="attachedType">Session</span></a></li>
   <li><a class="reference" href="#dumps%2CSession"
     title="dumps(session: Session): string"><wbr />dumps<span class="attachedType">Session</span></a></li>
+
+  </ul>
+</li>
+<li>
+  <a class="reference reference-toplevel" href="#15" id="65">Iterators</a>
+  <ul class="simple simple-toc-section">
+      <li><a class="reference" href="#pairs.i%2CSession"
+    title="pairs(session: Session): tuple[key, val: string]"><wbr />pairs<span class="attachedType">Session</span></a></li>
 
   </ul>
 </li>
@@ -175,7 +183,7 @@ function main() {
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/types.nim#L20"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L20"
 class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L20" class="link-seesrc" target="_blank" >Edit</a>
 
@@ -186,7 +194,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/types.nim#L21"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L21"
 class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L21" class="link-seesrc" target="_blank" >Edit</a>
 
@@ -197,7 +205,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/types.nim#L22"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L22"
 class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L22" class="link-seesrc" target="_blank" >Edit</a>
 
@@ -208,7 +216,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/types.nim#L23"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L23"
 class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L23" class="link-seesrc" target="_blank" >Edit</a>
 
@@ -219,13 +227,13 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/types.nim#L24"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L24"
 class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L24" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="Session"></a>
-<dt><pre><a href="types.html#Session"><span class="Identifier">Session</span></a> <span class="Other">=</span> <span class="Keyword">object</span>
+<dt><pre><a href="types.html#Session"><span class="Identifier">Session</span></a> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span>
   <span class="Identifier">data</span><span class="Other">:</span> <span class="Identifier">StringTableRef</span>
   <span class="Identifier">newCreated</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">bool</span>
   <span class="Identifier">modified</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">bool</span>
@@ -235,7 +243,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/types.nim#L27"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L27"
 class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L27" class="link-seesrc" target="_blank" >Edit</a>
 
@@ -248,7 +256,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/types.nim#L33"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L33"
 class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L33" class="link-seesrc" target="_blank" >Edit</a>
 
@@ -264,7 +272,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/types.nim#L37"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L37"
 class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L37" class="link-seesrc" target="_blank" >Edit</a>
 
@@ -276,7 +284,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/types.nim#L40"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L40"
 class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L40" class="link-seesrc" target="_blank" >Edit</a>
 
@@ -287,7 +295,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/types.nim#L44"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L44"
 class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L44" class="link-seesrc" target="_blank" >Edit</a>
 
@@ -298,7 +306,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/types.nim#L65"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L65"
 class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L65" class="link-seesrc" target="_blank" >Edit</a>
 
@@ -309,7 +317,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/types.nim#L78"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L78"
 class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L78" class="link-seesrc" target="_blank" >Edit</a>
 
@@ -320,7 +328,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 Hide secretKey's value
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/types.nim#L81"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L81"
 class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L81" class="link-seesrc" target="_blank" >Edit</a>
 
@@ -332,41 +340,40 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/types.nim#L85"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L85"
 class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L85" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="update,Session"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#update%2CSession"><span class="Identifier">update</span></a><span class="Other">(</span><span class="Identifier">session</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="types.html#Session"><span class="Identifier">Session</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dt><pre><span class="Keyword">proc</span> <a href="#update%2CSession"><span class="Identifier">update</span></a><span class="Other">(</span><span class="Identifier">session</span><span class="Other">:</span> <a href="types.html#Session"><span class="Identifier">Session</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/types.nim#L89"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L89"
 class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L89" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="[],Session,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#%5B%5D%2CSession%2Cstring"><span class="Identifier">`[]`</span></a><span class="Other">(</span><span class="Identifier">session</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="types.html#Session"><span class="Identifier">Session</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dt><pre><span class="Keyword">proc</span> <a href="#%5B%5D%2CSession%2Cstring"><span class="Identifier">`[]`</span></a><span class="Other">(</span><span class="Identifier">session</span><span class="Other">:</span> <a href="types.html#Session"><span class="Identifier">Session</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/types.nim#L93"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L93"
 class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L93" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="[]=,Session,string,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#%5B%5D%3D%2CSession%2Cstring%2Cstring"><span class="Identifier">`[]=`</span></a><span class="Other">(</span><span class="Identifier">session</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="types.html#Session"><span class="Identifier">Session</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">,</span> <span class="Identifier">value</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dt><pre><span class="Keyword">proc</span> <a href="#%5B%5D%3D%2CSession%2Cstring%2Cstring"><span class="Identifier">`[]=`</span></a><span class="Other">(</span><span class="Identifier">session</span><span class="Other">:</span> <a href="types.html#Session"><span class="Identifier">Session</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">,</span> <span class="Identifier">value</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/types.nim#L97"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L97"
 class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L97" class="link-seesrc" target="_blank" >Edit</a>
 
@@ -377,43 +384,43 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/types.nim#L101"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L101"
 class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L101" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="getOrDefault,Session,string,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#getOrDefault%2CSession%2Cstring%2Cstring"><span class="Identifier">getOrDefault</span></a><span class="Other">(</span><span class="Identifier">session</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="types.html#Session"><span class="Identifier">Session</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">default</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span>
+<dt><pre><span class="Keyword">proc</span> <a href="#getOrDefault%2CSession%2Cstring%2Cstring"><span class="Identifier">getOrDefault</span></a><span class="Other">(</span><span class="Identifier">session</span><span class="Other">:</span> <a href="types.html#Session"><span class="Identifier">Session</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">default</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span>
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/types.nim#L104"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L108"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L104" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L108" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="del,Session,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#del%2CSession%2Cstring"><span class="Identifier">del</span></a><span class="Other">(</span><span class="Identifier">session</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="types.html#Session"><span class="Identifier">Session</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dt><pre><span class="Keyword">proc</span> <a href="#del%2CSession%2Cstring"><span class="Identifier">del</span></a><span class="Other">(</span><span class="Identifier">session</span><span class="Other">:</span> <a href="types.html#Session"><span class="Identifier">Session</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/types.nim#L111"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L115"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L111" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L115" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="clear,Session"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#clear%2CSession"><span class="Identifier">clear</span></a><span class="Other">(</span><span class="Identifier">session</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="types.html#Session"><span class="Identifier">Session</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dt><pre><span class="Keyword">proc</span> <a href="#clear%2CSession"><span class="Identifier">clear</span></a><span class="Other">(</span><span class="Identifier">session</span><span class="Other">:</span> <a href="types.html#Session"><span class="Identifier">Session</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/types.nim#L115"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L119"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L115" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L119" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="$,Session"></a>
@@ -422,9 +429,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/types.nim#L119"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L123"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L119" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L123" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="parseStringTable,StringTableRef,string"></a>
@@ -433,20 +440,20 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/types.nim#L122"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L126"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L122" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L126" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="loads,Session,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#loads%2CSession%2Cstring"><span class="Identifier">loads</span></a><span class="Other">(</span><span class="Identifier">session</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="types.html#Session"><span class="Identifier">Session</span></a><span class="Other">;</span> <span class="Identifier">s</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dt><pre><span class="Keyword">proc</span> <a href="#loads%2CSession%2Cstring"><span class="Identifier">loads</span></a><span class="Other">(</span><span class="Identifier">session</span><span class="Other">:</span> <a href="types.html#Session"><span class="Identifier">Session</span></a><span class="Other">;</span> <span class="Identifier">s</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 Loads session from strings.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/types.nim#L148"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L152"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L148" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L152" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="dumps,Session"></a>
@@ -455,9 +462,25 @@ class="link-seesrc" target="_blank">Source</a>
 
 Dumps session to strings.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/master/src/prologue/core/types.nim#L153"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L157"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L153" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L157" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+
+</dl></div>
+<div class="section" id="15">
+<h1><a class="toc-backref" href="#15">Iterators</a></h1>
+<dl class="item">
+<a id="pairs.i,Session"></a>
+<dt><pre><span class="Keyword">iterator</span> <a href="#pairs.i%2CSession"><span class="Identifier">pairs</span></a><span class="Other">(</span><span class="Identifier">session</span><span class="Other">:</span> <a href="types.html#Session"><span class="Identifier">Session</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">tuple</span><span class="Other">[</span><span class="Identifier">key</span><span class="Other">,</span> <span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">]</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L104"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L104" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -470,7 +493,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-09-16 12:26:10 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-09-20 13:13:36 UTC</small>
       </div>
     </div>
   </div>

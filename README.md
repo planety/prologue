@@ -1,6 +1,6 @@
 ![Build Status](https://github.com/planety/prologue/workflows/Test%20Prologue/badge.svg)
-[![Build Status](https://dev.azure.com/xzsflywind/xlsx/_apis/build/status/planety.prologue?branchName=master)](https://dev.azure.com/xzsflywind/xlsx/_build/latest?definitionId=4&branchName=master)
-![Build Status](https://travis-ci.org/planety/prologue.svg?branch=master)
+[![Build Status](https://dev.azure.com/xzsflywind/xlsx/_apis/build/status/planety.prologue?branchName=devel)](https://dev.azure.com/xzsflywind/xlsx/_build/latest?definitionId=4&branchName=devel)
+![Build Status](https://travis-ci.org/planety/prologue.svg?branch=devel)
 
 ![License: Apache-2.0](https://img.shields.io/github/license/planety/prologue)
 [![Version](https://img.shields.io/github/v/release/planety/prologue?include_prereleases)](https://github.com/planety/prologue/releases)
@@ -206,10 +206,10 @@ with app:
 Run **app.nim**. Now the server is running at localhost:8080.
 
 ### More examples
-- [HelloWorld](https://github.com/planety/prologue/tree/master/examples/helloworld)
-- [ToDoList](https://github.com/planety/prologue/tree/master/examples/todolist)
-- [ToDoApp](https://github.com/planety/prologue/tree/master/examples/todoapp)
-- [Blog](https://github.com/planety/prologue/tree/master/examples/blog)
+- [HelloWorld](https://github.com/planety/prologue/tree/devel/examples/helloworld)
+- [ToDoList](https://github.com/planety/prologue/tree/devel/examples/todolist)
+- [ToDoApp](https://github.com/planety/prologue/tree/devel/examples/todoapp)
+- [Blog](https://github.com/planety/prologue/tree/devel/examples/blog)
 
 ### Extensions
 

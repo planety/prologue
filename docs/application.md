@@ -2,7 +2,7 @@
 
 `Prologue` object is used to configure the application, do some preparations before requests.
 
-The [hello world](https://github.com/planety/prologue/blob/master/examples/helloworld/app.nim) example is 
+The [hello world](https://github.com/planety/prologue/blob/devel/examples/helloworld/app.nim) example is 
 suitable for learning `Prologue` object.
 
 ## startup and shutdown events

@@ -80,7 +80,7 @@ function main() {
           <li><a class="reference external"
           data-doc-search-tag="types: `[]=`(formPart: FormPart; key: string; body: string)" href="src/prologue/core/types.html#%5B%5D%3D%2CFormPart%2Cstring%2Cstring">types: `[]=`(formPart: FormPart; key: string; body: string)</a></li>
           <li><a class="reference external"
-          data-doc-search-tag="types: `[]=`(session: var Session; key, value: string)" href="src/prologue/core/types.html#%5B%5D%3D%2CSession%2Cstring%2Cstring">types: `[]=`(session: var Session; key, value: string)</a></li>
+          data-doc-search-tag="types: `[]=`(session: Session; key, value: string)" href="src/prologue/core/types.html#%5B%5D%3D%2CSession%2Cstring%2Cstring">types: `[]=`(session: Session; key, value: string)</a></li>
           </ul></dd>
 <dt><a name="%60%5B%5D%60" href="#%60%5B%5D%60"><span>`[]`:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -92,7 +92,7 @@ function main() {
           <li><a class="reference external"
           data-doc-search-tag="types: `[]`(formPart: FormPart; key: string): tuple[params: StringTableRef, body: string]" href="src/prologue/core/types.html#%5B%5D%2CFormPart%2Cstring">types: `[]`(formPart: FormPart; key: string): tuple[params: StringTableRef, body: string]</a></li>
           <li><a class="reference external"
-          data-doc-search-tag="types: `[]`(session: var Session; key: string): string" href="src/prologue/core/types.html#%5B%5D%2CSession%2Cstring">types: `[]`(session: var Session; key: string): string</a></li>
+          data-doc-search-tag="types: `[]`(session: Session; key: string): string" href="src/prologue/core/types.html#%5B%5D%2CSession%2Cstring">types: `[]`(session: Session; key: string): string</a></li>
           </ul></dd>
 <dt><a name="abort" href="#abort"><span>abort:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -268,7 +268,7 @@ function main() {
           </ul></dd>
 <dt><a name="clear" href="#clear"><span>clear:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="types: clear(session: var Session)" href="src/prologue/core/types.html#clear%2CSession">types: clear(session: var Session)</a></li>
+          data-doc-search-tag="types: clear(session: Session)" href="src/prologue/core/types.html#clear%2CSession">types: clear(session: Session)</a></li>
           </ul></dd>
 <dt><a name="clickjackingMiddleWare" href="#clickjackingMiddleWare"><span>clickjackingMiddleWare:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -374,7 +374,7 @@ function main() {
           </ul></dd>
 <dt><a name="del" href="#del"><span>del:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="types: del(session: var Session; key: string)" href="src/prologue/core/types.html#del%2CSession%2Cstring">types: del(session: var Session; key: string)</a></li>
+          data-doc-search-tag="types: del(session: Session; key: string)" href="src/prologue/core/types.html#del%2CSession%2Cstring">types: del(session: Session; key: string)</a></li>
           </ul></dd>
 <dt><a name="delete" href="#delete"><span>delete:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -506,7 +506,7 @@ function main() {
           <li><a class="reference external"
           data-doc-search-tag="nativesettings: getOrDefault(settings: Settings; key: string): JsonNode" href="src/prologue/core/nativesettings.html#getOrDefault%2CSettings%2Cstring">nativesettings: getOrDefault(settings: Settings; key: string): JsonNode</a></li>
           <li><a class="reference external"
-          data-doc-search-tag="types: getOrDefault(session: var Session; key: string; default = &quot;&quot;): string" href="src/prologue/core/types.html#getOrDefault%2CSession%2Cstring%2Cstring">types: getOrDefault(session: var Session; key: string; default = &quot;&quot;): string</a></li>
+          data-doc-search-tag="types: getOrDefault(session: Session; key: string; default = &quot;&quot;): string" href="src/prologue/core/types.html#getOrDefault%2CSession%2Cstring%2Cstring">types: getOrDefault(session: Session; key: string; default = &quot;&quot;): string</a></li>
           </ul></dd>
 <dt><a name="getPathParams" href="#getPathParams"><span>getPathParams:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -756,7 +756,7 @@ function main() {
           </ul></dd>
 <dt><a name="loads" href="#loads"><span>loads:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="types: loads(session: var Session; s: string)" href="src/prologue/core/types.html#loads%2CSession%2Cstring">types: loads(session: var Session; s: string)</a></li>
+          data-doc-search-tag="types: loads(session: Session; s: string)" href="src/prologue/core/types.html#loads%2CSession%2Cstring">types: loads(session: Session; s: string)</a></li>
           </ul></dd>
 <dt><a name="loadTranslate" href="#loadTranslate"><span>loadTranslate:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -921,6 +921,8 @@ function main() {
           data-doc-search-tag="configure: pairs(env: Env): (string, string)" href="src/prologue/core/configure.html#pairs.i%2CEnv">configure: pairs(env: Env): (string, string)</a></li>
           <li><a class="reference external"
           data-doc-search-tag="route: pairs(router: Router): (Path, PathHandler)" href="src/prologue/core/route.html#pairs.i%2CRouter">route: pairs(router: Router): (Path, PathHandler)</a></li>
+          <li><a class="reference external"
+          data-doc-search-tag="types: pairs(session: Session): tuple[key, val: string]" href="src/prologue/core/types.html#pairs.i%2CSession">types: pairs(session: Session): tuple[key, val: string]</a></li>
           </ul></dd>
 <dt><a name="parseFormParams" href="#parseFormParams"><span>parseFormParams:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -1418,7 +1420,7 @@ function main() {
           </ul></dd>
 <dt><a name="update" href="#update"><span>update:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="types: update(session: var Session)" href="src/prologue/core/types.html#update%2CSession">types: update(session: var Session)</a></li>
+          data-doc-search-tag="types: update(session: Session)" href="src/prologue/core/types.html#update%2CSession">types: update(session: Session)</a></li>
           </ul></dd>
 <dt><a name="UploadFile" href="#UploadFile"><span>UploadFile:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -1477,7 +1479,7 @@ function main() {
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-09-16 12:26:59 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-09-20 13:13:51 UTC</small>
       </div>
     </div>
   </div>

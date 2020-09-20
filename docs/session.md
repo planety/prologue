@@ -28,5 +28,5 @@ proc logout*(ctx: Context) {.async.} =
   resp $ctx.session
 ```
 
-More session examples are in [Session](https://github.com/planety/prologue/tree/master/examples/session) and [Blog](https://github.com/planety/prologue/tree/master/examples/blog)
+More session examples are in [Session](https://github.com/planety/prologue/tree/devel/examples/session) and [Blog](https://github.com/planety/prologue/tree/devel/examples/blog)
 
