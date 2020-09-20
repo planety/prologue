@@ -78,6 +78,7 @@ let
   DefaultErrorHandler = newErrorHandlerTable({Http404: default404Handler, Http500: default500Handler})
 
 # shutdown events
+# I don't like global variables
 var dontUseThisShutDownEvents: seq[Event]
 
 
