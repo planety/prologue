@@ -78,7 +78,7 @@ let
   DefaultErrorHandler = newErrorHandlerTable({Http404: default404Handler, Http500: default500Handler})
 
 # shutdown events
-# I don't like global variables
+# TODO I don't like global variables
 var dontUseThisShutDownEvents: seq[Event]
 
 
@@ -277,6 +277,21 @@ proc appPort*(app: Prologue): Port {.inline.} =
   ## Gets the port from the settings.
   app.gScope.settings.port
 
+proc shutDownHandler() {.noconv.} =
+  # shutdown events
+
+  when defined(windows) and compileOption("threads"):
+    # workaround for https://github.com/nim-lang/Nim/issues/4057
+    setupForeignThreadGc()
+
+  for event in dontUseThisShutDownEvents:
+    if event.async:
+      waitFor event.asyncHandler()
+    else:
+      event.syncHandler()
+
+  echo "Shutting down Events are done after having received SIGINT!\n"
+
 proc newApp*(settings: Settings, middlewares: seq[HandlerAsync] = @[],
              startup: seq[Event] = @[], shutdown: seq[Event] = @[],
              errorHandlerTable = DefaultErrorHandler,
@@ -309,23 +324,8 @@ proc run*(app: Prologue) =
       event.syncHandler()
 
   dontUseThisShutDownEvents = app.shutdown
-  proc handler() {.noconv.} =
-    # shutdown events
 
-    when defined(windows) and compileOption("threads"):
-      # workaround for https://github.com/nim-lang/Nim/issues/4057
-      setupForeignThreadGc()
-
-    for event in dontUseThisShutDownEvents:
-      if event.async:
-        waitFor event.asyncHandler()
-      else:
-        event.syncHandler()
-
-    echo "Shutting down Events are done after having received SIGINT!\n"
-
-
-  setControlCHook(handler)
+  setControlCHook(shutDownHandler)
 
   # handle requests
   proc handleRequest(nativeRequest: NativeRequest) {.async.} =
