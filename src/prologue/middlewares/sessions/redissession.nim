@@ -1,27 +1,13 @@
-import redis, asyncdispatch
-
-proc main() {.async.} =
-  ## Open a connection to Redis running on localhost on the default port (6379)
-  
-
-  ## Set the key `nim_redis:test` to the value `Hello, World`
-  await redisClient.setk("nim_redis:test", "Hello, World")
-
-  ## Get the value of the key `nim_redis:test`
-  let value = await redisClient.get("nim_redis:test")
-
-  assert(value == "Hello, World")
-
-
 import options, strtabs
 
 
 from cookiejar import SameSite
 
 import asyncdispatch
-from ../../core/types import BadSecretKeyError, SecretKey, loads, dumps, len, initSession
+from ../../core/types import BadSecretKeyError, SecretKey, loads, dumps, len, Session, initSession, pairs
 from ../../core/context import Context, HandlerAsync, getCookie, setCookie,
     deleteCookie
+from ../../core/urandom import randomString
 from ../../core/response import addHeader
 from ../../signing/signing import DefaultSep, DefaultKeyDerivation,
     BadTimeSignatureError, SignatureExpiredError, DefaultDigestMethodType,
@@ -29,8 +15,15 @@ from ../../signing/signing import DefaultSep, DefaultKeyDerivation,
 from ../../core/middlewaresbase import switch
 
 
+import redis
+
 export cookiejar
 
+
+proc divide(info: RedisList): StringTableRef =
+  result = newStringTable(modeCaseSensitive)
+  for idx in countup(0, info.high, 2):
+    result[info[idx]] = info[idx + 1]
 
 proc sessionMiddleware*(
   secretKey: SecretKey,
@@ -49,27 +42,37 @@ proc sessionMiddleware*(
   if secretKey.len == 0:
     raise newException(BadSecretKeyError, "The length of secret key can't be zero")
 
-  let redisClient = await openAsync()
-  
-  let signer = initTimedSigner(secretKey, salt, sep, keyDerivation, digestMethodType)
-  
+  ## TODO
+  # {.gcsafe.}:
+  var redisClient = waitFor openAsync()
+
   result = proc(ctx: Context) {.async.} =
-    # TODO make sure {':', ',', '}'} notin key or value
-    ctx.session = initSession(data = newStringTable(modeCaseSensitive))
-    let
+    var
       data = ctx.getCookie(sessionName)
 
     if data.len != 0:
-      try:
-        ctx.session.loads(signer.unsign(data, maxAge))
-      except BadTimeSignatureError, SignatureExpiredError, ValueError:
-        # BadTimeSignature, SignatureExpired or ValueError
-        discard
+      {.gcsafe.}:
+        let info = await redisClient.hGetAll(data)
+
+      if info.len != 0:
+        ctx.session = initSession(data = divide(info))
+      else:
+        ctx.session = initSession(data = newStringTable(modeCaseSensitive))
+    else:
+      ctx.session = initSession(data = newStringTable(modeCaseSensitive))
+
+      ## TODO sign or encrypt it
+      data = randomString(16)
+      ctx.setCookie(sessionName, data, 
+              maxAge = some(maxAge), path = path, domain = domain, 
+              sameSite = sameSite, httpOnly = httpOnly)
 
     await switch(ctx)
 
     if ctx.session.len == 0: # empty or modified(del or clear)
       if ctx.session.modified: # modified
+        {.gcsafe.}:
+          discard await redisClient.del(@[data])
         ctx.deleteCookie(sessionName, domain = domain,
                         path = path) # delete session data in cookie
       return
@@ -77,8 +80,10 @@ proc sessionMiddleware*(
     if ctx.session.accessed:
       ctx.response.addHeader("vary", "Cookie")
 
-    # TODO add refresh every request[in permanent session]
     if ctx.session.modified:
-      ctx.setCookie(sessionName, signer.sign(dumps(ctx.session)), 
-                    maxAge = some(maxAge), path = path, domain = domain, 
-                    sameSite = sameSite, httpOnly = httpOnly)
+      let length = ctx.session.len
+      var temp = newSeqOfCap[(string, string)](length)
+      for (key, val) in ctx.session.pairs:
+        temp.add (key, val)
+      {.gcsafe.}:
+        await redisClient.hMset(data, temp)

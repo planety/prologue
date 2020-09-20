@@ -101,6 +101,10 @@ proc `[]=`*(session: Session, key, value: string) {.inline.} =
 proc len*(session: Session): int {.inline.} =
   session.data.len
 
+iterator pairs*(session: Session): tuple[key, val: string] =
+  for (key, val) in session.data.pairs:
+    yield (key, val)
+
 proc getOrDefault*(session: Session, key: string, default = ""): string {.inline.} =
   if session.data.hasKey(key):
     result = session.data[key]
