@@ -14,8 +14,10 @@ from ../../signing/signing import DefaultSep, DefaultKeyDerivation,
         initTimedSigner, unsign, sign
 from ../../core/middlewaresbase import switch
 
-
-import redis
+when not (compiles do: import redis):
+  {.error: "Please use `logue extension redis` to install!".}
+else:
+  import redis
 
 export cookiejar
 
