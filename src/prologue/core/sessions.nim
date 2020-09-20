@@ -9,7 +9,7 @@ type
   AsyncRedisStorage* = ref object of Storage
     data: AsyncRedis
 
-    
+
 
 
 method put(s: Storage, key, value: string) {.base, async.} = discard
