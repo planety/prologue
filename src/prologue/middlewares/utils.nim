@@ -30,7 +30,7 @@ proc testMiddleware*(): HandlerAsync =
     logging.info "debug->end"
 
 
-proc loggingMiddleware*(appName = "Starlight"): HandlerAsync =
+proc loggingMiddleware*(appName = "Prologue"): HandlerAsync =
   result = proc(ctx: Context) {.async.} =
     logging.info "loggingMiddleware->begin"
     logging.debug "============================"
@@ -41,7 +41,7 @@ proc loggingMiddleware*(appName = "Starlight"): HandlerAsync =
     logging.info "loggingMiddleware->end"
     await switch(ctx)
 
-proc debugRequestMiddleware*(appName = "Starlight"): HandlerAsync =
+proc debugRequestMiddleware*(appName = "Prologue"): HandlerAsync =
   result = proc(ctx: Context) {.async.} =
     logging.info "debugRequestMiddleware->begin"
     logging.debug "============================"
@@ -55,7 +55,7 @@ proc debugRequestMiddleware*(appName = "Starlight"): HandlerAsync =
     logging.info "debugRequestMiddleware->end"
     await switch(ctx)
 
-proc debugResponseMiddleware*(appName = "Starlight"): HandlerAsync =
+proc debugResponseMiddleware*(appName = "Prologue"): HandlerAsync =
   result = proc(ctx: Context) {.async.} =
     await switch(ctx)
     logging.info "debugResponseMiddleware->begin"
@@ -66,7 +66,7 @@ proc debugResponseMiddleware*(appName = "Starlight"): HandlerAsync =
     logging.debug "============================"
     logging.info "debugResponseMiddleware->end"
 
-proc stripPathMiddleware*(appName = "Starlight"): HandlerAsync =
+proc stripPathMiddleware*(appName = "Prologue"): HandlerAsync =
   result = proc(ctx: Context) {.async.} =
     logging.info "stripPathMiddleware->begin"
     logging.debug "============================"
