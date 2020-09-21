@@ -10,9 +10,9 @@ if (typeof Uint16Array === 'undefined') Uint16Array = Array;
 if (typeof Uint32Array === 'undefined') Uint32Array = Array;
 if (typeof Float32Array === 'undefined') Float32Array = Array;
 if (typeof Float64Array === 'undefined') Float64Array = Array;
-var NTI10396058 = {size: 0, kind: 18, base: null, node: null, finalizer: null};
-var NTI1214253 = {size: 0, kind: 17, base: null, node: null, finalizer: null};
-var NTI10555574 = {size: 0,kind: 24,base: null,node: null,finalizer: null};
+var NTI10406058 = {size: 0, kind: 18, base: null, node: null, finalizer: null};
+var NTI1214653 = {size: 0, kind: 17, base: null, node: null, finalizer: null};
+var NTI10565574 = {size: 0,kind: 24,base: null,node: null,finalizer: null};
 var NTI1872476 = {size: 0,kind: 25,base: null,node: null,finalizer: null};
 var NTI1872472 = {size: 0,kind: 25,base: null,node: null,finalizer: null};
 var NTI1872468 = {size: 0,kind: 25,base: null,node: null,finalizer: null};
@@ -39,11 +39,11 @@ var NTI1872388 = {size: 0,kind: 25,base: null,node: null,finalizer: null};
 var NTI1872205 = {size: 0, kind: 17, base: null, node: null, finalizer: null};
 var NTI1872293 = {size: 0, kind: 17, base: null, node: null, finalizer: null};
 var NTI1872291 = {size: 0,kind: 22,base: null,node: null,finalizer: null};
-var NTI1873616 = {size: 0,kind: 25,base: null,node: null,finalizer: null};
-var NTI1873607 = {size: 0,kind: 25,base: null,node: null,finalizer: null};
-var NTI1873606 = {size: 0, kind: 18, base: null, node: null, finalizer: null};
+var NTI1873626 = {size: 0,kind: 25,base: null,node: null,finalizer: null};
+var NTI1873617 = {size: 0,kind: 25,base: null,node: null,finalizer: null};
+var NTI1873616 = {size: 0, kind: 18, base: null, node: null, finalizer: null};
 var NTI1872385 = {size: 0,kind: 22,base: null,node: null,finalizer: null};
-var NTI1873614 = {size: 0, kind: 18, base: null, node: null, finalizer: null};
+var NTI1873624 = {size: 0, kind: 18, base: null, node: null, finalizer: null};
 var NTI1872387 = {size: 0,kind: 22,base: null,node: null,finalizer: null};
 var NTI1872269 = {size: 0, kind: 17, base: null, node: null, finalizer: null};
 var NTI1872267 = {size: 0,kind: 22,base: null,node: null,finalizer: null};
@@ -79,50 +79,50 @@ var NTI1872611 = {size: 0,kind: 24,base: null,node: null,finalizer: null};
 var NTI1872609 = {size: 0,kind: 24,base: null,node: null,finalizer: null};
 var NTI1872237 = {size: 0, kind: 17, base: null, node: null, finalizer: null};
 var NTI1872235 = {size: 0,kind: 22,base: null,node: null,finalizer: null};
-var NTI1890705 = {size: 0,kind: 24,base: null,node: null,finalizer: null};
-var NTI1214241 = {size: 0, kind: 17, base: null, node: null, finalizer: null};
-var NTI1214249 = {size: 0, kind: 17, base: null, node: null, finalizer: null};
+var NTI1900505 = {size: 0,kind: 24,base: null,node: null,finalizer: null};
+var NTI1214641 = {size: 0, kind: 17, base: null, node: null, finalizer: null};
+var NTI1214649 = {size: 0, kind: 17, base: null, node: null, finalizer: null};
 var NTI1208046 = {size: 0,kind: 31,base: null,node: null,finalizer: null};
 var NTI1400043 = {size: 0, kind: 18, base: null, node: null, finalizer: null};
-var NTI1214008 = {size: 0, kind: 17, base: null, node: null, finalizer: null};
-var NTI1214328 = {size: 0,kind: 22,base: null,node: null,finalizer: null};
+var NTI1214408 = {size: 0, kind: 17, base: null, node: null, finalizer: null};
+var NTI1214728 = {size: 0,kind: 22,base: null,node: null,finalizer: null};
 var NTI1208015 = {size: 0,kind: 28,base: null,node: null,finalizer: null};
 var NTI1208017 = {size: 0,kind: 29,base: null,node: null,finalizer: null};
-var NTI1214323 = {size: 0,kind: 22,base: null,node: null,finalizer: null};
-var NTI1214217 = {size: 0, kind: 17, base: null, node: null, finalizer: null};
-var NTI1214219 = {size: 0, kind: 17, base: null, node: null, finalizer: null};
-var NTI1214233 = {size: 0, kind: 17, base: null, node: null, finalizer: null};
-var NTI1214237 = {size: 0, kind: 17, base: null, node: null, finalizer: null};
-var NNI1214237 = {kind: 2, len: 0, offset: 0, typ: null, name: null, sons: []};
-NTI1214237.node = NNI1214237;
-var NNI1214233 = {kind: 2, len: 0, offset: 0, typ: null, name: null, sons: []};
-NTI1214233.node = NNI1214233;
-var NNI1214219 = {kind: 2, len: 0, offset: 0, typ: null, name: null, sons: []};
-NTI1214219.node = NNI1214219;
-NTI1214323.base = NTI1214217;
-NTI1214328.base = NTI1214217;
-var NNI1214217 = {kind: 2, len: 5, offset: 0, typ: null, name: null, sons: [{kind: 1, offset: "parent", len: 0, typ: NTI1214323, name: "parent", sons: null}, 
+var NTI1214723 = {size: 0,kind: 22,base: null,node: null,finalizer: null};
+var NTI1214617 = {size: 0, kind: 17, base: null, node: null, finalizer: null};
+var NTI1214619 = {size: 0, kind: 17, base: null, node: null, finalizer: null};
+var NTI1214633 = {size: 0, kind: 17, base: null, node: null, finalizer: null};
+var NTI1214637 = {size: 0, kind: 17, base: null, node: null, finalizer: null};
+var NNI1214637 = {kind: 2, len: 0, offset: 0, typ: null, name: null, sons: []};
+NTI1214637.node = NNI1214637;
+var NNI1214633 = {kind: 2, len: 0, offset: 0, typ: null, name: null, sons: []};
+NTI1214633.node = NNI1214633;
+var NNI1214619 = {kind: 2, len: 0, offset: 0, typ: null, name: null, sons: []};
+NTI1214619.node = NNI1214619;
+NTI1214723.base = NTI1214617;
+NTI1214728.base = NTI1214617;
+var NNI1214617 = {kind: 2, len: 5, offset: 0, typ: null, name: null, sons: [{kind: 1, offset: "parent", len: 0, typ: NTI1214723, name: "parent", sons: null}, 
 {kind: 1, offset: "name", len: 0, typ: NTI1208017, name: "name", sons: null}, 
 {kind: 1, offset: "message", len: 0, typ: NTI1208015, name: "msg", sons: null}, 
 {kind: 1, offset: "trace", len: 0, typ: NTI1208015, name: "trace", sons: null}, 
-{kind: 1, offset: "up", len: 0, typ: NTI1214328, name: "up", sons: null}]};
-NTI1214217.node = NNI1214217;
-var NNI1214008 = {kind: 2, len: 0, offset: 0, typ: null, name: null, sons: []};
-NTI1214008.node = NNI1214008;
-NTI1214217.base = NTI1214008;
-NTI1214219.base = NTI1214217;
-NTI1214233.base = NTI1214219;
-NTI1214237.base = NTI1214233;
+{kind: 1, offset: "up", len: 0, typ: NTI1214728, name: "up", sons: null}]};
+NTI1214617.node = NNI1214617;
+var NNI1214408 = {kind: 2, len: 0, offset: 0, typ: null, name: null, sons: []};
+NTI1214408.node = NNI1214408;
+NTI1214617.base = NTI1214408;
+NTI1214619.base = NTI1214617;
+NTI1214633.base = NTI1214619;
+NTI1214637.base = NTI1214633;
 var NNI1400043 = {kind: 2, len: 3, offset: 0, typ: null, name: null, sons: [{kind: 1, offset: "Field0", len: 0, typ: NTI1208017, name: "Field0", sons: null}, 
 {kind: 1, offset: "Field1", len: 0, typ: NTI1208046, name: "Field1", sons: null}, 
 {kind: 1, offset: "Field2", len: 0, typ: NTI1208017, name: "Field2", sons: null}]};
 NTI1400043.node = NNI1400043;
-var NNI1214249 = {kind: 2, len: 0, offset: 0, typ: null, name: null, sons: []};
-NTI1214249.node = NNI1214249;
-NTI1214249.base = NTI1214219;
-var NNI1214241 = {kind: 2, len: 0, offset: 0, typ: null, name: null, sons: []};
-NTI1214241.node = NNI1214241;
-NTI1214241.base = NTI1214219;
+var NNI1214649 = {kind: 2, len: 0, offset: 0, typ: null, name: null, sons: []};
+NTI1214649.node = NNI1214649;
+NTI1214649.base = NTI1214619;
+var NNI1214641 = {kind: 2, len: 0, offset: 0, typ: null, name: null, sons: []};
+NTI1214641.node = NNI1214641;
+NTI1214641.base = NTI1214619;
 NTI1872609.base = NTI1872235;
 NTI1872611.base = NTI1872235;
 NTI1872613.base = NTI1872235;
@@ -141,7 +141,7 @@ var NNI1872233 = {kind: 2, offset: 0, typ: null, name: null, len: 12, sons: {"1"
 NTI1872233.node = NNI1872233;
 var NNI1872231 = {kind: 2, len: 0, offset: 0, typ: null, name: null, sons: []};
 NTI1872231.node = NNI1872231;
-NTI1872231.base = NTI1214008;
+NTI1872231.base = NTI1214408;
 NTI1872229.base = NTI1872231;
 NTI1872765.base = NTI1872243;
 var NNI1872285 = {kind: 2, len: 10, offset: 0, typ: null, name: null, sons: [{kind: 1, offset: "acceptCharset", len: 0, typ: NTI1208017, name: "acceptCharset", sons: null}, 
@@ -229,13 +229,13 @@ NTI1872269.node = NNI1872269;
 NTI1872269.base = NTI1872245;
 NTI1872267.base = NTI1872269;
 NTI1872659.base = NTI1872267;
-var NNI1873606 = {kind: 1, offset: "then", len: 0, typ: NTI1873607, name: "then", sons: null};
-NTI1873606.node = NNI1873606;
-NTI1872385.base = NTI1873606;
-var NNI1873614 = {kind: 2, len: 2, offset: 0, typ: null, name: null, sons: [{kind: 1, offset: "ready", len: 0, typ: NTI1872385, name: "ready", sons: null}, 
-{kind: 1, offset: "onloadingdone", len: 0, typ: NTI1873616, name: "onloadingdone", sons: null}]};
-NTI1873614.node = NNI1873614;
-NTI1872387.base = NTI1873614;
+var NNI1873616 = {kind: 1, offset: "then", len: 0, typ: NTI1873617, name: "then", sons: null};
+NTI1873616.node = NNI1873616;
+NTI1872385.base = NTI1873616;
+var NNI1873624 = {kind: 2, len: 2, offset: 0, typ: null, name: null, sons: [{kind: 1, offset: "ready", len: 0, typ: NTI1872385, name: "ready", sons: null}, 
+{kind: 1, offset: "onloadingdone", len: 0, typ: NTI1873626, name: "onloadingdone", sons: null}]};
+NTI1873624.node = NNI1873624;
+NTI1872387.base = NTI1873624;
 var NNI1872241 = {kind: 2, len: 22, offset: 0, typ: null, name: null, sons: [{kind: 1, offset: "activeElement", len: 0, typ: NTI1872243, name: "activeElement", sons: null}, 
 {kind: 1, offset: "alinkColor", len: 0, typ: NTI1208017, name: "alinkColor", sons: null}, 
 {kind: 1, offset: "bgColor", len: 0, typ: NTI1208017, name: "bgColor", sons: null}, 
@@ -630,7 +630,7 @@ var NNI1872293 = {kind: 2, len: 368, offset: 0, typ: null, name: null, sons: [{k
 {kind: 1, offset: "writingMode", len: 0, typ: NTI1208017, name: "writingMode", sons: null}, 
 {kind: 1, offset: "zIndex", len: 0, typ: NTI1208017, name: "zIndex", sons: null}]};
 NTI1872293.node = NNI1872293;
-NTI1872293.base = NTI1214008;
+NTI1872293.base = NTI1214408;
 NTI1872291.base = NTI1872293;
 var NNI1872237 = {kind: 2, len: 22, offset: 0, typ: null, name: null, sons: [{kind: 1, offset: "attributes", len: 0, typ: NTI1872609, name: "attributes", sons: null}, 
 {kind: 1, offset: "childNodes", len: 0, typ: NTI1872611, name: "childNodes", sons: null}, 
@@ -679,17 +679,17 @@ var NNI1872205 = {kind: 2, len: 23, offset: 0, typ: null, name: null, sons: [{ki
 {kind: 1, offset: "onprogress", len: 0, typ: NTI1872472, name: "onprogress", sons: null}, 
 {kind: 1, offset: "onloadend", len: 0, typ: NTI1872476, name: "onloadend", sons: null}]};
 NTI1872205.node = NNI1872205;
-NTI1872205.base = NTI1214008;
+NTI1872205.base = NTI1214408;
 NTI1872237.base = NTI1872205;
 NTI1872235.base = NTI1872237;
-NTI1890705.base = NTI1872235;
-NTI10555574.base = NTI1208017;
-var NNI1214253 = {kind: 2, len: 0, offset: 0, typ: null, name: null, sons: []};
-NTI1214253.node = NNI1214253;
-NTI1214253.base = NTI1214219;
-var NNI10396058 = {kind: 2, len: 2, offset: 0, typ: null, name: null, sons: [{kind: 1, offset: "Field0", len: 0, typ: NTI1208046, name: "Field0", sons: null}, 
+NTI1900505.base = NTI1872235;
+NTI10565574.base = NTI1208017;
+var NNI1214653 = {kind: 2, len: 0, offset: 0, typ: null, name: null, sons: []};
+NTI1214653.node = NNI1214653;
+NTI1214653.base = NTI1214619;
+var NNI10406058 = {kind: 2, len: 2, offset: 0, typ: null, name: null, sons: [{kind: 1, offset: "Field0", len: 0, typ: NTI1208046, name: "Field0", sons: null}, 
 {kind: 1, offset: "Field1", len: 0, typ: NTI1208066, name: "Field1", sons: null}]};
-NTI10396058.node = NNI10396058;
+NTI10406058.node = NNI10406058;
 function makeNimstrLit(c_1475062) {
       var ln = c_1475062.length;
   var result = new Array(ln);
@@ -1041,2271 +1041,2280 @@ if (!Math.trunc) {
   };
 }
 
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dom",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\js\\dom.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dochack",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+var F={procname:"module dom",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\js\\dom.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module dochack",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module parseutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\parseutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module parseutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\parseutils.nim",line:0};
+var F={procname:"module parseutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\parseutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module parseutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\parseutils.nim",line:0};
+var F={procname:"module parseutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\parseutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module parseutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\parseutils.nim",line:0};
+var F={procname:"module parseutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\parseutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module parseutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\parseutils.nim",line:0};
+var F={procname:"module parseutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\parseutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module parseutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\parseutils.nim",line:0};
+var F={procname:"module parseutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\parseutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module parseutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\parseutils.nim",line:0};
+var F={procname:"module parseutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\parseutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module parseutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\parseutils.nim",line:0};
+var F={procname:"module parseutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\parseutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module parseutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\parseutils.nim",line:0};
+var F={procname:"module parseutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\parseutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module parseutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\parseutils.nim",line:0};
+var F={procname:"module parseutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\parseutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module parseutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\parseutils.nim",line:0};
+var F={procname:"module parseutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\parseutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module parseutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\parseutils.nim",line:0};
+var F={procname:"module parseutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\parseutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module parseutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\parseutils.nim",line:0};
+var F={procname:"module parseutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\parseutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module parseutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\parseutils.nim",line:0};
+var F={procname:"module parseutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\parseutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module parseutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\parseutils.nim",line:0};
+var F={procname:"module parseutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\parseutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module parseutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\parseutils.nim",line:0};
+var F={procname:"module parseutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\parseutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module parseutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\parseutils.nim",line:0};
+var F={procname:"module parseutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\parseutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module parseutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\parseutils.nim",line:0};
+var F={procname:"module parseutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\parseutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module parseutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\parseutils.nim",line:0};
+var F={procname:"module parseutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\parseutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module parseutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\parseutils.nim",line:0};
+var F={procname:"module parseutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\parseutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module parseutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\parseutils.nim",line:0};
+var F={procname:"module parseutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\parseutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module parseutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\parseutils.nim",line:0};
+var F={procname:"module parseutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\parseutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module parseutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\parseutils.nim",line:0};
+var F={procname:"module parseutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\parseutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module parseutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\parseutils.nim",line:0};
+var F={procname:"module parseutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\parseutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module parseutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\parseutils.nim",line:0};
+var F={procname:"module parseutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\parseutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module parseutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\parseutils.nim",line:0};
+var F={procname:"module parseutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\parseutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module parseutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\parseutils.nim",line:0};
+var F={procname:"module parseutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\parseutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module parseutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\parseutils.nim",line:0};
+var F={procname:"module parseutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\parseutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module parseutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\parseutils.nim",line:0};
+var F={procname:"module parseutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\parseutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module parseutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\parseutils.nim",line:0};
+var F={procname:"module parseutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\parseutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module parseutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\parseutils.nim",line:0};
+var F={procname:"module parseutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\parseutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module parseutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\parseutils.nim",line:0};
+var F={procname:"module parseutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\parseutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module parseutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\parseutils.nim",line:0};
+var F={procname:"module parseutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\parseutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module parseutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\parseutils.nim",line:0};
+var F={procname:"module parseutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\parseutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module parseutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\parseutils.nim",line:0};
+var F={procname:"module parseutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\parseutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module parseutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\parseutils.nim",line:0};
+var F={procname:"module parseutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\parseutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module parseutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\parseutils.nim",line:0};
+var F={procname:"module parseutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\parseutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module parseutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\parseutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module math",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\math.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module math",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\math.nim",line:0};
+var F={procname:"module math",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\math.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module math",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\math.nim",line:0};
+var F={procname:"module math",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\math.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module bitops",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\bitops.nim",line:0};
+var F={procname:"module math",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\math.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module bitops",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\bitops.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module macros",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\core\\macros.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module bitops",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\bitops.nim",line:0};
+var F={procname:"module macros",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\core\\macros.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module bitops",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\bitops.nim",line:0};
+var F={procname:"module bitops",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\bitops.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module bitops",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\bitops.nim",line:0};
+var F={procname:"module bitops",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\bitops.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module bitops",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\bitops.nim",line:0};
+var F={procname:"module bitops",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\bitops.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module bitops",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\bitops.nim",line:0};
+var F={procname:"module bitops",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\bitops.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module bitops",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\bitops.nim",line:0};
+var F={procname:"module bitops",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\bitops.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module bitops",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\bitops.nim",line:0};
+var F={procname:"module bitops",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\bitops.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module bitops",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\bitops.nim",line:0};
+var F={procname:"module bitops",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\bitops.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module bitops",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\bitops.nim",line:0};
+var F={procname:"module bitops",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\bitops.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module bitops",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\bitops.nim",line:0};
+var F={procname:"module bitops",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\bitops.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module bitops",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\bitops.nim",line:0};
+var F={procname:"module bitops",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\bitops.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module bitops",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\bitops.nim",line:0};
+var F={procname:"module bitops",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\bitops.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module bitops",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\bitops.nim",line:0};
+var F={procname:"module bitops",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\bitops.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module bitops",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\bitops.nim",line:0};
+var F={procname:"module bitops",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\bitops.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module bitops",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\bitops.nim",line:0};
+var F={procname:"module bitops",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\bitops.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module bitops",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\bitops.nim",line:0};
+var F={procname:"module bitops",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\bitops.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module bitops",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\bitops.nim",line:0};
+var F={procname:"module bitops",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\bitops.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module bitops",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\bitops.nim",line:0};
+var F={procname:"module bitops",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\bitops.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module bitops",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\bitops.nim",line:0};
+var F={procname:"module bitops",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\bitops.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module bitops",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\bitops.nim",line:0};
+var F={procname:"module bitops",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\bitops.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module bitops",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\bitops.nim",line:0};
+var F={procname:"module bitops",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\bitops.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module bitops",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\bitops.nim",line:0};
+var F={procname:"module bitops",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\bitops.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module bitops",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\bitops.nim",line:0};
+var F={procname:"module bitops",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\bitops.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module bitops",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\bitops.nim",line:0};
+var F={procname:"module bitops",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\bitops.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module bitops",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\bitops.nim",line:0};
+var F={procname:"module bitops",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\bitops.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module bitops",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\bitops.nim",line:0};
+var F={procname:"module bitops",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\bitops.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module bitops",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\bitops.nim",line:0};
+var F={procname:"module bitops",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\bitops.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module bitops",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\bitops.nim",line:0};
+var F={procname:"module bitops",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\bitops.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module bitops",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\bitops.nim",line:0};
+var F={procname:"module bitops",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\bitops.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module bitops",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\bitops.nim",line:0};
+var F={procname:"module bitops",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\bitops.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module bitops",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\bitops.nim",line:0};
+var F={procname:"module bitops",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\bitops.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module bitops",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\bitops.nim",line:0};
+var F={procname:"module bitops",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\bitops.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module bitops",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\bitops.nim",line:0};
+var F={procname:"module bitops",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\bitops.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module bitops",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\bitops.nim",line:0};
+var F={procname:"module bitops",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\bitops.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module bitops",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\bitops.nim",line:0};
+var F={procname:"module bitops",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\bitops.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module bitops",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\bitops.nim",line:0};
+var F={procname:"module bitops",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\bitops.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module bitops",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\bitops.nim",line:0};
+var F={procname:"module bitops",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\bitops.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module bitops",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\bitops.nim",line:0};
+var F={procname:"module bitops",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\bitops.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module bitops",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\bitops.nim",line:0};
+var F={procname:"module bitops",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\bitops.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module bitops",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\bitops.nim",line:0};
+var F={procname:"module bitops",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\bitops.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module bitops",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\bitops.nim",line:0};
+var F={procname:"module bitops",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\bitops.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module bitops",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\bitops.nim",line:0};
+var F={procname:"module bitops",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\bitops.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module bitops",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\bitops.nim",line:0};
+var F={procname:"module bitops",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\bitops.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module bitops",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\bitops.nim",line:0};
+var F={procname:"module bitops",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\bitops.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module math",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\math.nim",line:0};
+var F={procname:"module bitops",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\bitops.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module math",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\math.nim",line:0};
+var F={procname:"module math",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\math.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module math",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\math.nim",line:0};
+var F={procname:"module math",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\math.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module math",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\math.nim",line:0};
+var F={procname:"module math",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\math.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module math",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\math.nim",line:0};
+var F={procname:"module math",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\math.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module math",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\math.nim",line:0};
+var F={procname:"module math",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\math.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module math",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\math.nim",line:0};
+var F={procname:"module math",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\math.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module math",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\math.nim",line:0};
+var F={procname:"module math",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\math.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module math",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\math.nim",line:0};
+var F={procname:"module math",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\math.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module math",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\math.nim",line:0};
+var F={procname:"module math",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\math.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module math",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\math.nim",line:0};
+var F={procname:"module math",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\math.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module math",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\math.nim",line:0};
+var F={procname:"module math",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\math.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module math",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\math.nim",line:0};
+var F={procname:"module math",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\math.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module math",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\math.nim",line:0};
+var F={procname:"module math",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\math.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module math",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\math.nim",line:0};
+var F={procname:"module math",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\math.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module math",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\math.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module algorithm",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\algorithm.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module algorithm",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\algorithm.nim",line:0};
+var F={procname:"module algorithm",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\algorithm.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module algorithm",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\algorithm.nim",line:0};
+var F={procname:"module algorithm",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\algorithm.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module algorithm",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\algorithm.nim",line:0};
+var F={procname:"module algorithm",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\algorithm.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module algorithm",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\algorithm.nim",line:0};
+var F={procname:"module algorithm",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\algorithm.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module algorithm",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\algorithm.nim",line:0};
+var F={procname:"module algorithm",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\algorithm.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module algorithm",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\algorithm.nim",line:0};
+var F={procname:"module algorithm",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\algorithm.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module algorithm",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\algorithm.nim",line:0};
+var F={procname:"module algorithm",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\algorithm.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module algorithm",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\algorithm.nim",line:0};
+var F={procname:"module algorithm",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\algorithm.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module algorithm",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\algorithm.nim",line:0};
+var F={procname:"module algorithm",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\algorithm.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module algorithm",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\algorithm.nim",line:0};
+var F={procname:"module algorithm",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\algorithm.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module algorithm",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\algorithm.nim",line:0};
+var F={procname:"module algorithm",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\algorithm.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module algorithm",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\algorithm.nim",line:0};
+var F={procname:"module algorithm",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\algorithm.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module algorithm",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\algorithm.nim",line:0};
+var F={procname:"module algorithm",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\algorithm.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module algorithm",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\algorithm.nim",line:0};
+var F={procname:"module algorithm",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\algorithm.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module algorithm",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\algorithm.nim",line:0};
+var F={procname:"module algorithm",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\algorithm.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module algorithm",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\algorithm.nim",line:0};
+var F={procname:"module algorithm",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\algorithm.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module algorithm",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\algorithm.nim",line:0};
+var F={procname:"module algorithm",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\algorithm.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module algorithm",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\algorithm.nim",line:0};
+var F={procname:"module algorithm",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\algorithm.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module algorithm",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\algorithm.nim",line:0};
+var F={procname:"module algorithm",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\algorithm.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module algorithm",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\algorithm.nim",line:0};
+var F={procname:"module algorithm",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\algorithm.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module algorithm",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\algorithm.nim",line:0};
+var F={procname:"module algorithm",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\algorithm.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module algorithm",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\algorithm.nim",line:0};
+var F={procname:"module algorithm",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\algorithm.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module algorithm",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\algorithm.nim",line:0};
+var F={procname:"module algorithm",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\algorithm.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module algorithm",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\algorithm.nim",line:0};
+var F={procname:"module algorithm",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\algorithm.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module algorithm",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\algorithm.nim",line:0};
+var F={procname:"module algorithm",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\algorithm.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module algorithm",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\algorithm.nim",line:0};
+var F={procname:"module algorithm",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\algorithm.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module algorithm",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\algorithm.nim",line:0};
+var F={procname:"module algorithm",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\algorithm.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module algorithm",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\algorithm.nim",line:0};
+var F={procname:"module algorithm",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\algorithm.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module algorithm",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\algorithm.nim",line:0};
+var F={procname:"module algorithm",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\algorithm.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module algorithm",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\algorithm.nim",line:0};
+var F={procname:"module algorithm",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\algorithm.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module algorithm",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\algorithm.nim",line:0};
+var F={procname:"module algorithm",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\algorithm.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module algorithm",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\algorithm.nim",line:0};
+var F={procname:"module algorithm",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\algorithm.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module algorithm",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\algorithm.nim",line:0};
+var F={procname:"module algorithm",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\algorithm.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module algorithm",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\algorithm.nim",line:0};
+var F={procname:"module algorithm",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\algorithm.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module algorithm",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\algorithm.nim",line:0};
+var F={procname:"module algorithm",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\algorithm.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module algorithm",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\algorithm.nim",line:0};
+var F={procname:"module algorithm",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\algorithm.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module algorithm",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\algorithm.nim",line:0};
+var F={procname:"module algorithm",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\algorithm.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module algorithm",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\algorithm.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module unicode",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\unicode.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module unicode",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\unicode.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module strutils",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module fuzzysearch",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\fuzzysearch.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module fuzzysearch",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\fuzzysearch.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module fuzzysearch",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\fuzzysearch.nim",line:0};
+var F={procname:"module strutils",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module fuzzysearch",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\fuzzysearch.nim",line:0};
+var F={procname:"module fuzzysearch",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\fuzzysearch.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module fuzzysearch",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\fuzzysearch.nim",line:0};
+var F={procname:"module fuzzysearch",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\fuzzysearch.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dochack",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+var F={procname:"module fuzzysearch",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\fuzzysearch.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dochack",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+var F={procname:"module fuzzysearch",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\fuzzysearch.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dochack",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+var F={procname:"module fuzzysearch",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\fuzzysearch.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dochack",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+var F={procname:"module dochack",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dochack",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+var F={procname:"module dochack",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dochack",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+var F={procname:"module dochack",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dochack",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+var F={procname:"module dochack",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dochack",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+var F={procname:"module dochack",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dochack",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+var F={procname:"module dochack",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dochack",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+var F={procname:"module dochack",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dochack",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+var F={procname:"module dochack",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dochack",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+var F={procname:"module dochack",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dochack",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+var F={procname:"module dochack",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dochack",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+var F={procname:"module dochack",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dochack",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+var F={procname:"module dochack",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dochack",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+var F={procname:"module dochack",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dochack",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+var F={procname:"module dochack",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dochack",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+var F={procname:"module dochack",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dochack",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+var F={procname:"module dochack",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dochack",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+var F={procname:"module dochack",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dochack",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+var F={procname:"module dochack",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dochack",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+var F={procname:"module dochack",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dochack",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+var F={procname:"module dochack",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dochack",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+var F={procname:"module dochack",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dochack",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+var F={procname:"module dochack",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dochack",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+var F={procname:"module dochack",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dochack",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+var F={procname:"module dochack",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dochack",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+var F={procname:"module dochack",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dochack",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+var F={procname:"module dochack",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dochack",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+var F={procname:"module dochack",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dochack",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+var F={procname:"module dochack",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
+framePtr = F;
+framePtr = F.prev;
+var F={procname:"module dochack",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
+framePtr = F;
+framePtr = F.prev;
+var F={procname:"module dochack",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
+framePtr = F;
+framePtr = F.prev;
+var F={procname:"module dochack",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
 framePtr = F;
 F.line = 227;
-var alternative_10555322 = [null];
+var alternative_10565322 = [null];
 framePtr = F.prev;
-var F={procname:"module dochack",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+var F={procname:"module dochack",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
 function add_1377042(x_1377045, x_1377045_Idx, y_1377046) {
@@ -3391,13 +3400,13 @@ function auxWriteStackTrace_1400038(f_1400040) {
     
     L6: do {
       var j_1415236 = 0;
-      var colontmp__10555466 = 0;
-      colontmp__10555466 = (i_1400053 - 1);
-      var res_10555471 = colontmp__10555466;
+      var colontmp__10565466 = 0;
+      colontmp__10565466 = (i_1400053 - 1);
+      var res_10565471 = colontmp__10565466;
       L7: do {
           L8: while (true) {
-          if (!(0 <= res_10555471)) break L8;
-            j_1415236 = res_10555471;
+          if (!(0 <= res_10565471)) break L8;
+            j_1415236 = res_10565471;
             result_1400041[0].push.apply(result_1400041[0], cstrToNimstr(tempFrames_1400062[j_1415236].Field2));;
             if ((0 < tempFrames_1400062[j_1415236].Field1)) {
             result_1400041[0].push.apply(result_1400041[0], makeNimstrLit("("));;
@@ -3413,7 +3422,7 @@ function auxWriteStackTrace_1400038(f_1400040) {
             result_1400041[0].push.apply(result_1400041[0], makeNimstrLit(" at "));;
             add_1377042(result_1400041, 0, tempFrames_1400062[j_1415236].Field0);
             result_1400041[0].push.apply(result_1400041[0], makeNimstrLit("\x0A"));;
-            res_10555471 -= 1;
+            res_10565471 -= 1;
           }
       } while(false);
     } while(false);
@@ -3438,9 +3447,9 @@ function rawWriteStackTrace_1430260() {
 function newSeq_1475128(len_1475131) {
   var result_1475133 = [];
 
-  var F={procname:"newSeq.newSeq",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\system.nim",line:0};
+  var F={procname:"newSeq.newSeq",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\system.nim",line:0};
   framePtr = F;
-    F.line = 649;
+    F.line = 656;
     result_1475133 = new Array(len_1475131); for (var i=0;i<len_1475131;++i) {result_1475133[i]=null;}  framePtr = F.prev;
 
   return result_1475133;
@@ -3473,7 +3482,7 @@ function unhandledException(e_1435059) {
   
 }
 function raiseOverflow() {
-    raiseException({message: makeNimstrLit("over- or underflow"), parent: null, m_type: NTI1214237, name: null, trace: [], up: null}, "OverflowDefect");
+    raiseException({message: makeNimstrLit("over- or underflow"), parent: null, m_type: NTI1214637, name: null, trace: [], up: null}, "OverflowDefect");
 
   
 }
@@ -3483,25 +3492,25 @@ function checkOverflowInt(a_1480403) {
 
   
 }
-function isWhitespace_10530116(text_10530118) {
-         return !/[^\s]/.test(text_10530118);
+function isWhitespace_10540116(text_10540118) {
+         return !/[^\s]/.test(text_10540118);
   
 
   
 }
-function isWhitespace_10530133(x_10530135) {
+function isWhitespace_10540133(x_10540135) {
     var Tmp1;
     var Tmp2;
 
-  var result_10530136 = false;
+  var result_10540136 = false;
 
-  var F={procname:"dochack.isWhitespace",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+  var F={procname:"dochack.isWhitespace",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
   framePtr = F;
     F.line = 134;
-    if (!(x_10530135.nodeName == "#text")) Tmp2 = false; else {      Tmp2 = isWhitespace_10530116(x_10530135.textContent);    }    if (Tmp2) Tmp1 = true; else {      Tmp1 = (x_10530135.nodeName == "#comment");    }    result_10530136 = Tmp1;
+    if (!(x_10540135.nodeName == "#text")) Tmp2 = false; else {      Tmp2 = isWhitespace_10540116(x_10540135.textContent);    }    if (Tmp2) Tmp1 = true; else {      Tmp1 = (x_10540135.nodeName == "#comment");    }    result_10540136 = Tmp1;
   framePtr = F.prev;
 
-  return result_10530136;
+  return result_10540136;
 
 }
 function raiseIndexError(i_1460047, a_1460048, b_1460049) {
@@ -3514,164 +3523,164 @@ function raiseIndexError(i_1460047, a_1460048, b_1460049) {
     Tmp1 = (makeNimstrLit("index ") || []).concat(cstrToNimstr((i_1460047)+"") || [],makeNimstrLit(" not in ") || [],cstrToNimstr((a_1460048)+"") || [],makeNimstrLit(" .. ") || [],cstrToNimstr((b_1460049)+"") || []);
     }
     
-    raiseException({message: nimCopy(null, Tmp1, NTI1208015), parent: null, m_type: NTI1214249, name: null, trace: [], up: null}, "IndexDefect");
+    raiseException({message: nimCopy(null, Tmp1, NTI1208015), parent: null, m_type: NTI1214649, name: null, trace: [], up: null}, "IndexDefect");
 
   
 }
-function toToc_10530150(x_10530152, father_10530153) {
+function toToc_10540150(x_10540152, father_10540153) {
                 var Tmp5;
             var Tmp6;
             var Tmp7;
             var Tmp8;
       var Tmp15;
 
-  var F={procname:"dochack.toToc",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+  var F={procname:"dochack.toToc",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
   framePtr = F;
-    if ((x_10530152.nodeName == "UL")) {
+    if ((x_10540152.nodeName == "UL")) {
     F.line = 139;
-    var f_10530174 = {heading: null, kids: [], sortId: (father_10530153.kids).length, doSort: false};
+    var f_10540174 = {heading: null, kids: [], sortId: (father_10540153.kids).length, doSort: false};
     F.line = 140;
-    var i_10530176 = 0;
+    var i_10540176 = 0;
     L1: do {
       F.line = 141;
         L2: while (true) {
-        if (!(i_10530176 < x_10530152.childNodes.length)) break L2;
+        if (!(i_10540176 < x_10540152.childNodes.length)) break L2;
           F.line = 142;
-          var nxt_10530177 = addInt(i_10530176, 1);
+          var nxt_10540177 = addInt(i_10540176, 1);
           L3: do {
             F.line = 143;
               L4: while (true) {
-                if (!(nxt_10530177 < x_10530152.childNodes.length)) Tmp5 = false; else {                  Tmp5 = isWhitespace_10530133(x_10530152.childNodes[nxt_10530177]);                }              if (!Tmp5) break L4;
+                if (!(nxt_10540177 < x_10540152.childNodes.length)) Tmp5 = false; else {                  Tmp5 = isWhitespace_10540133(x_10540152.childNodes[nxt_10540177]);                }              if (!Tmp5) break L4;
                 F.line = 144;
-                nxt_10530177 = addInt(nxt_10530177, 1);
+                nxt_10540177 = addInt(nxt_10540177, 1);
               }
           } while(false);
-            if (!(nxt_10530177 < x_10530152.childNodes.length)) Tmp8 = false; else {              Tmp8 = (x_10530152.childNodes[i_10530176].nodeName == "LI");            }            if (!Tmp8) Tmp7 = false; else {              Tmp7 = (x_10530152.childNodes[i_10530176].childNodes.length == 1);            }            if (!Tmp7) Tmp6 = false; else {              Tmp6 = (x_10530152.childNodes[nxt_10530177].nodeName == "UL");            }          if (Tmp6) {
+            if (!(nxt_10540177 < x_10540152.childNodes.length)) Tmp8 = false; else {              Tmp8 = (x_10540152.childNodes[i_10540176].nodeName == "LI");            }            if (!Tmp8) Tmp7 = false; else {              Tmp7 = (x_10540152.childNodes[i_10540176].childNodes.length == 1);            }            if (!Tmp7) Tmp6 = false; else {              Tmp6 = (x_10540152.childNodes[nxt_10540177].nodeName == "UL");            }          if (Tmp6) {
           F.line = 147;
-          var e_10530204 = {heading: x_10530152.childNodes[i_10530176].childNodes[0], kids: [], sortId: (f_10530174.kids).length, doSort: false};
+          var e_10540204 = {heading: x_10540152.childNodes[i_10540176].childNodes[0], kids: [], sortId: (f_10540174.kids).length, doSort: false};
           F.line = 148;
-          var it_10530205 = x_10530152.childNodes[nxt_10530177];
+          var it_10540205 = x_10540152.childNodes[nxt_10540177];
           L9: do {
             F.line = 149;
-            var j_10530213 = 0;
+            var j_10540213 = 0;
             F.line = 104;
-            var colontmp__10555445 = 0;
+            var colontmp__10565445 = 0;
             F.line = 149;
-            colontmp__10555445 = it_10530205.childNodes.length;
+            colontmp__10565445 = it_10540205.childNodes.length;
             F.line = 106;
-            var i_10555446 = 0;
+            var i_10565446 = 0;
             L10: do {
               F.line = 107;
                 L11: while (true) {
-                if (!(i_10555446 < colontmp__10555445)) break L11;
+                if (!(i_10565446 < colontmp__10565445)) break L11;
                   F.line = 149;
-                  j_10530213 = i_10555446;
+                  j_10540213 = i_10565446;
                   F.line = 150;
-                  toToc_10530150(it_10530205.childNodes[j_10530213], e_10530204);
+                  toToc_10540150(it_10540205.childNodes[j_10540213], e_10540204);
                   F.line = 109;
-                  i_10555446 = addInt(i_10555446, 1);
+                  i_10565446 = addInt(i_10565446, 1);
                 }
             } while(false);
           } while(false);
           F.line = 151;
-          f_10530174.kids.push(e_10530204);;
+          f_10540174.kids.push(e_10540204);;
           F.line = 152;
-          i_10530176 = addInt(nxt_10530177, 1);
+          i_10540176 = addInt(nxt_10540177, 1);
           }
           else {
             F.line = 154;
-            toToc_10530150(x_10530152.childNodes[i_10530176], f_10530174);
+            toToc_10540150(x_10540152.childNodes[i_10540176], f_10540174);
             F.line = 155;
-            i_10530176 = addInt(i_10530176, 1);
+            i_10540176 = addInt(i_10540176, 1);
           }
           
         }
     } while(false);
     F.line = 156;
-    father_10530153.kids.push(f_10530174);;
+    father_10540153.kids.push(f_10540174);;
     }
     else {
-    if (isWhitespace_10530133(x_10530152)) {
+    if (isWhitespace_10540133(x_10540152)) {
     }
     else {
-    if ((x_10530152.nodeName == "LI")) {
+    if ((x_10540152.nodeName == "LI")) {
     F.line = 160;
-    var idx_10530252 = [];
+    var idx_10540252 = [];
     L12: do {
       F.line = 161;
-      var i_10530260 = 0;
+      var i_10540260 = 0;
       F.line = 104;
-      var colontmp__10555449 = 0;
+      var colontmp__10565449 = 0;
       F.line = 161;
-      colontmp__10555449 = x_10530152.childNodes.length;
+      colontmp__10565449 = x_10540152.childNodes.length;
       F.line = 106;
-      var i_10555450 = 0;
+      var i_10565450 = 0;
       L13: do {
         F.line = 107;
           L14: while (true) {
-          if (!(i_10555450 < colontmp__10555449)) break L14;
+          if (!(i_10565450 < colontmp__10565449)) break L14;
             F.line = 161;
-            i_10530260 = i_10555450;
-            if (!(isWhitespace_10530133(x_10530152.childNodes[i_10530260]))) {
+            i_10540260 = i_10565450;
+            if (!(isWhitespace_10540133(x_10540152.childNodes[i_10540260]))) {
             F.line = 162;
-            idx_10530252.push(i_10530260);;
+            idx_10540252.push(i_10540260);;
             }
             
             F.line = 109;
-            i_10555450 = addInt(i_10555450, 1);
+            i_10565450 = addInt(i_10565450, 1);
           }
       } while(false);
     } while(false);
-      if (!((idx_10530252).length == 2)) Tmp15 = false; else {        Tmp15 = (x_10530152.childNodes[idx_10530252[chckIndx(1, 0, (idx_10530252).length-1)]].nodeName == "UL");      }    if (Tmp15) {
+      if (!((idx_10540252).length == 2)) Tmp15 = false; else {        Tmp15 = (x_10540152.childNodes[idx_10540252[chckIndx(1, 0, (idx_10540252).length-1)]].nodeName == "UL");      }    if (Tmp15) {
     F.line = 164;
-    var e_10530294 = {heading: x_10530152.childNodes[idx_10530252[chckIndx(0, 0, (idx_10530252).length-1)]], kids: [], sortId: (father_10530153.kids).length, doSort: false};
+    var e_10540294 = {heading: x_10540152.childNodes[idx_10540252[chckIndx(0, 0, (idx_10540252).length-1)]], kids: [], sortId: (father_10540153.kids).length, doSort: false};
     F.line = 166;
-    var it_10530295 = x_10530152.childNodes[idx_10530252[chckIndx(1, 0, (idx_10530252).length-1)]];
+    var it_10540295 = x_10540152.childNodes[idx_10540252[chckIndx(1, 0, (idx_10540252).length-1)]];
     L16: do {
       F.line = 167;
-      var j_10530303 = 0;
+      var j_10540303 = 0;
       F.line = 104;
-      var colontmp__10555454 = 0;
+      var colontmp__10565454 = 0;
       F.line = 167;
-      colontmp__10555454 = it_10530295.childNodes.length;
+      colontmp__10565454 = it_10540295.childNodes.length;
       F.line = 106;
-      var i_10555455 = 0;
+      var i_10565455 = 0;
       L17: do {
         F.line = 107;
           L18: while (true) {
-          if (!(i_10555455 < colontmp__10555454)) break L18;
+          if (!(i_10565455 < colontmp__10565454)) break L18;
             F.line = 167;
-            j_10530303 = i_10555455;
+            j_10540303 = i_10565455;
             F.line = 168;
-            toToc_10530150(it_10530295.childNodes[j_10530303], e_10530294);
+            toToc_10540150(it_10540295.childNodes[j_10540303], e_10540294);
             F.line = 109;
-            i_10555455 = addInt(i_10555455, 1);
+            i_10565455 = addInt(i_10565455, 1);
           }
       } while(false);
     } while(false);
     F.line = 169;
-    father_10530153.kids.push(e_10530294);;
+    father_10540153.kids.push(e_10540294);;
     }
     else {
       L19: do {
         F.line = 171;
-        var i_10530319 = 0;
+        var i_10540319 = 0;
         F.line = 104;
-        var colontmp__10555458 = 0;
+        var colontmp__10565458 = 0;
         F.line = 171;
-        colontmp__10555458 = x_10530152.childNodes.length;
+        colontmp__10565458 = x_10540152.childNodes.length;
         F.line = 106;
-        var i_10555459 = 0;
+        var i_10565459 = 0;
         L20: do {
           F.line = 107;
             L21: while (true) {
-            if (!(i_10555459 < colontmp__10555458)) break L21;
+            if (!(i_10565459 < colontmp__10565458)) break L21;
               F.line = 171;
-              i_10530319 = i_10555459;
+              i_10540319 = i_10565459;
               F.line = 172;
-              toToc_10530150(x_10530152.childNodes[i_10530319], father_10530153);
+              toToc_10540150(x_10540152.childNodes[i_10540319], father_10540153);
               F.line = 109;
-              i_10555459 = addInt(i_10555459, 1);
+              i_10565459 = addInt(i_10565459, 1);
             }
         } while(false);
       } while(false);
@@ -3680,44 +3689,44 @@ function toToc_10530150(x_10530152, father_10530153) {
     }
     else {
       F.line = 174;
-    father_10530153.kids.push({heading: x_10530152, kids: [], sortId: (father_10530153.kids).length, doSort: false});;
+    father_10540153.kids.push({heading: x_10540152, kids: [], sortId: (father_10540153.kids).length, doSort: false});;
     }
     }}
   framePtr = F.prev;
 
   
 }
-function extractItems_10485075(x_10485077, heading_10485078, items_10485081, items_10485081_Idx) {
+function extractItems_10495075(x_10495077, heading_10495078, items_10495081, items_10495081_Idx) {
       var Tmp1;
 
-  var F={procname:"dochack.extractItems",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+  var F={procname:"dochack.extractItems",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
   framePtr = F;
   BeforeRet: do {
-    if ((x_10485077 == null)) {
+    if ((x_10495077 == null)) {
     F.line = 81;
     break BeforeRet;
     }
     
-      if (!!((x_10485077.heading == null))) Tmp1 = false; else {        Tmp1 = (x_10485077.heading.textContent == heading_10485078);      }    if (Tmp1) {
+      if (!!((x_10495077.heading == null))) Tmp1 = false; else {        Tmp1 = (x_10495077.heading.textContent == heading_10495078);      }    if (Tmp1) {
     L2: do {
       F.line = 83;
-      var i_10490021 = 0;
+      var i_10500021 = 0;
       F.line = 104;
-      var colontmp__10555488 = 0;
+      var colontmp__10565488 = 0;
       F.line = 83;
-      colontmp__10555488 = (x_10485077.kids).length;
+      colontmp__10565488 = (x_10495077.kids).length;
       F.line = 106;
-      var i_10555489 = 0;
+      var i_10565489 = 0;
       L3: do {
         F.line = 107;
           L4: while (true) {
-          if (!(i_10555489 < colontmp__10555488)) break L4;
+          if (!(i_10565489 < colontmp__10565488)) break L4;
             F.line = 83;
-            i_10490021 = i_10555489;
+            i_10500021 = i_10565489;
             F.line = 84;
-            items_10485081[items_10485081_Idx].push(x_10485077.kids[chckIndx(i_10490021, 0, (x_10485077.kids).length-1)].heading);;
+            items_10495081[items_10495081_Idx].push(x_10495077.kids[chckIndx(i_10500021, 0, (x_10495077.kids).length-1)].heading);;
             F.line = 109;
-            i_10555489 = addInt(i_10555489, 1);
+            i_10565489 = addInt(i_10565489, 1);
           }
       } while(false);
     } while(false);
@@ -3725,25 +3734,25 @@ function extractItems_10485075(x_10485077, heading_10485078, items_10485081, ite
     else {
       L5: do {
         F.line = 86;
-        var i_10490042 = 0;
+        var i_10500042 = 0;
         F.line = 104;
-        var colontmp__10555492 = 0;
+        var colontmp__10565492 = 0;
         F.line = 86;
-        colontmp__10555492 = (x_10485077.kids).length;
+        colontmp__10565492 = (x_10495077.kids).length;
         F.line = 106;
-        var i_10555493 = 0;
+        var i_10565493 = 0;
         L6: do {
           F.line = 107;
             L7: while (true) {
-            if (!(i_10555493 < colontmp__10555492)) break L7;
+            if (!(i_10565493 < colontmp__10565492)) break L7;
               F.line = 86;
-              i_10490042 = i_10555493;
+              i_10500042 = i_10565493;
               F.line = 87;
-              var it_10490043 = x_10485077.kids[chckIndx(i_10490042, 0, (x_10485077.kids).length-1)];
+              var it_10500043 = x_10495077.kids[chckIndx(i_10500042, 0, (x_10495077.kids).length-1)];
               F.line = 88;
-              extractItems_10485075(it_10490043, heading_10485078, items_10485081, items_10485081_Idx);
+              extractItems_10495075(it_10500043, heading_10495078, items_10495081, items_10495081_Idx);
               F.line = 109;
-              i_10555493 = addInt(i_10555493, 1);
+              i_10565493 = addInt(i_10565493, 1);
             }
         } while(false);
       } while(false);
@@ -3754,60 +3763,60 @@ function extractItems_10485075(x_10485077, heading_10485078, items_10485081, ite
 
   
 }
-function tree_10476020(tag_10476022, kids_10476024) {
-  var result_10476025 = null;
+function tree_10486020(tag_10486022, kids_10486024) {
+  var result_10486025 = null;
 
-  var F={procname:"dochack.tree",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+  var F={procname:"dochack.tree",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
   framePtr = F;
     F.line = 11;
-    result_10476025 = document.createElement(toJSStr(tag_10476022));
+    result_10486025 = document.createElement(toJSStr(tag_10486022));
     L1: do {
       F.line = 12;
-      var k_10476058 = null;
-      var k_10476058_Idx = 0;
+      var k_10486058 = null;
+      var k_10486058_Idx = 0;
       F.line = 8;
-      var i_10555509 = 0;
+      var i_10565509 = 0;
       L2: do {
         F.line = 9;
           L3: while (true) {
-          if (!(i_10555509 < (kids_10476024).length)) break L3;
+          if (!(i_10565509 < (kids_10486024).length)) break L3;
             F.line = 12;
-            k_10476058 = kids_10476024; k_10476058_Idx = chckIndx(i_10555509, 0, (kids_10476024).length-1);
+            k_10486058 = kids_10486024; k_10486058_Idx = chckIndx(i_10565509, 0, (kids_10486024).length-1);
             F.line = 13;
-            result_10476025.appendChild(k_10476058[k_10476058_Idx]);
+            result_10486025.appendChild(k_10486058[k_10486058_Idx]);
             F.line = 11;
-            i_10555509 = addInt(i_10555509, 1);
+            i_10565509 = addInt(i_10565509, 1);
           }
       } while(false);
     } while(false);
   framePtr = F.prev;
 
-  return result_10476025;
+  return result_10486025;
 
 }
-function text_10476169(s_10476171) {
-  var result_10476172 = null;
+function text_10486169(s_10486171) {
+  var result_10486172 = null;
 
-  var F={procname:"dochack.text",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+  var F={procname:"dochack.text",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
   framePtr = F;
     F.line = 27;
-    result_10476172 = document.createTextNode(s_10476171);
+    result_10486172 = document.createTextNode(s_10486171);
   framePtr = F.prev;
 
-  return result_10476172;
+  return result_10486172;
 
 }
 function sysFatal_1325418(message_1325422) {
-  var F={procname:"sysFatal.sysFatal",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\system\\fatal.nim",line:0};
+  var F={procname:"sysFatal.sysFatal",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\system\\fatal.nim",line:0};
   framePtr = F;
     F.line = 49;
-    raiseException({message: nimCopy(null, message_1325422, NTI1208015), m_type: NTI1214241, parent: null, name: null, trace: [], up: null}, "AssertionDefect");
+    raiseException({message: nimCopy(null, message_1325422, NTI1208015), m_type: NTI1214641, parent: null, name: null, trace: [], up: null}, "AssertionDefect");
   framePtr = F.prev;
 
   
 }
 function raiseAssert_1325414(msg_1325416) {
-  var F={procname:"assertions.raiseAssert",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\system\\assertions.nim",line:0};
+  var F={procname:"assertions.raiseAssert",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\system\\assertions.nim",line:0};
   framePtr = F;
     F.line = 23;
     sysFatal_1325418(msg_1325416);
@@ -3816,7 +3825,7 @@ function raiseAssert_1325414(msg_1325416) {
   
 }
 function failedAssertImpl_1325480(msg_1325482) {
-  var F={procname:"assertions.failedAssertImpl",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\system\\assertions.nim",line:0};
+  var F={procname:"assertions.failedAssertImpl",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\system\\assertions.nim",line:0};
   framePtr = F;
     F.line = 30;
     raiseAssert_1325414(msg_1325482);
@@ -3824,99 +3833,99 @@ function failedAssertImpl_1325480(msg_1325482) {
 
   
 }
-function uncovered_10535022(x_10535024) {
+function uncovered_10545022(x_10545024) {
       var Tmp1;
     var Tmp2;
 
-  var result_10535025 = null;
+  var result_10545025 = null;
 
-  var F={procname:"dochack.uncovered",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+  var F={procname:"dochack.uncovered",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
   framePtr = F;
   BeforeRet: do {
-      if (!((x_10535024.kids).length == 0)) Tmp1 = false; else {        Tmp1 = !((x_10535024.heading == null));      }    if (Tmp1) {
+      if (!((x_10545024.kids).length == 0)) Tmp1 = false; else {        Tmp1 = !((x_10545024.heading == null));      }    if (Tmp1) {
     F.line = 194;
-    if (!(x_10535024.heading.hasOwnProperty('__karaxMarker__'))) {
-    Tmp2 = x_10535024;
+    if (!(x_10545024.heading.hasOwnProperty('__karaxMarker__'))) {
+    Tmp2 = x_10545024;
     }
     else {
     Tmp2 = null;
     }
     
-    result_10535025 = Tmp2;
+    result_10545025 = Tmp2;
     break BeforeRet;
     }
     
     F.line = 195;
-    result_10535025 = {heading: x_10535024.heading, kids: [], sortId: x_10535024.sortId, doSort: x_10535024.doSort};
+    result_10545025 = {heading: x_10545024.heading, kids: [], sortId: x_10545024.sortId, doSort: x_10545024.doSort};
     L3: do {
       F.line = 197;
-      var i_10540036 = 0;
+      var i_10550036 = 0;
       F.line = 104;
-      var colontmp__10555520 = 0;
+      var colontmp__10565520 = 0;
       F.line = 197;
-      colontmp__10555520 = (x_10535024.kids).length;
+      colontmp__10565520 = (x_10545024.kids).length;
       F.line = 106;
-      var i_10555521 = 0;
+      var i_10565521 = 0;
       L4: do {
         F.line = 107;
           L5: while (true) {
-          if (!(i_10555521 < colontmp__10555520)) break L5;
+          if (!(i_10565521 < colontmp__10565520)) break L5;
             F.line = 197;
-            i_10540036 = i_10555521;
+            i_10550036 = i_10565521;
             F.line = 198;
-            var y_10540037 = uncovered_10535022(x_10535024.kids[chckIndx(i_10540036, 0, (x_10535024.kids).length-1)]);
-            if (!((y_10540037 == null))) {
+            var y_10550037 = uncovered_10545022(x_10545024.kids[chckIndx(i_10550036, 0, (x_10545024.kids).length-1)]);
+            if (!((y_10550037 == null))) {
             F.line = 199;
-            result_10535025.kids.push(y_10540037);;
+            result_10545025.kids.push(y_10550037);;
             }
             
             F.line = 109;
-            i_10555521 = addInt(i_10555521, 1);
+            i_10565521 = addInt(i_10565521, 1);
           }
       } while(false);
     } while(false);
-    if (((result_10535025.kids).length == 0)) {
+    if (((result_10545025.kids).length == 0)) {
     F.line = 200;
-    result_10535025 = null;
+    result_10545025 = null;
     }
     
   } while (false);
   framePtr = F.prev;
 
-  return result_10535025;
+  return result_10545025;
 
 }
-function mergeTocs_10545035(orig_10545037, news_10545038) {
-  var result_10545039 = null;
+function mergeTocs_10555035(orig_10555037, news_10555038) {
+  var result_10555039 = null;
 
-  var F={procname:"dochack.mergeTocs",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+  var F={procname:"dochack.mergeTocs",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
   framePtr = F;
     F.line = 203;
-    result_10545039 = uncovered_10535022(orig_10545037);
-    if ((result_10545039 == null)) {
+    result_10555039 = uncovered_10545022(orig_10555037);
+    if ((result_10555039 == null)) {
     F.line = 205;
-    result_10545039 = news_10545038;
+    result_10555039 = news_10555038;
     }
     else {
       L1: do {
         F.line = 207;
-        var i_10545060 = 0;
+        var i_10555060 = 0;
         F.line = 104;
-        var colontmp__10555515 = 0;
+        var colontmp__10565515 = 0;
         F.line = 207;
-        colontmp__10555515 = (news_10545038.kids).length;
+        colontmp__10565515 = (news_10555038.kids).length;
         F.line = 106;
-        var i_10555516 = 0;
+        var i_10565516 = 0;
         L2: do {
           F.line = 107;
             L3: while (true) {
-            if (!(i_10555516 < colontmp__10555515)) break L3;
+            if (!(i_10565516 < colontmp__10565515)) break L3;
               F.line = 207;
-              i_10545060 = i_10555516;
+              i_10555060 = i_10565516;
               F.line = 208;
-              result_10545039.kids.push(news_10545038.kids[chckIndx(i_10545060, 0, (news_10545038.kids).length-1)]);;
+              result_10555039.kids.push(news_10555038.kids[chckIndx(i_10555060, 0, (news_10555038.kids).length-1)]);;
               F.line = 109;
-              i_10555516 = addInt(i_10555516, 1);
+              i_10565516 = addInt(i_10565516, 1);
             }
         } while(false);
       } while(false);
@@ -3924,610 +3933,610 @@ function mergeTocs_10545035(orig_10545037, news_10545038) {
     
   framePtr = F.prev;
 
-  return result_10545039;
+  return result_10555039;
 
 }
-function buildToc_10545082(orig_10545084, types_10545086, procs_10545087) {
+function buildToc_10555082(orig_10555084, types_10555086, procs_10555087) {
                       var Tmp7;
 
-  var result_10545088 = null;
+  var result_10555088 = null;
 
-  var F={procname:"dochack.buildToc",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+  var F={procname:"dochack.buildToc",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
   framePtr = F;
     F.line = 211;
-    var newStuff_10545104 = {heading: null, kids: [], doSort: true, sortId: 0};
+    var newStuff_10555104 = {heading: null, kids: [], doSort: true, sortId: 0};
     L1: do {
       F.line = 212;
-      var t_10555214 = null;
-      var t_10555214_Idx = 0;
+      var t_10565214 = null;
+      var t_10565214_Idx = 0;
       F.line = 199;
-      var i_10555504 = 0;
+      var i_10565504 = 0;
       F.line = 200;
-      var L_10555505 = (types_10545086).length;
+      var L_10565505 = (types_10555086).length;
       L2: do {
         F.line = 201;
           L3: while (true) {
-          if (!(i_10555504 < L_10555505)) break L3;
+          if (!(i_10565504 < L_10565505)) break L3;
             F.line = 212;
-            t_10555214 = types_10545086; t_10555214_Idx = chckIndx(i_10555504, 0, (types_10545086).length-1);
+            t_10565214 = types_10555086; t_10565214_Idx = chckIndx(i_10565504, 0, (types_10555086).length-1);
             F.line = 213;
-            var c_10555230 = {heading: t_10555214[t_10555214_Idx].cloneNode(true), kids: [], doSort: true, sortId: 0};
+            var c_10565230 = {heading: t_10565214[t_10565214_Idx].cloneNode(true), kids: [], doSort: true, sortId: 0};
             F.line = 214;
-            t_10555214[t_10555214_Idx].__karaxMarker__ = true;
+            t_10565214[t_10565214_Idx].__karaxMarker__ = true;
             L4: do {
               F.line = 215;
-              var p_10555238 = null;
-              var p_10555238_Idx = 0;
+              var p_10565238 = null;
+              var p_10565238_Idx = 0;
               F.line = 199;
-              var i_10555501 = 0;
+              var i_10565501 = 0;
               F.line = 200;
-              var L_10555502 = (procs_10545087).length;
+              var L_10565502 = (procs_10555087).length;
               L5: do {
                 F.line = 201;
                   L6: while (true) {
-                  if (!(i_10555501 < L_10555502)) break L6;
+                  if (!(i_10565501 < L_10565502)) break L6;
                     F.line = 215;
-                    p_10555238 = procs_10545087; p_10555238_Idx = chckIndx(i_10555501, 0, (procs_10545087).length-1);
-                    if (!(p_10555238[p_10555238_Idx].hasOwnProperty('__karaxMarker__'))) {
+                    p_10565238 = procs_10555087; p_10565238_Idx = chckIndx(i_10565501, 0, (procs_10555087).length-1);
+                    if (!(p_10565238[p_10565238_Idx].hasOwnProperty('__karaxMarker__'))) {
                     F.line = 217;
-                    var xx_10555239 = p_10555238[p_10555238_Idx].parentNode.getElementsByClassName("attachedType");
-                      if (!((xx_10555239).length == 1)) Tmp7 = false; else {                        Tmp7 = (xx_10555239[chckIndx(0, 0, (xx_10555239).length-1)].textContent == t_10555214[t_10555214_Idx].textContent);                      }                    if (Tmp7) {
+                    var xx_10565239 = p_10565238[p_10565238_Idx].parentNode.getElementsByClassName("attachedType");
+                      if (!((xx_10565239).length == 1)) Tmp7 = false; else {                        Tmp7 = (xx_10565239[chckIndx(0, 0, (xx_10565239).length-1)].textContent == t_10565214[t_10565214_Idx].textContent);                      }                    if (Tmp7) {
                     F.line = 220;
-                    var q_10555247 = tree_10476020(makeNimstrLit("A"), [text_10476169(p_10555238[p_10555238_Idx].title)]);
+                    var q_10565247 = tree_10486020(makeNimstrLit("A"), [text_10486169(p_10565238[p_10565238_Idx].title)]);
                     F.line = 221;
-                    q_10555247.setAttribute("href", p_10555238[p_10555238_Idx].getAttribute("href"));
+                    q_10565247.setAttribute("href", p_10565238[p_10565238_Idx].getAttribute("href"));
                     F.line = 222;
-                    c_10555230.kids.push({heading: q_10555247, kids: [], sortId: 0, doSort: false});;
+                    c_10565230.kids.push({heading: q_10565247, kids: [], sortId: 0, doSort: false});;
                     F.line = 223;
-                    p_10555238[p_10555238_Idx].__karaxMarker__ = true;
+                    p_10565238[p_10565238_Idx].__karaxMarker__ = true;
                     }
                     
                     }
                     
                     F.line = 203;
-                    i_10555501 = addInt(i_10555501, 1);
-                    if (!(((procs_10545087).length == L_10555502))) {
+                    i_10565501 = addInt(i_10565501, 1);
+                    if (!(((procs_10555087).length == L_10565502))) {
                     F.line = 204;
-                    failedAssertImpl_1325480(makeNimstrLit("C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\system\\iterators.nim(204, 11) `len(a) == L` the length of the seq changed while iterating over it"));
+                    failedAssertImpl_1325480(makeNimstrLit("D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\system\\iterators.nim(204, 11) `len(a) == L` the length of the seq changed while iterating over it"));
                     }
                     
                   }
               } while(false);
             } while(false);
             F.line = 224;
-            newStuff_10545104.kids.push(c_10555230);;
+            newStuff_10555104.kids.push(c_10565230);;
             F.line = 203;
-            i_10555504 = addInt(i_10555504, 1);
-            if (!(((types_10545086).length == L_10555505))) {
+            i_10565504 = addInt(i_10565504, 1);
+            if (!(((types_10555086).length == L_10565505))) {
             F.line = 204;
-            failedAssertImpl_1325480(makeNimstrLit("C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\system\\iterators.nim(204, 11) `len(a) == L` the length of the seq changed while iterating over it"));
+            failedAssertImpl_1325480(makeNimstrLit("D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\system\\iterators.nim(204, 11) `len(a) == L` the length of the seq changed while iterating over it"));
             }
             
           }
       } while(false);
     } while(false);
     F.line = 225;
-    result_10545088 = mergeTocs_10545035(orig_10545084, newStuff_10545104);
+    result_10555088 = mergeTocs_10555035(orig_10555084, newStuff_10555104);
   framePtr = F.prev;
 
-  return result_10545088;
+  return result_10555088;
 
 }
-function add_10476117(parent_10476119, kid_10476120) {
+function add_10486117(parent_10486119, kid_10486120) {
       var Tmp1;
         var Tmp2;
 
-  var F={procname:"dochack.add",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+  var F={procname:"dochack.add",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
   framePtr = F;
-      if (!(parent_10476119.nodeName == "TR")) Tmp1 = false; else {        if ((kid_10476120.nodeName == "TD")) Tmp2 = true; else {          Tmp2 = (kid_10476120.nodeName == "TH");        }        Tmp1 = Tmp2;      }    if (Tmp1) {
+      if (!(parent_10486119.nodeName == "TR")) Tmp1 = false; else {        if ((kid_10486120.nodeName == "TD")) Tmp2 = true; else {          Tmp2 = (kid_10486120.nodeName == "TH");        }        Tmp1 = Tmp2;      }    if (Tmp1) {
     F.line = 18;
-    var k_10476121 = document.createElement("TD");
+    var k_10486121 = document.createElement("TD");
     F.line = 19;
-    k_10476121.appendChild(kid_10476120);
+    k_10486121.appendChild(kid_10486120);
     F.line = 20;
-    parent_10476119.appendChild(k_10476121);
+    parent_10486119.appendChild(k_10486121);
     }
     else {
       F.line = 22;
-    parent_10476119.appendChild(kid_10476120);
+    parent_10486119.appendChild(kid_10486120);
     }
     
   framePtr = F.prev;
 
   
 }
-function setClass_10476135(e_10476137, value_10476138) {
-  var F={procname:"dochack.setClass",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+function setClass_10486135(e_10486137, value_10486138) {
+  var F={procname:"dochack.setClass",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
   framePtr = F;
     F.line = 25;
-    e_10476137.setAttribute("class", toJSStr(value_10476138));
+    e_10486137.setAttribute("class", toJSStr(value_10486138));
   framePtr = F.prev;
 
   
 }
-function toHtml_10490072(x_10490074, isRoot_10490075) {
+function toHtml_10500072(x_10500074, isRoot_10500075) {
       var Tmp1;
-    function HEX3Aanonymous_10495015(a_10495017, b_10495018) {
+    function HEX3Aanonymous_10505015(a_10505017, b_10505018) {
           var Tmp1;
 
-      var result_10495019 = 0;
+      var result_10505019 = 0;
 
-      var F={procname:"toHtml.:anonymous",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+      var F={procname:"toHtml.:anonymous",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
       framePtr = F;
       BeforeRet: do {
-          if (!!((a_10495017.heading == null))) Tmp1 = false; else {            Tmp1 = !((b_10495018.heading == null));          }        if (Tmp1) {
+          if (!!((a_10505017.heading == null))) Tmp1 = false; else {            Tmp1 = !((b_10505018.heading == null));          }        if (Tmp1) {
         F.line = 106;
-        var x_10505009 = a_10495017.heading.textContent;
+        var x_10515009 = a_10505017.heading.textContent;
         F.line = 107;
-        var y_10505010 = b_10495018.heading.textContent;
-        if ((x_10505009 < y_10505010)) {
+        var y_10515010 = b_10505018.heading.textContent;
+        if ((x_10515009 < y_10515010)) {
         F.line = 108;
-        result_10495019 = -1;
+        result_10505019 = -1;
         break BeforeRet;
         }
         
-        if ((y_10505010 < x_10505009)) {
+        if ((y_10515010 < x_10515009)) {
         F.line = 109;
-        result_10495019 = 1;
+        result_10505019 = 1;
         break BeforeRet;
         }
         
         F.line = 110;
-        result_10495019 = 0;
+        result_10505019 = 0;
         break BeforeRet;
         }
         else {
           F.line = 113;
-          result_10495019 = subInt(a_10495017.sortId, b_10495018.sortId);
+          result_10505019 = subInt(a_10505017.sortId, b_10505018.sortId);
           break BeforeRet;
         }
         
       } while (false);
       framePtr = F.prev;
 
-      return result_10495019;
+      return result_10505019;
 
     }
 
-  var result_10490076 = null;
+  var result_10500076 = null;
 
-  var F={procname:"dochack.toHtml",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+  var F={procname:"dochack.toHtml",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
   framePtr = F;
   BeforeRet: do {
-    if ((x_10490074 == null)) {
+    if ((x_10500074 == null)) {
     F.line = 91;
-    result_10490076 = null;
+    result_10500076 = null;
     break BeforeRet;
     }
     
-    if (((x_10490074.kids).length == 0)) {
-    if ((x_10490074.heading == null)) {
+    if (((x_10500074.kids).length == 0)) {
+    if ((x_10500074.heading == null)) {
     F.line = 93;
-    result_10490076 = null;
+    result_10500076 = null;
     break BeforeRet;
     }
     
     F.line = 94;
-    result_10490076 = x_10490074.heading.cloneNode(true);
+    result_10500076 = x_10500074.heading.cloneNode(true);
     break BeforeRet;
     }
     
     F.line = 95;
-    result_10490076 = tree_10476020(makeNimstrLit("DIV"), []);
-      if (!!((x_10490074.heading == null))) Tmp1 = false; else {        Tmp1 = !(x_10490074.heading.hasOwnProperty('__karaxMarker__'));      }    if (Tmp1) {
+    result_10500076 = tree_10486020(makeNimstrLit("DIV"), []);
+      if (!!((x_10500074.heading == null))) Tmp1 = false; else {        Tmp1 = !(x_10500074.heading.hasOwnProperty('__karaxMarker__'));      }    if (Tmp1) {
     F.line = 97;
-    add_10476117(result_10490076, x_10490074.heading.cloneNode(true));
+    add_10486117(result_10500076, x_10500074.heading.cloneNode(true));
     }
     
     F.line = 98;
-    var ul_10495012 = tree_10476020(makeNimstrLit("UL"), []);
-    if (isRoot_10490075) {
+    var ul_10505012 = tree_10486020(makeNimstrLit("UL"), []);
+    if (isRoot_10500075) {
     F.line = 100;
-    setClass_10476135(ul_10495012, makeNimstrLit("simple simple-toc"));
+    setClass_10486135(ul_10505012, makeNimstrLit("simple simple-toc"));
     }
     else {
       F.line = 102;
-    setClass_10476135(ul_10495012, makeNimstrLit("simple"));
+    setClass_10486135(ul_10505012, makeNimstrLit("simple"));
     }
     
-    if (x_10490074.doSort) {
+    if (x_10500074.doSort) {
     F.line = 104;
-    x_10490074.kids.sort(HEX3Aanonymous_10495015);
+    x_10500074.kids.sort(HEX3Aanonymous_10505015);
     }
     
     L2: do {
       F.line = 115;
-      var k_10520214 = null;
-      var k_10520214_Idx = 0;
+      var k_10530214 = null;
+      var k_10530214_Idx = 0;
       F.line = 199;
-      var i_10555527 = 0;
+      var i_10565527 = 0;
       F.line = 200;
-      var L_10555528 = (x_10490074.kids).length;
+      var L_10565528 = (x_10500074.kids).length;
       L3: do {
         F.line = 201;
           L4: while (true) {
-          if (!(i_10555527 < L_10555528)) break L4;
+          if (!(i_10565527 < L_10565528)) break L4;
             F.line = 115;
-            k_10520214 = x_10490074.kids; k_10520214_Idx = chckIndx(i_10555527, 0, (x_10490074.kids).length-1);
+            k_10530214 = x_10500074.kids; k_10530214_Idx = chckIndx(i_10565527, 0, (x_10500074.kids).length-1);
             F.line = 116;
-            var y_10520215 = toHtml_10490072(k_10520214[k_10520214_Idx], false);
-            if (!((y_10520215 == null))) {
+            var y_10530215 = toHtml_10500072(k_10530214[k_10530214_Idx], false);
+            if (!((y_10530215 == null))) {
             F.line = 118;
-            add_10476117(ul_10495012, tree_10476020(makeNimstrLit("LI"), [y_10520215]));
+            add_10486117(ul_10505012, tree_10486020(makeNimstrLit("LI"), [y_10530215]));
             }
             
             F.line = 203;
-            i_10555527 = addInt(i_10555527, 1);
-            if (!(((x_10490074.kids).length == L_10555528))) {
+            i_10565527 = addInt(i_10565527, 1);
+            if (!(((x_10500074.kids).length == L_10565528))) {
             F.line = 204;
-            failedAssertImpl_1325480(makeNimstrLit("C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\system\\iterators.nim(204, 11) `len(a) == L` the length of the seq changed while iterating over it"));
+            failedAssertImpl_1325480(makeNimstrLit("D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\system\\iterators.nim(204, 11) `len(a) == L` the length of the seq changed while iterating over it"));
             }
             
           }
       } while(false);
     } while(false);
-    if (!((ul_10495012.childNodes.length == 0))) {
+    if (!((ul_10505012.childNodes.length == 0))) {
     F.line = 119;
-    add_10476117(result_10490076, ul_10495012);
+    add_10486117(result_10500076, ul_10505012);
     }
     
-    if ((result_10490076.childNodes.length == 0)) {
+    if ((result_10500076.childNodes.length == 0)) {
     F.line = 120;
-    result_10490076 = null;
+    result_10500076 = null;
     }
     
   } while (false);
   framePtr = F.prev;
 
-  return result_10490076;
+  return result_10500076;
 
 }
-function replaceById_10476189(id_10476191, newTree_10476192) {
-  var F={procname:"dochack.replaceById",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+function replaceById_10486189(id_10486191, newTree_10486192) {
+  var F={procname:"dochack.replaceById",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
   framePtr = F;
     F.line = 32;
-    var x_10476193 = document.getElementById(id_10476191);
+    var x_10486193 = document.getElementById(id_10486191);
     F.line = 33;
-    x_10476193.parentNode.replaceChild(newTree_10476192, x_10476193);
+    x_10486193.parentNode.replaceChild(newTree_10486192, x_10486193);
     F.line = 34;
-    newTree_10476192.id = id_10476191;
+    newTree_10486192.id = id_10486191;
   framePtr = F.prev;
 
   
 }
-function togglevis_10555336(d_10555338) {
-  var F={procname:"dochack.togglevis",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+function togglevis_10565336(d_10565338) {
+  var F={procname:"dochack.togglevis",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
   framePtr = F;
     F.line = 230;
-        if (d_10555338.style.display == 'none')
-      d_10555338.style.display = 'inline';
+        if (d_10565338.style.display == 'none')
+      d_10565338.style.display = 'inline';
     else
-      d_10555338.style.display = 'none';
+      d_10565338.style.display = 'none';
   
   framePtr = F.prev;
 
   
 }
-function groupBy(value_10555354) {
-  var F={procname:"dochack.groupBy",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+function groupBy(value_10565354) {
+  var F={procname:"dochack.groupBy",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
   framePtr = F;
     F.line = 238;
-    var toc_10555355 = document.getElementById("toc-list");
-    if ((alternative_10555322[0] == null)) {
+    var toc_10565355 = document.getElementById("toc-list");
+    if ((alternative_10565322[0] == null)) {
     F.line = 240;
-    var tt_10555376 = {heading: null, kids: [], sortId: 0, doSort: false};
+    var tt_10565376 = {heading: null, kids: [], sortId: 0, doSort: false};
     F.line = 241;
-    toToc_10530150(toc_10555355, tt_10555376);
+    toToc_10540150(toc_10565355, tt_10565376);
     F.line = 242;
-    tt_10555376 = tt_10555376.kids[chckIndx(0, 0, (tt_10555376.kids).length-1)];
+    tt_10565376 = tt_10565376.kids[chckIndx(0, 0, (tt_10565376.kids).length-1)];
     F.line = 244;
-    var types_10555393 = [[]];
+    var types_10565393 = [[]];
     F.line = 245;
-    var procs_10555410 = [[]];
+    var procs_10565410 = [[]];
     F.line = 247;
-    extractItems_10485075(tt_10555376, "Types", types_10555393, 0);
+    extractItems_10495075(tt_10565376, "Types", types_10565393, 0);
     F.line = 248;
-    extractItems_10485075(tt_10555376, "Procs", procs_10555410, 0);
+    extractItems_10495075(tt_10565376, "Procs", procs_10565410, 0);
     F.line = 249;
-    extractItems_10485075(tt_10555376, "Converters", procs_10555410, 0);
+    extractItems_10495075(tt_10565376, "Converters", procs_10565410, 0);
     F.line = 250;
-    extractItems_10485075(tt_10555376, "Methods", procs_10555410, 0);
+    extractItems_10495075(tt_10565376, "Methods", procs_10565410, 0);
     F.line = 251;
-    extractItems_10485075(tt_10555376, "Templates", procs_10555410, 0);
+    extractItems_10495075(tt_10565376, "Templates", procs_10565410, 0);
     F.line = 252;
-    extractItems_10485075(tt_10555376, "Macros", procs_10555410, 0);
+    extractItems_10495075(tt_10565376, "Macros", procs_10565410, 0);
     F.line = 253;
-    extractItems_10485075(tt_10555376, "Iterators", procs_10555410, 0);
+    extractItems_10495075(tt_10565376, "Iterators", procs_10565410, 0);
     F.line = 255;
-    var ntoc_10555418 = buildToc_10545082(tt_10555376, types_10555393[0], procs_10555410[0]);
+    var ntoc_10565418 = buildToc_10555082(tt_10565376, types_10565393[0], procs_10565410[0]);
     F.line = 256;
-    var x_10555419 = toHtml_10490072(ntoc_10555418, true);
+    var x_10565419 = toHtml_10500072(ntoc_10565418, true);
     F.line = 257;
-    alternative_10555322[0] = tree_10476020(makeNimstrLit("DIV"), [x_10555419]);
+    alternative_10565322[0] = tree_10486020(makeNimstrLit("DIV"), [x_10565419]);
     }
     
-    if ((value_10555354 == "type")) {
+    if ((value_10565354 == "type")) {
     F.line = 259;
-    replaceById_10476189("tocRoot", alternative_10555322[0]);
+    replaceById_10486189("tocRoot", alternative_10565322[0]);
     }
     else {
       F.line = 261;
-    replaceById_10476189("tocRoot", tree_10476020(makeNimstrLit("DIV"), []));
+    replaceById_10486189("tocRoot", tree_10486020(makeNimstrLit("DIV"), []));
     }
     
     F.line = 262;
-    togglevis_10555336(document.getElementById("toc-list"));
+    togglevis_10565336(document.getElementById("toc-list"));
   framePtr = F.prev;
 
   
 }
-var F={procname:"module dochack",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+var F={procname:"module dochack",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dochack",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+var F={procname:"module dochack",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
 framePtr = F;
 F.line = 265;
-var db_10555531 = [[]];
+var db_10565531 = [[]];
 F.line = 266;
-var contents_10555533 = [[]];
+var contents_10565533 = [[]];
 framePtr = F.prev;
-var F={procname:"module dochack",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+var F={procname:"module dochack",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dochack",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+var F={procname:"module dochack",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dochack",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+var F={procname:"module dochack",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
 framePtr = F;
 F.line = 315;
-var oldtoc_10565421 = [null];
+var oldtoc_10575438 = [null];
 F.line = 316;
-var timer_10565422 = [null];
+var timer_10575439 = [null];
 framePtr = F.prev;
 function raiseRangeError() {
-    raiseException({message: makeNimstrLit("value out of range"), parent: null, m_type: NTI1214253, name: null, trace: [], up: null}, "RangeDefect");
+    raiseException({message: makeNimstrLit("value out of range"), parent: null, m_type: NTI1214653, name: null, trace: [], up: null}, "RangeDefect");
 
   
 }
-function nsuToLowerAsciiChar(c_9420023) {
-  var result_9420024 = 0;
+function nsuToLowerAsciiChar(c_9430023) {
+  var result_9430024 = 0;
 
-  var F={procname:"strutils.toLowerAscii",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\pure\\strutils.nim",line:0};
+  var F={procname:"strutils.toLowerAscii",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\pure\\strutils.nim",line:0};
   framePtr = F;
-    if ((ConstSet2[c_9420023] != undefined)) {
+    if ((ConstSet2[c_9430023] != undefined)) {
     F.line = 210;
-    result_9420024 = chckRange(addInt(c_9420023, 32), 0, 255);
+    result_9430024 = chckRange(addInt(c_9430023, 32), 0, 255);
     }
     else {
       F.line = 212;
-      result_9420024 = c_9420023;
+      result_9430024 = c_9430023;
     }
     
   framePtr = F.prev;
 
-  return result_9420024;
+  return result_9430024;
 
 }
-function fuzzyMatch_10396054(pattern_10396056, str_10396057) {
+function fuzzyMatch_10406054(pattern_10406056, str_10406057) {
               var Tmp4;
               var Tmp5;
                 var Tmp6;
       var Tmp7;
         var Tmp8;
 
-  var result_10396061 = {Field0: 0, Field1: false};
+  var result_10406061 = {Field0: 0, Field1: false};
 
-  var F={procname:"fuzzysearch.fuzzyMatch",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\fuzzysearch.nim",line:0};
+  var F={procname:"fuzzysearch.fuzzyMatch",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\fuzzysearch.nim",line:0};
   framePtr = F;
     F.line = 36;
-    var scoreState_10396062 = -100;
+    var scoreState_10406062 = -100;
     F.line = 37;
-    var headerMatched_10396063 = false;
+    var headerMatched_10406063 = false;
     F.line = 38;
-    var unmatchedLeadingCharCount_10396065 = 0;
+    var unmatchedLeadingCharCount_10406065 = 0;
     F.line = 39;
-    var consecutiveMatchCount_10396067 = 0;
+    var consecutiveMatchCount_10406067 = 0;
     F.line = 40;
-    var strIndex_10396069 = 0;
+    var strIndex_10406069 = 0;
     F.line = 41;
-    var patIndex_10396071 = 0;
+    var patIndex_10406071 = 0;
     F.line = 42;
-    var score_10396073 = 0;
+    var score_10406073 = 0;
     L1: do {
       F.line = 48;
         L2: while (true) {
-        if (!((strIndex_10396069 < (str_10396057).length) && (patIndex_10396071 < (pattern_10396056).length))) break L2;
+        if (!((strIndex_10406069 < (str_10406057).length) && (patIndex_10406071 < (pattern_10406056).length))) break L2;
           L3: do {
             F.line = 50;
-            var patternChar_10396079 = nsuToLowerAsciiChar(pattern_10396056.charCodeAt(chckIndx(patIndex_10396071, 0, (pattern_10396056).length-1)));
+            var patternChar_10406079 = nsuToLowerAsciiChar(pattern_10406056.charCodeAt(chckIndx(patIndex_10406071, 0, (pattern_10406056).length-1)));
             F.line = 51;
-            var strChar_10396080 = nsuToLowerAsciiChar(str_10396057.charCodeAt(chckIndx(strIndex_10396069, 0, (str_10396057).length-1)));
-            if ((ConstSet3[patternChar_10396079] != undefined)) {
+            var strChar_10406080 = nsuToLowerAsciiChar(str_10406057.charCodeAt(chckIndx(strIndex_10406069, 0, (str_10406057).length-1)));
+            if ((ConstSet3[patternChar_10406079] != undefined)) {
             F.line = 55;
-            patIndex_10396071 = addInt(patIndex_10396071, 1);
+            patIndex_10406071 = addInt(patIndex_10406071, 1);
             F.line = 56;
             break L3;
             }
             
-            if ((ConstSet4[strChar_10396080] != undefined)) {
+            if ((ConstSet4[strChar_10406080] != undefined)) {
             F.line = 58;
-            strIndex_10396069 = addInt(strIndex_10396069, 1);
+            strIndex_10406069 = addInt(strIndex_10406069, 1);
             F.line = 59;
             break L3;
             }
             
-            if ((!(headerMatched_10396063) && (strChar_10396080 == 58))) {
+            if ((!(headerMatched_10406063) && (strChar_10406080 == 58))) {
             F.line = 64;
-            headerMatched_10396063 = true;
+            headerMatched_10406063 = true;
             F.line = 65;
-            scoreState_10396062 = -100;
+            scoreState_10406062 = -100;
             F.line = 66;
-            score_10396073 = ((Math.floor((5.0000000000000000e-001 * score_10396073)))|0);
+            score_10406073 = ((Math.floor((5.0000000000000000e-001 * score_10406073)))|0);
             F.line = 67;
-            patIndex_10396071 = 0;
+            patIndex_10406071 = 0;
             F.line = 68;
-            strIndex_10396069 = addInt(strIndex_10396069, 1);
+            strIndex_10406069 = addInt(strIndex_10406069, 1);
             F.line = 69;
             break L3;
             }
             
-            if ((strChar_10396080 == patternChar_10396079)) {
+            if ((strChar_10406080 == patternChar_10406079)) {
             F.line = 72;
-            switch (scoreState_10396062) {
+            switch (scoreState_10406062) {
             case -100:
             case 20:
               F.line = 74;
-              scoreState_10396062 = 10;
+              scoreState_10406062 = 10;
               break;
             case 0:
               F.line = 77;
-              scoreState_10396062 = 5;
+              scoreState_10406062 = 5;
               F.line = 77;
-              score_10396073 = addInt(score_10396073, scoreState_10396062);
+              score_10406073 = addInt(score_10406073, scoreState_10406062);
               break;
             case 10:
             case 5:
               F.line = 80;
-              consecutiveMatchCount_10396067 = addInt(consecutiveMatchCount_10396067, 1);
+              consecutiveMatchCount_10406067 = addInt(consecutiveMatchCount_10406067, 1);
               F.line = 81;
-              scoreState_10396062 = 5;
+              scoreState_10406062 = 5;
               F.line = 82;
-              score_10396073 = addInt(score_10396073, mulInt(5, consecutiveMatchCount_10396067));
-              if ((scoreState_10396062 == 10)) {
+              score_10406073 = addInt(score_10406073, mulInt(5, consecutiveMatchCount_10406067));
+              if ((scoreState_10406062 == 10)) {
               F.line = 85;
-              score_10396073 = addInt(score_10396073, 10);
+              score_10406073 = addInt(score_10406073, 10);
               }
               
               F.line = 87;
-              var onBoundary_10410042 = (patIndex_10396071 == ((pattern_10396056).length-1));
-              if ((!(onBoundary_10410042) && (strIndex_10396069 < ((str_10396057).length-1)))) {
+              var onBoundary_10420042 = (patIndex_10406071 == ((pattern_10406056).length-1));
+              if ((!(onBoundary_10420042) && (strIndex_10406069 < ((str_10406057).length-1)))) {
               F.line = 90;
-              var nextPatternChar_10410043 = nsuToLowerAsciiChar(pattern_10396056.charCodeAt(chckIndx(addInt(patIndex_10396071, 1), 0, (pattern_10396056).length-1)));
+              var nextPatternChar_10420043 = nsuToLowerAsciiChar(pattern_10406056.charCodeAt(chckIndx(addInt(patIndex_10406071, 1), 0, (pattern_10406056).length-1)));
               F.line = 91;
-              var nextStrChar_10410044 = nsuToLowerAsciiChar(str_10396057.charCodeAt(chckIndx(addInt(strIndex_10396069, 1), 0, (str_10396057).length-1)));
+              var nextStrChar_10420044 = nsuToLowerAsciiChar(str_10406057.charCodeAt(chckIndx(addInt(strIndex_10406069, 1), 0, (str_10406057).length-1)));
               F.line = 94;
-              if (!!((ConstSet5[nextStrChar_10410044] != undefined))) Tmp4 = false; else {                Tmp4 = !((nextStrChar_10410044 == nextPatternChar_10410043));              }              onBoundary_10410042 = Tmp4;
+              if (!!((ConstSet5[nextStrChar_10420044] != undefined))) Tmp4 = false; else {                Tmp4 = !((nextStrChar_10420044 == nextPatternChar_10420043));              }              onBoundary_10420042 = Tmp4;
               }
               
-              if (onBoundary_10410042) {
+              if (onBoundary_10420042) {
               F.line = 99;
-              scoreState_10396062 = 20;
+              scoreState_10406062 = 20;
               F.line = 99;
-              score_10396073 = addInt(score_10396073, scoreState_10396062);
+              score_10406073 = addInt(score_10406073, scoreState_10406062);
               }
               
               break;
             case -1:
             case -3:
               F.line = 102;
-              if (!((ConstSet6[str_10396057.charCodeAt(chckIndx(subInt(strIndex_10396069, 1), 0, (str_10396057).length-1))] != undefined))) Tmp5 = true; else {                if (!(ConstSet7[str_10396057.charCodeAt(chckIndx(subInt(strIndex_10396069, 1), 0, (str_10396057).length-1))] != undefined)) Tmp6 = false; else {                  Tmp6 = (ConstSet8[str_10396057.charCodeAt(chckIndx(strIndex_10396069, 0, (str_10396057).length-1))] != undefined);                }                Tmp5 = Tmp6;              }              var isLeadingChar_10440008 = Tmp5;
-              if (isLeadingChar_10440008) {
+              if (!((ConstSet6[str_10406057.charCodeAt(chckIndx(subInt(strIndex_10406069, 1), 0, (str_10406057).length-1))] != undefined))) Tmp5 = true; else {                if (!(ConstSet7[str_10406057.charCodeAt(chckIndx(subInt(strIndex_10406069, 1), 0, (str_10406057).length-1))] != undefined)) Tmp6 = false; else {                  Tmp6 = (ConstSet8[str_10406057.charCodeAt(chckIndx(strIndex_10406069, 0, (str_10406057).length-1))] != undefined);                }                Tmp5 = Tmp6;              }              var isLeadingChar_10450008 = Tmp5;
+              if (isLeadingChar_10450008) {
               F.line = 109;
-              scoreState_10396062 = 10;
+              scoreState_10406062 = 10;
               }
               else {
                 F.line = 113;
-                scoreState_10396062 = 0;
+                scoreState_10406062 = 0;
                 F.line = 113;
-                score_10396073 = addInt(score_10396073, scoreState_10396062);
+                score_10406073 = addInt(score_10406073, scoreState_10406062);
               }
               
               break;
             }
             F.line = 114;
-            patIndex_10396071 = addInt(patIndex_10396071, 1);
+            patIndex_10406071 = addInt(patIndex_10406071, 1);
             }
             else {
               F.line = 117;
-              switch (scoreState_10396062) {
+              switch (scoreState_10406062) {
               case -100:
                 F.line = 119;
-                scoreState_10396062 = -3;
+                scoreState_10406062 = -3;
                 F.line = 119;
-                score_10396073 = addInt(score_10396073, scoreState_10396062);
+                score_10406073 = addInt(score_10406073, scoreState_10406062);
                 break;
               case 5:
                 F.line = 122;
-                scoreState_10396062 = -1;
+                scoreState_10406062 = -1;
                 F.line = 122;
-                score_10396073 = addInt(score_10396073, scoreState_10396062);
+                score_10406073 = addInt(score_10406073, scoreState_10406062);
                 F.line = 123;
-                consecutiveMatchCount_10396067 = 0;
+                consecutiveMatchCount_10406067 = 0;
                 break;
               case -3:
-                if ((unmatchedLeadingCharCount_10396065 < 3)) {
+                if ((unmatchedLeadingCharCount_10406065 < 3)) {
                 F.line = 127;
-                scoreState_10396062 = -3;
+                scoreState_10406062 = -3;
                 F.line = 127;
-                score_10396073 = addInt(score_10396073, scoreState_10396062);
+                score_10406073 = addInt(score_10406073, scoreState_10406062);
                 }
                 
                 F.line = 128;
-                unmatchedLeadingCharCount_10396065 = addInt(unmatchedLeadingCharCount_10396065, 1);
+                unmatchedLeadingCharCount_10406065 = addInt(unmatchedLeadingCharCount_10406065, 1);
                 break;
               default: 
                 F.line = 131;
-                scoreState_10396062 = -1;
+                scoreState_10406062 = -1;
                 F.line = 131;
-                score_10396073 = addInt(score_10396073, scoreState_10396062);
+                score_10406073 = addInt(score_10406073, scoreState_10406062);
                 break;
               }
             }
             
             F.line = 133;
-            strIndex_10396069 = addInt(strIndex_10396069, 1);
+            strIndex_10406069 = addInt(strIndex_10406069, 1);
           } while(false);
         }
     } while(false);
-      if (!(patIndex_10396071 == (pattern_10396056).length)) Tmp7 = false; else {        if ((strIndex_10396069 == (str_10396057).length)) Tmp8 = true; else {          Tmp8 = !((ConstSet9[str_10396057.charCodeAt(chckIndx(strIndex_10396069, 0, (str_10396057).length-1))] != undefined));        }        Tmp7 = Tmp8;      }    if (Tmp7) {
+      if (!(patIndex_10406071 == (pattern_10406056).length)) Tmp7 = false; else {        if ((strIndex_10406069 == (str_10406057).length)) Tmp8 = true; else {          Tmp8 = !((ConstSet9[str_10406057.charCodeAt(chckIndx(strIndex_10406069, 0, (str_10406057).length-1))] != undefined));        }        Tmp7 = Tmp8;      }    if (Tmp7) {
     F.line = 136;
-    score_10396073 = addInt(score_10396073, 10);
+    score_10406073 = addInt(score_10406073, 10);
     }
     
     F.line = 139;
-    var colontmp__10575060 = nimMax(0, score_10396073);
+    var colontmp__10585060 = nimMax(0, score_10406073);
     F.line = 140;
-    var colontmp__10575061 = (0 < score_10396073);
+    var colontmp__10585061 = (0 < score_10406073);
     F.line = 138;
-    nimCopy(result_10396061, {Field0: colontmp__10575060, Field1: colontmp__10575061}, NTI10396058);
+    nimCopy(result_10406061, {Field0: colontmp__10585060, Field1: colontmp__10585061}, NTI10406058);
   framePtr = F.prev;
 
-  return result_10396061;
+  return result_10406061;
 
 }
-function text_10476152(s_10476154) {
-  var result_10476155 = null;
+function text_10486152(s_10486154) {
+  var result_10486155 = null;
 
-  var F={procname:"dochack.text",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+  var F={procname:"dochack.text",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
   framePtr = F;
     F.line = 26;
-    result_10476155 = document.createTextNode(toJSStr(s_10476154));
+    result_10486155 = document.createTextNode(toJSStr(s_10486154));
   framePtr = F.prev;
 
-  return result_10476155;
+  return result_10486155;
 
 }
-function dosearch_10555550(value_10555552) {
-    function HEX3Aanonymous_10565276(a_10565285, b_10565286) {
-      var result_10565290 = 0;
+function dosearch_10565550(value_10565552) {
+    function HEX3Aanonymous_10575276(a_10575285, b_10575286) {
+      var result_10575292 = 0;
 
-      var F={procname:"dosearch.:anonymous",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+      var F={procname:"dosearch.:anonymous",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
       framePtr = F;
         F.line = 305;
-        result_10565290 = subInt(b_10565286["Field1"], a_10565285["Field1"]);
+        result_10575292 = subInt(b_10575286["Field1"], a_10575285["Field1"]);
       framePtr = F.prev;
 
-      return result_10565290;
+      return result_10575292;
 
     }
 
-  var result_10555553 = null;
+  var result_10565553 = null;
 
-  var F={procname:"dochack.dosearch",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+  var F={procname:"dochack.dosearch",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
   framePtr = F;
-    if (((db_10555531[0]).length == 0)) {
+    if (((db_10565531[0]).length == 0)) {
     F.line = 272;
-    var stuff_10555559 = null;
+    var stuff_10565559 = null;
     F.line = 273;
         var request = new XMLHttpRequest();
     request.open("GET", "theindex.html", false);
@@ -4539,33 +4548,33 @@ function dosearch_10555550(value_10555552) {
     //parser=new DOMParser();
     //doc=parser.parseFromString("<html></html>", "text/html");
 
-    stuff_10555559 = doc.documentElement;
+    stuff_10565559 = doc.documentElement;
     
     F.line = 286;
-    db_10555531[0] = nimCopy(null, stuff_10555559.getElementsByClassName("reference"), NTI1890705);
+    db_10565531[0] = nimCopy(null, stuff_10565559.getElementsByClassName("reference"), NTI1900505);
     F.line = 287;
-    contents_10555533[0] = nimCopy(null, [], NTI10555574);
+    contents_10565533[0] = nimCopy(null, [], NTI10565574);
     L1: do {
       F.line = 288;
-      var ahref_10565214 = null;
-      var ahref_10565214_Idx = 0;
+      var ahref_10575214 = null;
+      var ahref_10575214_Idx = 0;
       F.line = 199;
-      var i_10575040 = 0;
+      var i_10585040 = 0;
       F.line = 200;
-      var L_10575041 = (db_10555531[0]).length;
+      var L_10585041 = (db_10565531[0]).length;
       L2: do {
         F.line = 201;
           L3: while (true) {
-          if (!(i_10575040 < L_10575041)) break L3;
+          if (!(i_10585040 < L_10585041)) break L3;
             F.line = 288;
-            ahref_10565214 = db_10555531[0]; ahref_10565214_Idx = chckIndx(i_10575040, 0, (db_10555531[0]).length-1);
+            ahref_10575214 = db_10565531[0]; ahref_10575214_Idx = chckIndx(i_10585040, 0, (db_10565531[0]).length-1);
             F.line = 289;
-            contents_10555533[0].push(ahref_10565214[ahref_10565214_Idx].getAttribute("data-doc-search-tag"));;
+            contents_10565533[0].push(ahref_10575214[ahref_10575214_Idx].getAttribute("data-doc-search-tag"));;
             F.line = 203;
-            i_10575040 = addInt(i_10575040, 1);
-            if (!(((db_10555531[0]).length == L_10575041))) {
+            i_10585040 = addInt(i_10585040, 1);
+            if (!(((db_10565531[0]).length == L_10585041))) {
             F.line = 204;
-            failedAssertImpl_1325480(makeNimstrLit("C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\lib\\system\\iterators.nim(204, 11) `len(a) == L` the length of the seq changed while iterating over it"));
+            failedAssertImpl_1325480(makeNimstrLit("D:\\a\\nightlies\\nightlies\\nim-1.3.5\\lib\\system\\iterators.nim(204, 11) `len(a) == L` the length of the seq changed while iterating over it"));
             }
             
           }
@@ -4574,118 +4583,118 @@ function dosearch_10555550(value_10555552) {
     }
     
     F.line = 290;
-    var ul_10565226 = tree_10476020(makeNimstrLit("UL"), []);
+    var ul_10575226 = tree_10486020(makeNimstrLit("UL"), []);
     F.line = 291;
-    result_10555553 = tree_10476020(makeNimstrLit("DIV"), []);
+    result_10565553 = tree_10486020(makeNimstrLit("DIV"), []);
     F.line = 292;
-    setClass_10476135(result_10555553, makeNimstrLit("search_results"));
+    setClass_10486135(result_10565553, makeNimstrLit("search_results"));
     F.line = 293;
-    var matches_10565247 = [];
+    var matches_10575247 = [];
     L4: do {
       F.line = 294;
-      var i_10565260 = 0;
+      var i_10575260 = 0;
       F.line = 104;
-      var colontmp__10575047 = 0;
+      var colontmp__10585047 = 0;
       F.line = 294;
-      colontmp__10575047 = (db_10555531[0]).length;
+      colontmp__10585047 = (db_10565531[0]).length;
       F.line = 106;
-      var i_10575048 = 0;
+      var i_10585048 = 0;
       L5: do {
         F.line = 107;
           L6: while (true) {
-          if (!(i_10575048 < colontmp__10575047)) break L6;
+          if (!(i_10585048 < colontmp__10585047)) break L6;
             F.line = 294;
-            i_10565260 = i_10575048;
+            i_10575260 = i_10585048;
             L7: do {
               F.line = 295;
-              var c_10565261 = contents_10555533[0][chckIndx(i_10565260, 0, (contents_10555533[0]).length-1)];
-              if (((c_10565261 == "Examples") || (c_10565261 == "PEG construction"))) {
+              var c_10575261 = contents_10565533[0][chckIndx(i_10575260, 0, (contents_10565533[0]).length-1)];
+              if (((c_10575261 == "Examples") || (c_10575261 == "PEG construction"))) {
               F.line = 300;
               break L7;
               }
               
               F.line = 301;
-              var colontmp__10575055 = fuzzyMatch_10396054(value_10555552, c_10565261);
+              var colontmp__10585055 = fuzzyMatch_10406054(value_10565552, c_10575261);
               F.line = 301;
-              var score_10565262 = colontmp__10575055["Field0"];
+              var score_10575262 = colontmp__10585055["Field0"];
               F.line = 301;
-              var matched_10565263 = colontmp__10575055["Field1"];
-              if (matched_10565263) {
+              var matched_10575263 = colontmp__10585055["Field1"];
+              if (matched_10575263) {
               F.line = 303;
-              matches_10565247.push({Field0: db_10555531[0][chckIndx(i_10565260, 0, (db_10555531[0]).length-1)], Field1: score_10565262});;
+              matches_10575247.push({Field0: db_10565531[0][chckIndx(i_10575260, 0, (db_10565531[0]).length-1)], Field1: score_10575262});;
               }
               
             } while(false);
             F.line = 109;
-            i_10575048 = addInt(i_10575048, 1);
+            i_10585048 = addInt(i_10585048, 1);
           }
       } while(false);
     } while(false);
     F.line = 305;
-    matches_10565247.sort(HEX3Aanonymous_10565276);
+    matches_10575247.sort(HEX3Aanonymous_10575276);
     L8: do {
       F.line = 306;
-      var i_10565329 = 0;
+      var i_10575331 = 0;
       F.line = 104;
-      var colontmp__10575052 = 0;
+      var colontmp__10585052 = 0;
       F.line = 306;
-      colontmp__10575052 = nimMin((matches_10565247).length, 29);
+      colontmp__10585052 = nimMin((matches_10575247).length, 29);
       F.line = 106;
-      var i_10575053 = 0;
+      var i_10585053 = 0;
       L9: do {
         F.line = 107;
           L10: while (true) {
-          if (!(i_10575053 < colontmp__10575052)) break L10;
+          if (!(i_10585053 < colontmp__10585052)) break L10;
             F.line = 306;
-            i_10565329 = i_10575053;
+            i_10575331 = i_10585053;
             F.line = 307;
-            matches_10565247[chckIndx(i_10565329, 0, (matches_10565247).length-1)]["Field0"].innerHTML = matches_10565247[chckIndx(i_10565329, 0, (matches_10565247).length-1)]["Field0"].getAttribute("data-doc-search-tag");
+            matches_10575247[chckIndx(i_10575331, 0, (matches_10575247).length-1)]["Field0"].innerHTML = matches_10575247[chckIndx(i_10575331, 0, (matches_10575247).length-1)]["Field0"].getAttribute("data-doc-search-tag");
             F.line = 308;
-            add_10476117(ul_10565226, tree_10476020(makeNimstrLit("LI"), [matches_10565247[chckIndx(i_10565329, 0, (matches_10565247).length-1)]["Field0"]]));
+            add_10486117(ul_10575226, tree_10486020(makeNimstrLit("LI"), [matches_10575247[chckIndx(i_10575331, 0, (matches_10575247).length-1)]["Field0"]]));
             F.line = 109;
-            i_10575053 = addInt(i_10575053, 1);
+            i_10585053 = addInt(i_10585053, 1);
           }
       } while(false);
     } while(false);
-    if ((ul_10565226.childNodes.length == 0)) {
+    if ((ul_10575226.childNodes.length == 0)) {
     F.line = 310;
-    add_10476117(result_10555553, tree_10476020(makeNimstrLit("B"), [text_10476152(makeNimstrLit("no search results"))]));
+    add_10486117(result_10565553, tree_10486020(makeNimstrLit("B"), [text_10486152(makeNimstrLit("no search results"))]));
     }
     else {
       F.line = 312;
-      add_10476117(result_10555553, tree_10476020(makeNimstrLit("B"), [text_10476152(makeNimstrLit("search results"))]));
+      add_10486117(result_10565553, tree_10486020(makeNimstrLit("B"), [text_10486152(makeNimstrLit("search results"))]));
       F.line = 313;
-      add_10476117(result_10555553, ul_10565226);
+      add_10486117(result_10565553, ul_10575226);
     }
     
   framePtr = F.prev;
 
-  return result_10555553;
+  return result_10565553;
 
 }
 function search() {
-    function wrapper_10565453() {
-      var F={procname:"search.wrapper",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+    function wrapper_10575470() {
+      var F={procname:"search.wrapper",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
       framePtr = F;
         F.line = 320;
-        var elem_10565455 = document.getElementById("searchInput");
+        var elem_10575472 = document.getElementById("searchInput");
         F.line = 321;
-        var value_10565456 = elem_10565455.value;
-        if (!(((value_10565456).length == 0))) {
-        if ((oldtoc_10565421[0] == null)) {
+        var value_10575473 = elem_10575472.value;
+        if (!(((value_10575473).length == 0))) {
+        if ((oldtoc_10575438[0] == null)) {
         F.line = 324;
-        oldtoc_10565421[0] = document.getElementById("tocRoot");
+        oldtoc_10575438[0] = document.getElementById("tocRoot");
         }
         
         F.line = 325;
-        var results_10570006 = dosearch_10555550(value_10565456);
+        var results_10580006 = dosearch_10565550(value_10575473);
         F.line = 326;
-        replaceById_10476189("tocRoot", results_10570006);
+        replaceById_10486189("tocRoot", results_10580006);
         }
         else {
-        if (!((oldtoc_10565421[0] == null))) {
+        if (!((oldtoc_10575438[0] == null))) {
         F.line = 328;
-        replaceById_10476189("tocRoot", oldtoc_10565421[0]);
+        replaceById_10486189("tocRoot", oldtoc_10575438[0]);
         }
         }
       framePtr = F.prev;
@@ -4693,22 +4702,22 @@ function search() {
       
     }
 
-  var F={procname:"dochack.search",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+  var F={procname:"dochack.search",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
   framePtr = F;
-    if (!((timer_10565422[0] == null))) {
+    if (!((timer_10575439[0] == null))) {
     F.line = 330;
-    clearTimeout(timer_10565422[0]);
+    clearTimeout(timer_10575439[0]);
     }
     
     F.line = 331;
-    timer_10565422[0] = setTimeout(wrapper_10565453, 400);
+    timer_10575439[0] = setTimeout(wrapper_10575470, 400);
   framePtr = F.prev;
 
   
 }
-var F={procname:"module dochack",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+var F={procname:"module dochack",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
-var F={procname:"module dochack",prev:framePtr,filename:"C:\\Users\\travis\\build\\nim-lang\\nightlies\\nim\\ef6358f0b0be71266d9fa7ae19a3b6f193b305cf\\tools\\dochack\\dochack.nim",line:0};
+var F={procname:"module dochack",prev:framePtr,filename:"D:\\a\\nightlies\\nightlies\\nim-1.3.5\\tools\\dochack\\dochack.nim",line:0};
 framePtr = F;
 framePtr = F.prev;
