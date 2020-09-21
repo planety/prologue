@@ -66,11 +66,11 @@ block:
     let
       msg = "not equal"
       decide = equals("prologue", msg)
-      decideDefaultMsg = equals("prologue")
+      decideDefaultMsg = equals("starlight")
 
     doAssert decide("prologue") == (true, "")
     doAssert decide("") == (false, msg)
-    doAssert decideDefaultMsg("prologue") == (false, "prologue is not equal to prologue!")
+    doAssert decideDefaultMsg("prologue") == (false, "prologue is not equal to starlight!")
 
   # "minValue can work"
   block:
@@ -199,7 +199,7 @@ block:
     doAssert decide("https://www.google.com") == (true, "")
     doAssert decide("https://127.0.0.1") == (true, "")
     doAssert decide("127.0.0.1") == (false, msg)
-    doAssert decideDefaultMsg("file:///prologue/prologue.nim") == (true, "")
+    doAssert decideDefaultMsg("file:///prologue/starlight.nim") == (true, "")
     doAssert decideDefaultMsg("https:/www.prologue.com") == (false,
                 "https:/www.prologue.com doesn't match url")
 

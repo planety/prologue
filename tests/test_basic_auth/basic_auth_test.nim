@@ -6,7 +6,7 @@ import ../../src/prologue/middlewares/utils
 
 
 proc verify(ctx: Context, username, password: string): bool =
-  if username == "prologue" and password == "prologue":
+  if username == "prologue" and password == "starlight":
     return true
   else:
     return false

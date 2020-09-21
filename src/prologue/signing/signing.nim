@@ -75,7 +75,7 @@ type
 
 
 const
-  DefaultSalt = "Prologue.Prologue"
+  DefaultSalt = "Starlight.Prologue"
   DefaultSep* = '.'
   Base64Alphabet = IdentChars + {'-', '='}
   DefaultKeyDerivation* = MoreConcat

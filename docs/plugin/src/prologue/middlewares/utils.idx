@@ -1,6 +1,6 @@
 testMiddleware	src/prologue/middlewares/utils.html#testMiddleware	utils: testMiddleware(): HandlerAsync	
-loggingMiddleware	src/prologue/middlewares/utils.html#loggingMiddleware,string	utils: loggingMiddleware(appName = &quot;Prologue&quot;): HandlerAsync	
-debugRequestMiddleware	src/prologue/middlewares/utils.html#debugRequestMiddleware,string	utils: debugRequestMiddleware(appName = &quot;Prologue&quot;): HandlerAsync	
-debugResponseMiddleware	src/prologue/middlewares/utils.html#debugResponseMiddleware,string	utils: debugResponseMiddleware(appName = &quot;Prologue&quot;): HandlerAsync	
-stripPathMiddleware	src/prologue/middlewares/utils.html#stripPathMiddleware,string	utils: stripPathMiddleware(appName = &quot;Prologue&quot;): HandlerAsync	
+loggingMiddleware	src/prologue/middlewares/utils.html#loggingMiddleware,string	utils: loggingMiddleware(appName = &quot;Starlight&quot;): HandlerAsync	
+debugRequestMiddleware	src/prologue/middlewares/utils.html#debugRequestMiddleware,string	utils: debugRequestMiddleware(appName = &quot;Starlight&quot;): HandlerAsync	
+debugResponseMiddleware	src/prologue/middlewares/utils.html#debugResponseMiddleware,string	utils: debugResponseMiddleware(appName = &quot;Starlight&quot;): HandlerAsync	
+stripPathMiddleware	src/prologue/middlewares/utils.html#stripPathMiddleware,string	utils: stripPathMiddleware(appName = &quot;Starlight&quot;): HandlerAsync	
 httpRedirectMiddleWare	src/prologue/middlewares/utils.html#httpRedirectMiddleWare	utils: httpRedirectMiddleWare(): HandlerAsync	

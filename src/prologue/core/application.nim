@@ -452,7 +452,7 @@ when isMainModule:
     logging.debug "doLogin"
     resp redirect("/hello/Nim")
 
-  let settings = newSettings(appName = "StarLight", debug = true)
+  let settings = newSettings(appName = "Prologue", debug = true)
   var app = newApp(settings = settings)
 
   app.addRoute("/", home, HttpGet)

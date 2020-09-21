@@ -108,14 +108,14 @@ block:
     doAssert response.code == Http200, $response.code
     doAssert (waitFor response.body) == "<h1>Home</h1>"
 
-  # "can get /hello/{name} with name = Prologue"
+  # "can get /hello/{name} with name = Starlight"
   block:
     let
-      route = "/hello/Prologue!"
+      route = "/hello/Starlight!"
       response = waitFor client.get(fmt"http://{address}:{port}{route}")
 
     doAssert response.code == Http200, $response.code
-    doAssert (waitFor response.body) == "<h1>Hello, Prologue!</h1>"
+    doAssert (waitFor response.body) == "<h1>Hello, Starlight!</h1>"
 
   # "can get /hello/{name} with name = "
   block:
@@ -150,7 +150,7 @@ block:
       let
         route = "/loginpage"
       var data = newMultipartData()
-      data["username"] = "prologue"
+      data["username"] = "starlight"
       data["password"] = "prologue"
       doAssert (waitFor client.postContent(fmt"http://{address}:{port}{route}",
                 multipart = data)) == "<h1>Hello, Nim</h1>"
@@ -170,7 +170,7 @@ block:
       let
         route = "/login"
       var data = newMultipartData()
-      data["username"] = "prologue"
+      data["username"] = "starlight"
       data["password"] = "prologue"
       doAssert (waitFor client.postContent(fmt"http://{address}:{port}{route}",
           multipart = data)) == "<h1>Hello, Nim</h1>"

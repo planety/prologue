@@ -20,7 +20,7 @@ import prologue
 proc hello(ctx: Context) {.async.} =
   discard
 
-proc myDebugRequestMiddleware*(appName = "Prologue"): HandlerAsync =
+proc myDebugRequestMiddleware*(appName = "Starlight"): HandlerAsync =
   result = proc(ctx: Context) {.async.} =
     logging.info "debugRequestMiddleware->begin"
     # do something before
