@@ -14,7 +14,7 @@ block:
       env = initEnv()
     env.setPrologueEnv("debug", "true")
     env.setPrologueEnv("port", "8080")
-    env.setPrologueEnv("appName", "Starlight")
+    env.setPrologueEnv("appName", "Prologue")
     env.setPrologueEnv("staticDir", "static")
     writePrologueEnv(filename, env)
     doAssert fileExists(filename)
@@ -24,7 +24,7 @@ block:
     let env = loadPrologueEnv("tests/.env")
     doAssert env["debug"] == "true"
     doAssert env["port"] == "8080"
-    doAssert env["appName"] == "Starlight"
+    doAssert env["appName"] == "Prologue"
     doAssert env["staticDir"] == "static"
     doAssert env.getOrDefault("address", "127.0.0.2") == "127.0.0.2"
 

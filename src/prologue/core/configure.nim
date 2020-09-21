@@ -24,7 +24,7 @@ runnableExamples:
   # only work in application scope
   putPrologueEnv("debug", "true", prefix)
   putPrologueEnv("port", "8787", prefix)
-  putPrologueEnv("appName", "Starlight", prefix)
+  putPrologueEnv("appName", "Prologue", prefix)
   putPrologueEnv("staticDir", "static", prefix)
 
 
@@ -35,12 +35,12 @@ runnableExamples:
   let config = newStringStream("""[Prologue]
 debug=true
 port=8787
-appName=Starlight
+appName=Prologue
 staticDir=static
 """)
 
   let tab = loadConfig(config)["Prologue"]
-  doAssert tab["appName"] == "Starlight"
+  doAssert tab["appName"] == "Prologue"
   doAssert tab["staticDir"] == "static"
   doAssert tab["debug"] == "true"
   doAssert tab["port"] == "8787"
