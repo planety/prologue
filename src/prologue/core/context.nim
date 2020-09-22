@@ -63,12 +63,12 @@ type
     request*: Request
     response*: Response
     handled*: bool
-    middlewares*: seq[HandlerAsync]
     session*: Session
     cleanedData*: StringTableRef
     ctxData*: StringTableRef
     localSettings*: Settings
     gScope: GlobalScope
+    middlewares: seq[HandlerAsync]
     size: int
     first: bool
 
@@ -111,6 +111,18 @@ proc first*(ctx: Context): bool {.inline.} =
 
 proc `first=`*(ctx: Context, first: bool) {.inline.} =
   ctx.first = first
+
+proc middlewares*(ctx: Context): lent seq[HandlerAsync] {.inline.} =
+  ctx.middlewares
+
+proc `middlewares=`*(ctx: Context, middlewares: seq[HandlerAsync]) {.inline.} =
+  ctx.middlewares = middlewares
+
+proc addMiddlewares*(ctx: Context, middleware: HandlerAsync) {.inline.} =
+  ctx.middlewares.add(middleware)
+
+proc addMiddlewares*(ctx: Context, middleware: seq[HandlerAsync]) {.inline.} =
+  ctx.middlewares.add(middleware)
 
 proc initUploadFile*(filename, body: string): UpLoadFile {.inline.} =
   ## Initiates a UploadFile.

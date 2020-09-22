@@ -14,7 +14,9 @@
 
 
 import asyncdispatch
-from ./context import HandlerAsync, Context, size, incSize, first, `first=`
+from ./context import HandlerAsync, Context, size, incSize, first, `first=`, 
+                      middlewares, `middlewares=`, addMiddlewares
+
 from ./route import findHandler
 
 
@@ -29,7 +31,7 @@ proc switch*(ctx: Context) {.async.} =
       next = handler.handler
 
     ctx.middlewares = handler.middlewares
-    ctx.middlewares.add next
+    ctx.addMiddlewares next
     ctx.first = false
 
   incSize(ctx)
@@ -43,8 +45,8 @@ proc switch*(ctx: Context) {.async.} =
       lastHandler = handler.handler
 
     ctx.localSettings = handler.settings
-    ctx.middlewares.add handler.middlewares
-    ctx.middlewares.add lastHandler
+    ctx.addMiddlewares handler.middlewares
+    ctx.addMiddlewares lastHandler
     ctx.first = false
 
     let next = ctx.middlewares[ctx.size - 1]

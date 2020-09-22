@@ -1,6 +1,8 @@
 # Context
 
-Context is initialized when a new request enters.
+Context is initialized when a new request enters. You can get the information of the whole Context when you are writing handlers.
+
+You can use attributes of context such as `request`, `response`, `session` and so on.
 
 ## Context utils
 

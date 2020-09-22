@@ -61,7 +61,7 @@ export json
 export basicregex
 export configure
 export constants
-export context except size, incSize, first, `first=`
+export context except size, incSize, first, `first=`, middlewares, `middlewares=`, addMiddlewares
 export cookiejar
 export encode
 export middlewaresbase
@@ -393,18 +393,17 @@ proc run*(app: Prologue) =
         ctx.response.headers = newHttpHeaders()
       ctx.response.setHeader("content-type", "text/plain; charset=UTF-8")
 
-    # display error messages only in debug mode
-    if ctx.gScope.settings.debug and ctx.response.code == Http500:
-      discard
-    elif ctx.response.code in app.errorHandlerTable:
-      await (app.errorHandlerTable[ctx.response.code])(ctx)
-
-    # central processing
-    # all context processed here except static file
-
-    # Only process the context when `ctx.handled` is false.
-
     if not ctx.handled:
+      # display error messages only in debug mode
+      if ctx.gScope.settings.debug and ctx.response.code == Http500:
+        discard
+      elif ctx.response.code in app.errorHandlerTable:
+        await (app.errorHandlerTable[ctx.response.code])(ctx)
+
+      # central processing
+      # all context processed here except static file
+
+      # Only process the context when `ctx.handled` is false.
       await handle(ctx)
 
     logging.debug($(ctx.response))
