@@ -132,11 +132,10 @@ proc parseStringTable*(tabs: StringTableRef, s: string) {.inline.} =
   var
     pos = 0
     key, value: string
-  # assert(s[pos] == '{', "StringTable String starts with '{'")
 
-  pos += skipWhile(s, {'{'})
   # ignore '{'
-  # inc(pos)
+  pos += skipWhile(s, {'{'})
+
   while true:
     pos += s.parseUntil(key, ':', pos)
     # ignore ':'

@@ -27,7 +27,7 @@ const
 
 proc pbkdf2_sha256encode*(password: SecretKey, salt: string,
                           iterations = 24400): string {.inline.} =
-  assert salt.len != 0 and '$' notin salt
+  doAssert salt.len != 0 and '$' notin salt
   let output = base64Encode(pbkdf2(sha256, string(password), salt, iterations, outLen))
   result = fmt"pdkdf2_sha256${salt}${iterations}${output}"
 
@@ -48,7 +48,7 @@ proc pbkdf2_sha256verify*(password: SecretKey, encoded: string): bool =
 
 proc pbkdf2_sha1encode*(password: SecretKey, salt: string,
   iterations = 24400): string {.inline.} =
-  assert salt.len != 0 and '$' notin salt
+  doAssert salt.len != 0 and '$' notin salt
   let output = base64Encode(pbkdf2(sha1, string(password), salt, iterations, outLen))
   result = fmt"pdkdf2_sha1${salt}${iterations}${output}"
 
@@ -69,7 +69,7 @@ proc pbkdf2_sha1verify*(password: SecretKey, encoded: string): bool =
 
 when isMainModule:
   let r1 = pbkdf2_sha256encode(SecretKey("flywind"), "prologue")
-  assert pbkdf2_sha256verify(SecretKey("flywind"), r1)
+  doAssert pbkdf2_sha256verify(SecretKey("flywind"), r1)
 
   let r2 = pbkdf2_sha1encode(SecretKey("flywind"), "prologue")
-  assert pbkdf2_sha1verify(SecretKey("flywind"), r2)
+  doAssert pbkdf2_sha1verify(SecretKey("flywind"), r2)

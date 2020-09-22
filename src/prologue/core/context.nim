@@ -274,7 +274,7 @@ proc multiMatch*(s: string, replacements: StringTableRef): string =
     pos += parseUntil(s, tok, startChar, pos)
     result.add tok
     if pos < s.len:
-      assert s[pos - 1] == sep, "The char before '{' must be '/'"
+      doAssert s[pos - 1] == sep, "The char before '{' must be '/'"
     else:
       break
     inc pos

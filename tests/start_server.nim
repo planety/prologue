@@ -40,11 +40,11 @@ proc doLogin*(ctx: Context) {.async.} =
 
 proc translate*(ctx: Context) {.async.} =
   let zh_CN = ctx.setLanguage("zh_CN")
-  assert zh_CN.Tr("Hello") == "你好"
+  doAssert zh_CN.Tr("Hello") == "你好"
   let ja = ctx.setLanguage("ja")
-  assert ja.Tr("Hello") == "こんにちは"
-  assert ctx.translate("Hello", "zh_CN") == "你好"
-  assert ctx.translate("Hello", "ja") == "こんにちは"
+  doAssert ja.Tr("Hello") == "こんにちは"
+  doAssert ctx.translate("Hello", "zh_CN") == "你好"
+  doAssert ctx.translate("Hello", "ja") == "こんにちは"
   resp "I'm ok."
 
 proc upload(ctx: Context) {.async.} =
