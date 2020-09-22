@@ -256,10 +256,10 @@ proc sign*(s: TimedSigner, value: string): string =
     sep = s.sep
     timestamp = $int(cpuTime())
     value = value & sep & timestamp
-  value & sep & s.getSignatureEncode(value.toOpenArrayByte(0, value.high))
+  result = value & sep & s.getSignatureEncode(value.toOpenArrayByte(0, value.high))
 
 proc verifySignature(s: Signer | TimedSigner, value, sig: string): bool =
-  return sig == s.getSignatureEncode(value.toOpenArrayByte(0, value.high))
+  result = sig == s.getSignatureEncode(value.toOpenArrayByte(0, value.high))
 
 proc unsign*(s: Signer | TimedSigner, signedValue: string): string =
   let sep = s.sep
@@ -271,6 +271,7 @@ proc unsign*(s: Signer | TimedSigner, signedValue: string): string =
     sig = temp[1]
   if verifySignature(s, value, sig):
     return value
+
   raise newException(BadSignatureError, fmt"Signature {sig} does not match")
 
 proc unsign*(s: TimedSigner, signedValue: string, max_age: Natural): string =
@@ -308,7 +309,7 @@ proc unsign*(s: TimedSigner, signedValue: string, max_age: Natural): string =
       raise newException(SignatureExpiredError,
           fmt"Signature age {age} > {max_age} seconds")
 
-  return value
+  result = value
 
 proc validate*(s: Signer, signedValue: string): bool =
   result = true

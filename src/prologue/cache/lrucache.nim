@@ -1,73 +1,117 @@
 import tables
 import lists
+import options
 
-import common
+import times
 
 
 type
-  LRUCached*[A, B] = object
-    map*: Table[A, MapValue[A, B]]
-    cached*: CachedKeyPair[A, B]
-    info*: CachedInfo
+  KeyPair[A, B] = tuple
+    keyPart: A
+    valuePart: B
+    expire: int # seconds
 
-proc initLruCached*[A, B](maxSize: Natural = 128): LRUCached[A, B] {.inline.} =
-  LRUCached[A, B](map: initTable[A, MapValue[A, B]](),
-      cached: initDoublyLinkedList[KeyPair[A, B]](), info: (hits: 0,
-          misses: 0, maxSize: maxSize))
+  ListPair*[A, B] = DoublyLinkedList[KeyPair[A, B]]
+  MapValue*[A, B] = DoublyLinkedNode[KeyPair[A, B]]
 
-proc moveToFront*[A, B](x: var LRUCached[A, B], node: MapValue[A, B]) {.inline.} =
-  x.cached.remove(node)
-  x.cached.prepend(node)
+  LRUCache*[A, B] = object
+    map: Table[A, MapValue[A, B]]
+    list: ListPair[A, B]
+    capacity: int
+    defaultTimeout: int # seconds
 
-proc get*[A, B](x: var LRUCached[A, B], key: A): B {.inline.} =
-  if key in x.map:
-    x.info.hits += 1
-    let node = x.map[key]
-    moveToFront(x, node)
-    return node.value.valuePart
-  x.info.misses += 1
+proc capacity*[A, B](cache: LRUCache[A, B]): int =
+  cache.capacity
 
-proc put*[A, B](x: var LRUCached[A, B], key: A, value: B) {.inline.} =
-  if key in x.map:
-    x.info.hits += 1
-    var node = x.map[key]
-    node.value.valuePart = value
-    moveToFront(x, node)
-    return
-  x.info.misses += 1
-  if x.map.len >= x.info.maxSize:
-    let node = x.cached.tail
-    x.cached.remove(node)
-    x.map.del(node.value.keyPart)
-  let node = newDoublyLinkedNode((keyPart: key, valuePart: value))
-  x.map[key] = node
-  moveToFront(x, node)
+proc len*[A, B](cache: LRUCache[A, B]): int =
+  cache.map.len
 
-proc `[]`*[A, B](x: var LRUCached[A, B], key: A): B {.inline.} =
-  x.get(key)
+proc isBool*[A, B](cache: LRUCache[A, B]): bool =
+  cache.len == 0
 
-proc `[]=`*[A, B](x: var LRUCached[A, B], key: A, value: B) {.inline.} =
-  x.put(key, value)
+proc isFull*[A, B](cache: LRUCache[A, B]): bool =
+  cache.len == cache.capacity
 
-proc contains*[A, B](x: var LRUCached[A, B], key: A): bool =
-  if key in x.map:
-    return true
+proc initLRUCache*[A, B](capacity: Natural = 128, defaultTimeout: Natural = 1): LRUCache[A, B] {.inline.} =
+  LRUCache[A, B](map: initTable[A, MapValue[A, B]](),
+                 list: initDoublyLinkedList[KeyPair[A, B]](), 
+                 capacity: capacity,
+                 defaultTimeout: defaultTimeout
+                 )
+
+proc moveToFront*[A, B](cache: var LRUCache[A, B], node: MapValue[A, B]) {.inline.} =
+  cache.list.remove(node)
+  cache.list.prepend(node)
+
+proc get*[A, B](cache: var LRUCache[A, B], key: A): Option[B] {.inline.} =
+  if key in cache.map:
+    var node = cache.map[key]
+    node.value.expire = int(epochTime()) + cache.defaultTimeout
+    moveToFront(cache, node)
+    return some(node.value.valuePart)
+  result = none(B)
+
+proc getOrDefault*[A, B](cache: var LRUCache[A, B], key: A, default: B): B {.inline.} =
+  let value = cache.get(key)
+
+  if value.isSome:
+    result = value.get
   else:
-    return false
+    result = B
+
+proc put*[A, B](cache: var LRUCache[A, B], key: A, value: B, timeout: Natural = 1) {.inline.} =
+  if key in cache.map:
+    var node = cache.map[key]
+    node.value.valuePart = value
+    node.value.expire = int(epochTime()) + timeout
+    moveToFront(cache, node)
+    return
+
+  if cache.map.len >= cache.capacity:
+    let node = cache.list.tail
+    cache.list.remove(node)
+    cache.map.del(node.value.keyPart)
+
+    let now = int(epochTime())
+    for cnode in nodes(cache.list):
+      if now > cnode.value.expire:
+        cache.list.remove(cnode)
+        cache.map.del(cnode.value.keyPart)
+
+  let node = newDoublyLinkedNode((keyPart: key, valuePart: value, expire: int(epochTime()) + timeout))
+  cache.map[key] = node
+  moveToFront(cache, node)
+
+proc `[]`*[A, B](cache: var LRUCache[A, B], key: A): B {.inline.} =
+  cache.get(key)
+
+proc `[]=`*[A, B](cache: var LRUCache[A, B], key: A, value: B) {.inline.} =
+  cache.put(key, value)
+
+proc hasKey*[A, B](cache: var LRUCache[A, B], key: A): bool {.inline.} =
+  if cache.map.hasKey(key):
+    result = true
+
+proc contains*[A, B](cache: var LRUCache[A, B], key: A): bool {.inline.} =
+  cache.hasKey(key)
+
 
 
 when isMainModule:
-  import random, timeit
+  import random, timeit, os
 
   randomize(128)
 
-  timeOnce("cached"):
-    var s = initLRUCached[int, int](128)
+  timeOnce("list"):
+    var s = initLRUCache[int, int](64)
     for i in 1 .. 100:
-      s.put(rand(1 .. 126), rand(1 .. 126))
+      s.put(rand(1 .. 64), rand(1 .. 126))
+
+    echo s.list
+    os.sleep(2000)
     s.put(5, 6)
     echo s.get(12)
     echo s.get(14)
     echo s.get(5)
-    echo s.info
-    echo s.map.len
+    echo s.len
+    echo s.list
