@@ -12,12 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import httpcore, asyncfile, mimetypes, md5, uri
+import asyncfile, mimetypes, md5, uri, httpcore
 import strtabs, tables, strformat, os, times, options, parseutils, json
 
 import asyncdispatch
 import ./response, ./pages, ./constants
-import cookiejar
+
 from ./types import BaseType, Session, `[]`, initSession
 from ./configure import parseValue
 from ./httpexception import AbortError
@@ -26,6 +26,8 @@ from ./basicregex import Regex
 from ./nativesettings import Settings, CtxSettings, getOrDefault, hasKey, `[]`
 
 import ./request
+
+import cookiejar
 
 
 type
@@ -185,7 +187,7 @@ proc send*(ctx: Context, content: string): Future[void] {.inline.} =
   result = ctx.request.send(content)
 
 proc respond*(ctx: Context, code: HttpCode, body: string,
-  headers: HttpHeaders = newHttpHeaders()): Future[void] {.inline.} =
+  headers: HttpHeaders): Future[void] {.inline.} =
   result = ctx.request.respond(code, body, headers)
 
 proc hasHeader*(request: var Request, key: string): bool {.inline.} =

@@ -24,54 +24,54 @@ type
     formParams*: FormPart
     pathParams*: StringTableRef
 
-proc createHeaders(headers: HttpHeaders): string =
-  result = ""
-  if headers != nil:
+
+func createHeaders(headers: HttpHeaders): string =
+  if headers != nil and headers.len != 0:
     for (key, value) in headers.pairs:
       result.add(key & ": " & value & "\c\L")
 
     result.setLen(result.len - 2) # Strip trailing \c\L
 
-proc url*(request: Request): Uri {.inline.} =
+func url*(request: Request): Uri {.inline.} =
   request.url
 
-proc port*(request: Request): string {.inline.} =
+func port*(request: Request): string {.inline.} =
   request.url.port
 
-proc path*(request: Request): string {.inline.} =
+func path*(request: Request): string {.inline.} =
   request.url.path
 
-proc stripPath*(request: var Request) {.inline.} =
+func stripPath*(request: var Request) {.inline.} =
   request.url.path = request.url.path.strip(
       leading = false, chars = {'/'})
 
-proc query*(request: Request): string {.inline.} =
+func query*(request: Request): string {.inline.} =
   request.url.query
 
-proc scheme*(request: Request): string {.inline.} =
+func scheme*(request: Request): string {.inline.} =
   request.url.scheme
 
-proc setScheme*(request: var Request, value: string) {.inline.} =
+func setScheme*(request: var Request, value: string) {.inline.} =
   request.url.scheme = value
 
-proc body*(request: Request): string {.inline.} =
+func body*(request: Request): string {.inline.} =
   request.body
 
 proc headers*(request: Request): HttpHeaders {.inline.} =
   request.headers
 
-proc reqMethod*(request: Request): HttpMethod {.inline.} =
+func reqMethod*(request: Request): HttpMethod {.inline.} =
   request.httpMethod
 
-proc getCookie*(request: Request, key: string, default: string): string {.inline.} =
+func getCookie*(request: Request, key: string, default: string): string {.inline.} =
   request.cookies.getOrDefault(key, default)
 
-proc contentType*(request: Request): string {.inline.} =
+func contentType*(request: Request): string {.inline.} =
   if not request.headers.hasKey("Content-Type"):
     return ""
   result = request.headers["Content-Type", 0]
 
-proc charset*(request: Request): string {.inline.} =
+func charset*(request: Request): string {.inline.} =
   let
     findStr = "charset="
     contentType = request.contentType
@@ -82,7 +82,7 @@ proc charset*(request: Request): string {.inline.} =
   else:
     return contentType[pos + findStr.len .. ^1]
 
-proc secure*(request: Request): bool {.inline.} =
+func secure*(request: Request): bool {.inline.} =
   if not request.headers.hasKey("X-Forwarded-Proto"):
     return false
 
@@ -94,7 +94,7 @@ proc secure*(request: Request): bool {.inline.} =
   else:
     result = false
 
-proc hostName*(request: Request): string {.inline.} =
+func hostName*(request: Request): string {.inline.} =
   if request.headers.hasKey("REMOTE_ADDR"):
     result = request.headers["REMOTE_ADDR", 0]
   if request.headers.hasKey("x-forwarded-for"):
@@ -102,23 +102,20 @@ proc hostName*(request: Request): string {.inline.} =
 
 proc send*(request: Request, content: string): Future[void] {.inline.} =
   request.nativeRequest.unsafeSend(content)
-  var fut = newFuture[void]()
-  complete(fut)
-  result = fut
+  result = newFuture[void]()
+  complete(result)
 
 proc respond*(request: Request, code: HttpCode, body: string,
-              headers: HttpHeaders = newHttpHeaders()): Future[void] {.inline.} =
+              headers: HttpHeaders): Future[void] {.inline.} =
 
-  let h = headers.createHeaders
-  request.nativeRequest.send(code, body, h)
-  var fut = newFuture[void]()
-  complete(fut)
-  result = fut
+  request.nativeRequest.send(code, body, headers.createHeaders)
+  result = newFuture[void]()
+  complete(result)
 
 proc respond*(request: Request, response: Response): Future[void] {.inline.} =
-  request.respond(response.code, response.body, response.headers)
+  result = request.respond(response.code, response.body, response.headers)
 
-proc initRequest*(nativeRequest: NativeRequest, 
+func initRequest*(nativeRequest: NativeRequest, 
                   cookies = initCookieJar(),
                   pathParams = newStringTable(modeCaseSensitive), 
                   queryParams = newStringTable(modeCaseSensitive),

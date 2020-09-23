@@ -261,21 +261,27 @@ proc printRoute*(app: Prologue) {.inline.} =
   for key in app.gScope.router.callable.keys:
     echo key
 
-proc appAddress*(app: Prologue): string {.inline.} =
+func appAddress*(app: Prologue): string {.inline.} =
   ## Gets the address from the settings.
   app.gScope.settings.address
 
-proc appDebug*(app: Prologue): bool {.inline.} =
+func appDebug*(app: Prologue): bool {.inline.} =
   ## Gets the debug attributes from the settings.
   app.gScope.settings.debug
 
-proc appName*(app: Prologue): string {.inline.} =
+func appName*(app: Prologue): string {.inline.} =
   ## Gets the appName attributes from the settings.
   app.gScope.settings.appName
 
-proc appPort*(app: Prologue): Port {.inline.} =
+func appPort*(app: Prologue): Port {.inline.} =
   ## Gets the port from the settings.
   app.gScope.settings.port
+
+proc execEvent(event: Event) {.inline.} =
+  if event.async:
+    waitFor event.asyncHandler()
+  else:
+    event.syncHandler()
 
 proc shutDownHandler() {.noconv.} =
   # shutdown events
@@ -285,10 +291,7 @@ proc shutDownHandler() {.noconv.} =
     setupForeignThreadGc()
 
   for event in dontUseThisShutDownEvents:
-    if event.async:
-      waitFor event.asyncHandler()
-    else:
-      event.syncHandler()
+    execEvent(event)
 
   echo "Shutting down Events are done after having received SIGINT!\n"
   quit(QuitSuccess)
@@ -314,100 +317,98 @@ proc newApp*(settings: Settings, middlewares: seq[HandlerAsync] = @[],
                        startup = startup, shutdown = shutdown,
                        errorHandlerTable = errorHandlerTable, appData = appData)
 
+
+# handle requests
+proc handleRequest(app: Prologue, nativeRequest: NativeRequest) {.async.} =
+  ## TODO request.headers check nil or None
+  var request = initRequest(nativeRequest = nativeRequest)
+
+  # process cookie
+  if request.hasHeader("cookie"):
+    request.cookies.parse(request.headers["cookie", 0])
+
+
+  let contentType = 
+    if request.hasHeader("content-type"):
+      request.headers["content-type", 0]
+    else:
+      ""
+
+  # parse form params
+  try:
+    request.parseFormParams(contentType)
+  except CgiError:
+    logging.warn(fmt"Malformed query params: Got ?{request.query}")
+  except Exception as e:
+    logging.error(&"Malformed form params:\n{e.msg}")
+
+  var
+    # initialize response
+    ctx = newContext(
+      request = move(request), 
+      response = initResponse(HttpVer11, Http200),
+                              gScope = app.gScope)
+
+  ## Todo Optimization
+  ctx.middlewares = app.middlewares
+  logging.debug(fmt"{ctx.request.reqMethod} {ctx.request.url.path}")
+
+  # whether request.path in the static path of settings.
+  let staticFileFlag = 
+    if ctx.gScope.settings.staticDirs.len != 0:
+      isStaticFile(ctx.request.path.decodeUrl, ctx.gScope.settings.staticDirs)
+    else:
+      (false, "", "")
+
+  try:
+    if staticFileFlag.hasValue:
+      # serve static files
+      await staticFileResponse(ctx, staticFileFlag.filename,
+                                staticFileFlag.dir)
+    else:
+      # serve dynamic contents
+      await switch(ctx)
+  except HttpError as e:
+    # catch general http error
+    logging.debug e.msg
+  except AbortError as e:
+    # catch abort error
+    logging.debug e.msg
+  except Exception as e:
+    logging.error e.msg
+    ctx.response.code = Http500
+    ctx.response.body = e.msg
+    if unlikely(ctx.response.headers == nil):
+      ctx.response.headers = newHttpHeaders()
+    ctx.response.setHeader("content-type", "text/plain; charset=UTF-8")
+
+  if not ctx.handled:
+    # display error messages only in debug mode
+    if ctx.gScope.settings.debug and ctx.response.code == Http500:
+      discard
+    elif ctx.response.code in app.errorHandlerTable:
+      await (app.errorHandlerTable[ctx.response.code])(ctx)
+
+    # central processing
+    # all context processed here except static file
+
+    # Only process the context when `ctx.handled` is false.
+    await handle(ctx)
+
+    logging.debug($(ctx.response))
+
+
 proc run*(app: Prologue) =
   ## Starts an Application.
 
   # start event
   for event in app.startup:
-    if event.async:
-      waitFor event.asyncHandler()
-    else:
-      event.syncHandler()
+    execEvent(event)
 
   dontUseThisShutDownEvents = app.shutdown
 
   if dontUseThisShutDownEvents.len != 0:
     setControlCHook(shutDownHandler)
-
-  # handle requests
-  proc handleRequest(nativeRequest: NativeRequest) {.async.} =
-    ## TODO request.headers check nil or None
-    var request = initRequest(nativeRequest = nativeRequest)
-
-    # process cookie
-    if request.hasHeader("cookie"):
-      request.cookies.parse(request.headers["cookie", 0])
-
-
-    let contentType = 
-      if request.hasHeader("content-type"):
-        request.headers["content-type", 0]
-      else:
-        ""
-
-    # parse form params
-    try:
-      request.parseFormParams(contentType)
-    except CgiError:
-      logging.warn(fmt"Malformed query params: Got ?{request.query}")
-    except Exception as e:
-      logging.error(&"Malformed form params:\n{e.msg}")
-
-    var
-      # initialize response
-      ctx = newContext(
-        request = move(request), 
-        response = initResponse(HttpVer11, Http200, headers = 
-                                newHttpHeaders({"Content-Type": "text/html; charset=UTF-8"})),
-                                gScope = app.gScope)
-
-    ## Todo Optimization
-    ctx.middlewares = app.middlewares
-    logging.debug(fmt"{ctx.request.reqMethod} {ctx.request.url.path}")
-
-    # whether request.path in the static path of settings.
-    let staticFileFlag = 
-      if ctx.gScope.settings.staticDirs.len != 0:
-        isStaticFile(ctx.request.path.decodeUrl, ctx.gScope.settings.staticDirs)
-      else:
-        (false, "", "")
-
-    try:
-      if staticFileFlag.hasValue:
-        # serve static files
-        await staticFileResponse(ctx, staticFileFlag.filename,
-                                 staticFileFlag.dir)
-      else:
-        # serve dynamic contents
-        await switch(ctx)
-    except HttpError as e:
-      # catch general http error
-      logging.debug e.msg
-    except AbortError as e:
-      # catch abort error
-      logging.debug e.msg
-    except Exception as e:
-      logging.error e.msg
-      ctx.response.code = Http500
-      ctx.response.body = e.msg
-      if unlikely(ctx.response.headers == nil):
-        ctx.response.headers = newHttpHeaders()
-      ctx.response.setHeader("content-type", "text/plain; charset=UTF-8")
-
-    if not ctx.handled:
-      # display error messages only in debug mode
-      if ctx.gScope.settings.debug and ctx.response.code == Http500:
-        discard
-      elif ctx.response.code in app.errorHandlerTable:
-        await (app.errorHandlerTable[ctx.response.code])(ctx)
-
-      # central processing
-      # all context processed here except static file
-
-      # Only process the context when `ctx.handled` is false.
-      await handle(ctx)
-
-    logging.debug($(ctx.response))
 
   # set the level of logging
   # Notes that you can set `app.appDebug=false` to disable logging printing.
@@ -424,7 +425,10 @@ proc run*(app: Prologue) =
   else:
     logging.debug(fmt"Prologue is serving at {app.appAddress}:{app.appPort} {app.appName}")
 
-  app.serve(app.appPort, handleRequest, app.appAddress)
+
+  app.serve(app.appPort, proc (nativeRequest: NativeRequest): Future[void] =
+                           result = handleRequest(app, nativeRequest),
+            app.appAddress)
 
 
 when isMainModule:
