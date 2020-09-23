@@ -36,7 +36,7 @@ proc switch*(ctx: Context) {.async.} =
 
   incSize(ctx)
 
-  if ctx.size <= ctx.middlewares.len:
+  if ctx.size <= ctx.middlewares.len.int8:
     let next = ctx.middlewares[ctx.size - 1]
     await next(ctx)
   elif ctx.first:
