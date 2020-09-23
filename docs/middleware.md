@@ -37,6 +37,16 @@ var
 app.addRoute("/", hello, HttpGet, middlewares = @[myDebugRequestMiddleware()])
 ```
 
+You can also put some variables in closure environments, but be careful it is error-prone when using multi-threads. You must know the differences between gc options(thread local heap vs shared heap) and what's the use of `gcsafe`. 
+
+```nim
+proc sessionMiddleware(): HandleAsync =
+  var memorySessionTable = newTable[string, string]()
+
+  result = proc(ctx: Context) {.async.} =
+    memorySessionTable["test"] = "prologue"
+```
+
 You can put your middleware plugin in [collections](https://github.com/planety/awesome-prologue).
 
 ## Use a middleware

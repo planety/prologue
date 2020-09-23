@@ -326,7 +326,8 @@ proc run*(app: Prologue) =
 
   dontUseThisShutDownEvents = app.shutdown
 
-  setControlCHook(shutDownHandler)
+  if dontUseThisShutDownEvents.len != 0:
+    setControlCHook(shutDownHandler)
 
   # handle requests
   proc handleRequest(nativeRequest: NativeRequest) {.async.} =

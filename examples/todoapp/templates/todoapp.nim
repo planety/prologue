@@ -1,4 +1,7 @@
-import karax / [vdom, karax, karaxdsl, jstrutils, compact, localstorage]
+when not (compiles do: import karax / karaxdsl):
+  {.error: "Please use `logue extension karax` to install!".}
+else:
+  import karax / [vdom, karax, karaxdsl, jstrutils, compact, localstorage]
 
 type
   Filter = enum

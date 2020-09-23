@@ -4,6 +4,13 @@ Context is initialized when a new request enters. You can get the information of
 
 You can use attributes of context such as `request`, `response`, `session` and so on.
 
+For example, you can get the HTTP method of the request.
+
+```nim
+proc login*(ctx: Context) {.async.} =
+  doAssert ctx.request.reqMethod == HttpPost
+```
+
 ## Context utils
 
 - getPostParams: gets the parameters by HttpPost.

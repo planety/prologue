@@ -1,4 +1,8 @@
-import karax / [karaxdsl, vdom]
+when not (compiles do: import karax / karaxdsl):
+  {.error: "Please use `logue extension karax` to install!".}
+else:
+  import karax / [karaxdsl, vdom]
+
 import ../../../src/prologue
 
 import
