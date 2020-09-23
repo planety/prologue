@@ -34,35 +34,35 @@ type
     data*: OrderedTableRef[string, tuple[params: StringTableRef, body: string]]
 
 
-proc initFormPart*(): FormPart {.inline.} =
+func initFormPart*(): FormPart {.inline.} =
   FormPart(data: newOrderedTable[string, (StringTableRef, string)]())
 
-proc `[]`*(formPart: FormPart, key: string): tuple[params: StringTableRef,
+func `[]`*(formPart: FormPart, key: string): tuple[params: StringTableRef,
     body: string] {.inline.} =
   formPart.data[key]
 
 proc `[]=`*(formPart: FormPart, key: string, body: string) {.inline.} =
   formPart.data[key] = (newStringTable(mode = modeCaseSensitive), body)
 
-proc tryParseInt(value: string, default: int): int {.inline.} =
+func tryParseInt(value: string, default: int): int {.inline.} =
   try:
     result = parseInt(value)
   except ValueError:
     result = default
 
-proc tryParseFloat(value: string, default: float): float {.inline.} =
+func tryParseFloat(value: string, default: float): float {.inline.} =
   try:
     result = parseFloat(value)
   except ValueError:
     result = default
 
-proc tryParseBool(value: string, default: bool): bool {.inline.} =
+func tryParseBool(value: string, default: bool): bool {.inline.} =
   try:
     result = parseBool(value)
   except ValueError:
     result = default
 
-proc parseValue*[T: BaseType](value: string, default: T): T {.inline.} =
+func parseValue*[T: BaseType](value: string, default: T): T {.inline.} =
   if value.len == 0:
     return default
 
@@ -75,14 +75,14 @@ proc parseValue*[T: BaseType](value: string, default: T): T {.inline.} =
   elif T is string:
     result = value
 
-proc len*(secretKey: SecretKey): int {.inline.} =
+func len*(secretKey: SecretKey): int {.inline.} =
   string(secretKey).len
 
 proc `$`*(secretKey: SecretKey): string {.inline.} =
   ## Hide secretKey's value
   "SecretKey(********)"
 
-proc initSession*(data: StringTableRef, newCreated = false, modified = false,
+func initSession*(data: StringTableRef, newCreated = false, modified = false,
     accessed = false): Session {.inline.} =
   Session(data: data, modified: modified)
 

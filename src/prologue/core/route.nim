@@ -40,54 +40,54 @@ type
     middlewares: seq[HandlerAsync]
 
 
-proc stripRoute*(route: string): string {.inline.} =
+func stripRoute*(route: string): string {.inline.} =
   result = route
   # Don't strip single slash
   if result.len > 1:
     if result[^1] == '/':
       result.setLen(result.high)
 
-proc initPath*(route: string, httpMethod = HttpGet): Path =
+func initPath*(route: string, httpMethod = HttpGet): Path =
   Path(route: route, httpMethod: httpMethod)
 
-proc initRePath*(route: Regex, httpMethod = HttpGet): RePath =
+func initRePath*(route: Regex, httpMethod = HttpGet): RePath =
   RePath(route: route, httpMethod: httpMethod)
 
-proc pattern*(route: string, handler: HandlerAsync, httpMethod = HttpGet,
+func pattern*(route: string, handler: HandlerAsync, httpMethod = HttpGet,
               name = "", middlewares: seq[HandlerAsync] = @[]): UrlPattern =
   (route, handler, @[httpMethod], name, middlewares)
 
-proc pattern*(route: string, handler: HandlerAsync, 
+func pattern*(route: string, handler: HandlerAsync, 
               httpMethod: seq[HttpMethod], name = "", 
               middlewares: seq[HandlerAsync] = @[]): UrlPattern =
   (route, handler, httpMethod, name, middlewares)
 
-proc hash*(x: Path): Hash =
+func hash*(x: Path): Hash =
   var h: Hash = 0
   h = h !& hash(x.route)
   h = h !& hash(x.httpMethod)
   result = !$h
 
-proc newPathHandler*(handler: HandlerAsync, middlewares: seq[HandlerAsync] = @[], 
+func newPathHandler*(handler: HandlerAsync, middlewares: seq[HandlerAsync] = @[], 
                      settings: Settings = nil): PathHandler {.inline.} =
   PathHandler(handler: handler, middlewares: middlewares, settings: settings)
 
-proc newRouter*(): Router {.inline.} =
+func newRouter*(): Router {.inline.} =
   Router(callable: initTable[Path, PathHandler]())
 
-proc newReRouter*(): ReRouter {.inline.} =
+func newReRouter*(): ReRouter {.inline.} =
   ReRouter(callable: newSeq[(RePath, PathHandler)]())
 
 proc add*(reRouter: ReRouter, pairs: (RePath, PathHandler)) {.inline.} =
   reRouter.callable.add(pairs)
 
-proc `[]`*(router: Router, path: Path): PathHandler {.inline.} =
+func `[]`*(router: Router, path: Path): PathHandler {.inline.} =
   router.callable[path]
 
 proc `[]=`*(router: Router, path: Path, pathHandler: PathHandler) {.inline.} =
   router.callable[path] = pathHandler
 
-proc hasKey*(router: Router, path: Path): bool {.inline.} =
+func hasKey*(router: Router, path: Path): bool {.inline.} =
   router.callable.hasKey(path)
 
 iterator pairs*(router: Router): (Path, PathHandler) {.inline.} =

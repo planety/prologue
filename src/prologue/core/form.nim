@@ -22,7 +22,7 @@ from ./types import FormPart, initFormPart, `[]=`
 import ./request
 
 
-proc parseFormPart*(body, contentType: string): FormPart {.inline.} =
+func parseFormPart*(body, contentType: string): FormPart {.inline.} =
   # parse form
   let
     sep = contentType[contentType.rfind("boundary") + 9 .. ^1]
@@ -88,7 +88,7 @@ proc parseFormPart*(body, contentType: string): FormPart {.inline.} =
 
     result.data[name].body = tail
 
-proc parseFormParams*(request: var Request, contentType: string) =
+func parseFormParams*(request: var Request, contentType: string) =
   # get or post forms params
   if "form-urlencoded" in contentType:
     request.formParams = initFormPart()

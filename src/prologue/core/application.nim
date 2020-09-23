@@ -296,7 +296,7 @@ proc shutDownHandler() {.noconv.} =
   echo "Shutting down Events are done after having received SIGINT!\n"
   quit(QuitSuccess)
 
-proc newApp*(settings: Settings, middlewares: seq[HandlerAsync] = @[],
+func newApp*(settings: Settings, middlewares: seq[HandlerAsync] = @[],
              startup: seq[Event] = @[], shutdown: seq[Event] = @[],
              errorHandlerTable = DefaultErrorHandler,
              appData = newStringTable(mode = modeCaseSensitive)): Prologue {.inline.} =

@@ -98,23 +98,23 @@ proc default404Handler*(ctx: Context) {.async.}
 proc default500Handler*(ctx: Context) {.async.}
 
 
-proc gScope*(ctx: Context): lent GlobalScope {.inline.} =
+func gScope*(ctx: Context): lent GlobalScope {.inline.} =
   ## Gets the gScope attribute of Context.
   ctx.gScope
 
-proc size*(ctx: Context): int {.inline.} =
+func size*(ctx: Context): int {.inline.} =
   ctx.size
 
-proc incSize*(ctx: Context, num = 1) {.inline.} =
+func incSize*(ctx: Context, num = 1) {.inline.} =
   inc(ctx.size, num)
 
-proc first*(ctx: Context): bool {.inline.} =
+func first*(ctx: Context): bool {.inline.} =
   ctx.first
 
 proc `first=`*(ctx: Context, first: bool) {.inline.} =
   ctx.first = first
 
-proc middlewares*(ctx: Context): lent seq[HandlerAsync] {.inline.} =
+func middlewares*(ctx: Context): lent seq[HandlerAsync] {.inline.} =
   ctx.middlewares
 
 proc `middlewares=`*(ctx: Context, middlewares: seq[HandlerAsync]) {.inline.} =
@@ -126,11 +126,11 @@ proc addMiddlewares*(ctx: Context, middleware: HandlerAsync) {.inline.} =
 proc addMiddlewares*(ctx: Context, middleware: seq[HandlerAsync]) {.inline.} =
   ctx.middlewares.add(middleware)
 
-proc initUploadFile*(filename, body: string): UpLoadFile {.inline.} =
+func initUploadFile*(filename, body: string): UpLoadFile {.inline.} =
   ## Initiates a UploadFile.
   UploadFile(filename: filename, body: body)
 
-proc getUploadFile*(ctx: Context, name: string): UpLoadFile {.inline.} =
+func getUploadFile*(ctx: Context, name: string): UpLoadFile {.inline.} =
   ## Gets the UploadFile from request.
   let file = ctx.request.formParams[name]
   initUploadFile(filename = file.params["filename"], body = file.body)
@@ -151,16 +151,16 @@ proc newErrorHandlerTable*(pairs: openArray[(HttpCode,
                            ErrorHandler)]): ErrorHandlerTable {.inline.} =
   newTable[HttpCode, ErrorHandler](pairs)
 
-proc newReversedRouter*(): ReversedRouter {.inline.} =
+func newReversedRouter*(): ReversedRouter {.inline.} =
   newStringTable(mode = modeCaseSensitive)
 
-proc initEvent*(handler: AsyncEvent): Event {.inline.} =
+func initEvent*(handler: AsyncEvent): Event {.inline.} =
   Event(async: true, asyncHandler: handler)
 
-proc initEvent*(handler: SyncEvent): Event {.inline.} =
+func initEvent*(handler: SyncEvent): Event {.inline.} =
   Event(async: false, syncHandler: handler)
 
-proc newContext*(request: Request, response: Response,
+func newContext*(request: Request, response: Response,
                  gScope: GlobalScope): Context {.inline.} =
   ## Creates a new Context.
   Context(request: request, response: response,
@@ -171,7 +171,7 @@ proc newContext*(request: Request, response: Response,
           size: 0, first: true,
     )
 
-proc getSettings*(ctx: Context, key: string): JsonNode {.inline.} =
+func getSettings*(ctx: Context, key: string): JsonNode {.inline.} =
   ## Get context.settings(First lookup localSettings then lookup globalSettings).
   if ctx.localSettings == nil:
     result = ctx.gScope.settings.getOrDefault(key)
@@ -190,7 +190,7 @@ proc respond*(ctx: Context, code: HttpCode, body: string,
   headers: HttpHeaders): Future[void] {.inline.} =
   result = ctx.request.respond(code, body, headers)
 
-proc hasHeader*(request: var Request, key: string): bool {.inline.} =
+func hasHeader*(request: var Request, key: string): bool {.inline.} =
   request.headers.hasKey(key)
 
 proc setHeader*(request: var Request, key, value: string) {.inline.} =
@@ -202,7 +202,7 @@ proc setHeader*(request: var Request, key: string, value: seq[string]) {.inline.
 proc addHeader*(request: var Request, key, value: string) {.inline.} =
   request.headers.add(key, value)
 
-proc getCookie*(ctx: Context, key: string, default: string = ""): string {.inline.} =
+func getCookie*(ctx: Context, key: string, default: string = ""): string {.inline.} =
   ## Gets Cookie from Request.
   getCookie(ctx.request, key, default)
 
@@ -239,7 +239,7 @@ proc default500Handler*(ctx: Context) {.async.} =
     ctx.response.headers = newHttpHeaders()
   ctx.response.setHeader("content-type", "text/html; charset=UTF-8")
 
-proc getPostParams*(ctx: Context, key: string, default = ""): string {.inline.} =
+func getPostParams*(ctx: Context, key: string, default = ""): string {.inline.} =
   ## Gets the parameters by HttpPost.
   case ctx.request.reqMethod
   of HttpPost:
@@ -247,15 +247,15 @@ proc getPostParams*(ctx: Context, key: string, default = ""): string {.inline.} 
   else:
     result = ""
 
-proc getQueryParams*(ctx: Context, key: string, default = ""): string {.inline.} =
+func getQueryParams*(ctx: Context, key: string, default = ""): string {.inline.} =
   ## Gets the query strings(for example, "www.google.com/hello?name=12", `name=12`).
   result = ctx.request.queryParams.getOrDefault(key, default)
 
-proc getPathParams*(ctx: Context, key: string): string {.inline.} =
+func getPathParams*(ctx: Context, key: string): string {.inline.} =
   ## Gets the route parameters(for example, "/hello/{name}").
   ctx.request.pathParams.getOrDefault(key)
 
-proc getPathParams*[T: BaseType](ctx: Context, key: string,
+func getPathParams*[T: BaseType](ctx: Context, key: string,
                     default: T): T {.inline.} =
   ## Gets the route parameters(for example, "/hello/{name}").
   let pathParams = ctx.request.pathParams.getOrDefault(key)
@@ -300,10 +300,10 @@ proc multiMatch*(s: string, replacements: StringTableRef): string =
       else:
         raise newException(ValueError, "Unexpected key")
 
-proc multiMatch*(s: string, replacements: varargs[(string, string)]): string {.inline.} =
+func multiMatch*(s: string, replacements: varargs[(string, string)]): string {.inline.} =
   multiMatch(s, replacements.newStringTable)
 
-proc urlFor*(ctx: Context, handler: string, parameters: openArray[(string,
+func urlFor*(ctx: Context, handler: string, parameters: openArray[(string,
              string)] = @[], queryParams: openArray[(string, string)] = @[],
              usePlus = true, omitEq = true): string {.inline.} =
 
@@ -316,7 +316,7 @@ proc urlFor*(ctx: Context, handler: string, parameters: openArray[(string,
   if queryString.len != 0:
     result = multiMatch(result, parameters) & "?" & queryString
 
-proc abortExit*(ctx: Context, code = Http401, body = "",
+func abortExit*(ctx: Context, code = Http401, body = "",
                 headers = newHttpHeaders(),
                 version = HttpVer11) {.inline.} =
   ## Abort the program.

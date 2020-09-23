@@ -61,32 +61,32 @@ type
   EnvWrongFormatError* = object of EnvError
 
 
-proc initEnv*(): Env =
+func initEnv*(): Env =
   ## Initializes an `Env`.
   Env(data: newOrderedTable[string, string]())
 
 proc `$`*(env: Env): string =
   $env.data
 
-proc `[]`*(env: Env, key: string): string =
+func `[]`*(env: Env, key: string): string =
   env.data[key]
 
-proc hasKey*(env: Env, key: string): bool =
+func hasKey*(env: Env, key: string): bool =
   if key in env.data:
     result = true
   else:
     result = false
 
-proc contains*(env: Env, key: string): bool =
+func contains*(env: Env, key: string): bool =
   if key in env.data:
     result = true
   else:
     result = false
 
-proc get*(env: Env, key: string): string {.inline.} =
+func get*(env: Env, key: string): string {.inline.} =
   result = env.data[key]
 
-proc getOrDefault*[T: BaseType](env: Env, key: string, default: T): T {.inline.} =
+func getOrDefault*[T: BaseType](env: Env, key: string, default: T): T {.inline.} =
   if key notin env.data:
     return default
   parseValue(env.data[key], default)

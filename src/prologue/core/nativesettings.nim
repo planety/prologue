@@ -38,20 +38,20 @@ type
     data*: JsonNode
 
 
-proc hasKey*(settings: Settings, key: string): bool {.inline.} =
+func hasKey*(settings: Settings, key: string): bool {.inline.} =
   settings.data.hasKey(key)
 
-proc `[]`*(settings: Settings, key: string): JsonNode {.inline.} =
+func `[]`*(settings: Settings, key: string): JsonNode {.inline.} =
   settings.data[key]
 
-proc getOrDefault*(settings: Settings, key: string): JsonNode {.inline.} =
+func getOrDefault*(settings: Settings, key: string): JsonNode {.inline.} =
   settings.data.getOrDefault(key)
 
-proc newCtxSettings*(): CtxSettings {.inline.} =
+func newCtxSettings*(): CtxSettings {.inline.} =
   # Ctretes a new context settings.
   CtxSettings(mimeDB: newMimetypes(), config: newTable[string, StringTableRef]())
 
-proc newLocalSettings*(data: JsonNode): LocalSettings {.inline.} =
+func newLocalSettings*(data: JsonNode): LocalSettings {.inline.} =
   ## Creates a new localSettings.
   result = LocalSettings(data: data)
 
@@ -68,7 +68,7 @@ proc normalizedStaticDirs(dirs: openArray[string]): seq[string] =
       result.add dir
     normalizePath(result[^1])
 
-proc newSettings*(address = "", port = Port(8080), debug = true, reusePort = true,
+func newSettings*(address = "", port = Port(8080), debug = true, reusePort = true,
                   staticDirs: openArray[string] = [], secretKey = randomString(8),
                   appName = ""): Settings {.inline.} =
   ## Creates a new settings.
@@ -79,7 +79,7 @@ proc newSettings*(address = "", port = Port(8080), debug = true, reusePort = tru
                     staticDirs: normalizedStaticDirs(staticDirs), appName: appName,
                     data: %* {"secretKey": secretKey})
 
-proc newSettings*(data: JsonNode, address = "", port = Port(8080), debug = true, reusePort = true,
+func newSettings*(data: JsonNode, address = "", port = Port(8080), debug = true, reusePort = true,
                   staticDirs: openArray[string] = [],
                   appName = ""): Settings {.inline.} =
   ## Creates a new settings.

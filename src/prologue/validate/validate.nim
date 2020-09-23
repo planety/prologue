@@ -75,7 +75,7 @@ type
     data: OrderedTableRef[string, seq[ValidateHandler]]
 
 
-proc newFormValidation*(validator: openArray[(string, seq[ValidateHandler])]
+func newFormValidation*(validator: openArray[(string, seq[ValidateHandler])]
                         ): FormValidation {.inline.} =
   ## Creates a new ``Forvalidation``.
   FormValidation(data: validator.newOrderedTable)
@@ -106,10 +106,10 @@ proc validate*(formValidation: FormValidation, textTable: StringTableRef,
     return (false, msgs)
   return (true, msgs)
 
-proc isInt*(msg = ""): ValidateHandler {.inline.} =
+func isInt*(msg = ""): ValidateHandler {.inline.} =
   ## The value of ``text`` is a int. If the length of 
   ## ``msg`` is more than 0, returns this ``msg`` when failed.
-  result = proc(text: string): Info =
+  result = func(text: string): Info =
     if basic.isInt(text):
       result = (true, "")
     elif msg.len == 0:
@@ -117,10 +117,10 @@ proc isInt*(msg = ""): ValidateHandler {.inline.} =
     else:
       result = (false, msg)
 
-proc isNumeric*(msg = ""): ValidateHandler {.inline.} =
+func isNumeric*(msg = ""): ValidateHandler {.inline.} =
   ## The value of ``text`` is  a number. If the length of 
   ## ``msg`` is more than 0, returns this ``msg`` when failed.
-  result = proc(text: string): Info =
+  result = func(text: string): Info =
     if basic.isNumeric(text):
       result = (true, "")
     elif msg.len == 0:
@@ -128,10 +128,10 @@ proc isNumeric*(msg = ""): ValidateHandler {.inline.} =
     else:
       result = (false, msg)
 
-proc isBool*(msg = ""): ValidateHandler {.inline.} =
+func isBool*(msg = ""): ValidateHandler {.inline.} =
   ## The value of ``text`` is a bool. If the length of 
   ## ``msg`` is more than 0, returns this ``msg`` when failed.
-  result = proc(text: string): Info =
+  result = func(text: string): Info =
     if basic.isBool(text):
       result = (true, "")
     elif msg.len == 0:
@@ -139,10 +139,10 @@ proc isBool*(msg = ""): ValidateHandler {.inline.} =
     else:
       result = (false, msg)
 
-proc minValue*(min: float, msg = ""): ValidateHandler {.inline.} =
+func minValue*(min: float, msg = ""): ValidateHandler {.inline.} =
   ## The value of ``text`` is more than or equal to ``min``. If the length of 
   ## ``msg`` is more than 0, returns this ``msg`` when failed.
-  result = proc(text: string): Info =
+  result = func(text: string): Info =
     var value: float
     try: 
       value = parseFloat(text)
@@ -156,10 +156,10 @@ proc minValue*(min: float, msg = ""): ValidateHandler {.inline.} =
     else:
       result = (false, msg)
 
-proc maxValue*(max: float, msg = ""): ValidateHandler {.inline.} =
+func maxValue*(max: float, msg = ""): ValidateHandler {.inline.} =
   ## The value of ``text`` is less than or equal to ``max``. If the length of 
   ## ``msg`` is more than 0, returns this ``msg`` when failed.
-  result = proc(text: string): Info =
+  result = func(text: string): Info =
     var value: float
     try: 
       value = parseFloat(text)
@@ -173,10 +173,10 @@ proc maxValue*(max: float, msg = ""): ValidateHandler {.inline.} =
     else:
       result = (false, msg)
 
-proc rangeValue*(min, max: float, msg = ""): ValidateHandler {.inline.} =
+func rangeValue*(min, max: float, msg = ""): ValidateHandler {.inline.} =
   ## The value of ``text`` is between ``min`` and ``max``. If the length of 
   ## ``msg`` is more than 0, returns this ``msg`` when failed.
-  result = proc(text: string): Info =
+  result = func(text: string): Info =
     var value: float
     try:
       value = parseFloat(text)
@@ -190,10 +190,10 @@ proc rangeValue*(min, max: float, msg = ""): ValidateHandler {.inline.} =
     else:
       result = (false, msg)
 
-proc minLength*(min: Natural, msg = ""): ValidateHandler {.inline.} =
+func minLength*(min: Natural, msg = ""): ValidateHandler {.inline.} =
   ## The length of ``text`` is more than or equal to ``min``. If the length of 
   ## ``msg`` is more than 0, returns this ``msg`` when failed.
-  result = proc(text: string): Info =
+  result = func(text: string): Info =
     let length = text.len
     if length >= min:
       result = (true, "")
@@ -202,10 +202,10 @@ proc minLength*(min: Natural, msg = ""): ValidateHandler {.inline.} =
     else:
       result = (false, msg)
 
-proc maxLength*(max: Natural, msg = ""): ValidateHandler {.inline.} =
+func maxLength*(max: Natural, msg = ""): ValidateHandler {.inline.} =
   ## The length of ``text`` is less than or equal to ``max``. If the length of 
   ## ``msg`` is more than 0, returns this ``msg`` when failed.
-  result = proc(text: string): Info =
+  result = func(text: string): Info =
     let length = text.len
     if length <= max:
       result = (true, "")
@@ -214,10 +214,10 @@ proc maxLength*(max: Natural, msg = ""): ValidateHandler {.inline.} =
     else:
       result = (false, msg)
 
-proc rangeLength*(min, max: Natural, msg = ""): ValidateHandler {.inline.} =
+func rangeLength*(min, max: Natural, msg = ""): ValidateHandler {.inline.} =
   ## The length of ``text`` is between ``min`` and ``max``. If the length of 
   ## ``msg`` is more than 0, returns this ``msg`` when failed.
-  result = proc(text: string): Info =
+  result = func(text: string): Info =
     let length = text.len
     if length <= max and length >= min:
       result = (true, "")
@@ -226,10 +226,10 @@ proc rangeLength*(min, max: Natural, msg = ""): ValidateHandler {.inline.} =
     else:
       result = (false, msg)
 
-proc equals*(value: string, msg = ""): ValidateHandler {.inline.} =
+func equals*(value: string, msg = ""): ValidateHandler {.inline.} =
   ## The content of ``text`` is equal to ``value``. If the length of 
   ## ``msg`` is more than 0, returns this ``msg`` when failed.
-  result = proc(text: string): Info =
+  result = func(text: string): Info =
     if text == value:
       result = (true, "")
     elif msg.len == 0:
@@ -237,11 +237,11 @@ proc equals*(value: string, msg = ""): ValidateHandler {.inline.} =
     else:
       result = (false, msg)
 
-proc accepted*(msg = ""): ValidateHandler {.inline.} =
+func accepted*(msg = ""): ValidateHandler {.inline.} =
   ## If lowerAscii input in {"yes", "on", "1", or "true"}, return true
   ## If the length of ``msg`` is more than 0, 
   ## returns this ``msg`` when failed.
-  result = proc(text: string): Info =
+  result = func(text: string): Info =
     case text.toLowerAscii
     of "yes", "y", "on", "1", "true":
       result = (true, "")
@@ -251,10 +251,10 @@ proc accepted*(msg = ""): ValidateHandler {.inline.} =
       else:
         result = (false, msg)
 
-proc required*(msg = ""): ValidateHandler {.inline.} =
+func required*(msg = ""): ValidateHandler {.inline.} =
   ## The content of ``text`` is not empty. If the length of 
   ## ``msg`` is more than 0, returns this ``msg`` when failed.
-  result = proc(text: string): Info =
+  result = func(text: string): Info =
     if text.len != 0:
       result = (true, "")
     elif msg.len == 0:
@@ -262,10 +262,10 @@ proc required*(msg = ""): ValidateHandler {.inline.} =
     else:
       result = (false, msg)
 
-proc matchRegex*(value: Regex, msg = ""): ValidateHandler {.inline.} =
+func matchRegex*(value: Regex, msg = ""): ValidateHandler {.inline.} =
   ## The content of ``text`` matches the regex expression. If the length of 
   ## ``msg`` is more than 0, returns this ``msg`` when failed.
-  result = proc(text: string): Info =
+  result = func(text: string): Info =
     var m: RegexMatch
     if text.match(value, m):
       result = (true, "")
@@ -274,10 +274,10 @@ proc matchRegex*(value: Regex, msg = ""): ValidateHandler {.inline.} =
     else:
       result = (false, msg)
 
-proc matchUrl*(msg = ""): ValidateHandler {.inline.} =
+func matchUrl*(msg = ""): ValidateHandler {.inline.} =
   ## The content of ``text`` matches the url expression. If the length of 
   ## ``msg`` is more than 0, returns this ``msg`` when failed.
-  result = proc(text: string): Info =
+  result = func(text: string): Info =
     var m: RegexMatch
     if text.match(re"(https?|ftp|file)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]", m):
       result = (true, "")

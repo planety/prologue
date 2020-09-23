@@ -16,7 +16,7 @@ proc `$`*(response: Response): string =
   ## Stringify response.
   fmt"{response.code} {response.headers}"
 
-proc initResponse*(httpVersion: HttpVersion, code: HttpCode, headers =
+func initResponse*(httpVersion: HttpVersion, code: HttpCode, headers =
                    {"Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders,
                    body = ""): Response {.inline.} =
   ## Initializes response.
