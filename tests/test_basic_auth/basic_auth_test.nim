@@ -12,8 +12,8 @@ proc verify(ctx: Context, username, password: string): bool =
     return false
 
 proc home(ctx: Context) {.async.} =
-  debug ctx.ctxData.getOrDefault("basic_username")
-  debug ctx.ctxData.getOrDefault("basic_password")
+  debug ctx.ctxData.getOrDefault("basic_auth_username")
+  debug ctx.ctxData.getOrDefault("basic_auth_password")
   resp "You logged in."
 
 

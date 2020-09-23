@@ -66,7 +66,6 @@ type
     response*: Response
     handled*: bool
     session*: Session
-    cleanedData*: StringTableRef
     ctxData*: StringTableRef
     localSettings*: Settings
     gScope: GlobalScope
@@ -164,7 +163,7 @@ func newContext*(request: Request, response: Response,
                  gScope: GlobalScope): Context {.inline.} =
   ## Creates a new Context.
   Context(request: request, response: response,
-          handled: false, cleanedData: newStringTable(mode = modeCaseSensitive),
+          handled: false,
           ctxData: newStringTable(mode = modeCaseSensitive),
           localSettings: nil,
           gScope: gScope,

@@ -12,6 +12,7 @@ proc basicAuthMiddleware*(realm: string, verifyHandler: VerifyHandler,
         verifyHandler, charset)
     if not hasValue:
       return
-    ctx.ctxData["basic_username"] = username
-    ctx.ctxData["basic_password"] = password
+
+    ctx.ctxData["basic_auth_username"] = username
+    ctx.ctxData["basic_auth_password"] = password
     await switch(ctx)
