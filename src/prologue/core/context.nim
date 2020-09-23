@@ -70,7 +70,7 @@ type
     localSettings*: Settings
     gScope: GlobalScope
     middlewares: seq[HandlerAsync]
-    size: int
+    size: int8
     first: bool
 
   AsyncEvent* = proc(): Future[void] {.closure, gcsafe.}
@@ -101,7 +101,7 @@ func gScope*(ctx: Context): lent GlobalScope {.inline.} =
   ## Gets the gScope attribute of Context.
   ctx.gScope
 
-func size*(ctx: Context): int {.inline.} =
+func size*(ctx: Context): int8 {.inline.} =
   ctx.size
 
 func incSize*(ctx: Context, num = 1) {.inline.} =
