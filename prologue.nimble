@@ -34,8 +34,6 @@ task apis, "Only for api":
   exec "nim doc --verbosity:0 --warnings:off --project --index:on " &
     "--git.url:https://github.com/planety/prologue " &
     "--git.commit:devel " &
-    # "--git.devel:devel " &
-    # "-o:docs/api/theindex.html " &
     "-o:docs/coreapi " &
     "src/prologue.nim"
 
@@ -44,8 +42,6 @@ task apis, "Only for api":
   exec "nim doc --verbosity:0 --warnings:off --project --index:on " &
     "--git.url:https://github.com/planety/prologue " &
     "--git.commit:devel " &
-    # "--git.devel:devel " &
-    # "-o:docs/api/theindex.html " &
     "-o:docs/plugin " &
     "index.nim"
 

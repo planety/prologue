@@ -1,10 +1,6 @@
 name: Test Prologue
 
-on:
-  push:
-    branches:
-      - devel
-  pull_request:
+on: [push, pull_request]
 
 jobs:
   test:
@@ -14,8 +10,10 @@ jobs:
         os:
           - ubuntu-latest
           - windows-latest
+          - macOS-latest
         version:
           - stable
+          - devel
     steps:
     - uses: actions/checkout@v1
     - uses: jiro4989/setup-nim-action@v1
