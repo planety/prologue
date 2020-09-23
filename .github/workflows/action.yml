@@ -13,6 +13,7 @@ jobs:
           - macOS-latest
         version:
           - stable
+          - devel
     steps:
     - uses: actions/checkout@v1
     - uses: jiro4989/setup-nim-action@v1
