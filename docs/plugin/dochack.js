@@ -1543,7 +1543,7 @@ function buildToc_11765082(orig_11765084, types_11765086, procs_11765087) {
                     var xx_11775239 = p_11775238[p_11775238_Idx].parentNode.getElementsByClassName("attachedType");
                       if (!((xx_11775239).length == 1)) Tmp7 = false; else {                        Tmp7 = (xx_11775239[chckIndx(0, 0, (xx_11775239).length-1)].textContent == t_11775214[t_11775214_Idx].textContent);                      }                    if (Tmp7) {
                     var q_11775247 = tree_11696020(makeNimstrLit("A"), [text_11696169(p_11775238[p_11775238_Idx].title)]);
-                    q_11775247.setAttribute("href", toJSStr(HEX5BHEX5D_11780005(nsuSplitChar(cstrToNimstr(p_11775238[p_11775238_Idx].getAttribute("href")), 47, 3), 1)));
+                    q_11775247.setAttribute("href", toJSStr(HEX5BHEX5D_11780005(nsuSplitChar(cstrToNimstr(p_11775238[p_11775238_Idx].getAttribute("href")), 47, 6), 1)));
                     c_11775230.kids.push({heading: q_11775247, kids: [], sortId: 0, doSort: false});;
                     p_11775238[p_11775238_Idx].__karaxMarker__ = true;
                     }

@@ -218,7 +218,7 @@ proc buildToc(orig: TocEntry; types, procs: seq[Element]): TocEntry =
         if xx.len == 1 and xx[0].textContent == t.textContent:
           #kout(cstring"found ", p.nodeName)
           let q = tree("A", text(p.title))
-          q.setAttr("href", ($p.getAttribute("href")).split('/', maxsplit = 3)[^1])
+          q.setAttr("href", ($p.getAttribute("href")).split('/', maxsplit = 6)[^1])
           c.kids.add TocEntry(heading: q, kids: @[])
           p.markElement()
     newStuff.kids.add c
