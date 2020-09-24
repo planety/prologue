@@ -4,6 +4,8 @@ Move `basicAuthMiddleware` from `auth/auth.nim` to `middlewares/auth.nim`. Users
 
 Setting doesn't set the default path of staticDirs anymore.
 
+Change `Response.headers` to `ResponseHeaders`, users can initialize it with `initResponseHeaders`.
+
 
 ## 0.3.6
 
