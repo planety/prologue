@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-import json
+import json, strutils
 
 import asyncdispatch
 from ../core/response import setHeader
@@ -24,7 +24,8 @@ from ../core/middlewaresbase import switch
 proc clickjackingMiddleWare*(): HandlerAsync =
   result = proc(ctx: Context) {.async.} =
     await switch(ctx)
-    var option = ctx.getSettings("X-Frame-Options").getStr
-    if option != "deny" or option != "sameorigin":
+    var option = ctx.getSettings("X-Frame-Options").getStr.toLowerAscii
+
+    if option != "deny" and option != "sameorigin":
       option = "deny"
     ctx.response.setHeader("X-Frame-Options", option)
