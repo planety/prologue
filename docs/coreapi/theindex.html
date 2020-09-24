@@ -63,10 +63,12 @@ function main() {
 <div class="document" id="documentId">
   <div class="container">
     <h1 class="title">Index</h1>
-    Modules: <a href="prologue/core/application.html">prologue/core/application</a>, <a href="prologue/core/beast/request.html">prologue/core/beast/request</a>, <a href="prologue/core/beast/server.html">prologue/core/beast/server</a>, <a href="prologue/core/configure.html">prologue/core/configure</a>, <a href="prologue/core/constants.html">prologue/core/constants</a>, <a href="prologue/core/context.html">prologue/core/context</a>, <a href="prologue/core/encode.html">prologue/core/encode</a>, <a href="prologue/core/form.html">prologue/core/form</a>, <a href="prologue/core/httpexception.html">prologue/core/httpexception</a>, <a href="prologue/core/middlewaresbase.html">prologue/core/middlewaresbase</a>, <a href="prologue/core/nativesettings.html">prologue/core/nativesettings</a>, <a href="prologue/core/pages.html">prologue/core/pages</a>, <a href="prologue/core/response.html">prologue/core/response</a>, <a href="prologue/core/route.html">prologue/core/route</a>, <a href="prologue/core/types.html">prologue/core/types</a>, <a href="prologue/core/urandom.html">prologue/core/urandom</a>, <a href="prologue/core/utils.html">prologue/core/utils</a>.<br/><p /><h2>API symbols</h2>
+    Modules: <a href="prologue/core/application.html">prologue/core/application</a>, <a href="prologue/core/beast/request.html">prologue/core/beast/request</a>, <a href="prologue/core/beast/server.html">prologue/core/beast/server</a>, <a href="prologue/core/configure.html">prologue/core/configure</a>, <a href="prologue/core/constants.html">prologue/core/constants</a>, <a href="prologue/core/context.html">prologue/core/context</a>, <a href="prologue/core/encode.html">prologue/core/encode</a>, <a href="prologue/core/form.html">prologue/core/form</a>, <a href="prologue/core/httpcore/httplogue.html">prologue/core/httpcore/httplogue</a>, <a href="prologue/core/httpexception.html">prologue/core/httpexception</a>, <a href="prologue/core/middlewaresbase.html">prologue/core/middlewaresbase</a>, <a href="prologue/core/nativesettings.html">prologue/core/nativesettings</a>, <a href="prologue/core/pages.html">prologue/core/pages</a>, <a href="prologue/core/response.html">prologue/core/response</a>, <a href="prologue/core/route.html">prologue/core/route</a>, <a href="prologue/core/types.html">prologue/core/types</a>, <a href="prologue/core/urandom.html">prologue/core/urandom</a>, <a href="prologue/core/utils.html">prologue/core/utils</a>.<br/><p /><h2>API symbols</h2>
 <dl><dt><a name="%60%24%60" href="#%60%24%60"><span>`$`:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="configure: `$`(env: Env): string" href="prologue/core/configure.html#%24%2CEnv">configure: `$`(env: Env): string</a></li>
+          <li><a class="reference external"
+          data-doc-search-tag="httplogue: `$`(headers: ResponseHeaders): string" href="prologue/core/httpcore/httplogue.html#%24%2CResponseHeaders">httplogue: `$`(headers: ResponseHeaders): string</a></li>
           <li><a class="reference external"
           data-doc-search-tag="response: `$`(response: Response): string" href="prologue/core/response.html#%24%2CResponse">response: `$`(response: Response): string</a></li>
           <li><a class="reference external"
@@ -76,6 +78,10 @@ function main() {
           </ul></dd>
 <dt><a name="%60%5B%5D%3D%60" href="#%60%5B%5D%3D%60"><span>`[]=`:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
+          data-doc-search-tag="httplogue: `[]=`(headers: ResponseHeaders; key: string; value: seq[string])" href="prologue/core/httpcore/httplogue.html#%5B%5D%3D%2CResponseHeaders%2Cstring%2Cseq%5Bstring%5D">httplogue: `[]=`(headers: ResponseHeaders; key: string; value: seq[string])</a></li>
+          <li><a class="reference external"
+          data-doc-search-tag="httplogue: `[]=`(headers: ResponseHeaders; key, value: string)" href="prologue/core/httpcore/httplogue.html#%5B%5D%3D%2CResponseHeaders%2Cstring%2Cstring">httplogue: `[]=`(headers: ResponseHeaders; key, value: string)</a></li>
+          <li><a class="reference external"
           data-doc-search-tag="route: `[]=`(router: Router; path: Path; pathHandler: PathHandler)" href="prologue/core/route.html#%5B%5D%3D%2CRouter%2CPath%2CPathHandler">route: `[]=`(router: Router; path: Path; pathHandler: PathHandler)</a></li>
           <li><a class="reference external"
           data-doc-search-tag="types: `[]=`(formPart: FormPart; key: string; body: string)" href="prologue/core/types.html#%5B%5D%3D%2CFormPart%2Cstring%2Cstring">types: `[]=`(formPart: FormPart; key: string; body: string)</a></li>
@@ -85,6 +91,10 @@ function main() {
 <dt><a name="%60%5B%5D%60" href="#%60%5B%5D%60"><span>`[]`:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="configure: `[]`(env: Env; key: string): string" href="prologue/core/configure.html#%5B%5D%2CEnv%2Cstring">configure: `[]`(env: Env; key: string): string</a></li>
+          <li><a class="reference external"
+          data-doc-search-tag="httplogue: `[]`(headers: ResponseHeaders; key: string): HttpHeaderValues" href="prologue/core/httpcore/httplogue.html#%5B%5D%2CResponseHeaders%2Cstring">httplogue: `[]`(headers: ResponseHeaders; key: string): HttpHeaderValues</a></li>
+          <li><a class="reference external"
+          data-doc-search-tag="httplogue: `[]`(headers: ResponseHeaders; key: string; i: int): string" href="prologue/core/httpcore/httplogue.html#%5B%5D%2CResponseHeaders%2Cstring%2Cint">httplogue: `[]`(headers: ResponseHeaders; key: string; i: int): string</a></li>
           <li><a class="reference external"
           data-doc-search-tag="nativesettings: `[]`(settings: Settings; key: string): JsonNode" href="prologue/core/nativesettings.html#%5B%5D%2CSettings%2Cstring">nativesettings: `[]`(settings: Settings; key: string): JsonNode</a></li>
           <li><a class="reference external"
@@ -96,7 +106,7 @@ function main() {
           </ul></dd>
 <dt><a name="abort" href="#abort"><span>abort:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="response: abort(code = Http401; body = &quot;&quot;; headers = newHttpHeaders(); version = HttpVer11): Response" href="prologue/core/response.html#abort%2Cstring">response: abort(code = Http401; body = &quot;&quot;; headers = newHttpHeaders(); version = HttpVer11): Response</a></li>
+          data-doc-search-tag="response: abort(code = Http401; body = &quot;&quot;; headers = initResponseHeaders(); version = HttpVer11): Response" href="prologue/core/response.html#abort%2Cstring">response: abort(code = Http401; body = &quot;&quot;; headers = initResponseHeaders(); version = HttpVer11): Response</a></li>
           </ul></dd>
 <dt><a name="AbortError" href="#AbortError"><span>AbortError:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -104,12 +114,14 @@ function main() {
           </ul></dd>
 <dt><a name="abortExit" href="#abortExit"><span>abortExit:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="context: abortExit(ctx: Context; code = Http401; body = &quot;&quot;; headers = newHttpHeaders();
-          version = HttpVer11)" href="prologue/core/context.html#abortExit%2CContext%2Cstring">context: abortExit(ctx: Context; code = Http401; body = &quot;&quot;; headers = newHttpHeaders();
+          data-doc-search-tag="context: abortExit(ctx: Context; code = Http401; body = &quot;&quot;; headers = initResponseHeaders();
+          version = HttpVer11)" href="prologue/core/context.html#abortExit%2CContext%2Cstring">context: abortExit(ctx: Context; code = Http401; body = &quot;&quot;; headers = initResponseHeaders();
           version = HttpVer11)</a></li>
           </ul></dd>
 <dt><a name="add" href="#add"><span>add:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
+          data-doc-search-tag="httplogue: add(headers: ResponseHeaders; key, value: string)" href="prologue/core/httpcore/httplogue.html#add%2CResponseHeaders%2Cstring%2Cstring">httplogue: add(headers: ResponseHeaders; key, value: string)</a></li>
+          <li><a class="reference external"
           data-doc-search-tag="route: add(reRouter: ReRouter; pairs: (RePath, PathHandler))" href="prologue/core/route.html#add%2CReRouter%2C">route: add(reRouter: ReRouter; pairs: (RePath, PathHandler))</a></li>
           </ul></dd>
 <dt><a name="addHeader" href="#addHeader"><span>addHeader:</span></a></dt><dd><ul class="simple">
@@ -117,6 +129,12 @@ function main() {
           data-doc-search-tag="context: addHeader(request: var Request; key, value: string)" href="prologue/core/context.html#addHeader%2CRequest%2Cstring%2Cstring">context: addHeader(request: var Request; key, value: string)</a></li>
           <li><a class="reference external"
           data-doc-search-tag="response: addHeader(response: var Response; key, value: string)" href="prologue/core/response.html#addHeader.t%2CResponse%2Cstring%2Cstring">response: addHeader(response: var Response; key, value: string)</a></li>
+          </ul></dd>
+<dt><a name="addMiddlewares" href="#addMiddlewares"><span>addMiddlewares:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="context: addMiddlewares(ctx: Context; middleware: HandlerAsync)" href="prologue/core/context.html#addMiddlewares%2CContext%2CHandlerAsync">context: addMiddlewares(ctx: Context; middleware: HandlerAsync)</a></li>
+          <li><a class="reference external"
+          data-doc-search-tag="context: addMiddlewares(ctx: Context; middleware: seq[HandlerAsync])" href="prologue/core/context.html#addMiddlewares%2CContext%2Cseq%5BHandlerAsync%5D">context: addMiddlewares(ctx: Context; middleware: seq[HandlerAsync])</a></li>
           </ul></dd>
 <dt><a name="addRoute" href="#addRoute"><span>addRoute:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -206,6 +224,8 @@ function main() {
           </ul></dd>
 <dt><a name="clear" href="#clear"><span>clear:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
+          data-doc-search-tag="httplogue: clear(headers: ResponseHeaders)" href="prologue/core/httpcore/httplogue.html#clear%2CResponseHeaders">httplogue: clear(headers: ResponseHeaders)</a></li>
+          <li><a class="reference external"
           data-doc-search-tag="types: clear(session: Session)" href="prologue/core/types.html#clear%2CSession">types: clear(session: Session)</a></li>
           </ul></dd>
 <dt><a name="close" href="#close"><span>close:</span></a></dt><dd><ul class="simple">
@@ -221,6 +241,8 @@ function main() {
 <dt><a name="contains" href="#contains"><span>contains:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="configure: contains(env: Env; key: string): bool" href="prologue/core/configure.html#contains%2CEnv%2Cstring">configure: contains(env: Env; key: string): bool</a></li>
+          <li><a class="reference external"
+          data-doc-search-tag="httplogue: contains(values: HttpHeaderValues; value: string): bool" href="prologue/core/httpcore/httplogue.html#contains%2CHttpHeaderValues%2Cstring">httplogue: contains(values: HttpHeaderValues; value: string): bool</a></li>
           </ul></dd>
 <dt><a name="contentType" href="#contentType"><span>contentType:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -252,6 +274,8 @@ function main() {
           </ul></dd>
 <dt><a name="del" href="#del"><span>del:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
+          data-doc-search-tag="httplogue: del(headers: ResponseHeaders; key: string)" href="prologue/core/httpcore/httplogue.html#del%2CResponseHeaders%2Cstring">httplogue: del(headers: ResponseHeaders; key: string)</a></li>
+          <li><a class="reference external"
           data-doc-search-tag="types: del(session: Session; key: string)" href="prologue/core/types.html#del%2CSession%2Cstring">types: del(session: Session; key: string)</a></li>
           </ul></dd>
 <dt><a name="delete" href="#delete"><span>delete:</span></a></dt><dd><ul class="simple">
@@ -304,9 +328,9 @@ function main() {
           </ul></dd>
 <dt><a name="error404" href="#error404"><span>error404:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="response: error404(code = Http404; body = &quot;&lt;h1&gt;404 Not Found!&lt;/h1&gt;&quot;; headers = newHttpHeaders();
-         version = HttpVer11): Response" href="prologue/core/response.html#error404%2Cstring">response: error404(code = Http404; body = &quot;&lt;h1&gt;404 Not Found!&lt;/h1&gt;&quot;; headers = newHttpHeaders();
-         version = HttpVer11): Response</a></li>
+          data-doc-search-tag="response: error404(code = Http404; body = &quot;&lt;h1&gt;404 Not Found!&lt;/h1&gt;&quot;;
+         headers = initResponseHeaders(); version = HttpVer11): Response" href="prologue/core/response.html#error404%2Cstring">response: error404(code = Http404; body = &quot;&lt;h1&gt;404 Not Found!&lt;/h1&gt;&quot;;
+         headers = initResponseHeaders(); version = HttpVer11): Response</a></li>
           </ul></dd>
 <dt><a name="ErrorHandler" href="#ErrorHandler"><span>ErrorHandler:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -366,6 +390,10 @@ function main() {
 <li><a class="reference external"
           data-doc-search-tag="configure: getOrDefault[T: BaseType](env: Env; key: string; default: T): T" href="prologue/core/configure.html#getOrDefault%2CEnv%2Cstring%2CT">configure: getOrDefault[T: BaseType](env: Env; key: string; default: T): T</a></li>
           <li><a class="reference external"
+          data-doc-search-tag="httplogue: getOrDefault(headers: ResponseHeaders; key: string;
+             default = @[&quot;&quot;].HttpHeaderValues): HttpHeaderValues" href="prologue/core/httpcore/httplogue.html#getOrDefault%2CResponseHeaders%2Cstring">httplogue: getOrDefault(headers: ResponseHeaders; key: string;
+             default = @[&quot;&quot;].HttpHeaderValues): HttpHeaderValues</a></li>
+          <li><a class="reference external"
           data-doc-search-tag="nativesettings: getOrDefault(settings: Settings; key: string): JsonNode" href="prologue/core/nativesettings.html#getOrDefault%2CSettings%2Cstring">nativesettings: getOrDefault(settings: Settings; key: string): JsonNode</a></li>
           <li><a class="reference external"
           data-doc-search-tag="types: getOrDefault(session: Session; key: string; default = &quot;&quot;): string" href="prologue/core/types.html#getOrDefault%2CSession%2Cstring%2Cstring">types: getOrDefault(session: Session; key: string; default = &quot;&quot;): string</a></li>
@@ -391,6 +419,10 @@ function main() {
 <dt><a name="getSettings" href="#getSettings"><span>getSettings:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="context: getSettings(ctx: Context; key: string): JsonNode" href="prologue/core/context.html#getSettings%2CContext%2Cstring">context: getSettings(ctx: Context; key: string): JsonNode</a></li>
+          </ul></dd>
+<dt><a name="getTables" href="#getTables"><span>getTables:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="httplogue: getTables(headers: ResponseHeaders): TableRef[string, seq[string]]" href="prologue/core/httpcore/httplogue.html#getTables%2CResponseHeaders">httplogue: getTables(headers: ResponseHeaders): TableRef[string, seq[string]]</a></li>
           </ul></dd>
 <dt><a name="getUploadFile" href="#getUploadFile"><span>getUploadFile:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -426,6 +458,8 @@ function main() {
 <li><a class="reference external"
           data-doc-search-tag="configure: hasKey(env: Env; key: string): bool" href="prologue/core/configure.html#hasKey%2CEnv%2Cstring">configure: hasKey(env: Env; key: string): bool</a></li>
           <li><a class="reference external"
+          data-doc-search-tag="httplogue: hasKey(headers: ResponseHeaders; key: string): bool" href="prologue/core/httpcore/httplogue.html#hasKey%2CResponseHeaders%2Cstring">httplogue: hasKey(headers: ResponseHeaders; key: string): bool</a></li>
+          <li><a class="reference external"
           data-doc-search-tag="nativesettings: hasKey(settings: Settings; key: string): bool" href="prologue/core/nativesettings.html#hasKey%2CSettings%2Cstring">nativesettings: hasKey(settings: Settings; key: string): bool</a></li>
           <li><a class="reference external"
           data-doc-search-tag="route: hasKey(router: Router; path: Path): bool" href="prologue/core/route.html#hasKey%2CRouter%2CPath">route: hasKey(router: Router; path: Path): bool</a></li>
@@ -446,8 +480,8 @@ function main() {
           </ul></dd>
 <dt><a name="htmlResponse" href="#htmlResponse"><span>htmlResponse:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="response: htmlResponse(text: string; code = Http200; headers = newHttpHeaders();
-             version = HttpVer11): Response" href="prologue/core/response.html#htmlResponse%2Cstring">response: htmlResponse(text: string; code = Http200; headers = newHttpHeaders();
+          data-doc-search-tag="response: htmlResponse(text: string; code = Http200; headers = initResponseHeaders();
+             version = HttpVer11): Response" href="prologue/core/response.html#htmlResponse%2Cstring">response: htmlResponse(text: string; code = Http200; headers = initResponseHeaders();
              version = HttpVer11): Response</a></li>
           </ul></dd>
 <dt><a name="HttpError" href="#HttpError"><span>HttpError:</span></a></dt><dd><ul class="simple">
@@ -493,8 +527,14 @@ function main() {
 <dt><a name="initResponse" href="#initResponse"><span>initResponse:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="response: initResponse(httpVersion: HttpVersion; code: HttpCode; headers = [
-    (&quot;Content-Type&quot;, &quot;text/html; charset=UTF-8&quot;)].newHttpHeaders; body = &quot;&quot;): Response" href="prologue/core/response.html#initResponse%2CHttpVersion%2CHttpCode%2Cstring">response: initResponse(httpVersion: HttpVersion; code: HttpCode; headers = [
-    (&quot;Content-Type&quot;, &quot;text/html; charset=UTF-8&quot;)].newHttpHeaders; body = &quot;&quot;): Response</a></li>
+    (&quot;Content-Type&quot;, &quot;text/html; charset=UTF-8&quot;)].initResponseHeaders; body = &quot;&quot;): Response" href="prologue/core/response.html#initResponse%2CHttpVersion%2CHttpCode%2Cstring">response: initResponse(httpVersion: HttpVersion; code: HttpCode; headers = [
+    (&quot;Content-Type&quot;, &quot;text/html; charset=UTF-8&quot;)].initResponseHeaders; body = &quot;&quot;): Response</a></li>
+          </ul></dd>
+<dt><a name="initResponseHeaders" href="#initResponseHeaders"><span>initResponseHeaders:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="httplogue: initResponseHeaders(): ResponseHeaders" href="prologue/core/httpcore/httplogue.html#initResponseHeaders">httplogue: initResponseHeaders(): ResponseHeaders</a></li>
+          <li><a class="reference external"
+          data-doc-search-tag="httplogue: initResponseHeaders(keyValuePairs: openArray[tuple[key: string, val: string]]): ResponseHeaders" href="prologue/core/httpcore/httplogue.html#initResponseHeaders%2CopenArray%5Btuple%5Bstring%2Cstring%5D%5D">httplogue: initResponseHeaders(keyValuePairs: openArray[tuple[key: string, val: string]]): ResponseHeaders</a></li>
           </ul></dd>
 <dt><a name="initSession" href="#initSession"><span>initSession:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -520,8 +560,8 @@ function main() {
           </ul></dd>
 <dt><a name="jsonResponse" href="#jsonResponse"><span>jsonResponse:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="response: jsonResponse(text: JsonNode; code = Http200; headers = newHttpHeaders();
-             version = HttpVer11): Response" href="prologue/core/response.html#jsonResponse%2CJsonNode">response: jsonResponse(text: JsonNode; code = Http200; headers = newHttpHeaders();
+          data-doc-search-tag="response: jsonResponse(text: JsonNode; code = Http200; headers = initResponseHeaders();
+             version = HttpVer11): Response" href="prologue/core/response.html#jsonResponse%2CJsonNode">response: jsonResponse(text: JsonNode; code = Http200; headers = initResponseHeaders();
              version = HttpVer11): Response</a></li>
           </ul></dd>
 <dt><a name="keys" href="#keys"><span>keys:</span></a></dt><dd><ul class="simple">
@@ -530,6 +570,8 @@ function main() {
           </ul></dd>
 <dt><a name="len" href="#len"><span>len:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
+          data-doc-search-tag="httplogue: len(headers: ResponseHeaders): int" href="prologue/core/httpcore/httplogue.html#len%2CResponseHeaders">httplogue: len(headers: ResponseHeaders): int</a></li>
+          <li><a class="reference external"
           data-doc-search-tag="types: len(secretKey: SecretKey): int" href="prologue/core/types.html#len%2CSecretKey">types: len(secretKey: SecretKey): int</a></li>
           <li><a class="reference external"
           data-doc-search-tag="types: len(session: Session): int" href="prologue/core/types.html#len%2CSession">types: len(session: Session): int</a></li>
@@ -549,6 +591,14 @@ function main() {
 <dt><a name="loginPage" href="#loginPage"><span>loginPage:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="pages: loginPage(): string" href="prologue/core/pages.html#loginPage">pages: loginPage(): string</a></li>
+          </ul></dd>
+<dt><a name="middlewares" href="#middlewares"><span>middlewares:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="context: middlewares(ctx: Context): lent seq[HandlerAsync]" href="prologue/core/context.html#middlewares%2CContext">context: middlewares(ctx: Context): lent seq[HandlerAsync]</a></li>
+          </ul></dd>
+<dt><a name="middlewares%3D" href="#middlewares%3D"><span>middlewares=:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="context: middlewares=(ctx: Context; middlewares: seq[HandlerAsync])" href="prologue/core/context.html#middlewares%3D%2CContext%2Cseq%5BHandlerAsync%5D">context: middlewares=(ctx: Context; middlewares: seq[HandlerAsync])</a></li>
           </ul></dd>
 <dt><a name="multiMatch" href="#multiMatch"><span>multiMatch:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -652,6 +702,8 @@ function main() {
 <li><a class="reference external"
           data-doc-search-tag="configure: pairs(env: Env): (string, string)" href="prologue/core/configure.html#pairs.i%2CEnv">configure: pairs(env: Env): (string, string)</a></li>
           <li><a class="reference external"
+          data-doc-search-tag="httplogue: pairs(headers: ResponseHeaders): tuple[key, value: string]" href="prologue/core/httpcore/httplogue.html#pairs.i%2CResponseHeaders">httplogue: pairs(headers: ResponseHeaders): tuple[key, value: string]</a></li>
+          <li><a class="reference external"
           data-doc-search-tag="route: pairs(router: Router): (Path, PathHandler)" href="prologue/core/route.html#pairs.i%2CRouter">route: pairs(router: Router): (Path, PathHandler)</a></li>
           <li><a class="reference external"
           data-doc-search-tag="types: pairs(session: Session): tuple[key, val: string]" href="prologue/core/types.html#pairs.i%2CSession">types: pairs(session: Session): tuple[key, val: string]</a></li>
@@ -702,8 +754,8 @@ function main() {
           </ul></dd>
 <dt><a name="plainTextResponse" href="#plainTextResponse"><span>plainTextResponse:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="response: plainTextResponse(text: string; code = Http200; headers = newHttpHeaders();
-                  version = HttpVer11): Response" href="prologue/core/response.html#plainTextResponse%2Cstring">response: plainTextResponse(text: string; code = Http200; headers = newHttpHeaders();
+          data-doc-search-tag="response: plainTextResponse(text: string; code = Http200; headers = initResponseHeaders();
+                  version = HttpVer11): Response" href="prologue/core/response.html#plainTextResponse%2Cstring">response: plainTextResponse(text: string; code = Http200; headers = initResponseHeaders();
                   version = HttpVer11): Response</a></li>
           </ul></dd>
 <dt><a name="port" href="#port"><span>port:</span></a></dt><dd><ul class="simple">
@@ -764,9 +816,9 @@ function main() {
           </ul></dd>
 <dt><a name="redirect" href="#redirect"><span>redirect:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="response: redirect(url: string; code = Http301; body = &quot;&quot;; delay = 0; headers = newHttpHeaders();
-         version = HttpVer11): Response" href="prologue/core/response.html#redirect%2Cstring%2Cstring%2Cint">response: redirect(url: string; code = Http301; body = &quot;&quot;; delay = 0; headers = newHttpHeaders();
-         version = HttpVer11): Response</a></li>
+          data-doc-search-tag="response: redirect(url: string; code = Http301; body = &quot;&quot;; delay = 0;
+         headers = initResponseHeaders(); version = HttpVer11): Response" href="prologue/core/response.html#redirect%2Cstring%2Cstring%2Cint">response: redirect(url: string; code = Http301; body = &quot;&quot;; delay = 0;
+         headers = initResponseHeaders(); version = HttpVer11): Response</a></li>
           </ul></dd>
 <dt><a name="registerErrorHandler" href="#registerErrorHandler"><span>registerErrorHandler:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -800,19 +852,23 @@ function main() {
           </ul></dd>
 <dt><a name="respond" href="#respond"><span>respond:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="request: respond(request: Request; code: HttpCode; body: string;
-        headers: HttpHeaders = newHttpHeaders()): Future[void]" href="prologue/core/beast/request.html#respond%2CRequest%2CHttpCode%2Cstring%2CHttpHeaders">request: respond(request: Request; code: HttpCode; body: string;
-        headers: HttpHeaders = newHttpHeaders()): Future[void]</a></li>
+          data-doc-search-tag="request: respond(request: Request; code: HttpCode; body: string; headers: ResponseHeaders): Future[
+    void]" href="prologue/core/beast/request.html#respond%2CRequest%2CHttpCode%2Cstring%2CResponseHeaders">request: respond(request: Request; code: HttpCode; body: string; headers: ResponseHeaders): Future[
+    void]</a></li>
           <li><a class="reference external"
           data-doc-search-tag="request: respond(request: Request; response: Response): Future[void]" href="prologue/core/beast/request.html#respond%2CRequest%2CResponse">request: respond(request: Request; response: Response): Future[void]</a></li>
           <li><a class="reference external"
-          data-doc-search-tag="context: respond(ctx: Context; code: HttpCode; body: string;
-        headers: HttpHeaders = newHttpHeaders()): Future[void]" href="prologue/core/context.html#respond%2CContext%2CHttpCode%2Cstring%2CHttpHeaders">context: respond(ctx: Context; code: HttpCode; body: string;
-        headers: HttpHeaders = newHttpHeaders()): Future[void]</a></li>
+          data-doc-search-tag="context: respond(ctx: Context; code: HttpCode; body: string; headers: ResponseHeaders): Future[
+    void]" href="prologue/core/context.html#respond%2CContext%2CHttpCode%2Cstring%2CResponseHeaders">context: respond(ctx: Context; code: HttpCode; body: string; headers: ResponseHeaders): Future[
+    void]</a></li>
           </ul></dd>
 <dt><a name="Response" href="#Response"><span>Response:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="response: Response" href="prologue/core/response.html#Response">response: Response</a></li>
+          </ul></dd>
+<dt><a name="ResponseHeaders" href="#ResponseHeaders"><span>ResponseHeaders:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="httplogue: ResponseHeaders" href="prologue/core/httpcore/httplogue.html#ResponseHeaders">httplogue: ResponseHeaders</a></li>
           </ul></dd>
 <dt><a name="ReversedRouter" href="#ReversedRouter"><span>ReversedRouter:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -915,9 +971,9 @@ function main() {
 <dt><a name="setResponse" href="#setResponse"><span>setResponse:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="context: setResponse(ctx: Context; code: HttpCode; httpHeaders = [
-    (&quot;Content-Type&quot;, &quot;text/html; charset=UTF-8&quot;)].newHttpHeaders; body = &quot;&quot;;
+    (&quot;Content-Type&quot;, &quot;text/html; charset=UTF-8&quot;)].initResponseHeaders; body = &quot;&quot;;
             version = HttpVer11)" href="prologue/core/context.html#setResponse%2CContext%2CHttpCode%2Cstring">context: setResponse(ctx: Context; code: HttpCode; httpHeaders = [
-    (&quot;Content-Type&quot;, &quot;text/html; charset=UTF-8&quot;)].newHttpHeaders; body = &quot;&quot;;
+    (&quot;Content-Type&quot;, &quot;text/html; charset=UTF-8&quot;)].initResponseHeaders; body = &quot;&quot;;
             version = HttpVer11)</a></li>
           <li><a class="reference external"
           data-doc-search-tag="context: setResponse(ctx: Context; response: Response)" href="prologue/core/context.html#setResponse%2CContext%2CResponse">context: setResponse(ctx: Context; response: Response)</a></li>
@@ -940,15 +996,15 @@ function main() {
           </ul></dd>
 <dt><a name="size" href="#size"><span>size:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="context: size(ctx: Context): int" href="prologue/core/context.html#size%2CContext">context: size(ctx: Context): int</a></li>
+          data-doc-search-tag="context: size(ctx: Context): int8" href="prologue/core/context.html#size%2CContext">context: size(ctx: Context): int8</a></li>
           </ul></dd>
 <dt><a name="staticFileResponse" href="#staticFileResponse"><span>staticFileResponse:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="context: staticFileResponse(ctx: Context; filename, dir: string; mimetype = &quot;&quot;;
-                   downloadName = &quot;&quot;; charset = &quot;utf-8&quot;; headers = newHttpHeaders()): owned(
-    Future[void])" href="prologue/core/context.html#staticFileResponse%2CContext%2Cstring%2Cstring%2Cstring%2Cstring%2Cstring">context: staticFileResponse(ctx: Context; filename, dir: string; mimetype = &quot;&quot;;
-                   downloadName = &quot;&quot;; charset = &quot;utf-8&quot;; headers = newHttpHeaders()): owned(
-    Future[void])</a></li>
+                   downloadName = &quot;&quot;; charset = &quot;utf-8&quot;;
+                   headers = initResponseHeaders()): owned(Future[void])" href="prologue/core/context.html#staticFileResponse%2CContext%2Cstring%2Cstring%2Cstring%2Cstring%2Cstring">context: staticFileResponse(ctx: Context; filename, dir: string; mimetype = &quot;&quot;;
+                   downloadName = &quot;&quot;; charset = &quot;utf-8&quot;;
+                   headers = initResponseHeaders()): owned(Future[void])</a></li>
           </ul></dd>
 <dt><a name="stripPath" href="#stripPath"><span>stripPath:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -1019,7 +1075,7 @@ function main() {
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-09-21 09:33:10 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-09-24 02:28:42 UTC</small>
       </div>
     </div>
   </div>

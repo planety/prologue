@@ -1,0 +1,17 @@
+ResponseHeaders	src/prologue/core/httpcore/httplogue.html#ResponseHeaders	httplogue: ResponseHeaders	
+getTables	src/prologue/core/httpcore/httplogue.html#getTables,ResponseHeaders	httplogue: getTables(headers: ResponseHeaders): TableRef[string, seq[string]]	
+initResponseHeaders	src/prologue/core/httpcore/httplogue.html#initResponseHeaders	httplogue: initResponseHeaders(): ResponseHeaders	
+initResponseHeaders	src/prologue/core/httpcore/httplogue.html#initResponseHeaders,openArray[tuple[string,string]]	httplogue: initResponseHeaders(keyValuePairs: openArray[tuple[key: string, val: string]]): ResponseHeaders	
+`$`	src/prologue/core/httpcore/httplogue.html#$,ResponseHeaders	httplogue: `$`(headers: ResponseHeaders): string	
+clear	src/prologue/core/httpcore/httplogue.html#clear,ResponseHeaders	httplogue: clear(headers: ResponseHeaders)	
+`[]`	src/prologue/core/httpcore/httplogue.html#[],ResponseHeaders,string	httplogue: `[]`(headers: ResponseHeaders; key: string): HttpHeaderValues	
+`[]`	src/prologue/core/httpcore/httplogue.html#[],ResponseHeaders,string,int	httplogue: `[]`(headers: ResponseHeaders; key: string; i: int): string	
+`[]=`	src/prologue/core/httpcore/httplogue.html#[]=,ResponseHeaders,string,string	httplogue: `[]=`(headers: ResponseHeaders; key, value: string)	
+`[]=`	src/prologue/core/httpcore/httplogue.html#[]=,ResponseHeaders,string,seq[string]	httplogue: `[]=`(headers: ResponseHeaders; key: string; value: seq[string])	
+add	src/prologue/core/httpcore/httplogue.html#add,ResponseHeaders,string,string	httplogue: add(headers: ResponseHeaders; key, value: string)	
+del	src/prologue/core/httpcore/httplogue.html#del,ResponseHeaders,string	httplogue: del(headers: ResponseHeaders; key: string)	
+pairs	src/prologue/core/httpcore/httplogue.html#pairs.i,ResponseHeaders	httplogue: pairs(headers: ResponseHeaders): tuple[key, value: string]	
+contains	src/prologue/core/httpcore/httplogue.html#contains,HttpHeaderValues,string	httplogue: contains(values: HttpHeaderValues; value: string): bool	
+hasKey	src/prologue/core/httpcore/httplogue.html#hasKey,ResponseHeaders,string	httplogue: hasKey(headers: ResponseHeaders; key: string): bool	
+getOrDefault	src/prologue/core/httpcore/httplogue.html#getOrDefault,ResponseHeaders,string	httplogue: getOrDefault(headers: ResponseHeaders; key: string;\n             default = @[&quot;&quot;].HttpHeaderValues): HttpHeaderValues	
+len	src/prologue/core/httpcore/httplogue.html#len,ResponseHeaders	httplogue: len(headers: ResponseHeaders): int	

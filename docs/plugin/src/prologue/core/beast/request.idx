@@ -16,7 +16,7 @@ charset	src/prologue/core/beast/request.html#charset,Request	request: charset(re
 secure	src/prologue/core/beast/request.html#secure,Request	request: secure(request: Request): bool	
 hostName	src/prologue/core/beast/request.html#hostName,Request	request: hostName(request: Request): string	
 send	src/prologue/core/beast/request.html#send,Request,string	request: send(request: Request; content: string): Future[void]	
-respond	src/prologue/core/beast/request.html#respond,Request,HttpCode,string,HttpHeaders	request: respond(request: Request; code: HttpCode; body: string;\n        headers: HttpHeaders = newHttpHeaders()): Future[void]	
+respond	src/prologue/core/beast/request.html#respond,Request,HttpCode,string,ResponseHeaders	request: respond(request: Request; code: HttpCode; body: string; headers: ResponseHeaders): Future[\n    void]	
 respond	src/prologue/core/beast/request.html#respond,Request,Response	request: respond(request: Request; response: Response): Future[void]	
 initRequest	src/prologue/core/beast/request.html#initRequest,Request	request: initRequest(nativeRequest: NativeRequest; cookies = initCookieJar();\n            pathParams = newStringTable(modeCaseSensitive);\n            queryParams = newStringTable(modeCaseSensitive);\n            postParams = newStringTable(modeCaseSensitive)): Request	
 close	src/prologue/core/beast/request.html#close,Request	request: close(request: Request)	

@@ -14,10 +14,14 @@ ErrorHandler	prologue/core/context.html#ErrorHandler	context: ErrorHandler
 ErrorHandlerTable	prologue/core/context.html#ErrorHandlerTable	context: ErrorHandlerTable	
 UploadFile	prologue/core/context.html#UploadFile	context: UploadFile	
 gScope	prologue/core/context.html#gScope,Context	context: gScope(ctx: Context): lent GlobalScope	
-size	prologue/core/context.html#size,Context	context: size(ctx: Context): int	
+size	prologue/core/context.html#size,Context	context: size(ctx: Context): int8	
 incSize	prologue/core/context.html#incSize,Context,int	context: incSize(ctx: Context; num = 1)	
 first	prologue/core/context.html#first,Context	context: first(ctx: Context): bool	
 first=	prologue/core/context.html#first=,Context,bool	context: first=(ctx: Context; first: bool)	
+middlewares	prologue/core/context.html#middlewares,Context	context: middlewares(ctx: Context): lent seq[HandlerAsync]	
+middlewares=	prologue/core/context.html#middlewares=,Context,seq[HandlerAsync]	context: middlewares=(ctx: Context; middlewares: seq[HandlerAsync])	
+addMiddlewares	prologue/core/context.html#addMiddlewares,Context,HandlerAsync	context: addMiddlewares(ctx: Context; middleware: HandlerAsync)	
+addMiddlewares	prologue/core/context.html#addMiddlewares,Context,seq[HandlerAsync]	context: addMiddlewares(ctx: Context; middleware: seq[HandlerAsync])	
 initUploadFile	prologue/core/context.html#initUploadFile,string,string	context: initUploadFile(filename, body: string): UploadFile	
 getUploadFile	prologue/core/context.html#getUploadFile,Context,string	context: getUploadFile(ctx: Context; name: string): UploadFile	
 save	prologue/core/context.html#save,UploadFile,string,string	context: save(uploadFile: UploadFile; dir: string; filename = &quot;&quot;)	
@@ -30,7 +34,7 @@ newContext	prologue/core/context.html#newContext,Request,Response,GlobalScope	co
 getSettings	prologue/core/context.html#getSettings,Context,string	context: getSettings(ctx: Context; key: string): JsonNode	
 handle	prologue/core/context.html#handle,Context	context: handle(ctx: Context): Future[void]	
 send	prologue/core/context.html#send,Context,string	context: send(ctx: Context; content: string): Future[void]	
-respond	prologue/core/context.html#respond,Context,HttpCode,string,HttpHeaders	context: respond(ctx: Context; code: HttpCode; body: string;\n        headers: HttpHeaders = newHttpHeaders()): Future[void]	
+respond	prologue/core/context.html#respond,Context,HttpCode,string,ResponseHeaders	context: respond(ctx: Context; code: HttpCode; body: string; headers: ResponseHeaders): Future[\n    void]	
 hasHeader	prologue/core/context.html#hasHeader,Request,string	context: hasHeader(request: var Request; key: string): bool	
 setHeader	prologue/core/context.html#setHeader,Request,string,string	context: setHeader(request: var Request; key, value: string)	
 setHeader	prologue/core/context.html#setHeader,Request,string,seq[string]	context: setHeader(request: var Request; key: string; value: seq[string])	
@@ -46,11 +50,11 @@ getPostParams	prologue/core/context.html#getPostParams,Context,string,string	con
 getQueryParams	prologue/core/context.html#getQueryParams,Context,string,string	context: getQueryParams(ctx: Context; key: string; default = &quot;&quot;): string	
 getPathParams	prologue/core/context.html#getPathParams,Context,string	context: getPathParams(ctx: Context; key: string): string	
 getPathParams	prologue/core/context.html#getPathParams,Context,string,T	context: getPathParams[T: BaseType](ctx: Context; key: string; default: T): T	
-setResponse	prologue/core/context.html#setResponse,Context,HttpCode,string	context: setResponse(ctx: Context; code: HttpCode; httpHeaders = [\n    (&quot;Content-Type&quot;, &quot;text/html; charset=UTF-8&quot;)].newHttpHeaders; body = &quot;&quot;;\n            version = HttpVer11)	
+setResponse	prologue/core/context.html#setResponse,Context,HttpCode,string	context: setResponse(ctx: Context; code: HttpCode; httpHeaders = [\n    (&quot;Content-Type&quot;, &quot;text/html; charset=UTF-8&quot;)].initResponseHeaders; body = &quot;&quot;;\n            version = HttpVer11)	
 setResponse	prologue/core/context.html#setResponse,Context,Response	context: setResponse(ctx: Context; response: Response)	
 multiMatch	prologue/core/context.html#multiMatch,string,StringTableRef	context: multiMatch(s: string; replacements: StringTableRef): string	
 multiMatch	prologue/core/context.html#multiMatch,string,varargs[]	context: multiMatch(s: string; replacements: varargs[(string, string)]): string	
 urlFor	prologue/core/context.html#urlFor,Context,string,openArray[],openArray[]	context: urlFor(ctx: Context; handler: string;\n       parameters: openArray[(string, string)] = @[];\n       queryParams: openArray[(string, string)] = @[]; usePlus = true; omitEq = true): string	
-abortExit	prologue/core/context.html#abortExit,Context,string	context: abortExit(ctx: Context; code = Http401; body = &quot;&quot;; headers = newHttpHeaders();\n          version = HttpVer11)	
+abortExit	prologue/core/context.html#abortExit,Context,string	context: abortExit(ctx: Context; code = Http401; body = &quot;&quot;; headers = initResponseHeaders();\n          version = HttpVer11)	
 attachment	prologue/core/context.html#attachment,Context,string,string	context: attachment(ctx: Context; downloadName = &quot;&quot;; charset = &quot;utf-8&quot;)	
-staticFileResponse	prologue/core/context.html#staticFileResponse,Context,string,string,string,string,string	context: staticFileResponse(ctx: Context; filename, dir: string; mimetype = &quot;&quot;;\n                   downloadName = &quot;&quot;; charset = &quot;utf-8&quot;; headers = newHttpHeaders()): owned(\n    Future[void])	
+staticFileResponse	prologue/core/context.html#staticFileResponse,Context,string,string,string,string,string	context: staticFileResponse(ctx: Context; filename, dir: string; mimetype = &quot;&quot;;\n                   downloadName = &quot;&quot;; charset = &quot;utf-8&quot;;\n                   headers = initResponseHeaders()): owned(Future[void])	
