@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import uri, httpcore
+import uri 
 import tables, strutils, strformat, logging, strtabs, options, json
 from nativesockets import Port, `$`
 import cookiejar
@@ -43,14 +43,14 @@ import ./constants
 import ./basicregex
 import ./encode
 import ./types
-
+import ./httpcore/httplogue
 
 import ./request
 import ./server
 export request, server
 
 
-export httpcore
+export httplogue
 export strtabs
 export tables
 export asyncdispatch except register
@@ -378,8 +378,6 @@ proc handleRequest(app: Prologue, nativeRequest: NativeRequest) {.async.} =
     logging.error e.msg
     ctx.response.code = Http500
     ctx.response.body = e.msg
-    if unlikely(ctx.response.headers == nil):
-      ctx.response.headers = newHttpHeaders()
     ctx.response.setHeader("content-type", "text/plain; charset=UTF-8")
 
   if not ctx.handled:

@@ -1,4 +1,4 @@
-import httpcore, strtabs, json
+import strtabs, json
 from asynchttpserver import newAsyncHttpServer, serve, close, AsyncHttpServer
 
 

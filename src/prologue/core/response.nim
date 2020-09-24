@@ -1,5 +1,5 @@
-import httpcore
 import times, json, strformat, options, macros
+import httpcore/httplogue
 
 import cookiejar
 
@@ -8,7 +8,7 @@ type
   Response* = object
     httpVersion*: HttpVersion
     code*: HttpCode
-    headers*: HttpHeaders
+    headers*: ResponseHeaders
     body*: string
 
 
@@ -17,7 +17,7 @@ proc `$`*(response: Response): string =
   fmt"{response.code} {response.headers}"
 
 func initResponse*(httpVersion: HttpVersion, code: HttpCode, headers =
-                   {"Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders,
+                   {"Content-Type": "text/html; charset=UTF-8"}.initResponseHeaders,
                    body = ""): Response {.inline.} =
   ## Initializes response.
   Response(httpVersion: httpVersion, code: code, headers: headers, body: body)
@@ -44,8 +44,6 @@ template setCookie*(response: var Response, key, value: string, expires = "",
   ## Sets the cookie of response.
   let cookies = initCookie(key, value, expires, maxAge, domain, 
                            path, secure, httpOnly, sameSite)
-  if unlikely(response.headers == nil):
-    response.headers = newHttpHeaders()
   response.addHeader("Set-Cookie", $cookies)
 
 template setCookie*(response: var Response, key, value: string, expires: DateTime|Time, 
@@ -54,8 +52,6 @@ template setCookie*(response: var Response, key, value: string, expires: DateTim
   ## Sets the cookie of response.
   let cookies = initCookie(key, value, expires, maxAge, domain, 
                           path, secure, httpOnly, sameSite)
-  if unlikely(response.headers == nil):
-    response.headers = newHttpHeaders()
   response.addHeader("Set-Cookie", $cookies)
 
 template deleteCookie*(response: var Response, key: string, value = "", path = "",
@@ -63,18 +59,16 @@ template deleteCookie*(response: var Response, key: string, value = "", path = "
   response.setCookie(key, value, expires = secondsForward(0), maxAge = some(0),
                      path = path, domain = domain)
 
-func abort*(code = Http401, body = "", headers = newHttpHeaders(),
+func abort*(code = Http401, body = "", headers = initResponseHeaders(),
             version = HttpVer11): Response {.inline.} =
   result = initResponse(version, code = code, body = body,
                         headers = headers)
 
 func redirect*(url: string, code = Http301,
-               body = "", delay = 0, headers = newHttpHeaders(),
+               body = "", delay = 0, headers = initResponseHeaders(),
                version = HttpVer11): Response {.inline.} =
   ## redirect to new url.
   result = initResponse(version, code = code, headers = headers, body = body)
-  if unlikely(result.headers == nil):
-    result.headers = newHttpHeaders()
   
   if delay == 0:
     result.headers.add("Location", url)
@@ -82,33 +76,27 @@ func redirect*(url: string, code = Http301,
     result.headers.add("refresh", &"{delay};url=\"{url}\"")
 
 func error404*(code = Http404,
-               body = "<h1>404 Not Found!</h1>", headers = newHttpHeaders(),
+               body = "<h1>404 Not Found!</h1>", headers = initResponseHeaders(),
                version = HttpVer11): Response {.inline.} =
   ## 404 HTML.
   result = initResponse(version, code = code, body = body, headers = headers)
 
-func htmlResponse*(text: string, code = Http200, headers = newHttpHeaders(),
+func htmlResponse*(text: string, code = Http200, headers = initResponseHeaders(),
                    version = HttpVer11): Response {.inline.} =
   ## Content-Type: text/html; charset=UTF-8.
   result = initResponse(version, code, headers, body = text)
-  if unlikely(result.headers == nil):
-    result.headers = newHttpHeaders()
   result.headers["Content-Type"] = "text/html; charset=UTF-8"
 
 func plainTextResponse*(text: string, code = Http200,
-                        headers = newHttpHeaders(), version = HttpVer11): Response {.inline.} =
+                        headers = initResponseHeaders(), version = HttpVer11): Response {.inline.} =
   ## Content-Type: text/plain.
   result = initResponse(version, code, headers, body = text)
-  if unlikely(result.headers == nil):
-    result.headers = newHttpHeaders()
   result.headers["Content-Type"] = "text/plain"
 
-func jsonResponse*(text: JsonNode, code = Http200, headers = newHttpHeaders(),
+func jsonResponse*(text: JsonNode, code = Http200, headers = initResponseHeaders(),
                    version = HttpVer11): Response {.inline.} =
   ## Content-Type: application/json.
   result = initResponse(version, code, headers, body = $text)
-  if unlikely(result.headers == nil):
-    result.headers = newHttpHeaders()
   result.headers["Content-Type"] = "text/json"
 
 macro resp*(body: string, code = Http200) =

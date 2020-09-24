@@ -1,4 +1,4 @@
-import httpcore, strtabs
+import strtabs
 
 
 import asyncdispatch

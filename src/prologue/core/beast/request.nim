@@ -1,4 +1,4 @@
-import uri, httpcore
+import uri
 import strutils, strtabs, options
 
 import cookiejar
@@ -7,6 +7,8 @@ import cookiejar
 import asyncdispatch
 from ../response import Response
 from ../types import FormPart
+import ../httpcore/httplogue
+
 
 import httpx except Settings
 
@@ -25,8 +27,8 @@ type
     pathParams*: StringTableRef
 
 
-func createHeaders(headers: HttpHeaders): string =
-  if headers != nil and headers.len != 0:
+func createHeaders(headers: ResponseHeaders): string =
+  if headers.len != 0:
     for (key, value) in headers.pairs:
       result.add(key & ": " & value & "\c\L")
 
@@ -106,7 +108,7 @@ proc send*(request: Request, content: string): Future[void] {.inline.} =
   complete(result)
 
 proc respond*(request: Request, code: HttpCode, body: string,
-              headers: HttpHeaders): Future[void] {.inline.} =
+              headers: ResponseHeaders): Future[void] {.inline.} =
 
   request.nativeRequest.send(code, body, headers.createHeaders)
   result = newFuture[void]()

@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-import httpcore
+import ./httpcore/httplogue
 import strtabs, strutils, strformat, parseutils, tables
 
 from cgi import decodeData

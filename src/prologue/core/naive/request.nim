@@ -9,6 +9,7 @@ import cookiejar
 import asyncdispatch
 from ../response import Response
 from ../types import FormPart
+import ../httpcore/httplogue
 
 
 type
@@ -112,7 +113,8 @@ proc send*(request: Request, content: string): Future[void] {.inline.} =
   result = request.nativeRequest.client.send(content)
 
 proc respond*(request: Request, code: HttpCode, body: string,
-              headers: HttpHeaders): Future[void] {.inline.} =
+              headers: ResponseHeaders): Future[void] {.inline.} =
+  let headers = HttpHeaders(table: getTables(headers))
   result = request.nativeRequest.respond(code, body, headers)
 
 proc respond*(request: Request, response: Response): Future[void] {.inline.} =

@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-import httpcore, cgi
+import cgi
 import hashes, strutils, strtabs, tables
 
 from ./context import Context, HandlerAsync, Path, RePath, Router, ReRouter,
@@ -23,6 +23,7 @@ from ./nativesettings import Settings
 from ./basicregex import Regex, RegexMatch, match, groupNames, groupFirstCapture
 
 import ./request
+import ./httpcore/httplogue
 
 
 type

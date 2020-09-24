@@ -12,8 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
-import httpcore
 import logging, strtabs, strutils
 
 
@@ -21,6 +19,7 @@ import asyncdispatch
 from ../core/context import Context, HandlerAsync
 from ../core/middlewaresbase import switch
 import ../core/request
+import ../core/httpcore/httplogue
 
 
 proc testMiddleware*(): HandlerAsync =

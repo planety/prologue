@@ -1,10 +1,11 @@
-import httpcore, strutils, strformat
+import strutils, strformat
 
 
 from ../core/context import Context, HandlerAsync, setHeader, hasHeader
 from ../core/response import setHeader, hasHeader
 from ../core/encode import base64Decode
 import ../core/request
+import ../core/httpcore/httplogue
 
 
 type

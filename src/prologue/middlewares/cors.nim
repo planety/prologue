@@ -12,8 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
-import httpcore
 from strutils import toLowerAscii, join
 
 
@@ -23,6 +21,7 @@ from ../core/context import Context, HandlerAsync
 from ../core/response import plainTextResponse, resp, setHeader, addHeader
 from ../core/basicregex import re, Regex, RegexMatch, match
 import ../core/request
+import ../core/httpcore/httplogue
 
 
 const
@@ -89,7 +88,7 @@ proc CorsMiddleware*(
     # doesn't use the same method as the actual request.
     if ctx.request.reqMethod == HttpOptions and reqHeaders.hasKey("Access-Control-Request-Method"):
       var
-        preflightHeaders = newHttpHeaders()
+        preflightHeaders = initResponseHeaders()
         errorMsg: seq[string] = @[]
 
       let
@@ -131,10 +130,10 @@ proc CorsMiddleware*(
 
       if errorMsg.len != 0:
         resp plainTextResponse("Disallowed CORS " &
-            errorMsg.join(", "), Http403, preflightHeaders)
+            errorMsg.join(", "), Http403, move preflightHeaders)
       else:
         resp plainTextResponse("Ok", Http200,
-            preflightHeaders)
+            move preflightHeaders)
       return
 
     # simple headers

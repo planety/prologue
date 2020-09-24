@@ -1,7 +1,7 @@
 from ../../src/prologue/core/response import initResponse, setHeader, addHeader, setCookie
+import ../../src/prologue/core/httpcore/httplogue
 
-
-import httpcore, strutils
+import strutils
 
 
 # "Test Response"

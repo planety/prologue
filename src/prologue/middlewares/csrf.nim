@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-import httpcore, strtabs
+import strtabs
 from htmlgen import input
 
 
@@ -23,6 +23,7 @@ from ../core/encode import urlsafeBase64Encode, urlsafeBase64Decode
 from ../core/middlewaresbase import switch
 from ../core/context import Context, HandlerAsync, getCookie, setCookie, deleteCookie
 import ../core/request
+import ../core/httpcore/httplogue
 
 
 import cookiejar

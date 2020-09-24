@@ -12,11 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import asyncfile, mimetypes, md5, uri, httpcore
+import asyncfile, mimetypes, md5, uri
 import strtabs, tables, strformat, os, times, options, parseutils, json
 
 import asyncdispatch
 import ./response, ./pages, ./constants
+import ./httpcore/httplogue
 
 from ./types import BaseType, Session, `[]`, initSession
 from ./configure import parseValue
@@ -186,7 +187,7 @@ proc send*(ctx: Context, content: string): Future[void] {.inline.} =
   result = ctx.request.send(content)
 
 proc respond*(ctx: Context, code: HttpCode, body: string,
-  headers: HttpHeaders): Future[void] {.inline.} =
+  headers: ResponseHeaders): Future[void] {.inline.} =
   result = ctx.request.respond(code, body, headers)
 
 func hasHeader*(request: var Request, key: string): bool {.inline.} =
@@ -228,14 +229,10 @@ proc defaultHandler*(ctx: Context) {.async.} =
 
 proc default404Handler*(ctx: Context) {.async.} =
   ctx.response.body = errorPage("404 Not Found!", PrologueVersion)
-  if unlikely(ctx.response.headers != nil):
-    ctx.response.headers = newHttpHeaders()
   ctx.response.setHeader("content-type", "text/html; charset=UTF-8")
 
 proc default500Handler*(ctx: Context) {.async.} =
   ctx.response.body = internalServerErrorPage()
-  if unlikely(ctx.response.headers != nil):
-    ctx.response.headers = newHttpHeaders()
   ctx.response.setHeader("content-type", "text/html; charset=UTF-8")
 
 func getPostParams*(ctx: Context, key: string, default = ""): string {.inline.} =
@@ -261,7 +258,7 @@ func getPathParams*[T: BaseType](ctx: Context, key: string,
   parseValue(pathParams, default)
 
 proc setResponse*(ctx: Context, code: HttpCode, httpHeaders =
-                  {"Content-Type": "text/html; charset=UTF-8"}.newHttpHeaders,
+                  {"Content-Type": "text/html; charset=UTF-8"}.initResponseHeaders,
                   body = "", version = HttpVer11) {.inline.} =
   ## Handy to make the response of `ctx`.
   ctx.response.httpVersion = version
@@ -316,7 +313,7 @@ func urlFor*(ctx: Context, handler: string, parameters: openArray[(string,
     result = multiMatch(result, parameters) & "?" & queryString
 
 func abortExit*(ctx: Context, code = Http401, body = "",
-                headers = newHttpHeaders(),
+                headers = initResponseHeaders(),
                 version = HttpVer11) {.inline.} =
   ## Abort the program.
   ctx.response = abort(code, body, headers, version)
@@ -326,9 +323,6 @@ proc attachment*(ctx: Context, downloadName = "", charset = "utf-8") {.inline.} 
   ## `attachment` is used to specify the file will be downloaded.
   if downloadName.len == 0:
     return
-
-  if unlikely(ctx.response.headers == nil):
-    ctx.response.headers = newHttpHeaders()
 
   var ext = downloadName.splitFile.ext
   if ext.len > 0:
@@ -342,7 +336,7 @@ proc attachment*(ctx: Context, downloadName = "", charset = "utf-8") {.inline.} 
 
 proc staticFileResponse*(ctx: Context, filename, dir: string, mimetype = "",
                          downloadName = "", charset = "utf-8", 
-                         headers = newHttpHeaders()) {.async.} =  
+                         headers = initResponseHeaders()) {.async.} =  
   ## Serves static files.
   let
     filePath = dir / filename
@@ -372,8 +366,6 @@ proc staticFileResponse*(ctx: Context, filename, dir: string, mimetype = "",
     etag = getMD5(etagBase)
 
   ctx.response.headers = headers
-  if unlikely(ctx.response.headers == nil):
-    ctx.response.headers = newHttpHeaders()
 
   if mimetype.len != 0:
     ctx.response.setHeader("Content-Type", fmt"{mimetype}; {charset}")
@@ -387,7 +379,7 @@ proc staticFileResponse*(ctx: Context, filename, dir: string, mimetype = "",
   if contentLength < 20_000_000:
     if ctx.request.hasHeader("If-None-Match") and ctx.request.headers[
         "If-None-Match"] == etag:
-      await ctx.respond(Http304, "", nil)
+      await ctx.respond(Http304, "", initResponseHeaders())
       ctx.handled = true
     else:
       ctx.response.body = readFile(filePath)
