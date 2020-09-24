@@ -218,7 +218,9 @@ proc buildToc(orig: TocEntry; types, procs: seq[Element]): TocEntry =
         if xx.len == 1 and xx[0].textContent == t.textContent:
           #kout(cstring"found ", p.nodeName)
           let q = tree("A", text(p.title))
-          q.setAttr("href", ($p.getAttribute("href")).split('/', maxsplit = 6)[^1])
+          let href = $p.getAttribute("href")
+          let res = rfind(href, "/core")
+          q.setAttr("href", href.substr(res + 6))
           c.kids.add TocEntry(heading: q, kids: @[])
           p.markElement()
     newStuff.kids.add c
@@ -272,7 +274,7 @@ proc dosearch(value: cstring): Element =
     var stuff: Element
     {.emit: """
     var request = new XMLHttpRequest();
-    request.open("GET", "https://planety.github.io/prologue/plugin/theindex.html", false);
+    request.open("GET", "https://planety.github.io/prologue/coreapi/theindex.html", false);
     request.send(null);
 
     var doc = document.implementation.createHTMLDocument("theindex");
