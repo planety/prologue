@@ -19,7 +19,6 @@ type
     cookies*: CookieJar
     httpMethod: HttpMethod
     headers: HttpHeaders
-    body: string
     url: Uri
     postParams*: StringTableRef
     queryParams*: StringTableRef # Only use queryParams for all url params
@@ -57,7 +56,10 @@ func setScheme*(request: var Request, value: string) {.inline.} =
   request.url.scheme = value
 
 func body*(request: Request): string {.inline.} =
-  request.body
+  if request.nativeRequest.body.isSome:
+    request.nativeRequest.body.get
+  else:
+    ""
 
 proc headers*(request: Request): HttpHeaders {.inline.} =
   request.headers
@@ -134,12 +136,6 @@ func initRequest*(nativeRequest: NativeRequest,
        nativeRequest.httpMethod.get
     else:
       HttpGet
-  
-  let body = 
-    if nativeRequest.body.isSome:
-      nativeRequest.body.get
-    else:
-      ""
 
   let headers = 
     if nativeRequest.headers.isSome:
@@ -147,7 +143,7 @@ func initRequest*(nativeRequest: NativeRequest,
     else:
       newHttpHeaders()
 
-  Request(nativeRequest: nativeRequest, url: url, httpMethod: httpMethod, body: body,
+  Request(nativeRequest: nativeRequest, url: url, httpMethod: httpMethod,
           headers: headers, cookies: cookies, pathParams: pathParams, queryParams: queryParams,
           postParams: postParams)
 

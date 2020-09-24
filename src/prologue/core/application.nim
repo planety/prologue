@@ -147,8 +147,9 @@ proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
   #   echo group
   if httpMethod == HttpGet:
     app.addRoute(route, handler, HttpHead, middlewares)
-  let path = initRePath(route = route, httpMethod = httpMethod)
-  app.gScope.reRouter.add (path, newPathHandler(handler, middlewares))
+
+  app.gScope.reRouter.add (initRePath(route = route, httpMethod = httpMethod), 
+                           newPathHandler(handler, middlewares))
 
 proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
                httpMethod: seq[HttpMethod], middlewares: seq[HandlerAsync] = @[],
