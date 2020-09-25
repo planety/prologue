@@ -1,5 +1,4 @@
-from ../../src/prologue/core/context import multiMatch
-
+include ../../src/prologue/core/context
 
 # "Test Context"
 block:

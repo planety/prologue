@@ -84,6 +84,7 @@ proc `$`*(secretKey: SecretKey): string {.inline.} =
 
 func initSession*(data: StringTableRef, newCreated = false, modified = false,
     accessed = false): Session {.inline.} =
+  ## Initializes a new session.
   Session(data: data, modified: modified)
 
 proc update*(session: Session) {.inline.} =

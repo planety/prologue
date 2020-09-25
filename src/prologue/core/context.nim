@@ -190,28 +190,36 @@ proc respond*(ctx: Context): Future[void] {.inline.} =
   ## Sends response to the client generating from `ctx.response`.
   result = ctx.request.respond(ctx.response)
 
+proc respond*(
+  ctx: Context, code: HttpCode, body: string,
+  headers: ResponseHeaders
+): Future[void] {.inline.} =
+  ## Sends response to the client generating from `code`, `body` and `headers`.
+  result = ctx.request.respond(code, body, headers)
+
 proc send*(ctx: Context, content: string): Future[void] {.inline.} =
   ## Sends content to the client.
   result = ctx.request.send(content)
 
-proc respond*(ctx: Context, code: HttpCode, body: string,
-  headers: ResponseHeaders): Future[void] {.inline.} =
-  result = ctx.request.respond(code, body, headers)
-
 func hasHeader*(request: var Request, key: string): bool {.inline.} =
+  ## Returns true if key is in `request.headers`.
   request.headers.hasKey(key)
 
 proc setHeader*(request: var Request, key, value: string) {.inline.} =
+  ## Inserts a (key, value) pair into `request.headers`.
   request.headers[key] = value
 
 proc setHeader*(request: var Request, key: string, value: seq[string]) {.inline.} =
+  ## Inserts a (key, value) pair into `request.headers`.
   request.headers[key] = value
 
 proc addHeader*(request: var Request, key, value: string) {.inline.} =
+  ## Appends value to the existing key in `request.headers`.
   request.headers.add(key, value)
 
-func getCookie*(ctx: Context, key: string, default: string = ""): string {.inline.} =
-  ## Gets Cookie from Request.
+func getCookie*(ctx: Context, key: string, default = ""): string {.inline.} =
+  ## Gets the value of `ctx.request.cookies[key]` if key is in cookies. Otherwise, the `default`
+  ## value will be returned.
   getCookie(ctx.request, key, default)
 
 proc setCookie*(ctx: Context, key, value: string, expires = "", 
@@ -233,13 +241,16 @@ proc deleteCookie*(ctx: Context, key: string, path = "", domain = "") {.inline.}
   ctx.response.deleteCookie(key = key, path = path, domain = domain)
 
 proc defaultHandler*(ctx: Context) {.async.} =
+  ## Default handler with HttpCode 404. 
   ctx.response.code = Http404
 
 proc default404Handler*(ctx: Context) {.async.} =
+  ## Default 404 pages.
   ctx.response.body = errorPage("404 Not Found!", PrologueVersion)
   ctx.response.setHeader("content-type", "text/html; charset=UTF-8")
 
 proc default500Handler*(ctx: Context) {.async.} =
+  ## Default 500 pages.
   ctx.response.body = internalServerErrorPage()
   ctx.response.setHeader("content-type", "text/html; charset=UTF-8")
 
@@ -278,7 +289,7 @@ proc setResponse*(ctx: Context, response: Response) {.inline.} =
   ## Handy to make the response of `ctx`.
   ctx.response = response
 
-proc multiMatch*(s: string, replacements: StringTableRef): string =
+proc multiMatch(s: string, replacements: StringTableRef): string =
   result = newStringOfCap(s.len)
   var
     pos = 0
@@ -304,14 +315,14 @@ proc multiMatch*(s: string, replacements: StringTableRef): string =
       else:
         raise newException(ValueError, "Unexpected key")
 
-func multiMatch*(s: string, replacements: varargs[(string, string)]): string {.inline.} =
+func multiMatch(s: string, replacements: varargs[(string, string)]): string {.inline.} =
   multiMatch(s, replacements.newStringTable)
 
 func urlFor*(ctx: Context, handler: string, parameters: openArray[(string,
              string)] = @[], queryParams: openArray[(string, string)] = @[],
              usePlus = true, omitEq = true): string {.inline.} =
-
-  ## { } can't appear in url
+  ## Returns the corresponding name of the handler.
+  ## Notes that `{` and `}` can't appear in url
   if handler in ctx.gScope.reversedRouter:
     result = ctx.gScope.reversedRouter[handler]
 
@@ -323,7 +334,7 @@ func urlFor*(ctx: Context, handler: string, parameters: openArray[(string,
 func abortExit*(ctx: Context, code = Http401, body = "",
                 headers = initResponseHeaders(),
                 version = HttpVer11) {.inline.} =
-  ## Abort the program.
+  ## Abort the program. It raises `AbortError`.
   ctx.response = abort(code, body, headers, version)
   raise newException(AbortError, "abort exit")
 

@@ -17,12 +17,15 @@ import base64, strutils
 
 
 proc base64Encode*[T: SomeInteger | char](s: openArray[T]): string {.inline.} =
+  ## The base64 encode.
   s.encode
 
 proc base64Encode*(s: string): string {.inline.} =
+  ## The base64 encode.
   s.encode
 
 proc base64Decode*(s: string): string {.inline.} =
+  ## The base64 decode.
   s.decode
 
 proc urlsafeBase64Encode*[T: SomeInteger | char](s: openArray[T]): string {.inline.} =

@@ -2,6 +2,7 @@ import htmlgen
 
 
 func errorPage*(errorMsg: string, version: string): string {.inline.} =
+  ## Error pages.
   result = html(head(title(errorMsg)),
                 body(h1(errorMsg),
                      "<hr/>",
@@ -10,6 +11,7 @@ func errorPage*(errorMsg: string, version: string): string {.inline.} =
                 xmlns = "http://www.w3.org/1999/xhtml")
 
 func loginPage*(): string {.inline.} =
+  ## Login pages.
   result = html(form(action = "/login",
                 `method` = "post",
                 "Username: ", input(name = "username", `type` = "text"),
@@ -18,6 +20,7 @@ func loginPage*(): string {.inline.} =
                 xmlns = "http://www.w3.org/1999/xhtml")
 
 func multiPartPage*(): string {.inline.} =
+  ## Multipart pages.
   result = html(form(action = "/multipart?firstname=red green&lastname=tenth",
                `method` = "post", enctype = "multipart/form-data",
                 input(name = "username", `type` = "text", value = "play game"),
@@ -26,6 +29,7 @@ func multiPartPage*(): string {.inline.} =
                 xmlns = "http://www.w3.org/1999/xhtml")
 
 func internalServerErrorPage*(): string {.inline.} =
+  ## Internal server error pages.
   result = """<html>
 
 <head>

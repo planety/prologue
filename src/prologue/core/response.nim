@@ -13,7 +13,7 @@ type
 
 
 proc `$`*(response: Response): string =
-  ## Stringify response.
+  ## Stringifys response.
   fmt"{response.code} {response.headers}"
 
 func initResponse*(httpVersion: HttpVersion, code: HttpCode, headers =
@@ -56,18 +56,20 @@ template setCookie*(response: var Response, key, value: string, expires: DateTim
 
 template deleteCookie*(response: var Response, key: string, value = "", path = "",
                    domain = "") =
+  ## Deletes the cookie of the response.
   response.setCookie(key, value, expires = secondsForward(0), maxAge = some(0),
                      path = path, domain = domain)
 
 func abort*(code = Http401, body = "", headers = initResponseHeaders(),
             version = HttpVer11): Response {.inline.} =
+  ## Returns the response with Http401 code(do not raise exception).
   result = initResponse(version, code = code, body = body,
                         headers = headers)
 
 func redirect*(url: string, code = Http301,
                body = "", delay = 0, headers = initResponseHeaders(),
                version = HttpVer11): Response {.inline.} =
-  ## redirect to new url.
+  ## Redirects to new url.
   result = initResponse(version, code = code, headers = headers, body = body)
   
   if delay == 0:
@@ -78,7 +80,7 @@ func redirect*(url: string, code = Http301,
 func error404*(code = Http404,
                body = "<h1>404 Not Found!</h1>", headers = initResponseHeaders(),
                version = HttpVer11): Response {.inline.} =
-  ## 404 HTML.
+  ## Creates an error 404 response.
   result = initResponse(version, code = code, body = body, headers = headers)
 
 func htmlResponse*(text: string, code = Http200, headers = initResponseHeaders(),

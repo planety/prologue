@@ -23,7 +23,7 @@ import ./request
 
 
 func parseFormPart*(body, contentType: string): FormPart {.inline.} =
-  # parse form
+  ## Parses form part of the body of the request.
   let
     sep = contentType[contentType.rfind("boundary") + 9 .. ^1]
     startSep = fmt"--{sep}"
@@ -89,7 +89,7 @@ func parseFormPart*(body, contentType: string): FormPart {.inline.} =
     result.data[name].body = tail
 
 func parseFormParams*(request: var Request, contentType: string) =
-  # get or post forms params
+  ## Parses get or post or query parameters.
   if "form-urlencoded" in contentType:
     request.formParams = initFormPart()
     if request.reqMethod == HttpPost:

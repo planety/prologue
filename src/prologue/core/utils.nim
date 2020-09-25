@@ -34,8 +34,9 @@ template beforeApi*(version, body: untyped) {.dirty.} =
   when (NimMajor, NimMinor) <= version:
     body
 
-proc isStaticFile*(path: string, dirs: openArray[string]): tuple[hasValue: bool,
-    filename, dir: string] {.inline.} =
+proc isStaticFile*(
+  path: string, dirs: openArray[string]
+): tuple[hasValue: bool, filename, dir: string] {.inline.} =
   result = (false, "", "")
   var path = path.strip(chars = {'/'}, trailing = false)
   normalizePath(path)

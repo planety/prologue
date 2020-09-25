@@ -24,6 +24,7 @@ proc doNothingClosureMiddleware*(): HandlerAsync
 
 
 proc switch*(ctx: Context) {.async.} =
+  ## Switch the control to the next handler.
   # TODO make middlewares checked
   if ctx.middlewares.len == 0:
     let

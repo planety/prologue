@@ -39,6 +39,7 @@ type
 
 
 func hasKey*(settings: Settings, key: string): bool {.inline.} =
+  ## Returns true if key is in `sesstings`.
   settings.data.hasKey(key)
 
 func `[]`*(settings: Settings, key: string): JsonNode {.inline.} =
