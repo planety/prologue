@@ -21,6 +21,10 @@ jobs:
     - uses: jiro4989/setup-nim-action@v1
       with:
         nim-version: 'devel'
+    - name: Install Packages
+      run: nimble install -y
+    - name: Install extension
+      run: logue extension all
     - name: Build API docs
       run: nimble apis
 
