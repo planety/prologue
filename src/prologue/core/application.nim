@@ -430,28 +430,28 @@ proc run*(app: Prologue) =
             app.appAddress)
 
 
-when isMainModule and not defined(nimdoc):
-  proc hello*(ctx: Context) {.async.} =
+when isMainModule:
+  proc hello(ctx: Context) {.async.} =
     logging.debug "hello"
     resp "<h1>Hello, Prologue!</h1>"
 
-  proc home*(ctx: Context) {.async.} =
+  proc home(ctx: Context) {.async.} =
     logging.debug "home"
     resp "<h1>Home</h1>"
 
-  proc helloName*(ctx: Context) {.async.} =
+  proc helloName(ctx: Context) {.async.} =
     logging.debug "helloname"
     resp "<h1>Hello, " & ctx.getPathParams("name", "Prologue!") & "</h1>"
 
-  proc testRedirect*(ctx: Context) {.async.} =
+  proc testRedirect(ctx: Context) {.async.} =
     logging.debug "testRedirect"
     resp redirect("/hello")
 
-  proc login*(ctx: Context) {.async.} =
+  proc login(ctx: Context) {.async.} =
     logging.debug "logging"
     resp loginPage()
 
-  proc doLogin*(ctx: Context) {.async.} =
+  proc doLogin(ctx: Context) {.async.} =
     logging.debug "doLogin"
     resp redirect("/hello/Nim")
 
