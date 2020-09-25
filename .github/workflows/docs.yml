@@ -28,14 +28,11 @@ jobs:
     - name: Build API docs
       run: nimble apis
 
-    - name: deploy docs
-      uses: appleboy/gh-pages-action@master
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
       with:
-        username: ${{ secrets.USERNAME }}
-        password: ${{ secrets.PASSWORD }}
-        target_branch: devel
-        target_directory: docs
-        remote_url: https://github.com/planety/prologue
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./site
 
   deploy:
     runs-on: ubuntu-20.04
