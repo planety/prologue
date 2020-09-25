@@ -31,8 +31,8 @@ jobs:
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
-          publish_branch: gh-pages  # default: gh-pages
-          publish_dir: ./public
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
 
   # deploy:
   #   runs-on: ubuntu-20.04
