@@ -9,7 +9,7 @@ repo_url: https://github.com/planety/prologue
 edit_uri: ""
 
 nav:
-    - Introduction: "index.md"
+    # - Introduction: "index.md"
     - QuickStart: "quickstart.md"
     - Application: "application.md"
     - Event: "event.md"
@@ -21,6 +21,7 @@ nav:
     - Static Files: "staticfiles.md"
     - Upload Files: "uploadfile.md"
     - Session: "session.md"
+    - FAQ: "faq.md"
 
 
 markdown_extensions:
