@@ -7,7 +7,7 @@ on:
 
 jobs:
   docs:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
     - name: Cache choosenim
       id: cache-choosenim
@@ -15,7 +15,7 @@ jobs:
       with:
         path: ~/.choosenim
         key: ${{ runner.os }}-choosenim-devel-latest
-        
+
     - name: Setup Nim Enviroment
       uses: actions/checkout@master
     - uses: jiro4989/setup-nim-action@v1
