@@ -6,6 +6,24 @@ on:
       - devel
 
 jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Cache choosenim
+      id: cache-choosenim
+      uses: actions/cache@v1
+      with:
+        path: ~/.choosenim
+        key: ${{ runner.os }}-choosenim-devel-latest
+        
+    - name: Setup Nim Enviroment
+      uses: actions/checkout@master
+    - uses: jiro4989/setup-nim-action@v1
+      with:
+        nim-version: 'devel'
+    - name: Build API docs
+      run: nimble apis
+
   deploy:
     runs-on: ubuntu-20.04
     steps:
