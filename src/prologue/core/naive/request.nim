@@ -41,7 +41,7 @@ func stripPath*(request: var Request) {.inline.} =
       leading = false, chars = {'/'})
 
 func query*(request: Request): string {.inline.} =
-  ## Gets the query of the request.
+  ## Gets the query strings of the request.
   request.nativeRequest.url.query
 
 func scheme*(request: Request): string {.inline.} =
@@ -53,7 +53,8 @@ func setScheme*(request: var Request, value: string) {.inline.} =
   request.nativeRequest.url.scheme = value
 
 func body*(request: Request): string {.inline.} =
-  ## Gets the body of the request.
+  ## Gets the body of the request. It is only present when
+  ## using HttpPost method.
   request.nativeRequest.body
 
 func headers*(request: Request): HttpHeaders {.inline.} =
@@ -65,7 +66,8 @@ func reqMethod*(request: Request): HttpMethod {.inline.} =
   request.nativeRequest.reqMethod
 
 func getCookie*(request: Request, key: string, default: string = ""): string {.inline.} =
-  ## Gets the cookie value of the request.
+  ## Gets the value of `request.cookies[key]` if key is in cookies. Otherwise, the `default`
+  ## value will be returned.
   request.cookies.getOrDefault(key, default)
 
 func contentType*(request: Request): string {.inline.} =
@@ -87,7 +89,7 @@ func charset*(request: Request): string {.inline.} =
     return contentType[pos + findStr.len .. ^1]
 
 func secure*(request: Request): bool {.inline.} =
-  ## Returns True if request is secure.
+  ## Returns True if the request is secure.
   let headers = request.nativeRequest.headers
   if not headers.hasKey("X-Forwarded-Proto"):
     return false
@@ -110,24 +112,31 @@ func hostName*(request: Request): string {.inline.} =
     result = headers["x-forwarded-for", 0]
 
 proc send*(request: Request, content: string): Future[void] {.inline.} =
+  ## Sends `content` to the client.
   result = request.nativeRequest.client.send(content)
 
 proc respond*(request: Request, code: HttpCode, body: string,
               headers: ResponseHeaders): Future[void] {.inline.} =
+  ## Responds `code`, `body` and `headers` to the client, the framework
+  ## will genertate response contents automatically.
   let headers = HttpHeaders(table: getTables(headers))
   result = request.nativeRequest.respond(code, body, headers)
 
 proc respond*(request: Request, response: Response): Future[void] {.inline.} =
+  ## Responds `response` to the client, the framework
+  ## will genertate response contents automatically.
   result = request.respond(response.code, response.body,
                            response.headers)
-
-proc close*(request: Request) =
-  request.nativeRequest.client.close()
 
 func initRequest*(nativeRequest: NativeRequest, 
                   cookies = initCookieJar(),
                   pathParams = newStringTable(modeCaseSensitive), 
                   queryParams = newStringTable(modeCaseSensitive),
                   postParams = newStringTable(modeCaseSensitive)): Request {.inline.} =
+  ## Initializes a new Request.
   Request(nativeRequest: nativeRequest, cookies: cookies,
     pathParams: pathParams, queryParams: queryParams, postParams: postParams)
+
+proc close*(request: Request) =
+  ## Closes the request.
+  request.nativeRequest.client.close()

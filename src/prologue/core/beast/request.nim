@@ -34,48 +34,63 @@ func createHeaders(headers: ResponseHeaders): string =
     result.setLen(result.len - 2) # Strip trailing \c\L
 
 func url*(request: Request): Uri {.inline.} =
+  ## Gets the url of the request.
   request.url
 
 func port*(request: Request): string {.inline.} =
+  ## Gets the port of the request.
   request.url.port
 
 func path*(request: Request): string {.inline.} =
+  ## Gets the path of the request.
   request.url.path
 
 func stripPath*(request: var Request) {.inline.} =
+  ## Strips the path of the request.
   request.url.path = request.url.path.strip(
-      leading = false, chars = {'/'})
+                          leading = false, chars = {'/'})
 
 func query*(request: Request): string {.inline.} =
+  ## Gets the query strings of the request.
   request.url.query
 
 func scheme*(request: Request): string {.inline.} =
+  ## Gets the scheme of the request.
   request.url.scheme
 
 func setScheme*(request: var Request, value: string) {.inline.} =
+  ## Sets the scheme of the request.
   request.url.scheme = value
 
 func body*(request: Request): string {.inline.} =
+  ## Gets the body of the request. It is only present when
+  ## using HttpPost method.
   if request.nativeRequest.body.isSome:
     request.nativeRequest.body.get
   else:
     ""
 
 proc headers*(request: Request): HttpHeaders {.inline.} =
+  ## Gets the `HttpHeaders` of the request.
   request.headers
 
 func reqMethod*(request: Request): HttpMethod {.inline.} =
+  ## Gets the `HttpMethod` of the request.
   request.httpMethod
 
 func getCookie*(request: Request, key: string, default: string): string {.inline.} =
+  ## Gets the value of `request.cookies[key]` if key is in cookies. Otherwise, the `default`
+  ## value will be returned.
   request.cookies.getOrDefault(key, default)
 
 func contentType*(request: Request): string {.inline.} =
+  ## Gets the contentType of the request.
   if not request.headers.hasKey("Content-Type"):
     return ""
   result = request.headers["Content-Type", 0]
 
 func charset*(request: Request): string {.inline.} =
+  ## Gets the charset of the request.
   let
     findStr = "charset="
     contentType = request.contentType
@@ -87,6 +102,7 @@ func charset*(request: Request): string {.inline.} =
     return contentType[pos + findStr.len .. ^1]
 
 func secure*(request: Request): bool {.inline.} =
+  ## Returns True if the request is secure.
   if not request.headers.hasKey("X-Forwarded-Proto"):
     return false
 
@@ -99,24 +115,29 @@ func secure*(request: Request): bool {.inline.} =
     result = false
 
 func hostName*(request: Request): string {.inline.} =
+  ## Gets the hostname of the request.
   if request.headers.hasKey("REMOTE_ADDR"):
     result = request.headers["REMOTE_ADDR", 0]
   if request.headers.hasKey("x-forwarded-for"):
     result = request.headers["x-forwarded-for", 0]
 
 proc send*(request: Request, content: string): Future[void] {.inline.} =
+  ## Sends `content` to the client.
   request.nativeRequest.unsafeSend(content)
   result = newFuture[void]()
   complete(result)
 
 proc respond*(request: Request, code: HttpCode, body: string,
               headers: ResponseHeaders): Future[void] {.inline.} =
-
+  ## Responds `code`, `body` and `headers` to the client, the framework
+  ## will genertate response contents automatically.
   request.nativeRequest.send(code, body, headers.createHeaders)
   result = newFuture[void]()
   complete(result)
 
 proc respond*(request: Request, response: Response): Future[void] {.inline.} =
+  ## Responds `response` to the client, the framework
+  ## will genertate response contents automatically.
   result = request.respond(response.code, response.body, response.headers)
 
 func initRequest*(nativeRequest: NativeRequest, 
@@ -124,7 +145,7 @@ func initRequest*(nativeRequest: NativeRequest,
                   pathParams = newStringTable(modeCaseSensitive), 
                   queryParams = newStringTable(modeCaseSensitive),
                   postParams = newStringTable(modeCaseSensitive)): Request {.inline.} =
-
+  ## Initializes a new Request.
   let url = 
     if nativeRequest.path.isSome:
       parseUri(nativeRequest.path.get)
@@ -148,4 +169,5 @@ func initRequest*(nativeRequest: NativeRequest,
           postParams: postParams)
 
 proc close*(request: Request) =
+  ## Closes the request.
   request.nativeRequest.forget()

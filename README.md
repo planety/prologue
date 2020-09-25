@@ -66,13 +66,14 @@ web services.
   - [x] Clickjacking Protection
   - [x] Authentication
   - [x] I18n
+  - [x] Command line tools
 
 - Plugin
   - [x] Minimal OpenApi support
   - [x] Template(Using Karax Native)
   - [x] Websocket support(https://github.com/xflywind/websocketx)
   - [x] Test Client(Using httpclient)
-  - [x] Command line tools(https://github.com/planety/logue)
+
 
 ## Installation
 
