@@ -29,12 +29,12 @@ jobs:
         run: nimble apis
 
       - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-        external_repository: planety/planety
-        publish_branch: gh-pages  # default: gh-pages
-        publish_dir: ./public
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          external_repository: planety/planety
+          publish_branch: gh-pages  # default: gh-pages
+          publish_dir: ./public
 
   deploy:
     runs-on: ubuntu-20.04
