@@ -20,11 +20,13 @@ web services.
 
 ## Documentation
 
-You can read documentation in https://planety.github.io/prologue.
+Core API docs: 
+[Index](https://planety.github.io/prologue/coreapi/theindex.html)
+[Search Pages](https://planety.github.io/prologue/coreapi/application.html)
 
-Core API docs in https://planety.github.io/prologue/coreapi/theindex.html.
-
-Plugin API docs in https://planety.github.io/prologue/plugin/theindex.html.
+Plugin API docs:
+[index](https://planety.github.io/prologue/plugin/theindex.html)
+[Search pages](https://planety.github.io/prologue/plugin/index.html)
 
 ## Feature
 
@@ -181,29 +183,6 @@ app.run()
 
 Run **app.nim**. Now the server is running at localhost:8080.
 
-#### DSL for routes  
-
-You can read docs in https://nim-lang.github.io/Nim/with.html and construct your own DSL.
-
-Pseudocode:
-
-```nim
-import std/with
-
-
-with app:
-  get "/", home
-  post "/", home
-  get "/home", home
-  get "/home", home
-  get "/redirect", doRedirect
-  get "/login", login  
-  post("/login", login, middlewares = debugRequestMiddleware())
-  get "/hello/{name}", helloName
-  addRoute [HttpGet, HttpPost], helloRoute
-```
-
-Run **app.nim**. Now the server is running at localhost:8080.
 
 ### More examples
 - [HelloWorld](https://github.com/planety/prologue/tree/devel/examples/helloworld)
