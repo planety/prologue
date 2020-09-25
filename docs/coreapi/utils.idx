@@ -1,4 +1,0 @@
-since	utils.html#since.t,untyped,untyped	utils: since(version, body: untyped)	
-sinceApi	utils.html#sinceApi.t,untyped,untyped	utils: sinceApi(version, body: untyped)	
-beforeApi	utils.html#beforeApi.t,untyped,untyped	utils: beforeApi(version, body: untyped)	
-isStaticFile	utils.html#isStaticFile,string,openArray[string]	utils: isStaticFile(path: string; dirs: openArray[string]): tuple[hasValue: bool,\n    filename, dir: string]	

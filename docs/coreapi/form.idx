@@ -1,2 +1,0 @@
-parseFormPart	form.html#parseFormPart,string,string	form: parseFormPart(body, contentType: string): FormPart	
-parseFormParams	form.html#parseFormParams,Request,string	form: parseFormParams(request: var Request; contentType: string)	
