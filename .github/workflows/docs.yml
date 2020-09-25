@@ -28,6 +28,15 @@ jobs:
     - name: Build API docs
       run: nimble apis
 
+    - name: deploy docs
+      uses: appleboy/gh-pages-action@master
+      with:
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        target_branch: devel
+        target_directory: docs
+        remote_url: https://github.com/planety/prologue
+
   deploy:
     runs-on: ubuntu-20.04
     steps:
