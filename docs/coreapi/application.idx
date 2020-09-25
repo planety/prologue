@@ -24,9 +24,3 @@ appName	application.html#appName,Prologue	application: appName(app: Prologue): s
 appPort	application.html#appPort,Prologue	application: appPort(app: Prologue): Port	
 newApp	application.html#newApp,Settings,seq[HandlerAsync],seq[Event],seq[Event]	application: newApp(settings: Settings; middlewares: seq[HandlerAsync] = @[];\n       startup: seq[Event] = @[]; shutdown: seq[Event] = @[];\n       errorHandlerTable = DefaultErrorHandler;\n       appData = newStringTable(mode = modeCaseSensitive)): Prologue	
 run	application.html#run,Prologue	application: run(app: Prologue)	
-hello	application.html#hello,Context	application: hello(ctx: Context): owned(Future[void])	
-home	application.html#home,Context	application: home(ctx: Context): owned(Future[void])	
-helloName	application.html#helloName,Context	application: helloName(ctx: Context): owned(Future[void])	
-testRedirect	application.html#testRedirect,Context	application: testRedirect(ctx: Context): owned(Future[void])	
-login	application.html#login,Context	application: login(ctx: Context): owned(Future[void])	
-doLogin	application.html#doLogin,Context	application: doLogin(ctx: Context): owned(Future[void])	

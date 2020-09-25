@@ -159,18 +159,6 @@ function main() {
     title="printRoute(app: Prologue)"><wbr />print<wbr />Route<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#run%2CPrologue"
     title="run(app: Prologue)"><wbr />run<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#hello%2CContext"
-    title="hello(ctx: Context): owned(Future[void])"><wbr />hello<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#home%2CContext"
-    title="home(ctx: Context): owned(Future[void])"><wbr />home<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#helloName%2CContext"
-    title="helloName(ctx: Context): owned(Future[void])"><wbr />hello<wbr />Name<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#testRedirect%2CContext"
-    title="testRedirect(ctx: Context): owned(Future[void])"><wbr />test<wbr />Redirect<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#login%2CContext"
-    title="login(ctx: Context): owned(Future[void])"><wbr />login<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#doLogin%2CContext"
-    title="doLogin(ctx: Context): owned(Future[void])"><wbr />do<wbr />Login<span class="attachedType"></span></a></li>
 
   </ul>
 </li>
@@ -532,77 +520,6 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L400" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="hello,Context"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#hello%2CContext"><span class="Identifier">hello</span></a><span class="Other">(</span><span class="Identifier">ctx</span><span class="Other">:</span> <a href="context.html#Context"><span class="Identifier">Context</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">owned</span><span class="Other">(</span><span class="Identifier">Future</span><span class="Other">[</span><span class="Identifier">void</span><span class="Other">]</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/application.nim#L434"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L434" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<a id="home,Context"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#home%2CContext"><span class="Identifier">home</span></a><span class="Other">(</span><span class="Identifier">ctx</span><span class="Other">:</span> <a href="context.html#Context"><span class="Identifier">Context</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">owned</span><span class="Other">(</span><span class="Identifier">Future</span><span class="Other">[</span><span class="Identifier">void</span><span class="Other">]</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/application.nim#L438"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L438" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<a id="helloName,Context"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#helloName%2CContext"><span class="Identifier">helloName</span></a><span class="Other">(</span><span class="Identifier">ctx</span><span class="Other">:</span> <a href="context.html#Context"><span class="Identifier">Context</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">owned</span><span class="Other">(</span><span class="Identifier">Future</span><span class="Other">[</span><span class="Identifier">void</span><span class="Other">]</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/application.nim#L442"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L442" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<a id="testRedirect,Context"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#testRedirect%2CContext"><span class="Identifier">testRedirect</span></a><span class="Other">(</span><span class="Identifier">ctx</span><span class="Other">:</span> <a href="context.html#Context"><span class="Identifier">Context</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">owned</span><span class="Other">(</span><span class="Identifier">Future</span><span class="Other">[</span><span class="Identifier">void</span><span class="Other">]</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/application.nim#L446"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L446" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<a id="login,Context"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#login%2CContext"><span class="Identifier">login</span></a><span class="Other">(</span><span class="Identifier">ctx</span><span class="Other">:</span> <a href="context.html#Context"><span class="Identifier">Context</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">owned</span><span class="Other">(</span><span class="Identifier">Future</span><span class="Other">[</span><span class="Identifier">void</span><span class="Other">]</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/application.nim#L450"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L450" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<a id="doLogin,Context"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#doLogin%2CContext"><span class="Identifier">doLogin</span></a><span class="Other">(</span><span class="Identifier">ctx</span><span class="Other">:</span> <a href="context.html#Context"><span class="Identifier">Context</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">owned</span><span class="Other">(</span><span class="Identifier">Future</span><span class="Other">[</span><span class="Identifier">void</span><span class="Other">]</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/application.nim#L454"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/application.nim#L454" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
 
 </dl></div>
 <div class="section" id="13">
@@ -692,7 +609,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-09-25 03:09:11 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-09-25 09:10:47 UTC</small>
       </div>
     </div>
   </div>
