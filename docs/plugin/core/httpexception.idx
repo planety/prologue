@@ -1,0 +1,2 @@
+HttpError	core/httpexception.html#HttpError	httpexception: HttpError	
+AbortError	core/httpexception.html#AbortError	httpexception: AbortError	

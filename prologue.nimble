@@ -47,8 +47,6 @@ task apis, "Only for api":
 
   exec "nim buildIndex -o:docs/plugin/theindex.html docs/plugin"
 
-  # exec "nim c -r docs.nim"
-
 task redis, "Install redis":
   exec "nimble install redis@#c02d404 -y"
 

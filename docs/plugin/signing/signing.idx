@@ -1,0 +1,43 @@
+BaseDigestType	signing/signing.html#BaseDigestType	signing: BaseDigestType	
+Sha1Type	signing/signing.html#Sha1Type	BaseDigestMethodType.Sha1Type	
+Sha224Type	signing/signing.html#Sha224Type	BaseDigestMethodType.Sha224Type	
+Sha384Type	signing/signing.html#Sha384Type	BaseDigestMethodType.Sha384Type	
+Sha512Type	signing/signing.html#Sha512Type	BaseDigestMethodType.Sha512Type	
+Sha512_224Type	signing/signing.html#Sha512_224Type	BaseDigestMethodType.Sha512_224Type	
+Sha512_256Type	signing/signing.html#Sha512_256Type	BaseDigestMethodType.Sha512_256Type	
+Keccak224Type	signing/signing.html#Keccak224Type	BaseDigestMethodType.Keccak224Type	
+Keccak256Type	signing/signing.html#Keccak256Type	BaseDigestMethodType.Keccak256Type	
+Keccak384Type	signing/signing.html#Keccak384Type	BaseDigestMethodType.Keccak384Type	
+Keccak512Type	signing/signing.html#Keccak512Type	BaseDigestMethodType.Keccak512Type	
+Sha3_224Type	signing/signing.html#Sha3_224Type	BaseDigestMethodType.Sha3_224Type	
+Sha3_256Type	signing/signing.html#Sha3_256Type	BaseDigestMethodType.Sha3_256Type	
+Sha3_384Type	signing/signing.html#Sha3_384Type	BaseDigestMethodType.Sha3_384Type	
+Sha3_512Type	signing/signing.html#Sha3_512Type	BaseDigestMethodType.Sha3_512Type	
+Ripemd128Type	signing/signing.html#Ripemd128Type	BaseDigestMethodType.Ripemd128Type	
+Ripemd160Type	signing/signing.html#Ripemd160Type	BaseDigestMethodType.Ripemd160Type	
+Ripemd256Type	signing/signing.html#Ripemd256Type	BaseDigestMethodType.Ripemd256Type	
+Ripemd320Type	signing/signing.html#Ripemd320Type	BaseDigestMethodType.Ripemd320Type	
+Blake2_224Type	signing/signing.html#Blake2_224Type	BaseDigestMethodType.Blake2_224Type	
+Blake2_256Type	signing/signing.html#Blake2_256Type	BaseDigestMethodType.Blake2_256Type	
+Blake2_384Type	signing/signing.html#Blake2_384Type	BaseDigestMethodType.Blake2_384Type	
+Blake2_512Type	signing/signing.html#Blake2_512Type	BaseDigestMethodType.Blake2_512Type	
+BaseDigestMethodType	signing/signing.html#BaseDigestMethodType	signing: BaseDigestMethodType	
+Concat	signing/signing.html#Concat	KeyDerivation.Concat	
+MoreConcat	signing/signing.html#MoreConcat	KeyDerivation.MoreConcat	
+KeyHmac	signing/signing.html#KeyHmac	KeyDerivation.KeyHmac	
+None	signing/signing.html#None	KeyDerivation.None	
+KeyDerivation	signing/signing.html#KeyDerivation	signing: KeyDerivation	
+Signer	signing/signing.html#Signer	signing: Signer	
+TimedSigner	signing/signing.html#TimedSigner	signing: TimedSigner	
+DefaultSep	signing/signing.html#DefaultSep	signing: DefaultSep	
+DefaultKeyDerivation	signing/signing.html#DefaultKeyDerivation	signing: DefaultKeyDerivation	
+DefaultDigestMethodType	signing/signing.html#DefaultDigestMethodType	signing: DefaultDigestMethodType	
+initSigner	signing/signing.html#initSigner,SecretKey	signing: initSigner(secretKey: SecretKey; salt = DefaultSalt; sep = DefaultSep;\n           keyDerivation = DefaultKeyDerivation;\n           digestMethod = DefaultDigestMethodType): Signer	
+initTimedSigner	signing/signing.html#initTimedSigner,SecretKey	signing: initTimedSigner(secretKey: SecretKey; salt = DefaultSalt; sep = DefaultSep;\n                keyDerivation = DefaultKeyDerivation;\n                digestMethod = DefaultDigestMethodType): TimedSigner	
+getSignatureEncode	signing/signing.html#getSignatureEncode,,openArray[byte]	signing: getSignatureEncode(s: Signer | TimedSigner; value: openArray[byte]): string	
+getSignatureDecode	signing/signing.html#getSignatureDecode	signing: getSignatureDecode(s: Signer | TimedSigner): string	
+sign	signing/signing.html#sign,Signer,string	signing: sign(s: Signer; value: string): string	
+sign	signing/signing.html#sign,TimedSigner,string	signing: sign(s: TimedSigner; value: string): string	
+unsign	signing/signing.html#unsign,,string	signing: unsign(s: Signer | TimedSigner; signedValue: string): string	
+unsign	signing/signing.html#unsign,TimedSigner,string,Natural	signing: unsign(s: TimedSigner; signedValue: string; max_age: Natural): string	
+validate	signing/signing.html#validate,Signer,string	signing: validate(s: Signer; signedValue: string): bool	

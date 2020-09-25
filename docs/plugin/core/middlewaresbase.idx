@@ -1,0 +1,2 @@
+switch	core/middlewaresbase.html#switch,Context	middlewaresbase: switch(ctx: Context): owned(Future[void])	
+doNothingClosureMiddleware	core/middlewaresbase.html#doNothingClosureMiddleware	middlewaresbase: doNothingClosureMiddleware(): HandlerAsync	

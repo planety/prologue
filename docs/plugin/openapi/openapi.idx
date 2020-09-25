@@ -1,0 +1,6 @@
+swaggerDocs	openapi/openapi.html#swaggerDocs	openapi: swaggerDocs	
+redocs	openapi/openapi.html#redocs	openapi: redocs	
+openapiHandler	openapi/openapi.html#openapiHandler,Context	openapi: openapiHandler(ctx: Context): owned(Future[void])	
+swaggerHandler	openapi/openapi.html#swaggerHandler,Context	openapi: swaggerHandler(ctx: Context): owned(Future[void])	
+redocsHandler	openapi/openapi.html#redocsHandler,Context	openapi: redocsHandler(ctx: Context): owned(Future[void])	
+serveDocs	openapi/openapi.html#serveDocs,Prologue,string	openapi: serveDocs(app: Prologue; source: string; onlyDebug = false)	

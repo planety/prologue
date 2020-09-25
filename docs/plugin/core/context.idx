@@ -1,0 +1,60 @@
+PathHandler	core/context.html#PathHandler	context: PathHandler	
+Path	core/context.html#Path	context: Path	
+Router	core/context.html#Router	context: Router	
+RePath	core/context.html#RePath	context: RePath	
+ReRouter	core/context.html#ReRouter	context: ReRouter	
+ReversedRouter	core/context.html#ReversedRouter	context: ReversedRouter	
+GlobalScope	core/context.html#GlobalScope	context: GlobalScope	
+Context	core/context.html#Context	context: Context	
+AsyncEvent	core/context.html#AsyncEvent	context: AsyncEvent	
+SyncEvent	core/context.html#SyncEvent	context: SyncEvent	
+Event	core/context.html#Event	context: Event	
+HandlerAsync	core/context.html#HandlerAsync	context: HandlerAsync	
+ErrorHandler	core/context.html#ErrorHandler	context: ErrorHandler	
+ErrorHandlerTable	core/context.html#ErrorHandlerTable	context: ErrorHandlerTable	
+UploadFile	core/context.html#UploadFile	context: UploadFile	
+gScope	core/context.html#gScope,Context	context: gScope(ctx: Context): lent GlobalScope	
+size	core/context.html#size,Context	context: size(ctx: Context): int8	
+incSize	core/context.html#incSize,Context,int	context: incSize(ctx: Context; num = 1)	
+first	core/context.html#first,Context	context: first(ctx: Context): bool	
+first=	core/context.html#first=,Context,bool	context: first=(ctx: Context; first: bool)	
+middlewares	core/context.html#middlewares,Context	context: middlewares(ctx: Context): lent seq[HandlerAsync]	
+middlewares=	core/context.html#middlewares=,Context,seq[HandlerAsync]	context: middlewares=(ctx: Context; middlewares: seq[HandlerAsync])	
+addMiddlewares	core/context.html#addMiddlewares,Context,HandlerAsync	context: addMiddlewares(ctx: Context; middleware: HandlerAsync)	
+addMiddlewares	core/context.html#addMiddlewares,Context,seq[HandlerAsync]	context: addMiddlewares(ctx: Context; middleware: seq[HandlerAsync])	
+initUploadFile	core/context.html#initUploadFile,string,string	context: initUploadFile(filename, body: string): UploadFile	
+getUploadFile	core/context.html#getUploadFile,Context,string	context: getUploadFile(ctx: Context; name: string): UploadFile	
+save	core/context.html#save,UploadFile,string,string	context: save(uploadFile: UploadFile; dir: string; filename = &quot;&quot;)	
+newErrorHandlerTable	core/context.html#newErrorHandlerTable	context: newErrorHandlerTable(initialSize = defaultInitialSize): ErrorHandlerTable	
+newErrorHandlerTable	core/context.html#newErrorHandlerTable,openArray[]	context: newErrorHandlerTable(pairs: openArray[(HttpCode, ErrorHandler)]): ErrorHandlerTable	
+newReversedRouter	core/context.html#newReversedRouter	context: newReversedRouter(): ReversedRouter	
+initEvent	core/context.html#initEvent,AsyncEvent	context: initEvent(handler: AsyncEvent): Event	
+initEvent	core/context.html#initEvent,SyncEvent	context: initEvent(handler: SyncEvent): Event	
+newContext	core/context.html#newContext,Request,Response,GlobalScope	context: newContext(request: Request; response: Response; gScope: GlobalScope): Context	
+getSettings	core/context.html#getSettings,Context,string	context: getSettings(ctx: Context; key: string): JsonNode	
+handle	core/context.html#handle,Context	context: handle(ctx: Context): Future[void]	
+send	core/context.html#send,Context,string	context: send(ctx: Context; content: string): Future[void]	
+respond	core/context.html#respond,Context,HttpCode,string,ResponseHeaders	context: respond(ctx: Context; code: HttpCode; body: string; headers: ResponseHeaders): Future[\n    void]	
+hasHeader	core/context.html#hasHeader,Request,string	context: hasHeader(request: var Request; key: string): bool	
+setHeader	core/context.html#setHeader,Request,string,string	context: setHeader(request: var Request; key, value: string)	
+setHeader	core/context.html#setHeader,Request,string,seq[string]	context: setHeader(request: var Request; key: string; value: seq[string])	
+addHeader	core/context.html#addHeader,Request,string,string	context: addHeader(request: var Request; key, value: string)	
+getCookie	core/context.html#getCookie,Context,string,string	context: getCookie(ctx: Context; key: string; default: string = &quot;&quot;): string	
+setCookie	core/context.html#setCookie,Context,string,string,string,Option[int],string,string	context: setCookie(ctx: Context; key, value: string; expires = &quot;&quot;;\n          maxAge: Option[int] = none(int); domain = &quot;&quot;; path = &quot;&quot;; secure = false;\n          httpOnly = false; sameSite = Lax)	
+setCookie	core/context.html#setCookie,Context,string,string,,Option[int],string,string	context: setCookie(ctx: Context; key, value: string; expires: DateTime | Time;\n          maxAge: Option[int] = none(int); domain = &quot;&quot;; path = &quot;&quot;; secure = false;\n          httpOnly = false; sameSite = Lax)	
+deleteCookie	core/context.html#deleteCookie,Context,string,string,string	context: deleteCookie(ctx: Context; key: string; path = &quot;&quot;; domain = &quot;&quot;)	
+defaultHandler	core/context.html#defaultHandler,Context	context: defaultHandler(ctx: Context): owned(Future[void])	
+default404Handler	core/context.html#default404Handler,Context	context: default404Handler(ctx: Context): owned(Future[void])	
+default500Handler	core/context.html#default500Handler,Context	context: default500Handler(ctx: Context): owned(Future[void])	
+getPostParams	core/context.html#getPostParams,Context,string,string	context: getPostParams(ctx: Context; key: string; default = &quot;&quot;): string	
+getQueryParams	core/context.html#getQueryParams,Context,string,string	context: getQueryParams(ctx: Context; key: string; default = &quot;&quot;): string	
+getPathParams	core/context.html#getPathParams,Context,string	context: getPathParams(ctx: Context; key: string): string	
+getPathParams	core/context.html#getPathParams,Context,string,T	context: getPathParams[T: BaseType](ctx: Context; key: string; default: T): T	
+setResponse	core/context.html#setResponse,Context,HttpCode,string	context: setResponse(ctx: Context; code: HttpCode; httpHeaders = [\n    (&quot;Content-Type&quot;, &quot;text/html; charset=UTF-8&quot;)].initResponseHeaders; body = &quot;&quot;;\n            version = HttpVer11)	
+setResponse	core/context.html#setResponse,Context,Response	context: setResponse(ctx: Context; response: Response)	
+multiMatch	core/context.html#multiMatch,string,StringTableRef	context: multiMatch(s: string; replacements: StringTableRef): string	
+multiMatch	core/context.html#multiMatch,string,varargs[]	context: multiMatch(s: string; replacements: varargs[(string, string)]): string	
+urlFor	core/context.html#urlFor,Context,string,openArray[],openArray[]	context: urlFor(ctx: Context; handler: string;\n       parameters: openArray[(string, string)] = @[];\n       queryParams: openArray[(string, string)] = @[]; usePlus = true; omitEq = true): string	
+abortExit	core/context.html#abortExit,Context,string	context: abortExit(ctx: Context; code = Http401; body = &quot;&quot;; headers = initResponseHeaders();\n          version = HttpVer11)	
+attachment	core/context.html#attachment,Context,string,string	context: attachment(ctx: Context; downloadName = &quot;&quot;; charset = &quot;utf-8&quot;)	
+staticFileResponse	core/context.html#staticFileResponse,Context,string,string,string,string,string	context: staticFileResponse(ctx: Context; filename, dir: string; mimetype = &quot;&quot;;\n                   downloadName = &quot;&quot;; charset = &quot;utf-8&quot;;\n                   headers = initResponseHeaders()): owned(Future[void])	

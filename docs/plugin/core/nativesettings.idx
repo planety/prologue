@@ -1,0 +1,12 @@
+Settings	core/nativesettings.html#Settings	nativesettings: Settings	
+CtxSettings	core/nativesettings.html#CtxSettings	nativesettings: CtxSettings	
+LocalSettings	core/nativesettings.html#LocalSettings	nativesettings: LocalSettings	
+hasKey	core/nativesettings.html#hasKey,Settings,string	nativesettings: hasKey(settings: Settings; key: string): bool	
+`[]`	core/nativesettings.html#[],Settings,string	nativesettings: `[]`(settings: Settings; key: string): JsonNode	
+getOrDefault	core/nativesettings.html#getOrDefault,Settings,string	nativesettings: getOrDefault(settings: Settings; key: string): JsonNode	
+newCtxSettings	core/nativesettings.html#newCtxSettings	nativesettings: newCtxSettings(): CtxSettings	
+newLocalSettings	core/nativesettings.html#newLocalSettings,JsonNode	nativesettings: newLocalSettings(data: JsonNode): LocalSettings	
+newLocalSettings	core/nativesettings.html#newLocalSettings,string	nativesettings: newLocalSettings(configPath: string): LocalSettings	
+newSettings	core/nativesettings.html#newSettings,string,openArray[string],string	nativesettings: newSettings(address = &quot;&quot;; port = Port(8080); debug = true; reusePort = true;\n            staticDirs: openArray[string] = []; secretKey = randomString(8);\n            appName = &quot;&quot;): Settings	
+newSettings	core/nativesettings.html#newSettings,JsonNode,string,openArray[string],string	nativesettings: newSettings(data: JsonNode; address = &quot;&quot;; port = Port(8080); debug = true;\n            reusePort = true; staticDirs: openArray[string] = []; appName = &quot;&quot;): Settings	
+newSettings	core/nativesettings.html#newSettings,string,string,openArray[string],string	nativesettings: newSettings(configPath: string; address = &quot;&quot;; port = Port(8080); debug = true;\n            reusePort = true; staticDirs: openArray[string] = []; appName = &quot;&quot;): Settings	
