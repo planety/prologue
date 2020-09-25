@@ -430,7 +430,7 @@ proc run*(app: Prologue) =
             app.appAddress)
 
 
-when isMainModule:
+when isMainModule and not defined(nimdoc):
   proc hello*(ctx: Context) {.async.} =
     logging.debug "hello"
     resp "<h1>Hello, Prologue!</h1>"
