@@ -229,11 +229,11 @@ class="link-seesrc" target="_blank">Source</a>
 <dt><pre><span class="Keyword">proc</span> <a href="#headers%2CRequest"><span class="Identifier">headers</span></a><span class="Other">(</span><span class="Identifier">request</span><span class="Other">:</span> <a href="request.html#Request"><span class="Identifier">Request</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">HttpHeaders</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-
+Gets the <tt class="docutils literal"><span class="pre">HttpHeaders</span></tt> of the request.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L64"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L73"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L64" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L73" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="send,Request,string"></a>
@@ -241,11 +241,11 @@ class="link-seesrc" target="_blank">Source</a>
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">,</span> <span class="Identifier">IOSelectorsException</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-
+Sends <tt class="docutils literal"><span class="pre">content</span></tt> to the client.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L107"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L124"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L107" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L124" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="respond,Request,HttpCode,string,ResponseHeaders"></a>
@@ -254,11 +254,11 @@ class="link-seesrc" target="_blank">Source</a>
            <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-
+Responds <tt class="docutils literal"><span class="pre">code</span></tt>, <tt class="docutils literal"><span class="pre">body</span></tt> and <tt class="docutils literal"><span class="pre">headers</span></tt> to the client, the framework will genertate response contents automatically.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L112"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L130"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L112" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L130" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="respond,Request,Response"></a>
@@ -266,22 +266,22 @@ class="link-seesrc" target="_blank">Source</a>
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">,</span> <span class="Identifier">IOSelectorsException</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-
+Responds <tt class="docutils literal"><span class="pre">response</span></tt> to the client, the framework will genertate response contents automatically.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L119"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L138"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L119" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L138" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="close,Request"></a>
 <dt><pre><span class="Keyword">proc</span> <a href="#close%2CRequest"><span class="Identifier">close</span></a><span class="Other">(</span><span class="Identifier">request</span><span class="Other">:</span> <a href="request.html#Request"><span class="Identifier">Request</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">,</span> <span class="Identifier">IOSelectorsException</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-
+Closes the request.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L150"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L171"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L150" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L171" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -293,7 +293,7 @@ class="link-seesrc" target="_blank">Source</a>
 <dt><pre><span class="Keyword">func</span> <a href="#url%2CRequest"><span class="Identifier">url</span></a><span class="Other">(</span><span class="Identifier">request</span><span class="Other">:</span> <a href="request.html#Request"><span class="Identifier">Request</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Uri</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-
+Gets the url of the request.
 &nbsp;&nbsp;<a
 href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L36"
 class="link-seesrc" target="_blank">Source</a>
@@ -304,88 +304,88 @@ class="link-seesrc" target="_blank">Source</a>
 <dt><pre><span class="Keyword">func</span> <a href="#port%2CRequest"><span class="Identifier">port</span></a><span class="Other">(</span><span class="Identifier">request</span><span class="Other">:</span> <a href="request.html#Request"><span class="Identifier">Request</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-
+Gets the port of the request.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L39"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L40"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L39" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L40" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="path,Request"></a>
 <dt><pre><span class="Keyword">func</span> <a href="#path%2CRequest"><span class="Identifier">path</span></a><span class="Other">(</span><span class="Identifier">request</span><span class="Other">:</span> <a href="request.html#Request"><span class="Identifier">Request</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-
+Gets the path of the request.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L42"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L44"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L42" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L44" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="stripPath,Request"></a>
 <dt><pre><span class="Keyword">func</span> <a href="#stripPath%2CRequest"><span class="Identifier">stripPath</span></a><span class="Other">(</span><span class="Identifier">request</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="request.html#Request"><span class="Identifier">Request</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-
+Strips the path of the request.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L45"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L48"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L45" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L48" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="query,Request"></a>
 <dt><pre><span class="Keyword">func</span> <a href="#query%2CRequest"><span class="Identifier">query</span></a><span class="Other">(</span><span class="Identifier">request</span><span class="Other">:</span> <a href="request.html#Request"><span class="Identifier">Request</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-
+Gets the query strings of the request.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L49"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L53"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L49" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L53" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="scheme,Request"></a>
 <dt><pre><span class="Keyword">func</span> <a href="#scheme%2CRequest"><span class="Identifier">scheme</span></a><span class="Other">(</span><span class="Identifier">request</span><span class="Other">:</span> <a href="request.html#Request"><span class="Identifier">Request</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-
+Gets the scheme of the request.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L52"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L57"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L52" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L57" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="setScheme,Request,string"></a>
 <dt><pre><span class="Keyword">func</span> <a href="#setScheme%2CRequest%2Cstring"><span class="Identifier">setScheme</span></a><span class="Other">(</span><span class="Identifier">request</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="request.html#Request"><span class="Identifier">Request</span></a><span class="Other">;</span> <span class="Identifier">value</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-
+Sets the scheme of the request.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L55"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L61"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L55" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L61" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="body,Request"></a>
 <dt><pre><span class="Keyword">func</span> <a href="#body%2CRequest"><span class="Identifier">body</span></a><span class="Other">(</span><span class="Identifier">request</span><span class="Other">:</span> <a href="request.html#Request"><span class="Identifier">Request</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">,</span> <span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-
+Gets the body of the request. It is only present when using HttpPost method.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L58"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L65"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L58" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L65" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="reqMethod,Request"></a>
 <dt><pre><span class="Keyword">func</span> <a href="#reqMethod%2CRequest"><span class="Identifier">reqMethod</span></a><span class="Other">(</span><span class="Identifier">request</span><span class="Other">:</span> <a href="request.html#Request"><span class="Identifier">Request</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">HttpMethod</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-
+Gets the <tt class="docutils literal"><span class="pre">HttpMethod</span></tt> of the request.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L67"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L77"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L67" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L77" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="getCookie,Request,string,string"></a>
@@ -393,55 +393,55 @@ class="link-seesrc" target="_blank">Source</a>
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-
+Gets the value of <tt class="docutils literal"><span class="pre">request.cookies[key]</span></tt> if key is in cookies. Otherwise, the <tt class="docutils literal"><span class="pre">default</span></tt> value will be returned.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L70"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L81"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L70" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L81" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="contentType,Request"></a>
 <dt><pre><span class="Keyword">func</span> <a href="#contentType%2CRequest"><span class="Identifier">contentType</span></a><span class="Other">(</span><span class="Identifier">request</span><span class="Other">:</span> <a href="request.html#Request"><span class="Identifier">Request</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-
+Gets the contentType of the request.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L73"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L86"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L73" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L86" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="charset,Request"></a>
 <dt><pre><span class="Keyword">func</span> <a href="#charset%2CRequest"><span class="Identifier">charset</span></a><span class="Other">(</span><span class="Identifier">request</span><span class="Other">:</span> <a href="request.html#Request"><span class="Identifier">Request</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-
+Gets the charset of the request.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L78"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L92"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L78" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L92" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="secure,Request"></a>
 <dt><pre><span class="Keyword">func</span> <a href="#secure%2CRequest"><span class="Identifier">secure</span></a><span class="Other">(</span><span class="Identifier">request</span><span class="Other">:</span> <a href="request.html#Request"><span class="Identifier">Request</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-
+Returns True if the request is secure.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L89"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L104"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L89" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L104" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="hostName,Request"></a>
 <dt><pre><span class="Keyword">func</span> <a href="#hostName%2CRequest"><span class="Identifier">hostName</span></a><span class="Other">(</span><span class="Identifier">request</span><span class="Other">:</span> <a href="request.html#Request"><span class="Identifier">Request</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-
+Gets the hostname of the request.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L101"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L117"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L101" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L117" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="initRequest,Request"></a>
@@ -452,11 +452,11 @@ class="link-seesrc" target="_blank">Source</a>
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-
+Initializes a new Request.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L122"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L143"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L122" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L143" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -469,7 +469,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-09-25 09:10:40 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-09-25 15:45:36 UTC</small>
       </div>
     </div>
   </div>

@@ -32,14 +32,14 @@ initEvent	core/context.html#initEvent,AsyncEvent	context: initEvent(handler: Asy
 initEvent	core/context.html#initEvent,SyncEvent	context: initEvent(handler: SyncEvent): Event	
 newContext	core/context.html#newContext,Request,Response,GlobalScope	context: newContext(request: Request; response: Response; gScope: GlobalScope): Context	
 getSettings	core/context.html#getSettings,Context,string	context: getSettings(ctx: Context; key: string): JsonNode	
-handle	core/context.html#handle,Context	context: handle(ctx: Context): Future[void]	
-send	core/context.html#send,Context,string	context: send(ctx: Context; content: string): Future[void]	
+respond	core/context.html#respond,Context	context: respond(ctx: Context): Future[void]	
 respond	core/context.html#respond,Context,HttpCode,string,ResponseHeaders	context: respond(ctx: Context; code: HttpCode; body: string; headers: ResponseHeaders): Future[\n    void]	
+send	core/context.html#send,Context,string	context: send(ctx: Context; content: string): Future[void]	
 hasHeader	core/context.html#hasHeader,Request,string	context: hasHeader(request: var Request; key: string): bool	
 setHeader	core/context.html#setHeader,Request,string,string	context: setHeader(request: var Request; key, value: string)	
 setHeader	core/context.html#setHeader,Request,string,seq[string]	context: setHeader(request: var Request; key: string; value: seq[string])	
 addHeader	core/context.html#addHeader,Request,string,string	context: addHeader(request: var Request; key, value: string)	
-getCookie	core/context.html#getCookie,Context,string,string	context: getCookie(ctx: Context; key: string; default: string = &quot;&quot;): string	
+getCookie	core/context.html#getCookie,Context,string,string	context: getCookie(ctx: Context; key: string; default = &quot;&quot;): string	
 setCookie	core/context.html#setCookie,Context,string,string,string,Option[int],string,string	context: setCookie(ctx: Context; key, value: string; expires = &quot;&quot;;\n          maxAge: Option[int] = none(int); domain = &quot;&quot;; path = &quot;&quot;; secure = false;\n          httpOnly = false; sameSite = Lax)	
 setCookie	core/context.html#setCookie,Context,string,string,,Option[int],string,string	context: setCookie(ctx: Context; key, value: string; expires: DateTime | Time;\n          maxAge: Option[int] = none(int); domain = &quot;&quot;; path = &quot;&quot;; secure = false;\n          httpOnly = false; sameSite = Lax)	
 deleteCookie	core/context.html#deleteCookie,Context,string,string,string	context: deleteCookie(ctx: Context; key: string; path = &quot;&quot;; domain = &quot;&quot;)	
@@ -52,8 +52,6 @@ getPathParams	core/context.html#getPathParams,Context,string	context: getPathPar
 getPathParams	core/context.html#getPathParams,Context,string,T	context: getPathParams[T: BaseType](ctx: Context; key: string; default: T): T	
 setResponse	core/context.html#setResponse,Context,HttpCode,string	context: setResponse(ctx: Context; code: HttpCode; httpHeaders = [\n    (&quot;Content-Type&quot;, &quot;text/html; charset=UTF-8&quot;)].initResponseHeaders; body = &quot;&quot;;\n            version = HttpVer11)	
 setResponse	core/context.html#setResponse,Context,Response	context: setResponse(ctx: Context; response: Response)	
-multiMatch	core/context.html#multiMatch,string,StringTableRef	context: multiMatch(s: string; replacements: StringTableRef): string	
-multiMatch	core/context.html#multiMatch,string,varargs[]	context: multiMatch(s: string; replacements: varargs[(string, string)]): string	
 urlFor	core/context.html#urlFor,Context,string,openArray[],openArray[]	context: urlFor(ctx: Context; handler: string;\n       parameters: openArray[(string, string)] = @[];\n       queryParams: openArray[(string, string)] = @[]; usePlus = true; omitEq = true): string	
 abortExit	core/context.html#abortExit,Context,string	context: abortExit(ctx: Context; code = Http401; body = &quot;&quot;; headers = initResponseHeaders();\n          version = HttpVer11)	
 attachment	core/context.html#attachment,Context,string,string	context: attachment(ctx: Context; downloadName = &quot;&quot;; charset = &quot;utf-8&quot;)	

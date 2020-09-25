@@ -102,30 +102,37 @@ func gScope*(ctx: Context): lent GlobalScope {.inline.} =
   ## Gets the gScope attribute of Context.
   ctx.gScope
 
-when not defined(nimdoc):
-  func size*(ctx: Context): int8 {.inline.} =
-    ctx.size
+func size*(ctx: Context): int8 {.inline.} =
+  ## Internal function. Do not use.
+  ctx.size
 
-  func incSize*(ctx: Context, num = 1) {.inline.} =
-    inc(ctx.size, num)
+func incSize*(ctx: Context, num = 1) {.inline.} =
+  ## Internal function. Do not use.
+  inc(ctx.size, num)
 
-  func first*(ctx: Context): bool {.inline.} =
-    ctx.first
+func first*(ctx: Context): bool {.inline.} =
+  ## Internal function. Do not use.
+  ctx.first
 
-  proc `first=`*(ctx: Context, first: bool) {.inline.} =
-    ctx.first = first
+proc `first=`*(ctx: Context, first: bool) {.inline.} =
+  ## Internal function. Do not use.
+  ctx.first = first
 
-  func middlewares*(ctx: Context): lent seq[HandlerAsync] {.inline.} =
-    ctx.middlewares
+func middlewares*(ctx: Context): lent seq[HandlerAsync] {.inline.} =
+  ## Internal function. Do not use.
+  ctx.middlewares
 
-  proc `middlewares=`*(ctx: Context, middlewares: seq[HandlerAsync]) {.inline.} =
-    ctx.middlewares = middlewares
+proc `middlewares=`*(ctx: Context, middlewares: seq[HandlerAsync]) {.inline.} =
+  ## Internal function. Do not use.
+  ctx.middlewares = middlewares
 
-  proc addMiddlewares*(ctx: Context, middleware: HandlerAsync) {.inline.} =
-    ctx.middlewares.add(middleware)
+proc addMiddlewares*(ctx: Context, middleware: HandlerAsync) {.inline.} =
+  ## Internal function. Do not use.
+  ctx.middlewares.add(middleware)
 
-  proc addMiddlewares*(ctx: Context, middleware: seq[HandlerAsync]) {.inline.} =
-    ctx.middlewares.add(middleware)
+proc addMiddlewares*(ctx: Context, middleware: seq[HandlerAsync]) {.inline.} =
+  ## Internal function. Do not use.
+  ctx.middlewares.add(middleware)
 
 func initUploadFile*(filename, body: string): UpLoadFile {.inline.} =
   ## Initiates a UploadFile.

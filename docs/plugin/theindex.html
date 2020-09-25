@@ -522,7 +522,7 @@ function main() {
 <li><a class="reference external"
           data-doc-search-tag="request: getCookie(request: Request; key: string; default: string): string" href="core/beast/request.html#getCookie%2CRequest%2Cstring%2Cstring">request: getCookie(request: Request; key: string; default: string): string</a></li>
           <li><a class="reference external"
-          data-doc-search-tag="context: getCookie(ctx: Context; key: string; default: string = &quot;&quot;): string" href="core/context.html#getCookie%2CContext%2Cstring%2Cstring">context: getCookie(ctx: Context; key: string; default: string = &quot;&quot;): string</a></li>
+          data-doc-search-tag="context: getCookie(ctx: Context; key: string; default = &quot;&quot;): string" href="core/context.html#getCookie%2CContext%2Cstring%2Cstring">context: getCookie(ctx: Context; key: string; default = &quot;&quot;): string</a></li>
           </ul></dd>
 <dt><a name="getOrDefault" href="#getOrDefault"><span>getOrDefault:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -585,10 +585,6 @@ function main() {
 <dt><a name="gScope" href="#gScope"><span>gScope:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="context: gScope(ctx: Context): lent GlobalScope" href="core/context.html#gScope%2CContext">context: gScope(ctx: Context): lent GlobalScope</a></li>
-          </ul></dd>
-<dt><a name="handle" href="#handle"><span>handle:</span></a></dt><dd><ul class="simple">
-<li><a class="reference external"
-          data-doc-search-tag="context: handle(ctx: Context): Future[void]" href="core/context.html#handle%2CContext">context: handle(ctx: Context): Future[void]</a></li>
           </ul></dd>
 <dt><a name="HandlerAsync" href="#HandlerAsync"><span>HandlerAsync:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -855,12 +851,6 @@ function main() {
 <dt><a name="MoreConcat" href="#MoreConcat"><span>MoreConcat:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="KeyDerivation.MoreConcat" href="signing/signing.html#MoreConcat">KeyDerivation.MoreConcat</a></li>
-          </ul></dd>
-<dt><a name="multiMatch" href="#multiMatch"><span>multiMatch:</span></a></dt><dd><ul class="simple">
-<li><a class="reference external"
-          data-doc-search-tag="context: multiMatch(s: string; replacements: StringTableRef): string" href="core/context.html#multiMatch%2Cstring%2CStringTableRef">context: multiMatch(s: string; replacements: StringTableRef): string</a></li>
-          <li><a class="reference external"
-          data-doc-search-tag="context: multiMatch(s: string; replacements: varargs[(string, string)]): string" href="core/context.html#multiMatch%2Cstring%2Cvarargs%5B%5D">context: multiMatch(s: string; replacements: varargs[(string, string)]): string</a></li>
           </ul></dd>
 <dt><a name="multiPartPage" href="#multiPartPage"><span>multiPartPage:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -1161,6 +1151,8 @@ function main() {
     void]</a></li>
           <li><a class="reference external"
           data-doc-search-tag="request: respond(request: Request; response: Response): Future[void]" href="core/beast/request.html#respond%2CRequest%2CResponse">request: respond(request: Request; response: Response): Future[void]</a></li>
+          <li><a class="reference external"
+          data-doc-search-tag="context: respond(ctx: Context): Future[void]" href="core/context.html#respond%2CContext">context: respond(ctx: Context): Future[void]</a></li>
           <li><a class="reference external"
           data-doc-search-tag="context: respond(ctx: Context; code: HttpCode; body: string; headers: ResponseHeaders): Future[
     void]" href="core/context.html#respond%2CContext%2CHttpCode%2Cstring%2CResponseHeaders">context: respond(ctx: Context; code: HttpCode; body: string; headers: ResponseHeaders): Future[
@@ -1535,7 +1527,7 @@ function main() {
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-09-25 09:11:06 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-09-25 15:46:13 UTC</small>
       </div>
     </div>
   </div>
