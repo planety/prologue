@@ -321,7 +321,6 @@ func newApp*(settings: Settings, middlewares: seq[HandlerAsync] = @[],
 
 # handle requests
 proc handleRequest(app: Prologue, nativeRequest: NativeRequest) {.async.} =
-  ## TODO request.headers check nil or None
   var request = initRequest(nativeRequest = nativeRequest)
 
   # process cookie
@@ -392,7 +391,7 @@ proc handleRequest(app: Prologue, nativeRequest: NativeRequest) {.async.} =
     # all context processed here except static file
 
     # Only process the context when `ctx.handled` is false.
-    await handle(ctx)
+    await respond(ctx)
 
     logging.debug($(ctx.response))
 

@@ -102,29 +102,30 @@ func gScope*(ctx: Context): lent GlobalScope {.inline.} =
   ## Gets the gScope attribute of Context.
   ctx.gScope
 
-func size*(ctx: Context): int8 {.inline.} =
-  ctx.size
+when not defined(nimdoc):
+  func size*(ctx: Context): int8 {.inline.} =
+    ctx.size
 
-func incSize*(ctx: Context, num = 1) {.inline.} =
-  inc(ctx.size, num)
+  func incSize*(ctx: Context, num = 1) {.inline.} =
+    inc(ctx.size, num)
 
-func first*(ctx: Context): bool {.inline.} =
-  ctx.first
+  func first*(ctx: Context): bool {.inline.} =
+    ctx.first
 
-proc `first=`*(ctx: Context, first: bool) {.inline.} =
-  ctx.first = first
+  proc `first=`*(ctx: Context, first: bool) {.inline.} =
+    ctx.first = first
 
-func middlewares*(ctx: Context): lent seq[HandlerAsync] {.inline.} =
-  ctx.middlewares
+  func middlewares*(ctx: Context): lent seq[HandlerAsync] {.inline.} =
+    ctx.middlewares
 
-proc `middlewares=`*(ctx: Context, middlewares: seq[HandlerAsync]) {.inline.} =
-  ctx.middlewares = middlewares
+  proc `middlewares=`*(ctx: Context, middlewares: seq[HandlerAsync]) {.inline.} =
+    ctx.middlewares = middlewares
 
-proc addMiddlewares*(ctx: Context, middleware: HandlerAsync) {.inline.} =
-  ctx.middlewares.add(middleware)
+  proc addMiddlewares*(ctx: Context, middleware: HandlerAsync) {.inline.} =
+    ctx.middlewares.add(middleware)
 
-proc addMiddlewares*(ctx: Context, middleware: seq[HandlerAsync]) {.inline.} =
-  ctx.middlewares.add(middleware)
+  proc addMiddlewares*(ctx: Context, middleware: seq[HandlerAsync]) {.inline.} =
+    ctx.middlewares.add(middleware)
 
 func initUploadFile*(filename, body: string): UpLoadFile {.inline.} =
   ## Initiates a UploadFile.
@@ -145,19 +146,24 @@ proc save*(uploadFile: UpLoadFile, dir: string, filename = "") {.inline.} =
     writeFile(dir / filename, uploadFile.body)
 
 proc newErrorHandlerTable*(initialSize = defaultInitialSize): ErrorHandlerTable {.inline.} =
+  ## Creates a new error handler table.
   newTable[HttpCode, ErrorHandler](initialSize)
 
 proc newErrorHandlerTable*(pairs: openArray[(HttpCode,
                            ErrorHandler)]): ErrorHandlerTable {.inline.} =
+  ## Creates a new error handler table.
   newTable[HttpCode, ErrorHandler](pairs)
 
 func newReversedRouter*(): ReversedRouter {.inline.} =
+  ## Creates a new reversed router table.
   newStringTable(mode = modeCaseSensitive)
 
 func initEvent*(handler: AsyncEvent): Event {.inline.} =
+  ## Initializes a new asynchronous event. 
   Event(async: true, asyncHandler: handler)
 
 func initEvent*(handler: SyncEvent): Event {.inline.} =
+  ## Initializes a new synchronous event. 
   Event(async: false, syncHandler: handler)
 
 func newContext*(request: Request, response: Response,
@@ -180,10 +186,12 @@ func getSettings*(ctx: Context, key: string): JsonNode {.inline.} =
   else:
     result = ctx.localSettings[key]
 
-proc handle*(ctx: Context): Future[void] {.inline.} =
+proc respond*(ctx: Context): Future[void] {.inline.} =
+  ## Sends response to the client generating from `ctx.response`.
   result = ctx.request.respond(ctx.response)
 
 proc send*(ctx: Context, content: string): Future[void] {.inline.} =
+  ## Sends content to the client.
   result = ctx.request.send(content)
 
 proc respond*(ctx: Context, code: HttpCode, body: string,

@@ -21,12 +21,14 @@ type
 proc serve*(app: Prologue, port: Port,
             callback: proc (request: NativeRequest): Future[void] {.closure, gcsafe.},
             address = "", numThreads = 0) {.inline.} =
+  ## Serves a new web application.
   run(callback, httpx.initSettings(port, address, numThreads))
 
 proc newPrologue*(settings: Settings, ctxSettings: CtxSettings, router: Router,
                   reversedRouter: ReversedRouter, reRouter: ReRouter, middlewares: seq[HandlerAsync], 
                   startup: seq[Event], shutdown: seq[Event],
                   errorHandlerTable: ErrorHandlerTable, appData: StringTableRef): Prologue {.inline.} =
+  ## Creates a new application instance.
   Prologue(gScope: GlobalScope(settings: settings, ctxSettings: ctxSettings, router: router, 
            reversedRouter: reversedRouter, reRouter: reRouter, appData: appData),
            middlewares: middlewares, startup: startup, shutdown: shutdown,

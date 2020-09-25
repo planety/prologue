@@ -38,7 +38,7 @@ func path*(request: Request): string {.inline.} =
 func stripPath*(request: var Request) {.inline.} =
   ## Strips the path of the request.
   request.nativeRequest.url.path = request.nativeRequest.url.path.strip(
-      leading = false, chars = {'/'})
+                  leading = false, chars = {'/'})
 
 func query*(request: Request): string {.inline.} =
   ## Gets the query strings of the request.

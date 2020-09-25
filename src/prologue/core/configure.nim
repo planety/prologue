@@ -66,27 +66,34 @@ func initEnv*(): Env =
   Env(data: newOrderedTable[string, string]())
 
 proc `$`*(env: Env): string =
+  ## Stringifys an `Env`.
   $env.data
 
 func `[]`*(env: Env, key: string): string =
+  ## Retrieves a value of key in `Env`.
   env.data[key]
 
 func hasKey*(env: Env, key: string): bool =
+  ## Returns true if `key` exists in `Env`.
   if key in env.data:
     result = true
   else:
     result = false
 
 func contains*(env: Env, key: string): bool =
+  ## Returns true if key exists in `Env`.
   if key in env.data:
     result = true
   else:
     result = false
 
 func get*(env: Env, key: string): string {.inline.} =
+  ## Retrieves a value of key in `Env`.
   result = env.data[key]
 
 func getOrDefault*[T: BaseType](env: Env, key: string, default: T): T {.inline.} =
+  ## Retrieves a value of key if key exists in `Env`. Otherwise the default value
+  ## will be returned.
   if key notin env.data:
     return default
   parseValue(env.data[key], default)
