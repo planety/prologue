@@ -35,7 +35,7 @@ task apis, "Only for api":
     "--git.url:https://github.com/planety/prologue " &
     "--git.commit:devel " &
     "-o:docs/coreapi " &
-    "src/prologue.nim"
+    "src/prologue/core/application.nim"
 
   exec "nim buildIndex -o:docs/coreapi/theindex.html docs/coreapi"
 
@@ -43,11 +43,11 @@ task apis, "Only for api":
     "--git.url:https://github.com/planety/prologue " &
     "--git.commit:devel " &
     "-o:docs/plugin " &
-    "index.nim"
+    "src/prologue/index.nim"
 
   exec "nim buildIndex -o:docs/plugin/theindex.html docs/plugin"
 
-  exec "nim c -r docs.nim"
+  # exec "nim c -r docs.nim"
 
 task redis, "Install redis":
   exec "nimble install redis@#c02d404 -y"

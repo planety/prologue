@@ -1,0 +1,4 @@
+pbkdf2_sha256encode	security/hasher.html#pbkdf2_sha256encode,SecretKey,string,int	hasher: pbkdf2_sha256encode(password: SecretKey; salt: string; iterations = 24400): string	
+pbkdf2_sha256verify	security/hasher.html#pbkdf2_sha256verify,SecretKey,string	hasher: pbkdf2_sha256verify(password: SecretKey; encoded: string): bool	
+pbkdf2_sha1encode	security/hasher.html#pbkdf2_sha1encode,SecretKey,string,int	hasher: pbkdf2_sha1encode(password: SecretKey; salt: string; iterations = 24400): string	
+pbkdf2_sha1verify	security/hasher.html#pbkdf2_sha1verify,SecretKey,string	hasher: pbkdf2_sha1verify(password: SecretKey; encoded: string): bool	
