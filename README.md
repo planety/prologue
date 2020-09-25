@@ -149,6 +149,7 @@ Run **app.nim**. Now the server is running at localhost:8080.
 - [ToDoList](https://github.com/planety/prologue/tree/devel/examples/todolist)
 - [ToDoApp](https://github.com/planety/prologue/tree/devel/examples/todoapp)
 - [Blog](https://github.com/planety/prologue/tree/devel/examples/blog)
+- [Additional examples repository](https://github.com/planety/prologue-examples)
 
 ### Extensions
 
