@@ -1,4 +1,0 @@
-errorPage	prologue/core/pages.html#errorPage,string,string	pages: errorPage(errorMsg: string; version: string): string	
-loginPage	prologue/core/pages.html#loginPage	pages: loginPage(): string	
-multiPartPage	prologue/core/pages.html#multiPartPage	pages: multiPartPage(): string	
-internalServerErrorPage	prologue/core/pages.html#internalServerErrorPage	pages: internalServerErrorPage(): string	

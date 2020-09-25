@@ -1,3 +1,0 @@
-isInt	src/prologue/validate/basic.html#isInt,string	basic: isInt(value: string): bool	
-isNumeric	src/prologue/validate/basic.html#isNumeric,string	basic: isNumeric(value: string): bool	
-isBool	src/prologue/validate/basic.html#isBool,string	basic: isBool(value: string): bool	
