@@ -14,7 +14,7 @@
 
 
 import cgi
-import hashes, strutils, strtabs, tables
+import hashes, strutils, strtabs, tables, options
 
 from ./context import Context, HandlerAsync, Path, RePath, Router, ReRouter,
         PathHandler, defaultHandler, gScope
@@ -99,8 +99,11 @@ iterator items*(reRouter: ReRouter): (RePath, PathHandler) {.inline.} =
   for item in reRouter.callable.items:
     yield item
 
+func findRoute(ctx: Context, rawPath: Path): Option[PathHandler] {.inline.} =
+  # find fixed route
+  if ctx.gScope.router.hasKey(rawPath):
+    return some(ctx.gScope.router[rawPath])
 
-proc findParamsRoute(ctx: Context, rawPath: Path): PathHandler =
   let
     pathList = rawPath.route.split("/")
 
@@ -129,12 +132,10 @@ proc findParamsRoute(ctx: Context, rawPath: Path): PathHandler =
           flag = false
           break
       if flag:
-        return handler
+        return some(handler)
 
-  result = newPathHandler(defaultHandler)
-
-proc findHandler*(ctx: Context): PathHandler =
-  ## fixed route -> regex route -> params route
+proc findHandler*(ctx: Context): PathHandler {.inline.} =
+  ## fixed route -> params route -> regex route
   ## Follow the order of addition.
   
   # Notes path will be striped one slash.
@@ -145,11 +146,11 @@ proc findHandler*(ctx: Context): PathHandler =
   let rawPath = initPath(route = ctx.request.url.path.stripRoute,
                          httpMethod = ctx.request.reqMethod)
 
-  # find fixed route
-  if ctx.gScope.router.hasKey(rawPath):
-    return ctx.gScope.router[rawPath]
-
   # find regex route
+  let handlerOption = findRoute(ctx, rawPath)
+  if handlerOption.isSome:
+    return handlerOption.get
+
   for (path, pathHandler) in ctx.gScope.reRouter:
     if path.httpMethod != rawPath.httpMethod:
       continue
@@ -160,5 +161,4 @@ proc findHandler*(ctx: Context): PathHandler =
         ctx.request.pathParams[name] = m.groupFirstCapture(name, rawPath.route)
       return pathHandler
 
-
-  result = findParamsRoute(ctx, rawPath)
+  result = PathHandler(handler: defaultHandler)
