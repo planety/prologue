@@ -121,7 +121,7 @@ macro resp*(body: string, code = Http200, version = HttpVer11) =
   var ctx = ident"ctx"
 
   result = quote do:
-    `ctx`.response.httpVersion = version
+    `ctx`.response.httpVersion = `version`
     `ctx`.response.code = `code`
     `ctx`.response.body = `body`
 
