@@ -1,4 +1,4 @@
-from ../../src/prologue/core/response import initResponse, setHeader, addHeader, setCookie
+from ../../src/prologue/core/response import initResponse, setHeader, getHeader, addHeader, setCookie
 import ../../src/prologue/core/httpcore/httplogue
 
 import strutils
@@ -18,7 +18,7 @@ block:
 
     doAssert response.httpVersion == version
     doAssert response.code == code
-    doAssert response.headers["Content-Type"] == "text/html; charset=UTF-8"
+    doAssert response.getHeader("Content-Type") == @["text/html; charset=UTF-8"]
     doAssert response.body == body
 
   # "can set response header"
@@ -28,7 +28,7 @@ block:
 
     response.setHeader("Content-Type", "text/plain")
 
-    doAssert response.headers["content-type"] == "text/plain"
+    doAssert response.getHeader("content-type") == @["text/plain"]
 
   # "can add response header"
   block:
@@ -37,7 +37,7 @@ block:
 
     response.addHeader("Content-Type", "text/plain")
 
-    doAssert seq[string](response.headers["CONTENT-TYPE"]) == @[
+    doAssert response.getHeader("CONTENT-TYPE") == @[
           "text/html; charset=UTF-8", "text/plain"]
 
   # "can set response cookie"
@@ -47,5 +47,5 @@ block:
 
     response.setCookie("username", "flywind")
     response.setCookie("password", "root")
-    doAssert seq[string](response.headers["set-cookie"]).join("; ") ==
+    doAssert response.getHeader("set-cookie").join("; ") ==
           "username=flywind; SameSite=Lax; password=root; SameSite=Lax"
