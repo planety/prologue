@@ -278,7 +278,7 @@ func appPort*(app: Prologue): Port {.inline.} =
   ## Gets the port from the settings.
   app.gScope.settings.port
 
-proc execEvent(event: Event) {.inline.} =
+proc execEvent*(event: Event) {.inline.} =
   if event.async:
     waitFor event.asyncHandler()
   else:
@@ -297,10 +297,14 @@ proc shutDownHandler() {.noconv.} =
   echo "Shutting down Events are done after having received SIGINT!\n"
   quit(QuitSuccess)
 
-func newApp*(settings: Settings, middlewares: seq[HandlerAsync] = @[],
-             startup: seq[Event] = @[], shutdown: seq[Event] = @[],
-             errorHandlerTable = DefaultErrorHandler,
-             appData = newStringTable(mode = modeCaseSensitive)): Prologue {.inline.} =
+func newApp*(
+  settings: Settings, 
+  middlewares: seq[HandlerAsync] = @[],
+  startup: seq[Event] = @[], 
+  shutdown: seq[Event] = @[],
+  errorHandlerTable = DefaultErrorHandler,
+  appData = newStringTable(mode = modeCaseSensitive)
+): Prologue {.inline.} =
   ## Creates a new App instance.
   ## 
   ## Params:
@@ -318,10 +322,9 @@ func newApp*(settings: Settings, middlewares: seq[HandlerAsync] = @[],
                        startup = startup, shutdown = shutdown,
                        errorHandlerTable = errorHandlerTable, appData = appData)
 
-
-# handle requests
-proc handleRequest(app: Prologue, nativeRequest: NativeRequest) {.async.} =
-  var request = initRequest(nativeRequest = nativeRequest)
+proc handleNativeRequest(request: var Request, nativeRequest: NativeRequest) {.inline.} =
+  ## Handles the request from the client. 
+  request.nativeRequest = nativeRequest
 
   # process cookie
   if request.hasHeader("cookie"):
@@ -342,10 +345,11 @@ proc handleRequest(app: Prologue, nativeRequest: NativeRequest) {.async.} =
   except Exception as e:
     logging.error(&"Malformed form params:\n{e.msg}")
 
+proc handleContext*(app: Prologue, request: sink Request) {.async.} =
   var
     # initialize response
     ctx = newContext(
-      request = move(request), 
+      request = request, 
       response = initResponse(HttpVer11, Http200),
                               gScope = app.gScope)
 
@@ -395,6 +399,10 @@ proc handleRequest(app: Prologue, nativeRequest: NativeRequest) {.async.} =
 
     logging.debug($(ctx.response))
 
+proc handleRequest*(app: Prologue, nativeRequest: NativeRequest): Future[void] =
+  var request: Request
+  handleNativeRequest(request, nativeRequest)
+  result = handleContext(app, request)
 
 proc run*(app: Prologue) =
   ## Starts an Application.

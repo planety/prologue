@@ -6,7 +6,7 @@ import cookiejar
 
 import asyncdispatch
 from ../response import Response
-from ../types import FormPart
+from ../types import FormPart, initFormPart
 import ../httpcore/httplogue
 
 
@@ -171,3 +171,18 @@ func initRequest*(nativeRequest: NativeRequest,
 proc close*(request: Request) =
   ## Closes the request.
   request.nativeRequest.forget()
+
+func initMockingRequest*(
+  httpMethod: HttpMethod,
+  headers: HttpHeaders,
+  url: Uri,
+  cookies = initCookieJar(),
+  postParams = newStringTable(),
+  queryParams = newStringTable(),
+  formParams = initFormPart(),
+  pathParams = newStringTable()
+): Request {.inline.} =
+  ## Initializes a new Request.
+  Request(url: url, httpMethod: httpMethod,
+          headers: headers, cookies: cookies, pathParams: pathParams, queryParams: queryParams,
+          postParams: postParams, formParams: formParams)
