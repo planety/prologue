@@ -322,14 +322,12 @@ func newApp*(
                        startup = startup, shutdown = shutdown,
                        errorHandlerTable = errorHandlerTable, appData = appData)
 
-proc handleNativeRequest(request: var Request, nativeRequest: NativeRequest) {.inline.} =
-  ## Handles the request from the client. 
-  request.nativeRequest = nativeRequest
+proc handleNativeRequest(request: var Request) {.inline.} =
+  ## Handles the request from the client.
 
   # process cookie
   if request.hasHeader("cookie"):
     request.cookies.parse(request.headers["cookie", 0])
-
 
   let contentType = 
     if request.hasHeader("content-type"):
@@ -400,8 +398,8 @@ proc handleContext*(app: Prologue, request: sink Request) {.async.} =
     logging.debug($(ctx.response))
 
 proc handleRequest*(app: Prologue, nativeRequest: NativeRequest): Future[void] =
-  var request: Request
-  handleNativeRequest(request, nativeRequest)
+  var request = initRequest(nativeRequest)
+  handleNativeRequest(request)
   result = handleContext(app, request)
 
 proc run*(app: Prologue) =
