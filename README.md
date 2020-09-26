@@ -67,6 +67,7 @@ web services.
   - [x] Authentication
   - [x] I18n
   - [x] Command line tools
+  - [x] Mocking test
 
 - Plugin
   - [x] Minimal OpenApi support
