@@ -99,33 +99,8 @@ iterator items*(reRouter: ReRouter): (RePath, PathHandler) {.inline.} =
   for item in reRouter.callable.items:
     yield item
 
-proc findHandler*(ctx: Context): PathHandler =
-  ## fixed route -> regex route -> params route
-  ## Follow the order of addition.
-  
-  # Notes path will be striped one slash.
-  # Such as 
-  # /hello/ -> /hello
-  # /hello -> /hello
-  # / -> /
-  let rawPath = initPath(route = ctx.request.url.path.stripRoute,
-                         httpMethod = ctx.request.reqMethod)
 
-  # find fixed route
-  if ctx.gScope.router.hasKey(rawPath):
-    return ctx.gScope.router[rawPath]
-
-  # find regex route
-  for (path, pathHandler) in ctx.gScope.reRouter:
-    if path.httpMethod != rawPath.httpMethod:
-      continue
-    var m: RegexMatch
-
-    if rawPath.route.match(path.route, m):
-      for name in m.groupNames():
-        ctx.request.pathParams[name] = m.groupFirstCapture(name, rawPath.route)
-      return pathHandler
-
+proc findParamsRoute(ctx: Context, rawPath: Path): PathHandler =
   let
     pathList = rawPath.route.split("/")
 
@@ -155,4 +130,35 @@ proc findHandler*(ctx: Context): PathHandler =
           break
       if flag:
         return handler
+
   result = newPathHandler(defaultHandler)
+
+proc findHandler*(ctx: Context): PathHandler =
+  ## fixed route -> regex route -> params route
+  ## Follow the order of addition.
+  
+  # Notes path will be striped one slash.
+  # Such as 
+  # /hello/ -> /hello
+  # /hello -> /hello
+  # / -> /
+  let rawPath = initPath(route = ctx.request.url.path.stripRoute,
+                         httpMethod = ctx.request.reqMethod)
+
+  # find fixed route
+  if ctx.gScope.router.hasKey(rawPath):
+    return ctx.gScope.router[rawPath]
+
+  # find regex route
+  for (path, pathHandler) in ctx.gScope.reRouter:
+    if path.httpMethod != rawPath.httpMethod:
+      continue
+    var m: RegexMatch
+
+    if rawPath.route.match(path.route, m):
+      for name in m.groupNames():
+        ctx.request.pathParams[name] = m.groupFirstCapture(name, rawPath.route)
+      return pathHandler
+
+
+  result = findParamsRoute(ctx, rawPath)
