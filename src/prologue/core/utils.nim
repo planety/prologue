@@ -35,7 +35,8 @@ template beforeApi*(version, body: untyped) {.dirty.} =
     body
 
 proc isStaticFile*(
-  path: string, dirs: openArray[string]
+  path: string, 
+  dirs: openArray[string]
 ): tuple[hasValue: bool, filename, dir: string] {.inline.} =
   result = (false, "", "")
   var path = path.strip(chars = {'/'}, trailing = false)

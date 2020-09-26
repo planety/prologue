@@ -39,32 +39,34 @@ type
 
 
 func hasKey*(settings: Settings, key: string): bool {.inline.} =
-  ## Returns true if key is in `sesstings`.
+  ## Returns true if key is in `settings`.
   settings.data.hasKey(key)
 
 func `[]`*(settings: Settings, key: string): JsonNode {.inline.} =
+  ## Retreives value if key is in `settings`.
   settings.data[key]
 
 func getOrDefault*(settings: Settings, key: string): JsonNode {.inline.} =
+  ## Retreives value if key is in `settings`. Otherwise `nil` will be returned.
   settings.data.getOrDefault(key)
 
 func newCtxSettings*(): CtxSettings {.inline.} =
-  # Ctretes a new context settings.
+  ## Creates a new context settings.
   CtxSettings(mimeDB: newMimetypes(), config: newTable[string, StringTableRef]())
 
 func newLocalSettings*(data: JsonNode): LocalSettings {.inline.} =
-  ## Creates a new localSettings.
+  ## Creates a new local settings.
   result = LocalSettings(data: data)
 
 proc newLocalSettings*(configPath: string): LocalSettings {.inline.} =
-  ## Creates a new localSettings.
+  ## Creates a new local settings.
   result = LocalSettings(data: parseFile(configPath))
 
 proc normalizedStaticDirs(dirs: openArray[string]): seq[string] =
+  ## Normalizes the path of static directories.
   result = newSeqOfCap[string](dirs.len)
   for item in dirs:
     let dir = item.strip(chars = {'/'}, trailing = false)
-    # 
     if dir.len != 0:
       result.add dir
     normalizePath(result[^1])

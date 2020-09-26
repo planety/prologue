@@ -54,5 +54,6 @@ proc switch*(ctx: Context) {.async.} =
     await next(ctx)
 
 proc doNothingClosureMiddleware*(): HandlerAsync =
+  ## Don't do anything, just for placeholder.
   result = proc(ctx: Context) {.async.} =
     await switch(ctx)

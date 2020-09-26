@@ -13,6 +13,7 @@ nav:
     - QuickStart: "quickstart.md"
     - Application: "application.md"
     - Event: "event.md"
+    - Headers: "headers.md"
     - Requests: "request.md"
     - Response: "response.md"
     - Context: "context.md"

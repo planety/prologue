@@ -70,7 +70,7 @@ func body*(request: Request): string {.inline.} =
   else:
     ""
 
-proc headers*(request: Request): HttpHeaders {.inline.} =
+func headers*(request: Request): HttpHeaders {.inline.} =
   ## Gets the `HttpHeaders` of the request.
   request.headers
 

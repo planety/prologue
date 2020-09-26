@@ -155,4 +155,4 @@ proc findHandler*(ctx: Context): PathHandler =
           break
       if flag:
         return handler
-  return newPathHandler(defaultHandler)
+  result = newPathHandler(defaultHandler)

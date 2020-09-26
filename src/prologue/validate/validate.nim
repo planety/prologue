@@ -274,7 +274,7 @@ func matchRegex*(value: Regex, msg = ""): ValidateHandler {.inline.} =
     else:
       result = (false, msg)
 
-func matchUrl*(msg = ""): ValidateHandler {.inline.} =
+func matchURL*(msg = ""): ValidateHandler {.inline.} =
   ## The content of ``text`` matches the url expression. If the length of 
   ## ``msg`` is more than 0, returns this ``msg`` when failed.
   result = func(text: string): Info =

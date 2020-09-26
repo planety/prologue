@@ -65,7 +65,7 @@ func reqMethod*(request: Request): HttpMethod {.inline.} =
   ## Gets the `HttpMethod` of the request.
   request.nativeRequest.reqMethod
 
-func getCookie*(request: Request, key: string, default: string = ""): string {.inline.} =
+func getCookie*(request: Request, key: string, default = ""): string {.inline.} =
   ## Gets the value of `request.cookies[key]` if key is in cookies. Otherwise, the `default`
   ## value will be returned.
   request.cookies.getOrDefault(key, default)

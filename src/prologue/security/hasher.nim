@@ -37,6 +37,7 @@ proc pbkdf2_sha256verify*(password: SecretKey, encoded: string): bool =
 
   if collections.len < 4:
     return false
+
   let
     algorithm = collections[0]
     salt = collections[1]
@@ -47,7 +48,7 @@ proc pbkdf2_sha256verify*(password: SecretKey, encoded: string): bool =
   return encoded == pbkdf2_sha256encode(password, salt, parseInt(iterations))
 
 proc pbkdf2_sha1encode*(password: SecretKey, salt: string,
-  iterations = 24400): string {.inline.} =
+                        iterations = 24400): string {.inline.} =
   doAssert salt.len != 0 and '$' notin salt
   let output = base64Encode(pbkdf2(sha1, string(password), salt, iterations, outLen))
   result = fmt"pdkdf2_sha1${salt}${iterations}${output}"
