@@ -24,7 +24,7 @@ proc serve*(app: Prologue, port: Port,
   ## Serves a new web application.
   run(callback, httpx.initSettings(port, address, numThreads))
 
-proc newPrologue*(settings: Settings, ctxSettings: CtxSettings, router: Router,
+func newPrologue*(settings: Settings, ctxSettings: CtxSettings, router: Router,
                   reversedRouter: ReversedRouter, reRouter: ReRouter, middlewares: seq[HandlerAsync], 
                   startup: seq[Event], shutdown: seq[Event],
                   errorHandlerTable: ErrorHandlerTable, appData: StringTableRef): Prologue {.inline.} =

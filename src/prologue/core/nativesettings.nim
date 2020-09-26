@@ -62,7 +62,7 @@ proc newLocalSettings*(configPath: string): LocalSettings {.inline.} =
   ## Creates a new local settings.
   result = LocalSettings(data: parseFile(configPath))
 
-proc normalizedStaticDirs(dirs: openArray[string]): seq[string] =
+func normalizedStaticDirs(dirs: openArray[string]): seq[string] =
   ## Normalizes the path of static directories.
   result = newSeqOfCap[string](dirs.len)
   for item in dirs:

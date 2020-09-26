@@ -208,19 +208,30 @@ proc send*(ctx: Context, content: string): Future[void] {.inline.} =
   ## Sends content to the client.
   result = ctx.request.send(content)
 
-func hasHeader*(request: var Request, key: string): bool {.inline.} =
+func hasHeader*(request: Request, key: string): bool {.inline.} =
   ## Returns true if key is in `request.headers`.
   request.headers.hasKey(key)
 
-proc setHeader*(request: var Request, key, value: string) {.inline.} =
+func getHeader*(request: Request, key: string): seq[string] {.inline.} =
+  ## Retrieves value of `request.headers[key]`.
+  seq[string](request.headers[key])
+
+func getHeaderOrDefault*(request: Request, key: string, default = @[""]): seq[string] {.inline.} =
+  ## Retrieves value of `request.headers[key]`. Otherwise `default` will be returned.
+  if request.headers.hasKey(key):
+    result = getHeader(request, key)
+  else:
+    result = default
+
+func setHeader*(request: var Request, key, value: string) {.inline.} =
   ## Inserts a (key, value) pair into `request.headers`.
   request.headers[key] = value
 
-proc setHeader*(request: var Request, key: string, value: seq[string]) {.inline.} =
+func setHeader*(request: var Request, key: string, value: seq[string]) {.inline.} =
   ## Inserts a (key, value) pair into `request.headers`.
   request.headers[key] = value
 
-proc addHeader*(request: var Request, key, value: string) {.inline.} =
+func addHeader*(request: var Request, key, value: string) {.inline.} =
   ## Appends value to the existing key in `request.headers`.
   request.headers.add(key, value)
 
@@ -283,13 +294,11 @@ func getPathParams*[T: BaseType](ctx: Context, key: string,
   let pathParams = ctx.request.pathParams.getOrDefault(key)
   parseValue(pathParams, default)
 
-proc setResponse*(ctx: Context, code: HttpCode, httpHeaders =
-                  {"Content-Type": "text/html; charset=UTF-8"}.initResponseHeaders,
+proc setResponse*(ctx: Context, code: HttpCode,
                   body = "", version = HttpVer11) {.inline.} =
   ## Handy to make the response of `ctx`.
   ctx.response.httpVersion = version
   ctx.response.code = code
-  ctx.response.headers = httpHeaders
   ctx.response.body = body
 
 proc setResponse*(ctx: Context, response: Response) {.inline.} =

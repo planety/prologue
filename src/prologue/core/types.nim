@@ -78,7 +78,7 @@ func parseValue*[T: BaseType](value: string, default: T): T {.inline.} =
 func len*(secretKey: SecretKey): int {.inline.} =
   string(secretKey).len
 
-proc `$`*(secretKey: SecretKey): string {.inline.} =
+func `$`*(secretKey: SecretKey): string {.inline.} =
   ## Hide secretKey's value
   "SecretKey(********)"
 
@@ -99,7 +99,7 @@ proc `[]=`*(session: Session, key, value: string) {.inline.} =
   session.data[key] = value
   update(session)
 
-proc len*(session: Session): int {.inline.} =
+func len*(session: Session): int {.inline.} =
   session.data.len
 
 iterator pairs*(session: Session): tuple[key, val: string] =
@@ -121,7 +121,7 @@ proc clear*(session: Session) {.inline.} =
   session.data.clear(modeCaseSensitive)
   update(session)
 
-proc `$`*(session: Session): string {.inline.} =
+func `$`*(session: Session): string {.inline.} =
   $session.data
 
 proc parseStringTable*(tabs: StringTableRef, s: string) {.inline.} =

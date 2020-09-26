@@ -12,19 +12,34 @@ type
     body*: string
 
 
-proc `$`*(response: Response): string =
+func `$`*(response: Response): string =
   ## Stringifys response.
   fmt"{response.code} {response.headers}"
 
 func initResponse*(httpVersion: HttpVersion, code: HttpCode, headers =
                    {"Content-Type": "text/html; charset=UTF-8"}.initResponseHeaders,
                    body = ""): Response {.inline.} =
-  ## Initializes response.
+  ## Initializes a response.
   Response(httpVersion: httpVersion, code: code, headers: headers, body: body)
+
+func initResponse*(httpVersion: HttpVersion, code: HttpCode, 
+                   headers: openArray[(string, string)],
+                   body = ""): Response {.inline.} =
+  ## Initializes a response.
+  Response(httpVersion: httpVersion, code: code,
+           headers: headers.initResponseHeaders, body: body)
 
 template hasHeader*(response: Response, key: string): bool =
   ## Returns true if key is in the `response`.
   response.headers.hasKey(key)
+
+template getHeader*(response: Response, key: string): seq[string] =
+  ## Retrieves value of `response.headers[key]`.
+  response.headers[key]
+
+template getHeaderOrDefault*(response: Response, key: string, default = @[""]): seq[string] =
+  ## Retrieves value of `response.headers[key]`. Otherwise `default` will be returned.
+  response.headers.getOrDefault(key, default)
 
 template setHeader*(response: var Response, key, value: string) =
   ## Sets the header values of the response.
@@ -101,12 +116,12 @@ func jsonResponse*(text: JsonNode, code = Http200, headers = initResponseHeaders
   result = initResponse(version, code, headers, body = $text)
   result.headers["Content-Type"] = "text/json"
 
-macro resp*(body: string, code = Http200) =
+macro resp*(body: string, code = Http200, version = HttpVer11) =
   ## Handy to make a response of ctx.
   var ctx = ident"ctx"
 
   result = quote do:
-    `ctx`.response.httpVersion = HttpVer11
+    `ctx`.response.httpVersion = version
     `ctx`.response.code = `code`
     `ctx`.response.body = `body`
 

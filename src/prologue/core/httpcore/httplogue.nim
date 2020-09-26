@@ -38,29 +38,24 @@ proc initResponseHeaders*(keyValuePairs:
       result.table[key] = @[pair.val]
 
 proc `$`*(headers: ResponseHeaders): string =
-  return $headers.table
+  result = $headers.table
 
 proc clear*(headers: ResponseHeaders) =
   headers.table.clear()
 
-proc `[]`*(headers: ResponseHeaders, key: string): HttpHeaderValues =
-  ## Returns the values associated with the given ``key``. If the returned
-  ## values are passed to a procedure expecting a ``string``, the first
-  ## value is automatically picked. If there are
+proc `[]`*(headers: ResponseHeaders, key: string): seq[string] =
+  ## Returns the values associated with the given ``key``. If there are
   ## no values associated with the key, an exception is raised.
   ##
   ## To access multiple values of a key, use the overloaded ``[]`` below or
   ## to get all of them access the ``table`` field directly.
-  return headers.table[headers.toCaseInsensitive(key)].HttpHeaderValues
-
-# converter toString*(values: HttpHeaderValues): string =
-#   return seq[string](values)[0]
+  result = headers.table[headers.toCaseInsensitive(key)]
 
 proc `[]`*(headers: ResponseHeaders, key: string, i: int): string =
   ## Returns the ``i``'th value associated with the given key. If there are
   ## no values associated with the key or the ``i``'th value doesn't exist,
   ## an exception is raised.
-  return headers.table[key][i]
+  result = headers.table[key][i]
 
 proc `[]=`*(headers: ResponseHeaders, key, value: string) =
   ## Sets the header entries associated with ``key`` to the specified value.
@@ -68,8 +63,7 @@ proc `[]=`*(headers: ResponseHeaders, key, value: string) =
   headers.table[headers.toCaseInsensitive(key)] = @[value]
 
 proc `[]=`*(headers: ResponseHeaders, key: string, value: seq[string]) =
-  ## Sets the header entries associated with ``key`` to the specified list of
-  ## values.
+  ## Sets the header entries associated with ``key`` to the specified list of values.
   ## Replaces any existing values.
   headers.table[headers.toCaseInsensitive(key)] = value
 
@@ -91,22 +85,17 @@ iterator pairs*(headers: ResponseHeaders): tuple[key, value: string] =
     for value in v:
       yield (k, value)
 
-proc contains*(values: HttpHeaderValues, value: string): bool =
-  ## Determines if ``value`` is one of the values inside ``values``. Comparison
-  ## is performed without case sensitivity.
-  for val in seq[string](values):
-    if val.toLowerAscii == value.toLowerAscii: return true
-
 proc hasKey*(headers: ResponseHeaders, key: string): bool =
-  return headers.table.hasKey(headers.toCaseInsensitive(key))
+  result = headers.table.hasKey(headers.toCaseInsensitive(key))
 
 proc getOrDefault*(headers: ResponseHeaders, key: string,
-    default = @[""].HttpHeaderValues): HttpHeaderValues =
+    default = @[""]): seq[string] =
   ## Returns the values associated with the given ``key``. If there are no
   ## values associated with the key, then ``default`` is returned.
   if headers.hasKey(key):
-    return headers[key]
+    result = headers[key]
   else:
-    return default
+    result = default
 
-proc len*(headers: ResponseHeaders): int = return headers.table.len
+proc len*(headers: ResponseHeaders): int = 
+  result = headers.table.len
