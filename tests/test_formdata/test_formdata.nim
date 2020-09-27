@@ -8,7 +8,7 @@ discard """
   timeout:  60.0
 """
 
-import prologue/core/form
+import ../../src/prologue/core/form
 import tables, os, strutils
 
 let testmime = open(getAppDir() / "testmime.txt", fmRead).readAll()
