@@ -177,7 +177,7 @@ func initUploadFile*(filename, body: string): UpLoadFile {.inline.} =
 func getUploadFile*(ctx: Context, name: string): UpLoadFile {.inline.} =
   ## Gets the UploadFile from request.
   let file = ctx.request.formParams[name]
-  initUploadFile(filename = file.params["filename"], body = file.body)
+  initUploadFile(filename = file.params.getOrDefault("filename"), body = file.body)
 
 proc save*(uploadFile: UpLoadFile, dir: string, filename = "") {.inline.} =
   ## Saves the UploadFile to ``dir``.
