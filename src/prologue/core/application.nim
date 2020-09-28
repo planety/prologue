@@ -70,6 +70,7 @@ export route
 export types
 export urandom
 export utils
+export httpexception
 
 
 let

@@ -492,7 +492,8 @@ proc findHandler*(ctx: Context): PathHandler {.inline.} =
   # /hello/ -> /hello
   # /hello -> /hello
   # / -> /
-  let route =  ctx.request.url.path.stripRoute
+  # let route = ctx.request.url.path.stripRoute
+  let route = ctx.request.url.path
   let reqMethod = ctx.request.reqMethod
 
   # find regex route
