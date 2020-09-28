@@ -22,14 +22,11 @@ from cgi import CgiError
 
 
 from ./utils import isStaticFile
-from ./route import pattern, initPath, initRePath, newPathHandler, newRouter,
-    newReRouter, DuplicatedRouteError, DuplicatedReversedRouteError, UrlPattern,
-    add, `[]`, `[]=`, hasKey, stripRoute
 from ./form import parseFormParams
 from ./nativesettings import newSettings, newCtxSettings, 
                              getOrDefault, Settings, LocalSettings,
                              newLocalSettings
-from ./httpexception import HttpError, AbortError
+import ./httpexception
 
 import asyncdispatch
 # import ./signing/signing
@@ -44,6 +41,7 @@ import ./basicregex
 import ./encode
 import ./types
 import ./httpcore/httplogue
+import ./route
 
 import ./request
 import ./server
@@ -145,11 +143,21 @@ proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
 
   # for group in route.namedGroups.keys:
   #   echo group
+
+  let ctxSettings = 
+    if settings == nil:
+      nil
+    else:
+      newSettings(app.gScope.settings, settings)
+
   if httpMethod == HttpGet:
-    app.addRoute(route, handler, HttpHead, middlewares)
+      app.gScope.reRouter.add (initRePath(route = route, httpMethod = HttpHead), 
+                           newPathHandler(handler, middlewares, ctxSettings)
+                           )
 
   app.gScope.reRouter.add (initRePath(route = route, httpMethod = httpMethod), 
-                           newPathHandler(handler, middlewares))
+                           newPathHandler(handler, middlewares, ctxSettings)
+                           )
 
 proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
                httpMethod: seq[HttpMethod], middlewares: seq[HandlerAsync] = @[],
@@ -176,18 +184,22 @@ proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
   ## 
   ## Notes: The framework will automatically register `HttpHead` method, if
   ## HttpMethod is `HttpGet`.
-  let path = initPath(route = route.stripRoute, httpMethod = httpMethod)
-  # automatically register HttpHead for HttpGet
-  if httpMethod == HttpGet:
-    app.addRoute(route, handler, HttpHead, "", middlewares, settings)
 
-  if app.gScope.router.hasKey(path):
-    raise newException(DuplicatedRouteError, fmt"Route {route} is duplicated!")
-  if settings == nil:
-    app.gScope.router[path] = newPathHandler(handler, middlewares, nil)
-  else:
-    app.gScope.router[path] = newPathHandler(handler, middlewares, 
-                                             newSettings(app.gScope.settings, settings))
+  # automatically register HttpHead for HttpGet
+  let route = route.stripRoute
+  if route.len == 0:
+    raise newException(RouteError, "The path of route can't be empty")
+  let ctxSettings = 
+    if settings == nil:
+      nil
+    else:
+      newSettings(app.gScope.settings, settings)
+
+  if httpMethod == HttpGet:
+    app.gScope.router.addRoute(route, HttpHead, handler, middlewares, ctxSettings)
+
+  app.gScope.router.addRoute(route, httpMethod, handler, middlewares, ctxSettings)
+
   app.addReversedRoute(name, route)
 
 proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
@@ -257,10 +269,10 @@ proc all*(app: Prologue, route: string, handler: HandlerAsync, name = "",
   app.addRoute(route, handler, @[HttpGet, HttpPost, HttpPut, HttpDelete,
                HttpTrace, HttpOptions, HttpConnect, HttpPatch], name, middlewares, settings)
 
-proc printRoute*(app: Prologue) {.inline.} =
-  ## A helper function for printing all route names.
-  for key in app.gScope.router.callable.keys:
-    echo key
+# proc printRoute*(app: Prologue) {.inline.} =
+#   ## A helper function for printing all route names.
+#   for key in app.gScope.router.callable.keys:
+#     echo key
 
 func appAddress*(app: Prologue): string {.inline.} =
   ## Gets the address from the settings.
@@ -343,17 +355,14 @@ proc handleNativeRequest(request: var Request) {.inline.} =
   except Exception as e:
     logging.error(&"Malformed form params:\n{e.msg}")
 
-proc handleContext*(app: Prologue, request: sink Request) {.async.} =
-  var
-    # initialize response
-    ctx = newContext(
-      request = request, 
-      response = initResponse(HttpVer11, Http200),
-                              gScope = app.gScope)
+proc handleContext*(app: Prologue, ctx: Context) {.async.} =
 
   ## Todo Optimization
   ctx.middlewares = app.middlewares
   logging.debug(fmt"{ctx.request.reqMethod} {ctx.request.url.path}")
+
+  echo ctx.request.url
+  echo ctx.request.reqMethod
 
   # whether request.path in the static path of settings.
   let staticFileFlag = 
@@ -370,6 +379,10 @@ proc handleContext*(app: Prologue, request: sink Request) {.async.} =
     else:
       # serve dynamic contents
       await switch(ctx)
+  except RouteError as e:
+    ctx.response.code = Http404
+    ctx.response.body = e.msg
+    logging.debug e.msg
   except HttpError as e:
     # catch general http error
     logging.debug e.msg
@@ -381,6 +394,10 @@ proc handleContext*(app: Prologue, request: sink Request) {.async.} =
     ctx.response.code = Http500
     ctx.response.body = e.msg
     ctx.response.setHeader("content-type", "text/plain; charset=UTF-8")
+
+  echo "---------------------"
+  echo ctx.response.body
+  echo "---------------------"
 
   if not ctx.handled:
     # display error messages only in debug mode
@@ -400,10 +417,18 @@ proc handleContext*(app: Prologue, request: sink Request) {.async.} =
 proc handleRequest*(app: Prologue, nativeRequest: NativeRequest): Future[void] =
   var request = initRequest(nativeRequest)
   handleNativeRequest(request)
-  result = handleContext(app, request)
+  var
+    # initialize response
+    ctx = newContext(
+      request = request, 
+      response = initResponse(HttpVer11, Http200),
+                              gScope = app.gScope)
+  result = handleContext(app, ctx)
 
 proc run*(app: Prologue) =
   ## Starts an Application.
+  
+  app.gScope.router.compress()
 
   # start event
   for event in app.startup:

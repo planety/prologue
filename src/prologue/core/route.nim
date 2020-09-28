@@ -1,3 +1,8 @@
+#           nest
+#    The MIT License (MIT)
+# Copyright (c) 2016 Kevin Dean
+
+
 # Copyright 2020 Zeshen Xing
 # 
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,11 +18,9 @@
 # limitations under the License.
 
 
-import cgi
-import hashes, strutils, strtabs, tables, options
+import hashes, strutils, strtabs, options, critbits, sequtils, parseutils
 
-from ./context import Context, HandlerAsync, Path, RePath, Router, ReRouter,
-        PathHandler, defaultHandler, gScope
+import ./context
 from ./nativesettings import Settings
 
 from ./basicregex import Regex, RegexMatch, match, groupNames, groupFirstCapture
@@ -25,14 +28,22 @@ from ./basicregex import Regex, RegexMatch, match, groupNames, groupFirstCapture
 import ./request
 import ./httpcore/httplogue
 
+import ./httpexception
+
+
+const 
+  pathSeparator = '/'
+  allowedCharsInUrl = {'a'..'z', 'A'..'Z', '0'..'9', '-', '.', '_', '~', pathSeparator}
+  wildcard = '*'
+  startParam = '{'
+  endParam = '}'
+  greedyIndicator = '$'
+  specialSectionStartChars = {pathSeparator, wildcard, startParam}
+  allowedCharsInPattern = allowedCharsInUrl + {wildcard, startParam,
+                          endParam, greedyIndicator}
+
 
 type
-  PrologueError* = object of CatchableError
-  RouteError* = object of PrologueError
-  RouteResetError* = object of RouteError
-  DuplicatedRouteError* = object of RouteError
-  DuplicatedReversedRouteError* = object of RouteError
-
   UrlPattern* = tuple
     route: string
     matcher: HandlerAsync
@@ -40,13 +51,6 @@ type
     name: string
     middlewares: seq[HandlerAsync]
 
-
-func stripRoute*(route: string): string {.inline.} =
-  result = route
-  # Don't strip single slash
-  if result.len > 1:
-    if result[^1] == '/':
-      result.setLen(result.high)
 
 func initPath*(route: string, httpMethod = HttpGet): Path =
   Path(route: route, httpMethod: httpMethod)
@@ -69,70 +73,415 @@ func hash*(x: Path): Hash =
   h = h !& hash(x.httpMethod)
   result = !$h
 
-func newPathHandler*(handler: HandlerAsync, middlewares: seq[HandlerAsync] = @[], 
-                     settings: Settings = nil): PathHandler {.inline.} =
-  PathHandler(handler: handler, middlewares: middlewares, settings: settings)
-
-func newRouter*(): Router {.inline.} =
-  Router(callable: initTable[Path, PathHandler]())
-
 func newReRouter*(): ReRouter {.inline.} =
   ReRouter(callable: newSeq[(RePath, PathHandler)]())
 
 proc add*(reRouter: ReRouter, pairs: (RePath, PathHandler)) {.inline.} =
   reRouter.callable.add(pairs)
 
-func `[]`*(router: Router, path: Path): PathHandler {.inline.} =
-  router.callable[path]
-
-proc `[]=`*(router: Router, path: Path, pathHandler: PathHandler) {.inline.} =
-  router.callable[path] = pathHandler
-
-func hasKey*(router: Router, path: Path): bool {.inline.} =
-  router.callable.hasKey(path)
-
-iterator pairs*(router: Router): (Path, PathHandler) {.inline.} =
-  for pair in router.callable.pairs:
-    yield pair
-
 iterator items*(reRouter: ReRouter): (RePath, PathHandler) {.inline.} =
   for item in reRouter.callable.items:
     yield item
 
-func findRoute(ctx: Context, rawPath: Path): Option[PathHandler] {.inline.} =
-  # find fixed route
-  if ctx.gScope.router.hasKey(rawPath):
-    return some(ctx.gScope.router[rawPath])
+func `$`*(piece: BasePatternNode): string =
+  case piece.kind
+  of ptrnParam, ptrnText:
+    result = $(piece.kind) & ":" & piece.value
+  of ptrnWildcard:
+    result = $(piece.kind)
 
-  let
-    pathList = rawPath.route.split("/")
+func `$`*(node: PatternNode): string =
+  case node.kind
+  of ptrnParam, ptrnText:
+    result = $(node.kind) & ":value=" & node.value & ", "
+  of ptrnWildcard:
+    result = $(node.kind) & ":"
 
-  # find params route
-  for route, handler in ctx.gScope.router:
-    if route.httpMethod != rawPath.httpMethod:
-      continue
+  result = result & "leaf=" & $node.isLeaf & ", terminator=" &
+      $node.isTerminator & ", greedy=" & $node.isGreedy
 
-    let routeList = route.route.split("/")
-    var flag = true
-    if pathList.len == routeList.len:
-      for idx in 0 ..< pathList.len:
-        if pathList[idx] == routeList[idx]:
-          continue
+func `==`(node: PatternNode, bnode: BasePatternNode): bool =
+  result = (node.kind == bnode.kind)
 
-        if routeList[idx].startsWith("{"):
-          # should be checked in addRoute
-          let key = routeList[idx]
-          if key.len <= 2:
-            raise newException(RouteError, "{} shouldn't be empty!")
-          let
-            params = key[1 ..< ^1]
+  if result:
+    case node.kind
+    of ptrnText, ptrnParam:
+      result = (node.value == bnode.value)
+    else:
+      discard
 
-          ctx.request.pathParams[params] = decodeUrl(pathList[idx])
-        else:
-          flag = false
+func printRoutingTree(node: PatternNode, tabs: int = 0) =
+  debugEcho ' '.repeat(tabs), $node
+  if not node.isLeaf:
+    for child in node.children:
+      printRoutingTree(child, tabs + 1)
+
+func printRoutingTree*(router: Router) =
+  for httpMethod, tree in pairs(router.data):
+    debugEcho httpMethod.toUpper()
+    printRoutingTree(tree)
+
+func newRouter*(): Router =
+  ## Creates a new ``Router`` instance.
+  result = Router(data: CritBitTree[PatternNode]())
+
+func ensureCorrectRoute(
+  path: string
+): string {.raises: [RouteError].} =
+  ## Verifies that this given path is a valid path, strips trailing slashes, and guarantees leading slashes.
+  if(not path.allCharsInSet(allowedCharsInPattern)):
+    raise newException(RouteError, "Illegal characters occurred in the mapped pattern, please restrict to alphanumerics, or the following: - . _ ~ /")
+
+  result = path
+
+  if result.len == 1 and result[0] == '/':
+    return
+  if result[^1] == pathSeparator: # patterns should not end in a separator, it's redundant
+    result = result[0 .. ^2]
+  if not (result[0] == '/'): # ensure each pattern is relative to root
+    result.insert("/")
+
+func emptyBnodeSequence(
+  bnodeSeq: seq[BasePatternNode]
+): bool =
+  ## A bnode sequence is empty if it A) contains no elements or B) 
+  ## it contains a single text element with no value.
+  result = (bnodeSeq.len == 0 or (bnodeSeq.len == 1 and bnodeSeq[0].kind ==
+              ptrnText and bnodeSeq[0].value == ""))
+
+func generateRope(
+  pattern: string,
+  startIndex = 0
+): seq[BasePatternNode] {.raises: [RouteError].} =
+  ## Translates the string form of a pattern into a sequence of BasePatternNode objects to be parsed against.
+  var token: string
+  let tokenSize = pattern.parseUntil(token, specialSectionStartChars, startIndex)
+  var newStartIndex = startIndex + tokenSize
+
+  if newStartIndex < pattern.len: # we encountered a wildcard or parameter def, there could be more left
+    let specialChar = pattern[newStartIndex]
+    inc newStartIndex
+
+    var scanner: BasePatternNode
+
+    if specialChar == wildcard:
+      if newStartIndex < pattern.len and pattern[newStartIndex] == greedyIndicator:
+        inc newStartIndex
+        if pattern.len != newStartIndex:
+          raise newException(RouteError, "$ found before end of route")
+        scanner = BasePatternNode(kind: ptrnWildcard, isGreedy: true)
+      else:
+        scanner = BasePatternNode(kind: ptrnWildcard)
+    elif specialChar == startParam:
+      var paramName: string
+      let paramNameSize = pattern.parseUntil(paramName, endParam, newStartIndex)
+      inc(newStartIndex, paramNameSize + 1)
+      if pattern.len > newStartIndex and pattern[newStartIndex] == greedyIndicator:
+        inc newStartIndex
+        if pattern.len != newStartIndex:
+          raise newException(RouteError, "$ found before end of route")
+        scanner = BasePatternNode(kind: ptrnParam, value: paramName, isGreedy: true)
+      else:
+        scanner = BasePatternNode(kind: ptrnParam, value: paramName)
+    elif specialChar == pathSeparator:
+      scanner = BasePatternNode(kind: ptrnText, value: ($pathSeparator))
+    else:
+      raise newException(RouteError, "Unrecognized special character")
+
+    var prefix: seq[BasePatternNode]
+    if tokenSize > 0:
+      prefix = @[BasePatternNode(kind: ptrnText, value: token), scanner]
+    else:
+      prefix = @[scanner]
+
+    let suffix = generateRope(pattern, newStartIndex)
+
+    if emptyBnodeSequence(suffix):
+      result = prefix
+    else:
+      result = concat(prefix, suffix)
+
+  else: #no more wildcards or parameter defs, the rest is static text
+    result = newSeq[BasePatternNode](token.len)
+    for i, c in pairs(token):
+      result[i] = BasePatternNode(kind: ptrnText, value: ($c))
+
+func terminatingPatternNode(
+  oldNode: PatternNode,
+  bnode: BasePatternNode,
+  handler: PathHandler
+): PatternNode {.raises: [RouteError].} =
+  ## Turns the given node into a terminating node ending at the given bnode/handler pair. 
+  ## If it is already a terminator, throws an exception.
+  if oldNode.isTerminator: # Already mapped
+    raise newException(DuplicatedRouteError, "Duplicate route detected")
+  case bnode.kind
+  of ptrnText:
+    result = PatternNode(kind: ptrnText, value: bnode.value,
+        isLeaf: oldNode.isLeaf, isTerminator: true, handler: handler)
+  of ptrnParam:
+    result = PatternNode(kind: ptrnParam, value: bnode.value,
+        isLeaf: oldNode.isLeaf, isTerminator: true, handler: handler,
+        isGreedy: bnode.isGreedy)
+  of ptrnWildcard:
+    result = PatternNode(kind: ptrnWildcard, isLeaf: oldNode.isLeaf,
+        isTerminator: true, handler: handler, isGreedy: bnode.isGreedy)
+
+  result.handler = handler
+
+  if not result.isLeaf:
+    result.children = oldNode.children
+
+func parentalPatternNode(oldNode: PatternNode): PatternNode =
+  ## Turns the given node into a parent node. If it not a leaf node, this returns a new copy of the input.
+  case oldNode.kind
+  of ptrnText:
+    result = PatternNode(kind: ptrnText, value: oldNode.value,
+                         isLeaf: false, children: newSeq[PatternNode](),
+                         isTerminator: oldNode.isTerminator)
+  of ptrnParam:
+    result = PatternNode(kind: ptrnParam, value: oldNode.value,
+                         isLeaf: false, children: newSeq[PatternNode](),
+                         isTerminator: oldNode.isTerminator, isGreedy: oldNode.isGreedy)
+  of ptrnWildcard:
+    result = PatternNode(kind: ptrnWildcard, isLeaf: false,
+                         children: newSeq[PatternNode](),
+                         isTerminator: oldNode.isTerminator, isGreedy: oldNode.isGreedy)
+
+  if result.isTerminator:
+    result.handler = oldNode.handler
+
+func indexOf(nodes: seq[PatternNode], bnode: BasePatternNode): int =
+  ## Finds the index of nodes that matches the given bnode. If none is found, returns -1.
+  for index, child in pairs(nodes):
+    if child == bnode:
+      return index
+  return -1 #the 'not found' value
+
+func chainTree(rope: seq[BasePatternNode], handler: PathHandler): PatternNode =
+  ## Creates a tree made up of single-child nodes that matches the given rope. 
+  ## The last node in the tree is a terminator with the given handler.
+
+  let bnode = rope[0]
+  let lastKnot = (rope.len == 1) #since this is a chain tree, the only leaf node is the terminator node, so they are mutually linked, if this is true then it is both
+
+  case bnode.kind
+  of ptrnText:
+    result = PatternNode(kind: ptrnText, value: bnode.value,
+        isLeaf: lastKnot, isTerminator: lastKnot)
+  of ptrnParam:
+    result = PatternNode(kind: ptrnParam, value: bnode.value,
+        isLeaf: lastKnot, isTerminator: lastKnot, isGreedy: bnode.isGreedy)
+  of ptrnWildcard:
+    result = PatternNode(kind: ptrnWildcard, isLeaf: lastKnot,
+        isTerminator: lastKnot, isGreedy: bnode.isGreedy)
+
+  if lastKnot:
+    result.handler = handler
+  else:
+    result.children = @[chainTree(rope[1 .. ^1], handler)] #continue the chain
+
+func merge(
+  node: PatternNode,
+  rope: seq[BasePatternNode],
+  handler: PathHandler
+): PatternNode {.raises: [RouteError].} =
+  ## Merges the given sequence of MapperKnots into the given tree as a new mapping. 
+  ## This does not mutate the given node, instead it will return a new one.
+
+  if rope.len == 1: # Terminating bnode reached, finish the merge
+    result = terminatingPatternNode(node, rope[0], handler)
+  else:
+    let currentKnot = rope[0]
+    let nextKnot = rope[1]
+    let remainder = rope[1 .. ^1]
+
+    assert node == currentKnot
+
+    var childIndex = -1
+    if node.isLeaf: #node isn't a parent yet, make it one to continue the funcess
+      result = parentalPatternNode(node)
+    else:
+      result = node
+      childIndex = node.children.indexOf(nextKnot)
+
+    if childIndex == -1: # the next bnode doesn't map to a child of this node, needs to me directly translated into a deep tree (one branch per level)
+      result.children.add(chainTree(remainder,
+          handler)) # make a node containing everything remaining and inject it
+    else:
+      result.children[childIndex] = merge(result.children[childIndex],
+          remainder, handler)
+
+func contains(
+  node: PatternNode,
+  rope: seq[BasePatternNode]
+): bool =
+  ## Determines whether or not merging rope into node will create a mapping conflict.
+
+  if rope.len == 0: return
+  let bnode = rope[0]
+
+  # Is this node equal to the bnode?
+  if node.kind == bnode.kind:
+    if node.kind == ptrnText:
+      result = (node.value == bnode.value)
+    else:
+      result = true
+  else:
+    if
+      (node.kind == ptrnWildcard and bnode.kind == ptrnParam) or
+      (node.kind == ptrnParam and bnode.kind == ptrnWildcard) or
+      (node.kind == ptrnWildcard and bnode.kind == ptrnText) or
+      (node.kind == ptrnParam and bnode.kind == ptrnText) or
+      (node.kind == ptrnText and bnode.kind == ptrnParam) or
+      (node.kind == ptrnText and bnode.kind == ptrnWildcard):
+      result = true
+    else:
+      result = false
+
+  if not node.isLeaf and result: # if the node has kids, is at least one qual?
+    if node.children.len > 0:
+      result = false # false until proven otherwise
+      for child in node.children:
+        if child.contains(rope[1 .. ^1]): # does the child match the rest of the rope?
+          result = true
           break
-      if flag:
-        return some(handler)
+  elif node.isLeaf and rope.len > 1: # the node is a leaf but we want to map further to it, so it won't conflict
+    result = false
+
+func newPathHandler*(handler: HandlerAsync, middlewares: seq[HandlerAsync], 
+                     settings: Settings): PathHandler {.inline.} =
+  PathHandler(handler: handler, middlewares: middlewares, settings: settings)
+
+func addRoute*(
+  router: Router,
+  route: string,
+  httpMethod: HttpMethod,
+  handler: HandlerAsync,
+  middlewares: seq[HandlerAsync],
+  settings: Settings
+) =
+  ## Add a new mapping to the given ``Router`` instance.
+
+  var rope = generateRope(ensureCorrectRoute(route))       # initial rope
+  let httpMethod = $httpMethod
+
+  var nodeToBeMerged: PatternNode
+  if router.data.hasKey(httpMethod):
+    nodeToBeMerged = router.data[httpMethod]
+    if nodeToBeMerged.contains(rope):
+      raise newException(DuplicatedRouteError, "Duplicate route encountered: " & route)
+  else:
+    nodeToBeMerged = PatternNode(kind: ptrnText, value: $pathSeparator,
+                                 isLeaf: true, isTerminator: false)
+
+  router.data[httpMethod] = nodeToBeMerged.merge(rope, newPathHandler(handler, middlewares, settings))
+
+func compress(node: PatternNode): PatternNode =
+  ## Finds sequences of single ptrnText nodes and combines them to reduce the depth of the tree.
+
+  if node.isLeaf: # if it's a leaf, there are clearly no descendents, and if it is a terminator then compression will alter the behavior
+    return node
+  elif node.kind == ptrnText and (not node.isTerminator) and node.children.len == 1:
+    let compressedChild = compress(node.children[0])
+    if compressedChild.kind == ptrnText:
+      result = compressedChild
+      result.value = node.value & compressedChild.value
+      return
+
+  result = node
+  result.children = map(result.children, compress)
+
+func compress*(router: Router) =
+  ## Compresses the entire contents of the given ``Router``. Successive calls will recompress, but may not be efficient, so use this only when mapping is complete for the best effect
+  for index, existing in pairs(router.data):
+    router.data[index] = compress(existing)
+
+func matchTree(
+  ctx: Context,
+  head: PatternNode,
+  path: string,
+  pathIndex = 0,
+): Option[PathHandler] =
+  ## Check whether the given path matches the given tree node starting from pathIndex.
+
+  var node = head
+  var pathIndex = pathIndex
+
+  block matching:
+    while pathIndex >= 0:
+      case node.kind
+      of ptrnText:
+        if path.continuesWith(node.value, pathIndex):
+          pathIndex += node.value.len
+        else:
+          break matching
+      of ptrnWildcard:
+        if node.isGreedy:
+          pathIndex = path.len
+        else:
+          pathIndex = path.find(pathSeparator,
+              pathIndex) #skip forward to the next separator
+          if pathIndex == -1:
+            pathIndex = path.len
+      of ptrnParam:
+        if node.isGreedy:
+          ctx.request.pathParams[node.value] = path[pathIndex .. ^1]
+          pathIndex = path.len
+        else:
+          let newPathIndex = path.find(pathSeparator,
+              pathIndex) #skip forward to the next separator
+          if newPathIndex == -1:
+            ctx.request.pathParams[node.value] = path[pathIndex .. ^1]
+            pathIndex = path.len
+          else:
+            ctx.request.pathParams[node.value] = path[pathIndex .. newPathIndex - 1]
+            pathIndex = newPathIndex
+
+      if pathIndex == path.len and node.isTerminator: #the path was exhausted and we reached a node that has a handler
+        return some(node.handler)
+       
+      elif not node.isLeaf: #there is children remaining, could match against children
+        if node.children.len == 1: #optimization for single child that just points the node forward
+          node = node.children[0]
+        else: #more than one child
+          assert node.children.len != 0
+          for child in node.children:
+            result = ctx.matchTree(child, path, pathIndex)
+            if result.isSome:
+              return
+          break matching #none of the children matched, assume no match
+      else: #its a leaf and we havent' satisfied the path yet, let the last line handle returning
+        break matching
+
+func findHandler(
+  ctx: Context, 
+  reqMethod: string,
+  path: string
+): Option[PathHandler] =
+  ## Find a mapping that matches the given request description.
+  let reqMethod = reqMethod.toUpperAscii
+
+  if ctx.gScope.router.data.hasKey(reqMethod):
+    result = ctx.matchTree(ctx.gScope.router.data[reqMethod], ensureCorrectRoute(
+                        path))
+  else:
+    result = none(PathHandler)
+
+func findHandler*(
+    ctx: Context,
+    reqMethod: HttpMethod,
+    path: string
+): Option[PathHandler] =
+  ## Simple wrapper around the regular route function.
+  findHandler(ctx, $reqMethod, path)
+
+func stripRoute*(route: string): string {.inline.} =
+  result = route
+  # Don't strip single slash
+  if result.len > 1:
+    if result[^1] == '/':
+      result.setLen(result.high)
 
 proc findHandler*(ctx: Context): PathHandler {.inline.} =
   ## fixed route -> params route -> regex route
@@ -143,22 +492,23 @@ proc findHandler*(ctx: Context): PathHandler {.inline.} =
   # /hello/ -> /hello
   # /hello -> /hello
   # / -> /
-  let rawPath = initPath(route = ctx.request.url.path.stripRoute,
-                         httpMethod = ctx.request.reqMethod)
+  let route =  ctx.request.url.path.stripRoute
+  let reqMethod = ctx.request.reqMethod
 
   # find regex route
-  let handlerOption = findRoute(ctx, rawPath)
-  if handlerOption.isSome:
-    return handlerOption.get
+  let handler = findHandler(ctx, reqMethod, route)
+  if handler.isSome:
+    return handler.get
 
   for (path, pathHandler) in ctx.gScope.reRouter:
-    if path.httpMethod != rawPath.httpMethod:
+    if path.httpMethod != reqMethod:
       continue
     var m: RegexMatch
 
-    if rawPath.route.match(path.route, m):
+    if route.match(path.route, m):
       for name in m.groupNames():
-        ctx.request.pathParams[name] = m.groupFirstCapture(name, rawPath.route)
+        ctx.request.pathParams[name] = m.groupFirstCapture(name, route)
       return pathHandler
 
+  # no find route
   result = PathHandler(handler: defaultHandler)

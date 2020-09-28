@@ -9,7 +9,7 @@ proc staticFileMiddleware*(path: string): HandlerAsync =
   result = proc(ctx: Context) {.async.} =
     await switch(ctx)
 
-let settings = newSettings(staticDirs = @["templates"], port = Port(8787))
+let settings = newSettings(staticDirs = @["templates"], port = Port(8080))
 var app = newApp(settings)
 app.addRoute("/home", home)
 app.run()

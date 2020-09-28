@@ -12,7 +12,7 @@ let
   env = loadPrologueEnv(".env")
   settings = newSettings(appName = env.getOrDefault("appName", "Prologue"),
                          debug = false,
-                         port = Port(env.getOrDefault("port", 8787)),
+                         port = Port(env.getOrDefault("port", 8080)),
                          staticDirs = [env.get("staticDir")],
                          secretKey = env.getOrDefault("secretKey", "")
     )
@@ -24,7 +24,7 @@ or in `.env` file, set `debug = false`.
 # Don't commit this to source control.
 # Eg. Make sure ".env" in your ".gitignore" file.
 debug=false # change this
-port=8787
+port=8080
 appName=HelloWorld
 staticDir=/static
 secretKey=Pr435ol67ogue

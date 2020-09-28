@@ -35,7 +35,7 @@ else:
   process = startProcess(expandFileName("tests/start_server"))
 
 proc start() {.async.} =
-  let address = "http://127.0.0.1:8787/home"
+  let address = "http://127.0.0.1:8080/home"
   for i in 0 .. 20:
     var client = newAsyncHttpClient()
     styledEcho(fgBlue, "Getting ", address)
@@ -63,7 +63,7 @@ block:
   let
     client = newAsyncHttpClient()
     address = "127.0.0.1"
-    port = Port(8787)
+    port = Port(8080)
 
   # test "can handle houndreds of reuqest":
   #   let
@@ -111,11 +111,11 @@ block:
   # "can get /hello/{name} with name = Starlight"
   block:
     let
-      route = "/hello/Starlight!"
+      route = "/hello/Starlight"
       response = waitFor client.get(fmt"http://{address}:{port}{route}")
 
     doAssert response.code == Http200, $response.code
-    doAssert (waitFor response.body) == "<h1>Hello, Starlight!</h1>"
+    doAssert (waitFor response.body) == "<h1>Hello, Starlight</h1>"
 
   # "can get /hello/{name} with name = "
   block:

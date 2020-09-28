@@ -59,7 +59,7 @@ This file is for grouping URL endpoints and linking them to their corresponding 
 This file contains business logic that is called from 'attached' urls. It's like a 'controller' or a 'route'
 
 ## Compile and run project
-Simply call `nim compile --run app.nim` and access 127.0.0.1:8787 URL in your browser.
+Simply call `nim compile --run app.nim` and access 127.0.0.1:8080 URL in your browser.
 
 ## Miscellaneous
 This example uses Marx classless framework with custom modifications made by @keshon

@@ -8,7 +8,7 @@ block:
     app = "app.nim"
     execCommand = "nim c --d:release"
 
-  # todoapp can compile
+  # app can compile
   block:
     let (outp, errC) = execCmdEx(fmt"{execCommand} {todoappDir / app}")
     doAssert errC == 0, outp

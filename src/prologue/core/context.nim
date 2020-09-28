@@ -21,14 +21,16 @@ import ./httpcore/httplogue
 
 from ./types import BaseType, Session, `[]`, initSession
 from ./configure import parseValue
-from ./httpexception import AbortError
+from ./httpexception import AbortError, RouteError, DuplicatedRouteError
 
-from ./basicregex import Regex
-from ./nativesettings import Settings, CtxSettings, getOrDefault, hasKey, `[]`
+import ./basicregex
+from ./nativesettings import Settings, LocalSettings, CtxSettings, getOrDefault, hasKey, `[]`
 
 import ./request
 
 import cookiejar
+
+import strutils, critbits
 
 
 type
@@ -41,9 +43,9 @@ type
     route*: string
     httpMethod*: HttpMethod
 
-  # may change to flat
-  Router* = ref object
-    callable*: Table[Path, PathHandler]
+  # # may change to flat
+  # Router* = ref object
+  #   callable*: Table[Path, PathHandler]
 
   RePath* = object
     route*: Regex
@@ -93,6 +95,40 @@ type
   UploadFile* = object
     filename*: string
     body*: string
+
+
+  PatternMatchingType* = enum ## Kinds of elements that may appear in a mapping
+    ptrnWildcard
+    ptrnParam
+    ptrnText
+
+  # Structures for setting up the mappings
+  BasePatternNode* = object of RootObj ## A token within a URL to be mapped. The URL is broken into 'knots' that make up a 'rope' (``seq[BasePatternNode]``)
+    isGreedy*: bool
+    case kind*: PatternMatchingType
+    of ptrnParam, ptrnText:
+      value*: string
+    of ptrnWildcard:
+      discard
+
+  # Structures for holding fully parsed mappings
+  PatternNode* = object of BasePatternNode ## A node within a routing tree, usually constructed from a ``BasePatternNode``
+    case isLeaf*: bool #a leaf node is one with no children
+    of true:
+      discard
+    of false:
+      children*: seq[PatternNode]
+
+    case isTerminator*: bool # a terminator is a node that can be considered a mapping on its own, matching could stop at this node or continue. If it is not a terminator, matching can only continue
+    of true:
+      handler*: PathHandler
+    of false:
+      discard
+
+  # Router Structures
+  Router* = ref object ## Container that holds HTTP mappings to handler funcs
+    data*: CritBitTree[PatternNode]
+
 
 proc default404Handler*(ctx: Context) {.async.}
 proc default500Handler*(ctx: Context) {.async.}
