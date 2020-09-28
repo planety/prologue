@@ -1,4 +1,5 @@
 import ../core/application
+import strformat
 
 
 proc mockingMiddleware*(): HandlerAsync =
@@ -9,6 +10,9 @@ proc mockingMiddleware*(): HandlerAsync =
 proc mockApp*(app: Prologue) =
   ## Adds mocking middleware to global middlewares.
   app.middlewares.add mockingMiddleware()
+
+proc debugResponse*(ctx: Context) =
+  echo &"{ctx.response.code} {ctx.response.headers} \n {ctx.response.body}"
 
 proc runOnce*(app: Prologue, request: Request): Context =
   ## Starts an Application.

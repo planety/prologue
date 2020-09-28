@@ -361,9 +361,6 @@ proc handleContext*(app: Prologue, ctx: Context) {.async.} =
   ctx.middlewares = app.middlewares
   logging.debug(fmt"{ctx.request.reqMethod} {ctx.request.url.path}")
 
-  echo ctx.request.url
-  echo ctx.request.reqMethod
-
   # whether request.path in the static path of settings.
   let staticFileFlag = 
     if ctx.gScope.settings.staticDirs.len != 0:
@@ -395,9 +392,6 @@ proc handleContext*(app: Prologue, ctx: Context) {.async.} =
     ctx.response.body = e.msg
     ctx.response.setHeader("content-type", "text/plain; charset=UTF-8")
 
-  echo "---------------------"
-  echo ctx.response.body
-  echo "---------------------"
 
   if not ctx.handled:
     # display error messages only in debug mode
