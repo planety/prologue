@@ -26,6 +26,3 @@ let req = initMockingRequest(
   pathParams = newStringTable()
 )
 let ctx = runOnce(app, req)
-echo req.url
-echo ctx.response
-echo ctx.response.body
