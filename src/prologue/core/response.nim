@@ -114,7 +114,7 @@ func jsonResponse*(text: JsonNode, code = Http200, headers = initResponseHeaders
                    version = HttpVer11): Response {.inline.} =
   ## Content-Type: application/json.
   result = initResponse(version, code, headers, body = $text)
-  result.headers["Content-Type"] = "text/json"
+  result.headers["Content-Type"] = "application/json"
 
 macro resp*(body: string, code = Http200, version = HttpVer11) =
   ## Handy to make a response of ctx.
