@@ -4,10 +4,9 @@ Route is the core of web framework.
 
 ## Static Route
 
+Registering handler `hello` by specifying path, HTTP methods and middlewares.
 
-Register handler `hello` by specifying path, httpMethod and middlewares.
-
-Default http method is `HttpGet`.If you register a handler with `HttpGet`, `Prologue` will automatically register `HttpHead` for this handler.
+`HttpGet` is the default HTTP methods. If you have registered a handler with `HttpGet`, `Prologue` will automatically register `HttpHead` for this handler.
 
 ```nim
 # handler
@@ -17,7 +16,7 @@ proc hello*(ctx: Context) {.async.} =
 app.addRoute("/hello", hello)
 ```
 
-You can also use `seq[httpMetod]` to register same handler but support different http methods.
+You can also use `seq[httpMetod]` to register the same handler but supports mutiple HTTP methods.
 
 ```nim
 # handler
@@ -29,7 +28,7 @@ app.addRoute("/hello", hello, @[HttpGet, HttpPost])
 
 ## Parameters Route
 
-`Prologue` support parameters route.You can use `getPathParams` to get name argument.
+`Prologue` supports parameters route. You can use `getPathParams` to get named arguments.
 
 ```nim
 proc helloName*(ctx: Context) {.async.} =
@@ -41,7 +40,7 @@ app.addRoute("/hello/{name}", helloName, HttpGet)
 
 ### Regex Route
 
-`Prologue` support regex route.You can use `getPathParams` to get name argument.
+`Prologue` supports regex route.
 
 ```nim
 proc articles*(ctx: Context) {.async.} =

@@ -1,3 +1,5 @@
+# FAQ
+
 1. If you use Linux or MacOS, you can use `--threads:on` to enable the multi-threads HTTP server.
 
 2. If you use windows and want to use multi-threads HTTP server, make sure use

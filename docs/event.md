@@ -1,3 +1,5 @@
+# Event
+
 `Prologue` supports both `startup` and `shutdown` events. `startup` events will be only executed once before the main loop. In contrast, `shutdown` events will be executed once after the main loop.
 
 Let's first look at the structure of `Event`, you can see that `Event` supports both synchronous and asynchronous closure function pointers.

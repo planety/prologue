@@ -36,7 +36,6 @@ proc prepareRequest*(path: string, httpMethod: HttpMethod): Request =
     pathParams = newStringTable()
   )
 
-
 proc testContext*(app: Prologue, path: string, httpMethod = HttpGet): Context =
   result = app.runOnce(prepareRequest(path, httpMethod))
   doAssert result.response.code == Http200

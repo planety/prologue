@@ -29,6 +29,7 @@ proc basicAuth*(
   if not ctx.request.hasHeader("Authorization"):
     unauthenticate(ctx, Basic, realm, charset)
     return
+
   let
     text = ctx.request.headers["Authorization", 0]
     authorization = text.split(' ', maxsplit = 1)

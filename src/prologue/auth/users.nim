@@ -10,7 +10,7 @@ type
 
   SuperUser* = object of User
 
-proc initUser*(username: string, password: SecretKey, email, firstName,
+func initUser*(username: string, password: SecretKey, email, firstName,
     lastName = ""): User =
   User(username: username, password: password, email: email,
       firstName: firstName, lastName: lastName)
