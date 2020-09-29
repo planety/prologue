@@ -12,19 +12,19 @@ type
     capacity: int
     defaultTimeout: int # seconds
 
-proc capacity*[A, B](cache: LFUCache[A, B]): int =
+func capacity*[A, B](cache: LFUCache[A, B]): int =
   cache.capacity
 
-proc len*[A, B](cache: LFUCache[A, B]): int =
+func len*[A, B](cache: LFUCache[A, B]): int =
   cache.map.len
 
-proc isBool*[A, B](cache: LFUCache[A, B]): bool =
+func isBool*[A, B](cache: LFUCache[A, B]): bool =
   cache.len == 0
 
-proc isFull*[A, B](cache: LFUCache[A, B]): bool =
+func isFull*[A, B](cache: LFUCache[A, B]): bool =
   cache.len == cache.capacity
 
-proc initLFUCache*[A, B](capacity: Natural = 128, defaultTimeout: Natural = 1): LFUCache[A, B] =
+func initLFUCache*[A, B](capacity: Natural = 128, defaultTimeout: Natural = 1): LFUCache[A, B] =
   LFUCache[A, B](map: initTable[A, ValuePair[B]](), capacity: capacity, defaultTimeout: defaultTimeout)
 
 proc get*[A, B](cache: var LFUCache[A, B], key: A): Option[B] =

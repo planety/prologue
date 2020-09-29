@@ -20,19 +20,19 @@ type
     capacity: int
     defaultTimeout: int # seconds
 
-proc capacity*[A, B](cache: LRUCache[A, B]): int =
+func capacity*[A, B](cache: LRUCache[A, B]): int =
   cache.capacity
 
-proc len*[A, B](cache: LRUCache[A, B]): int =
+func len*[A, B](cache: LRUCache[A, B]): int =
   cache.map.len
 
-proc isBool*[A, B](cache: LRUCache[A, B]): bool =
+func isBool*[A, B](cache: LRUCache[A, B]): bool =
   cache.len == 0
 
-proc isFull*[A, B](cache: LRUCache[A, B]): bool =
+func isFull*[A, B](cache: LRUCache[A, B]): bool =
   cache.len == cache.capacity
 
-proc initLRUCache*[A, B](capacity: Natural = 128, defaultTimeout: Natural = 1): LRUCache[A, B] {.inline.} =
+func initLRUCache*[A, B](capacity: Natural = 128, defaultTimeout: Natural = 1): LRUCache[A, B] {.inline.} =
   LRUCache[A, B](map: initTable[A, MapValue[A, B]](),
                  list: initDoublyLinkedList[KeyPair[A, B]](), 
                  capacity: capacity,

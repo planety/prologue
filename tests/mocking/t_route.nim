@@ -204,3 +204,72 @@ block Basic_Mapping:
     var app = prepareApp()
     app.addTestRoute("/{pathParam}/*$")
     discard testContext(app, "/foo/bar/baz")
+
+
+  # "Restful Function Test"
+  block:
+    # "restful head can work"
+    block:
+      var app = prepareApp()
+      app.head("/hi", hello)
+      discard testContext(app, "/hi", HttpHead)
+
+  # "restful get can work"
+  block:
+    var app = prepareApp()
+    app.get("/hi", hello)
+    discard testContext(app, "/hi", HttpHead)
+    discard testContext(app, "/hi", HttpGet)
+
+  # "restful post can work"
+  block:
+    var app = prepareApp()
+    app.post("/hi", hello)
+    discard testContext(app, "/hi", HttpPost)
+
+  # "restful put can work"
+  block:
+    var app = prepareApp()
+    app.put("/hi", hello)
+    discard testContext(app, "/hi", HttpPut)
+
+  # "restful delete can work"
+  block:
+    var app = prepareApp()
+    app.delete("/hi", hello)
+    discard testContext(app, "/hi", HttpDelete)
+
+  # "restful trace can work"
+  block:
+    var app = prepareApp()
+    app.trace("/hi", hello)
+    discard testContext(app, "/hi", HttpTrace)
+
+  # "restful options can work"
+  block:
+    var app = prepareApp()
+    app.options("/hi", hello)
+    discard testContext(app, "/hi", HttpOptions)
+
+  # "restful connect can work"
+  block:
+    var app = prepareApp()
+    app.connect("/hi", hello)
+    discard testContext(app, "/hi", HttpConnect)
+
+  # "restful patch can work"
+  block:
+    var app = prepareApp()
+    app.patch("/hi", hello)
+    discard testContext(app, "/hi", HttpPatch)
+
+  # "restful all can work"
+  block:
+    var app = prepareApp()
+    app.all("/hi", hello)
+    discard testContext(app, "/hi", HttpHead)
+    discard testContext(app, "/hi", HttpGet)
+    discard testContext(app, "/hi", HttpPost)
+    discard testContext(app, "/hi", HttpPut)
+    discard testContext(app, "/hi", HttpOptions)
+    discard testContext(app, "/hi", HttpDelete)

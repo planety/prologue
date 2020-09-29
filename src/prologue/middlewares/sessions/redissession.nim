@@ -44,8 +44,6 @@ proc sessionMiddleware*(
   if secretKey.len == 0:
     raise newException(BadSecretKeyError, "The length of secret key can't be zero")
 
-  ## TODO
-  # {.gcsafe.}:
   var redisClient = waitFor openAsync()
 
   result = proc(ctx: Context) {.async.} =
