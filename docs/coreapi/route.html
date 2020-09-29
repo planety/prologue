@@ -100,17 +100,7 @@ function main() {
 <li>
   <a class="reference reference-toplevel" href="#7" id="57">Types</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#PrologueError"
-    title="PrologueError = object of CatchableError"><wbr />Prologue<wbr />Error<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#RouteError"
-    title="RouteError = object of PrologueError"><wbr />Route<wbr />Error<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#RouteResetError"
-    title="RouteResetError = object of RouteError"><wbr />Route<wbr />Reset<wbr />Error<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#DuplicatedRouteError"
-    title="DuplicatedRouteError = object of RouteError"><wbr />Duplicated<wbr />Route<wbr />Error<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#DuplicatedReversedRouteError"
-    title="DuplicatedReversedRouteError = object of RouteError"><wbr />Duplicated<wbr />Reversed<wbr />Route<wbr />Error<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#UrlPattern"
+      <li><a class="reference" href="#UrlPattern"
     title="UrlPattern = tuple[route: string, matcher: HandlerAsync, httpMethod: seq[HttpMethod],
                  name: string, middlewares: seq[HandlerAsync]]"><wbr />Url<wbr />Pattern<span class="attachedType"></span></a></li>
 
@@ -121,19 +111,13 @@ function main() {
   <ul class="simple simple-toc-section">
       <li><a class="reference" href="#add%2CReRouter%2C"
     title="add(reRouter: ReRouter; pairs: (RePath, PathHandler))"><wbr />add<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#%5B%5D%3D%2CRouter%2CPath%2CPathHandler"
-    title="`[]=`(router: Router; path: Path; pathHandler: PathHandler)"><wbr />`[]=`<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#findHandler%2CContext"
-    title="findHandler(ctx: Context): PathHandler"><wbr />find<wbr />Handler<span class="attachedType"></span></a></li>
 
   </ul>
 </li>
 <li>
   <a class="reference reference-toplevel" href="#13" id="63">Funcs</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#stripRoute%2Cstring"
-    title="stripRoute(route: string): string"><wbr />strip<wbr />Route<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#initPath%2Cstring"
+      <li><a class="reference" href="#initPath%2Cstring"
     title="initPath(route: string; httpMethod = HttpGet): Path"><wbr />init<wbr />Path<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#initRePath%2CRegex"
     title="initRePath(route: Regex; httpMethod = HttpGet): RePath"><wbr />init<wbr />Re<wbr />Path<span class="attachedType"></span></a></li>
@@ -145,26 +129,37 @@ function main() {
         middlewares: seq[HandlerAsync] = @[]): UrlPattern"><wbr />pattern<span class="attachedType">UrlPattern</span></a></li>
   <li><a class="reference" href="#hash%2CPath"
     title="hash(x: Path): Hash"><wbr />hash<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#newPathHandler%2CHandlerAsync%2Cseq%5BHandlerAsync%5D%2CSettings"
-    title="newPathHandler(handler: HandlerAsync; middlewares: seq[HandlerAsync] = @[];
-               settings: Settings = nil): PathHandler"><wbr />new<wbr />Path<wbr />Handler<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#newRouter"
-    title="newRouter(): Router"><wbr />new<wbr />Router<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#newReRouter"
     title="newReRouter(): ReRouter"><wbr />new<wbr />Re<wbr />Router<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#%5B%5D%2CRouter%2CPath"
-    title="`[]`(router: Router; path: Path): PathHandler"><wbr />`[]`<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#hasKey%2CRouter%2CPath"
-    title="hasKey(router: Router; path: Path): bool"><wbr />has<wbr />Key<span class="attachedType"></span></a></li>
+  <li><a class="reference" href="#%24%2CBasePatternNode"
+    title="`$`(piece: BasePatternNode): string"><wbr />`$`<span class="attachedType"></span></a></li>
+  <li><a class="reference" href="#%24%2CPatternNode"
+    title="`$`(node: PatternNode): string"><wbr />`$`<span class="attachedType"></span></a></li>
+  <li><a class="reference" href="#printRoutingTree%2CRouter"
+    title="printRoutingTree(router: Router)"><wbr />print<wbr />Routing<wbr />Tree<span class="attachedType"></span></a></li>
+  <li><a class="reference" href="#newRouter"
+    title="newRouter(): Router"><wbr />new<wbr />Router<span class="attachedType"></span></a></li>
+  <li><a class="reference" href="#newPathHandler%2CHandlerAsync%2Cseq%5BHandlerAsync%5D%2CSettings"
+    title="newPathHandler(handler: HandlerAsync; middlewares: seq[HandlerAsync];
+               settings: Settings): PathHandler"><wbr />new<wbr />Path<wbr />Handler<span class="attachedType"></span></a></li>
+  <li><a class="reference" href="#addRoute%2CRouter%2Cstring%2CHttpMethod%2CHandlerAsync%2Cseq%5BHandlerAsync%5D%2CSettings"
+    title="addRoute(router: Router; route: string; httpMethod: HttpMethod; handler: HandlerAsync;
+         middlewares: seq[HandlerAsync]; settings: Settings)"><wbr />add<wbr />Route<span class="attachedType"></span></a></li>
+  <li><a class="reference" href="#compress%2CRouter"
+    title="compress(router: Router)"><wbr />compress<span class="attachedType"></span></a></li>
+  <li><a class="reference" href="#findHandler%2CContext%2CHttpMethod%2Cstring"
+    title="findHandler(ctx: Context; reqMethod: HttpMethod; path: string): Option[PathHandler]"><wbr />find<wbr />Handler<span class="attachedType"></span></a></li>
+  <li><a class="reference" href="#stripRoute%2Cstring"
+    title="stripRoute(route: string): string"><wbr />strip<wbr />Route<span class="attachedType"></span></a></li>
+  <li><a class="reference" href="#findHandler%2CContext"
+    title="findHandler(ctx: Context): PathHandler"><wbr />find<wbr />Handler<span class="attachedType"></span></a></li>
 
   </ul>
 </li>
 <li>
   <a class="reference reference-toplevel" href="#15" id="65">Iterators</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#pairs.i%2CRouter"
-    title="pairs(router: Router): (Path, PathHandler)"><wbr />pairs<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#items.i%2CReRouter"
+      <li><a class="reference" href="#items.i%2CReRouter"
     title="items(reRouter: ReRouter): (RePath, PathHandler)"><wbr />items<span class="attachedType"></span></a></li>
 
   </ul>
@@ -180,66 +175,11 @@ function main() {
   <div class="section" id="6">
 <h1><a class="toc-backref" href="#6">Imports</a></h1>
 <dl class="item">
-<a class="reference external" href="context.html">context</a>, <a class="reference external" href="nativesettings.html">nativesettings</a>, <a class="reference external" href="basicregex.html">basicregex</a>, <a class="reference external" href="request.html">request</a>, <a class="reference external" href="httpcore/httplogue.html">httpcore/httplogue</a>
+<a class="reference external" href="context.html">context</a>, <a class="reference external" href="nativesettings.html">nativesettings</a>, <a class="reference external" href="basicregex.html">basicregex</a>, <a class="reference external" href="request.html">request</a>, <a class="reference external" href="httpcore/httplogue.html">httpcore/httplogue</a>, <a class="reference external" href="httpexception.html">httpexception</a>
 </dl></div>
 <div class="section" id="7">
 <h1><a class="toc-backref" href="#7">Types</a></h1>
 <dl class="item">
-<a id="PrologueError"></a>
-<dt><pre><a href="route.html#PrologueError"><span class="Identifier">PrologueError</span></a> <span class="Other">=</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">CatchableError</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/route.nim#L30"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/route.nim#L30" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<a id="RouteError"></a>
-<dt><pre><a href="route.html#RouteError"><span class="Identifier">RouteError</span></a> <span class="Other">=</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <a href="route.html#PrologueError"><span class="Identifier">PrologueError</span></a></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/route.nim#L31"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/route.nim#L31" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<a id="RouteResetError"></a>
-<dt><pre><a href="route.html#RouteResetError"><span class="Identifier">RouteResetError</span></a> <span class="Other">=</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <a href="route.html#RouteError"><span class="Identifier">RouteError</span></a></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/route.nim#L32"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/route.nim#L32" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<a id="DuplicatedRouteError"></a>
-<dt><pre><a href="route.html#DuplicatedRouteError"><span class="Identifier">DuplicatedRouteError</span></a> <span class="Other">=</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <a href="route.html#RouteError"><span class="Identifier">RouteError</span></a></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/route.nim#L33"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/route.nim#L33" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<a id="DuplicatedReversedRouteError"></a>
-<dt><pre><a href="route.html#DuplicatedReversedRouteError"><span class="Identifier">DuplicatedReversedRouteError</span></a> <span class="Other">=</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <a href="route.html#RouteError"><span class="Identifier">RouteError</span></a></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/route.nim#L34"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/route.nim#L34" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
 <a id="UrlPattern"></a>
 <dt><pre><a href="route.html#UrlPattern"><span class="Identifier">UrlPattern</span></a> <span class="Other">=</span> <span class="Keyword">tuple</span><span class="Other">[</span><span class="Identifier">route</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">,</span> <span class="Identifier">matcher</span><span class="Other">:</span> <a href="context.html#HandlerAsync"><span class="Identifier">HandlerAsync</span></a><span class="Other">,</span> <span class="Identifier">httpMethod</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">HttpMethod</span><span class="Other">]</span><span class="Other">,</span>
                  <span class="Identifier">name</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">,</span> <span class="Identifier">middlewares</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><a href="context.html#HandlerAsync"><span class="Identifier">HandlerAsync</span></a><span class="Other">]</span><span class="Other">]</span></pre></dt>
@@ -247,9 +187,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/route.nim#L36"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/route.nim#L47"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/route.nim#L36" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/route.nim#L47" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -263,33 +203,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/route.nim#L82"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/route.nim#L79"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/route.nim#L82" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<a id="[]=,Router,Path,PathHandler"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#%5B%5D%3D%2CRouter%2CPath%2CPathHandler"><span class="Identifier">`[]=`</span></a><span class="Other">(</span><span class="Identifier">router</span><span class="Other">:</span> <a href="context.html#Router"><span class="Identifier">Router</span></a><span class="Other">;</span> <span class="Identifier">path</span><span class="Other">:</span> <a href="context.html#Path"><span class="Identifier">Path</span></a><span class="Other">;</span> <span class="Identifier">pathHandler</span><span class="Other">:</span> <a href="context.html#PathHandler"><span class="Identifier">PathHandler</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/route.nim#L88"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/route.nim#L88" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<a id="findHandler,Context"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#findHandler%2CContext"><span class="Identifier">findHandler</span></a><span class="Other">(</span><span class="Identifier">ctx</span><span class="Other">:</span> <a href="context.html#Context"><span class="Identifier">Context</span></a><span class="Other">)</span><span class="Other">:</span> <a href="context.html#PathHandler"><span class="Identifier">PathHandler</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
-    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">,</span> <span class="Identifier">RouteError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-fixed route -&gt; regex route -&gt; params route Follow the order of addition.
-&nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/route.nim#L102"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/route.nim#L102" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/route.nim#L79" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -297,26 +213,15 @@ class="link-seesrc" target="_blank">Source</a>
 <div class="section" id="13">
 <h1><a class="toc-backref" href="#13">Funcs</a></h1>
 <dl class="item">
-<a id="stripRoute,string"></a>
-<dt><pre><span class="Keyword">func</span> <a href="#stripRoute%2Cstring"><span class="Identifier">stripRoute</span></a><span class="Other">(</span><span class="Identifier">route</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/route.nim#L44"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/route.nim#L44" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
 <a id="initPath,string"></a>
 <dt><pre><span class="Keyword">func</span> <a href="#initPath%2Cstring"><span class="Identifier">initPath</span></a><span class="Other">(</span><span class="Identifier">route</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">httpMethod</span> <span class="Other">=</span> <span class="Identifier">HttpGet</span><span class="Other">)</span><span class="Other">:</span> <a href="context.html#Path"><span class="Identifier">Path</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/route.nim#L51"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/route.nim#L55"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/route.nim#L51" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/route.nim#L55" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="initRePath,Regex"></a>
@@ -325,9 +230,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/route.nim#L54"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/route.nim#L58"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/route.nim#L54" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/route.nim#L58" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="pattern,string,HandlerAsync,string,seq[HandlerAsync]"></a>
@@ -337,9 +242,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/route.nim#L57"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/route.nim#L61"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/route.nim#L57" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/route.nim#L61" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="pattern,string,HandlerAsync,seq[HttpMethod],string,seq[HandlerAsync]"></a>
@@ -350,9 +255,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/route.nim#L61"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/route.nim#L65"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/route.nim#L61" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/route.nim#L65" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="hash,Path"></a>
@@ -361,25 +266,13 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/route.nim#L66"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/route.nim#L70"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/route.nim#L66" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/route.nim#L70" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="newPathHandler,HandlerAsync,seq[HandlerAsync],Settings"></a>
-<dt><pre><span class="Keyword">func</span> <a href="#newPathHandler%2CHandlerAsync%2Cseq%5BHandlerAsync%5D%2CSettings"><span class="Identifier">newPathHandler</span></a><span class="Other">(</span><span class="Identifier">handler</span><span class="Other">:</span> <a href="context.html#HandlerAsync"><span class="Identifier">HandlerAsync</span></a><span class="Other">;</span> <span class="Identifier">middlewares</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><a href="context.html#HandlerAsync"><span class="Identifier">HandlerAsync</span></a><span class="Other">]</span> <span class="Other">=</span> <span class="Operator">@</span><span class="Other">[</span><span class="Other">]</span><span class="Other">;</span>
-                   <span class="Identifier">settings</span><span class="Other">:</span> <a href="nativesettings.html#Settings"><span class="Identifier">Settings</span></a> <span class="Other">=</span> <span class="Keyword">nil</span><span class="Other">)</span><span class="Other">:</span> <a href="context.html#PathHandler"><span class="Identifier">PathHandler</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/route.nim#L72"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/route.nim#L72" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<a id="newRouter"></a>
-<dt><pre><span class="Keyword">func</span> <a href="#newRouter"><span class="Identifier">newRouter</span></a><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <a href="context.html#Router"><span class="Identifier">Router</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<a id="newReRouter"></a>
+<dt><pre><span class="Keyword">func</span> <a href="#newReRouter"><span class="Identifier">newReRouter</span></a><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <a href="context.html#ReRouter"><span class="Identifier">ReRouter</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 
@@ -389,37 +282,120 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/route.nim#L76" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="newReRouter"></a>
-<dt><pre><span class="Keyword">func</span> <a href="#newReRouter"><span class="Identifier">newReRouter</span></a><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <a href="context.html#ReRouter"><span class="Identifier">ReRouter</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<a id="$,BasePatternNode"></a>
+<dt><pre><span class="Keyword">func</span> <a href="#%24%2CBasePatternNode"><span class="Identifier">`$`</span></a><span class="Other">(</span><span class="Identifier">piece</span><span class="Other">:</span> <a href="context.html#BasePatternNode"><span class="Identifier">BasePatternNode</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/route.nim#L79"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/route.nim#L86"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/route.nim#L79" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/route.nim#L86" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="[],Router,Path"></a>
-<dt><pre><span class="Keyword">func</span> <a href="#%5B%5D%2CRouter%2CPath"><span class="Identifier">`[]`</span></a><span class="Other">(</span><span class="Identifier">router</span><span class="Other">:</span> <a href="context.html#Router"><span class="Identifier">Router</span></a><span class="Other">;</span> <span class="Identifier">path</span><span class="Other">:</span> <a href="context.html#Path"><span class="Identifier">Path</span></a><span class="Other">)</span><span class="Other">:</span> <a href="context.html#PathHandler"><span class="Identifier">PathHandler</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<a id="$,PatternNode"></a>
+<dt><pre><span class="Keyword">func</span> <a href="#%24%2CPatternNode"><span class="Identifier">`$`</span></a><span class="Other">(</span><span class="Identifier">node</span><span class="Other">:</span> <a href="context.html#PatternNode"><span class="Identifier">PatternNode</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/route.nim#L85"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/route.nim#L93"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/route.nim#L85" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/route.nim#L93" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="hasKey,Router,Path"></a>
-<dt><pre><span class="Keyword">func</span> <a href="#hasKey%2CRouter%2CPath"><span class="Identifier">hasKey</span></a><span class="Other">(</span><span class="Identifier">router</span><span class="Other">:</span> <a href="context.html#Router"><span class="Identifier">Router</span></a><span class="Other">;</span> <span class="Identifier">path</span><span class="Other">:</span> <a href="context.html#Path"><span class="Identifier">Path</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<a id="printRoutingTree,Router"></a>
+<dt><pre><span class="Keyword">func</span> <a href="#printRoutingTree%2CRouter"><span class="Identifier">printRoutingTree</span></a><span class="Other">(</span><span class="Identifier">router</span><span class="Other">:</span> <a href="context.html#Router"><span class="Identifier">Router</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/route.nim#L91"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/route.nim#L119"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/route.nim#L91" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/route.nim#L119" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="newRouter"></a>
+<dt><pre><span class="Keyword">func</span> <a href="#newRouter"><span class="Identifier">newRouter</span></a><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <a href="context.html#Router"><span class="Identifier">Router</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+Creates a new <tt class="docutils literal"><span class="pre">Router</span></tt> instance.
+&nbsp;&nbsp;<a
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/route.nim#L124"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/route.nim#L124" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="newPathHandler,HandlerAsync,seq[HandlerAsync],Settings"></a>
+<dt><pre><span class="Keyword">func</span> <a href="#newPathHandler%2CHandlerAsync%2Cseq%5BHandlerAsync%5D%2CSettings"><span class="Identifier">newPathHandler</span></a><span class="Other">(</span><span class="Identifier">handler</span><span class="Other">:</span> <a href="context.html#HandlerAsync"><span class="Identifier">HandlerAsync</span></a><span class="Other">;</span> <span class="Identifier">middlewares</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><a href="context.html#HandlerAsync"><span class="Identifier">HandlerAsync</span></a><span class="Other">]</span><span class="Other">;</span>
+                   <span class="Identifier">settings</span><span class="Other">:</span> <a href="nativesettings.html#Settings"><span class="Identifier">Settings</span></a><span class="Other">)</span><span class="Other">:</span> <a href="context.html#PathHandler"><span class="Identifier">PathHandler</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/route.nim#L352"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/route.nim#L352" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="addRoute,Router,string,HttpMethod,HandlerAsync,seq[HandlerAsync],Settings"></a>
+<dt><pre><span class="Keyword">func</span> <a href="#addRoute%2CRouter%2Cstring%2CHttpMethod%2CHandlerAsync%2Cseq%5BHandlerAsync%5D%2CSettings"><span class="Identifier">addRoute</span></a><span class="Other">(</span><span class="Identifier">router</span><span class="Other">:</span> <a href="context.html#Router"><span class="Identifier">Router</span></a><span class="Other">;</span> <span class="Identifier">route</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">httpMethod</span><span class="Other">:</span> <span class="Identifier">HttpMethod</span><span class="Other">;</span>
+             <span class="Identifier">handler</span><span class="Other">:</span> <a href="context.html#HandlerAsync"><span class="Identifier">HandlerAsync</span></a><span class="Other">;</span> <span class="Identifier">middlewares</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><a href="context.html#HandlerAsync"><span class="Identifier">HandlerAsync</span></a><span class="Other">]</span><span class="Other">;</span>
+             <span class="Identifier">settings</span><span class="Other">:</span> <a href="nativesettings.html#Settings"><span class="Identifier">Settings</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RouteError</span><span class="Other">,</span> <span class="Identifier">KeyError</span><span class="Other">,</span>
+    <span class="Identifier">DuplicatedRouteError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+Add a new mapping to the given <tt class="docutils literal"><span class="pre">Router</span></tt> instance.
+&nbsp;&nbsp;<a
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/route.nim#L356"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/route.nim#L356" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="compress,Router"></a>
+<dt><pre><span class="Keyword">func</span> <a href="#compress%2CRouter"><span class="Identifier">compress</span></a><span class="Other">(</span><span class="Identifier">router</span><span class="Other">:</span> <a href="context.html#Router"><span class="Identifier">Router</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+Compresses the entire contents of the given <tt class="docutils literal"><span class="pre">Router</span></tt>. Successive calls will recompress, but may not be efficient, so use this only when mapping is complete for the best effect
+&nbsp;&nbsp;<a
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/route.nim#L395"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/route.nim#L395" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="findHandler,Context,HttpMethod,string"></a>
+<dt><pre><span class="Keyword">func</span> <a href="#findHandler%2CContext%2CHttpMethod%2Cstring"><span class="Identifier">findHandler</span></a><span class="Other">(</span><span class="Identifier">ctx</span><span class="Other">:</span> <a href="context.html#Context"><span class="Identifier">Context</span></a><span class="Other">;</span> <span class="Identifier">reqMethod</span><span class="Other">:</span> <span class="Identifier">HttpMethod</span><span class="Other">;</span> <span class="Identifier">path</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Option</span><span class="Other">[</span><a href="context.html#PathHandler"><span class="Identifier">PathHandler</span></a><span class="Other">]</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">,</span> <span class="Identifier">RouteError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+Simple wrapper around the regular route function.
+&nbsp;&nbsp;<a
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/route.nim#L471"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/route.nim#L471" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="stripRoute,string"></a>
+<dt><pre><span class="Keyword">func</span> <a href="#stripRoute%2Cstring"><span class="Identifier">stripRoute</span></a><span class="Other">(</span><span class="Identifier">route</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/route.nim#L479"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/route.nim#L479" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="findHandler,Context"></a>
+<dt><pre><span class="Keyword">func</span> <a href="#findHandler%2CContext"><span class="Identifier">findHandler</span></a><span class="Other">(</span><span class="Identifier">ctx</span><span class="Other">:</span> <a href="context.html#Context"><span class="Identifier">Context</span></a><span class="Other">)</span><span class="Other">:</span> <a href="context.html#PathHandler"><span class="Identifier">PathHandler</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">,</span> <span class="Identifier">RouteError</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+fixed route -&gt; params route -&gt; regex route Follow the order of addition.
+&nbsp;&nbsp;<a
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/route.nim#L486"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/route.nim#L486" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -427,26 +403,15 @@ class="link-seesrc" target="_blank">Source</a>
 <div class="section" id="15">
 <h1><a class="toc-backref" href="#15">Iterators</a></h1>
 <dl class="item">
-<a id="pairs.i,Router"></a>
-<dt><pre><span class="Keyword">iterator</span> <a href="#pairs.i%2CRouter"><span class="Identifier">pairs</span></a><span class="Other">(</span><span class="Identifier">router</span><span class="Other">:</span> <a href="context.html#Router"><span class="Identifier">Router</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Other">(</span><a href="context.html#Path"><span class="Identifier">Path</span></a><span class="Other">,</span> <a href="context.html#PathHandler"><span class="Identifier">PathHandler</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/route.nim#L94"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/route.nim#L94" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
 <a id="items.i,ReRouter"></a>
 <dt><pre><span class="Keyword">iterator</span> <a href="#items.i%2CReRouter"><span class="Identifier">items</span></a><span class="Other">(</span><span class="Identifier">reRouter</span><span class="Other">:</span> <a href="context.html#ReRouter"><span class="Identifier">ReRouter</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Other">(</span><a href="context.html#RePath"><span class="Identifier">RePath</span></a><span class="Other">,</span> <a href="context.html#PathHandler"><span class="Identifier">PathHandler</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/route.nim#L98"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/route.nim#L82"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/route.nim#L98" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/route.nim#L82" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -459,7 +424,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-09-25 15:45:36 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-09-29 10:53:39 UTC</small>
       </div>
     </div>
   </div>

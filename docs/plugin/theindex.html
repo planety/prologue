@@ -72,6 +72,10 @@ function main() {
           <li><a class="reference external"
           data-doc-search-tag="response: `$`(response: Response): string" href="core/response.html#%24%2CResponse">response: `$`(response: Response): string</a></li>
           <li><a class="reference external"
+          data-doc-search-tag="route: `$`(piece: BasePatternNode): string" href="core/route.html#%24%2CBasePatternNode">route: `$`(piece: BasePatternNode): string</a></li>
+          <li><a class="reference external"
+          data-doc-search-tag="route: `$`(node: PatternNode): string" href="core/route.html#%24%2CPatternNode">route: `$`(node: PatternNode): string</a></li>
+          <li><a class="reference external"
           data-doc-search-tag="types: `$`(secretKey: SecretKey): string" href="core/types.html#%24%2CSecretKey">types: `$`(secretKey: SecretKey): string</a></li>
           <li><a class="reference external"
           data-doc-search-tag="types: `$`(session: Session): string" href="core/types.html#%24%2CSession">types: `$`(session: Session): string</a></li>
@@ -82,8 +86,6 @@ function main() {
           <li><a class="reference external"
           data-doc-search-tag="httplogue: `[]=`(headers: ResponseHeaders; key, value: string)" href="core/httpcore/httplogue.html#%5B%5D%3D%2CResponseHeaders%2Cstring%2Cstring">httplogue: `[]=`(headers: ResponseHeaders; key, value: string)</a></li>
           <li><a class="reference external"
-          data-doc-search-tag="route: `[]=`(router: Router; path: Path; pathHandler: PathHandler)" href="core/route.html#%5B%5D%3D%2CRouter%2CPath%2CPathHandler">route: `[]=`(router: Router; path: Path; pathHandler: PathHandler)</a></li>
-          <li><a class="reference external"
           data-doc-search-tag="types: `[]=`(formPart: FormPart; key: string; body: string)" href="core/types.html#%5B%5D%3D%2CFormPart%2Cstring%2Cstring">types: `[]=`(formPart: FormPart; key: string; body: string)</a></li>
           <li><a class="reference external"
           data-doc-search-tag="types: `[]=`(session: Session; key, value: string)" href="core/types.html#%5B%5D%3D%2CSession%2Cstring%2Cstring">types: `[]=`(session: Session; key, value: string)</a></li>
@@ -92,13 +94,11 @@ function main() {
 <li><a class="reference external"
           data-doc-search-tag="configure: `[]`(env: Env; key: string): string" href="core/configure.html#%5B%5D%2CEnv%2Cstring">configure: `[]`(env: Env; key: string): string</a></li>
           <li><a class="reference external"
-          data-doc-search-tag="httplogue: `[]`(headers: ResponseHeaders; key: string): HttpHeaderValues" href="core/httpcore/httplogue.html#%5B%5D%2CResponseHeaders%2Cstring">httplogue: `[]`(headers: ResponseHeaders; key: string): HttpHeaderValues</a></li>
+          data-doc-search-tag="httplogue: `[]`(headers: ResponseHeaders; key: string): seq[string]" href="core/httpcore/httplogue.html#%5B%5D%2CResponseHeaders%2Cstring">httplogue: `[]`(headers: ResponseHeaders; key: string): seq[string]</a></li>
           <li><a class="reference external"
           data-doc-search-tag="httplogue: `[]`(headers: ResponseHeaders; key: string; i: int): string" href="core/httpcore/httplogue.html#%5B%5D%2CResponseHeaders%2Cstring%2Cint">httplogue: `[]`(headers: ResponseHeaders; key: string; i: int): string</a></li>
           <li><a class="reference external"
           data-doc-search-tag="nativesettings: `[]`(settings: Settings; key: string): JsonNode" href="core/nativesettings.html#%5B%5D%2CSettings%2Cstring">nativesettings: `[]`(settings: Settings; key: string): JsonNode</a></li>
-          <li><a class="reference external"
-          data-doc-search-tag="route: `[]`(router: Router; path: Path): PathHandler" href="core/route.html#%5B%5D%2CRouter%2CPath">route: `[]`(router: Router; path: Path): PathHandler</a></li>
           <li><a class="reference external"
           data-doc-search-tag="types: `[]`(formPart: FormPart; key: string): tuple[params: StringTableRef, body: string]" href="core/types.html#%5B%5D%2CFormPart%2Cstring">types: `[]`(formPart: FormPart; key: string): tuple[params: StringTableRef, body: string]</a></li>
           <li><a class="reference external"
@@ -165,6 +165,10 @@ function main() {
           data-doc-search-tag="application: addRoute(app: Prologue; route: string; handler: HandlerAsync; httpMethod = HttpGet;
          name = &quot;&quot;; middlewares: seq[HandlerAsync] = @[]; settings: LocalSettings = nil)" href="core/application.html#addRoute%2CPrologue%2Cstring%2CHandlerAsync%2Cstring%2Cseq%5BHandlerAsync%5D%2CLocalSettings">application: addRoute(app: Prologue; route: string; handler: HandlerAsync; httpMethod = HttpGet;
          name = &quot;&quot;; middlewares: seq[HandlerAsync] = @[]; settings: LocalSettings = nil)</a></li>
+          <li><a class="reference external"
+          data-doc-search-tag="route: addRoute(router: Router; route: string; httpMethod: HttpMethod; handler: HandlerAsync;
+         middlewares: seq[HandlerAsync]; settings: Settings)" href="core/route.html#addRoute%2CRouter%2Cstring%2CHttpMethod%2CHandlerAsync%2Cseq%5BHandlerAsync%5D%2CSettings">route: addRoute(router: Router; route: string; httpMethod: HttpMethod; handler: HandlerAsync;
+         middlewares: seq[HandlerAsync]; settings: Settings)</a></li>
           </ul></dd>
 <dt><a name="all" href="#all"><span>all:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -234,6 +238,10 @@ function main() {
 <li><a class="reference external"
           data-doc-search-tag="signing: BaseDigestType" href="signing/signing.html#BaseDigestType">signing: BaseDigestType</a></li>
           </ul></dd>
+<dt><a name="BasePatternNode" href="#BasePatternNode"><span>BasePatternNode:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="context: BasePatternNode" href="core/context.html#BasePatternNode">context: BasePatternNode</a></li>
+          </ul></dd>
 <dt><a name="BaseType" href="#BaseType"><span>BaseType:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="types: BaseType" href="core/types.html#BaseType">types: BaseType</a></li>
@@ -298,6 +306,10 @@ function main() {
 <li><a class="reference external"
           data-doc-search-tag="request: close(request: Request)" href="core/beast/request.html#close%2CRequest">request: close(request: Request)</a></li>
           </ul></dd>
+<dt><a name="compress" href="#compress"><span>compress:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="route: compress(router: Router)" href="core/route.html#compress%2CRouter">route: compress(router: Router)</a></li>
+          </ul></dd>
 <dt><a name="Concat" href="#Concat"><span>Concat:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="KeyDerivation.Concat" href="signing/signing.html#Concat">KeyDerivation.Concat</a></li>
@@ -311,8 +323,6 @@ function main() {
 <dt><a name="contains" href="#contains"><span>contains:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="configure: contains(env: Env; key: string): bool" href="core/configure.html#contains%2CEnv%2Cstring">configure: contains(env: Env; key: string): bool</a></li>
-          <li><a class="reference external"
-          data-doc-search-tag="httplogue: contains(values: HttpHeaderValues; value: string): bool" href="core/httpcore/httplogue.html#contains%2CHttpHeaderValues%2Cstring">httplogue: contains(values: HttpHeaderValues; value: string): bool</a></li>
           </ul></dd>
 <dt><a name="contentType" href="#contentType"><span>contentType:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -430,11 +440,11 @@ function main() {
           </ul></dd>
 <dt><a name="DuplicatedReversedRouteError" href="#DuplicatedReversedRouteError"><span>DuplicatedReversedRouteError:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="route: DuplicatedReversedRouteError" href="core/route.html#DuplicatedReversedRouteError">route: DuplicatedReversedRouteError</a></li>
+          data-doc-search-tag="httpexception: DuplicatedReversedRouteError" href="core/httpexception.html#DuplicatedReversedRouteError">httpexception: DuplicatedReversedRouteError</a></li>
           </ul></dd>
 <dt><a name="DuplicatedRouteError" href="#DuplicatedRouteError"><span>DuplicatedRouteError:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="route: DuplicatedRouteError" href="core/route.html#DuplicatedRouteError">route: DuplicatedRouteError</a></li>
+          data-doc-search-tag="httpexception: DuplicatedRouteError" href="core/httpexception.html#DuplicatedRouteError">httpexception: DuplicatedRouteError</a></li>
           </ul></dd>
 <dt><a name="EmptySecretKeyError" href="#EmptySecretKeyError"><span>EmptySecretKeyError:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -478,6 +488,10 @@ function main() {
 <li><a class="reference external"
           data-doc-search-tag="context: Event" href="core/context.html#Event">context: Event</a></li>
           </ul></dd>
+<dt><a name="execEvent" href="#execEvent"><span>execEvent:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="application: execEvent(event: Event)" href="core/application.html#execEvent%2CEvent">application: execEvent(event: Event)</a></li>
+          </ul></dd>
 <dt><a name="existsPrologueEnv" href="#existsPrologueEnv"><span>existsPrologueEnv:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="configure: existsPrologueEnv(key: string; prefix: string): bool" href="core/configure.html#existsPrologueEnv%2Cstring%2Cstring">configure: existsPrologueEnv(key: string; prefix: string): bool</a></li>
@@ -485,6 +499,8 @@ function main() {
 <dt><a name="findHandler" href="#findHandler"><span>findHandler:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="route: findHandler(ctx: Context): PathHandler" href="core/route.html#findHandler%2CContext">route: findHandler(ctx: Context): PathHandler</a></li>
+          <li><a class="reference external"
+          data-doc-search-tag="route: findHandler(ctx: Context; reqMethod: HttpMethod; path: string): Option[PathHandler]" href="core/route.html#findHandler%2CContext%2CHttpMethod%2Cstring">route: findHandler(ctx: Context; reqMethod: HttpMethod; path: string): Option[PathHandler]</a></li>
           </ul></dd>
 <dt><a name="first" href="#first"><span>first:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -524,13 +540,23 @@ function main() {
           <li><a class="reference external"
           data-doc-search-tag="context: getCookie(ctx: Context; key: string; default = &quot;&quot;): string" href="core/context.html#getCookie%2CContext%2Cstring%2Cstring">context: getCookie(ctx: Context; key: string; default = &quot;&quot;): string</a></li>
           </ul></dd>
+<dt><a name="getHeader" href="#getHeader"><span>getHeader:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="context: getHeader(request: Request; key: string): seq[string]" href="core/context.html#getHeader%2CRequest%2Cstring">context: getHeader(request: Request; key: string): seq[string]</a></li>
+          <li><a class="reference external"
+          data-doc-search-tag="response: getHeader(response: Response; key: string): seq[string]" href="core/response.html#getHeader.t%2CResponse%2Cstring">response: getHeader(response: Response; key: string): seq[string]</a></li>
+          </ul></dd>
+<dt><a name="getHeaderOrDefault" href="#getHeaderOrDefault"><span>getHeaderOrDefault:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="context: getHeaderOrDefault(request: Request; key: string; default = @[&quot;&quot;]): seq[string]" href="core/context.html#getHeaderOrDefault%2CRequest%2Cstring">context: getHeaderOrDefault(request: Request; key: string; default = @[&quot;&quot;]): seq[string]</a></li>
+          <li><a class="reference external"
+          data-doc-search-tag="response: getHeaderOrDefault(response: Response; key: string; default = @[&quot;&quot;]): seq[string]" href="core/response.html#getHeaderOrDefault.t%2CResponse%2Cstring">response: getHeaderOrDefault(response: Response; key: string; default = @[&quot;&quot;]): seq[string]</a></li>
+          </ul></dd>
 <dt><a name="getOrDefault" href="#getOrDefault"><span>getOrDefault:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="configure: getOrDefault[T: BaseType](env: Env; key: string; default: T): T" href="core/configure.html#getOrDefault%2CEnv%2Cstring%2CT">configure: getOrDefault[T: BaseType](env: Env; key: string; default: T): T</a></li>
           <li><a class="reference external"
-          data-doc-search-tag="httplogue: getOrDefault(headers: ResponseHeaders; key: string;
-             default = @[&quot;&quot;].HttpHeaderValues): HttpHeaderValues" href="core/httpcore/httplogue.html#getOrDefault%2CResponseHeaders%2Cstring">httplogue: getOrDefault(headers: ResponseHeaders; key: string;
-             default = @[&quot;&quot;].HttpHeaderValues): HttpHeaderValues</a></li>
+          data-doc-search-tag="httplogue: getOrDefault(headers: ResponseHeaders; key: string; default = @[&quot;&quot;]): seq[string]" href="core/httpcore/httplogue.html#getOrDefault%2CResponseHeaders%2Cstring">httplogue: getOrDefault(headers: ResponseHeaders; key: string; default = @[&quot;&quot;]): seq[string]</a></li>
           <li><a class="reference external"
           data-doc-search-tag="nativesettings: getOrDefault(settings: Settings; key: string): JsonNode" href="core/nativesettings.html#getOrDefault%2CSettings%2Cstring">nativesettings: getOrDefault(settings: Settings; key: string): JsonNode</a></li>
           <li><a class="reference external"
@@ -586,9 +612,17 @@ function main() {
 <li><a class="reference external"
           data-doc-search-tag="context: gScope(ctx: Context): lent GlobalScope" href="core/context.html#gScope%2CContext">context: gScope(ctx: Context): lent GlobalScope</a></li>
           </ul></dd>
+<dt><a name="handleContext" href="#handleContext"><span>handleContext:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="application: handleContext(app: Prologue; ctx: Context): owned(Future[void])" href="core/application.html#handleContext%2CPrologue%2CContext">application: handleContext(app: Prologue; ctx: Context): owned(Future[void])</a></li>
+          </ul></dd>
 <dt><a name="HandlerAsync" href="#HandlerAsync"><span>HandlerAsync:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="context: HandlerAsync" href="core/context.html#HandlerAsync">context: HandlerAsync</a></li>
+          </ul></dd>
+<dt><a name="handleRequest" href="#handleRequest"><span>handleRequest:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="application: handleRequest(app: Prologue; nativeRequest: NativeRequest): Future[void]" href="core/application.html#handleRequest%2CPrologue%2CRequest">application: handleRequest(app: Prologue; nativeRequest: NativeRequest): Future[void]</a></li>
           </ul></dd>
 <dt><a name="hash" href="#hash"><span>hash:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -596,7 +630,7 @@ function main() {
           </ul></dd>
 <dt><a name="hasHeader" href="#hasHeader"><span>hasHeader:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="context: hasHeader(request: var Request; key: string): bool" href="core/context.html#hasHeader%2CRequest%2Cstring">context: hasHeader(request: var Request; key: string): bool</a></li>
+          data-doc-search-tag="context: hasHeader(request: Request; key: string): bool" href="core/context.html#hasHeader%2CRequest%2Cstring">context: hasHeader(request: Request; key: string): bool</a></li>
           <li><a class="reference external"
           data-doc-search-tag="response: hasHeader(response: Response; key: string): bool" href="core/response.html#hasHeader.t%2CResponse%2Cstring">response: hasHeader(response: Response; key: string): bool</a></li>
           </ul></dd>
@@ -607,8 +641,6 @@ function main() {
           data-doc-search-tag="httplogue: hasKey(headers: ResponseHeaders; key: string): bool" href="core/httpcore/httplogue.html#hasKey%2CResponseHeaders%2Cstring">httplogue: hasKey(headers: ResponseHeaders; key: string): bool</a></li>
           <li><a class="reference external"
           data-doc-search-tag="nativesettings: hasKey(settings: Settings; key: string): bool" href="core/nativesettings.html#hasKey%2CSettings%2Cstring">nativesettings: hasKey(settings: Settings; key: string): bool</a></li>
-          <li><a class="reference external"
-          data-doc-search-tag="route: hasKey(router: Router; path: Path): bool" href="core/route.html#hasKey%2CRouter%2CPath">route: hasKey(router: Router; path: Path): bool</a></li>
           </ul></dd>
 <dt><a name="head" href="#head"><span>head:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -660,6 +692,16 @@ function main() {
 <li><a class="reference external"
           data-doc-search-tag="types: initFormPart(): FormPart" href="core/types.html#initFormPart">types: initFormPart(): FormPart</a></li>
           </ul></dd>
+<dt><a name="initMockingRequest" href="#initMockingRequest"><span>initMockingRequest:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="request: initMockingRequest(httpMethod: HttpMethod; headers: HttpHeaders; url: Uri;
+                   cookies = initCookieJar(); postParams = newStringTable();
+                   queryParams = newStringTable(); formParams = initFormPart();
+                   pathParams = newStringTable()): Request" href="core/beast/request.html#initMockingRequest%2CHttpMethod%2CHttpHeaders%2CUri">request: initMockingRequest(httpMethod: HttpMethod; headers: HttpHeaders; url: Uri;
+                   cookies = initCookieJar(); postParams = newStringTable();
+                   queryParams = newStringTable(); formParams = initFormPart();
+                   pathParams = newStringTable()): Request</a></li>
+          </ul></dd>
 <dt><a name="initPath" href="#initPath"><span>initPath:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="route: initPath(route: string; httpMethod = HttpGet): Path" href="core/route.html#initPath%2Cstring">route: initPath(route: string; httpMethod = HttpGet): Path</a></li>
@@ -680,6 +722,10 @@ function main() {
           </ul></dd>
 <dt><a name="initResponse" href="#initResponse"><span>initResponse:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
+          data-doc-search-tag="response: initResponse(httpVersion: HttpVersion; code: HttpCode;
+             headers: openArray[(string, string)]; body = &quot;&quot;): Response" href="core/response.html#initResponse%2CHttpVersion%2CHttpCode%2CopenArray%5B%5D%2Cstring">response: initResponse(httpVersion: HttpVersion; code: HttpCode;
+             headers: openArray[(string, string)]; body = &quot;&quot;): Response</a></li>
+          <li><a class="reference external"
           data-doc-search-tag="response: initResponse(httpVersion: HttpVersion; code: HttpCode; headers = [
     (&quot;Content-Type&quot;, &quot;text/html; charset=UTF-8&quot;)].initResponseHeaders; body = &quot;&quot;): Response" href="core/response.html#initResponse%2CHttpVersion%2CHttpCode%2Cstring">response: initResponse(httpVersion: HttpVersion; code: HttpCode; headers = [
     (&quot;Content-Type&quot;, &quot;text/html; charset=UTF-8&quot;)].initResponseHeaders; body = &quot;&quot;): Response</a></li>
@@ -820,9 +866,9 @@ function main() {
 <li><a class="reference external"
           data-doc-search-tag="validate: matchRegex(value: Regex; msg = &quot;&quot;): ValidateHandler" href="validate/validate.html#matchRegex%2CRegex%2Cstring">validate: matchRegex(value: Regex; msg = &quot;&quot;): ValidateHandler</a></li>
           </ul></dd>
-<dt><a name="matchUrl" href="#matchUrl"><span>matchUrl:</span></a></dt><dd><ul class="simple">
+<dt><a name="matchURL" href="#matchURL"><span>matchURL:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="validate: matchUrl(msg = &quot;&quot;): ValidateHandler" href="validate/validate.html#matchUrl%2Cstring">validate: matchUrl(msg = &quot;&quot;): ValidateHandler</a></li>
+          data-doc-search-tag="validate: matchURL(msg = &quot;&quot;): ValidateHandler" href="validate/validate.html#matchURL%2Cstring">validate: matchURL(msg = &quot;&quot;): ValidateHandler</a></li>
           </ul></dd>
 <dt><a name="maxLength" href="#maxLength"><span>maxLength:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -896,9 +942,9 @@ function main() {
           </ul></dd>
 <dt><a name="newPathHandler" href="#newPathHandler"><span>newPathHandler:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="route: newPathHandler(handler: HandlerAsync; middlewares: seq[HandlerAsync] = @[];
-               settings: Settings = nil): PathHandler" href="core/route.html#newPathHandler%2CHandlerAsync%2Cseq%5BHandlerAsync%5D%2CSettings">route: newPathHandler(handler: HandlerAsync; middlewares: seq[HandlerAsync] = @[];
-               settings: Settings = nil): PathHandler</a></li>
+          data-doc-search-tag="route: newPathHandler(handler: HandlerAsync; middlewares: seq[HandlerAsync];
+               settings: Settings): PathHandler" href="core/route.html#newPathHandler%2CHandlerAsync%2Cseq%5BHandlerAsync%5D%2CSettings">route: newPathHandler(handler: HandlerAsync; middlewares: seq[HandlerAsync];
+               settings: Settings): PathHandler</a></li>
           </ul></dd>
 <dt><a name="newPrologue" href="#newPrologue"><span>newPrologue:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -962,8 +1008,6 @@ function main() {
           <li><a class="reference external"
           data-doc-search-tag="httplogue: pairs(headers: ResponseHeaders): tuple[key, value: string]" href="core/httpcore/httplogue.html#pairs.i%2CResponseHeaders">httplogue: pairs(headers: ResponseHeaders): tuple[key, value: string]</a></li>
           <li><a class="reference external"
-          data-doc-search-tag="route: pairs(router: Router): (Path, PathHandler)" href="core/route.html#pairs.i%2CRouter">route: pairs(router: Router): (Path, PathHandler)</a></li>
-          <li><a class="reference external"
           data-doc-search-tag="types: pairs(session: Session): tuple[key, val: string]" href="core/types.html#pairs.i%2CSession">types: pairs(session: Session): tuple[key, val: string]</a></li>
           </ul></dd>
 <dt><a name="parseFormParams" href="#parseFormParams"><span>parseFormParams:</span></a></dt><dd><ul class="simple">
@@ -1010,6 +1054,14 @@ function main() {
         middlewares: seq[HandlerAsync] = @[]): UrlPattern" href="core/route.html#pattern%2Cstring%2CHandlerAsync%2Cstring%2Cseq%5BHandlerAsync%5D">route: pattern(route: string; handler: HandlerAsync; httpMethod = HttpGet; name = &quot;&quot;;
         middlewares: seq[HandlerAsync] = @[]): UrlPattern</a></li>
           </ul></dd>
+<dt><a name="PatternMatchingType" href="#PatternMatchingType"><span>PatternMatchingType:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="context: PatternMatchingType" href="core/context.html#PatternMatchingType">context: PatternMatchingType</a></li>
+          </ul></dd>
+<dt><a name="PatternNode" href="#PatternNode"><span>PatternNode:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="context: PatternNode" href="core/context.html#PatternNode">context: PatternNode</a></li>
+          </ul></dd>
 <dt><a name="pbkdf2_sha1encode" href="#pbkdf2_sha1encode"><span>pbkdf2_sha1encode:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="hasher: pbkdf2_sha1encode(password: SecretKey; salt: string; iterations = 24400): string" href="security/hasher.html#pbkdf2_sha1encode%2CSecretKey%2Cstring%2Cint">hasher: pbkdf2_sha1encode(password: SecretKey; salt: string; iterations = 24400): string</a></li>
@@ -1042,9 +1094,9 @@ function main() {
      middlewares: seq[HandlerAsync] = @[]; settings: LocalSettings = nil)" href="core/application.html#post%2CPrologue%2Cstring%2CHandlerAsync%2Cstring%2Cseq%5BHandlerAsync%5D%2CLocalSettings">application: post(app: Prologue; route: string; handler: HandlerAsync; name = &quot;&quot;;
      middlewares: seq[HandlerAsync] = @[]; settings: LocalSettings = nil)</a></li>
           </ul></dd>
-<dt><a name="printRoute" href="#printRoute"><span>printRoute:</span></a></dt><dd><ul class="simple">
+<dt><a name="printRoutingTree" href="#printRoutingTree"><span>printRoutingTree:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="application: printRoute(app: Prologue)" href="core/application.html#printRoute%2CPrologue">application: printRoute(app: Prologue)</a></li>
+          data-doc-search-tag="route: printRoutingTree(router: Router)" href="core/route.html#printRoutingTree%2CRouter">route: printRoutingTree(router: Router)</a></li>
           </ul></dd>
 <dt><a name="Prologue" href="#Prologue"><span>Prologue:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -1052,7 +1104,7 @@ function main() {
           </ul></dd>
 <dt><a name="PrologueError" href="#PrologueError"><span>PrologueError:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="route: PrologueError" href="core/route.html#PrologueError">route: PrologueError</a></li>
+          data-doc-search-tag="httpexception: PrologueError" href="core/httpexception.html#PrologueError">httpexception: PrologueError</a></li>
           </ul></dd>
 <dt><a name="ProloguePrefix" href="#ProloguePrefix"><span>ProloguePrefix:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -1061,6 +1113,18 @@ function main() {
 <dt><a name="PrologueVersion" href="#PrologueVersion"><span>PrologueVersion:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="constants: PrologueVersion" href="core/constants.html#PrologueVersion">constants: PrologueVersion</a></li>
+          </ul></dd>
+<dt><a name="ptrnParam" href="#ptrnParam"><span>ptrnParam:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="PatternMatchingType.ptrnParam" href="core/context.html#ptrnParam">PatternMatchingType.ptrnParam</a></li>
+          </ul></dd>
+<dt><a name="ptrnText" href="#ptrnText"><span>ptrnText:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="PatternMatchingType.ptrnText" href="core/context.html#ptrnText">PatternMatchingType.ptrnText</a></li>
+          </ul></dd>
+<dt><a name="ptrnWildcard" href="#ptrnWildcard"><span>ptrnWildcard:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="PatternMatchingType.ptrnWildcard" href="core/context.html#ptrnWildcard">PatternMatchingType.ptrnWildcard</a></li>
           </ul></dd>
 <dt><a name="put" href="#put"><span>put:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -1142,7 +1206,11 @@ function main() {
 <li><a class="reference external"
           data-doc-search-tag="response: resp(response: Response)" href="core/response.html#resp.m%2CResponse">response: resp(response: Response)</a></li>
           <li><a class="reference external"
-          data-doc-search-tag="response: resp(body: string; code = Http200)" href="core/response.html#resp.m%2Cstring">response: resp(body: string; code = Http200)</a></li>
+          data-doc-search-tag="response: resp(body: string; code = Http200; version = HttpVer11)" href="core/response.html#resp.m%2Cstring">response: resp(body: string; code = Http200; version = HttpVer11)</a></li>
+          </ul></dd>
+<dt><a name="respDefault" href="#respDefault"><span>respDefault:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="response: respDefault(code: HttpCode)" href="core/response.html#respDefault.m%2CHttpCode">response: respDefault(code: HttpCode)</a></li>
           </ul></dd>
 <dt><a name="respond" href="#respond"><span>respond:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -1188,7 +1256,7 @@ function main() {
           </ul></dd>
 <dt><a name="RouteError" href="#RouteError"><span>RouteError:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="route: RouteError" href="core/route.html#RouteError">route: RouteError</a></li>
+          data-doc-search-tag="httpexception: RouteError" href="core/httpexception.html#RouteError">httpexception: RouteError</a></li>
           </ul></dd>
 <dt><a name="Router" href="#Router"><span>Router:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -1196,7 +1264,7 @@ function main() {
           </ul></dd>
 <dt><a name="RouteResetError" href="#RouteResetError"><span>RouteResetError:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="route: RouteResetError" href="core/route.html#RouteResetError">route: RouteResetError</a></li>
+          data-doc-search-tag="httpexception: RouteResetError" href="core/httpexception.html#RouteResetError">httpexception: RouteResetError</a></li>
           </ul></dd>
 <dt><a name="run" href="#run"><span>run:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -1304,11 +1372,7 @@ function main() {
           </ul></dd>
 <dt><a name="setResponse" href="#setResponse"><span>setResponse:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="context: setResponse(ctx: Context; code: HttpCode; httpHeaders = [
-    (&quot;Content-Type&quot;, &quot;text/html; charset=UTF-8&quot;)].initResponseHeaders; body = &quot;&quot;;
-            version = HttpVer11)" href="core/context.html#setResponse%2CContext%2CHttpCode%2Cstring">context: setResponse(ctx: Context; code: HttpCode; httpHeaders = [
-    (&quot;Content-Type&quot;, &quot;text/html; charset=UTF-8&quot;)].initResponseHeaders; body = &quot;&quot;;
-            version = HttpVer11)</a></li>
+          data-doc-search-tag="context: setResponse(ctx: Context; code: HttpCode; body = &quot;&quot;; version = HttpVer11)" href="core/context.html#setResponse%2CContext%2CHttpCode%2Cstring">context: setResponse(ctx: Context; code: HttpCode; body = &quot;&quot;; version = HttpVer11)</a></li>
           <li><a class="reference external"
           data-doc-search-tag="context: setResponse(ctx: Context; response: Response)" href="core/context.html#setResponse%2CContext%2CResponse">context: setResponse(ctx: Context; response: Response)</a></li>
           </ul></dd>
@@ -1527,7 +1591,7 @@ function main() {
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-09-25 15:46:13 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-09-29 10:54:16 UTC</small>
       </div>
     </div>
   </div>

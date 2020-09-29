@@ -114,7 +114,7 @@ function main() {
   <li><a class="reference" href="#clear%2CResponseHeaders"
     title="clear(headers: ResponseHeaders)"><wbr />clear<span class="attachedType">ResponseHeaders</span></a></li>
   <li><a class="reference" href="#%5B%5D%2CResponseHeaders%2Cstring"
-    title="`[]`(headers: ResponseHeaders; key: string): HttpHeaderValues"><wbr />`[]`<span class="attachedType">ResponseHeaders</span></a></li>
+    title="`[]`(headers: ResponseHeaders; key: string): seq[string]"><wbr />`[]`<span class="attachedType">ResponseHeaders</span></a></li>
   <li><a class="reference" href="#%5B%5D%2CResponseHeaders%2Cstring%2Cint"
     title="`[]`(headers: ResponseHeaders; key: string; i: int): string"><wbr />`[]`<span class="attachedType">ResponseHeaders</span></a></li>
   <li><a class="reference" href="#%5B%5D%3D%2CResponseHeaders%2Cstring%2Cstring"
@@ -125,13 +125,10 @@ function main() {
     title="add(headers: ResponseHeaders; key, value: string)"><wbr />add<span class="attachedType">ResponseHeaders</span></a></li>
   <li><a class="reference" href="#del%2CResponseHeaders%2Cstring"
     title="del(headers: ResponseHeaders; key: string)"><wbr />del<span class="attachedType">ResponseHeaders</span></a></li>
-  <li><a class="reference" href="#contains%2CHttpHeaderValues%2Cstring"
-    title="contains(values: HttpHeaderValues; value: string): bool"><wbr />contains<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#hasKey%2CResponseHeaders%2Cstring"
     title="hasKey(headers: ResponseHeaders; key: string): bool"><wbr />has<wbr />Key<span class="attachedType">ResponseHeaders</span></a></li>
   <li><a class="reference" href="#getOrDefault%2CResponseHeaders%2Cstring"
-    title="getOrDefault(headers: ResponseHeaders; key: string;
-             default = @[&quot;&quot;].HttpHeaderValues): HttpHeaderValues"><wbr />get<wbr />Or<wbr />Default<span class="attachedType">ResponseHeaders</span></a></li>
+    title="getOrDefault(headers: ResponseHeaders; key: string; default = @[&quot;&quot;]): seq[string]"><wbr />get<wbr />Or<wbr />Default<span class="attachedType">ResponseHeaders</span></a></li>
   <li><a class="reference" href="#len%2CResponseHeaders"
     title="len(headers: ResponseHeaders): int"><wbr />len<span class="attachedType">ResponseHeaders</span></a></li>
 
@@ -232,11 +229,11 @@ class="link-seesrc" target="_blank">Source</a>
 
 </dd>
 <a id="[],ResponseHeaders,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#%5B%5D%2CResponseHeaders%2Cstring"><span class="Identifier">`[]`</span></a><span class="Other">(</span><span class="Identifier">headers</span><span class="Other">:</span> <a href="httplogue.html#ResponseHeaders"><span class="Identifier">ResponseHeaders</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">HttpHeaderValues</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
-    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dt><pre><span class="Keyword">proc</span> <a href="#%5B%5D%2CResponseHeaders%2Cstring"><span class="Identifier">`[]`</span></a><span class="Other">(</span><span class="Identifier">headers</span><span class="Other">:</span> <a href="httplogue.html#ResponseHeaders"><span class="Identifier">ResponseHeaders</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-<p>Returns the values associated with the given <tt class="docutils literal"><span class="pre">key</span></tt>. If the returned values are passed to a procedure expecting a <tt class="docutils literal"><span class="pre">string</span></tt>, the first value is automatically picked. If there are no values associated with the key, an exception is raised.</p>
+<p>Returns the values associated with the given <tt class="docutils literal"><span class="pre">key</span></tt>. If there are no values associated with the key, an exception is raised.</p>
 <p>To access multiple values of a key, use the overloaded <tt class="docutils literal"><span class="pre">[]</span></tt> below or to get all of them access the <tt class="docutils literal"><span class="pre">table</span></tt> field directly.</p>
 
 &nbsp;&nbsp;<a
@@ -252,9 +249,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Returns the <tt class="docutils literal"><span class="pre">i</span></tt>'th value associated with the given key. If there are no values associated with the key or the <tt class="docutils literal"><span class="pre">i</span></tt>'th value doesn't exist, an exception is raised.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/httpcore/httplogue.nim#L59"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/httpcore/httplogue.nim#L54"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/httpcore/httplogue.nim#L59" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/httpcore/httplogue.nim#L54" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="[]=,ResponseHeaders,string,string"></a>
@@ -263,9 +260,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Sets the header entries associated with <tt class="docutils literal"><span class="pre">key</span></tt> to the specified value. Replaces any existing values.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/httpcore/httplogue.nim#L65"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/httpcore/httplogue.nim#L60"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/httpcore/httplogue.nim#L65" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/httpcore/httplogue.nim#L60" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="[]=,ResponseHeaders,string,seq[string]"></a>
@@ -275,9 +272,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Sets the header entries associated with <tt class="docutils literal"><span class="pre">key</span></tt> to the specified list of values. Replaces any existing values.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/httpcore/httplogue.nim#L70"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/httpcore/httplogue.nim#L65"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/httpcore/httplogue.nim#L70" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/httpcore/httplogue.nim#L65" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="add,ResponseHeaders,string,string"></a>
@@ -286,9 +283,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Adds the specified value to the specified key. Appends to any existing values associated with the key.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/httpcore/httplogue.nim#L76"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/httpcore/httplogue.nim#L70"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/httpcore/httplogue.nim#L76" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/httpcore/httplogue.nim#L70" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="del,ResponseHeaders,string"></a>
@@ -297,20 +294,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Delete the header entries associated with <tt class="docutils literal"><span class="pre">key</span></tt>
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/httpcore/httplogue.nim#L84"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/httpcore/httplogue.nim#L78"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/httpcore/httplogue.nim#L84" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<a id="contains,HttpHeaderValues,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#contains%2CHttpHeaderValues%2Cstring"><span class="Identifier">contains</span></a><span class="Other">(</span><span class="Identifier">values</span><span class="Other">:</span> <span class="Identifier">HttpHeaderValues</span><span class="Other">;</span> <span class="Identifier">value</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Determines if <tt class="docutils literal"><span class="pre">value</span></tt> is one of the values inside <tt class="docutils literal"><span class="pre">values</span></tt>. Comparison is performed without case sensitivity.
-&nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/httpcore/httplogue.nim#L94"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/httpcore/httplogue.nim#L94" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/httpcore/httplogue.nim#L78" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="hasKey,ResponseHeaders,string"></a>
@@ -319,22 +305,21 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/httpcore/httplogue.nim#L100"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/httpcore/httplogue.nim#L88"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/httpcore/httplogue.nim#L100" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/httpcore/httplogue.nim#L88" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="getOrDefault,ResponseHeaders,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#getOrDefault%2CResponseHeaders%2Cstring"><span class="Identifier">getOrDefault</span></a><span class="Other">(</span><span class="Identifier">headers</span><span class="Other">:</span> <a href="httplogue.html#ResponseHeaders"><span class="Identifier">ResponseHeaders</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span>
-                 <span class="Identifier">default</span> <span class="Other">=</span> <span class="Operator">@</span><span class="Other">[</span><span class="StringLit">&quot;&quot;</span><span class="Other">]</span><span class="Other">.</span><span class="Identifier">HttpHeaderValues</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">HttpHeaderValues</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
+<dt><pre><span class="Keyword">proc</span> <a href="#getOrDefault%2CResponseHeaders%2Cstring"><span class="Identifier">getOrDefault</span></a><span class="Other">(</span><span class="Identifier">headers</span><span class="Other">:</span> <a href="httplogue.html#ResponseHeaders"><span class="Identifier">ResponseHeaders</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">default</span> <span class="Other">=</span> <span class="Operator">@</span><span class="Other">[</span><span class="StringLit">&quot;&quot;</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 Returns the values associated with the given <tt class="docutils literal"><span class="pre">key</span></tt>. If there are no values associated with the key, then <tt class="docutils literal"><span class="pre">default</span></tt> is returned.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/httpcore/httplogue.nim#L103"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/httpcore/httplogue.nim#L91"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/httpcore/httplogue.nim#L103" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/httpcore/httplogue.nim#L91" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="len,ResponseHeaders"></a>
@@ -343,9 +328,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/httpcore/httplogue.nim#L112"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/httpcore/httplogue.nim#L100"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/httpcore/httplogue.nim#L112" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/httpcore/httplogue.nim#L100" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -360,9 +345,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Yields each key, value pair.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/httpcore/httplogue.nim#L88"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/httpcore/httplogue.nim#L82"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/httpcore/httplogue.nim#L88" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/httpcore/httplogue.nim#L82" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -375,7 +360,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-09-25 15:45:34 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-09-29 10:53:33 UTC</small>
       </div>
     </div>
   </div>

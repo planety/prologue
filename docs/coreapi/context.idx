@@ -1,6 +1,5 @@
 PathHandler	context.html#PathHandler	context: PathHandler	
 Path	context.html#Path	context: Path	
-Router	context.html#Router	context: Router	
 RePath	context.html#RePath	context: RePath	
 ReRouter	context.html#ReRouter	context: ReRouter	
 ReversedRouter	context.html#ReversedRouter	context: ReversedRouter	
@@ -13,6 +12,13 @@ HandlerAsync	context.html#HandlerAsync	context: HandlerAsync
 ErrorHandler	context.html#ErrorHandler	context: ErrorHandler	
 ErrorHandlerTable	context.html#ErrorHandlerTable	context: ErrorHandlerTable	
 UploadFile	context.html#UploadFile	context: UploadFile	
+ptrnWildcard	context.html#ptrnWildcard	PatternMatchingType.ptrnWildcard	
+ptrnParam	context.html#ptrnParam	PatternMatchingType.ptrnParam	
+ptrnText	context.html#ptrnText	PatternMatchingType.ptrnText	
+PatternMatchingType	context.html#PatternMatchingType	context: PatternMatchingType	
+BasePatternNode	context.html#BasePatternNode	context: BasePatternNode	
+PatternNode	context.html#PatternNode	context: PatternNode	
+Router	context.html#Router	context: Router	
 gScope	context.html#gScope,Context	context: gScope(ctx: Context): lent GlobalScope	
 size	context.html#size,Context	context: size(ctx: Context): int8	
 incSize	context.html#incSize,Context,int	context: incSize(ctx: Context; num = 1)	
@@ -35,7 +41,9 @@ getSettings	context.html#getSettings,Context,string	context: getSettings(ctx: Co
 respond	context.html#respond,Context	context: respond(ctx: Context): Future[void]	
 respond	context.html#respond,Context,HttpCode,string,ResponseHeaders	context: respond(ctx: Context; code: HttpCode; body: string; headers: ResponseHeaders): Future[\n    void]	
 send	context.html#send,Context,string	context: send(ctx: Context; content: string): Future[void]	
-hasHeader	context.html#hasHeader,Request,string	context: hasHeader(request: var Request; key: string): bool	
+hasHeader	context.html#hasHeader,Request,string	context: hasHeader(request: Request; key: string): bool	
+getHeader	context.html#getHeader,Request,string	context: getHeader(request: Request; key: string): seq[string]	
+getHeaderOrDefault	context.html#getHeaderOrDefault,Request,string	context: getHeaderOrDefault(request: Request; key: string; default = @[&quot;&quot;]): seq[string]	
 setHeader	context.html#setHeader,Request,string,string	context: setHeader(request: var Request; key, value: string)	
 setHeader	context.html#setHeader,Request,string,seq[string]	context: setHeader(request: var Request; key: string; value: seq[string])	
 addHeader	context.html#addHeader,Request,string,string	context: addHeader(request: var Request; key, value: string)	
@@ -50,7 +58,7 @@ getPostParams	context.html#getPostParams,Context,string,string	context: getPostP
 getQueryParams	context.html#getQueryParams,Context,string,string	context: getQueryParams(ctx: Context; key: string; default = &quot;&quot;): string	
 getPathParams	context.html#getPathParams,Context,string	context: getPathParams(ctx: Context; key: string): string	
 getPathParams	context.html#getPathParams,Context,string,T	context: getPathParams[T: BaseType](ctx: Context; key: string; default: T): T	
-setResponse	context.html#setResponse,Context,HttpCode,string	context: setResponse(ctx: Context; code: HttpCode; httpHeaders = [\n    (&quot;Content-Type&quot;, &quot;text/html; charset=UTF-8&quot;)].initResponseHeaders; body = &quot;&quot;;\n            version = HttpVer11)	
+setResponse	context.html#setResponse,Context,HttpCode,string	context: setResponse(ctx: Context; code: HttpCode; body = &quot;&quot;; version = HttpVer11)	
 setResponse	context.html#setResponse,Context,Response	context: setResponse(ctx: Context; response: Response)	
 urlFor	context.html#urlFor,Context,string,openArray[],openArray[]	context: urlFor(ctx: Context; handler: string;\n       parameters: openArray[(string, string)] = @[];\n       queryParams: openArray[(string, string)] = @[]; usePlus = true; omitEq = true): string	
 abortExit	context.html#abortExit,Context,string	context: abortExit(ctx: Context; code = Http401; body = &quot;&quot;; headers = initResponseHeaders();\n          version = HttpVer11)	

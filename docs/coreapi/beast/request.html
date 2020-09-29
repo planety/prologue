@@ -119,9 +119,7 @@ function main() {
 <li>
   <a class="reference reference-toplevel" href="#12" id="62">Procs</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#headers%2CRequest"
-    title="headers(request: Request): HttpHeaders"><wbr />headers<span class="attachedType">Request</span></a></li>
-  <li><a class="reference" href="#send%2CRequest%2Cstring"
+      <li><a class="reference" href="#send%2CRequest%2Cstring"
     title="send(request: Request; content: string): Future[void]"><wbr />send<span class="attachedType">Request</span></a></li>
   <li><a class="reference" href="#respond%2CRequest%2CHttpCode%2Cstring%2CResponseHeaders"
     title="respond(request: Request; code: HttpCode; body: string; headers: ResponseHeaders): Future[
@@ -152,6 +150,8 @@ function main() {
     title="setScheme(request: var Request; value: string)"><wbr />set<wbr />Scheme<span class="attachedType">Request</span></a></li>
   <li><a class="reference" href="#body%2CRequest"
     title="body(request: Request): string"><wbr />body<span class="attachedType">Request</span></a></li>
+  <li><a class="reference" href="#headers%2CRequest"
+    title="headers(request: Request): HttpHeaders"><wbr />headers<span class="attachedType">Request</span></a></li>
   <li><a class="reference" href="#reqMethod%2CRequest"
     title="reqMethod(request: Request): HttpMethod"><wbr />req<wbr />Method<span class="attachedType">Request</span></a></li>
   <li><a class="reference" href="#getCookie%2CRequest%2Cstring%2Cstring"
@@ -169,6 +169,11 @@ function main() {
             pathParams = newStringTable(modeCaseSensitive);
             queryParams = newStringTable(modeCaseSensitive);
             postParams = newStringTable(modeCaseSensitive)): Request"><wbr />init<wbr />Request<span class="attachedType">NativeRequest</span></a></li>
+  <li><a class="reference" href="#initMockingRequest%2CHttpMethod%2CHttpHeaders%2CUri"
+    title="initMockingRequest(httpMethod: HttpMethod; headers: HttpHeaders; url: Uri;
+                   cookies = initCookieJar(); postParams = newStringTable();
+                   queryParams = newStringTable(); formParams = initFormPart();
+                   pathParams = newStringTable()): Request"><wbr />init<wbr />Mocking<wbr />Request<span class="attachedType">Request</span></a></li>
 
   </ul>
 </li>
@@ -225,17 +230,6 @@ class="link-seesrc" target="_blank">Source</a>
 <div class="section" id="12">
 <h1><a class="toc-backref" href="#12">Procs</a></h1>
 <dl class="item">
-<a id="headers,Request"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#headers%2CRequest"><span class="Identifier">headers</span></a><span class="Other">(</span><span class="Identifier">request</span><span class="Other">:</span> <a href="request.html#Request"><span class="Identifier">Request</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">HttpHeaders</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Gets the <tt class="docutils literal"><span class="pre">HttpHeaders</span></tt> of the request.
-&nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L73"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L73" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
 <a id="send,Request,string"></a>
 <dt><pre><span class="Keyword">proc</span> <a href="#send%2CRequest%2Cstring"><span class="Identifier">send</span></a><span class="Other">(</span><span class="Identifier">request</span><span class="Other">:</span> <a href="request.html#Request"><span class="Identifier">Request</span></a><span class="Other">;</span> <span class="Identifier">content</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Future</span><span class="Other">[</span><span class="Identifier">void</span><span class="Other">]</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span>
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">,</span> <span class="Identifier">IOSelectorsException</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
@@ -377,6 +371,17 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L65" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
+<a id="headers,Request"></a>
+<dt><pre><span class="Keyword">func</span> <a href="#headers%2CRequest"><span class="Identifier">headers</span></a><span class="Other">(</span><span class="Identifier">request</span><span class="Other">:</span> <a href="request.html#Request"><span class="Identifier">Request</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">HttpHeaders</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+Gets the <tt class="docutils literal"><span class="pre">HttpHeaders</span></tt> of the request.
+&nbsp;&nbsp;<a
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L73"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L73" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
 <a id="reqMethod,Request"></a>
 <dt><pre><span class="Keyword">func</span> <a href="#reqMethod%2CRequest"><span class="Identifier">reqMethod</span></a><span class="Other">(</span><span class="Identifier">request</span><span class="Other">:</span> <a href="request.html#Request"><span class="Identifier">Request</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">HttpMethod</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
@@ -459,6 +464,21 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L143" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
+<a id="initMockingRequest,HttpMethod,HttpHeaders,Uri"></a>
+<dt><pre><span class="Keyword">func</span> <a href="#initMockingRequest%2CHttpMethod%2CHttpHeaders%2CUri"><span class="Identifier">initMockingRequest</span></a><span class="Other">(</span><span class="Identifier">httpMethod</span><span class="Other">:</span> <span class="Identifier">HttpMethod</span><span class="Other">;</span> <span class="Identifier">headers</span><span class="Other">:</span> <span class="Identifier">HttpHeaders</span><span class="Other">;</span> <span class="Identifier">url</span><span class="Other">:</span> <span class="Identifier">Uri</span><span class="Other">;</span>
+                       <span class="Identifier">cookies</span> <span class="Other">=</span> <span class="Identifier">initCookieJar</span><span class="Other">(</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">postParams</span> <span class="Other">=</span> <span class="Identifier">newStringTable</span><span class="Other">(</span><span class="Other">)</span><span class="Other">;</span>
+                       <span class="Identifier">queryParams</span> <span class="Other">=</span> <span class="Identifier">newStringTable</span><span class="Other">(</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">formParams</span> <span class="Other">=</span> <span class="Identifier">initFormPart</span><span class="Other">(</span><span class="Other">)</span><span class="Other">;</span>
+                       <span class="Identifier">pathParams</span> <span class="Other">=</span> <span class="Identifier">newStringTable</span><span class="Other">(</span><span class="Other">)</span><span class="Other">)</span><span class="Other">:</span> <a href="request.html#Request"><span class="Identifier">Request</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+Initializes a new Request.
+&nbsp;&nbsp;<a
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L175"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L175" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
 
 </dl></div>
 
@@ -469,7 +489,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-09-25 15:45:36 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-09-29 10:53:34 UTC</small>
       </div>
     </div>
   </div>

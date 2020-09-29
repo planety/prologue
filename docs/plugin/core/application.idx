@@ -17,10 +17,12 @@ options	core/application.html#options,Prologue,string,HandlerAsync,string,seq[Ha
 connect	core/application.html#connect,Prologue,string,HandlerAsync,string,seq[HandlerAsync],LocalSettings	application: connect(app: Prologue; route: string; handler: HandlerAsync; name = &quot;&quot;;\n        middlewares: seq[HandlerAsync] = @[]; settings: LocalSettings = nil)	
 patch	core/application.html#patch,Prologue,string,HandlerAsync,string,seq[HandlerAsync],LocalSettings	application: patch(app: Prologue; route: string; handler: HandlerAsync; name = &quot;&quot;;\n      middlewares: seq[HandlerAsync] = @[]; settings: LocalSettings = nil)	
 all	core/application.html#all,Prologue,string,HandlerAsync,string,seq[HandlerAsync],LocalSettings	application: all(app: Prologue; route: string; handler: HandlerAsync; name = &quot;&quot;;\n    middlewares: seq[HandlerAsync] = @[]; settings: LocalSettings = nil)	
-printRoute	core/application.html#printRoute,Prologue	application: printRoute(app: Prologue)	
 appAddress	core/application.html#appAddress,Prologue	application: appAddress(app: Prologue): string	
 appDebug	core/application.html#appDebug,Prologue	application: appDebug(app: Prologue): bool	
 appName	core/application.html#appName,Prologue	application: appName(app: Prologue): string	
 appPort	core/application.html#appPort,Prologue	application: appPort(app: Prologue): Port	
+execEvent	core/application.html#execEvent,Event	application: execEvent(event: Event)	
 newApp	core/application.html#newApp,Settings,seq[HandlerAsync],seq[Event],seq[Event]	application: newApp(settings: Settings; middlewares: seq[HandlerAsync] = @[];\n       startup: seq[Event] = @[]; shutdown: seq[Event] = @[];\n       errorHandlerTable = DefaultErrorHandler;\n       appData = newStringTable(mode = modeCaseSensitive)): Prologue	
+handleContext	core/application.html#handleContext,Prologue,Context	application: handleContext(app: Prologue; ctx: Context): owned(Future[void])	
+handleRequest	core/application.html#handleRequest,Prologue,Request	application: handleRequest(app: Prologue; nativeRequest: NativeRequest): Future[void]	
 run	core/application.html#run,Prologue	application: run(app: Prologue)	

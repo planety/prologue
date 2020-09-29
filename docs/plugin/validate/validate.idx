@@ -16,4 +16,4 @@ equals	validate/validate.html#equals,string,string	validate: equals(value: strin
 accepted	validate/validate.html#accepted,string	validate: accepted(msg = &quot;&quot;): ValidateHandler	
 required	validate/validate.html#required,string	validate: required(msg = &quot;&quot;): ValidateHandler	
 matchRegex	validate/validate.html#matchRegex,Regex,string	validate: matchRegex(value: Regex; msg = &quot;&quot;): ValidateHandler	
-matchUrl	validate/validate.html#matchUrl,string	validate: matchUrl(msg = &quot;&quot;): ValidateHandler	
+matchURL	validate/validate.html#matchURL,string	validate: matchURL(msg = &quot;&quot;): ValidateHandler	
