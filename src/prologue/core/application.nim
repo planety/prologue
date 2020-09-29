@@ -102,13 +102,13 @@ proc registerErrorHandler*(app: Prologue, code: openArray[HttpCode],
   runnableExamples:
     ## Examples for all registerErrorHandler
     proc go404*(ctx: Context) {.async.} =
-      resp "Something wrong!"
+      resp "Something wrong!", Http404
 
     proc go20x*(ctx: Context) {.async.} =
-      resp "Ok!"
+      resp "Ok!", Http404
 
     proc go30x*(ctx: Context) {.async.} =
-      resp "EveryThing else?"
+      resp "EveryThing else?", Http404
 
     let settings = newSettings()
     var app = newApp(settings)
@@ -393,14 +393,13 @@ proc handleContext*(app: Prologue, ctx: Context) {.async.} =
     ctx.response.body = e.msg
     ctx.response.setHeader("content-type", "text/plain; charset=UTF-8")
 
+  # display error messages only in debug mode
+  if ctx.gScope.settings.debug and ctx.response.code == Http500:
+    discard
+  elif ctx.response.code in app.errorHandlerTable and ctx.response.body.len == 0:
+    await (app.errorHandlerTable[ctx.response.code])(ctx)
 
   if not ctx.handled:
-    # display error messages only in debug mode
-    if ctx.gScope.settings.debug and ctx.response.code == Http500:
-      discard
-    elif ctx.response.code in app.errorHandlerTable:
-      await (app.errorHandlerTable[ctx.response.code])(ctx)
-
     # central processing
     # all context processed here except static file
 

@@ -297,6 +297,7 @@ proc deleteCookie*(ctx: Context, key: string, path = "", domain = "") {.inline.}
 proc defaultHandler*(ctx: Context) {.async.} =
   ## Default handler with HttpCode 404. 
   ctx.response.code = Http404
+  ctx.response.body.setLen(0)
 
 proc default404Handler*(ctx: Context) {.async.} =
   ## Default 404 pages.

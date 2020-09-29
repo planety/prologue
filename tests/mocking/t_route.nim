@@ -1,7 +1,7 @@
 import ../../src/prologue
 import ../../src/prologue/mocking/mocking
 
-import uri, segfaults
+import uri
 
 
 proc hello*(ctx: Context) {.async.} =
@@ -15,7 +15,7 @@ proc prepareApp*(debug = true): Prologue =
 proc addTestRoute*(app: Prologue, path: string, httpMethod = HttpGet) =
   app.addRoute(path, hello, httpMethod)
 
-proc prepareRequest(path: string, httpMethod: HttpMethod): Request =
+proc prepareRequest*(path: string, httpMethod: HttpMethod): Request =
   result = initMockingRequest(
     httpMethod = httpMethod,
     headers = newHttpHeaders(),
@@ -28,11 +28,15 @@ proc prepareRequest(path: string, httpMethod: HttpMethod): Request =
   )
 
 
-proc testContext(app: Prologue, path: string, httpMethod = HttpGet): Context =
+proc testContext*(app: Prologue, path: string, httpMethod = HttpGet): Context =
   result = app.runOnce(prepareRequest(path, httpMethod))
   doAssert result.response.code == Http200
   doAssert result.response.getHeader("content-type") == @["text/html; charset=UTF-8"]
   doAssert result.response.body == "<h1>Hello, Prologue!</h1>"
+
+proc testFailedContext*(app: Prologue, path: string, httpMethod = HttpGet): Context =
+  result = app.runOnce(prepareRequest(path, httpMethod))
+  doAssert result.response.code == Http404
 
 
 block Basic_Mapping:
@@ -115,3 +119,88 @@ block Basic_Mapping:
     app.addTestRoute("/flywind/prologue")
     discard testContext(app, "/flywind/prologue")
     discard testContext(app, "/flywind/prologue/")
+
+  # test "Trailing slash doesn't make a unique mapping":
+  block:
+    var app = prepareApp()
+    app.addTestRoute("/some/url/")
+    doAssertRaises(DuplicatedRouteError):
+      app.addTestRoute("/some/url")
+
+  # test "Varying param names don't make a unique mapping":
+  block:
+    var app = prepareApp()
+    app.addTestRoute("/has/{paramA}")
+
+    doAssertRaises(DuplicatedRouteError):
+      app.addTestRoute("/has/{paramB}")
+
+  # test "Param vs wildcard don't make a unique mapping":
+  block:
+    var app = prepareApp()
+    app.addTestRoute("/has/{param}")
+
+    doAssertRaises(DuplicatedRouteError):
+      app.addTestRoute("/has/*")
+
+  # test "Greedy params must go at the end of a mapping":
+  block:
+    var app = prepareApp()
+    doAssertRaises(RouteError):
+      app.addTestRoute("/has/{p1}$/{p2}")
+
+  # test "Greedy wildcards must go at the end of a mapping":
+  block:
+    var app = prepareApp()
+    doAssertRaises(RouteError):
+      app.addTestRoute("/has/*$/*")
+
+  # test "Wildcards only match one URL section":
+  block:
+    var app = prepareApp()
+    app.addTestRoute("/has/*/one")
+    discard testFailedContext(app, "/has/a/b/one")
+
+
+  # test "Invalid characters in URL":
+  block:
+    var app = prepareApp()
+    app.addTestRoute("/test/{param}")
+    discard testFailedContext(app, "/test/!/")
+
+  # test "Remaining path consumption with parameter":
+  block:
+    var app = prepareApp()
+    app.addTestRoute("/test/{param}$")
+    let ctx = testContext(app, "/test/foo/bar/baz/")
+    doAssert ctx.getPathParams("param") == "foo/bar/baz"
+
+  # test "Remaining path consumption with wildcard":
+  block:
+    var app = prepareApp()
+    app.addTestRoute("/test/*$")
+    discard testContext(app, "/test/foo/bar/baz")
+
+  # test "Map subpath after path":
+  block:
+    var app = prepareApp()
+    app.addTestRoute("/hello")
+    app.addTestRoute("/")
+
+  # test "Path param that consumes entire path":
+  block:
+    var app = prepareApp()
+    app.addTestRoute("/{pathParam}$")
+    discard testContext(app, "/foo/bar/baz")
+
+  # test "Path param combined with consuming path param":
+  block:
+    var app = prepareApp()
+    app.addTestRoute("/{pathParam1}/{pathParam2}$")
+    discard testContext(app, "/foo/bar/baz")
+
+  # test "Path param combined with consuming wildcard":
+  block:
+    var app = prepareApp()
+    app.addTestRoute("/{pathParam}/*$")
+    discard testContext(app, "/foo/bar/baz")

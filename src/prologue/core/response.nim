@@ -116,6 +116,14 @@ func jsonResponse*(text: JsonNode, code = Http200, headers = initResponseHeaders
   result = initResponse(version, code, headers, body = $text)
   result.headers["Content-Type"] = "application/json"
 
+macro respDefault*(code: HttpCode) =
+  ## Uses default error handler registered in the error handler table if existing.
+  var ctx = ident"ctx"
+
+  result = quote do:
+    `ctx`.response.code = `code`
+    `ctx`.response.body.setLen(0)
+
 macro resp*(body: string, code = Http200, version = HttpVer11) =
   ## Handy to make a response of ctx.
   var ctx = ident"ctx"

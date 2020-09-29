@@ -483,7 +483,7 @@ func stripRoute*(route: string): string {.inline.} =
     if result[^1] == '/':
       result.setLen(result.high)
 
-proc findHandler*(ctx: Context): PathHandler {.inline.} =
+func findHandler*(ctx: Context): PathHandler {.inline.} =
   ## fixed route -> params route -> regex route
   ## Follow the order of addition.
   
