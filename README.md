@@ -132,7 +132,7 @@ proc do_login*(ctx: Context) {.async.} =
   resp redirect("/hello/Nim")
 
 
-let settings = newSettings(appName = "StarLight")
+let settings = newSettings(appName = "Prologue")
 var app = newApp(settings = settings, middlewares = @[debugRequestMiddleware()])
 app.addRoute("/", home, @[HttpGet, HttpPost])
 app.addRoute("/home", home, HttpGet)

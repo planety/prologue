@@ -108,14 +108,14 @@ block:
     doAssert response.code == Http200, $response.code
     doAssert (waitFor response.body) == "<h1>Home</h1>"
 
-  # "can get /hello/{name} with name = Starlight"
+  # "can get /hello/{name} with name = Prologue"
   block:
     let
-      route = "/hello/Starlight"
+      route = "/hello/Prologue"
       response = waitFor client.get(fmt"http://{address}:{port}{route}")
 
     doAssert response.code == Http200, $response.code
-    doAssert (waitFor response.body) == "<h1>Hello, Starlight</h1>"
+    doAssert (waitFor response.body) == "<h1>Hello, Prologue</h1>"
 
   # "can get /hello/{name} with name = "
   block:
