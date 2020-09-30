@@ -18,8 +18,6 @@ from nativesockets import Port, `$`
 import cookiejar
 from cgi import CgiError
 
-# from os import sleep
-
 
 from ./utils import isStaticFile
 from ./form import parseFormParams
@@ -72,9 +70,6 @@ export urandom
 export utils
 export httpexception
 
-
-let
-  DefaultErrorHandler = newErrorHandlerTable({Http404: default404Handler, Http500: default500Handler})
 
 # shutdown events
 # TODO I don't like global variables
@@ -315,7 +310,7 @@ func newApp*(
   middlewares: seq[HandlerAsync] = @[],
   startup: seq[Event] = @[], 
   shutdown: seq[Event] = @[],
-  errorHandlerTable = DefaultErrorHandler,
+  errorHandlerTable = newErrorHandlerTable({Http404: default404Handler, Http500: default500Handler}),
   appData = newStringTable(mode = modeCaseSensitive)
 ): Prologue {.inline.} =
   ## Creates a new App instance.

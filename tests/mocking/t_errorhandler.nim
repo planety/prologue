@@ -42,15 +42,13 @@ proc testError404(app: Prologue, path: string, httpMethod = HttpGet, body = "Som
   doAssert result.response.body == body, result.response.body
 
 
-block Basic_Mapping:
+block ErrorHandler:
   # No find handler
   block:
     var app = prepareApp()
     app.registerErrorHandler(Http404, go404)
     app.addTestRoute("/hello")
     discard testError404(app, "/no")
-    ## Testament bug which pollutes `test_doc_errorhandler.nim`
-    app.errorHandlerTable[Http404] = default404Handler
 
   block:
     # Http 404
@@ -59,13 +57,9 @@ block Basic_Mapping:
     app.addRoute("/hello", helloDefaultError)
     let ctx = testError404(app, "/hello")
     doAssert ctx.ctxData["Tested"] == "true"
-    ## Testament bug which pollutes `test_doc_errorhandler.nim`
-    app.errorHandlerTable[Http404] = default404Handler
 
   block:
     var app = prepareApp()
     app.registerErrorHandler(Http404, go404)
     app.addRoute("/hello", helloError)
     discard testError404(app, "/hello", body = "This is test!")
-    ## Testament bug which pollutes `test_doc_errorhandler.nim`
-    app.errorHandlerTable[Http404] = default404Handler
