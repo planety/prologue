@@ -24,7 +24,7 @@ proc prepareApp(debug = true): Prologue =
 proc addTestRoute(app: Prologue, path: string, httpMethod = HttpGet) =
   app.addRoute(path, hello, httpMethod)
 
-proc prepareRequest(path: string, httpMethod: HttpMethod): Request =
+proc prepareRequest(path: string, httpMethod = HttpGet): Request =
   result = initMockingRequest(
     httpMethod = httpMethod,
     headers = newHttpHeaders(),
@@ -63,3 +63,80 @@ block ErrorHandler:
     app.registerErrorHandler(Http404, go404)
     app.addRoute("/hello", helloError)
     discard testError404(app, "/hello", body = "This is test!")
+
+  block:
+    proc go500(ctx: Context) {.async.} = 
+      ctx.response.code = Http500
+      ctx.response.body = "Internal Error"
+
+    var app = prepareApp(debug = true)
+    app.addRoute("/hello", go500)
+    let ctx = app.runOnce(prepareRequest("/hello"))
+    doAssert ctx.response.body == "Internal Error"
+
+  block:
+    proc go500(ctx: Context) {.async.} = 
+      raise newException(ValueError, "This is wrong!")
+
+    var app = prepareApp(debug = true)
+    app.addRoute("/hello", go500)
+    let ctx = app.runOnce(prepareRequest("/hello"))
+    doAssert ctx.response.body != "This is wrong!"
+
+  block:
+    proc go500(ctx: Context) {.async.} = 
+      ctx.response.code = Http500
+      ctx.response.body = "Internal Error"
+
+    var app = prepareApp(debug = false)
+    app.addRoute("/hello", go500)
+    let ctx = app.runOnce(prepareRequest("/hello"))
+    doAssert ctx.response.body == internalServerErrorPage(), ctx.response.body
+
+  block:
+    proc go500(ctx: Context) {.async.} = 
+      raise newException(ValueError, "This is wrong!")
+
+    var app = prepareApp(debug = false)
+    app.addRoute("/hello", go500)
+    let ctx = app.runOnce(prepareRequest("/hello"))
+    doAssert ctx.response.body == internalServerErrorPage()
+
+  block:
+    proc go500(ctx: Context) {.async.} = 
+      ctx.response.code = Http500
+      ctx.response.body.setLen(0)
+
+    var app = prepareApp(debug = true)
+    app.addRoute("/hello", go500)
+    let ctx = app.runOnce(prepareRequest("/hello"))
+    doAssert ctx.response.body == internalServerErrorPage()
+
+  block:
+    proc go500(ctx: Context) {.async.} = 
+      raise newException(ValueError, "")
+
+    var app = prepareApp(debug = true)
+    app.addRoute("/hello", go500)
+    let ctx = app.runOnce(prepareRequest("/hello"))
+    doAssert ctx.response.body.len > 0
+    doAssert ctx.response.body != internalServerErrorPage()
+
+  block:
+    proc go500(ctx: Context) {.async.} = 
+      ctx.response.code = Http500
+      ctx.response.body.setLen(0)
+
+    var app = prepareApp(debug = false)
+    app.addRoute("/hello", go500)
+    let ctx = app.runOnce(prepareRequest("/hello"))
+    doAssert ctx.response.body == internalServerErrorPage(), ctx.response.body
+
+  block:
+    proc go500(ctx: Context) {.async.} = 
+      raise newException(ValueError, "")
+
+    var app = prepareApp(debug = false)
+    app.addRoute("/hello", go500)
+    let ctx = app.runOnce(prepareRequest("/hello"))
+    doAssert ctx.response.body == internalServerErrorPage()
