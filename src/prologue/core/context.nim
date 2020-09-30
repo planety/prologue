@@ -331,6 +331,14 @@ func getPathParams*[T: BaseType](ctx: Context, key: string,
   let pathParams = ctx.request.pathParams.getOrDefault(key)
   parseValue(pathParams, default)
 
+func getFormParams*(ctx: Context, key: string, default = ""): string {.inline.} =
+  ## Gets the contents of the form if key exists. Otherwise `default` will be returned.
+  ## If you need the filename of the form, use `getUploadFile` instead.
+  if key in ctx.request.formParams.data:
+    result = ctx.request.formParams[key].body
+  else:
+    result = default
+
 proc setResponse*(ctx: Context, code: HttpCode,
                   body = "", version = HttpVer11) {.inline.} =
   ## Handy to make the response of `ctx`.
