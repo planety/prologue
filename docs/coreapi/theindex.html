@@ -218,9 +218,9 @@ function main() {
 <li><a class="reference external"
           data-doc-search-tag="types: BaseType" href="types.html#BaseType">types: BaseType</a></li>
           </ul></dd>
-<dt><a name="beforeApi" href="#beforeApi"><span>beforeApi:</span></a></dt><dd><ul class="simple">
+<dt><a name="beforeAPI" href="#beforeAPI"><span>beforeAPI:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="utils: beforeApi(version, body: untyped)" href="utils.html#beforeApi.t%2Cuntyped%2Cuntyped">utils: beforeApi(version, body: untyped)</a></li>
+          data-doc-search-tag="utils: beforeAPI(version, body: untyped)" href="utils.html#beforeAPI.t%2Cuntyped%2Cuntyped">utils: beforeAPI(version, body: untyped)</a></li>
           </ul></dd>
 <dt><a name="body" href="#body"><span>body:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -352,7 +352,7 @@ function main() {
           </ul></dd>
 <dt><a name="errorPage" href="#errorPage"><span>errorPage:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="pages: errorPage(errorMsg: string; version: string): string" href="pages.html#errorPage%2Cstring%2Cstring">pages: errorPage(errorMsg: string; version: string): string</a></li>
+          data-doc-search-tag="pages: errorPage(errorMsg: string): string" href="pages.html#errorPage%2Cstring">pages: errorPage(errorMsg: string): string</a></li>
           </ul></dd>
 <dt><a name="Event" href="#Event"><span>Event:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -653,11 +653,11 @@ function main() {
 <dt><a name="newApp" href="#newApp"><span>newApp:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="application: newApp(settings: Settings; middlewares: seq[HandlerAsync] = @[];
-       startup: seq[Event] = @[]; shutdown: seq[Event] = @[];
-       errorHandlerTable = DefaultErrorHandler;
+       startup: seq[Event] = @[]; shutdown: seq[Event] = @[]; errorHandlerTable = newErrorHandlerTable(
+    [(Http404, default404Handler), (Http500, default500Handler)]);
        appData = newStringTable(mode = modeCaseSensitive)): Prologue" href="application.html#newApp%2CSettings%2Cseq%5BHandlerAsync%5D%2Cseq%5BEvent%5D%2Cseq%5BEvent%5D">application: newApp(settings: Settings; middlewares: seq[HandlerAsync] = @[];
-       startup: seq[Event] = @[]; shutdown: seq[Event] = @[];
-       errorHandlerTable = DefaultErrorHandler;
+       startup: seq[Event] = @[]; shutdown: seq[Event] = @[]; errorHandlerTable = newErrorHandlerTable(
+    [(Http404, default404Handler), (Http500, default500Handler)]);
        appData = newStringTable(mode = modeCaseSensitive)): Prologue</a></li>
           </ul></dd>
 <dt><a name="newContext" href="#newContext"><span>newContext:</span></a></dt><dd><ul class="simple">
@@ -1046,9 +1046,9 @@ function main() {
 <li><a class="reference external"
           data-doc-search-tag="utils: since(version, body: untyped)" href="utils.html#since.t%2Cuntyped%2Cuntyped">utils: since(version, body: untyped)</a></li>
           </ul></dd>
-<dt><a name="sinceApi" href="#sinceApi"><span>sinceApi:</span></a></dt><dd><ul class="simple">
+<dt><a name="sinceAPI" href="#sinceAPI"><span>sinceAPI:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="utils: sinceApi(version, body: untyped)" href="utils.html#sinceApi.t%2Cuntyped%2Cuntyped">utils: sinceApi(version, body: untyped)</a></li>
+          data-doc-search-tag="utils: sinceAPI(version, body: untyped)" href="utils.html#sinceAPI.t%2Cuntyped%2Cuntyped">utils: sinceAPI(version, body: untyped)</a></li>
           </ul></dd>
 <dt><a name="size" href="#size"><span>size:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -1131,7 +1131,7 @@ function main() {
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-09-29 10:53:49 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-09-30 14:53:24 UTC</small>
       </div>
     </div>
   </div>
