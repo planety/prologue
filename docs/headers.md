@@ -25,7 +25,7 @@ proc hello(ctx: Context) {.async.} =
 `Prologue` also sends HTTP headers to the client. It uses `ResponseHeaders` to store them. It has similar API like the headers of the request. First, `Prologue` initializes `ctx.response` with `initResponseHeaders`. Then 
 users could use `hasHeader`, `addHeader` or `setHeader` to do what they want. 
 
-Notes that, `addHeader` will appends values to existing keys in headers. `setHeader` will reset the values of key no matter whether key is in the headers. 
+Notes that, `addHeader` will append values to existing keys in headers. `setHeader` will reset the values of key no matter whether key is in the headers. 
 
 ```nim
 proc hello(ctx: Context) {.async.} =
