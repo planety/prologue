@@ -58,8 +58,8 @@ block:
     doAssert decide("Off") == (true, "")
     doAssert decide("wrong") == (false, msg)
     doAssert decide("") == (false, msg)
-    doAssert decideDefaultMsg("wrong") == (false, "wrong is not a boolean!")
-    doAssert decideDefaultMsg("") == (false, " is not a boolean!")
+    doAssert decideDefaultMsg("wrong") == (false, "wrong is not a Boolean!")
+    doAssert decideDefaultMsg("") == (false, " is not a Boolean!")
 
   # "equals can work"
   block:
