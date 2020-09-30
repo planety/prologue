@@ -18,8 +18,6 @@ from nativesockets import Port, `$`
 import cookiejar
 from cgi import CgiError
 
-# from os import sleep
-
 
 from ./utils import isStaticFile
 from ./form import parseFormParams
@@ -72,9 +70,6 @@ export urandom
 export utils
 export httpexception
 
-
-let
-  DefaultErrorHandler = newErrorHandlerTable({Http404: default404Handler, Http500: default500Handler})
 
 # shutdown events
 # TODO I don't like global variables
@@ -315,7 +310,7 @@ func newApp*(
   middlewares: seq[HandlerAsync] = @[],
   startup: seq[Event] = @[], 
   shutdown: seq[Event] = @[],
-  errorHandlerTable = DefaultErrorHandler,
+  errorHandlerTable = newErrorHandlerTable({Http404: default404Handler, Http500: default500Handler}),
   appData = newStringTable(mode = modeCaseSensitive)
 ): Prologue {.inline.} =
   ## Creates a new App instance.
@@ -379,7 +374,7 @@ proc handleContext*(app: Prologue, ctx: Context) {.async.} =
       await switch(ctx)
   except RouteError as e:
     ctx.response.code = Http404
-    ctx.response.body = e.msg
+    ctx.response.body.setLen(0)
     logging.debug e.msg
   except HttpError as e:
     # catch general http error
@@ -394,7 +389,7 @@ proc handleContext*(app: Prologue, ctx: Context) {.async.} =
     ctx.response.setHeader("content-type", "text/plain; charset=UTF-8")
 
   # display error messages only in debug mode
-  if ctx.gScope.settings.debug and ctx.response.code == Http500:
+  if ctx.gScope.settings.debug and ctx.response.code == Http500 and ctx.response.body.len != 0:
     discard
   elif ctx.response.code in app.errorHandlerTable and 
           (ctx.response.body.len == 0 or ctx.response.code == Http500):
@@ -402,7 +397,7 @@ proc handleContext*(app: Prologue, ctx: Context) {.async.} =
 
   if not ctx.handled:
     # central processing
-    # all context processed here except static file
+    # the context is processed here except static file
 
     # Only process the context when `ctx.handled` is false.
     await respond(ctx)

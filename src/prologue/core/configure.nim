@@ -65,7 +65,7 @@ func initEnv*(): Env =
   ## Initializes an `Env`.
   Env(data: newOrderedTable[string, string]())
 
-proc `$`*(env: Env): string =
+func `$`*(env: Env): string =
   ## Gets the string form of `Env`.
   $env.data
 
@@ -140,10 +140,6 @@ proc loadPrologueEnv*(filename: string): Env =
   if f != nil:
     var p: CfgParser
     open(p, f, filename)
-    # TODO buggy in --gc:arc
-    defer:
-      p.close()
-      f.close()
     while true:
       var e = p.next
       case e.kind
@@ -153,6 +149,8 @@ proc loadPrologueEnv*(filename: string): Env =
         result.data[e.key] = e.value
       else:
         raise newException(EnvWrongFormatError, ".env file only support key-value pair")
+    f.close()
+    p.close()
 
 proc setPrologueEnv*(env: Env, key, value: string) =
   env.data[key] = value
