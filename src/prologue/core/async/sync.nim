@@ -37,7 +37,7 @@ type
     ## The ``wait()`` coroutine blocks until the flag is `false`.
     ##
     ## If more than one coroutine blocked in ``wait()`` waiting for event
-    ## state to be signaled, when event get fired, then all coroutines
+    ## state to be signalled, when event get fired, then all coroutines
     ## continue proceeds in order, they have entered waiting state.
     flag: bool
     waiters: seq[Future[void]]

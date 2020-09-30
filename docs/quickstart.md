@@ -27,7 +27,7 @@ First we `import prologue` to include all things we need in this example(for exa
 Then let's look at `hello` function. It generates html or plain text or json or something else sent to our HTTP server. The parameter `ctx` is of `Context` type. `Context` carries all things which we can use in our handler in each request. It contains `request` information from HTTP server, `response` information which we transfer to HTTP server Correspondingly and other useful attributes. In the body of function, we can find `resp` macros. `resp` is handy for generating response we need. It is equal to `ctx.response = initResponse("<h1>Hello, Prologue!</h1>")`.
 
 Next let's configure our application. For this basic
-example, we use default settings. You can specify parameters of `newSettings` too. For example change `port` attibute or set `debug` flag.
+example, we use default settings. You can specify parameters of `newSettings` too. For example change `port` attribute or set `debug` flag.
 
 Next add route to our application. `"/"` is the URL we can visit in the web browser. `Hello` is the handler which processes the request from the web browser and sends `"<h1>Hello, Prologue!</h1>"` to the web browser.
 

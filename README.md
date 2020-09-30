@@ -70,7 +70,7 @@ web services.
   - [x] Mocking test
 
 - Plugin
-  - [x] Minimal OpenApi support
+  - [x] Minimal OpenAPI support
   - [x] Template(Using Karax Native)
   - [x] Websocket support(https://github.com/xflywind/websocketx)
   - [x] Test Client(Using httpclient)

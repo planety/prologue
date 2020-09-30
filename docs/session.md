@@ -3,13 +3,13 @@
 The session helps with storing users' state.
 
 ## Session based on signed cookie
-This session is based on signed cookie. **It is not safe**. You must not use it to store sensitive or important infos except for testing.
+This session is based on signed cookie. **It is not safe**. You must not use it to store sensitive or important info except for testing.
 
 Prologue provides `sessionMiddleware` to you.
 
 ## Usage
 
-First you should register `sessionMiddleware` in global middlewares or hanler's middlewares.
+First you should register `sessionMiddleware` in global middlewares or handler's middlewares.
 
 ```nim
 var app = newApp(settings = settings, 

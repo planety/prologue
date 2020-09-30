@@ -1,7 +1,7 @@
 import asyncdispatch
 
 
-# needs lastest devel version to use httpx
+# needs latest devel version to use httpx
 when compiles(getGlobalDispatcher().handles):
   when defined(usestd):
     import naive/server

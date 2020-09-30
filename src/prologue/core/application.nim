@@ -85,7 +85,7 @@ proc registerErrorHandler*(app: Prologue, code: HttpCode,
                            handler: ErrorHandler) {.inline.} =
   ## Registers a user-defined error handler. You can specify
   ## HttpCode and its corresponding handler. For example,
-  ## if response's HttpCode is euqal to this, Framework will execute
+  ## if response's HttpCode is equal to this, Framework will execute
   ## corresponding function.
   app.errorHandlerTable[code] = handler
 
@@ -266,7 +266,7 @@ proc patch*(app: Prologue, route: string, handler: HandlerAsync, name = "",
 
 proc all*(app: Prologue, route: string, handler: HandlerAsync, name = "",
           middlewares: seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
-  ## Adds `route` and `handler` with all `HttppMethod`.
+  ## Adds `route` and `handler` with all `HttpMethod`.
   app.addRoute(route, handler, @[HttpGet, HttpPost, HttpPut, HttpDelete,
                HttpTrace, HttpOptions, HttpConnect, HttpPatch], name, middlewares, settings)
 
@@ -302,7 +302,7 @@ proc shutDownHandler() {.noconv.} =
 
   when defined(windows) and compileOption("threads"):
     # workaround for https://github.com/nim-lang/Nim/issues/4057
-    setupForeignThreadGc()
+    setupForeignThreadGC()
 
   for event in dontUseThisShutDownEvents:
     execEvent(event)
@@ -325,7 +325,7 @@ func newApp*(
   ##        - `middlewares` is a global middlewares collections.
   ##        - `startup` is used to execute tasks before the application starts.
   ##        - `shutdown` is used to execute tasks after the application stops.
-  ##        - `errorHandlerTable` stores Httpcodes and corresponding handlers.
+  ##        - `errorHandlerTable` stores HTTP codes and corresponding handlers.
   ##        - `appData` is a global user-defined data.
   if settings == nil:
     raise newException(ValueError, "Settings can't be nil!")

@@ -3,7 +3,7 @@
 ## Write a middleware
 
 Middleware is like an onion. 
-
+s
 a request -> middlewareA does something -> middlewareB does something
 -> handler does something -> middlewareB does something -> middlewareA does something -> a response
 
@@ -37,7 +37,7 @@ var
 app.addRoute("/", hello, HttpGet, middlewares = @[myDebugRequestMiddleware()])
 ```
 
-You can also put some variables in closure environments, but be careful it is error-prone when using multi-threads. You must know the differences between gc options(thread local heap vs shared heap) and what's the use of `gcsafe`. 
+You can also put some variables in closure environments, but be careful it is error-prone when using multi-threads. You must know the differences between GC options(thread local heap vs shared heap) and what's the use of `gcsafe`. 
 
 ```nim
 proc sessionMiddleware(): HandleAsync =

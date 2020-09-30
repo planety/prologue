@@ -6,7 +6,7 @@ Prologue provides two types of `headers`. One is the headers of `request` which 
 ## The headers of the request
 
 The client will send headers to our HTTP server. You may want to check whether some keys are in the headers. 
-If existing, you counld get the values of them. The return type of `ctx.request.getHeader` is `seq[string]`. You often only need the first element of the sequenece.
+If existing, you could get the values of them. The return type of `ctx.request.getHeader` is `seq[string]`. You often only need the first element of the sequence.
 
 The following code first checks whether the key exists in headers. If true, retrieve the sequence of values and display them in the browser.
 

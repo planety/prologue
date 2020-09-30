@@ -16,7 +16,7 @@ proc hello*(ctx: Context) {.async.} =
 app.addRoute("/hello", hello)
 ```
 
-You can also use `seq[httpMetod]` to register the same handler but supports mutiple HTTP methods.
+You can also use `seq[httpMetod]` to register the same handler but supports multiple HTTP methods.
 
 ```nim
 # handler

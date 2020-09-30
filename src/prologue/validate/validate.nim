@@ -77,12 +77,12 @@ type
 
 func newFormValidation*(validator: openArray[(string, seq[ValidateHandler])]
                         ): FormValidation {.inline.} =
-  ## Creates a new ``Forvalidation``.
+  ## Creates a new ``Formvalidation``.
   FormValidation(data: validator.newOrderedTable)
 
 proc validate*(formValidation: FormValidation, textTable: StringTableRef,
                 allMsgs = true): Info =
-  ## Valiates all (key, value) pairs in ``textTable``.
+  ## Validates all (key, value) pairs in ``textTable``.
   var msgs = ""
   for (key, handlers) in formValidation.data.pairs:
     for handler in handlers:
@@ -135,7 +135,7 @@ func isBool*(msg = ""): ValidateHandler {.inline.} =
     if basic.isBool(text):
       result = (true, "")
     elif msg.len == 0:
-      result = (false, fmt"{text} is not a boolean!")
+      result = (false, fmt"{text} is not a Boolean!")
     else:
       result = (false, msg)
 

@@ -118,13 +118,13 @@ proc send*(request: Request, content: string): Future[void] {.inline.} =
 proc respond*(request: Request, code: HttpCode, body: string,
               headers: ResponseHeaders): Future[void] {.inline.} =
   ## Responds `code`, `body` and `headers` to the client, the framework
-  ## will genertate response contents automatically.
+  ## will generate response contents automatically.
   let headers = HttpHeaders(table: getTables(headers))
   result = request.nativeRequest.respond(code, body, headers)
 
 proc respond*(request: Request, response: Response): Future[void] {.inline.} =
   ## Responds `response` to the client, the framework
-  ## will genertate response contents automatically.
+  ## will generate response contents automatically.
   result = request.respond(response.code, response.body,
                            response.headers)
 

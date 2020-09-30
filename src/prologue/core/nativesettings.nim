@@ -43,11 +43,11 @@ func hasKey*(settings: Settings, key: string): bool {.inline.} =
   settings.data.hasKey(key)
 
 func `[]`*(settings: Settings, key: string): JsonNode {.inline.} =
-  ## Retreives value if key is in `settings`.
+  ## Retrieves value if key is in `settings`.
   settings.data[key]
 
 func getOrDefault*(settings: Settings, key: string): JsonNode {.inline.} =
-  ## Retreives value if key is in `settings`. Otherwise `nil` will be returned.
+  ## Retrieves value if key is in `settings`. Otherwise `nil` will be returned.
   settings.data.getOrDefault(key)
 
 func newCtxSettings*(): CtxSettings {.inline.} =

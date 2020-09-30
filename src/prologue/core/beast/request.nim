@@ -130,14 +130,14 @@ proc send*(request: Request, content: string): Future[void] {.inline.} =
 proc respond*(request: Request, code: HttpCode, body: string,
               headers: ResponseHeaders): Future[void] {.inline.} =
   ## Responds `code`, `body` and `headers` to the client, the framework
-  ## will genertate response contents automatically.
+  ## will generate response contents automatically.
   request.nativeRequest.send(code, body, headers.createHeaders)
   result = newFuture[void]()
   complete(result)
 
 proc respond*(request: Request, response: Response): Future[void] {.inline.} =
   ## Responds `response` to the client, the framework
-  ## will genertate response contents automatically.
+  ## will generate response contents automatically.
   result = request.respond(response.code, response.body, response.headers)
 
 func initRequest*(nativeRequest: NativeRequest, 
