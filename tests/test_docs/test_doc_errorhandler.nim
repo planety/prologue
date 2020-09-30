@@ -22,7 +22,7 @@ proc prepareRequest*(path: string, httpMethod = HttpGet): Request =
   )
 
 
-block:
+block first:
   proc hello(ctx: Context) {.async.} =
     ctx.ctxData["test"] = "true"
     resp "Something is wrong, please retry.", Http404
@@ -31,3 +31,41 @@ block:
   app.addRoute("/hello", hello)
   let ctx = app.runOnce(prepareRequest("/hello"))
   doAssert ctx.ctxData["test"] == "true"
+  doAssert ctx.response.code == Http404
+  doAssert ctx.response.body == "Something is wrong, please retry."
+
+block second:
+  proc hello(ctx: Context) {.async.} =
+    ctx.ctxData["test"] = "true"
+    resp error404(headers = ctx.response.headers)
+
+  var app = prepareApp()
+  app.addRoute("/hello", hello)
+  let ctx = app.runOnce(prepareRequest("/hello"))
+  doAssert ctx.ctxData["test"] == "true"
+  doAssert ctx.response.code == Http404
+  doAssert ctx.response.body == "<h1>404 Not Found!</h1>"
+
+block three:
+  proc hello(ctx: Context) {.async.} =
+    ctx.ctxData["test"] = "true"
+    resp errorPage("Something is wrong"), Http404
+
+  var app = prepareApp()
+  app.addRoute("/hello", hello)
+  let ctx = app.runOnce(prepareRequest("/hello"))
+  doAssert ctx.ctxData["test"] == "true"
+  doAssert ctx.response.code == Http404
+  doAssert ctx.response.body == errorPage("Something is wrong")
+
+block four:
+  proc hello(ctx: Context) {.async.} =
+    ctx.ctxData["test"] = "true"
+    respDefault(Http404)
+
+  var app = prepareApp()
+  app.addRoute("/hello", hello)
+  let ctx = app.runOnce(prepareRequest("/hello"))
+  doAssert ctx.ctxData["test"] == "true"
+  doAssert ctx.response.code == Http404
+  doAssert ctx.response.body == errorPage("404 Not Found!")

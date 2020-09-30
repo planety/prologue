@@ -1,12 +1,13 @@
 import htmlgen
+import constants
 
 
-func errorPage*(errorMsg: string, version: string): string {.inline.} =
+func errorPage*(errorMsg: string): string {.inline.} =
   ## Error pages.
   result = html(head(title(errorMsg)),
                 body(h1(errorMsg),
                      "<hr/>",
-                     p("Prologue " & version),
+                     p("Prologue " & PrologueVersion),
                      style = "text-align: center;"),
                 xmlns = "http://www.w3.org/1999/xhtml")
 

@@ -16,7 +16,7 @@ import asyncfile, mimetypes, md5, uri
 import strtabs, tables, strformat, os, times, options, parseutils, json
 
 import asyncdispatch
-import ./response, ./pages, ./constants
+import ./response, ./pages
 import ./httpcore/httplogue
 
 from ./types import BaseType, Session, `[]`, initSession
@@ -126,7 +126,7 @@ type
       discard
 
   # Router Structures
-  Router* = ref object ## Container that holds HTTP mappings to handler funcs
+  Router* = ref object ## Container that holds HTTP mappings to handler functions
     data*: CritBitTree[PatternNode]
 
 
@@ -301,7 +301,7 @@ proc defaultHandler*(ctx: Context) {.async.} =
 
 proc default404Handler*(ctx: Context) {.async.} =
   ## Default 404 pages.
-  ctx.response.body = errorPage("404 Not Found!", PrologueVersion)
+  ctx.response.body = errorPage("404 Not Found!")
   ctx.response.setHeader("content-type", "text/html; charset=UTF-8")
 
 proc default500Handler*(ctx: Context) {.async.} =

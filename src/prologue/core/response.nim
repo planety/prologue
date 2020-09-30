@@ -13,7 +13,7 @@ type
 
 
 func `$`*(response: Response): string =
-  ## Stringifys response.
+  ## Gets the string form of `Response`.
   fmt"{response.code} {response.headers}"
 
 func initResponse*(httpVersion: HttpVersion, code: HttpCode, headers =
