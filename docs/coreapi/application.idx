@@ -22,7 +22,7 @@ appDebug	application.html#appDebug,Prologue	application: appDebug(app: Prologue)
 appName	application.html#appName,Prologue	application: appName(app: Prologue): string	
 appPort	application.html#appPort,Prologue	application: appPort(app: Prologue): Port	
 execEvent	application.html#execEvent,Event	application: execEvent(event: Event)	
-newApp	application.html#newApp,Settings,seq[HandlerAsync],seq[Event],seq[Event]	application: newApp(settings: Settings; middlewares: seq[HandlerAsync] = @[];\n       startup: seq[Event] = @[]; shutdown: seq[Event] = @[];\n       errorHandlerTable = DefaultErrorHandler;\n       appData = newStringTable(mode = modeCaseSensitive)): Prologue	
+newApp	application.html#newApp,Settings,seq[HandlerAsync],seq[Event],seq[Event]	application: newApp(settings: Settings; middlewares: seq[HandlerAsync] = @[];\n       startup: seq[Event] = @[]; shutdown: seq[Event] = @[]; errorHandlerTable = newErrorHandlerTable(\n    [(Http404, default404Handler), (Http500, default500Handler)]);\n       appData = newStringTable(mode = modeCaseSensitive)): Prologue	
 handleContext	application.html#handleContext,Prologue,Context	application: handleContext(app: Prologue; ctx: Context): owned(Future[void])	
 handleRequest	application.html#handleRequest,Prologue,Request	application: handleRequest(app: Prologue; nativeRequest: NativeRequest): Future[void]	
 run	application.html#run,Prologue	application: run(app: Prologue)	

@@ -53,9 +53,14 @@ app.registerErrorHandler({Http200 .. Http204}, go20x)
 app.registerErrorHandler(@[Http301, Http304, Http307], go30x)
 ```
 
-If you don't want to use default Error handler, you could clear the error handler table.
+If you don't want to use the default Error handler, you could clear the whole error handler table.
 
 ```nim
 let settings = newSettings()
 var app = newApp(settings=settings, errorHandlerTable = newErrorHandlerTable())
 ```
+
+## HTTP 500 handler
+
+`Http 500` indicates the internal error of the framework. In debug mode(`settings.debug = true`), the framework will send the exception msgs to the web browser if the length of error msgs is greater than zero. 
+Otherwise, the framework will use the default error handled which has been registered before the application starts. Users could cover this handler by using their own error handler.
