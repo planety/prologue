@@ -4,18 +4,18 @@ import ../../src/prologue/mocking/mocking
 import uri
 
 
-proc hello*(ctx: Context) {.async.} =
+proc hello(ctx: Context) {.async.} =
   resp "<h1>Hello, Prologue!</h1>"
 
 
-proc prepareApp*(debug = true): Prologue =
+proc prepareApp(debug = true): Prologue =
   result = newApp(settings = newSettings(debug = debug))
   mockApp(result)
 
-proc addTestRoute*(app: Prologue, path: string, httpMethod = HttpGet) =
+proc addTestRoute(app: Prologue, path: string, httpMethod = HttpGet) =
   app.addRoute(path, hello, httpMethod)
 
-proc prepareRequest*(path: string, httpMethod: HttpMethod): Request =
+proc prepareRequest(path: string, httpMethod: HttpMethod): Request =
   result = initMockingRequest(
     httpMethod = httpMethod,
     headers = newHttpHeaders(),
@@ -28,13 +28,13 @@ proc prepareRequest*(path: string, httpMethod: HttpMethod): Request =
   )
 
 
-proc testContext*(app: Prologue, path: string, httpMethod = HttpGet): Context =
+proc testContext(app: Prologue, path: string, httpMethod = HttpGet): Context =
   result = app.runOnce(prepareRequest(path, httpMethod))
   doAssert result.response.code == Http200
   doAssert result.response.getHeader("content-type") == @["text/html; charset=UTF-8"]
   doAssert result.response.body == "<h1>Hello, Prologue!</h1>"
 
-proc testFailedContext*(app: Prologue, path: string, httpMethod = HttpGet): Context =
+proc testFailedContext(app: Prologue, path: string, httpMethod = HttpGet): Context =
   result = app.runOnce(prepareRequest(path, httpMethod))
   doAssert result.response.code == Http404
 

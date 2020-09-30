@@ -14,10 +14,10 @@ proc go404*(ctx: Context) {.async.} =
   resp "Something wrong!", Http404
 
 proc go20x*(ctx: Context) {.async.} =
-  resp "Ok!", Http404
+  resp "Ok!", Http200
 
 proc go30x*(ctx: Context) {.async.} =
-  resp "EveryThing else?", Http404
+  resp "EveryThing else?", Http301
 
 
 # "Application Func Test"

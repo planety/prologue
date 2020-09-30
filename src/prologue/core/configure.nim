@@ -66,7 +66,7 @@ func initEnv*(): Env =
   Env(data: newOrderedTable[string, string]())
 
 proc `$`*(env: Env): string =
-  ## Stringifys an `Env`.
+  ## Gets the string form of `Env`.
   $env.data
 
 func `[]`*(env: Env, key: string): string =

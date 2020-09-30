@@ -105,10 +105,10 @@ proc registerErrorHandler*(app: Prologue, code: openArray[HttpCode],
       resp "Something wrong!", Http404
 
     proc go20x*(ctx: Context) {.async.} =
-      resp "Ok!", Http404
+      resp "Ok!", Http200
 
     proc go30x*(ctx: Context) {.async.} =
-      resp "EveryThing else?", Http404
+      resp "EveryThing else?", Http301
 
     let settings = newSettings()
     var app = newApp(settings)
@@ -321,8 +321,8 @@ func newApp*(
   ## Creates a new App instance.
   ## 
   ## Params:
-  ##        - `settings` is a global immutable setting which is visible all handlers.
-  ##        - `middlewares` is a global middlewares collections.
+  ##        - `settings` is a global immutable setting which is visible to all handlers.
+  ##        - `middlewares` is a global sequence of middlewares.
   ##        - `startup` is used to execute tasks before the application starts.
   ##        - `shutdown` is used to execute tasks after the application stops.
   ##        - `errorHandlerTable` stores HTTP codes and corresponding handlers.
@@ -396,7 +396,8 @@ proc handleContext*(app: Prologue, ctx: Context) {.async.} =
   # display error messages only in debug mode
   if ctx.gScope.settings.debug and ctx.response.code == Http500:
     discard
-  elif ctx.response.code in app.errorHandlerTable and ctx.response.body.len == 0:
+  elif ctx.response.code in app.errorHandlerTable and 
+          (ctx.response.body.len == 0 or ctx.response.code == Http500):
     await (app.errorHandlerTable[ctx.response.code])(ctx)
 
   if not ctx.handled:
