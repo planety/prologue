@@ -4,12 +4,11 @@ import ../../src/prologue/mocking/mocking
 import uri
 
 
-proc prepareApp*(debug = true): Prologue =
+proc prepareApp(debug = true): Prologue =
   result = newApp(settings = newSettings(debug = debug))
   mockApp(result)
 
-
-proc prepareRequest*(path: string, httpMethod = HttpGet): Request =
+proc prepareRequest(path: string, httpMethod = HttpGet): Request =
   result = initMockingRequest(
     httpMethod = httpMethod,
     headers = newHttpHeaders(),
@@ -21,65 +20,67 @@ proc prepareRequest*(path: string, httpMethod = HttpGet): Request =
     pathParams = newStringTable()
   )
 
+block:
+  block first:
+    proc hello(ctx: Context) {.async.} =
+      ctx.ctxData["test"] = "true"
+      resp "Something is wrong, please retry.", Http404
 
-block first:
-  proc hello(ctx: Context) {.async.} =
-    ctx.ctxData["test"] = "true"
-    resp "Something is wrong, please retry.", Http404
+    var app = prepareApp()
+    app.addRoute("/hello", hello)
+    let ctx = app.runOnce(prepareRequest("/hello"))
+    doAssert ctx.ctxData["test"] == "true"
+    doAssert ctx.response.code == Http404
+    doAssert ctx.response.body == "Something is wrong, please retry."
 
-  var app = prepareApp()
-  app.addRoute("/hello", hello)
-  let ctx = app.runOnce(prepareRequest("/hello"))
-  doAssert ctx.ctxData["test"] == "true"
-  doAssert ctx.response.code == Http404
-  doAssert ctx.response.body == "Something is wrong, please retry."
+  block second:
+    proc hello(ctx: Context) {.async.} =
+      ctx.ctxData["test"] = "true"
+      resp error404(headers = ctx.response.headers)
 
-block second:
-  proc hello(ctx: Context) {.async.} =
-    ctx.ctxData["test"] = "true"
-    resp error404(headers = ctx.response.headers)
+    var app = prepareApp()
+    app.addRoute("/hello", hello)
+    let ctx = app.runOnce(prepareRequest("/hello"))
+    doAssert ctx.ctxData["test"] == "true"
+    doAssert ctx.response.code == Http404
+    doAssert ctx.response.body == "<h1>404 Not Found!</h1>"
 
-  var app = prepareApp()
-  app.addRoute("/hello", hello)
-  let ctx = app.runOnce(prepareRequest("/hello"))
-  doAssert ctx.ctxData["test"] == "true"
-  doAssert ctx.response.code == Http404
-  doAssert ctx.response.body == "<h1>404 Not Found!</h1>"
+  block three:
+    proc hello(ctx: Context) {.async.} =
+      ctx.ctxData["test"] = "true"
+      resp errorPage("Something is wrong"), Http404
 
-block three:
-  proc hello(ctx: Context) {.async.} =
-    ctx.ctxData["test"] = "true"
-    resp errorPage("Something is wrong"), Http404
+    var app = prepareApp()
+    app.addRoute("/hello", hello)
+    let ctx = app.runOnce(prepareRequest("/hello"))
+    doAssert ctx.ctxData["test"] == "true"
+    doAssert ctx.response.code == Http404
+    doAssert ctx.response.body == errorPage("Something is wrong")
 
-  var app = prepareApp()
-  app.addRoute("/hello", hello)
-  let ctx = app.runOnce(prepareRequest("/hello"))
-  doAssert ctx.ctxData["test"] == "true"
-  doAssert ctx.response.code == Http404
-  doAssert ctx.response.body == errorPage("Something is wrong")
+  block four:
+    proc hello(ctx: Context) {.async.} =
+      ctx.ctxData["test"] = "true"
+      respDefault(Http404)
 
-block four:
-  proc hello(ctx: Context) {.async.} =
-    ctx.ctxData["test"] = "true"
-    respDefault(Http404)
+    let settings = newSettings(appName = "Prologue")
+    var app = newApp(settings)
+    mockApp(app)
+    app.addRoute("/hello", hello)
+    let ctx = app.runOnce(prepareRequest("/hello"))
+    doAssert ctx.ctxData["test"] == "true"
+    doAssert ctx.response.code == Http404
+    doAssert ctx.response.body == errorPage("404 Not Found!"), ctx.response.body
 
-  var app = prepareApp()
-  app.addRoute("/hello", hello)
-  let ctx = app.runOnce(prepareRequest("/hello"))
-  doAssert ctx.ctxData["test"] == "true"
-  doAssert ctx.response.code == Http404
-  doAssert ctx.response.body == errorPage("404 Not Found!")
+  block five:
+    proc hello(ctx: Context) {.async.} =
+      ctx.ctxData["test"] = "true"
+      respDefault(Http404)
 
-block five:
-  proc hello(ctx: Context) {.async.} =
-    ctx.ctxData["test"] = "true"
-    respDefault(Http404)
-
-  let settings = newSettings()
-  var app = newApp(settings=settings, errorHandlerTable = newErrorHandlerTable())
-  mockApp(app)
-  app.addRoute("/hello", hello)
-  let ctx = app.runOnce(prepareRequest("/hello"))
-  doAssert ctx.ctxData["test"] == "true"
-  doAssert ctx.response.code == Http404
-  doAssert ctx.response.body.len == 0
+    let settings = newSettings()
+    var app = newApp(settings=settings, errorHandlerTable = newErrorHandlerTable())
+    mockApp(app)
+    app.addRoute("/hello", hello)
+    let ctx = app.runOnce(prepareRequest("/hello"))
+    doAssert ctx.ctxData["test"] == "true"
+    doAssert ctx.response.code == Http404
+    doAssert ctx.response.body.len == 0
