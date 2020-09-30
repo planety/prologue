@@ -321,8 +321,8 @@ func newApp*(
   ## Creates a new App instance.
   ## 
   ## Params:
-  ##        - `settings` is a global immutable setting which is visible all handlers.
-  ##        - `middlewares` is a global middlewares collections.
+  ##        - `settings` is a global immutable setting which is visible to all handlers.
+  ##        - `middlewares` is a global sequence of middlewares.
   ##        - `startup` is used to execute tasks before the application starts.
   ##        - `shutdown` is used to execute tasks after the application stops.
   ##        - `errorHandlerTable` stores HTTP codes and corresponding handlers.

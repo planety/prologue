@@ -52,3 +52,10 @@ app.registerErrorHandler(Http404, go404)
 app.registerErrorHandler({Http200 .. Http204}, go20x)
 app.registerErrorHandler(@[Http301, Http304, Http307], go30x)
 ```
+
+If you don't want to use default Error handler, you could clear the error handler table.
+
+```nim
+let settings = newSettings()
+var app = newApp(settings=settings, errorHandlerTable = newErrorHandlerTable())
+```

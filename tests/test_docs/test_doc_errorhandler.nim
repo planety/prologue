@@ -69,3 +69,17 @@ block four:
   doAssert ctx.ctxData["test"] == "true"
   doAssert ctx.response.code == Http404
   doAssert ctx.response.body == errorPage("404 Not Found!")
+
+block five:
+  proc hello(ctx: Context) {.async.} =
+    ctx.ctxData["test"] = "true"
+    respDefault(Http404)
+
+  let settings = newSettings()
+  var app = newApp(settings=settings, errorHandlerTable = newErrorHandlerTable())
+  mockApp(app)
+  app.addRoute("/hello", hello)
+  let ctx = app.runOnce(prepareRequest("/hello"))
+  doAssert ctx.ctxData["test"] == "true"
+  doAssert ctx.response.code == Http404
+  doAssert ctx.response.body.len == 0
