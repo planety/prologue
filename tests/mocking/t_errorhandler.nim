@@ -75,8 +75,9 @@ block ErrorHandler:
     doAssert ctx.response.body == "Internal Error"
 
   block:
-    proc go500(ctx: Context) {.async.} = 
-      raise newException(ValueError, "This is wrong!")
+    proc go500(ctx: Context): Future[void] = 
+      if true:
+        raise newException(ValueError, "This is wrong!")
 
     var app = prepareApp(debug = true)
     app.addRoute("/hello", go500)
@@ -94,8 +95,9 @@ block ErrorHandler:
     doAssert ctx.response.body == internalServerErrorPage(), ctx.response.body
 
   block:
-    proc go500(ctx: Context) {.async.} = 
-      raise newException(ValueError, "This is wrong!")
+    proc go500(ctx: Context): Future[void] = 
+      if true:
+        raise newException(ValueError, "This is wrong!")
 
     var app = prepareApp(debug = false)
     app.addRoute("/hello", go500)
@@ -113,8 +115,9 @@ block ErrorHandler:
     doAssert ctx.response.body == internalServerErrorPage()
 
   block:
-    proc go500(ctx: Context) {.async.} = 
-      raise newException(ValueError, "")
+    proc go500(ctx: Context): Future[void] = 
+      if true:
+        raise newException(ValueError, "")
 
     var app = prepareApp(debug = true)
     app.addRoute("/hello", go500)
@@ -133,8 +136,9 @@ block ErrorHandler:
     doAssert ctx.response.body == internalServerErrorPage(), ctx.response.body
 
   block:
-    proc go500(ctx: Context) {.async.} = 
-      raise newException(ValueError, "")
+    proc go500(ctx: Context): Future[void] = 
+      if true:
+        raise newException(ValueError, "")
 
     var app = prepareApp(debug = false)
     app.addRoute("/hello", go500)
