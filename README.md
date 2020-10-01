@@ -42,7 +42,7 @@ web services.
 ## Feature
 
 - Core
-  - [x] Base on httpx and asynchttpserver
+  - [x] Base on `httpx` and `asynchttpserver`
   - [x] Configure and Settings
   - [x] Context
   - [x] Param and Query Data
@@ -91,7 +91,6 @@ nimble install prologue
 ### Hello World
 
 ```nim
-# app.nim
 import prologue
 
 
@@ -99,52 +98,14 @@ proc hello*(ctx: Context) {.async.} =
   resp "<h1>Hello, Prologue!</h1>"
 
 
-let settings = newSettings()
-var app = newApp(settings = settings)
+let 
+  settings = newSettings()
+  app = newApp(settings = settings)
 app.addRoute("/", hello)
 app.run()
 ```
 
-Run **app.nim**. Now the server is running at localhost:8080.
-
-### Another example
-
-```nim
-# app.nim
-import prologue
-import prologue/middlewares
-
-
-# Async Function
-proc home*(ctx: Context) {.async.} =
-  resp "<h1>Home</h1>"
-
-proc helloName*(ctx: Context) {.async.} =
-  resp "<h1>Hello, " & ctx.getPathParams("name", "Prologue") & "</h1>"
-
-proc doRedirect*(ctx: Context) {.async.} =
-  resp redirect("/hello")
-
-proc login*(ctx: Context) {.async.} =
-  resp loginPage()
-
-proc do_login*(ctx: Context) {.async.} =
-  resp redirect("/hello/Nim")
-
-
-let settings = newSettings(appName = "Prologue")
-var app = newApp(settings = settings, middlewares = @[debugRequestMiddleware()])
-app.addRoute("/", home, @[HttpGet, HttpPost])
-app.addRoute("/home", home, HttpGet)
-app.addRoute("/redirect", doRedirect, HttpGet)
-app.addRoute("/login", login, HttpGet)
-app.addRoute("/login", do_login, HttpPost, middlewares = @[debugRequestMiddleware()])
-app.addRoute("/hello/{name}", helloName, HttpGet)
-app.run()
-```
-
-Run **app.nim**. Now the server is running at localhost:8080.
-
+Run **app.nim**(`nim c -r app.nim`). Now the server is running at localhost:8080.
 
 ### More examples
 - [HelloWorld](https://github.com/planety/prologue/tree/devel/examples/helloworld)

@@ -49,6 +49,8 @@ Then you can use `nimble` command to install prologue.
 nimble install prologue
 ```
 
+`Prologue` also provides some extensions. You can use `logue extension` to install all of them. If you just want to install one of them, you can use `logue extension module` for example `logue extension redis`.
+
 ## Usage
 
 ### Hello World
