@@ -188,29 +188,29 @@ proc save*(uploadFile: UpLoadFile, dir: string, filename = "") {.inline.} =
   else:
     writeFile(dir / filename, uploadFile.body)
 
-proc newErrorHandlerTable*(initialSize = defaultInitialSize): ErrorHandlerTable {.inline.} =
+proc newErrorHandlerTable*(initialSize = defaultInitialSize): ErrorHandlerTable =
   ## Creates a new error handler table.
   newTable[HttpCode, ErrorHandler](initialSize)
 
 proc newErrorHandlerTable*(pairs: openArray[(HttpCode,
-                           ErrorHandler)]): ErrorHandlerTable {.inline.} =
+                           ErrorHandler)]): ErrorHandlerTable =
   ## Creates a new error handler table.
   newTable[HttpCode, ErrorHandler](pairs)
 
-func newReversedRouter*(): ReversedRouter {.inline.} =
+func newReversedRouter*(): ReversedRouter =
   ## Creates a new reversed router table.
   newStringTable(mode = modeCaseSensitive)
 
-func initEvent*(handler: AsyncEvent): Event {.inline.} =
+func initEvent*(handler: AsyncEvent): Event =
   ## Initializes a new asynchronous event. 
   Event(async: true, asyncHandler: handler)
 
-func initEvent*(handler: SyncEvent): Event {.inline.} =
+func initEvent*(handler: SyncEvent): Event =
   ## Initializes a new synchronous event. 
   Event(async: false, syncHandler: handler)
 
 func newContext*(request: Request, response: Response,
-                 gScope: GlobalScope): Context {.inline.} =
+                 gScope: GlobalScope): Context =
   ## Creates a new Context.
   Context(request: request, response: response,
           handled: false,

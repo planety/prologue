@@ -34,7 +34,7 @@ type
     data*: OrderedTableRef[string, tuple[params: StringTableRef, body: string]]
 
 
-func initFormPart*(): FormPart {.inline.} =
+func initFormPart*(): FormPart =
   FormPart(data: newOrderedTable[string, (StringTableRef, string)]())
 
 func `[]`*(formPart: FormPart, key: string): tuple[params: StringTableRef,

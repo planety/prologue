@@ -118,7 +118,7 @@ proc registerErrorHandler*(app: Prologue, code: openArray[HttpCode],
   for idx in code:
     app.registerErrorHandler(idx, handler)
 
-proc newSettings*(settings: Settings, localSettings: LocalSettings): Settings {.inline.} =
+func newSettings*(settings: Settings, localSettings: LocalSettings): Settings =
   ## Creates a new settings.
   ##
   ## Params:
@@ -312,7 +312,7 @@ func newApp*(
   shutdown: seq[Event] = @[],
   errorHandlerTable = newErrorHandlerTable({Http404: default404Handler, Http500: default500Handler}),
   appData = newStringTable(mode = modeCaseSensitive)
-): Prologue {.inline.} =
+): Prologue =
   ## Creates a new App instance.
   ## 
   ## Params:

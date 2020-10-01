@@ -82,7 +82,7 @@ const
   DefaultDigestMethodType* = Sha1Type
 
 
-proc initSigner*(secretKey: SecretKey, salt = DefaultSalt, sep = DefaultSep,
+func initSigner*(secretKey: SecretKey, salt = DefaultSalt, sep = DefaultSep,
                  keyDerivation = DefaultKeyDerivation,
                  digestMethod = DefaultDigestMethodType): Signer =
 
@@ -94,7 +94,7 @@ proc initSigner*(secretKey: SecretKey, salt = DefaultSalt, sep = DefaultSep,
   Signer(secretKey: secretKey, salt: salt, sep: sep,
          keyDerivation: keyDerivation, digestMethod: digestMethod)
 
-proc initTimedSigner*(secretKey: SecretKey, salt = DefaultSalt,
+func initTimedSigner*(secretKey: SecretKey, salt = DefaultSalt,
                       sep = DefaultSep, keyDerivation = DefaultKeyDerivation,
                       digestMethod = DefaultDigestMethodType): TimedSigner =
 

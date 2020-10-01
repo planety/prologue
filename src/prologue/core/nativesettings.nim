@@ -50,15 +50,15 @@ func getOrDefault*(settings: Settings, key: string): JsonNode {.inline.} =
   ## Retrieves value if key is in `settings`. Otherwise `nil` will be returned.
   settings.data.getOrDefault(key)
 
-func newCtxSettings*(): CtxSettings {.inline.} =
+func newCtxSettings*(): CtxSettings =
   ## Creates a new context settings.
   CtxSettings(mimeDB: newMimetypes(), config: newTable[string, StringTableRef]())
 
-func newLocalSettings*(data: JsonNode): LocalSettings {.inline.} =
+func newLocalSettings*(data: JsonNode): LocalSettings =
   ## Creates a new local settings.
   result = LocalSettings(data: data)
 
-proc newLocalSettings*(configPath: string): LocalSettings {.inline.} =
+proc newLocalSettings*(configPath: string): LocalSettings =
   ## Creates a new local settings.
   result = LocalSettings(data: parseFile(configPath))
 
@@ -73,7 +73,7 @@ func normalizedStaticDirs(dirs: openArray[string]): seq[string] =
 
 func newSettings*(address = "", port = Port(8080), debug = true, reusePort = true,
                   staticDirs: openArray[string] = [], secretKey = randomString(8),
-                  appName = ""): Settings {.inline.} =
+                  appName = ""): Settings =
   ## Creates a new settings.
   if secretKey.len == 0:
     raise newException(EmptySecretKeyError, "Secret key can't be empty!")
@@ -84,7 +84,7 @@ func newSettings*(address = "", port = Port(8080), debug = true, reusePort = tru
 
 func newSettings*(data: JsonNode, address = "", port = Port(8080), debug = true, reusePort = true,
                   staticDirs: openArray[string] = [],
-                  appName = ""): Settings {.inline.} =
+                  appName = ""): Settings =
   ## Creates a new settings.
   result = Settings(address: address, port: port, debug: debug, reusePort: reusePort,
                     staticDirs: normalizedStaticDirs(staticDirs), appName: appName,
@@ -92,7 +92,7 @@ func newSettings*(data: JsonNode, address = "", port = Port(8080), debug = true,
 
 proc newSettings*(configPath: string, address = "", port = Port(8080), debug = true, reusePort = true,
                   staticDirs: openArray[string] = [],
-                  appName = ""): Settings {.inline.} =
+                  appName = ""): Settings =
   ## Creates a new settings.
   # make sure reserved keys must appear in settings
   result = Settings(address: address, port: port, debug: debug, reusePort: reusePort,

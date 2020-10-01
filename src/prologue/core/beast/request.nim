@@ -144,7 +144,7 @@ func initRequest*(nativeRequest: NativeRequest,
                   cookies = initCookieJar(),
                   pathParams = newStringTable(modeCaseSensitive), 
                   queryParams = newStringTable(modeCaseSensitive),
-                  postParams = newStringTable(modeCaseSensitive)): Request {.inline.} =
+                  postParams = newStringTable(modeCaseSensitive)): Request =
   ## Initializes a new Request.
   let url = 
     if nativeRequest.path.isSome:
@@ -181,7 +181,7 @@ func initMockingRequest*(
   queryParams = newStringTable(),
   formParams = initFormPart(),
   pathParams = newStringTable()
-): Request {.inline.} =
+): Request =
   ## Initializes a new Request.
   Request(url: url, httpMethod: httpMethod,
           headers: headers, cookies: cookies, pathParams: pathParams, queryParams: queryParams,

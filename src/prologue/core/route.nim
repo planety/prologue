@@ -73,13 +73,13 @@ func hash*(x: Path): Hash =
   h = h !& hash(x.httpMethod)
   result = !$h
 
-func newReRouter*(): ReRouter {.inline.} =
+func newReRouter*(): ReRouter =
   ReRouter(callable: newSeq[(RePath, PathHandler)]())
 
-proc add*(reRouter: ReRouter, pairs: (RePath, PathHandler)) {.inline.} =
+proc add*(reRouter: ReRouter, pairs: (RePath, PathHandler)) =
   reRouter.callable.add(pairs)
 
-iterator items*(reRouter: ReRouter): (RePath, PathHandler) {.inline.} =
+iterator items*(reRouter: ReRouter): (RePath, PathHandler) =
   for item in reRouter.callable.items:
     yield item
 
@@ -130,7 +130,7 @@ func ensureCorrectRoute(
 ): string {.raises: [RouteError].} =
   ## Verifies that this given path is a valid path, strips trailing slashes, and guarantees leading slashes.
   if(not path.allCharsInSet(allowedCharsInPattern)):
-    raise newException(RouteError, "Illegal characters occurred in the mapped pattern, please restrict to alphanumerics, or the following: - . _ ~ /")
+    raise newException(RouteError, "Illegal characters occurred in the mapped pattern, please restrict to alphanumeric, or the following: - . _ ~ /")
 
   result = path
 
@@ -299,7 +299,7 @@ func merge(
     assert node == currentKnot
 
     var childIndex = -1
-    if node.isLeaf: #node isn't a parent yet, make it one to continue the funcess
+    if node.isLeaf: # node isn't a parent yet, make it one to continue
       result = parentalPatternNode(node)
     else:
       result = node
@@ -339,7 +339,7 @@ func contains(
     else:
       result = false
 
-  if not node.isLeaf and result: # if the node has kids, is at least one qual?
+  if not node.isLeaf and result: # if the node has kids, is at least one?
     if node.children.len > 0:
       result = false # false until proven otherwise
       for child in node.children:
@@ -380,7 +380,7 @@ func addRoute*(
 func compress(node: PatternNode): PatternNode =
   ## Finds sequences of single ptrnText nodes and combines them to reduce the depth of the tree.
 
-  if node.isLeaf: # if it's a leaf, there are clearly no descendents, and if it is a terminator then compression will alter the behavior
+  if node.isLeaf: # if it's a leaf, there are clearly no descendants, and if it is a terminator then compression will alter the behaviour.
     return node
   elif node.kind == ptrnText and (not node.isTerminator) and node.children.len == 1:
     let compressedChild = compress(node.children[0])
@@ -451,7 +451,7 @@ func matchTree(
             if result.isSome:
               return
           break matching #none of the children matched, assume no match
-      else: #its a leaf and we havent' satisfied the path yet, let the last line handle returning
+      else: #its a leaf and we haven't satisfied the path yet, let the last line handle returning
         break matching
 
 func findHandler(
