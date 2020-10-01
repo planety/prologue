@@ -10,10 +10,29 @@ jobs:
         os:
           - ubuntu-latest
           - windows-latest
-          - macOS-latest
         version:
           - stable
           - devel
+    steps:
+    - uses: actions/checkout@v1
+    - uses: jiro4989/setup-nim-action@v1
+      with:
+        nim-version: ${{ matrix.version }}
+    - name: Install Packages
+      run: nimble install -y
+    - name: Install extension
+      run: logue extension all
+    - name: Test command
+      run: nimble tests
+
+  test_macos:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - macOS-latest
+        version:
+          - stable
     steps:
     - uses: actions/checkout@v1
     - uses: jiro4989/setup-nim-action@v1

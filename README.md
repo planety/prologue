@@ -39,7 +39,7 @@ web services.
 </tbody>
 </table>
 
-## Feature
+## Features
 
 - Core
   - [x] Base on `httpx` and `asynchttpserver`
@@ -86,7 +86,7 @@ Then you can use `nimble` command to install `prologue`.
 nimble install prologue
 ```
 
-## Usage
+## Usages
 
 ### Hello World
 
@@ -115,7 +115,7 @@ Run **app.nim** ( `nim c -r app.nim` ). Now the server is running at `localhost:
 If you need more extensions, you can refer to [awesome prologue](https://github.com/planety/awesome-prologue) and [awesome nim](https://github.com/xflywind/awesome-nim#web).
 
 
-## Donate
+## Donations
 
 Thanks for supporting me!
 
