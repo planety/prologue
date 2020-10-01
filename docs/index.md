@@ -59,18 +59,15 @@ nimble install prologue
 # app.nim
 import prologue
 
-
 proc hello*(ctx: Context) {.async.} =
   resp "<h1>Hello, Prologue!</h1>"
 
-
-let settings = newSettings()
-var app = newApp(settings = settings)
+let app = newApp(settings = newSettings())
 app.addRoute("/", hello)
 app.run()
 ```
 
-Run **app.nim**. Now the server is running at localhost:8080.
+Run **app.nim** ( `nim c -r app.nim` ). Now the server is running at `localhost:8080`.
 
 ### Another example
 
@@ -108,7 +105,7 @@ app.addRoute("/hello/{name}", helloName, HttpGet)
 app.run()
 ```
 
-Run **app.nim**. Now the server is running at localhost:8080.
+Run **app.nim** ( `nim c -r app.nim` ). Now the server is running at `localhost:8080`.
 
 ### More examples
 - [HelloWorld](https://github.com/planety/prologue/tree/devel/examples/helloworld)
@@ -121,7 +118,7 @@ Run **app.nim**. Now the server is running at localhost:8080.
 
 If you need more extensions, you can refer to [awesome prologue](https://github.com/planety/awesome-prologue) and [awesome nim](https://github.com/xflywind/awesome-nim#web).
 
-### Donate
+## Donate
 
 Thanks for supporting me.
 
@@ -130,5 +127,5 @@ Thanks for supporting me.
 [patreon](https://www.patreon.com/flywind)
 
 
-### Stars
+## Stars
 [![Stargazers over time](https://starchart.cc/planety/prologue.svg)](https://starchart.cc/planety/prologue)

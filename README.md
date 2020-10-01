@@ -100,8 +100,8 @@ let app = newApp(settings = newSettings())
 app.addRoute("/", hello)
 app.run()
 ```
-`
-Run **app.nim**(`nim c -r app.nim`). Now the server is running at `localhost:8080`.
+
+Run **app.nim** ( `nim c -r app.nim` ). Now the server is running at `localhost:8080`.
 
 ### More examples
 - [HelloWorld](https://github.com/planety/prologue/tree/devel/examples/helloworld)
