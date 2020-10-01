@@ -134,31 +134,31 @@ proc default404Handler*(ctx: Context) {.async.}
 proc default500Handler*(ctx: Context) {.async.}
 
 
-func gScope*(ctx: Context): lent GlobalScope {.inline.} =
+func gScope*(ctx: Context): lent GlobalScope =
   ## Gets the gScope attribute of Context.
   ctx.gScope
 
-func size*(ctx: Context): int8 {.inline.} =
+func size*(ctx: Context): int8 =
   ## Internal function. Do not use.
   ctx.size
 
-func incSize*(ctx: Context, num = 1) {.inline.} =
+func incSize*(ctx: Context, num = 1) =
   ## Internal function. Do not use.
   inc(ctx.size, num)
 
-func first*(ctx: Context): bool {.inline.} =
+func first*(ctx: Context): bool =
   ## Internal function. Do not use.
   ctx.first
 
-proc `first=`*(ctx: Context, first: bool) {.inline.} =
+proc `first=`*(ctx: Context, first: bool) =
   ## Internal function. Do not use.
   ctx.first = first
 
-func middlewares*(ctx: Context): lent seq[HandlerAsync] {.inline.} =
+func middlewares*(ctx: Context): lent seq[HandlerAsync] =
   ## Internal function. Do not use.
   ctx.middlewares
 
-proc `middlewares=`*(ctx: Context, middlewares: seq[HandlerAsync]) {.inline.} =
+proc `middlewares=`*(ctx: Context, middlewares: seq[HandlerAsync]) =
   ## Internal function. Do not use.
   ctx.middlewares = middlewares
 
@@ -170,7 +170,7 @@ proc addMiddlewares*(ctx: Context, middleware: seq[HandlerAsync]) {.inline.} =
   ## Internal function. Do not use.
   ctx.middlewares.add(middleware)
 
-func initUploadFile*(filename, body: string): UpLoadFile {.inline.} =
+func initUploadFile*(filename, body: string): UpLoadFile =
   ## Initiates a UploadFile.
   UploadFile(filename: filename, body: body)
 
