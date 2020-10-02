@@ -486,7 +486,7 @@ proc staticFileResponse*(ctx: Context, filename, dir: string, mimetype = "",
 
       file.close()
     else:
-      ## TODO asyncfile doesn't work for asyncfile
+      ## TODO asyncfile doesn't work with httpx
       var file = newFileStream(filePath)
       while true:
         let value = file.readStr(bufSize)
