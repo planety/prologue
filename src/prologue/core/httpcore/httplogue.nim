@@ -17,6 +17,7 @@ type
 
 
 func getTables*(headers: ResponseHeaders): TableRef[string, seq[string]] =
+  ## Only for internal use, don't use it!
   headers.table
 
 func toCaseInsensitive(s: string): string =
@@ -55,7 +56,7 @@ func `[]`*(headers: ResponseHeaders, key: string, i: int): string =
   ## Returns the ``i``'th value associated with the given key. If there are
   ## no values associated with the key or the ``i``'th value doesn't exist,
   ## an exception is raised.
-  result = headers.table[key][i]
+  result = headers.table[toCaseInsensitive(key)][i]
 
 proc `[]=`*(headers: ResponseHeaders, key, value: string) =
   ## Sets the header entries associated with ``key`` to the specified value.
@@ -65,7 +66,12 @@ proc `[]=`*(headers: ResponseHeaders, key, value: string) =
 proc `[]=`*(headers: ResponseHeaders, key: string, value: seq[string]) =
   ## Sets the header entries associated with ``key`` to the specified list of values.
   ## Replaces any existing values.
-  headers.table[toCaseInsensitive(key)] = value
+  ## 
+  ## If ``value`` is an empty sequence, the ``key`` will be removed from ``headers``.
+  if value.len > 0:
+    headers.table[toCaseInsensitive(key)] = value
+  else:
+    headers.table.del(toCaseInsensitive(key))
 
 proc add*(headers: ResponseHeaders, key, value: string) =
   ## Adds the specified value to the specified key. Appends to any existing

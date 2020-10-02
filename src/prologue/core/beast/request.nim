@@ -11,6 +11,7 @@ import ../httpcore/httplogue
 
 
 import httpx except Settings
+export unsafeSend
 
 type
   NativeRequest* = httpx.Request
@@ -130,14 +131,17 @@ proc send*(request: Request, content: string): Future[void] {.inline.} =
 proc respond*(request: Request, code: HttpCode, body: string,
               headers: ResponseHeaders): Future[void] {.inline.} =
   ## Responds `code`, `body` and `headers` to the client, the framework
-  ## will generate response contents automatically.
-  request.nativeRequest.send(code, body, headers.createHeaders)
+  ## will generate the contents of the response automatically.
+  if headers.hasKey("Content-Length"):
+    request.nativeRequest.send(code, body, some(headers["Content-Length", 0]), headers.createHeaders)
+  else:
+    request.nativeRequest.send(code, body, headers.createHeaders)
   result = newFuture[void]()
   complete(result)
 
 proc respond*(request: Request, response: Response): Future[void] {.inline.} =
   ## Responds `response` to the client, the framework
-  ## will generate response contents automatically.
+  ## will generate the contents of the response automatically.
   result = request.respond(response.code, response.body, response.headers)
 
 func initRequest*(nativeRequest: NativeRequest, 

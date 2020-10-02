@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import asyncfile, mimetypes, md5, uri
+import mimetypes, md5, uri
 import strtabs, tables, strformat, os, times, options, parseutils, json
 
 import asyncdispatch
@@ -31,6 +31,11 @@ import ./request
 import cookiejar
 
 import strutils, critbits
+
+when defined(usestd):
+  import asyncfile
+else:
+  import streams
 
 
 type
@@ -400,7 +405,7 @@ func abortExit*(ctx: Context, code = Http401, body = "",
   raise newException(AbortError, "abort exit")
 
 proc attachment*(ctx: Context, downloadName = "", charset = "utf-8") {.inline.} =
-  ## `attachment` is used to specify the file will be downloaded.
+  ## `attachment` is used to specify the file which will be downloaded.
   if downloadName.len == 0:
     return
 
@@ -414,8 +419,9 @@ proc attachment*(ctx: Context, downloadName = "", charset = "utf-8") {.inline.} 
   ctx.response.setHeader("Content-Disposition",
                           &"attachment; filename=\"{downloadName}\"")
 
+
 proc staticFileResponse*(ctx: Context, filename, dir: string, mimetype = "",
-                         downloadName = "", charset = "utf-8", 
+                         downloadName = "", charset = "utf-8", bufSize = 40960,
                          headers = initResponseHeaders()) {.async.} =  
   ## Serves static files.
   let
@@ -456,7 +462,7 @@ proc staticFileResponse*(ctx: Context, filename, dir: string, mimetype = "",
   if downloadName.len != 0:
     ctx.attachment(downloadName)
 
-  if contentLength < 20_000_000:
+  if contentLength < 10_000_000:
     if ctx.request.hasHeader("If-None-Match") and ctx.request.headers[
         "If-None-Match"] == etag:
       await ctx.respond(Http304, "", initResponseHeaders())
@@ -466,15 +472,30 @@ proc staticFileResponse*(ctx: Context, filename, dir: string, mimetype = "",
   else:
     ctx.response.setHeader("Content-Length", $contentLength)
     await ctx.respond(Http200, "", ctx.response.headers)
-    var
-      file = openAsync(filePath, fmRead)
 
-    while true:
-      let value = await file.read(4096)
-      if value.len > 0:
-        await ctx.send(value)
-      else:
-        break
+    when defined(usestd):
+      var file = openAsync(filePath, fmRead)
 
-    file.close()
+      while true:
+        let value = await file.read(bufSize)
+
+        if value.len > 0:
+          await ctx.send(value)
+        else:
+          break
+
+      file.close()
+    else:
+      ## TODO asyncfile doesn't work for asyncfile
+      var file = newFileStream(filePath)
+      while true:
+        let value = file.readStr(bufSize)
+
+        if value.len > 0:
+          await ctx.send(value)
+        else:
+          break
+
+      file.close()
+
     ctx.handled = true

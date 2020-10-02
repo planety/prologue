@@ -12,7 +12,7 @@ requires "nim >= 1.2.6"
 requires "regex >= 0.16.2"
 requires "nimcrypto >= 0.5.4"
 requires "cookiejar >= 0.2.0"
-requires "httpx >= 0.1.0"
+requires "httpx >= 0.1.4"
 requires "logue >= 0.2.0"
 
 

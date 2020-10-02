@@ -11,8 +11,8 @@ proc mockApp*(app: Prologue) =
   ## Adds mocking middleware to global middlewares.
   app.middlewares.add mockingMiddleware()
 
-proc debugResponse*(ctx: Context) =
-  echo &"{ctx.response.code} {ctx.response.headers} \n {ctx.response.body}"
+func debugResponse*(ctx: Context) =
+  debugEcho &"{ctx.response.code} {ctx.response.headers} \n {ctx.response.body}"
 
 proc runOnce*(app: Prologue, request: Request): Context =
   ## Starts an Application.
