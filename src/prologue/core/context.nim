@@ -32,12 +32,7 @@ import cookiejar
 
 import strutils, critbits
 
-const httpxWindows = defined(windows) and not defined(usestd)
-
-when httpxWindows:
-  import streams
-else:
-  import asyncfile
+import asyncfile
 
 
 type
@@ -419,7 +414,7 @@ proc attachment*(ctx: Context, downloadName = "", charset = "utf-8") {.inline.} 
 
 
 proc staticFileResponse*(ctx: Context, filename, dir: string, mimetype = "",
-                         downloadName = "", charset = "utf-8", bufSize = 40960,
+                         downloadName = "", charset = "utf-8", bufSize = 4096,
                          headers = initResponseHeaders()) {.async.} =  
   ## Serves static files.
   let
@@ -471,29 +466,16 @@ proc staticFileResponse*(ctx: Context, filename, dir: string, mimetype = "",
     ctx.response.setHeader("Content-Length", $contentLength)
     await ctx.respond(Http200, "", ctx.response.headers)
 
-    when httpxWindows:
-      ## TODO asyncfile doesn't work with httpx in windows
-      var file = newFileStream(filePath)
-      while true:
-        let value = file.readStr(bufSize)
+    var file = openAsync(filePath, fmRead)
 
-        if value.len > 0:
-          await ctx.send(value)
-        else:
-          break
+    while true:
+      let value = await file.read(bufSize)
 
-      file.close()
-    else:
-      var file = openAsync(filePath, fmRead)
+      if value.len > 0:
+        await ctx.send(value)
+      else:
+        break
 
-      while true:
-        let value = await file.read(bufSize)
-
-        if value.len > 0:
-          await ctx.send(value)
-        else:
-          break
-
-      file.close()
+    file.close()
 
     ctx.handled = true
