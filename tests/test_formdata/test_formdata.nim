@@ -1,6 +1,6 @@
 import ../../src/prologue/core/form
 import tables, strutils, base64
-let testfile = open("tests/test_formdata/testfile.txt", fmRead).readAll()
+let testfile = "MTIzNA0KNTY3OA0KYWJjZA==".decode()
 let testmime = open("tests/test_formdata/testmime.base64", fmRead).readAll().decode()
 let contenttype = "multipart/form-data; boundary=---------------------------203238422770489380538321896"
 let formPart = parseFormPart(testmime, contenttype)
