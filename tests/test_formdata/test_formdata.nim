@@ -17,7 +17,7 @@ const testfile =
   "1234\13\10" &
   "5678\13\10" &
   "abcd"
-let contenttype = "multipart/form-data; boundary=---------------------------263701891623491983764541468"
+const contenttype = "multipart/form-data; boundary=---------------------------263701891623491983764541468"
 let formPart = parseFormPart(testmime, contenttype)
 doAssert formPart.data["upload"].body.len == testfile.len
 doAssert formPart.data["upload"].body == testfile
