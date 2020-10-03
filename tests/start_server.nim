@@ -60,7 +60,7 @@ proc cookie(ctx: Context) {.async.} =
   ctx.setCookie("Two", "done")
   resp "Hello"
 
-  doAssert seq[string](ctx.response.headers["Set-Cookie"]) == 
+  doAssert ctx.response.headers["Set-Cookie"] == 
             @["One=ok; SameSite=Lax", "Two=done; SameSite=Lax"]
 
 
