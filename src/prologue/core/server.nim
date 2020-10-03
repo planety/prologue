@@ -1,17 +1,9 @@
-import asyncdispatch
+import constants
 
 
-# needs latest devel version to use httpx
-when compiles(getGlobalDispatcher().handles):
-  when defined(usestd):
-    import naive/server
-  else:
-    import beast/server
+when useAsyncHTTPServer:
+  import naive/server
 else:
-  when defined(windows) or defined(usestd):
-    import naive/server
-  else:
-    import beast/server
-
+  import beast/server
 
 export server

@@ -1,15 +1,9 @@
-import asyncdispatch
+import constants
 
 
-when compiles(getGlobalDispatcher().handles):
-  when defined(usestd):
-    import naive/request
-  else:
-    import beast/request
+when useAsyncHTTPServer:
+  import naive/request
 else:
-  when defined(windows) or defined(usestd):
-    import naive/request
-  else:
-    import beast/request
+  import beast/request
 
 export request
