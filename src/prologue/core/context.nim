@@ -32,10 +32,12 @@ import cookiejar
 
 import strutils, critbits
 
-when defined(usestd):
-  import asyncfile
-else:
+const httpxWindows = defined(windows) and not defined(usestd)
+
+when httpxWindows:
   import streams
+else:
+  import asyncfile
 
 
 type
@@ -47,10 +49,6 @@ type
   Path* = object
     route*: string
     httpMethod*: HttpMethod
-
-  # # may change to flat
-  # Router* = ref object
-  #   callable*: Table[Path, PathHandler]
 
   RePath* = object
     route*: Regex
@@ -473,11 +471,11 @@ proc staticFileResponse*(ctx: Context, filename, dir: string, mimetype = "",
     ctx.response.setHeader("Content-Length", $contentLength)
     await ctx.respond(Http200, "", ctx.response.headers)
 
-    when defined(usestd):
-      var file = openAsync(filePath, fmRead)
-
+    when httpxWindows:
+      ## TODO asyncfile doesn't work with httpx in windows
+      var file = newFileStream(filePath)
       while true:
-        let value = await file.read(bufSize)
+        let value = file.readStr(bufSize)
 
         if value.len > 0:
           await ctx.send(value)
@@ -486,10 +484,10 @@ proc staticFileResponse*(ctx: Context, filename, dir: string, mimetype = "",
 
       file.close()
     else:
-      ## TODO asyncfile doesn't work with httpx
-      var file = newFileStream(filePath)
+      var file = openAsync(filePath, fmRead)
+
       while true:
-        let value = file.readStr(bufSize)
+        let value = await file.read(bufSize)
 
         if value.len > 0:
           await ctx.send(value)

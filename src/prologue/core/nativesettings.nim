@@ -28,14 +28,15 @@ type
     reusePort*: bool         ## Use socket port in multiple times.
     staticDirs*: seq[string] ## The path of static directories.
     appName*: string         ## The name of your application.
-    data: JsonNode
+    bufSize*: int            ## The size of buffer in file streaming.
+    data: JsonNode           ## Data which carries user defined settings.
 
   CtxSettings* = ref object ## Context settings.
     mimeDB*: MimeDB
     config*: TableRef[string, StringTableRef]
 
   LocalSettings* = ref object ## local settings for corresponding handlers.
-    data*: JsonNode
+    data*: JsonNode           ## Data which carries user defined settings.
 
 
 func hasKey*(settings: Settings, key: string): bool {.inline.} =
@@ -73,28 +74,28 @@ func normalizedStaticDirs(dirs: openArray[string]): seq[string] =
 
 func newSettings*(address = "", port = Port(8080), debug = true, reusePort = true,
                   staticDirs: openArray[string] = [], secretKey = randomString(8),
-                  appName = ""): Settings =
-  ## Creates a new settings.
+                  appName = "", bufSize = 40960): Settings =
+  ## Creates a new `Settings`.
   if secretKey.len == 0:
     raise newException(EmptySecretKeyError, "Secret key can't be empty!")
 
   result = Settings(address: address, port: port, debug: debug, reusePort: reusePort,
                     staticDirs: normalizedStaticDirs(staticDirs), appName: appName,
-                    data: %* {"secretKey": secretKey})
+                    bufSize: bufSize, data: %* {"secretKey": secretKey})
 
 func newSettings*(data: JsonNode, address = "", port = Port(8080), debug = true, reusePort = true,
                   staticDirs: openArray[string] = [],
-                  appName = ""): Settings =
-  ## Creates a new settings.
+                  appName = "", bufSize = 40960): Settings =
+  ## Creates a new `Settings`.
   result = Settings(address: address, port: port, debug: debug, reusePort: reusePort,
-                    staticDirs: normalizedStaticDirs(staticDirs), appName: appName,
-                    data: data)
+                    staticDirs: normalizedStaticDirs(staticDirs), 
+                    appName: appName, bufSize: bufSize, data: data)
 
 proc newSettings*(configPath: string, address = "", port = Port(8080), debug = true, reusePort = true,
                   staticDirs: openArray[string] = [],
-                  appName = ""): Settings =
-  ## Creates a new settings.
+                  appName = "", bufSize = 40960): Settings =
+  ## Creates a new `Settings`.
   # make sure reserved keys must appear in settings
   result = Settings(address: address, port: port, debug: debug, reusePort: reusePort,
                     staticDirs: normalizedStaticDirs(staticDirs), appName: appName,
-                    data: parseFile(configPath))
+                     bufSize: bufSize, data: parseFile(configPath))

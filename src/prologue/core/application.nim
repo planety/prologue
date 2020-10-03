@@ -126,7 +126,7 @@ func newSettings*(settings: Settings, localSettings: LocalSettings): Settings =
   ##        - `localSettings` is a local immutable setting for corresponding handler or handler group.
 
   result = newSettings(localSettings.data, settings.address, settings.port, settings.debug, settings.reusePort,
-                       settings.staticDirs, settings.appName)
+                       settings.staticDirs, settings.appName, settings.bufSize)
 
 
 proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
@@ -267,7 +267,7 @@ proc all*(app: Prologue, route: string, handler: HandlerAsync, name = "",
 
 # proc printRoute*(app: Prologue) {.inline.} =
 #   ## A helper function for printing all route names.
-#   for key in app.gScope.router.callable.keys:
+#   for key in app.gScope.router.keys:
 #     echo key
 
 func appAddress*(app: Prologue): string {.inline.} =
