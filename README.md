@@ -4,7 +4,7 @@
 
 ![License: Apache-2.0](https://img.shields.io/github/license/planety/prologue)
 [![Version](https://img.shields.io/github/v/release/planety/prologue?include_prereleases)](https://github.com/planety/prologue/releases)
-[![buy me a coffee](https://img.shields.io/badge/donate-buy%20me%20a%20coffee-orange.svg)](https://github.com/planety/prologue#donate)
+[![buy me a coffee](https://img.shields.io/badge/donate-buy%20me%20a%20coffee-orange.svg)](https://github.com/planety/prologue#donations)
 [![Discord](https://img.shields.io/discord/718010516034945045?label=Discord&logo=discord&logoColor=white)](https://discord.gg/e2dB4WT)
 
 # Prologue
