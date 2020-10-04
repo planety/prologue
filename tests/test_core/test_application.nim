@@ -1,6 +1,6 @@
 discard """
   cmd:      "nim c -r --styleCheck:hint --panics:on $options $file"
-  matrix:   "--gc:refc"
+  matrix:   "--gc:refc; --gc:refc -d:usestd"
   targets:  "c"
   nimout:   ""
   action:   "run"
@@ -13,23 +13,22 @@ import strformat, os, osproc, terminal, strutils
 
 import ./utils
 
+when defined(usestd):
+  const toExecute = "nim c -d:usestd --hints:off --verbosity=0 tests/start_server.nim"
+else:
+  const toExecute = "nim c --hints:off --verbosity=0 tests/start_server.nim"
 
 var process: Process
+
 when defined(windows):
   if not fileExists("tests/start_server.exe"):
-    let code = execCmd("nim c --hints:off --verbosity=0 tests/start_server.nim")
+    let code = execCmd(toExecute)
     if code != 0:
       raise newException(IOError, "can't compile tests/start_server.nim")
   process = startProcess(expandFileName("tests/start_server.exe"))
-elif not defined(windows) and defined(usestd):
-  if not fileExists("tests/start_server"):
-    let code = execCmd("nim c --hints:off -d:usestd tests/start_server.nim")
-    if code != 0:
-      raise newException(IOError, "can't compile tests/start_server.nim")
-  process = startProcess(expandFileName("tests/start_server"))
 else:
   if not fileExists("tests/start_server"):
-    let code = execCmd("nim c --hints:off tests/start_server.nim")
+    let code = execCmd(toExecute)
     if code != 0:
       raise newException(IOError, "can't compile tests/start_server.nim")
   process = startProcess(expandFileName("tests/start_server"))
@@ -53,7 +52,7 @@ proc start() {.async.} =
 waitFor start()
 
 
-# proc houndredsRequest(client: AsyncHttpClient, address: string, port: Port, route: string,num: int = 100000) {.async.} =
+# proc hundredsRequest(client: AsyncHttpClient, address: string, port: Port, route: string,num: int = 100000) {.async.} =
 #   for i in 0 ..< num:
 #     echo await client.getContent(fmt"http://{address}:{port}{route}")
 #     echo i
@@ -65,11 +64,11 @@ block:
     address = "127.0.0.1"
     port = Port(8080)
 
-  # test "can handle houndreds of reuqest":
+  # test "can handle hundreds of request":
   #   let
   #     route = "/"
   #   echo "begin"
-  #   waitFor client.houndredsRequest(address, port, route)
+  #   waitFor client.hundredsRequest(address, port, route)
   #   echo "end"
 
   # "can get /"

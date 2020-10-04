@@ -2,7 +2,7 @@ from ../../src/prologue/core/utils import isStaticFile
 import os
 
 
-# "Tesst Utils"
+# "Test Utils"
 block:
   # "isStaticFile can work"
   block:
@@ -25,7 +25,7 @@ block:
     doAssert s4.filename.len == 0
     doAssert s4.dir.len == 0
 
-# "Tesst Utils"
+# "Test Utils"
 block:
   # "isStaticFile can work"
   block:
