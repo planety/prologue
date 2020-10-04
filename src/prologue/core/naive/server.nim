@@ -40,7 +40,7 @@ func newPrologue*(
   ## Creates a new application instance.
 
   Prologue(server: newPrologueServer(true, settings.reusePort, 
-                                    settings.getOrDefault("maxBody").getInt(8388608)), 
+                                    settings.getOrDefault("stdlib_maxBody").getInt(8388608)), 
            gScope: GlobalScope(settings: settings, ctxSettings: ctxSettings, router: router, 
            reversedRouter: reversedRouter, reRouter: reRouter, appData: appData),
            middlewares: middlewares, startup: startup, shutdown: shutdown,

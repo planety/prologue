@@ -40,6 +40,7 @@ import ./encode
 import ./types
 import ./httpcore/httplogue
 import ./route
+import ./defaultserversettings
 
 import ./request
 import ./server
@@ -69,6 +70,7 @@ export types
 export urandom
 export utils
 export httpexception
+export defaultserversettings
 
 
 # shutdown events
