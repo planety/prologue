@@ -1,9 +1,7 @@
-import strtabs
+import std / [strtabs, json, asyncdispatch]
 
-
-import asyncdispatch
 from ./request import NativeRequest
-from ../nativesettings import Settings, CtxSettings
+from ../nativesettings import Settings, CtxSettings, getOrDefault
 from ../context import Router, ReversedRouter, ReRouter, HandlerAsync,
     Event, ErrorHandlerTable, GlobalScope
 
@@ -20,9 +18,9 @@ type
 
 proc serve*(app: Prologue, port: Port,
             callback: proc (request: NativeRequest): Future[void] {.closure, gcsafe.},
-            address = "", numThreads = 0) {.inline.} =
+            address = "") {.inline.} =
   ## Serves a new web application.
-  run(callback, httpx.initSettings(port, address, numThreads))
+  run(callback, httpx.initSettings(port, address, app.gScope.settings.getOrDefault("numThreads").getInt(0)))
 
 func newPrologue*(settings: Settings, ctxSettings: CtxSettings, router: Router,
                   reversedRouter: ReversedRouter, reRouter: ReRouter, middlewares: seq[HandlerAsync], 
