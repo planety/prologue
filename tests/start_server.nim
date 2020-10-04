@@ -53,7 +53,7 @@ proc upload(ctx: Context) {.async.} =
   elif ctx.request.reqMethod == HttpPost:
     let 
       file = ctx.getUploadFile("file")
-    resp fmt"<html><h1>{file.filename}</h1><p>{file.body.strip()}</p></html>"
+    resp fmt"<html><h1>{file.filename}</h1><p>{file.body}</p></html>"
 
 proc cookie(ctx: Context) {.async.} =
   ctx.setCookie("One", "ok")
