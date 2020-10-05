@@ -81,20 +81,21 @@ var dontUseThisShutDownEvents: seq[Event]
 proc registerErrorHandler*(app: Prologue, code: HttpCode,
                            handler: ErrorHandler) {.inline.} =
   ## Registers a user-defined error handler. You can specify
-  ## HttpCode and its corresponding handler. For example,
-  ## if response's HttpCode is equal to this, Framework will execute
-  ## corresponding function.
+  ## `HttpCode` and its corresponding `handler`. 
+  ## 
+  ## When the HTTP code of response exists in the error handler table,
+  ## corresponding handler will be executed.
   app.errorHandlerTable[code] = handler
 
 proc registerErrorHandler*(app: Prologue, code: set[HttpCode],
                            handler: ErrorHandler) {.inline.} =
-  ## Register the same handler for a set of HttpCode.
+  ## Registers the same handler with a set of HttpCode.
   for idx in code:
     app.registerErrorHandler(idx, handler)
 
 proc registerErrorHandler*(app: Prologue, code: openArray[HttpCode],
                            handler: ErrorHandler) {.inline.} =
-  ## Register the same handler for a sequence of HttpCode.
+  ## Registers the same handler with a sequence of HttpCode.
   ## This is a helper function.
   runnableExamples:
     ## Examples for all registerErrorHandler
@@ -209,12 +210,19 @@ proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
   for m in httpMethod:
     app.addRoute(route, handler, m, "", middlewares, settings)
 
-proc addRoute*(app: Prologue, patterns: seq[UrlPattern],
-               baseRoute = "", settings: LocalSettings = nil) {.inline.} =
+proc addRoute*(app: Prologue, patterns: seq[UrlPattern], baseRoute = "", 
+               middlewares: Option[seq[HandlerAsync]] = none(seq[HandlerAsync]), 
+               settings: LocalSettings = nil) {.inline.} =
   ## Adds multiple routes with handlers.
-  for pattern in patterns:
-    app.addRoute(baseRoute & pattern.route, pattern.matcher, pattern.httpMethod,
-                 pattern.name, pattern.middlewares, settings)
+  if middlewares.isSome:
+    let addition = middlewares.get
+    for pattern in patterns:
+      app.addRoute(baseRoute & pattern.route, pattern.matcher, pattern.httpMethod,
+                  pattern.name, addition, settings)
+  else:
+    for pattern in patterns:
+      app.addRoute(baseRoute & pattern.route, pattern.matcher, pattern.httpMethod,
+                  pattern.name, pattern.middlewares, settings)
 
 proc head*(app: Prologue, route: string, handler: HandlerAsync, name = "",
            middlewares: seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
@@ -266,11 +274,6 @@ proc all*(app: Prologue, route: string, handler: HandlerAsync, name = "",
   ## Adds `route` and `handler` with all `HttpMethod`.
   app.addRoute(route, handler, @[HttpGet, HttpPost, HttpPut, HttpDelete,
                HttpTrace, HttpOptions, HttpConnect, HttpPatch], name, middlewares, settings)
-
-# proc printRoute*(app: Prologue) {.inline.} =
-#   ## A helper function for printing all route names.
-#   for key in app.gScope.router.keys:
-#     echo key
 
 func appAddress*(app: Prologue): string {.inline.} =
   ## Gets the address from the settings.
@@ -332,7 +335,7 @@ func newApp*(
                        startup = startup, shutdown = shutdown,
                        errorHandlerTable = errorHandlerTable, appData = appData)
 
-proc handleNativeRequest(request: var Request) {.inline.} =
+proc handleNativeRequest(request: var Request) {.inline, gcsafe.} =
   ## Handles the request from the client.
 
   # process cookie
@@ -353,7 +356,7 @@ proc handleNativeRequest(request: var Request) {.inline.} =
   except Exception as e:
     logging.error(&"Malformed form params:\n{e.msg}")
 
-proc handleContext*(app: Prologue, ctx: Context) {.async.} =
+proc handleContext*(app: Prologue, ctx: Context) {.async, gcsafe.} =
 
   ## Todo Optimization
   ctx.middlewares = app.middlewares
@@ -406,7 +409,7 @@ proc handleContext*(app: Prologue, ctx: Context) {.async.} =
 
     logging.debug($(ctx.response))
 
-proc handleRequest*(app: Prologue, nativeRequest: NativeRequest): Future[void] =
+proc handleRequest*(app: Prologue, nativeRequest: NativeRequest): Future[void] {.gcsafe.} =
   var request = initRequest(nativeRequest)
   handleNativeRequest(request)
   var
@@ -447,7 +450,7 @@ proc run*(app: Prologue) =
     logging.debug(fmt"Prologue is serving at {app.appAddress}:{app.appPort} {app.appName}")
 
 
-  app.serve(app.appPort, proc (nativeRequest: NativeRequest): Future[void] =
+  app.serve(app.appPort, proc (nativeRequest: NativeRequest): Future[void] {.gcsafe.} =
                            result = handleRequest(app, nativeRequest),
             app.appAddress)
 

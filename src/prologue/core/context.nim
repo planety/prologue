@@ -12,27 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import mimetypes, md5, uri, options
-import strtabs, tables, strformat, os, times, options, parseutils, json
+import std/[mimetypes, md5, uri, options, strutils, critbits, 
+            asyncfile, asyncdispatch,strtabs, tables, strformat, 
+            os, times, options, parseutils, json]
 
-import asyncdispatch
-import ./response, ./pages
-import ./httpcore/httplogue
-
+import ./response, ./pages, ./basicregex, ./request, ./httpcore/httplogue
 from ./types import BaseType, Session, `[]`, initSession
 from ./configure import parseValue
 from ./httpexception import AbortError, RouteError, DuplicatedRouteError
-
-import ./basicregex
 from ./nativesettings import Settings, LocalSettings, CtxSettings, getOrDefault, hasKey, `[]`
 
-import ./request
-
-import cookiejar
-
-import strutils, critbits
-
-import asyncfile
+import pkg/cookiejar
 
 
 type
@@ -93,7 +83,6 @@ type
   UploadFile* = object
     filename*: string
     body*: string
-
 
   PatternMatchingType* = enum ## Kinds of elements that may appear in a mapping
     ptrnWildcard
@@ -220,12 +209,13 @@ func newContext*(request: Request, response: Response,
 
 func getSettings*(ctx: Context, key: string): JsonNode {.inline.} =
   ## Get context.settings(First lookup localSettings then lookup globalSettings).
+  ## If key doesn't exist, `nil` will be returned.
   if ctx.localSettings == nil:
     result = ctx.gScope.settings.getOrDefault(key)
   elif not ctx.localSettings.hasKey(key):
     result = ctx.gScope.settings.getOrDefault(key)
   else:
-    result = ctx.localSettings[key]
+    result = ctx.localSettings.getOrDefault(key)
 
 proc respond*(
   ctx: Context, code: HttpCode, body: string,
@@ -352,6 +342,7 @@ proc setResponse*(ctx: Context, response: Response) {.inline.} =
   ## Handy to make the response of `ctx`.
   ctx.response = response
 
+## TODO
 proc multiMatch(s: string, replacements: StringTableRef): string =
   result = newStringOfCap(s.len)
   var
@@ -385,6 +376,10 @@ func urlFor*(ctx: Context, handler: string, parameters: openArray[(string,
              string)] = @[], queryParams: openArray[(string, string)] = @[],
              usePlus = true, omitEq = true): string {.inline.} =
   ## Returns the corresponding name of the handler.
+  ## **Limitation**:
+  ##                Only supports two forms of Route: 
+  ##                1. "/route/hello"
+  ##                2. "/route/{parameter}/other
   ## Notes that `{` and `}` can't appear in url
   if handler in ctx.gScope.reversedRouter:
     result = ctx.gScope.reversedRouter[handler]
@@ -396,13 +391,19 @@ func urlFor*(ctx: Context, handler: string, parameters: openArray[(string,
 
 func abortExit*(ctx: Context, code = Http401, body = "",
                 headers = initResponseHeaders(),
-                version = HttpVer11) {.inline.} =
-  ## Abort the program. It raises `AbortError`.
+                version = HttpVer11
+) {.inline.} =
+  ## Aborts the program. It raises `AbortError`.
   ctx.response = abort(code, body, headers, version)
   raise newException(AbortError, "abort exit")
 
-proc attachment*(ctx: Context, downloadName = "", charset = "utf-8") {.inline.} =
+proc attachment*(ctx: Context, downloadName: string, charset = "utf-8") {.inline.} =
   ## `attachment` is used to specify the file which will be downloaded.
+  ## 
+  ## Params: 
+  ##         - ``downloadName``: The name of the file to be downloaded. If the
+  ##                             length of the name is zero, the function will return immediately.
+  ##         - ``charset``: The Encoding of the file. ``utf-8`` is the default encoding.
   if downloadName.len == 0:
     return
 
@@ -416,10 +417,10 @@ proc attachment*(ctx: Context, downloadName = "", charset = "utf-8") {.inline.} 
   ctx.response.setHeader("Content-Disposition",
                           &"attachment; filename=\"{downloadName}\"")
 
-
 proc staticFileResponse*(ctx: Context, filename, dir: string, mimetype = "",
                          downloadName = "", charset = "utf-8", bufSize = 4096,
-                         headers = none(ResponseHeaders)) {.async.} =  
+                         headers = none(ResponseHeaders)
+) {.async.} =  
   ## Serves static files.
   let
     filePath = dir / filename

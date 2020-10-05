@@ -18,7 +18,7 @@
 # limitations under the License.
 
 
-import hashes, strutils, strtabs, options, critbits, sequtils, parseutils
+import std/[hashes, strutils, strtabs, options, critbits, sequtils, parseutils]
 
 import ./context
 from ./nativesettings import Settings
@@ -27,7 +27,6 @@ from ./basicregex import Regex, RegexMatch, match, groupNames, groupFirstCapture
 
 import ./request
 import ./httpcore/httplogue
-
 import ./httpexception
 
 
@@ -58,6 +57,7 @@ func initPath*(route: string, httpMethod = HttpGet): Path =
 func initRePath*(route: Regex, httpMethod = HttpGet): RePath =
   RePath(route: route, httpMethod: httpMethod)
 
+## TODO May support RePattern
 func pattern*(route: string, handler: HandlerAsync, httpMethod = HttpGet,
               name = "", middlewares: seq[HandlerAsync] = @[]): UrlPattern =
   (route, handler, @[httpMethod], name, middlewares)
@@ -318,7 +318,9 @@ func contains(
 ): bool =
   ## Determines whether or not merging rope into node will create a mapping conflict.
 
-  if rope.len == 0: return
+  if rope.len == 0: 
+    return
+
   let bnode = rope[0]
 
   # Is this node equal to the bnode?
@@ -328,13 +330,12 @@ func contains(
     else:
       result = true
   else:
-    if
-      (node.kind == ptrnWildcard and bnode.kind == ptrnParam) or
-      (node.kind == ptrnParam and bnode.kind == ptrnWildcard) or
-      (node.kind == ptrnWildcard and bnode.kind == ptrnText) or
-      (node.kind == ptrnParam and bnode.kind == ptrnText) or
-      (node.kind == ptrnText and bnode.kind == ptrnParam) or
-      (node.kind == ptrnText and bnode.kind == ptrnWildcard):
+    if (node.kind == ptrnWildcard and bnode.kind == ptrnParam) or
+        (node.kind == ptrnParam and bnode.kind == ptrnWildcard) or
+        (node.kind == ptrnWildcard and bnode.kind == ptrnText) or
+        (node.kind == ptrnParam and bnode.kind == ptrnText) or
+        (node.kind == ptrnText and bnode.kind == ptrnParam) or
+        (node.kind == ptrnText and bnode.kind == ptrnWildcard):
       result = true
     else:
       result = false
@@ -413,7 +414,7 @@ func matchTree(
       case node.kind
       of ptrnText:
         if path.continuesWith(node.value, pathIndex):
-          pathIndex += node.value.len
+          inc(pathIndex, node.value.len)
         else:
           break matching
       of ptrnWildcard:
@@ -421,7 +422,7 @@ func matchTree(
           pathIndex = path.len
         else:
           pathIndex = path.find(pathSeparator,
-              pathIndex) #skip forward to the next separator
+                                pathIndex) # skip forward to the next separator
           if pathIndex == -1:
             pathIndex = path.len
       of ptrnParam:
@@ -444,7 +445,7 @@ func matchTree(
       elif not node.isLeaf: #there is children remaining, could match against children
         if node.children.len == 1: #optimization for single child that just points the node forward
           node = node.children[0]
-        else: #more than one child
+        else: # more than one child
           assert node.children.len != 0
           for child in node.children:
             result = ctx.matchTree(child, path, pathIndex)
@@ -496,18 +497,18 @@ func findHandler*(ctx: Context): PathHandler {.inline.} =
   let route = ctx.request.url.path
   let reqMethod = ctx.request.reqMethod
 
-  # find regex route
   let handler = findHandler(ctx, reqMethod, route)
   if handler.isSome:
     return handler.get
 
+  # find regex route
   for (path, pathHandler) in ctx.gScope.reRouter:
     if path.httpMethod != reqMethod:
       continue
     var m: RegexMatch
 
     if route.match(path.route, m):
-      for name in m.groupNames():
+      for name in groupNames(m):
         ctx.request.pathParams[name] = m.groupFirstCapture(name, route)
       return pathHandler
 
