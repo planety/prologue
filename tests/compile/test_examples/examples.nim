@@ -8,6 +8,7 @@ block:
     todolistDir = "./examples/todolist"
     todoappDir = "./examples/todoapp"
     blogDir = "./examples/blog"
+    basicDir = "./examples/basic"
     app = "app.nim"
     execCommand = "nim c --d:release --hints:off"
 
@@ -29,4 +30,9 @@ block:
   # blog can compile
   block:
     let (outp, errC) = execCmdEx(fmt"{execCommand} {blogDir / app}")
+    doAssert errC == 0, outp
+
+  # basic can compile
+  block:
+    let (outp, errC) = execCmdEx(fmt"{execCommand} {basicDir / app}")
     doAssert errC == 0, outp
