@@ -27,7 +27,7 @@ task readme, "Test Readme":
   exec "testament r tests/compile/test_readme/readme.nim"
 
 task tcompile, "Test Compile":
-  exec "testament r tests/compile/test_compile/test_compile.nim"
+  exec "nim c -d:release tests/compile/test_compile/test_compile.nim"
 
 task docs, "Only for gh-pages, not for users":
   exec "mkdocs build"
