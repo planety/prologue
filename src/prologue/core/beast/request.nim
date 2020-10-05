@@ -11,7 +11,6 @@ import ../httpcore/httplogue
 
 
 import httpx except Settings
-export unsafeSend
 
 type
   NativeRequest* = httpx.Request

@@ -20,7 +20,7 @@ proc serve*(app: Prologue, port: Port,
             callback: proc (request: NativeRequest): Future[void] {.closure, gcsafe.},
             address = "") {.inline.} =
   ## Serves a new web application.
-  run(callback, httpx.initSettings(port, address, app.gScope.settings.getOrDefault("numThreads").getInt(0)))
+  run(callback, httpx.initSettings(port, address, app.gScope.settings.getOrDefault("httpx_numThreads").getInt(0)))
 
 func newPrologue*(settings: Settings, ctxSettings: CtxSettings, router: Router,
                   reversedRouter: ReversedRouter, reRouter: ReRouter, middlewares: seq[HandlerAsync], 

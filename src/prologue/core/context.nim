@@ -424,12 +424,14 @@ proc staticFileResponse*(ctx: Context, filename, dir: string, mimetype = "",
   let filePermission = getFilePermissions(filePath)
   if fpOthersRead notin filePermission:
     if headers.isSome:
-      resp abort(code = Http403,
+      await ctx.respond(code = Http403,
                 body = "You do not have permission to access this file.",
                 headers = headers.get)
     else:
-      resp abort(code = Http403,
-          body = "You do not have permission to access this file.")
+      await ctx.respond(code = Http403,
+                body = "You do not have permission to access this file.",
+                headers = initResponseHeaders())
+    ctx.handled = true
     return
 
   var
@@ -464,6 +466,7 @@ proc staticFileResponse*(ctx: Context, filename, dir: string, mimetype = "",
 
   if ctx.request.hasHeader("If-None-Match") and ctx.request.headers[
         "If-None-Match"] == etag:
+    ## TODO overload respond to provide no header version.
     await ctx.respond(Http304, "", initResponseHeaders())
   elif contentLength < 10_000_000:
     ctx.response.body = await file.readAll()
