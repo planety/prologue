@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    working_directory: /usr/src/dotenv
+    working_directory: /usr/src/prologue
     docker:
       - image: nimlang/nim
     branches:
@@ -26,7 +26,7 @@ jobs:
           command: nimble examples
 
   build_alpine:
-    working_directory: /usr/src/dotenv
+    working_directory: /usr/src/prologue
     docker:
       - image: nimlang/nim:alpine
     branches:
