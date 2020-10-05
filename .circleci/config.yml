@@ -4,9 +4,6 @@ jobs:
     working_directory: /usr/src/prologue
     docker:
       - image: nimlang/nim
-    branches:
-      only:
-        - devel
     steps:
       - checkout
       - run:
@@ -29,9 +26,6 @@ jobs:
     working_directory: /usr/src/prologue
     docker:
       - image: nimlang/nim:alpine
-    branches:
-      only:
-        - devel
     steps:
       - checkout
       - run:
