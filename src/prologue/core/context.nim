@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import mimetypes, md5, uri
+import mimetypes, md5, uri, options
 import strtabs, tables, strformat, os, times, options, parseutils, json
 
 import asyncdispatch
@@ -415,17 +415,21 @@ proc attachment*(ctx: Context, downloadName = "", charset = "utf-8") {.inline.} 
 
 proc staticFileResponse*(ctx: Context, filename, dir: string, mimetype = "",
                          downloadName = "", charset = "utf-8", bufSize = 4096,
-                         headers = initResponseHeaders()) {.async.} =  
+                         headers = none(ResponseHeaders)) {.async.} =  
   ## Serves static files.
   let
     filePath = dir / filename
 
   # exists -> have access -> can open
-  var filePermission = getFilePermissions(filePath)
+  let filePermission = getFilePermissions(filePath)
   if fpOthersRead notin filePermission:
-    resp abort(code = Http403,
-               body = "You do not have permission to access this file.",
-               headers = headers)
+    if headers.isSome:
+      resp abort(code = Http403,
+                body = "You do not have permission to access this file.",
+                headers = headers.get)
+    else:
+      resp abort(code = Http403,
+          body = "You do not have permission to access this file.")
     return
 
   var
@@ -444,7 +448,8 @@ proc staticFileResponse*(ctx: Context, filename, dir: string, mimetype = "",
     etagBase = fmt"{filename}-{lastModified}-{contentLength}"
     etag = getMD5(etagBase)
 
-  ctx.response.headers = headers
+  if headers.isSome:
+    ctx.response.headers = headers.get
 
   if mimetype.len != 0:
     ctx.response.setHeader("Content-Type", fmt"{mimetype}; {charset}")
@@ -455,18 +460,17 @@ proc staticFileResponse*(ctx: Context, filename, dir: string, mimetype = "",
   if downloadName.len != 0:
     ctx.attachment(downloadName)
 
-  if contentLength < 10_000_000:
-    if ctx.request.hasHeader("If-None-Match") and ctx.request.headers[
+  var file = openAsync(filePath, fmRead)
+
+  if ctx.request.hasHeader("If-None-Match") and ctx.request.headers[
         "If-None-Match"] == etag:
-      await ctx.respond(Http304, "", initResponseHeaders())
-      ctx.handled = true
-    else:
-      ctx.response.body = readFile(filePath)
+    await ctx.respond(Http304, "", initResponseHeaders())
+  elif contentLength < 10_000_000:
+    ctx.response.body = await file.readAll()
+    await ctx.respond()
   else:
     ctx.response.setHeader("Content-Length", $contentLength)
     await ctx.respond(Http200, "", ctx.response.headers)
-
-    var file = openAsync(filePath, fmRead)
 
     while true:
       let value = await file.read(bufSize)
@@ -476,6 +480,5 @@ proc staticFileResponse*(ctx: Context, filename, dir: string, mimetype = "",
       else:
         break
 
-    file.close()
-
-    ctx.handled = true
+  ctx.handled = true
+  file.close()
