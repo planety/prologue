@@ -20,10 +20,10 @@ requires "logue >= 0.2.0"
 task tests, "Run all tests":
   exec "testament all"
 
-task examples, "Test examples":
+task texamples, "Test examples":
   exec "testament r tests/compile/test_examples/examples.nim"
 
-task readme, "Test Readme":
+task treadme, "Test Readme":
   exec "testament r tests/compile/test_readme/readme.nim"
 
 task tcompile, "Test Compile":

@@ -1,0 +1,58 @@
+version: 2
+jobs:
+  build:
+    working_directory: /usr/src/dotenv
+    docker:
+      - image: nimlang/nim
+    branches:
+      only:
+        - devel
+    steps:
+      - checkout
+      - run:
+          name: intall
+          command: nimble install
+      - run:
+          name: extension
+          command: logue extension
+      - run:
+          name: compile
+          command: nimble tcompile
+      - run:
+          name: readme
+          command: nimble treadme
+      - run:
+          name: examples
+          command: nimble examples
+
+  build_alpine:
+    working_directory: /usr/src/dotenv
+    docker:
+      - image: nimlang/nim:alpine
+    branches:
+      only:
+        - devel
+    steps:
+      - checkout
+      - run:
+          name: intall
+          command: nimble install
+      - run:
+          name: extension
+          command: logue extension
+      - run:
+          name: compile
+          command: nimble tcompile
+      - run:
+          name: readme
+          command: nimble treadme
+      - run:
+          name: examples
+          command: nimble examples
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - build_alpine
