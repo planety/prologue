@@ -14,7 +14,7 @@ jobs:
           command: nimble install -y
       - run:
           name: extension
-          command: logue extension
+          command: nimble extension
       - run:
           name: compile
           command: nimble tcompile
@@ -39,7 +39,7 @@ jobs:
           command: nimble install -y
       - run:
           name: extension
-          command: logue extension
+          command: nimble extension
       - run:
           name: compile
           command: nimble tcompile
