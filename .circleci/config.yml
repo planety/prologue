@@ -23,7 +23,7 @@ jobs:
           command: nimble treadme
       - run:
           name: examples
-          command: nimble examples
+          command: nimble texamples
 
   build_alpine:
     working_directory: /usr/src/prologue
@@ -48,7 +48,7 @@ jobs:
           command: nimble treadme
       - run:
           name: examples
-          command: nimble examples
+          command: nimble texamples
 
 workflows:
   version: 2
