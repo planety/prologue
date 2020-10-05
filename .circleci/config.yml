@@ -7,8 +7,11 @@ jobs:
     steps:
       - checkout
       - run:
+          name: refresh
+          command: nimble refresh
+      - run:
           name: intall
-          command: nimble install
+          command: nimble install -y
       - run:
           name: extension
           command: logue extension
@@ -29,8 +32,11 @@ jobs:
     steps:
       - checkout
       - run:
+          name: refresh
+          command: nimble refresh
+      - run:
           name: intall
-          command: nimble install
+          command: nimble install -y
       - run:
           name: extension
           command: logue extension
