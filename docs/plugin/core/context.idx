@@ -58,9 +58,10 @@ getPostParams	core/context.html#getPostParams,Context,string,string	context: get
 getQueryParams	core/context.html#getQueryParams,Context,string,string	context: getQueryParams(ctx: Context; key: string; default = &quot;&quot;): string	
 getPathParams	core/context.html#getPathParams,Context,string	context: getPathParams(ctx: Context; key: string): string	
 getPathParams	core/context.html#getPathParams,Context,string,T	context: getPathParams[T: BaseType](ctx: Context; key: string; default: T): T	
+getFormParams	core/context.html#getFormParams,Context,string,string	context: getFormParams(ctx: Context; key: string; default = &quot;&quot;): string	
 setResponse	core/context.html#setResponse,Context,HttpCode,string	context: setResponse(ctx: Context; code: HttpCode; body = &quot;&quot;; version = HttpVer11)	
 setResponse	core/context.html#setResponse,Context,Response	context: setResponse(ctx: Context; response: Response)	
 urlFor	core/context.html#urlFor,Context,string,openArray[],openArray[]	context: urlFor(ctx: Context; handler: string;\n       parameters: openArray[(string, string)] = @[];\n       queryParams: openArray[(string, string)] = @[]; usePlus = true; omitEq = true): string	
 abortExit	core/context.html#abortExit,Context,string	context: abortExit(ctx: Context; code = Http401; body = &quot;&quot;; headers = initResponseHeaders();\n          version = HttpVer11)	
 attachment	core/context.html#attachment,Context,string,string	context: attachment(ctx: Context; downloadName = &quot;&quot;; charset = &quot;utf-8&quot;)	
-staticFileResponse	core/context.html#staticFileResponse,Context,string,string,string,string,string	context: staticFileResponse(ctx: Context; filename, dir: string; mimetype = &quot;&quot;;\n                   downloadName = &quot;&quot;; charset = &quot;utf-8&quot;;\n                   headers = initResponseHeaders()): owned(Future[void])	
+staticFileResponse	core/context.html#staticFileResponse,Context,string,string,string,string,string,int	context: staticFileResponse(ctx: Context; filename, dir: string; mimetype = &quot;&quot;;\n                   downloadName = &quot;&quot;; charset = &quot;utf-8&quot;; bufSize = 4096;\n                   headers = none(ResponseHeaders)): owned(Future[void])	

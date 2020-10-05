@@ -144,15 +144,7 @@ function main() {
 <li>
   <a class="reference reference-toplevel" href="#12" id="62">Procs</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#initSigner%2CSecretKey"
-    title="initSigner(secretKey: SecretKey; salt = DefaultSalt; sep = DefaultSep;
-           keyDerivation = DefaultKeyDerivation;
-           digestMethod = DefaultDigestMethodType): Signer"><wbr />init<wbr />Signer<span class="attachedType">Signer</span></a></li>
-  <li><a class="reference" href="#initTimedSigner%2CSecretKey"
-    title="initTimedSigner(secretKey: SecretKey; salt = DefaultSalt; sep = DefaultSep;
-                keyDerivation = DefaultKeyDerivation;
-                digestMethod = DefaultDigestMethodType): TimedSigner"><wbr />init<wbr />Timed<wbr />Signer<span class="attachedType">TimedSigner</span></a></li>
-  <li><a class="reference" href="#getSignatureEncode%2C%2CopenArray%5Bbyte%5D"
+      <li><a class="reference" href="#getSignatureEncode%2C%2CopenArray%5Bbyte%5D"
     title="getSignatureEncode(s: Signer | TimedSigner; value: openArray[byte]): string"><wbr />get<wbr />Signature<wbr />Encode<span class="attachedType">Signer</span></a></li>
   <li><a class="reference" href="#getSignatureDecode"
     title="getSignatureDecode(s: Signer | TimedSigner): string"><wbr />get<wbr />Signature<wbr />Decode<span class="attachedType">Signer</span></a></li>
@@ -166,6 +158,20 @@ function main() {
     title="unsign(s: TimedSigner; signedValue: string; max_age: Natural): string"><wbr />unsign<span class="attachedType">TimedSigner</span></a></li>
   <li><a class="reference" href="#validate%2CSigner%2Cstring"
     title="validate(s: Signer; signedValue: string): bool"><wbr />validate<span class="attachedType">Signer</span></a></li>
+
+  </ul>
+</li>
+<li>
+  <a class="reference reference-toplevel" href="#13" id="63">Funcs</a>
+  <ul class="simple simple-toc-section">
+      <li><a class="reference" href="#initSigner%2CSecretKey"
+    title="initSigner(secretKey: SecretKey; salt = DefaultSalt; sep = DefaultSep;
+           keyDerivation = DefaultKeyDerivation;
+           digestMethod = DefaultDigestMethodType): Signer"><wbr />init<wbr />Signer<span class="attachedType">Signer</span></a></li>
+  <li><a class="reference" href="#initTimedSigner%2CSecretKey"
+    title="initTimedSigner(secretKey: SecretKey; salt = DefaultSalt; sep = DefaultSep;
+                keyDerivation = DefaultKeyDerivation;
+                digestMethod = DefaultDigestMethodType): TimedSigner"><wbr />init<wbr />Timed<wbr />Signer<span class="attachedType">TimedSigner</span></a></li>
 
   </ul>
 </li>
@@ -335,34 +341,6 @@ class="link-seesrc" target="_blank">Source</a>
 <div class="section" id="12">
 <h1><a class="toc-backref" href="#12">Procs</a></h1>
 <dl class="item">
-<a id="initSigner,SecretKey"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#initSigner%2CSecretKey"><span class="Identifier">initSigner</span></a><span class="Other">(</span><span class="Identifier">secretKey</span><span class="Other">:</span> <a href="../core/types.html#SecretKey"><span class="Identifier">SecretKey</span></a><span class="Other">;</span> <span class="Identifier">salt</span> <span class="Other">=</span> <span class="Identifier">DefaultSalt</span><span class="Other">;</span> <span class="Identifier">sep</span> <span class="Other">=</span> <span class="Identifier">DefaultSep</span><span class="Other">;</span>
-               <span class="Identifier">keyDerivation</span> <span class="Other">=</span> <span class="Identifier">DefaultKeyDerivation</span><span class="Other">;</span>
-               <span class="Identifier">digestMethod</span> <span class="Other">=</span> <span class="Identifier">DefaultDigestMethodType</span><span class="Other">)</span><span class="Other">:</span> <a href="signing.html#Signer"><span class="Identifier">Signer</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
-    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/signing/signing.nim#L85"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/signing/signing.nim#L85" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<a id="initTimedSigner,SecretKey"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#initTimedSigner%2CSecretKey"><span class="Identifier">initTimedSigner</span></a><span class="Other">(</span><span class="Identifier">secretKey</span><span class="Other">:</span> <a href="../core/types.html#SecretKey"><span class="Identifier">SecretKey</span></a><span class="Other">;</span> <span class="Identifier">salt</span> <span class="Other">=</span> <span class="Identifier">DefaultSalt</span><span class="Other">;</span> <span class="Identifier">sep</span> <span class="Other">=</span> <span class="Identifier">DefaultSep</span><span class="Other">;</span>
-                    <span class="Identifier">keyDerivation</span> <span class="Other">=</span> <span class="Identifier">DefaultKeyDerivation</span><span class="Other">;</span>
-                    <span class="Identifier">digestMethod</span> <span class="Other">=</span> <span class="Identifier">DefaultDigestMethodType</span><span class="Other">)</span><span class="Other">:</span> <a href="signing.html#TimedSigner"><span class="Identifier">TimedSigner</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
-    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/signing/signing.nim#L97"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/signing/signing.nim#L97" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
 <a id="getSignatureEncode,,openArray[byte]"></a>
 <dt><pre><span class="Keyword">proc</span> <a href="#getSignatureEncode%2C%2CopenArray%5Bbyte%5D"><span class="Identifier">getSignatureEncode</span></a><span class="Other">(</span><span class="Identifier">s</span><span class="Other">:</span> <a href="signing.html#Signer"><span class="Identifier">Signer</span></a> <span class="Operator">|</span> <a href="signing.html#TimedSigner"><span class="Identifier">TimedSigner</span></a><span class="Other">;</span> <span class="Identifier">value</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Identifier">byte</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span></pre></dt>
 <dd>
@@ -444,6 +422,39 @@ class="link-seesrc" target="_blank">Source</a>
 </dd>
 
 </dl></div>
+<div class="section" id="13">
+<h1><a class="toc-backref" href="#13">Funcs</a></h1>
+<dl class="item">
+<a id="initSigner,SecretKey"></a>
+<dt><pre><span class="Keyword">func</span> <a href="#initSigner%2CSecretKey"><span class="Identifier">initSigner</span></a><span class="Other">(</span><span class="Identifier">secretKey</span><span class="Other">:</span> <a href="../core/types.html#SecretKey"><span class="Identifier">SecretKey</span></a><span class="Other">;</span> <span class="Identifier">salt</span> <span class="Other">=</span> <span class="Identifier">DefaultSalt</span><span class="Other">;</span> <span class="Identifier">sep</span> <span class="Other">=</span> <span class="Identifier">DefaultSep</span><span class="Other">;</span>
+               <span class="Identifier">keyDerivation</span> <span class="Other">=</span> <span class="Identifier">DefaultKeyDerivation</span><span class="Other">;</span>
+               <span class="Identifier">digestMethod</span> <span class="Other">=</span> <span class="Identifier">DefaultDigestMethodType</span><span class="Other">)</span><span class="Other">:</span> <a href="signing.html#Signer"><span class="Identifier">Signer</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://github.com/planety/prologue/tree/devel/src/prologue/signing/signing.nim#L85"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/signing/signing.nim#L85" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="initTimedSigner,SecretKey"></a>
+<dt><pre><span class="Keyword">func</span> <a href="#initTimedSigner%2CSecretKey"><span class="Identifier">initTimedSigner</span></a><span class="Other">(</span><span class="Identifier">secretKey</span><span class="Other">:</span> <a href="../core/types.html#SecretKey"><span class="Identifier">SecretKey</span></a><span class="Other">;</span> <span class="Identifier">salt</span> <span class="Other">=</span> <span class="Identifier">DefaultSalt</span><span class="Other">;</span> <span class="Identifier">sep</span> <span class="Other">=</span> <span class="Identifier">DefaultSep</span><span class="Other">;</span>
+                    <span class="Identifier">keyDerivation</span> <span class="Other">=</span> <span class="Identifier">DefaultKeyDerivation</span><span class="Other">;</span>
+                    <span class="Identifier">digestMethod</span> <span class="Other">=</span> <span class="Identifier">DefaultDigestMethodType</span><span class="Other">)</span><span class="Other">:</span> <a href="signing.html#TimedSigner"><span class="Identifier">TimedSigner</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://github.com/planety/prologue/tree/devel/src/prologue/signing/signing.nim#L97"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/signing/signing.nim#L97" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+
+</dl></div>
 <div class="section" id="19">
 <h1><a class="toc-backref" href="#19">Exports</a></h1>
 <dl class="item">
@@ -457,7 +468,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-09-30 14:53:31 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-05 05:39:56 UTC</small>
       </div>
     </div>
   </div>

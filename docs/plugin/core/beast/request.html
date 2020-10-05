@@ -244,11 +244,12 @@ class="link-seesrc" target="_blank">Source</a>
 </dd>
 <a id="respond,Request,HttpCode,string,ResponseHeaders"></a>
 <dt><pre><span class="Keyword">proc</span> <a href="#respond%2CRequest%2CHttpCode%2Cstring%2CResponseHeaders"><span class="Identifier">respond</span></a><span class="Other">(</span><span class="Identifier">request</span><span class="Other">:</span> <a href="request.html#Request"><span class="Identifier">Request</span></a><span class="Other">;</span> <span class="Identifier">code</span><span class="Other">:</span> <span class="Identifier">HttpCode</span><span class="Other">;</span> <span class="Identifier">body</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">headers</span><span class="Other">:</span> <a href="../httpcore/httplogue.html#ResponseHeaders"><span class="Identifier">ResponseHeaders</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Future</span><span class="Other">[</span>
-    <span class="Identifier">void</span><span class="Other">]</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">,</span> <span class="Identifier">IOSelectorsException</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">void</span><span class="Other">]</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span>
+           <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">,</span> <span class="Identifier">IOSelectorsException</span><span class="Other">,</span> <span class="Identifier">KeyError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span>
            <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-Responds <tt class="docutils literal"><span class="pre">code</span></tt>, <tt class="docutils literal"><span class="pre">body</span></tt> and <tt class="docutils literal"><span class="pre">headers</span></tt> to the client, the framework will generate response contents automatically.
+Responds <tt class="docutils literal"><span class="pre">code</span></tt>, <tt class="docutils literal"><span class="pre">body</span></tt> and <tt class="docutils literal"><span class="pre">headers</span></tt> to the client, the framework will generate the contents of the response automatically.
 &nbsp;&nbsp;<a
 href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L130"
 class="link-seesrc" target="_blank">Source</a>
@@ -257,14 +258,15 @@ class="link-seesrc" target="_blank">Source</a>
 </dd>
 <a id="respond,Request,Response"></a>
 <dt><pre><span class="Keyword">proc</span> <a href="#respond%2CRequest%2CResponse"><span class="Identifier">respond</span></a><span class="Other">(</span><span class="Identifier">request</span><span class="Other">:</span> <a href="request.html#Request"><span class="Identifier">Request</span></a><span class="Other">;</span> <span class="Identifier">response</span><span class="Other">:</span> <a href="../response.html#Response"><span class="Identifier">Response</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Future</span><span class="Other">[</span><span class="Identifier">void</span><span class="Other">]</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span>
-    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">,</span> <span class="Identifier">IOSelectorsException</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">,</span> <span class="Identifier">IOSelectorsException</span><span class="Other">,</span> <span class="Identifier">KeyError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-Responds <tt class="docutils literal"><span class="pre">response</span></tt> to the client, the framework will generate response contents automatically.
+Responds <tt class="docutils literal"><span class="pre">response</span></tt> to the client, the framework will generate the contents of the response automatically.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L138"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L141"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L138" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L141" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="close,Request"></a>
@@ -273,9 +275,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Closes the request.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L171"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L174"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L171" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L174" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -453,30 +455,29 @@ class="link-seesrc" target="_blank">Source</a>
 <dt><pre><span class="Keyword">func</span> <a href="#initRequest%2CRequest"><span class="Identifier">initRequest</span></a><span class="Other">(</span><span class="Identifier">nativeRequest</span><span class="Other">:</span> <a href="request.html#NativeRequest"><span class="Identifier">NativeRequest</span></a><span class="Other">;</span> <span class="Identifier">cookies</span> <span class="Other">=</span> <span class="Identifier">initCookieJar</span><span class="Other">(</span><span class="Other">)</span><span class="Other">;</span>
                 <span class="Identifier">pathParams</span> <span class="Other">=</span> <span class="Identifier">newStringTable</span><span class="Other">(</span><span class="Identifier">modeCaseSensitive</span><span class="Other">)</span><span class="Other">;</span>
                 <span class="Identifier">queryParams</span> <span class="Other">=</span> <span class="Identifier">newStringTable</span><span class="Other">(</span><span class="Identifier">modeCaseSensitive</span><span class="Other">)</span><span class="Other">;</span>
-                <span class="Identifier">postParams</span> <span class="Other">=</span> <span class="Identifier">newStringTable</span><span class="Other">(</span><span class="Identifier">modeCaseSensitive</span><span class="Other">)</span><span class="Other">)</span><span class="Other">:</span> <a href="request.html#Request"><span class="Identifier">Request</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span>
+                <span class="Identifier">postParams</span> <span class="Other">=</span> <span class="Identifier">newStringTable</span><span class="Other">(</span><span class="Identifier">modeCaseSensitive</span><span class="Other">)</span><span class="Other">)</span><span class="Other">:</span> <a href="request.html#Request"><span class="Identifier">Request</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 Initializes a new Request.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L143"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L146"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L143" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L146" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="initMockingRequest,HttpMethod,HttpHeaders,Uri"></a>
 <dt><pre><span class="Keyword">func</span> <a href="#initMockingRequest%2CHttpMethod%2CHttpHeaders%2CUri"><span class="Identifier">initMockingRequest</span></a><span class="Other">(</span><span class="Identifier">httpMethod</span><span class="Other">:</span> <span class="Identifier">HttpMethod</span><span class="Other">;</span> <span class="Identifier">headers</span><span class="Other">:</span> <span class="Identifier">HttpHeaders</span><span class="Other">;</span> <span class="Identifier">url</span><span class="Other">:</span> <span class="Identifier">Uri</span><span class="Other">;</span>
                        <span class="Identifier">cookies</span> <span class="Other">=</span> <span class="Identifier">initCookieJar</span><span class="Other">(</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">postParams</span> <span class="Other">=</span> <span class="Identifier">newStringTable</span><span class="Other">(</span><span class="Other">)</span><span class="Other">;</span>
                        <span class="Identifier">queryParams</span> <span class="Other">=</span> <span class="Identifier">newStringTable</span><span class="Other">(</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">formParams</span> <span class="Other">=</span> <span class="Identifier">initFormPart</span><span class="Other">(</span><span class="Other">)</span><span class="Other">;</span>
-                       <span class="Identifier">pathParams</span> <span class="Other">=</span> <span class="Identifier">newStringTable</span><span class="Other">(</span><span class="Other">)</span><span class="Other">)</span><span class="Other">:</span> <a href="request.html#Request"><span class="Identifier">Request</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+                       <span class="Identifier">pathParams</span> <span class="Other">=</span> <span class="Identifier">newStringTable</span><span class="Other">(</span><span class="Other">)</span><span class="Other">)</span><span class="Other">:</span> <a href="request.html#Request"><span class="Identifier">Request</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 Initializes a new Request.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L175"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L178"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L175" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L178" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -489,7 +490,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-09-30 14:53:41 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-05 05:40:08 UTC</small>
       </div>
     </div>
   </div>

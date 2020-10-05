@@ -3,7 +3,7 @@ import ../src/prologue/middlewares/utils as ut
 import ../src/prologue/i18n
 import logging, os, strformat, strutils
 
-import test_core/utils
+import server/utils
 
 
 proc hello*(ctx: Context) {.async.} =
@@ -49,7 +49,7 @@ proc translate*(ctx: Context) {.async.} =
 
 proc upload(ctx: Context) {.async.} =
   if ctx.request.reqMethod == HttpGet:
-    await ctx.staticFileResponse("tests/static/upload.html", "")
+    await ctx.staticFileResponse("tests/assets/static/upload.html", "")
   elif ctx.request.reqMethod == HttpPost:
     let 
       file = ctx.getUploadFile("file")
@@ -79,5 +79,5 @@ app.addRoute("/hello/{name}", helloName, HttpGet)
 app.addRoute("/translate", translate)
 app.addRoute("/upload", upload, @[HttpGet, HttpPost])
 app.get("/cookie", cookie)
-app.loadTranslate(expandFileName("tests/i18n/trans.ini"))
+app.loadTranslate(expandFileName("tests/assets/i18n/trans.ini"))
 app.run()

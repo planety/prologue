@@ -63,7 +63,7 @@ function main() {
 <div class="document" id="documentId">
   <div class="container">
     <h1 class="title">Index</h1>
-    Modules: <a href="auth/auth.html">auth/auth</a>, <a href="core/application.html">core/application</a>, <a href="core/beast/request.html">core/beast/request</a>, <a href="core/beast/server.html">core/beast/server</a>, <a href="core/configure.html">core/configure</a>, <a href="core/constants.html">core/constants</a>, <a href="core/context.html">core/context</a>, <a href="core/encode.html">core/encode</a>, <a href="core/form.html">core/form</a>, <a href="core/httpcore/httplogue.html">core/httpcore/httplogue</a>, <a href="core/httpexception.html">core/httpexception</a>, <a href="core/middlewaresbase.html">core/middlewaresbase</a>, <a href="core/nativesettings.html">core/nativesettings</a>, <a href="core/pages.html">core/pages</a>, <a href="core/response.html">core/response</a>, <a href="core/route.html">core/route</a>, <a href="core/types.html">core/types</a>, <a href="core/urandom.html">core/urandom</a>, <a href="core/utils.html">core/utils</a>, <a href="i18n/i18n.html">i18n/i18n</a>, <a href="middlewares/auth.html">middlewares/auth</a>, <a href="middlewares/clickjacking.html">middlewares/clickjacking</a>, <a href="middlewares/cors.html">middlewares/cors</a>, <a href="middlewares/csrf.html">middlewares/csrf</a>, <a href="middlewares/sessions/signedcookiesession.html">middlewares/sessions/signedcookiesession</a>, <a href="middlewares/utils.html">middlewares/utils</a>, <a href="openapi/openapi.html">openapi/openapi</a>, <a href="security/hasher.html">security/hasher</a>, <a href="signing/signing.html">signing/signing</a>, <a href="signing/signingbase.html">signing/signingbase</a>, <a href="validate/basic.html">validate/basic</a>, <a href="validate/validate.html">validate/validate</a>.<br/><p /><h2>API symbols</h2>
+    Modules: <a href="auth/auth.html">auth/auth</a>, <a href="core/application.html">core/application</a>, <a href="core/beast/request.html">core/beast/request</a>, <a href="core/beast/server.html">core/beast/server</a>, <a href="core/configure.html">core/configure</a>, <a href="core/constants.html">core/constants</a>, <a href="core/context.html">core/context</a>, <a href="core/defaultserversettings.html">core/defaultserversettings</a>, <a href="core/encode.html">core/encode</a>, <a href="core/form.html">core/form</a>, <a href="core/httpcore/httplogue.html">core/httpcore/httplogue</a>, <a href="core/httpexception.html">core/httpexception</a>, <a href="core/middlewaresbase.html">core/middlewaresbase</a>, <a href="core/nativesettings.html">core/nativesettings</a>, <a href="core/pages.html">core/pages</a>, <a href="core/response.html">core/response</a>, <a href="core/route.html">core/route</a>, <a href="core/types.html">core/types</a>, <a href="core/urandom.html">core/urandom</a>, <a href="core/utils.html">core/utils</a>, <a href="i18n/i18n.html">i18n/i18n</a>, <a href="middlewares/auth.html">middlewares/auth</a>, <a href="middlewares/clickjacking.html">middlewares/clickjacking</a>, <a href="middlewares/cors.html">middlewares/cors</a>, <a href="middlewares/csrf.html">middlewares/csrf</a>, <a href="middlewares/sessions/signedcookiesession.html">middlewares/sessions/signedcookiesession</a>, <a href="middlewares/utils.html">middlewares/utils</a>, <a href="openapi/openapi.html">openapi/openapi</a>, <a href="security/hasher.html">security/hasher</a>, <a href="signing/signing.html">signing/signing</a>, <a href="signing/signingbase.html">signing/signingbase</a>, <a href="validate/basic.html">validate/basic</a>, <a href="validate/validate.html">validate/validate</a>.<br/><p /><h2>API symbols</h2>
 <dl><dt><a name="%60%24%60" href="#%60%24%60"><span>`$`:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="configure: `$`(env: Env): string" href="core/configure.html#%24%2CEnv">configure: `$`(env: Env): string</a></li>
@@ -133,6 +133,10 @@ function main() {
           data-doc-search-tag="context: addHeader(request: var Request; key, value: string)" href="core/context.html#addHeader%2CRequest%2Cstring%2Cstring">context: addHeader(request: var Request; key, value: string)</a></li>
           <li><a class="reference external"
           data-doc-search-tag="response: addHeader(response: var Response; key, value: string)" href="core/response.html#addHeader.t%2CResponse%2Cstring%2Cstring">response: addHeader(response: var Response; key, value: string)</a></li>
+          </ul></dd>
+<dt><a name="additionalSettings" href="#additionalSettings"><span>additionalSettings:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="defaultserversettings: additionalSettings" href="core/defaultserversettings.html#additionalSettings">defaultserversettings: additionalSettings</a></li>
           </ul></dd>
 <dt><a name="addMiddlewares" href="#addMiddlewares"><span>addMiddlewares:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -540,6 +544,10 @@ function main() {
           <li><a class="reference external"
           data-doc-search-tag="context: getCookie(ctx: Context; key: string; default = &quot;&quot;): string" href="core/context.html#getCookie%2CContext%2Cstring%2Cstring">context: getCookie(ctx: Context; key: string; default = &quot;&quot;): string</a></li>
           </ul></dd>
+<dt><a name="getFormParams" href="#getFormParams"><span>getFormParams:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="context: getFormParams(ctx: Context; key: string; default = &quot;&quot;): string" href="core/context.html#getFormParams%2CContext%2Cstring%2Cstring">context: getFormParams(ctx: Context; key: string; default = &quot;&quot;): string</a></li>
+          </ul></dd>
 <dt><a name="getHeader" href="#getHeader"><span>getHeader:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="context: getHeader(request: Request; key: string): seq[string]" href="core/context.html#getHeader%2CRequest%2Cstring">context: getHeader(request: Request; key: string): seq[string]</a></li>
@@ -579,6 +587,14 @@ function main() {
 <dt><a name="getQueryParams" href="#getQueryParams"><span>getQueryParams:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="context: getQueryParams(ctx: Context; key: string; default = &quot;&quot;): string" href="core/context.html#getQueryParams%2CContext%2Cstring%2Cstring">context: getQueryParams(ctx: Context; key: string; default = &quot;&quot;): string</a></li>
+          </ul></dd>
+<dt><a name="getServerSettingsName" href="#getServerSettingsName"><span>getServerSettingsName:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="defaultserversettings: getServerSettingsName(key: string): string" href="core/defaultserversettings.html#getServerSettingsName%2Cstring">defaultserversettings: getServerSettingsName(key: string): string</a></li>
+          </ul></dd>
+<dt><a name="getServerSettingsNameOrKey" href="#getServerSettingsNameOrKey"><span>getServerSettingsNameOrKey:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="defaultserversettings: getServerSettingsNameOrKey(key: string): string" href="core/defaultserversettings.html#getServerSettingsNameOrKey%2Cstring">defaultserversettings: getServerSettingsNameOrKey(key: string): string</a></li>
           </ul></dd>
 <dt><a name="getSettings" href="#getSettings"><span>getSettings:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -975,18 +991,22 @@ function main() {
           data-doc-search-tag="application: newSettings(settings: Settings; localSettings: LocalSettings): Settings" href="core/application.html#newSettings%2CSettings%2CLocalSettings">application: newSettings(settings: Settings; localSettings: LocalSettings): Settings</a></li>
           <li><a class="reference external"
           data-doc-search-tag="nativesettings: newSettings(data: JsonNode; address = &quot;&quot;; port = Port(8080); debug = true;
-            reusePort = true; staticDirs: openArray[string] = []; appName = &quot;&quot;): Settings" href="core/nativesettings.html#newSettings%2CJsonNode%2Cstring%2CopenArray%5Bstring%5D%2Cstring">nativesettings: newSettings(data: JsonNode; address = &quot;&quot;; port = Port(8080); debug = true;
-            reusePort = true; staticDirs: openArray[string] = []; appName = &quot;&quot;): Settings</a></li>
+            reusePort = true; staticDirs: openArray[string] = []; appName = &quot;&quot;;
+            bufSize = 40960): Settings" href="core/nativesettings.html#newSettings%2CJsonNode%2Cstring%2CopenArray%5Bstring%5D%2Cstring%2Cint">nativesettings: newSettings(data: JsonNode; address = &quot;&quot;; port = Port(8080); debug = true;
+            reusePort = true; staticDirs: openArray[string] = []; appName = &quot;&quot;;
+            bufSize = 40960): Settings</a></li>
           <li><a class="reference external"
           data-doc-search-tag="nativesettings: newSettings(address = &quot;&quot;; port = Port(8080); debug = true; reusePort = true;
             staticDirs: openArray[string] = []; secretKey = randomString(8);
-            appName = &quot;&quot;): Settings" href="core/nativesettings.html#newSettings%2Cstring%2CopenArray%5Bstring%5D%2Cstring">nativesettings: newSettings(address = &quot;&quot;; port = Port(8080); debug = true; reusePort = true;
+            appName = &quot;&quot;; bufSize = 40960): Settings" href="core/nativesettings.html#newSettings%2Cstring%2CopenArray%5Bstring%5D%2Cstring%2Cint">nativesettings: newSettings(address = &quot;&quot;; port = Port(8080); debug = true; reusePort = true;
             staticDirs: openArray[string] = []; secretKey = randomString(8);
-            appName = &quot;&quot;): Settings</a></li>
+            appName = &quot;&quot;; bufSize = 40960): Settings</a></li>
           <li><a class="reference external"
           data-doc-search-tag="nativesettings: newSettings(configPath: string; address = &quot;&quot;; port = Port(8080); debug = true;
-            reusePort = true; staticDirs: openArray[string] = []; appName = &quot;&quot;): Settings" href="core/nativesettings.html#newSettings%2Cstring%2Cstring%2CopenArray%5Bstring%5D%2Cstring">nativesettings: newSettings(configPath: string; address = &quot;&quot;; port = Port(8080); debug = true;
-            reusePort = true; staticDirs: openArray[string] = []; appName = &quot;&quot;): Settings</a></li>
+            reusePort = true; staticDirs: openArray[string] = []; appName = &quot;&quot;;
+            bufSize = 40960): Settings" href="core/nativesettings.html#newSettings%2Cstring%2Cstring%2CopenArray%5Bstring%5D%2Cstring%2Cint">nativesettings: newSettings(configPath: string; address = &quot;&quot;; port = Port(8080); debug = true;
+            reusePort = true; staticDirs: openArray[string] = []; appName = &quot;&quot;;
+            bufSize = 40960): Settings</a></li>
           </ul></dd>
 <dt><a name="None" href="#None"><span>None:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -1300,9 +1320,9 @@ function main() {
 <li><a class="reference external"
           data-doc-search-tag="server: serve(app: Prologue; port: Port;
       callback: proc (request: NativeRequest): Future[void] {.closure, gcsafe.};
-      address = &quot;&quot;; numThreads = 0)" href="core/beast/server.html#serve%2CPrologue%2CPort%2Cproc%28Request%29%2Cstring%2Cint">server: serve(app: Prologue; port: Port;
+      address = &quot;&quot;)" href="core/beast/server.html#serve%2CPrologue%2CPort%2Cproc%28Request%29%2Cstring">server: serve(app: Prologue; port: Port;
       callback: proc (request: NativeRequest): Future[void] {.closure, gcsafe.};
-      address = &quot;&quot;; numThreads = 0)</a></li>
+      address = &quot;&quot;)</a></li>
           </ul></dd>
 <dt><a name="serveDocs" href="#serveDocs"><span>serveDocs:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -1457,10 +1477,10 @@ function main() {
 <dt><a name="staticFileResponse" href="#staticFileResponse"><span>staticFileResponse:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="context: staticFileResponse(ctx: Context; filename, dir: string; mimetype = &quot;&quot;;
-                   downloadName = &quot;&quot;; charset = &quot;utf-8&quot;;
-                   headers = initResponseHeaders()): owned(Future[void])" href="core/context.html#staticFileResponse%2CContext%2Cstring%2Cstring%2Cstring%2Cstring%2Cstring">context: staticFileResponse(ctx: Context; filename, dir: string; mimetype = &quot;&quot;;
-                   downloadName = &quot;&quot;; charset = &quot;utf-8&quot;;
-                   headers = initResponseHeaders()): owned(Future[void])</a></li>
+                   downloadName = &quot;&quot;; charset = &quot;utf-8&quot;; bufSize = 4096;
+                   headers = none(ResponseHeaders)): owned(Future[void])" href="core/context.html#staticFileResponse%2CContext%2Cstring%2Cstring%2Cstring%2Cstring%2Cstring%2Cint">context: staticFileResponse(ctx: Context; filename, dir: string; mimetype = &quot;&quot;;
+                   downloadName = &quot;&quot;; charset = &quot;utf-8&quot;; bufSize = 4096;
+                   headers = none(ResponseHeaders)): owned(Future[void])</a></li>
           </ul></dd>
 <dt><a name="stripPath" href="#stripPath"><span>stripPath:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -1564,6 +1584,10 @@ function main() {
           <li><a class="reference external"
           data-doc-search-tag="encode: urlsafeBase64Encode(s: string): string" href="core/encode.html#urlsafeBase64Encode%2Cstring">encode: urlsafeBase64Encode(s: string): string</a></li>
           </ul></dd>
+<dt><a name="useAsyncHTTPServer" href="#useAsyncHTTPServer"><span>useAsyncHTTPServer:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="constants: useAsyncHTTPServer" href="core/constants.html#useAsyncHTTPServer">constants: useAsyncHTTPServer</a></li>
+          </ul></dd>
 <dt><a name="validate" href="#validate"><span>validate:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="signing: validate(s: Signer; signedValue: string): bool" href="signing/signing.html#validate%2CSigner%2Cstring">signing: validate(s: Signer; signedValue: string): bool</a></li>
@@ -1591,7 +1615,7 @@ function main() {
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-09-30 14:53:58 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-05 05:40:23 UTC</small>
       </div>
     </div>
   </div>
