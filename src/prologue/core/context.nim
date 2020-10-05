@@ -227,16 +227,20 @@ func getSettings*(ctx: Context, key: string): JsonNode {.inline.} =
   else:
     result = ctx.localSettings[key]
 
-proc respond*(ctx: Context): Future[void] {.inline.} =
-  ## Sends response to the client generating from `ctx.response`.
-  result = ctx.request.respond(ctx.response)
-
 proc respond*(
   ctx: Context, code: HttpCode, body: string,
   headers: ResponseHeaders
 ): Future[void] {.inline.} =
   ## Sends response to the client generating from `code`, `body` and `headers`.
   result = ctx.request.respond(code, body, headers)
+
+proc respond*(ctx: Context): Future[void] {.inline.} =
+  ## Sends response to the client generating from `ctx.response`.
+  result = ctx.request.respond(ctx.response)
+
+proc respond*(ctx: Context, code: HttpCode, body: string): Future[void] {.inline.} =
+  ## Sends response to the client generating from `ctx.response`.
+  result = ctx.request.respond(code, body)
 
 proc send*(ctx: Context, content: string): Future[void] {.inline.} =
   ## Sends content to the client.
@@ -429,8 +433,7 @@ proc staticFileResponse*(ctx: Context, filename, dir: string, mimetype = "",
                 headers = headers.get)
     else:
       await ctx.respond(code = Http403,
-                body = "You do not have permission to access this file.",
-                headers = initResponseHeaders())
+                body = "You do not have permission to access this file.")
     ctx.handled = true
     return
 
@@ -466,8 +469,7 @@ proc staticFileResponse*(ctx: Context, filename, dir: string, mimetype = "",
 
   if ctx.request.hasHeader("If-None-Match") and ctx.request.headers[
         "If-None-Match"] == etag:
-    ## TODO overload respond to provide no header version.
-    await ctx.respond(Http304, "", initResponseHeaders())
+    await ctx.respond(Http304, "")
   elif contentLength < 10_000_000:
     ctx.response.body = await file.readAll()
     await ctx.respond()

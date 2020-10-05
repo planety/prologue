@@ -127,6 +127,13 @@ proc send*(request: Request, content: string): Future[void] {.inline.} =
   result = newFuture[void]()
   complete(result)
 
+proc respond*(request: Request, code: HttpCode, body: string): Future[void] {.inline.} =
+  ## Responds `code`, `body` to the client, the framework
+  ## will generate the contents of the response automatically.
+  request.nativeRequest.send(code, body, "")
+  result = newFuture[void]()
+  complete(result)
+
 proc respond*(request: Request, code: HttpCode, body: string,
               headers: ResponseHeaders): Future[void] {.inline.} =
   ## Responds `code`, `body` and `headers` to the client, the framework
