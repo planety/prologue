@@ -21,13 +21,13 @@ task tests, "Run all tests":
   exec "testament all"
 
 task texamples, "Test examples":
-  exec "testament r tests/compile/test_examples/examples.nim"
+  exec "nim c -d:release -r tests/compile/test_examples/examples.nim"
 
 task treadme, "Test Readme":
-  exec "testament r tests/compile/test_readme/readme.nim"
+  exec "nim c -d:release -r tests/compile/test_readme/readme.nim"
 
 task tcompile, "Test Compile":
-  exec "nim c -d:release tests/compile/test_compile/test_compile.nim"
+  exec "nim c -d:release -r tests/compile/test_compile/test_compile.nim"
 
 task docs, "Only for gh-pages, not for users":
   exec "mkdocs build"
