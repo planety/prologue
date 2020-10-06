@@ -67,7 +67,7 @@ jobs:
           command: nimble extension
       - run:
           name: app
-          command: nim c -r -d:usestd -d:release tests/server/tserver_application.nim
+          command: nimble tstdbackend
 
 workflows:
   version: 2
