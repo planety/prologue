@@ -50,9 +50,29 @@ jobs:
           name: examples
           command: nimble texamples
 
+  test_app:
+    working_directory: /usr/src/prologue
+    docker:
+      - image: nimlang/nim
+    steps:
+      - checkout
+      - run:
+          name: refresh
+          command: nimble refresh
+      - run:
+          name: intall
+          command: nimble install -y
+      - run:
+          name: extension
+          command: nimble extension
+      - run:
+          name: app
+          command: nim c -r -d:usestd -d:release tests/server/tserver_application.nim
+
 workflows:
   version: 2
   build_and_test:
     jobs:
       - build
       - build_alpine
+      - test_app
