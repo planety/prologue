@@ -1,6 +1,7 @@
 import ../../src/prologue
-import ../../src/prologue/middlewares
+import ../../src/prologue/middlewares/signedcookiesession
 import ./urls
+
 
 let
   env = loadPrologueEnv(".env")
