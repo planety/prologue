@@ -65,9 +65,9 @@ jobs:
       - run:
           name: extension
           command: nimble extension
-      - run:
-          name: app
-          command: nimble tstdbackend
+      # - run:
+      #     name: app
+      #     command: nimble tstdbackend
 
 workflows:
   version: 2
@@ -75,4 +75,4 @@ workflows:
     jobs:
       - build
       - build_alpine
-      - test_app
+      # - test_app
