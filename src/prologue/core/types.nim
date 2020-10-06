@@ -13,7 +13,8 @@
 # limitations under the License.
 
 
-import strutils, strtabs, parseutils, tables, base64
+import strutils, strtabs, parseutils, tables
+import ./encode
 
 
 type
@@ -38,7 +39,7 @@ func initFormPart*(): FormPart =
   FormPart(data: newOrderedTable[string, (StringTableRef, string)]())
 
 func `[]`*(formPart: FormPart, key: string): tuple[params: StringTableRef,
-    body: string] {.inline.} =
+           body: string] {.inline.} =
   formPart.data[key]
 
 proc `[]=`*(formPart: FormPart, key: string, body: string) {.inline.} =
@@ -154,8 +155,8 @@ proc parseStringTable*(tabs: StringTableRef, s: string) {.inline.} =
 proc loads*(session: Session, s: string) {.inline.} =
   ## Loads session from strings.
   session.data = newStringTable(mode = modeCaseSensitive)
-  session.data.parseStringTable(decode(s))
+  session.data.parseStringTable(urlsafeBase64Decode(s))
 
 proc dumps*(session: Session): string {.inline.} =
   ## Dumps session to strings.
-  encode($session)
+  urlsafeBase64Encode($session)

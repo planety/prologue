@@ -23,6 +23,7 @@ nav:
     - Static Files: "staticfiles.md"
     - Upload Files: "uploadfile.md"
     - Session: "session.md"
+    - Server Settings: "server.md"
     - FAQ: "faq.md"
 
 

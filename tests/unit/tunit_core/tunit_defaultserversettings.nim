@@ -7,12 +7,9 @@ discard """
   exitcode: 0
   timeout:  60.0
 """
-
-
 import ../../../src/prologue/core/defaultserversettings
 import ../../../src/prologue/core/constants
 import std/strtabs
-
 
 
 block:

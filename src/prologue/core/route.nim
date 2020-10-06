@@ -117,6 +117,7 @@ func printRoutingTree(node: PatternNode, tabs: int = 0) =
       printRoutingTree(child, tabs + 1)
 
 func printRoutingTree*(router: Router) =
+  ## Prints the route.
   for httpMethod, tree in pairs(router.data):
     debugEcho httpMethod.toUpper()
     printRoutingTree(tree)

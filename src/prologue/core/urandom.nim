@@ -32,7 +32,7 @@ proc randomBytesSeq*(size = DefaultEntropy): seq[byte] {.inline.} =
 proc randomString*(size = DefaultEntropy): string {.inline.} =
   ## Generates a new system random strings.
   result = randomBytesSeq(size).urlsafeBase64Encode.strip(leading = false,
-      chars = {'='})
+                    chars = {'='})
 
 proc randomSecretKey*(size = DefaultEntropy): SecretKey {.inline.} =
   ## Generates a new system random secretKey.

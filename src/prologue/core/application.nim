@@ -357,7 +357,7 @@ proc handleNativeRequest(request: var Request) {.inline, gcsafe.} =
     logging.error(&"Malformed form params:\n{e.msg}")
 
 proc handleContext*(app: Prologue, ctx: Context) {.async, gcsafe.} =
-
+  ## Handles the context of each request.
   ## Todo Optimization
   ctx.middlewares = app.middlewares
   logging.debug(fmt"{ctx.request.reqMethod} {ctx.request.url.path}")
@@ -410,6 +410,7 @@ proc handleContext*(app: Prologue, ctx: Context) {.async, gcsafe.} =
     logging.debug($(ctx.response))
 
 proc handleRequest*(app: Prologue, nativeRequest: NativeRequest): Future[void] {.gcsafe.} =
+  ## Handles the native request and sends response to the client.
   var request = initRequest(nativeRequest)
   handleNativeRequest(request)
   var

@@ -57,7 +57,7 @@ task karax, "Install karax":
   exec """nimble install karax@">= 1.1.2" -y"""
 
 task websocketx, "Install websocketx":
-  exec """nimble install https://github.com/xflywind/websocketx@">= 0.1.0" -y"""
+  exec """nimble install websocketx@">= 0.1.0" -y"""
 
 task extension, "Install all extensions":
   exec "nimble redis"

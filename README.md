@@ -12,7 +12,7 @@
 What's past is prologue.
 
 ## Purpose
-Prologue is a Full-Stack Web Framework which is
+`Prologue` is a Full-Stack Web Framework which is
 ideal for building elegant and high performance
 web services.
 
@@ -62,7 +62,7 @@ web services.
   - [x] Data Validation
   - [x] Exception Handler
   - [x] Cross-Site Request Forgery
-  - [x] Cross-Site Scripting (XSS) Protection(Karax quote string automatically)
+  - [x] Cross-Site Scripting (XSS) Protection(`Karax` quote string automatically)
   - [x] Clickjacking Protection
   - [x] Authentication
   - [x] I18n
@@ -71,9 +71,9 @@ web services.
 
 - Plugin
   - [x] Minimal OpenAPI support
-  - [x] Template(Using Karax Native)
-  - [x] Websocket support(https://github.com/xflywind/websocketx)
-  - [x] Test Client(Using httpclient)
+  - [x] Template(Using `Karax` Native)
+  - [x] Websocket support
+  - [x] Test Client(Using `httpclient`)
 
 
 ## Installation
