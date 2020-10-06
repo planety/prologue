@@ -51,7 +51,9 @@ You can put your middleware plugin in [collections](https://github.com/planety/a
 
 ## Use a middleware
 
-`prologue` also supplies some middleware plugins, you can directly import them.
+`prologue` also supplies some middleware plugins, you can directly import `middlewares`.
+
+It contains `cors`, `clickjacking`, `csrf`, `utils` and `auth` middlewares.
 
 ```nim
 import prologue/middlewares
@@ -60,9 +62,23 @@ import prologue/middlewares
 For better compilation time, you could import them directly.
 
 ```nim
-import prologue/middlewares/signedcookiesession
+import prologue/middlewares/auth
 # or
 import prologue/middlewares/utils
 # or
 import prologue/middlewares/cors
+# or
+import prologue/middlewares/clickjacking
+# or
+import prologue/middlewares/csrf
 ```
+
+For session middlewares, you need to import them directly.
+
+```
+import prologue/middlewares/memorysession
+or
+import prologue/middlewares/redissession
+or
+import prologue/middlewares/signedcookiesession
+``
