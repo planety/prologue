@@ -1,7 +1,8 @@
-when not (compiles do: import karax / karaxdsl):
-  {.error: "Please use `logue extension karax` to install!".}
-else:
+when (compiles do: import karax / karaxdsl):
   import karax / [vdom, karax, karaxdsl, jstrutils, compact, localstorage]
+else:
+  {.error: "Please use `logue extension karax` to install!".}
+
 
 type
   Filter = enum

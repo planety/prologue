@@ -1,2 +1,2 @@
-import validate/validate
+import ./validate/validate
 export validate

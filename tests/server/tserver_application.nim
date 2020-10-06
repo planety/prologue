@@ -1,14 +1,13 @@
 discard """
   cmd:      "nim c -r --styleCheck:hint --panics:on $options $file"
-  matrix:   "--gc:refc; --gc:refc -d:usestd"
+  matrix:   "--gc:refc"
   targets:  "c"
   nimout:   ""
   action:   "run"
   exitcode: 0
   timeout:  60.0
 """
-import httpclient, asyncdispatch, nativesockets
-import strformat, os, osproc, terminal, strutils
+import httpclient, asyncdispatch, nativesockets, strformat, os, osproc, terminal, strutils
 
 
 import ./utils

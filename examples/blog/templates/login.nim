@@ -1,7 +1,7 @@
-when not (compiles do: import karax / karaxdsl):
-  {.error: "Please use `logue extension karax` to install!".}
-else:
+when (compiles do: import karax / karaxdsl):
   import karax / [karaxdsl, vdom]
+else:
+  {.error: "Please use `logue extension karax` to install!".}
 
 import ../../../src/prologue
 

@@ -1,2 +1,2 @@
-import i18n/i18n
+import ./i18n/i18n
 export i18n

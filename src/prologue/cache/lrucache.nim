@@ -1,8 +1,4 @@
-import tables
-import lists
-import options
-
-import times
+import std/[tables, lists, options, times]
 
 
 type
@@ -20,16 +16,17 @@ type
     capacity: int
     defaultTimeout: int # seconds
 
-func capacity*[A, B](cache: LRUCache[A, B]): int =
+
+func capacity*[A, B](cache: LRUCache[A, B]): int {.inline.} =
   cache.capacity
 
-func len*[A, B](cache: LRUCache[A, B]): int =
+func len*[A, B](cache: LRUCache[A, B]): int {.inline.} =
   cache.map.len
 
-func isBool*[A, B](cache: LRUCache[A, B]): bool =
+func isBool*[A, B](cache: LRUCache[A, B]): bool {.inline.} =
   cache.len == 0
 
-func isFull*[A, B](cache: LRUCache[A, B]): bool =
+func isFull*[A, B](cache: LRUCache[A, B]): bool {.inline.} =
   cache.len == cache.capacity
 
 func initLRUCache*[A, B](capacity: Natural = 128, defaultTimeout: Natural = 1): LRUCache[A, B] {.inline.} =
@@ -59,7 +56,7 @@ proc getOrDefault*[A, B](cache: var LRUCache[A, B], key: A, default: B): B {.inl
   else:
     result = B
 
-proc put*[A, B](cache: var LRUCache[A, B], key: A, value: B, timeout: Natural = 1) {.inline.} =
+proc put*[A, B](cache: var LRUCache[A, B], key: A, value: B, timeout: Natural = 1) =
   if key in cache.map:
     var node = cache.map[key]
     node.value.valuePart = value

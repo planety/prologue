@@ -46,7 +46,7 @@ staticDir=static
   doAssert tab["port"] == "8080"
 
 
-import os, tables, strutils, parsecfg, streams
+import std/[os, tables, strutils, parsecfg, streams]
 
 import ./types
 

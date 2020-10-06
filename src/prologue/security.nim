@@ -1,2 +1,2 @@
-import security/security
+import ./security/security
 export security

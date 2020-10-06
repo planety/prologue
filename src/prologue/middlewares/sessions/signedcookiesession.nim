@@ -1,9 +1,6 @@
-import options, strtabs
+import std/[options, strtabs, asyncdispatch, json]
 
 
-from cookiejar import SameSite
-
-import asyncdispatch
 from ../../core/types import BadSecretKeyError, SecretKey, loads, dumps, len, initSession
 from ../../core/context import Context, HandlerAsync, getCookie, setCookie,
     deleteCookie
@@ -12,18 +9,17 @@ from ../../signing/signing import DefaultSep, DefaultKeyDerivation,
     BadTimeSignatureError, SignatureExpiredError, DefaultDigestMethodType,
         initTimedSigner, unsign, sign
 from ../../core/middlewaresbase import switch
+from ../../core/urandom import randomString
+from ../../core/nativesettings import getOrdefault, Settings
 
+from pkg/cookiejar import SameSite
 
 export cookiejar
 
 
 proc sessionMiddleware*(
-  secretKey: SecretKey,
-  sessionName: string = "session",
-  salt = "prologue.signedcookiesession",
-  sep = DefaultSep,
-  keyDerivation = DefaultKeyDerivation,
-  digestMethodType = DefaultDigestMethodType,
+  settings: Settings,
+  sessionName = "session",
   maxAge: int = 14 * 24 * 60 * 60, # 14 days, in seconds
   path = "",
   domain = "",
@@ -31,11 +27,17 @@ proc sessionMiddleware*(
   httpOnly = false
 ): HandlerAsync =
 
+  var secretKey = settings.getOrDefault("secretKey").getStr
   if secretKey.len == 0:
-    raise newException(BadSecretKeyError, "The length of secret key can't be zero")
-  
-  let signer = initTimedSigner(secretKey, salt, sep, keyDerivation, digestMethodType)
-  
+    secretKey = randomString(16)
+
+  let
+    salt = "prologue.signedcookiesession"
+    sep = DefaultSep
+    keyDerivation = DefaultKeyDerivation
+    digestMethodType = DefaultDigestMethodType
+    signer = initTimedSigner(SecretKey(secretKey), salt, sep, keyDerivation, digestMethodType)
+
   result = proc(ctx: Context) {.async.} =
     # TODO make sure {':', ',', '}'} notin key or value
     ctx.session = initSession(data = newStringTable(modeCaseSensitive))

@@ -205,7 +205,6 @@ block Basic_Mapping:
     app.addTestRoute("/{pathParam}/*$")
     discard testContext(app, "/foo/bar/baz")
 
-
   # "Restful Function Test"
   block:
     # "restful head can work"

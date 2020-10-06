@@ -1,3 +1,3 @@
-import sessions/signedcookiesession
+import ./sessions/signedcookiesession
 
 export signedcookiesession

@@ -6,8 +6,8 @@ from ../../../src/prologue/core/urandom import randomString, randomSecretKey
 block:
   # "randomString can work"
   block:
-    doAssert randomString(8).len != 0
+    doAssert randomString(8).len == 8
 
   # "randomSecretKey can work"
   block:
-    doAssert randomSecretKey(8).len != 0
+    doAssert randomSecretKey(8).len == 8

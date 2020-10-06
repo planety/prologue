@@ -74,12 +74,12 @@ func normalizedStaticDirs(dirs: openArray[string]): seq[string] =
 
 func newSettings*(
   address = "",
-  port = Port(8080), 
-  debug = true, 
+  port = Port(8080),
+  debug = true,
   reusePort = true,
-  staticDirs: openArray[string] = [], 
+  staticDirs: openArray[string] = [],
   secretKey = randomString(8),
-  appName = "", 
+  appName = "",
   bufSize = 40960
 ): Settings =
   ## Creates a new `Settings`.
@@ -87,36 +87,38 @@ func newSettings*(
     raise newException(EmptySecretKeyError, "Secret key can't be empty!")
 
   result = Settings(address: address, port: port, debug: debug, reusePort: reusePort,
-                    staticDirs: normalizedStaticDirs(staticDirs), appName: appName,
+                    staticDirs: normalizedStaticDirs(staticDirs),
+                        appName: appName,
                     bufSize: bufSize, data: %* {"secretKey": secretKey})
 
 func newSettings*(
   data: JsonNode,
   address = "",
   port = Port(8080),
-  debug = true, 
+  debug = true,
   reusePort = true,
   staticDirs: openArray[string] = [],
-  appName = "", 
+  appName = "",
   bufSize = 40960
 ): Settings =
   ## Creates a new `Settings`.
   result = Settings(address: address, port: port, debug: debug, reusePort: reusePort,
-                    staticDirs: normalizedStaticDirs(staticDirs), 
+                    staticDirs: normalizedStaticDirs(staticDirs),
                     appName: appName, bufSize: bufSize, data: data)
 
 proc newSettings*(
-  configPath: string, 
-  address = "", 
-  port = Port(8080), 
-  debug = true, 
+  configPath: string,
+  address = "",
+  port = Port(8080),
+  debug = true,
   reusePort = true,
   staticDirs: openArray[string] = [],
-  appName = "", 
+  appName = "",
   bufSize = 40960
 ): Settings =
   ## Creates a new `Settings`.
   # make sure reserved keys must appear in settings
   result = Settings(address: address, port: port, debug: debug, reusePort: reusePort,
-                    staticDirs: normalizedStaticDirs(staticDirs), appName: appName,
+                    staticDirs: normalizedStaticDirs(staticDirs),
+                        appName: appName,
                     bufSize: bufSize, data: parseFile(configPath))

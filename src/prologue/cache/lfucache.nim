@@ -1,4 +1,4 @@
-import tables, options, times
+import std/[tables, options, times]
 
 
 type
@@ -12,22 +12,22 @@ type
     capacity: int
     defaultTimeout: int # seconds
 
-func capacity*[A, B](cache: LFUCache[A, B]): int =
+func capacity*[A, B](cache: LFUCache[A, B]): int {.inline.} =
   cache.capacity
 
-func len*[A, B](cache: LFUCache[A, B]): int =
+func len*[A, B](cache: LFUCache[A, B]): int {.inline.} =
   cache.map.len
 
-func isBool*[A, B](cache: LFUCache[A, B]): bool =
+func isBool*[A, B](cache: LFUCache[A, B]): bool {.inline.} =
   cache.len == 0
 
-func isFull*[A, B](cache: LFUCache[A, B]): bool =
+func isFull*[A, B](cache: LFUCache[A, B]): bool {.inline.} =
   cache.len == cache.capacity
 
-func initLFUCache*[A, B](capacity: Natural = 128, defaultTimeout: Natural = 1): LFUCache[A, B] =
+func initLFUCache*[A, B](capacity: Natural = 128, defaultTimeout: Natural = 1): LFUCache[A, B] {.inline.} =
   LFUCache[A, B](map: initTable[A, ValuePair[B]](), capacity: capacity, defaultTimeout: defaultTimeout)
 
-proc get*[A, B](cache: var LFUCache[A, B], key: A): Option[B] =
+proc get*[A, B](cache: var LFUCache[A, B], key: A): Option[B] {.inline.} =
   if key in cache.map:
     inc cache.map[key].hits
     cache.map[key].expire = int(epochTime()) + cache.defaultTimeout

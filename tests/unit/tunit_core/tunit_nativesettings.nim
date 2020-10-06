@@ -12,6 +12,6 @@ block:
   doAssert settings.bufSize == 40960
 
   doAssert settings.hasKey("secretKey")
-  doAssert settings["secretKey"].getStr.len > 0
+  doAssert settings["secretKey"].getStr.len == 8
   doAssert settings.getOrDefault("secretKey").getStr == settings["secretKey"].getStr
   doAssert settings.getOrDefault("empty").getStr.len == 0

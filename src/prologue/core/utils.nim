@@ -34,6 +34,17 @@ template beforeAPI*(version, body: untyped) {.dirty.} =
   when (NimMajor, NimMinor) <= version:
     body
 
+func toByteSeq*(str: string): seq[byte] {.inline.} =
+  ## Converts a string to the corresponding byte sequence.
+  @(str.toOpenArrayByte(0, str.high))
+
+func fromByteSeq*(sequence: openArray[byte]): string {.inline.} =
+  ## Converts a byte sequence to the corresponding string.
+  let length = sequence.len
+  if length > 0:
+    result = newString(length)
+    copyMem(result.cstring, sequence[0].unsafeAddr, length)
+
 proc isStaticFile*(
   path: string, 
   dirs: openArray[string]
@@ -50,3 +61,21 @@ proc isStaticFile*(
       continue
     if file.dir.startsWith(dir):
       return (true, file.name & file.ext, file.dir)
+
+template castNumber(result, number: typed): untyped =
+  ## Casts ``number`` to array[byte] in system endians order.
+  cast[typeof(result)](number)
+
+proc serialize*(number: int64): array[8, byte] {.inline.} =
+  ## Serializes int64 to byte array.
+  result = castNumber(result, number)
+
+proc serialize*(number: int32): array[4, byte] {.inline.} =
+  ## Serializes int32 to byte array.
+  result = castNumber(result, number)
+
+proc serialize*(number: int16): array[2, byte] {.inline.} =
+  ## Serializes int16 to byte array.
+  # result[0] = byte(number shr 8'u16)
+  # result[1] = byte(number)
+  result = castNumber(result, number)

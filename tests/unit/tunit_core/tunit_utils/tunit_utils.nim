@@ -1,5 +1,9 @@
-from ../../../../src/prologue/core/utils import isStaticFile
-import os
+from ../../../../src/prologue/core/utils import isStaticFile, toByteSeq, fromByteSeq
+import std/os
+
+
+block:
+  doAssert "Hello, Nim".toByteSeq.fromByteSeq == "Hello, Nim"
 
 
 # "Test Utils"

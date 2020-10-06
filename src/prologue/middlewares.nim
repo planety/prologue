@@ -1,2 +1,2 @@
-import middlewares/middlewares
+import ./middlewares/middlewares
 export middlewares

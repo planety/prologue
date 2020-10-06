@@ -4,14 +4,14 @@ import ./urls
 
 let
   env = loadPrologueEnv(".env")
-  secretKey = env.getOrDefault("secretKey", "")
   settings = newSettings(appName = env.getOrDefault("appName", "Prologue"),
                          debug = env.getOrDefault("debug", true),
                          port = Port(env.getOrDefault("port", 8080)),
-                         secretKey = secretKey
+                         secretKey = env.getOrDefault("secretKey", "")
     )
 
 
-var app = newApp(settings = settings, middlewares = @[debugRequestMiddleware(), sessionMiddleware(secretKey = secretKey.SecretKey)])
+var app = newApp(settings = settings, middlewares = 
+                 @[debugRequestMiddleware(), sessionMiddleware(settings)])
 app.addRoute(urls.urlPatterns, "")
 app.run()

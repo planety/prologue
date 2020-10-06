@@ -1,3 +1,3 @@
-import lfucache, lrucache
+import ./lfucache, ./lrucache
 
 export lfucache, lrucache

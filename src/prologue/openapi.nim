@@ -1,2 +1,2 @@
-import openapi/openapi
+import ./openapi/openapi
 export openapi

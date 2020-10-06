@@ -1,2 +1,2 @@
-import signing/signing
+import ./signing/signing
 export signing

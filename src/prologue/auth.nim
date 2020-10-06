@@ -1,2 +1,2 @@
-import auth/auth
+import ./auth/auth
 export auth

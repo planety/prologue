@@ -1,4 +1,4 @@
-import strutils, parseutils
+import std/[strutils, parseutils]
 
 
 func isInt*(value: string): bool {.inline.} =

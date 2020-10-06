@@ -3,7 +3,6 @@ import ../../../src/prologue/mocking/mocking
 
 import uri
 
-
 proc prepareApp(debug = true): Prologue =
   result = newApp(settings = newSettings(debug = debug))
   mockApp(result)

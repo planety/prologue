@@ -12,11 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import uri 
-import tables, strutils, strformat, logging, strtabs, options, json
+import std/[uri, tables, strutils, strformat, logging, strtabs, options, json]
 from nativesockets import Port, `$`
-import cookiejar
 from cgi import CgiError
+
+import pkg/cookiejar
 
 
 from ./utils import isStaticFile
@@ -302,6 +302,7 @@ proc shutDownHandler() {.noconv.} =
 
   when defined(windows) and compileOption("threads"):
     # workaround for https://github.com/nim-lang/Nim/issues/4057
+    echo "ok"
     setupForeignThreadGC()
 
   for event in dontUseThisShutDownEvents:
