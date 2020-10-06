@@ -97,6 +97,22 @@ function main() {
       <li><a class="reference" href="#isStaticFile%2Cstring%2CopenArray%5Bstring%5D"
     title="isStaticFile(path: string; dirs: openArray[string]): tuple[hasValue: bool,
     filename, dir: string]"><wbr />is<wbr />Static<wbr />File<span class="attachedType"></span></a></li>
+  <li><a class="reference" href="#serialize%2Cint64"
+    title="serialize(number: int64): array[8, byte]"><wbr />serialize<span class="attachedType"></span></a></li>
+  <li><a class="reference" href="#serialize%2Cint32"
+    title="serialize(number: int32): array[4, byte]"><wbr />serialize<span class="attachedType"></span></a></li>
+  <li><a class="reference" href="#serialize%2Cint16"
+    title="serialize(number: int16): array[2, byte]"><wbr />serialize<span class="attachedType"></span></a></li>
+
+  </ul>
+</li>
+<li>
+  <a class="reference reference-toplevel" href="#13" id="63">Funcs</a>
+  <ul class="simple simple-toc-section">
+      <li><a class="reference" href="#toByteSeq%2Cstring"
+    title="toByteSeq(str: string): seq[byte]"><wbr />to<wbr />Byte<wbr />Seq<span class="attachedType"></span></a></li>
+  <li><a class="reference" href="#fromByteSeq%2CopenArray%5Bbyte%5D"
+    title="fromByteSeq(sequence: openArray[byte]): string"><wbr />from<wbr />Byte<wbr />Seq<span class="attachedType"></span></a></li>
 
   </ul>
 </li>
@@ -130,9 +146,69 @@ function main() {
 
 
 &nbsp;&nbsp;<a
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/utils.nim#L48"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/utils.nim#L48" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="serialize,int64"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#serialize%2Cint64"><span class="Identifier">serialize</span></a><span class="Other">(</span><span class="Identifier">number</span><span class="Other">:</span> <span class="Identifier">int64</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">array</span><span class="Other">[</span><span class="DecNumber">8</span><span class="Other">,</span> <span class="Identifier">byte</span><span class="Other">]</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+Serializes int64 to byte array.
+&nbsp;&nbsp;<a
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/utils.nim#L69"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/utils.nim#L69" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="serialize,int32"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#serialize%2Cint32"><span class="Identifier">serialize</span></a><span class="Other">(</span><span class="Identifier">number</span><span class="Other">:</span> <span class="Identifier">int32</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">array</span><span class="Other">[</span><span class="DecNumber">4</span><span class="Other">,</span> <span class="Identifier">byte</span><span class="Other">]</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+Serializes int32 to byte array.
+&nbsp;&nbsp;<a
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/utils.nim#L73"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/utils.nim#L73" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="serialize,int16"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#serialize%2Cint16"><span class="Identifier">serialize</span></a><span class="Other">(</span><span class="Identifier">number</span><span class="Other">:</span> <span class="Identifier">int16</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">array</span><span class="Other">[</span><span class="DecNumber">2</span><span class="Other">,</span> <span class="Identifier">byte</span><span class="Other">]</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+Serializes int16 to byte array.
+&nbsp;&nbsp;<a
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/utils.nim#L77"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/utils.nim#L77" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+
+</dl></div>
+<div class="section" id="13">
+<h1><a class="toc-backref" href="#13">Funcs</a></h1>
+<dl class="item">
+<a id="toByteSeq,string"></a>
+<dt><pre><span class="Keyword">func</span> <a href="#toByteSeq%2Cstring"><span class="Identifier">toByteSeq</span></a><span class="Other">(</span><span class="Identifier">str</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">byte</span><span class="Other">]</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+Converts a string to the corresponding byte sequence.
+&nbsp;&nbsp;<a
 href="https://github.com/planety/prologue/tree/devel/src/prologue/core/utils.nim#L37"
 class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/utils.nim#L37" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="fromByteSeq,openArray[byte]"></a>
+<dt><pre><span class="Keyword">func</span> <a href="#fromByteSeq%2CopenArray%5Bbyte%5D"><span class="Identifier">fromByteSeq</span></a><span class="Other">(</span><span class="Identifier">sequence</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Identifier">byte</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+Converts a byte sequence to the corresponding string.
+&nbsp;&nbsp;<a
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/utils.nim#L41"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/utils.nim#L41" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -183,7 +259,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-05 05:39:35 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-06 13:54:46 UTC</small>
       </div>
     </div>
   </div>

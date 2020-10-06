@@ -121,6 +121,8 @@ function main() {
   <ul class="simple simple-toc-section">
       <li><a class="reference" href="#send%2CRequest%2Cstring"
     title="send(request: Request; content: string): Future[void]"><wbr />send<span class="attachedType">Request</span></a></li>
+  <li><a class="reference" href="#respond%2CRequest%2CHttpCode%2Cstring"
+    title="respond(request: Request; code: HttpCode; body: string): Future[void]"><wbr />respond<span class="attachedType">Request</span></a></li>
   <li><a class="reference" href="#respond%2CRequest%2CHttpCode%2Cstring%2CResponseHeaders"
     title="respond(request: Request; code: HttpCode; body: string; headers: ResponseHeaders): Future[
     void]"><wbr />respond<span class="attachedType">Request</span></a></li>
@@ -242,6 +244,18 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L124" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
+<a id="respond,Request,HttpCode,string"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#respond%2CRequest%2CHttpCode%2Cstring"><span class="Identifier">respond</span></a><span class="Other">(</span><span class="Identifier">request</span><span class="Other">:</span> <a href="request.html#Request"><span class="Identifier">Request</span></a><span class="Other">;</span> <span class="Identifier">code</span><span class="Other">:</span> <span class="Identifier">HttpCode</span><span class="Other">;</span> <span class="Identifier">body</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Future</span><span class="Other">[</span><span class="Identifier">void</span><span class="Other">]</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span>
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">,</span> <span class="Identifier">IOSelectorsException</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+Responds <tt class="docutils literal"><span class="pre">code</span></tt>, <tt class="docutils literal"><span class="pre">body</span></tt> to the client, the framework will generate the contents of the response automatically.
+&nbsp;&nbsp;<a
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L130"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L130" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
 <a id="respond,Request,HttpCode,string,ResponseHeaders"></a>
 <dt><pre><span class="Keyword">proc</span> <a href="#respond%2CRequest%2CHttpCode%2Cstring%2CResponseHeaders"><span class="Identifier">respond</span></a><span class="Other">(</span><span class="Identifier">request</span><span class="Other">:</span> <a href="request.html#Request"><span class="Identifier">Request</span></a><span class="Other">;</span> <span class="Identifier">code</span><span class="Other">:</span> <span class="Identifier">HttpCode</span><span class="Other">;</span> <span class="Identifier">body</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">headers</span><span class="Other">:</span> <a href="../httpcore/httplogue.html#ResponseHeaders"><span class="Identifier">ResponseHeaders</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Future</span><span class="Other">[</span>
     <span class="Identifier">void</span><span class="Other">]</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span>
@@ -251,9 +265,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Responds <tt class="docutils literal"><span class="pre">code</span></tt>, <tt class="docutils literal"><span class="pre">body</span></tt> and <tt class="docutils literal"><span class="pre">headers</span></tt> to the client, the framework will generate the contents of the response automatically.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L130"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L137"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L130" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L137" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="respond,Request,Response"></a>
@@ -264,9 +278,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Responds <tt class="docutils literal"><span class="pre">response</span></tt> to the client, the framework will generate the contents of the response automatically.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L141"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L148"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L141" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L148" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="close,Request"></a>
@@ -275,9 +289,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Closes the request.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L174"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L181"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L174" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L181" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -461,9 +475,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Initializes a new Request.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L146"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L153"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L146" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L153" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="initMockingRequest,HttpMethod,HttpHeaders,Uri"></a>
@@ -475,9 +489,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Initializes a new Request.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L178"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L185"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L178" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L185" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -490,7 +504,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-05 05:39:36 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-06 13:54:47 UTC</small>
       </div>
     </div>
   </div>

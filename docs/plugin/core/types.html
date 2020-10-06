@@ -92,6 +92,12 @@ function main() {
   </div>
   <ul class="simple simple-toc" id="toc-list">
 <li>
+  <a class="reference reference-toplevel" href="#6" id="56">Imports</a>
+  <ul class="simple simple-toc-section">
+    
+  </ul>
+</li>
+<li>
   <a class="reference reference-toplevel" href="#7" id="57">Types</a>
   <ul class="simple simple-toc-section">
       <li><a class="reference" href="#BadSecretKeyError"
@@ -180,22 +186,16 @@ function main() {
   <div id="tocRoot"></div>
   
   <p class="module-desc"></p>
-  <div class="section" id="7">
+  <div class="section" id="6">
+<h1><a class="toc-backref" href="#6">Imports</a></h1>
+<dl class="item">
+<a class="reference external" href="encode.html">encode</a>
+</dl></div>
+<div class="section" id="7">
 <h1><a class="toc-backref" href="#7">Types</a></h1>
 <dl class="item">
 <a id="BadSecretKeyError"></a>
 <dt><pre><a href="types.html#BadSecretKeyError"><span class="Identifier">BadSecretKeyError</span></a> <span class="Other">=</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">CatchableError</span></pre></dt>
-<dd>
-
-
-&nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L20"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L20" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<a id="EmptySecretKeyError"></a>
-<dt><pre><a href="types.html#EmptySecretKeyError"><span class="Identifier">EmptySecretKeyError</span></a> <span class="Other">=</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">CatchableError</span></pre></dt>
 <dd>
 
 
@@ -205,8 +205,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L21" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="BaseType"></a>
-<dt><pre><a href="types.html#BaseType"><span class="Identifier">BaseType</span></a> <span class="Other">=</span> <span class="Identifier">int</span> <span class="Operator">|</span> <span class="Identifier">float</span> <span class="Operator">|</span> <span class="Identifier">bool</span> <span class="Operator">|</span> <span class="Identifier">string</span></pre></dt>
+<a id="EmptySecretKeyError"></a>
+<dt><pre><a href="types.html#EmptySecretKeyError"><span class="Identifier">EmptySecretKeyError</span></a> <span class="Other">=</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">CatchableError</span></pre></dt>
 <dd>
 
 
@@ -216,8 +216,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L22" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="SecretKey"></a>
-<dt><pre><a href="types.html#SecretKey"><span class="Identifier">SecretKey</span></a> <span class="Other">=</span> <span class="Keyword">distinct</span> <span class="Identifier">string</span></pre></dt>
+<a id="BaseType"></a>
+<dt><pre><a href="types.html#BaseType"><span class="Identifier">BaseType</span></a> <span class="Other">=</span> <span class="Identifier">int</span> <span class="Operator">|</span> <span class="Identifier">float</span> <span class="Operator">|</span> <span class="Identifier">bool</span> <span class="Operator">|</span> <span class="Identifier">string</span></pre></dt>
 <dd>
 
 
@@ -227,8 +227,8 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L23" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="SecretUrl"></a>
-<dt><pre><a href="types.html#SecretUrl"><span class="Identifier">SecretUrl</span></a> <span class="Other">=</span> <span class="Keyword">distinct</span> <span class="Identifier">string</span></pre></dt>
+<a id="SecretKey"></a>
+<dt><pre><a href="types.html#SecretKey"><span class="Identifier">SecretKey</span></a> <span class="Other">=</span> <span class="Keyword">distinct</span> <span class="Identifier">string</span></pre></dt>
 <dd>
 
 
@@ -236,6 +236,17 @@ class="link-seesrc" target="_blank">Source</a>
 href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L24"
 class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L24" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="SecretUrl"></a>
+<dt><pre><a href="types.html#SecretUrl"><span class="Identifier">SecretUrl</span></a> <span class="Other">=</span> <span class="Keyword">distinct</span> <span class="Identifier">string</span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L25"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L25" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="Session"></a>
@@ -249,9 +260,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L27"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L28"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L27" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L28" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="FormPart"></a>
@@ -262,9 +273,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L33"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L34"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L33" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L34" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -278,9 +289,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L44"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L45"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L44" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L45" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="update,Session"></a>
@@ -289,9 +300,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L90"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L91"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L90" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L91" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="[],Session,string"></a>
@@ -300,9 +311,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L94"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L95"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L94" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L95" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="[]=,Session,string,string"></a>
@@ -311,9 +322,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L98"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L99"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L98" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L99" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="getOrDefault,Session,string,string"></a>
@@ -323,9 +334,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L109"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L110"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L109" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L110" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="del,Session,string"></a>
@@ -334,9 +345,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L116"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L117"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L116" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L117" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="clear,Session"></a>
@@ -345,9 +356,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L120"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L121"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L120" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L121" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="parseStringTable,StringTableRef,string"></a>
@@ -356,9 +367,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L127"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L128"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L127" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L128" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="loads,Session,string"></a>
@@ -367,9 +378,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Loads session from strings.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L154"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L155"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L154" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L155" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="dumps,Session"></a>
@@ -378,9 +389,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Dumps session to strings.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L159"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L160"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L159" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L160" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -394,9 +405,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L37"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L38"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L37" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L38" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="[],FormPart,string"></a>
@@ -406,9 +417,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L40"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L41"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L40" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L41" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="parseValue,string,T"></a>
@@ -417,9 +428,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L65"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L66"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L65" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L66" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="len,SecretKey"></a>
@@ -428,9 +439,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L78"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L79"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L78" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L79" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="$,SecretKey"></a>
@@ -439,9 +450,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Hide secretKey's value
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L81"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L82"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L81" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L82" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="initSession,StringTableRef"></a>
@@ -451,9 +462,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Initializes a new session.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L85"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L86"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L85" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L86" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="len,Session"></a>
@@ -462,9 +473,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L102"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L103"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L102" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L103" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="$,Session"></a>
@@ -473,9 +484,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L124"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L125"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L124" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L125" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -489,9 +500,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L105"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/types.nim#L106"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L105" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/types.nim#L106" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -504,7 +515,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-05 05:39:55 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-06 13:55:05 UTC</small>
       </div>
     </div>
   </div>

@@ -153,7 +153,9 @@ function main() {
          settings: LocalSettings = nil)</a></li>
           <li><a class="reference external"
           data-doc-search-tag="application: addRoute(app: Prologue; patterns: seq[UrlPattern]; baseRoute = &quot;&quot;;
-         settings: LocalSettings = nil)" href="application.html#addRoute%2CPrologue%2Cseq%5BUrlPattern%5D%2Cstring%2CLocalSettings">application: addRoute(app: Prologue; patterns: seq[UrlPattern]; baseRoute = &quot;&quot;;
+         middlewares: Option[seq[HandlerAsync]] = none(seq[HandlerAsync]);
+         settings: LocalSettings = nil)" href="application.html#addRoute%2CPrologue%2Cseq%5BUrlPattern%5D%2Cstring%2COption%5Bseq%5BHandlerAsync%5D%5D%2CLocalSettings">application: addRoute(app: Prologue; patterns: seq[UrlPattern]; baseRoute = &quot;&quot;;
+         middlewares: Option[seq[HandlerAsync]] = none(seq[HandlerAsync]);
          settings: LocalSettings = nil)</a></li>
           <li><a class="reference external"
           data-doc-search-tag="application: addRoute(app: Prologue; route: string; handler: HandlerAsync;
@@ -198,7 +200,7 @@ function main() {
           </ul></dd>
 <dt><a name="attachment" href="#attachment"><span>attachment:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="context: attachment(ctx: Context; downloadName = &quot;&quot;; charset = &quot;utf-8&quot;)" href="context.html#attachment%2CContext%2Cstring%2Cstring">context: attachment(ctx: Context; downloadName = &quot;&quot;; charset = &quot;utf-8&quot;)</a></li>
+          data-doc-search-tag="context: attachment(ctx: Context; downloadName: string; charset = &quot;utf-8&quot;)" href="context.html#attachment%2CContext%2Cstring%2Cstring">context: attachment(ctx: Context; downloadName: string; charset = &quot;utf-8&quot;)</a></li>
           </ul></dd>
 <dt><a name="BadSecretKeyError" href="#BadSecretKeyError"><span>BadSecretKeyError:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -387,6 +389,10 @@ function main() {
 <dt><a name="FormPart" href="#FormPart"><span>FormPart:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="types: FormPart" href="types.html#FormPart">types: FormPart</a></li>
+          </ul></dd>
+<dt><a name="fromByteSeq" href="#fromByteSeq"><span>fromByteSeq:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="utils: fromByteSeq(sequence: openArray[byte]): string" href="utils.html#fromByteSeq%2CopenArray%5Bbyte%5D">utils: fromByteSeq(sequence: openArray[byte]): string</a></li>
           </ul></dd>
 <dt><a name="get" href="#get"><span>get:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -879,6 +885,8 @@ function main() {
 <dt><a name="randomBytesSeq" href="#randomBytesSeq"><span>randomBytesSeq:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="urandom: randomBytesSeq(size = DefaultEntropy): seq[byte]" href="urandom.html#randomBytesSeq">urandom: randomBytesSeq(size = DefaultEntropy): seq[byte]</a></li>
+          <li><a class="reference external"
+          data-doc-search-tag="urandom: randomBytesSeq[size = DefaultEntropy](): array[size, byte]" href="urandom.html#randomBytesSeq_2">urandom: randomBytesSeq[size = DefaultEntropy](): array[size, byte]</a></li>
           </ul></dd>
 <dt><a name="randomSecretKey" href="#randomSecretKey"><span>randomSecretKey:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -930,6 +938,8 @@ function main() {
           </ul></dd>
 <dt><a name="respond" href="#respond"><span>respond:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
+          data-doc-search-tag="request: respond(request: Request; code: HttpCode; body: string): Future[void]" href="beast/request.html#respond%2CRequest%2CHttpCode%2Cstring">request: respond(request: Request; code: HttpCode; body: string): Future[void]</a></li>
+          <li><a class="reference external"
           data-doc-search-tag="request: respond(request: Request; code: HttpCode; body: string; headers: ResponseHeaders): Future[
     void]" href="beast/request.html#respond%2CRequest%2CHttpCode%2Cstring%2CResponseHeaders">request: respond(request: Request; code: HttpCode; body: string; headers: ResponseHeaders): Future[
     void]</a></li>
@@ -937,6 +947,8 @@ function main() {
           data-doc-search-tag="request: respond(request: Request; response: Response): Future[void]" href="beast/request.html#respond%2CRequest%2CResponse">request: respond(request: Request; response: Response): Future[void]</a></li>
           <li><a class="reference external"
           data-doc-search-tag="context: respond(ctx: Context): Future[void]" href="context.html#respond%2CContext">context: respond(ctx: Context): Future[void]</a></li>
+          <li><a class="reference external"
+          data-doc-search-tag="context: respond(ctx: Context; code: HttpCode; body: string): Future[void]" href="context.html#respond%2CContext%2CHttpCode%2Cstring">context: respond(ctx: Context; code: HttpCode; body: string): Future[void]</a></li>
           <li><a class="reference external"
           data-doc-search-tag="context: respond(ctx: Context; code: HttpCode; body: string; headers: ResponseHeaders): Future[
     void]" href="context.html#respond%2CContext%2CHttpCode%2Cstring%2CResponseHeaders">context: respond(ctx: Context; code: HttpCode; body: string; headers: ResponseHeaders): Future[
@@ -995,6 +1007,14 @@ function main() {
           data-doc-search-tag="request: send(request: Request; content: string): Future[void]" href="beast/request.html#send%2CRequest%2Cstring">request: send(request: Request; content: string): Future[void]</a></li>
           <li><a class="reference external"
           data-doc-search-tag="context: send(ctx: Context; content: string): Future[void]" href="context.html#send%2CContext%2Cstring">context: send(ctx: Context; content: string): Future[void]</a></li>
+          </ul></dd>
+<dt><a name="serialize" href="#serialize"><span>serialize:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="utils: serialize(number: int16): array[2, byte]" href="utils.html#serialize%2Cint16">utils: serialize(number: int16): array[2, byte]</a></li>
+          <li><a class="reference external"
+          data-doc-search-tag="utils: serialize(number: int32): array[4, byte]" href="utils.html#serialize%2Cint32">utils: serialize(number: int32): array[4, byte]</a></li>
+          <li><a class="reference external"
+          data-doc-search-tag="utils: serialize(number: int64): array[8, byte]" href="utils.html#serialize%2Cint64">utils: serialize(number: int64): array[8, byte]</a></li>
           </ul></dd>
 <dt><a name="serve" href="#serve"><span>serve:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -1098,6 +1118,10 @@ function main() {
 <li><a class="reference external"
           data-doc-search-tag="context: SyncEvent" href="context.html#SyncEvent">context: SyncEvent</a></li>
           </ul></dd>
+<dt><a name="toByteSeq" href="#toByteSeq"><span>toByteSeq:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="utils: toByteSeq(str: string): seq[byte]" href="utils.html#toByteSeq%2Cstring">utils: toByteSeq(str: string): seq[byte]</a></li>
+          </ul></dd>
 <dt><a name="trace" href="#trace"><span>trace:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="application: trace(app: Prologue; route: string; handler: HandlerAsync; name = &quot;&quot;;
@@ -1155,7 +1179,7 @@ function main() {
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-05 05:39:51 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-06 13:55:02 UTC</small>
       </div>
     </div>
   </div>

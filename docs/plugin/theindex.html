@@ -63,7 +63,7 @@ function main() {
 <div class="document" id="documentId">
   <div class="container">
     <h1 class="title">Index</h1>
-    Modules: <a href="auth/auth.html">auth/auth</a>, <a href="core/application.html">core/application</a>, <a href="core/beast/request.html">core/beast/request</a>, <a href="core/beast/server.html">core/beast/server</a>, <a href="core/configure.html">core/configure</a>, <a href="core/constants.html">core/constants</a>, <a href="core/context.html">core/context</a>, <a href="core/defaultserversettings.html">core/defaultserversettings</a>, <a href="core/encode.html">core/encode</a>, <a href="core/form.html">core/form</a>, <a href="core/httpcore/httplogue.html">core/httpcore/httplogue</a>, <a href="core/httpexception.html">core/httpexception</a>, <a href="core/middlewaresbase.html">core/middlewaresbase</a>, <a href="core/nativesettings.html">core/nativesettings</a>, <a href="core/pages.html">core/pages</a>, <a href="core/response.html">core/response</a>, <a href="core/route.html">core/route</a>, <a href="core/types.html">core/types</a>, <a href="core/urandom.html">core/urandom</a>, <a href="core/utils.html">core/utils</a>, <a href="i18n/i18n.html">i18n/i18n</a>, <a href="middlewares/auth.html">middlewares/auth</a>, <a href="middlewares/clickjacking.html">middlewares/clickjacking</a>, <a href="middlewares/cors.html">middlewares/cors</a>, <a href="middlewares/csrf.html">middlewares/csrf</a>, <a href="middlewares/sessions/signedcookiesession.html">middlewares/sessions/signedcookiesession</a>, <a href="middlewares/utils.html">middlewares/utils</a>, <a href="openapi/openapi.html">openapi/openapi</a>, <a href="security/hasher.html">security/hasher</a>, <a href="signing/signing.html">signing/signing</a>, <a href="signing/signingbase.html">signing/signingbase</a>, <a href="validate/basic.html">validate/basic</a>, <a href="validate/validate.html">validate/validate</a>.<br/><p /><h2>API symbols</h2>
+    Modules: <a href="auth/auth.html">auth/auth</a>, <a href="core/application.html">core/application</a>, <a href="core/beast/request.html">core/beast/request</a>, <a href="core/beast/server.html">core/beast/server</a>, <a href="core/configure.html">core/configure</a>, <a href="core/constants.html">core/constants</a>, <a href="core/context.html">core/context</a>, <a href="core/defaultserversettings.html">core/defaultserversettings</a>, <a href="core/encode.html">core/encode</a>, <a href="core/form.html">core/form</a>, <a href="core/httpcore/httplogue.html">core/httpcore/httplogue</a>, <a href="core/httpexception.html">core/httpexception</a>, <a href="core/middlewaresbase.html">core/middlewaresbase</a>, <a href="core/nativesettings.html">core/nativesettings</a>, <a href="core/pages.html">core/pages</a>, <a href="core/response.html">core/response</a>, <a href="core/route.html">core/route</a>, <a href="core/types.html">core/types</a>, <a href="core/uid.html">core/uid</a>, <a href="core/urandom.html">core/urandom</a>, <a href="core/utils.html">core/utils</a>, <a href="i18n/i18n.html">i18n/i18n</a>, <a href="middlewares/auth.html">middlewares/auth</a>, <a href="middlewares/clickjacking.html">middlewares/clickjacking</a>, <a href="middlewares/cors.html">middlewares/cors</a>, <a href="middlewares/csrf.html">middlewares/csrf</a>, <a href="middlewares/sessions/memorysession.html">middlewares/sessions/memorysession</a>, <a href="middlewares/sessions/redissession.html">middlewares/sessions/redissession</a>, <a href="middlewares/sessions/signedcookiesession.html">middlewares/sessions/signedcookiesession</a>, <a href="middlewares/utils.html">middlewares/utils</a>, <a href="openapi/openapi.html">openapi/openapi</a>, <a href="security/hasher.html">security/hasher</a>, <a href="signing/signing.html">signing/signing</a>, <a href="signing/signingbase.html">signing/signingbase</a>, <a href="validate/basic.html">validate/basic</a>, <a href="validate/validate.html">validate/validate</a>.<br/><p /><h2>API symbols</h2>
 <dl><dt><a name="%60%24%60" href="#%60%24%60"><span>`$`:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="configure: `$`(env: Env): string" href="core/configure.html#%24%2CEnv">configure: `$`(env: Env): string</a></li>
@@ -157,7 +157,9 @@ function main() {
          settings: LocalSettings = nil)</a></li>
           <li><a class="reference external"
           data-doc-search-tag="application: addRoute(app: Prologue; patterns: seq[UrlPattern]; baseRoute = &quot;&quot;;
-         settings: LocalSettings = nil)" href="core/application.html#addRoute%2CPrologue%2Cseq%5BUrlPattern%5D%2Cstring%2CLocalSettings">application: addRoute(app: Prologue; patterns: seq[UrlPattern]; baseRoute = &quot;&quot;;
+         middlewares: Option[seq[HandlerAsync]] = none(seq[HandlerAsync]);
+         settings: LocalSettings = nil)" href="core/application.html#addRoute%2CPrologue%2Cseq%5BUrlPattern%5D%2Cstring%2COption%5Bseq%5BHandlerAsync%5D%5D%2CLocalSettings">application: addRoute(app: Prologue; patterns: seq[UrlPattern]; baseRoute = &quot;&quot;;
+         middlewares: Option[seq[HandlerAsync]] = none(seq[HandlerAsync]);
          settings: LocalSettings = nil)</a></li>
           <li><a class="reference external"
           data-doc-search-tag="application: addRoute(app: Prologue; route: string; handler: HandlerAsync;
@@ -202,7 +204,7 @@ function main() {
           </ul></dd>
 <dt><a name="attachment" href="#attachment"><span>attachment:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="context: attachment(ctx: Context; downloadName = &quot;&quot;; charset = &quot;utf-8&quot;)" href="core/context.html#attachment%2CContext%2Cstring%2Cstring">context: attachment(ctx: Context; downloadName = &quot;&quot;; charset = &quot;utf-8&quot;)</a></li>
+          data-doc-search-tag="context: attachment(ctx: Context; downloadName: string; charset = &quot;utf-8&quot;)" href="core/context.html#attachment%2CContext%2Cstring%2Cstring">context: attachment(ctx: Context; downloadName: string; charset = &quot;utf-8&quot;)</a></li>
           </ul></dd>
 <dt><a name="AuthMethod" href="#AuthMethod"><span>AuthMethod:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -522,9 +524,17 @@ function main() {
 <li><a class="reference external"
           data-doc-search-tag="validate: FormValidation" href="validate/validate.html#FormValidation">validate: FormValidation</a></li>
           </ul></dd>
+<dt><a name="fromByteSeq" href="#fromByteSeq"><span>fromByteSeq:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="utils: fromByteSeq(sequence: openArray[byte]): string" href="core/utils.html#fromByteSeq%2CopenArray%5Bbyte%5D">utils: fromByteSeq(sequence: openArray[byte]): string</a></li>
+          </ul></dd>
 <dt><a name="generateToken" href="#generateToken"><span>generateToken:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="csrf: generateToken(ctx: Context; tokenName = DefaultTokenName): string" href="middlewares/csrf.html#generateToken%2CContext">csrf: generateToken(ctx: Context; tokenName = DefaultTokenName): string</a></li>
+          </ul></dd>
+<dt><a name="genUid" href="#genUid"><span>genUid:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="uid: genUid(): string" href="core/uid.html#genUid">uid: genUid(): string</a></li>
           </ul></dd>
 <dt><a name="get" href="#get"><span>get:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -1163,6 +1173,8 @@ function main() {
 <dt><a name="randomBytesSeq" href="#randomBytesSeq"><span>randomBytesSeq:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="urandom: randomBytesSeq(size = DefaultEntropy): seq[byte]" href="core/urandom.html#randomBytesSeq">urandom: randomBytesSeq(size = DefaultEntropy): seq[byte]</a></li>
+          <li><a class="reference external"
+          data-doc-search-tag="urandom: randomBytesSeq[size = DefaultEntropy](): array[size, byte]" href="core/urandom.html#randomBytesSeq_2">urandom: randomBytesSeq[size = DefaultEntropy](): array[size, byte]</a></li>
           </ul></dd>
 <dt><a name="randomSecretKey" href="#randomSecretKey"><span>randomSecretKey:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -1234,6 +1246,8 @@ function main() {
           </ul></dd>
 <dt><a name="respond" href="#respond"><span>respond:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
+          data-doc-search-tag="request: respond(request: Request; code: HttpCode; body: string): Future[void]" href="core/beast/request.html#respond%2CRequest%2CHttpCode%2Cstring">request: respond(request: Request; code: HttpCode; body: string): Future[void]</a></li>
+          <li><a class="reference external"
           data-doc-search-tag="request: respond(request: Request; code: HttpCode; body: string; headers: ResponseHeaders): Future[
     void]" href="core/beast/request.html#respond%2CRequest%2CHttpCode%2Cstring%2CResponseHeaders">request: respond(request: Request; code: HttpCode; body: string; headers: ResponseHeaders): Future[
     void]</a></li>
@@ -1241,6 +1255,8 @@ function main() {
           data-doc-search-tag="request: respond(request: Request; response: Response): Future[void]" href="core/beast/request.html#respond%2CRequest%2CResponse">request: respond(request: Request; response: Response): Future[void]</a></li>
           <li><a class="reference external"
           data-doc-search-tag="context: respond(ctx: Context): Future[void]" href="core/context.html#respond%2CContext">context: respond(ctx: Context): Future[void]</a></li>
+          <li><a class="reference external"
+          data-doc-search-tag="context: respond(ctx: Context; code: HttpCode; body: string): Future[void]" href="core/context.html#respond%2CContext%2CHttpCode%2Cstring">context: respond(ctx: Context; code: HttpCode; body: string): Future[void]</a></li>
           <li><a class="reference external"
           data-doc-search-tag="context: respond(ctx: Context; code: HttpCode; body: string; headers: ResponseHeaders): Future[
     void]" href="core/context.html#respond%2CContext%2CHttpCode%2Cstring%2CResponseHeaders">context: respond(ctx: Context; code: HttpCode; body: string; headers: ResponseHeaders): Future[
@@ -1316,6 +1332,14 @@ function main() {
           <li><a class="reference external"
           data-doc-search-tag="context: send(ctx: Context; content: string): Future[void]" href="core/context.html#send%2CContext%2Cstring">context: send(ctx: Context; content: string): Future[void]</a></li>
           </ul></dd>
+<dt><a name="serialize" href="#serialize"><span>serialize:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="utils: serialize(number: int16): array[2, byte]" href="core/utils.html#serialize%2Cint16">utils: serialize(number: int16): array[2, byte]</a></li>
+          <li><a class="reference external"
+          data-doc-search-tag="utils: serialize(number: int32): array[4, byte]" href="core/utils.html#serialize%2Cint32">utils: serialize(number: int32): array[4, byte]</a></li>
+          <li><a class="reference external"
+          data-doc-search-tag="utils: serialize(number: int64): array[8, byte]" href="core/utils.html#serialize%2Cint64">utils: serialize(number: int64): array[8, byte]</a></li>
+          </ul></dd>
 <dt><a name="serve" href="#serve"><span>serve:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="server: serve(app: Prologue; port: Port;
@@ -1334,15 +1358,21 @@ function main() {
           </ul></dd>
 <dt><a name="sessionMiddleware" href="#sessionMiddleware"><span>sessionMiddleware:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="signedcookiesession: sessionMiddleware(secretKey: SecretKey; sessionName: string = &quot;session&quot;;
-                  salt = &quot;prologue.signedcookiesession&quot;; sep = DefaultSep;
-                  keyDerivation = DefaultKeyDerivation;
-                  digestMethodType = DefaultDigestMethodType;
+          data-doc-search-tag="memorysession: sessionMiddleware(settings: Settings; sessionName = &quot;session&quot;;
                   maxAge: int = 20160 * 60; path = &quot;&quot;; domain = &quot;&quot;; sameSite = Lax;
-                  httpOnly = false): HandlerAsync" href="middlewares/sessions/signedcookiesession.html#sessionMiddleware%2CSecretKey%2Cstring%2Cstring%2Cint%2Cstring%2Cstring">signedcookiesession: sessionMiddleware(secretKey: SecretKey; sessionName: string = &quot;session&quot;;
-                  salt = &quot;prologue.signedcookiesession&quot;; sep = DefaultSep;
-                  keyDerivation = DefaultKeyDerivation;
-                  digestMethodType = DefaultDigestMethodType;
+                  httpOnly = false): HandlerAsync" href="middlewares/sessions/memorysession.html#sessionMiddleware%2CSettings%2Cstring%2Cint%2Cstring%2Cstring">memorysession: sessionMiddleware(settings: Settings; sessionName = &quot;session&quot;;
+                  maxAge: int = 20160 * 60; path = &quot;&quot;; domain = &quot;&quot;; sameSite = Lax;
+                  httpOnly = false): HandlerAsync</a></li>
+          <li><a class="reference external"
+          data-doc-search-tag="redissession: sessionMiddleware(settings: Settings; sessionName = &quot;session&quot;;
+                  maxAge: int = 20160 * 60; path = &quot;&quot;; domain = &quot;&quot;; sameSite = Lax;
+                  httpOnly = false): HandlerAsync" href="middlewares/sessions/redissession.html#sessionMiddleware%2CSettings%2Cstring%2Cint%2Cstring%2Cstring">redissession: sessionMiddleware(settings: Settings; sessionName = &quot;session&quot;;
+                  maxAge: int = 20160 * 60; path = &quot;&quot;; domain = &quot;&quot;; sameSite = Lax;
+                  httpOnly = false): HandlerAsync</a></li>
+          <li><a class="reference external"
+          data-doc-search-tag="signedcookiesession: sessionMiddleware(settings: Settings; sessionName = &quot;session&quot;;
+                  maxAge: int = 20160 * 60; path = &quot;&quot;; domain = &quot;&quot;; sameSite = Lax;
+                  httpOnly = false): HandlerAsync" href="middlewares/sessions/signedcookiesession.html#sessionMiddleware%2CSettings%2Cstring%2Cint%2Cstring%2Cstring">signedcookiesession: sessionMiddleware(settings: Settings; sessionName = &quot;session&quot;;
                   maxAge: int = 20160 * 60; path = &quot;&quot;; domain = &quot;&quot;; sameSite = Lax;
                   httpOnly = false): HandlerAsync</a></li>
           </ul></dd>
@@ -1518,6 +1548,10 @@ function main() {
 <li><a class="reference external"
           data-doc-search-tag="signing: TimedSigner" href="signing/signing.html#TimedSigner">signing: TimedSigner</a></li>
           </ul></dd>
+<dt><a name="toByteSeq" href="#toByteSeq"><span>toByteSeq:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="utils: toByteSeq(str: string): seq[byte]" href="core/utils.html#toByteSeq%2Cstring">utils: toByteSeq(str: string): seq[byte]</a></li>
+          </ul></dd>
 <dt><a name="Tr" href="#Tr"><span>Tr:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="i18n: Tr(ctx: Context; text: string; language: string): string" href="i18n/i18n.html#Tr%2CContext%2Cstring%2Cstring">i18n: Tr(ctx: Context; text: string; language: string): string</a></li>
@@ -1615,7 +1649,7 @@ function main() {
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-05 05:40:23 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-06 13:55:29 UTC</small>
       </div>
     </div>
   </div>

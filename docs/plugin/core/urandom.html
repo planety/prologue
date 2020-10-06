@@ -110,6 +110,8 @@ function main() {
   <ul class="simple simple-toc-section">
       <li><a class="reference" href="#randomBytesSeq"
     title="randomBytesSeq(size = DefaultEntropy): seq[byte]"><wbr />random<wbr />Bytes<wbr />Seq<span class="attachedType"></span></a></li>
+  <li><a class="reference" href="#randomBytesSeq_2"
+    title="randomBytesSeq[size = DefaultEntropy](): array[size, byte]"><wbr />random<wbr />Bytes<wbr />Seq<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#randomString"
     title="randomString(size = DefaultEntropy): string"><wbr />random<wbr />String<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#randomSecretKey"
@@ -128,7 +130,7 @@ function main() {
   <div class="section" id="6">
 <h1><a class="toc-backref" href="#6">Imports</a></h1>
 <dl class="item">
-<a class="reference external" href="types.html">types</a>, <a class="reference external" href="encode.html">encode</a>
+<a class="reference external" href="types.html">types</a>, <a class="reference external" href="utils.html">utils</a>
 </dl></div>
 <div class="section" id="10">
 <h1><a class="toc-backref" href="#10">Consts</a></h1>
@@ -139,9 +141,9 @@ function main() {
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/urandom.nim#L24"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/urandom.nim#L22"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/urandom.nim#L24" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/urandom.nim#L22" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -156,9 +158,20 @@ class="link-seesrc" target="_blank">Source</a>
 
 Generates a new system random sequence of bytes.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/urandom.nim#L27"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/urandom.nim#L25"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/urandom.nim#L27" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/urandom.nim#L25" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="randomBytesSeq_2"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#randomBytesSeq_2"><span class="Identifier">randomBytesSeq</span></a><span class="Other">[</span><span class="Identifier">size</span> <span class="Other">=</span> <span class="Identifier">DefaultEntropy</span><span class="Other">]</span><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">array</span><span class="Other">[</span><span class="Identifier">size</span><span class="Other">,</span> <span class="Identifier">byte</span><span class="Other">]</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+Generates a new system random sequence of bytes.
+&nbsp;&nbsp;<a
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/urandom.nim#L30"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/urandom.nim#L30" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="randomString"></a>
@@ -168,9 +181,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Generates a new system random strings.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/urandom.nim#L32"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/urandom.nim#L34"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/urandom.nim#L32" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/urandom.nim#L34" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="randomSecretKey"></a>
@@ -180,9 +193,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Generates a new system random secretKey.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/urandom.nim#L37"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/urandom.nim#L38"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/urandom.nim#L37" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/urandom.nim#L38" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -195,7 +208,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-05 05:40:08 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-06 13:55:15 UTC</small>
       </div>
     </div>
   </div>
