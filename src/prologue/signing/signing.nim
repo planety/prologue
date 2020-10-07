@@ -246,26 +246,23 @@ proc getSignatureDecode*(s: Signer | TimedSigner): string =
   of Blake2_512Type:
     result = getKeyDerivationDecode(s, blake2_512)
 
-# TODO May support compress
 proc sign*(s: Signer, value: string): string =
   value & s.sep & s.getSignatureEncode(value.toOpenArrayByte(0, value.high))
 
 proc sign*(s: TimedSigner, value: string): string =
   let
-    sep = s.sep
     timestamp = $int(cpuTime())
-    value = value & sep & timestamp
-  result = value & sep & s.getSignatureEncode(value.toOpenArrayByte(0, value.high))
+    value = value & s.sep & timestamp
+  result = value & s.sep & s.getSignatureEncode(value.toOpenArrayByte(0, value.high))
 
 proc verifySignature(s: Signer | TimedSigner, value, sig: string): bool =
   result = sig == s.getSignatureEncode(value.toOpenArrayByte(0, value.high))
 
 proc unsign*(s: Signer | TimedSigner, signedValue: string): string =
-  let sep = s.sep
-  if sep notin signedValue:
-    raise newException(BadSignatureError, fmt"No {$sep} found in value")
+  if s.sep notin signedValue:
+    raise newException(BadSignatureError, fmt"No {$s.sep} found in value")
   let
-    temp = signedValue.rsplit({sep}, maxsplit = 1)
+    temp = signedValue.rsplit({s.sep}, maxsplit = 1)
     value = temp[0]
     sig = temp[1]
   if verifySignature(s, value, sig):
@@ -283,15 +280,13 @@ proc unsign*(s: TimedSigner, signedValue: string, max_age: Natural): string =
     exception = e
     res = ""
 
-  let sep = s.sep
-
-  if sep notin signedValue:
+  if s.sep notin signedValue:
     if exception != nil:
       raise exception
     raise newException(BadTimeSignatureError, "timestamp missing")
 
   let
-    temp = res.rsplit({sep}, maxsplit = 1)
+    temp = res.rsplit({s.sep}, maxsplit = 1)
     value = temp[0]
 
   var timestamp = temp[1]

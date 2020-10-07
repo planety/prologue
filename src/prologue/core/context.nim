@@ -430,7 +430,7 @@ proc staticFileResponse*(
   ctx: Context, filename, dir: string, mimetype = "",
   downloadName = "", charset = "utf-8", bufSize = 4096,
   headers = none(ResponseHeaders)
-) {.async.} =  
+) {.async.} =
   ## Serves static files.
   let
     filePath = dir / filename

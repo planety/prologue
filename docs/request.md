@@ -12,9 +12,21 @@ proc hello(ctx: Context) {.async.} =
 
 
 ## Request utils
-- request.url: gets the url of the request
-- request.port: gets the port of the request
-- request.path: gets the path of the request.
-- request.reqMethod: gets the `HttpMethod` of the request.
-- request.contentType: gets the contentType of the request.
-- request.hostName: gets the hostname of the request.
+
+### request.url
+Gets the url of the request.
+
+### request.port 
+Gets the port of the request.
+
+### request.path
+Gets the path of the request.
+
+### request.reqMethod
+Gets the `HttpMethod` of the request.
+
+### request.contentType
+Gets the contentType of the request.
+
+### request.hostName
+Gets the hostname of the request.

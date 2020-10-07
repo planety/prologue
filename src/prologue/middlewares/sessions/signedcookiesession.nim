@@ -39,7 +39,6 @@ proc sessionMiddleware*(
     signer = initTimedSigner(SecretKey(secretKey), salt, sep, keyDerivation, digestMethodType)
 
   result = proc(ctx: Context) {.async.} =
-    # TODO make sure {':', ',', '}'} notin key or value
     ctx.session = initSession(data = newStringTable(modeCaseSensitive))
     let
       data = ctx.getCookie(sessionName)

@@ -2,12 +2,14 @@
 
 ## Write a middleware
 
-Middleware is like an onion. 
-s
+Middleware is like an onion.
+
+```
 a request -> middlewareA does something -> middlewareB does something
 -> handler does something -> middlewareB does something -> middlewareA does something -> a response
+```
 
-Don't forget `await switch(ctx)` to enter next middleware or handler.
+Don't forget `await switch(ctx)` to enter the next middleware or handler.
 
 Then you can set global middlewares which are visible to all handlers. Or you can make them only
 visible to some middlewares.

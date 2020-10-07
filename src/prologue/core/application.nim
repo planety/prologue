@@ -47,8 +47,6 @@ export tables
 export asyncdispatch except register
 export options
 export json
-
-# export signing
 export basicregex
 export configure
 export constants
