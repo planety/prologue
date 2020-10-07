@@ -21,7 +21,7 @@ from ./types import FormPart, initFormPart, `[]=`
 import ./request
 
 
-func parseFormPart*(body, contentType: string): FormPart {.inline.} =
+func parseFormPart*(body, contentType: string): FormPart =
   ## Parses form part of the body of the request.
   let
     sep = contentType[contentType.rfind("boundary") + 9 .. ^1]

@@ -137,7 +137,7 @@ func initRequest*(nativeRequest: NativeRequest,
                   cookies = initCookieJar(),
                   pathParams = newStringTable(modeCaseSensitive), 
                   queryParams = newStringTable(modeCaseSensitive),
-                  postParams = newStringTable(modeCaseSensitive)): Request =
+                  postParams = newStringTable(modeCaseSensitive)): Request {.inline.} =
   ## Initializes a new Request.
   Request(nativeRequest: nativeRequest, cookies: cookies,
     pathParams: pathParams, queryParams: queryParams, postParams: postParams)

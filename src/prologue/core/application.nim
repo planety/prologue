@@ -165,7 +165,7 @@ func scanRoute(route: string): bool {.inline.} =
     else:
       discard 
 
-proc addReversedRoute(app: Prologue, name, route: string) {.inline.} =
+proc addReversedRoute(app: Prologue, name, route: string) =
   ## Adds reversed route.
   ## 
   ## Params:
@@ -187,7 +187,7 @@ proc addReversedRoute(app: Prologue, name, route: string) {.inline.} =
 
 proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
                httpMethod = HttpGet, name = "", middlewares: seq[HandlerAsync] = @[],
-               settings: LocalSettings = nil) {.inline.} =
+               settings: LocalSettings = nil) =
   ## Adds a single route and handler. It checks whether route is duplicated.
   ## 
   ## Notes: The framework will automatically register `HttpHead` method, if
@@ -212,7 +212,7 @@ proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
 
 proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
                httpMethod: seq[HttpMethod], name = "", 
-               middlewares: seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
+               middlewares: seq[HandlerAsync] = @[], settings: LocalSettings = nil) =
   ## Adds a single regex `route` and `handler`, but supports a set of HttpMethod.
   ## It also checks whether route is duplicated
   for m in httpMethod:
@@ -221,7 +221,7 @@ proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
 
 proc addRoute*(app: Prologue, patterns: seq[UrlPattern], baseRoute = "", 
                middlewares: Option[seq[HandlerAsync]] = none(seq[HandlerAsync]), 
-               settings: LocalSettings = nil) {.inline.} =
+               settings: LocalSettings = nil) =
   ## Adds multiple routes with handlers.
   if middlewares.isSome:
     let addition = middlewares.get

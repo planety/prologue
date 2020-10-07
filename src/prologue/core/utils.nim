@@ -48,7 +48,7 @@ func fromByteSeq*(sequence: openArray[byte]): string {.inline.} =
 proc isStaticFile*(
   path: string, 
   dirs: openArray[string]
-): tuple[hasValue: bool, filename, dir: string] {.inline.} =
+): tuple[hasValue: bool, filename, dir: string] =
   result = (false, "", "")
   var path = path.strip(chars = {'/'}, trailing = false)
   normalizePath(path)

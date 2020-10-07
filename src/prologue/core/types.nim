@@ -124,7 +124,7 @@ proc clear*(session: Session) {.inline.} =
 func `$`*(session: Session): string {.inline.} =
   $session.data
 
-proc parseStringTable*(tabs: StringTableRef, s: string) {.inline.} =
+proc parseStringTable*(tabs: StringTableRef, s: string) =
   # """{username: flywind, password: root}"""
   # {:}
   # TODO make sure {':', ',', '}'} notin key or value

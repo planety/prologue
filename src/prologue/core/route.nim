@@ -49,31 +49,31 @@ type
     middlewares: seq[HandlerAsync]
 
 
-func initPath*(route: string, httpMethod = HttpGet): Path =
+func initPath*(route: string, httpMethod = HttpGet): Path {.inline.} =
   Path(route: route, httpMethod: httpMethod)
 
-func initRePath*(route: Regex, httpMethod = HttpGet): RePath =
+func initRePath*(route: Regex, httpMethod = HttpGet): RePath {.inline.} =
   RePath(route: route, httpMethod: httpMethod)
 
 func pattern*(route: string, handler: HandlerAsync, httpMethod = HttpGet,
-              name = "", middlewares: seq[HandlerAsync] = @[]): UrlPattern =
+              name = "", middlewares: seq[HandlerAsync] = @[]): UrlPattern{.inline.}  =
   (route, handler, @[httpMethod], name, middlewares)
 
 func pattern*(route: string, handler: HandlerAsync, 
               httpMethod: seq[HttpMethod], name = "", 
-              middlewares: seq[HandlerAsync] = @[]): UrlPattern =
+              middlewares: seq[HandlerAsync] = @[]): UrlPattern {.inline.} =
   (route, handler, httpMethod, name, middlewares)
 
-func hash*(x: Path): Hash =
+func hash*(x: Path): Hash {.inline.} =
   var h: Hash = 0
   h = h !& hash(x.route)
   h = h !& hash(x.httpMethod)
   result = !$h
 
-func newReRouter*(): ReRouter =
+func newReRouter*(): ReRouter {.inline.} =
   ReRouter(callable: newSeq[(RePath, PathHandler)]())
 
-proc add*(reRouter: ReRouter, pairs: (RePath, PathHandler)) =
+proc add*(reRouter: ReRouter, pairs: (RePath, PathHandler)) {.inline.} =
   reRouter.callable.add(pairs)
 
 iterator items*(reRouter: ReRouter): (RePath, PathHandler) =
@@ -119,7 +119,7 @@ func printRoutingTree*(router: Router) =
     debugEcho httpMethod.toUpper
     printRoutingTree(tree)
 
-func newRouter*(): Router =
+func newRouter*(): Router {.inline.} =
   ## Creates a new ``Router`` instance.
   result = Router(data: CritBitTree[PatternNode]())
 
@@ -142,7 +142,7 @@ func ensureCorrectRoute(
 
 func emptyBnodeSequence(
   bnodeSeq: seq[BasePatternNode]
-): bool =
+): bool {.inline.} =
   ## A bnode sequence is empty if it A) contains no elements or B) 
   ## it contains a single text element with no value.
   result = (bnodeSeq.len == 0 or (bnodeSeq.len == 1 and bnodeSeq[0].kind ==
@@ -250,7 +250,7 @@ func parentalPatternNode(oldNode: PatternNode): PatternNode =
   if result.isTerminator:
     result.handler = oldNode.handler
 
-func indexOf(nodes: seq[PatternNode], bnode: BasePatternNode): int =
+func indexOf(nodes: seq[PatternNode], bnode: BasePatternNode): int {.inline.} =
   ## Finds the index of nodes that matches the given bnode. If none is found, returns -1.
   for index, child in pairs(nodes):
     if child == bnode:
@@ -458,7 +458,7 @@ func findHandler(
   ctx: Context, 
   reqMethod: string,
   path: string
-): Option[PathHandler] =
+): Option[PathHandler] {.inline.} =
   ## Find a mapping that matches the given request description.
   let reqMethod = reqMethod.toUpperAscii
 
@@ -472,7 +472,7 @@ func findHandler*(
     ctx: Context,
     reqMethod: HttpMethod,
     path: string
-): Option[PathHandler] =
+): Option[PathHandler] {.inline.} =
   ## Simple wrapper around the regular route function.
   findHandler(ctx, $reqMethod, path)
 
