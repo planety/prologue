@@ -157,16 +157,33 @@ proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
   for m in httpMethod:
     app.addRoute(route, handler, m, middlewares, settings)
 
+func scanRoute(route: string): bool {.inline.} =
+  for c in route:
+    case c:
+    of '$', '*':
+      return true
+    else:
+      discard 
+
 proc addReversedRoute(app: Prologue, name, route: string) {.inline.} =
   ## Adds reversed route.
   ## 
   ## Params:
-  ##        - `name` is the user-defined name for `route`.
+  ##        - `name` is a user-defined name for `route`.
   if name.len != 0:
     if app.gScope.reversedRouter.hasKey(name):
-      raise newException(DuplicatedReversedRouteError,
-          fmt"Reversed Route {name} is duplicated!")
-    app.gScope.reversedRouter[name] = route.stripRoute
+      let origin = app.gScope.reversedRouter[name]
+      if origin == route:
+        raise newException(RouteError, 
+            fmt"Reversed Route name(`{name}`) is already set for the same route(`{route}`)!")
+      else:
+        raise newException(DuplicatedReversedRouteError,
+            fmt"Reversed Route name(`{name}`) is already set for the different route(`{origin}`)!")
+
+    if scanRoute(route):
+      raise newException(RouteError, fmt"Route {route} contains $ or *")
+
+    app.gScope.reversedRouter[name] = route
 
 proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
                httpMethod = HttpGet, name = "", middlewares: seq[HandlerAsync] = @[],
@@ -198,9 +215,9 @@ proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
                middlewares: seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
   ## Adds a single regex `route` and `handler`, but supports a set of HttpMethod.
   ## It also checks whether route is duplicated
-  app.addReversedRoute(name, route)
   for m in httpMethod:
     app.addRoute(route, handler, m, "", middlewares, settings)
+  app.addReversedRoute(name, route.stripRoute)
 
 proc addRoute*(app: Prologue, patterns: seq[UrlPattern], baseRoute = "", 
                middlewares: Option[seq[HandlerAsync]] = none(seq[HandlerAsync]), 
@@ -294,7 +311,6 @@ proc shutDownHandler() {.noconv.} =
 
   when defined(windows) and compileOption("threads"):
     # workaround for https://github.com/nim-lang/Nim/issues/4057
-    echo "ok"
     setupForeignThreadGC()
 
   for event in dontUseThisShutDownEvents:

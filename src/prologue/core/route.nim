@@ -37,7 +37,7 @@ const
   greedyIndicator = '$'
   specialSectionStartChars = {pathSeparator, wildcard, startParam}
   allowedCharsInPattern = allowedCharsInUrl + {wildcard, startParam,
-                          endParam, greedyIndicator}
+                                  endParam, greedyIndicator}
 
 
 type
@@ -55,7 +55,6 @@ func initPath*(route: string, httpMethod = HttpGet): Path =
 func initRePath*(route: Regex, httpMethod = HttpGet): RePath =
   RePath(route: route, httpMethod: httpMethod)
 
-## TODO May support RePattern
 func pattern*(route: string, handler: HandlerAsync, httpMethod = HttpGet,
               name = "", middlewares: seq[HandlerAsync] = @[]): UrlPattern =
   (route, handler, @[httpMethod], name, middlewares)
@@ -95,8 +94,8 @@ func `$`*(node: PatternNode): string =
   of ptrnWildcard:
     result = $(node.kind) & ":"
 
-  result = result & "leaf=" & $node.isLeaf & ", terminator=" &
-                $node.isTerminator & ", greedy=" & $node.isGreedy
+  result.add "leaf=" & $node.isLeaf & ", terminator=" &
+                    $node.isTerminator & ", greedy=" & $node.isGreedy
 
 func `==`(node: PatternNode, bnode: BasePatternNode): bool =
   result = (node.kind == bnode.kind)
@@ -129,7 +128,8 @@ func ensureCorrectRoute(
 ): string {.raises: [RouteError].} =
   ## Verifies that this given path is a valid path, strips trailing slashes, and guarantees leading slashes.
   if(not path.allCharsInSet(allowedCharsInPattern)):
-    raise newException(RouteError, "Illegal characters occurred in the mapped pattern, please restrict to alphanumeric, or the following: - . _ ~ /")
+    raise newException(RouteError, "Illegal characters occurred in the mapped pattern," &
+                  "please restrict to alphanumeric, or the following: - . _ ~ / * { } &")
 
   result = path
 
@@ -167,7 +167,7 @@ func generateRope(
       if newStartIndex < pattern.len and pattern[newStartIndex] == greedyIndicator:
         inc newStartIndex
         if pattern.len != newStartIndex:
-          raise newException(RouteError, "$ found before end of route")
+          raise newException(RouteError, "$ found before end of route!")
         scanner = BasePatternNode(kind: ptrnWildcard, isGreedy: true)
       else:
         scanner = BasePatternNode(kind: ptrnWildcard)
@@ -178,14 +178,14 @@ func generateRope(
       if pattern.len > newStartIndex and pattern[newStartIndex] == greedyIndicator:
         inc newStartIndex
         if pattern.len != newStartIndex:
-          raise newException(RouteError, "$ found before end of route")
+          raise newException(RouteError, "$ found before end of route!")
         scanner = BasePatternNode(kind: ptrnParam, value: paramName, isGreedy: true)
       else:
         scanner = BasePatternNode(kind: ptrnParam, value: paramName)
     elif specialChar == pathSeparator:
       scanner = BasePatternNode(kind: ptrnText, value: ($pathSeparator))
     else:
-      raise newException(RouteError, "Unrecognized special character")
+      raise newException(RouteError, "Unrecognized special character!")
 
     var prefix: seq[BasePatternNode]
     if tokenSize > 0:
@@ -213,7 +213,7 @@ func terminatingPatternNode(
   ## Turns the given node into a terminating node ending at the given bnode/handler pair. 
   ## If it is already a terminator, throws an exception.
   if oldNode.isTerminator: # Already mapped
-    raise newException(DuplicatedRouteError, "Duplicate route detected")
+    raise newException(DuplicatedRouteError, "Duplicate route detected!")
   case bnode.kind
   of ptrnText:
     result = PatternNode(kind: ptrnText, value: bnode.value,
@@ -255,7 +255,7 @@ func indexOf(nodes: seq[PatternNode], bnode: BasePatternNode): int =
   for index, child in pairs(nodes):
     if child == bnode:
       return index
-  return -1 #the 'not found' value
+  result = -1 #the 'not found' value
 
 func chainTree(rope: seq[BasePatternNode], handler: PathHandler): PatternNode =
   ## Creates a tree made up of single-child nodes that matches the given rope. 
@@ -430,7 +430,7 @@ func matchTree(
           pathIndex = path.len
         else:
           let newPathIndex = path.find(pathSeparator,
-              pathIndex) # skip forward to the next separator
+                                       pathIndex) # skip forward to the next separator
           if newPathIndex == -1:
             ctx.request.pathParams[node.value] = path[pathIndex .. ^1]
             pathIndex = path.len
@@ -445,7 +445,7 @@ func matchTree(
         if node.children.len == 1: # optimization for single child that just points the node forward
           node = node.children[0]
         else: # more than one child
-          assert node.children.len != 0
+          doAssert node.children.len != 0
           for child in node.children:
             result = ctx.matchTree(child, path, pathIndex)
             if result.isSome:
