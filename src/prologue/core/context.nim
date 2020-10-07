@@ -117,8 +117,8 @@ type
     data*: CritBitTree[PatternNode]
 
 
-proc default404Handler*(ctx: Context) {.async.}
-proc default500Handler*(ctx: Context) {.async.}
+proc default404Handler*(ctx: Context): Future[void]
+proc default500Handler*(ctx: Context): Future[void]
 
 
 func gScope*(ctx: Context): lent GlobalScope =
@@ -286,20 +286,26 @@ proc deleteCookie*(ctx: Context, key: string, path = "", domain = "") {.inline.}
   ## Deletes Cookie from Response.
   ctx.response.deleteCookie(key = key, path = path, domain = domain)
 
-proc defaultHandler*(ctx: Context) {.async.} =
-  ## Default handler with HttpCode 404. 
+proc defaultHandler*(ctx: Context): Future[void] =
+  ## Default handler with HttpCode 404.
   ctx.response.code = Http404
   ctx.response.body.setLen(0)
+  result = newFuture[void]()
+  complete(result)
 
-proc default404Handler*(ctx: Context) {.async.} =
+proc default404Handler*(ctx: Context): Future[void] =
   ## Default 404 pages.
   ctx.response.body = errorPage("404 Not Found!")
   ctx.response.setHeader("content-type", "text/html; charset=UTF-8")
+  result = newFuture[void]()
+  complete(result)
 
-proc default500Handler*(ctx: Context) {.async.} =
+proc default500Handler*(ctx: Context): Future[void] =
   ## Default 500 pages.
   ctx.response.body = internalServerErrorPage()
   ctx.response.setHeader("content-type", "text/html; charset=UTF-8")
+  result = newFuture[void]()
+  complete(result)
 
 func getPostParams*(ctx: Context, key: string, default = ""): string {.inline.} =
   ## Gets the parameters by HttpPost.

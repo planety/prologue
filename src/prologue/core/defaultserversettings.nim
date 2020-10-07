@@ -1,5 +1,6 @@
-import ./constants
 import std/strtabs
+
+import ./constants
 
 
 when useAsyncHTTPServer:

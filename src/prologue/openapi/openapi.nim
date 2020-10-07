@@ -13,10 +13,8 @@
 # limitations under the License.
 
 
-import json, strtabs
+import std/[json, strtabs, asyncdispatch]
 
-
-import asyncdispatch
 from ../core/application import Prologue, addRoute, appDebug
 from ../core/response import htmlResponse, resp, jsonResponse
 from ../core/context import Context, setHeader, staticFileResponse, gScope

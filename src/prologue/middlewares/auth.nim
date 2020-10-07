@@ -1,8 +1,8 @@
+import std/[asyncdispatch, strtabs]
+
 from ../auth/auth import basicAuth, VerifyHandler
 from  ../core/context import HandlerAsync, Context
 from ../core/middlewaresbase import switch
-
-import std/[asyncdispatch, strtabs]
 
 
 proc basicAuthMiddleware*(realm: string, verifyHandler: VerifyHandler,

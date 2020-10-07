@@ -12,10 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from strutils import toLowerAscii, join
+from std/strutils import toLowerAscii, join
+import std/asyncdispatch
 
-
-import asyncdispatch
 from ../core/middlewaresbase import switch
 from ../core/context import Context, HandlerAsync
 from ../core/response import plainTextResponse, resp, setHeader, addHeader

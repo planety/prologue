@@ -12,9 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import std/strformat
 
 import ../core/application
-import strformat
 
 
 proc mockingMiddleware*(): HandlerAsync =

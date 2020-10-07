@@ -13,9 +13,9 @@
 # limitations under the License.
 
 
-import strformat, strutils
+import std/[strformat, strutils]
 
-import nimcrypto/pbkdf2
+import pkg/nimcrypto/pbkdf2
 
 from ../core/types import SecretKey
 from ../core/encode import base64Encode

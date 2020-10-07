@@ -1,2 +1,2 @@
-import prologue/core/application
+import ./prologue/core/application
 export application

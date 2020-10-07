@@ -61,7 +61,7 @@ runnableExamples:
   doAssert chk4.msg == "12.5 is not an integer!\n"
 
 
-import tables, strtabs, strutils, strformat
+import std/[tables, strtabs, strutils, strformat]
 
 from ./basic import nil
 from ../core/basicregex import match, re, Regex, RegexMatch

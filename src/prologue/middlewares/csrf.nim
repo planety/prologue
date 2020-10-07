@@ -14,7 +14,7 @@
 
 
 import std/[strtabs, asyncdispatch]
-from htmlgen import input
+from std/htmlgen import input
 
 from ../core/urandom import randomBytesSeq, randomString, DefaultEntropy
 from ../core/encode import urlsafeBase64Encode, urlsafeBase64Decode

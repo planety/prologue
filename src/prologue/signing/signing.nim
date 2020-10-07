@@ -33,14 +33,13 @@
 ##      discard s.unsign("[1, 2, 3].sdhfghjkjhdfghjigf")
 
 
-import strutils, tables, strformat, times
+import std/[strutils, tables, strformat, times]
 
-import signingbase
-
-import nimcrypto
-
+import ./signingbase
 from ../core/types import SecretKey
 from ../core/encode import urlsafeBase64Encode
+
+import pkg/nimcrypto
 
 export signingbase
 

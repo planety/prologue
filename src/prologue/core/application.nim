@@ -12,12 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import std/[uri, tables, strutils, strformat, logging, strtabs, options, json]
+import std/[uri, tables, strutils, strformat, logging, strtabs, options, json, asyncdispatch]
 from nativesockets import Port, `$`
 from cgi import CgiError
-
-import pkg/cookiejar
-
 
 from ./utils import isStaticFile
 from ./form import parseFormParams
@@ -25,9 +22,6 @@ from ./nativesettings import newSettings, newCtxSettings,
                              getOrDefault, Settings, LocalSettings,
                              newLocalSettings
 import ./httpexception
-
-import asyncdispatch
-# import ./signing/signing
 import ./response
 import ./context
 import ./pages
@@ -41,12 +35,12 @@ import ./types
 import ./httpcore/httplogue
 import ./route
 import ./defaultserversettings
-
 import ./request
 import ./server
+
+import pkg/cookiejar
+
 export request, server
-
-
 export httplogue
 export strtabs
 export tables
