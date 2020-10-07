@@ -431,7 +431,8 @@ proc staticFileResponse*(
   downloadName = "", charset = "utf-8", bufSize = 4096,
   headers = none(ResponseHeaders)
 ) {.async.} =
-  ## Serves static files.
+  ## Returns static files response.
+  ## The following middlewares processing will be discarded.
   let
     filePath = dir / filename
 

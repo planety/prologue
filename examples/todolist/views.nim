@@ -15,7 +15,7 @@ db.close()
 
 proc todoList*(ctx: Context) {.async.} =
   let db = open("todo.db", "", "", "")
-  let rows = db.getAllRows(sql"""SELECT id, task FROM todo WHERE status LIKE "1"""")
+  let rows = db.getAllRows(sql("""SELECT id, task FROM todo WHERE status LIKE "1""""))
   db.close()
   resp htmlResponse(makeList(rows=rows))
 

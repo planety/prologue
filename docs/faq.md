@@ -1,8 +1,8 @@
 # FAQ
 
-1. `Prologue` supports two HTTP server: `httpx` and `asynchttpserver`. The default HTTP server is `httpx`. If you are in Linux or MacOS, use `--threads:on` to enable the multi-threads HTTP server. If you are in windows, `threads` can't speed up the server. You can use `-d:usestd` to switch to `asynchttpserver`.
+(1). `Prologue` supports two HTTP server: `httpx` and `asynchttpserver`. The default HTTP server is `httpx`. If you are in Linux or MacOS, use `--threads:on` to enable the multi-threads HTTP server. If you are in windows, `threads` can't speed up the server. You can use `-d:usestd` to switch to `asynchttpserver`.
 
-2. If you want to benchmark `prologue` or release you programs, make sure set `settings.debug` = false.
+(2). If you want to benchmark `prologue` or release you programs, make sure set `settings.debug` = false.
 
 ```nim
 let
@@ -28,7 +28,7 @@ staticDir=/static
 secretKey=Pr435ol67ogue
 ```
 
-3. There are two ways to disable logging messages:
+(3). There are two ways to disable logging messages:
 
 (1) set `settings.debug` = false
 (2) set a startup event
