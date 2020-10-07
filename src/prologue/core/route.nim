@@ -96,7 +96,7 @@ func `$`*(node: PatternNode): string =
     result = $(node.kind) & ":"
 
   result = result & "leaf=" & $node.isLeaf & ", terminator=" &
-      $node.isTerminator & ", greedy=" & $node.isGreedy
+                $node.isTerminator & ", greedy=" & $node.isGreedy
 
 func `==`(node: PatternNode, bnode: BasePatternNode): bool =
   result = (node.kind == bnode.kind)
@@ -117,7 +117,7 @@ func printRoutingTree(node: PatternNode, tabs: int = 0) =
 func printRoutingTree*(router: Router) =
   ## Prints the route.
   for httpMethod, tree in pairs(router.data):
-    debugEcho httpMethod.toUpper()
+    debugEcho httpMethod.toUpper
     printRoutingTree(tree)
 
 func newRouter*(): Router =
@@ -430,7 +430,7 @@ func matchTree(
           pathIndex = path.len
         else:
           let newPathIndex = path.find(pathSeparator,
-              pathIndex) #skip forward to the next separator
+              pathIndex) # skip forward to the next separator
           if newPathIndex == -1:
             ctx.request.pathParams[node.value] = path[pathIndex .. ^1]
             pathIndex = path.len
@@ -438,11 +438,11 @@ func matchTree(
             ctx.request.pathParams[node.value] = path[pathIndex .. newPathIndex - 1]
             pathIndex = newPathIndex
 
-      if pathIndex == path.len and node.isTerminator: #the path was exhausted and we reached a node that has a handler
+      if pathIndex == path.len and node.isTerminator: # the path was exhausted and we reached a node that has a handler
         return some(node.handler)
        
-      elif not node.isLeaf: #there is children remaining, could match against children
-        if node.children.len == 1: #optimization for single child that just points the node forward
+      elif not node.isLeaf: # there is children remaining, could match against children
+        if node.children.len == 1: # optimization for single child that just points the node forward
           node = node.children[0]
         else: # more than one child
           assert node.children.len != 0
@@ -450,8 +450,8 @@ func matchTree(
             result = ctx.matchTree(child, path, pathIndex)
             if result.isSome:
               return
-          break matching #none of the children matched, assume no match
-      else: #its a leaf and we haven't satisfied the path yet, let the last line handle returning
+          break matching # none of the children matched, assume no match
+      else: # its a leaf and we haven't satisfied the path yet, let the last line handle returning
         break matching
 
 func findHandler(

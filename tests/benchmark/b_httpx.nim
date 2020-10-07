@@ -4,7 +4,7 @@ import httpx, asyncdispatch
 
 proc onRequest(req: Request): Future[void] =
   if req.httpMethod == some(HttpGet):
-    case req.path.get()
+    case req.path.get
     of "/json":
       const data = $(%*{"message": "Hello, World!"})
       req.send(Http200, data)

@@ -12,13 +12,14 @@ type
     capacity: int
     defaultTimeout: int # seconds
 
+
 func capacity*[A, B](cache: LFUCache[A, B]): int {.inline.} =
   cache.capacity
 
 func len*[A, B](cache: LFUCache[A, B]): int {.inline.} =
   cache.map.len
 
-func isBool*[A, B](cache: LFUCache[A, B]): bool {.inline.} =
+func isEmpty*[A, B](cache: LFUCache[A, B]): bool {.inline.} =
   cache.len == 0
 
 func isFull*[A, B](cache: LFUCache[A, B]): bool {.inline.} =
@@ -34,11 +35,19 @@ proc get*[A, B](cache: var LFUCache[A, B], key: A): Option[B] {.inline.} =
     return some(cache.map[key].valuePart)
   result = none(B)
 
-proc put*[A, B](cache: var LFUCache[A, B], key: A, value: B, expire: Natural) =
+proc getOrDefault*[A, B](cache: var LFUCache[A, B], key: A, default: B): B {.inline.} =
+  let value = cache.get(key)
+
+  if value.isSome:
+    result = value.get
+  else:
+    result = default
+
+proc put*[A, B](cache: var LFUCache[A, B], key: A, value: B, timeout: Natural = 1) =
   if key in cache.map:
     cache.map[key].hits += 1
     cache.map[key].valuePart = value
-    cache.map[key].expire = int(cpuTime()) + expire
+    cache.map[key].expire = int(cpuTime()) + timeout
     return
 
   if cache.map.len >= cache.capacity:
@@ -51,13 +60,22 @@ proc put*[A, B](cache: var LFUCache[A, B], key: A, value: B, expire: Natural) =
     cache.map.del(minKey)
 
     var allDelKey: seq[A]
+    let now = int(cpuTime())
     for key, value in cache.map.pairs:
-      if value.expire >= int(cpuTime()):
+      if value.expire >= now:
         allDelkey.add(key)
 
     for key in allDelKey:
       cache.map.del(key)
-  cache.map[key] = ValuePair[B](valuePart: value, hits: 0, expire: 12)
+
+  cache.map[key] = ValuePair[B](valuePart: value, hits: 0, expire: int(epochTime()) + timeout)
+
+func hasKey*[A, B](cache: var LFUCache[A, B], key: A): bool {.inline.} =
+  if cache.map.hasKey(key):
+    result = true
+
+func contains*[A, B](cache: var LFUCache[A, B], key: A): bool {.inline.} =
+  cache.hasKey(key)
 
 
 when isMainModule:

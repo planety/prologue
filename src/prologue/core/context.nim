@@ -372,15 +372,18 @@ proc multiMatch(s: string, replacements: StringTableRef): string =
 func multiMatch(s: string, replacements: varargs[(string, string)]): string {.inline.} =
   multiMatch(s, replacements.newStringTable)
 
-func urlFor*(ctx: Context, handler: string, parameters: openArray[(string,
-             string)] = @[], queryParams: openArray[(string, string)] = @[],
-             usePlus = true, omitEq = true): string {.inline.} =
+func urlFor*(
+  ctx: Context, handler: string,
+  parameters: openArray[(string, string)] = @[],
+  queryParams: openArray[(string, string)] = @[],
+  usePlus = true, omitEq = true
+): string {.inline.} =
   ## Returns the corresponding name of the handler.
   ## **Limitation**:
   ##                Only supports two forms of Route: 
   ##                1. "/route/hello"
   ##                2. "/route/{parameter}/other
-  ## Notes that `{` and `}` can't appear in url
+  ## Notes that `{` and `}` shouldn't appear in url
   if handler in ctx.gScope.reversedRouter:
     result = ctx.gScope.reversedRouter[handler]
 
@@ -417,9 +420,10 @@ proc attachment*(ctx: Context, downloadName: string, charset = "utf-8") {.inline
   ctx.response.setHeader("Content-Disposition",
                           &"attachment; filename=\"{downloadName}\"")
 
-proc staticFileResponse*(ctx: Context, filename, dir: string, mimetype = "",
-                         downloadName = "", charset = "utf-8", bufSize = 4096,
-                         headers = none(ResponseHeaders)
+proc staticFileResponse*(
+  ctx: Context, filename, dir: string, mimetype = "",
+  downloadName = "", charset = "utf-8", bufSize = 4096,
+  headers = none(ResponseHeaders)
 ) {.async.} =  
   ## Serves static files.
   let

@@ -12,9 +12,9 @@
 What's past is prologue.
 
 ## Purpose
-Prologue is a Full-Stack Web Framework which is
-ideal for building elegant and high performance
-web services.
+
+`Prologue` is a Web Framework written in Nim.
+It is ideal for building elegant and high performance web services.
 
 **Reduce magic. Reduce surprise.**
 

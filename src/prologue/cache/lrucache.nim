@@ -23,7 +23,7 @@ func capacity*[A, B](cache: LRUCache[A, B]): int {.inline.} =
 func len*[A, B](cache: LRUCache[A, B]): int {.inline.} =
   cache.map.len
 
-func isBool*[A, B](cache: LRUCache[A, B]): bool {.inline.} =
+func isEmpty*[A, B](cache: LRUCache[A, B]): bool {.inline.} =
   cache.len == 0
 
 func isFull*[A, B](cache: LRUCache[A, B]): bool {.inline.} =
@@ -54,7 +54,7 @@ proc getOrDefault*[A, B](cache: var LRUCache[A, B], key: A, default: B): B {.inl
   if value.isSome:
     result = value.get
   else:
-    result = B
+    result = default
 
 proc put*[A, B](cache: var LRUCache[A, B], key: A, value: B, timeout: Natural = 1) =
   if key in cache.map:
@@ -82,16 +82,12 @@ proc put*[A, B](cache: var LRUCache[A, B], key: A, value: B, timeout: Natural = 
 proc `[]`*[A, B](cache: var LRUCache[A, B], key: A): B {.inline.} =
   cache.get(key)
 
-proc `[]=`*[A, B](cache: var LRUCache[A, B], key: A, value: B) {.inline.} =
-  cache.put(key, value)
-
-proc hasKey*[A, B](cache: var LRUCache[A, B], key: A): bool {.inline.} =
+func hasKey*[A, B](cache: var LRUCache[A, B], key: A): bool {.inline.} =
   if cache.map.hasKey(key):
     result = true
 
-proc contains*[A, B](cache: var LRUCache[A, B], key: A): bool {.inline.} =
+func contains*[A, B](cache: var LRUCache[A, B], key: A): bool {.inline.} =
   cache.hasKey(key)
-
 
 
 when isMainModule:
