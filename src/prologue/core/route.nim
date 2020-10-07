@@ -20,11 +20,9 @@
 
 import std/[hashes, strutils, strtabs, options, critbits, sequtils, parseutils]
 
-import ./context
 from ./nativesettings import Settings
-
 from ./basicregex import Regex, RegexMatch, match, groupNames, groupFirstCapture
-
+import ./context
 import ./request
 import ./httpcore/httplogue
 import ./httpexception

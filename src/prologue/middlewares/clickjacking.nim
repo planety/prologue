@@ -13,9 +13,8 @@
 # limitations under the License.
 
 
-import json, strutils
+import std/[json, strutils, asyncdispatch]
 
-import asyncdispatch
 from ../core/response import setHeader
 from ../core/context import Context, HandlerAsync, getSettings
 from ../core/middlewaresbase import switch

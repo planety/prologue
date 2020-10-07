@@ -13,11 +13,9 @@
 # limitations under the License.
 
 
-import strtabs
+import std/[strtabs, asyncdispatch]
 from htmlgen import input
 
-
-import asyncdispatch
 from ../core/urandom import randomBytesSeq, randomString, DefaultEntropy
 from ../core/encode import urlsafeBase64Encode, urlsafeBase64Decode
 from ../core/middlewaresbase import switch
@@ -26,7 +24,7 @@ import ../core/request
 import ../core/httpcore/httplogue
 
 
-import cookiejar
+import pkg/cookiejar
 
 
 const

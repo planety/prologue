@@ -1,7 +1,8 @@
-import times, json, strformat, options, macros
-import httpcore/httplogue
+import std/[times, json, strformat, options, macros]
 
-import cookiejar
+import ./httpcore/httplogue
+
+import pkg/cookiejar
 
 
 type

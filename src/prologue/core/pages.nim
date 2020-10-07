@@ -1,5 +1,5 @@
-import htmlgen
-import constants
+import std/htmlgen
+import ./constants
 
 
 func errorPage*(errorMsg: string): string {.inline.} =

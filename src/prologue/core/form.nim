@@ -13,11 +13,11 @@
 # limitations under the License.
 
 
-import ./httpcore/httplogue
-import strtabs, strutils, strformat, parseutils, tables
+import std/[strtabs, strutils, strformat, parseutils, tables]
 
 from cgi import decodeData
 
+import ./httpcore/httplogue
 from ./types import FormPart, initFormPart, `[]=`
 import ./request
 

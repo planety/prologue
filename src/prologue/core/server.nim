@@ -1,9 +1,9 @@
-import constants
+import ./constants
 
 
 when useAsyncHTTPServer:
-  import naive/server
+  import ./naive/server
 else:
-  import beast/server
+  import ./beast/server
 
 export server

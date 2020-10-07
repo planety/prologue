@@ -49,7 +49,7 @@ task apis, "Only for api":
     "--git.url:https://github.com/planety/prologue " &
     "--git.commit:devel " &
     "-o:docs/plugin " &
-    "src/prologue/index.nim"
+    "src/prologue/plugin.nim"
 
   exec "nim buildIndex -o:docs/plugin/theindex.html docs/plugin"
 

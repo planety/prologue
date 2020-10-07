@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-import base64, strutils
+import std/[base64, strutils]
 
 
 proc base64Encode*[T: SomeInteger | char](s: openArray[T]): string {.inline.} =

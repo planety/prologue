@@ -1,9 +1,9 @@
-import constants
+import ./constants
 
 
 when useAsyncHTTPServer:
-  import naive/request
+  import ./naive/request
 else:
-  import beast/request
+  import ./beast/request
 
 export request
