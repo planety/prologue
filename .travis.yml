@@ -51,5 +51,7 @@ script:
     - nimble install -y
     - logue extension all
     - nimble tests
-    - nimble examples
-    - nimble readme
+    - nimble tstdbackend
+    - nimble treadme
+    - nimble tcompile
+    - nimble texamples
