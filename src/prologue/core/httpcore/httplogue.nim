@@ -6,9 +6,8 @@
 #    See the file "copying.txt", included in this
 #    distribution, for details about the copyright.
 #
+import std/[tables, httpcore, strutils]
 
-
-import tables, httpcore, strutils
 export httpcore
 
 type
@@ -16,14 +15,14 @@ type
     table: TableRef[string, seq[string]]
 
 
-func getTables*(headers: ResponseHeaders): TableRef[string, seq[string]] =
+func getTables*(headers: ResponseHeaders): TableRef[string, seq[string]] {.inline.} =
   ## Only for internal use, don't use it!
   headers.table
 
-func toCaseInsensitive(s: string): string =
+func toCaseInsensitive(s: string): string {.inline.} =
   result = toLowerAscii(s)
 
-func initResponseHeaders*(): ResponseHeaders =
+func initResponseHeaders*(): ResponseHeaders {.inline.} =
   ## Returns a new ``ResponseHeaders`` object.
   result.table = newTable[string, seq[string]]()
 
@@ -38,13 +37,13 @@ func initResponseHeaders*(keyValuePairs:
     else:
       result.table[key] = @[pair.val]
 
-func `$`*(headers: ResponseHeaders): string =
+func `$`*(headers: ResponseHeaders): string {.inline.} =
   result = $headers.table
 
-proc clear*(headers: ResponseHeaders) =
+proc clear*(headers: ResponseHeaders) {.inline.} =
   headers.table.clear()
 
-func `[]`*(headers: ResponseHeaders, key: string): seq[string] =
+func `[]`*(headers: ResponseHeaders, key: string): seq[string] {.inline.} =
   ## Returns the values associated with the given ``key``. If there are
   ## no values associated with the key, an exception is raised.
   ##
@@ -52,18 +51,18 @@ func `[]`*(headers: ResponseHeaders, key: string): seq[string] =
   ## to get all of them access the ``table`` field directly.
   result = headers.table[toCaseInsensitive(key)]
 
-func `[]`*(headers: ResponseHeaders, key: string, i: int): string =
+func `[]`*(headers: ResponseHeaders, key: string, i: int): string {.inline.} =
   ## Returns the ``i``'th value associated with the given key. If there are
   ## no values associated with the key or the ``i``'th value doesn't exist,
   ## an exception is raised.
   result = headers.table[toCaseInsensitive(key)][i]
 
-proc `[]=`*(headers: ResponseHeaders, key, value: string) =
+proc `[]=`*(headers: ResponseHeaders, key, value: string) {.inline.} =
   ## Sets the header entries associated with ``key`` to the specified value.
   ## Replaces any existing values.
   headers.table[toCaseInsensitive(key)] = @[value]
 
-proc `[]=`*(headers: ResponseHeaders, key: string, value: seq[string]) =
+proc `[]=`*(headers: ResponseHeaders, key: string, value: seq[string]) {.inline.} =
   ## Sets the header entries associated with ``key`` to the specified list of values.
   ## Replaces any existing values.
   ## 
@@ -73,7 +72,7 @@ proc `[]=`*(headers: ResponseHeaders, key: string, value: seq[string]) =
   else:
     headers.table.del(toCaseInsensitive(key))
 
-proc add*(headers: ResponseHeaders, key, value: string) =
+proc add*(headers: ResponseHeaders, key, value: string) {.inline.} =
   ## Adds the specified value to the specified key. Appends to any existing
   ## values associated with the key.
   if not headers.table.hasKey(toCaseInsensitive(key)):
@@ -81,7 +80,7 @@ proc add*(headers: ResponseHeaders, key, value: string) =
   else:
     headers.table[toCaseInsensitive(key)].add(value)
 
-proc del*(headers: ResponseHeaders, key: string) =
+proc del*(headers: ResponseHeaders, key: string) {.inline.} =
   ## Delete the header entries associated with ``key``
   headers.table.del(toCaseInsensitive(key))
 
@@ -91,11 +90,11 @@ iterator pairs*(headers: ResponseHeaders): tuple[key, value: string] =
     for value in v:
       yield (k, value)
 
-func hasKey*(headers: ResponseHeaders, key: string): bool =
+func hasKey*(headers: ResponseHeaders, key: string): bool {.inline.} =
   result = headers.table.hasKey(toCaseInsensitive(key))
 
 func getOrDefault*(headers: ResponseHeaders, key: string,
-    default = @[""]): seq[string] =
+    default = @[""]): seq[string] {.inline.} =
   ## Returns the values associated with the given ``key``. If there are no
   ## values associated with the key, then ``default`` is returned.
   if headers.hasKey(key):
@@ -103,5 +102,5 @@ func getOrDefault*(headers: ResponseHeaders, key: string,
   else:
     result = default
 
-func len*(headers: ResponseHeaders): int = 
+func len*(headers: ResponseHeaders): int {.inline.} = 
   result = headers.table.len

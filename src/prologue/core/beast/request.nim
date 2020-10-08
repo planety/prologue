@@ -1,16 +1,12 @@
-import uri
-import strutils, strtabs, options
+import std/[uri, strutils, strtabs, options, asyncdispatch]
 
-import cookiejar
-
-
-import asyncdispatch
 from ../response import Response
 from ../types import FormPart, initFormPart
 import ../httpcore/httplogue
 
+import pkg/cookiejar
+import pkg/httpx except Settings
 
-import httpx except Settings
 
 type
   NativeRequest* = httpx.Request

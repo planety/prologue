@@ -56,13 +56,13 @@ func initRePath*(route: Regex, httpMethod = HttpGet): RePath {.inline.} =
   RePath(route: route, httpMethod: httpMethod)
 
 func pattern*(route: string, handler: HandlerAsync, httpMethod = HttpGet,
-              name = "", middlewares: seq[HandlerAsync] = @[]): UrlPattern{.inline.}  =
-  (route, handler, @[httpMethod], name, middlewares)
+              name = "", middlewares: openArray[HandlerAsync] = @[]): UrlPattern{.inline.}  =
+  (route, handler, @[httpMethod], name, @middlewares)
 
 func pattern*(route: string, handler: HandlerAsync, 
-              httpMethod: seq[HttpMethod], name = "", 
-              middlewares: seq[HandlerAsync] = @[]): UrlPattern {.inline.} =
-  (route, handler, httpMethod, name, middlewares)
+              httpMethod: openArray[HttpMethod], name = "", 
+              middlewares: openArray[HandlerAsync] = @[]): UrlPattern {.inline.} =
+  (route, handler, @httpMethod, name, @middlewares)
 
 func hash*(x: Path): Hash {.inline.} =
   var h: Hash = 0

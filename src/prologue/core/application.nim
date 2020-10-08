@@ -73,7 +73,7 @@ var dontUseThisShutDownEvents: seq[Event]
 proc registerErrorHandler*(app: Prologue, code: HttpCode,
                            handler: ErrorHandler) {.inline.} =
   ## Registers a user-defined error handler. You can specify
-  ## `HttpCode` and its corresponding `handler`. 
+  ## `HttpCode` and its corresponding `handler`.
   ## 
   ## When the HTTP code of response exists in the error handler table,
   ## corresponding handler will be executed.
@@ -125,7 +125,7 @@ func newSettings*(settings: Settings, localSettings: LocalSettings): Settings =
 
 
 proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
-               httpMethod = HttpGet, middlewares: seq[HandlerAsync] = @[],
+               httpMethod = HttpGet, middlewares: openArray[HandlerAsync] = @[],
                settings: LocalSettings = nil) {.inline.} =
   ## Adds a single regex `route` with `handler` and don't check whether route is duplicated.
   ## 
@@ -143,15 +143,15 @@ proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
 
   if httpMethod == HttpGet:
       app.gScope.reRouter.add (initRePath(route = route, httpMethod = HttpHead), 
-                           newPathHandler(handler, middlewares, ctxSettings)
+                           newPathHandler(handler, @middlewares, ctxSettings)
                            )
 
   app.gScope.reRouter.add (initRePath(route = route, httpMethod = httpMethod), 
-                           newPathHandler(handler, middlewares, ctxSettings)
+                           newPathHandler(handler, @middlewares, ctxSettings)
                            )
 
 proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
-               httpMethod: seq[HttpMethod], middlewares: seq[HandlerAsync] = @[],
+               httpMethod: openArray[HttpMethod], middlewares: openArray[HandlerAsync] = @[],
                settings: LocalSettings = nil) {.inline.} =
   ## Adds a single regex `route` and `handler`, but supports a set of HttpMethod.
   for m in httpMethod:
@@ -186,7 +186,7 @@ proc addReversedRoute(app: Prologue, name, route: string) =
     app.gScope.reversedRouter[name] = route
 
 proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
-               httpMethod = HttpGet, name = "", middlewares: seq[HandlerAsync] = @[],
+               httpMethod = HttpGet, name = "", middlewares: openArray[HandlerAsync] = @[],
                settings: LocalSettings = nil) =
   ## Adds a single route and handler. It checks whether route is duplicated.
   ## 
@@ -204,15 +204,15 @@ proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
       newSettings(app.gScope.settings, settings)
 
   if httpMethod == HttpGet:
-    app.gScope.router.addRoute(route, HttpHead, handler, middlewares, ctxSettings)
+    app.gScope.router.addRoute(route, HttpHead, handler, @middlewares, ctxSettings)
 
-  app.gScope.router.addRoute(route, httpMethod, handler, middlewares, ctxSettings)
+  app.gScope.router.addRoute(route, httpMethod, handler, @middlewares, ctxSettings)
 
   app.addReversedRoute(name, route)
 
 proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
-               httpMethod: seq[HttpMethod], name = "", 
-               middlewares: seq[HandlerAsync] = @[], settings: LocalSettings = nil) =
+               httpMethod: openArray[HttpMethod], name = "", 
+               middlewares: openArray[HandlerAsync] = @[], settings: LocalSettings = nil) =
   ## Adds a single regex `route` and `handler`, but supports a set of HttpMethod.
   ## It also checks whether route is duplicated
   for m in httpMethod:
@@ -234,52 +234,52 @@ proc addRoute*(app: Prologue, patterns: seq[UrlPattern], baseRoute = "",
                   pattern.name, pattern.middlewares, settings)
 
 proc head*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-           middlewares: seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
+           middlewares: openArray[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
   ## Adds `route` and `handler` with `HttpHead`.
   app.addRoute(route, handler, HttpHead, name, middlewares, settings)
 
 proc get*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-          middlewares: seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
+          middlewares: openArray[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
   ## Adds `route` and `handler` with `HttpGet` and `HttpHead`.
   app.addRoute(route, handler, HttpGet, name, middlewares, settings)
 
 proc post*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-           middlewares: seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
+           middlewares: openArray[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
   ## Adds `route` and `handler` with `HttpPost`.
   app.addRoute(route, handler, HttpPost, name, middlewares, settings)
 
 proc put*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-          middlewares: seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
+          middlewares: openArray[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
   ## Adds `route` and `handler` with `HttpPut`.
   app.addRoute(route, handler, HttpPut, name, middlewares, settings)
 
 proc delete*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-             middlewares: seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
+             middlewares: openArray[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
   ## Adds `route` and `handler` with `HttpDelete`.
   app.addRoute(route, handler, HttpDelete, name, middlewares, settings)
 
 proc trace*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-            middlewares: seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
+            middlewares: openArray[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
   ## Adds `route` and `handler` with `HttpTrace`.
   app.addRoute(route, handler, HttpTrace, name, middlewares, settings)
 
 proc options*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-              middlewares: seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
+              middlewares: openArray[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
   ## Adds `route` and `handler` with `HttpOptions`.
   app.addRoute(route, handler, HttpOptions, name, middlewares, settings)
 
 proc connect*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-              middlewares: seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
+              middlewares: openArray[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
   ## Adds `route` and `handler` with `HttpConnect`.
   app.addRoute(route, handler, HttpConnect, name, middlewares, settings)
 
 proc patch*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-            middlewares: seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
+            middlewares: openArray[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
   ## Adds `route` and `handler` with `HttpPatch`.
   app.addRoute(route, handler, HttpPatch, name, middlewares, settings)
 
 proc all*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-          middlewares: seq[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
+          middlewares: openArray[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
   ## Adds `route` and `handler` with all `HttpMethod`.
   app.addRoute(route, handler, @[HttpGet, HttpPost, HttpPut, HttpDelete,
                HttpTrace, HttpOptions, HttpConnect, HttpPatch], name, middlewares, settings)
@@ -321,9 +321,9 @@ proc shutDownHandler() {.noconv.} =
 
 func newApp*(
   settings: Settings, 
-  middlewares: seq[HandlerAsync] = @[],
-  startup: seq[Event] = @[], 
-  shutdown: seq[Event] = @[],
+  middlewares: openArray[HandlerAsync] = @[],
+  startup: openArray[Event] = @[], 
+  shutdown: openArray[Event] = @[],
   errorHandlerTable = newErrorHandlerTable({Http404: default404Handler, Http500: default500Handler}),
   appData = newStringTable(mode = modeCaseSensitive)
 ): Prologue =

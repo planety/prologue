@@ -1,15 +1,10 @@
-import asyncnet, uri
-import strutils, strtabs
+import std/[asyncnet, uri, strutils, strtabs, asynchttpserver, asyncdispatch]
 
-import asynchttpserver
-
-import cookiejar
-
-
-import asyncdispatch
 from ../response import Response
 from ../types import FormPart, initFormPart
 import ../httpcore/httplogue
+
+import pkg/cookiejar
 
 
 type

@@ -1,11 +1,11 @@
-import std / [strtabs, json, asyncdispatch]
+import std/[strtabs, json, asyncdispatch]
 
 from ./request import NativeRequest
 from ../nativesettings import Settings, CtxSettings, getOrDefault
 from ../context import Router, ReversedRouter, ReRouter, HandlerAsync,
     Event, ErrorHandlerTable, GlobalScope
 
-import httpx except Settings, Request
+import pkg/httpx except Settings, Request
 
 
 type
@@ -23,11 +23,11 @@ proc serve*(app: Prologue, port: Port,
   run(callback, httpx.initSettings(port, address, app.gScope.settings.getOrDefault("httpx_numThreads").getInt(0)))
 
 func newPrologue*(settings: Settings, ctxSettings: CtxSettings, router: Router,
-                  reversedRouter: ReversedRouter, reRouter: ReRouter, middlewares: seq[HandlerAsync], 
-                  startup: seq[Event], shutdown: seq[Event],
+                  reversedRouter: ReversedRouter, reRouter: ReRouter, middlewares: openArray[HandlerAsync], 
+                  startup: openArray[Event], shutdown: openArray[Event],
                   errorHandlerTable: ErrorHandlerTable, appData: StringTableRef): Prologue {.inline.} =
   ## Creates a new application instance.
   Prologue(gScope: GlobalScope(settings: settings, ctxSettings: ctxSettings, router: router, 
            reversedRouter: reversedRouter, reRouter: reRouter, appData: appData),
-           middlewares: middlewares, startup: startup, shutdown: shutdown,
+           middlewares: @middlewares, startup: @startup, shutdown: @shutdown,
            errorHandlerTable: errorHandlerTable)
