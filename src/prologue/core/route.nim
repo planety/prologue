@@ -208,12 +208,13 @@ func generateRope(
 func terminatingPatternNode(
   oldNode: PatternNode,
   bnode: BasePatternNode,
-  handler: PathHandler
+  handler: PathHandler,
+  route: string
 ): PatternNode {.raises: [RouteError].} =
   ## Turns the given node into a terminating node ending at the given bnode/handler pair. 
   ## If it is already a terminator, throws an exception.
   if oldNode.isTerminator: # Already mapped
-    raise newException(DuplicatedRouteError, "Duplicate route detected!")
+    raise newException(DuplicatedRouteError, "Duplicate route detected: " & route)
   case bnode.kind
   of ptrnText:
     result = PatternNode(kind: ptrnText, value: bnode.value,
@@ -283,13 +284,14 @@ func chainTree(rope: seq[BasePatternNode], handler: PathHandler): PatternNode =
 func merge(
   node: PatternNode,
   rope: seq[BasePatternNode],
-  handler: PathHandler
+  handler: PathHandler,
+  route: string
 ): PatternNode {.raises: [RouteError].} =
   ## Merges the given sequence of MapperKnots into the given tree as a new mapping. 
   ## This does not mutate the given node, instead it will return a new one.
 
   if rope.len == 1: # Terminating bnode reached, finish the merge
-    result = terminatingPatternNode(node, rope[0], handler)
+    result = terminatingPatternNode(node, rope[0], handler, route)
   else:
     let currentKnot = rope[0]
     let nextKnot = rope[1]
@@ -309,7 +311,7 @@ func merge(
           handler)) # make a node containing everything remaining and inject it
     else:
       result.children[childIndex] = merge(result.children[childIndex],
-          remainder, handler)
+          remainder, handler, route)
 
 func contains(
   node: PatternNode,
@@ -363,7 +365,7 @@ func addRoute*(
 ) =
   ## Add a new mapping to the given ``Router`` instance.
 
-  var rope = generateRope(ensureCorrectRoute(route))       # initial rope
+  var rope = generateRope(ensureCorrectRoute(route))       # initialize rope
   let httpMethod = $httpMethod
 
   var nodeToBeMerged: PatternNode
@@ -375,7 +377,7 @@ func addRoute*(
     nodeToBeMerged = PatternNode(kind: ptrnText, value: $pathSeparator,
                                  isLeaf: true, isTerminator: false)
 
-  router.data[httpMethod] = nodeToBeMerged.merge(rope, newPathHandler(handler, middlewares, settings))
+  router.data[httpMethod] = nodeToBeMerged.merge(rope, newPathHandler(handler, middlewares, settings), route)
 
 func compress(node: PatternNode): PatternNode =
   ## Finds sequences of single ptrnText nodes and combines them to reduce the depth of the tree.

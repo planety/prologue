@@ -44,7 +44,7 @@ type
 
   ReversedRouter* = StringTableRef
 
-  GlobalScope* = ref object
+  GlobalScope* = ref object   ## Contains global data passed to `Context`.
     router*: Router
     reversedRouter*: ReversedRouter
     reRouter*: ReRouter
@@ -67,7 +67,7 @@ type
   AsyncEvent* = proc(): Future[void] {.closure, gcsafe.}
   SyncEvent* = proc() {.closure, gcsafe.}
 
-  Event* = object
+  Event* = object      ## `startup` or `shutdown` event which is executed once.
     case async*: bool
     of true:
       asyncHandler*: AsyncEvent
@@ -80,7 +80,7 @@ type
 
   ErrorHandlerTable* = TableRef[HttpCode, ErrorHandler]
 
-  UploadFile* = object
+  UploadFile* = object  ## Contains `filename` and `body` of a file uploaded by users.
     filename*: string
     body*: string
 
@@ -348,7 +348,6 @@ proc setResponse*(ctx: Context, response: Response) {.inline.} =
   ## Handy to make the response of `ctx`.
   ctx.response = response
 
-## TODO
 proc multiMatch(s: string, replacements: StringTableRef): string =
   result = newStringOfCap(s.len)
   var
@@ -385,11 +384,12 @@ func urlFor*(
   usePlus = true, omitEq = true
 ): string {.inline.} =
   ## Returns the corresponding name of the handler.
+  ## 
   ## **Limitation**:
   ##                Only supports two forms of Route: 
   ##                1. "/route/hello"
   ##                2. "/route/{parameter}/other
-  ## Notes that `{` and `}` shouldn't appear in url
+  ## 
   if handler in ctx.gScope.reversedRouter:
     result = ctx.gScope.reversedRouter[handler]
 
