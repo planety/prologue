@@ -35,9 +35,6 @@ type
     mimeDB*: MimeDB
     config*: TableRef[string, StringTableRef]
 
-  LocalSettings* = ref object ## local settings for corresponding handlers.
-    data*: JsonNode           ## Data which carries user defined settings.
-
 
 func hasKey*(settings: Settings, key: string): bool {.inline.} =
   ## Returns true if key is in `settings`.
@@ -54,14 +51,6 @@ func getOrDefault*(settings: Settings, key: string): JsonNode {.inline.} =
 func newCtxSettings*(): CtxSettings =
   ## Creates a new context settings.
   CtxSettings(mimeDB: newMimetypes(), config: newTable[string, StringTableRef]())
-
-func newLocalSettings*(data: JsonNode): LocalSettings =
-  ## Creates a new local settings.
-  result = LocalSettings(data: data)
-
-proc newLocalSettings*(configPath: string): LocalSettings =
-  ## Creates a new local settings.
-  result = LocalSettings(data: parseFile(configPath))
 
 func normalizedStaticDirs(dirs: openArray[string]): seq[string] =
   ## Normalizes the path of static directories.
@@ -88,37 +77,41 @@ func newSettings*(
 
   result = Settings(address: address, port: port, debug: debug, reusePort: reusePort,
                     staticDirs: normalizedStaticDirs(staticDirs),
-                        appName: appName,
-                    bufSize: bufSize, data: %* {"secretKey": secretKey})
+                    appName: appName, bufSize: bufSize, 
+                    data: %* {"prologue": {"secretKey": secretKey}})
+
+func checkSettings(settings: var Settings, data: JsonNode) {.inline.} =
+  if not data.hasKey("prologue"):
+    raise newException(KeyError, "Key `prologue` must be present in the config file!")
+
+  let logueSettings = data["prologue"]
+
+  settings.address = logueSettings.getOrDefault("address").getStr
+  settings.port = Port(logueSettings.getOrDefault("port").getInt(8080))
+  settings.reusePort = logueSettings.getOrDefault("reusePort").getBool(true)
+  settings.debug = logueSettings.getOrDefault("debug").getBool(true)
+
+  var staticDirs: seq[string] = @[]
+  let node = logueSettings.getOrDefault("staticDirs")
+  if node != nil:
+    for item in items(node):
+      staticDirs.add item.getStr
+
+  settings.staticDirs = normalizedStaticDirs(staticDirs)
+  settings.appName = logueSettings.getOrDefault("appName").getStr("")
+  settings.bufSize = logueSettings.getOrDefault("bufSize").getInt(40960)
+  settings.data = data
 
 func newSettings*(
-  data: JsonNode,
-  address = "",
-  port = Port(8080),
-  debug = true,
-  reusePort = true,
-  staticDirs: openArray[string] = [],
-  appName = "",
-  bufSize = 40960
+  data: JsonNode
 ): Settings =
   ## Creates a new `Settings`.
-  result = Settings(address: address, port: port, debug: debug, reusePort: reusePort,
-                    staticDirs: normalizedStaticDirs(staticDirs),
-                    appName: appName, bufSize: bufSize, data: data)
+  new result
+  checkSettings(result, data)
 
 proc newSettings*(
-  configPath: string,
-  address = "",
-  port = Port(8080),
-  debug = true,
-  reusePort = true,
-  staticDirs: openArray[string] = [],
-  appName = "",
-  bufSize = 40960
+  configPath: string
 ): Settings =
   ## Creates a new `Settings`.
-  # make sure reserved keys must appear in settings
-  result = Settings(address: address, port: port, debug: debug, reusePort: reusePort,
-                    staticDirs: normalizedStaticDirs(staticDirs),
-                        appName: appName,
-                    bufSize: bufSize, data: parseFile(configPath))
+  new result
+  checkSettings(result, parseFile(configPath))

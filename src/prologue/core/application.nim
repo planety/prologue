@@ -13,14 +13,13 @@
 # limitations under the License.
 
 import std/[uri, tables, strutils, strformat, logging, strtabs, options, json, asyncdispatch]
-from nativesockets import Port, `$`
-from cgi import CgiError
+from std/nativesockets import Port, `$`
+from std/cgi import CgiError
 
 from ./utils import isStaticFile
 from ./form import parseFormParams
 from ./nativesettings import newSettings, newCtxSettings, 
-                             getOrDefault, Settings, LocalSettings,
-                             newLocalSettings
+                             getOrDefault, Settings
 import ./httpexception
 import ./response
 import ./context
@@ -34,12 +33,13 @@ import ./encode
 import ./types
 import ./httpcore/httplogue
 import ./route
-import ./defaultserversettings
 import ./request
 import ./server
+import ./group
 
 import pkg/cookiejar
 
+export group except getAllInfos
 export request, server
 export httplogue
 export strtabs
@@ -62,7 +62,6 @@ export types
 export urandom
 export utils
 export httpexception
-export defaultserversettings
 
 
 # shutdown events
@@ -113,20 +112,10 @@ proc registerErrorHandler*(app: Prologue, code: openArray[HttpCode],
   for idx in code:
     app.registerErrorHandler(idx, handler)
 
-func newSettings*(settings: Settings, localSettings: LocalSettings): Settings =
-  ## Creates a new settings.
-  ##
-  ## Params:
-  ##        - `settings` is a global immutable setting for all handlers.
-  ##        - `localSettings` is a local immutable setting for corresponding handler or handler group.
-
-  result = newSettings(localSettings.data, settings.address, settings.port, settings.debug, settings.reusePort,
-                       settings.staticDirs, settings.appName, settings.bufSize)
-
+# -------------------------------- Regex Route --------------------------------
 
 proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
-               httpMethod = HttpGet, middlewares: openArray[HandlerAsync] = @[],
-               settings: LocalSettings = nil) {.inline.} =
+               httpMethod = HttpGet, middlewares: openArray[HandlerAsync] = @[]) {.inline.} =
   ## Adds a single regex `route` with `handler` and don't check whether route is duplicated.
   ## 
   ## Notes: The framework will automatically register `HttpHead` method, if
@@ -135,27 +124,23 @@ proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
   # for group in route.namedGroups.keys:
   #   echo group
 
-  let ctxSettings = 
-    if settings == nil:
-      nil
-    else:
-      newSettings(app.gScope.settings, settings)
-
   if httpMethod == HttpGet:
       app.gScope.reRouter.add (initRePath(route = route, httpMethod = HttpHead), 
-                           newPathHandler(handler, @middlewares, ctxSettings)
+                           newPathHandler(handler, @middlewares)
                            )
 
   app.gScope.reRouter.add (initRePath(route = route, httpMethod = httpMethod), 
-                           newPathHandler(handler, @middlewares, ctxSettings)
+                           newPathHandler(handler, @middlewares)
                            )
 
 proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
-               httpMethod: openArray[HttpMethod], middlewares: openArray[HandlerAsync] = @[],
-               settings: LocalSettings = nil) {.inline.} =
+               httpMethod: openArray[HttpMethod], 
+               middlewares: openArray[HandlerAsync] = @[]) {.inline.} =
   ## Adds a single regex `route` and `handler`, but supports a set of HttpMethod.
   for m in httpMethod:
-    app.addRoute(route, handler, m, middlewares, settings)
+    app.addRoute(route, handler, m, middlewares)
+
+# -------------------------------- Parameters Route --------------------------------
 
 func scanRoute(route: string): bool {.inline.} =
   for c in route:
@@ -186,8 +171,8 @@ proc addReversedRoute(app: Prologue, name, route: string) =
     app.gScope.reversedRouter[name] = route
 
 proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
-               httpMethod = HttpGet, name = "", middlewares: openArray[HandlerAsync] = @[],
-               settings: LocalSettings = nil) =
+               httpMethod = HttpGet, name = "", 
+               middlewares: openArray[HandlerAsync] = @[]) =
   ## Adds a single route and handler. It checks whether route is duplicated.
   ## 
   ## Notes: The framework will automatically register `HttpHead` method, if
@@ -197,108 +182,184 @@ proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
   let route = route.stripRoute
   if route.len == 0:
     raise newException(RouteError, "The path of route can't be empty")
-  let ctxSettings = 
-    if settings == nil:
-      nil
-    else:
-      newSettings(app.gScope.settings, settings)
 
   if httpMethod == HttpGet:
-    app.gScope.router.addRoute(route, HttpHead, handler, @middlewares, ctxSettings)
+    app.gScope.router.addRoute(route, HttpHead, handler, @middlewares)
 
-  app.gScope.router.addRoute(route, httpMethod, handler, @middlewares, ctxSettings)
+  app.gScope.router.addRoute(route, httpMethod, handler, @middlewares)
 
   app.addReversedRoute(name, route)
 
 proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
                httpMethod: openArray[HttpMethod], name = "", 
-               middlewares: openArray[HandlerAsync] = @[], settings: LocalSettings = nil) =
-  ## Adds a single regex `route` and `handler`, but supports a set of HttpMethod.
+               middlewares: openArray[HandlerAsync] = @[]) =
+  ## Adds a single `route` and `handler`, but supports a set of HttpMethod.
   ## It also checks whether route is duplicated
   for m in httpMethod:
-    app.addRoute(route, handler, m, "", middlewares, settings)
+    app.addRoute(route, handler, m, "", middlewares)
   app.addReversedRoute(name, route.stripRoute)
 
 proc addRoute*(app: Prologue, patterns: seq[UrlPattern], baseRoute = "", 
-               middlewares: Option[seq[HandlerAsync]] = none(seq[HandlerAsync]), 
-               settings: LocalSettings = nil) =
+               middlewares: Option[seq[HandlerAsync]] = none(seq[HandlerAsync])) =
   ## Adds multiple routes with handlers.
   if middlewares.isSome:
-    let addition = middlewares.get
+    let additional = middlewares.get
     for pattern in patterns:
       app.addRoute(baseRoute & pattern.route, pattern.matcher, pattern.httpMethod,
-                  pattern.name, addition, settings)
+                  pattern.name, additional)
   else:
     for pattern in patterns:
       app.addRoute(baseRoute & pattern.route, pattern.matcher, pattern.httpMethod,
-                  pattern.name, pattern.middlewares, settings)
+                  pattern.name, pattern.middlewares)
+
+
+# -------------------------------- API Route --------------------------------
 
 proc head*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-           middlewares: openArray[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
+           middlewares: openArray[HandlerAsync] = @[]) {.inline.} =
   ## Adds `route` and `handler` with `HttpHead`.
-  app.addRoute(route, handler, HttpHead, name, middlewares, settings)
+  app.addRoute(route, handler, HttpHead, name, middlewares)
 
 proc get*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-          middlewares: openArray[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
+          middlewares: openArray[HandlerAsync] = @[]) {.inline.} =
   ## Adds `route` and `handler` with `HttpGet` and `HttpHead`.
-  app.addRoute(route, handler, HttpGet, name, middlewares, settings)
+  app.addRoute(route, handler, HttpGet, name, middlewares)
 
 proc post*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-           middlewares: openArray[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
+           middlewares: openArray[HandlerAsync] = @[]) {.inline.} =
   ## Adds `route` and `handler` with `HttpPost`.
-  app.addRoute(route, handler, HttpPost, name, middlewares, settings)
+  app.addRoute(route, handler, HttpPost, name, middlewares)
 
 proc put*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-          middlewares: openArray[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
+          middlewares: openArray[HandlerAsync] = @[]) {.inline.} =
   ## Adds `route` and `handler` with `HttpPut`.
-  app.addRoute(route, handler, HttpPut, name, middlewares, settings)
+  app.addRoute(route, handler, HttpPut, name, middlewares)
 
 proc delete*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-             middlewares: openArray[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
+             middlewares: openArray[HandlerAsync] = @[]) {.inline.} =
   ## Adds `route` and `handler` with `HttpDelete`.
-  app.addRoute(route, handler, HttpDelete, name, middlewares, settings)
+  app.addRoute(route, handler, HttpDelete, name, middlewares)
 
 proc trace*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-            middlewares: openArray[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
+            middlewares: openArray[HandlerAsync] = @[]) {.inline.} =
   ## Adds `route` and `handler` with `HttpTrace`.
-  app.addRoute(route, handler, HttpTrace, name, middlewares, settings)
+  app.addRoute(route, handler, HttpTrace, name, middlewares)
 
 proc options*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-              middlewares: openArray[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
+              middlewares: openArray[HandlerAsync] = @[]) {.inline.} =
   ## Adds `route` and `handler` with `HttpOptions`.
-  app.addRoute(route, handler, HttpOptions, name, middlewares, settings)
+  app.addRoute(route, handler, HttpOptions, name, middlewares)
 
 proc connect*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-              middlewares: openArray[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
+              middlewares: openArray[HandlerAsync] = @[]) {.inline.} =
   ## Adds `route` and `handler` with `HttpConnect`.
-  app.addRoute(route, handler, HttpConnect, name, middlewares, settings)
+  app.addRoute(route, handler, HttpConnect, name, middlewares)
 
 proc patch*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-            middlewares: openArray[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
+            middlewares: openArray[HandlerAsync] = @[]) {.inline.} =
   ## Adds `route` and `handler` with `HttpPatch`.
-  app.addRoute(route, handler, HttpPatch, name, middlewares, settings)
+  app.addRoute(route, handler, HttpPatch, name, middlewares)
 
 proc all*(app: Prologue, route: string, handler: HandlerAsync, name = "",
-          middlewares: openArray[HandlerAsync] = @[], settings: LocalSettings = nil) {.inline.} =
+          middlewares: openArray[HandlerAsync] = @[]) {.inline.} =
   ## Adds `route` and `handler` with all `HttpMethod`.
   app.addRoute(route, handler, @[HttpGet, HttpPost, HttpPut, HttpDelete,
-               HttpTrace, HttpOptions, HttpConnect, HttpPatch], name, middlewares, settings)
+               HttpTrace, HttpOptions, HttpConnect, HttpPatch], name, middlewares)
 
-func appAddress*(app: Prologue): string {.inline.} =
-  ## Gets the address from the settings.
-  app.gScope.settings.address
+# -------------------------------- Group Route --------------------------------
 
-func appDebug*(app: Prologue): bool {.inline.} =
-  ## Gets the debug attributes from the settings.
-  app.gScope.settings.debug
+proc addRoute*(group: Group, route: string, handler: HandlerAsync,
+               httpMethod = HttpGet, name = "", 
+               middlewares: openArray[HandlerAsync] = @[]) =
+  ## Adds a single route and handler. It checks whether route is duplicated.
+  ## 
+  ## Notes: The framework will automatically register `HttpHead` method, if
+  ## HttpMethod is `HttpGet`.
+  let (route, middlewares) = getAllInfos(group, route, middlewares)
+  group.app.addRoute(route, handler, httpMethod, name, middlewares)
 
-func appName*(app: Prologue): string {.inline.} =
-  ## Gets the appName attributes from the settings.
-  app.gScope.settings.appName
+proc addRoute*(group: Group, route: string, handler: HandlerAsync,
+               httpMethod: openArray[HttpMethod], name = "", 
+               middlewares: openArray[HandlerAsync] = @[]) =
+  ## Adds a single regex `route` and `handler`, but supports a set of HttpMethod.
+  ## It also checks whether route is duplicated
+  let (route, middlewares) = getAllInfos(group, route, middlewares)
+  group.app.addRoute(route, handler, httpMethod, name, middlewares)
 
-func appPort*(app: Prologue): Port {.inline.} =
-  ## Gets the port from the settings.
-  app.gScope.settings.port
+proc addRoute*(app: Prologue, patterns: (Group, seq[UrlPattern])) =
+  ## Adds multiple routes with handlers.
+  let (group, patterns) = patterns
+  for pattern in patterns:
+    let (route, middlewares) = getAllInfos(group, pattern.route, @[])
+    group.app.addRoute(route, pattern.matcher, pattern.httpMethod, 
+                        pattern.name, middlewares)
+
+proc addRoute*(app: Prologue, patterns: openArray[(Group, seq[UrlPattern])]) =
+  ## Adds multiple routes with handlers.
+  for (group, patterns) in patterns:
+    for pattern in patterns:
+      let (route, middlewares) = getAllInfos(group, pattern.route, @[])
+      group.app.addRoute(route, pattern.matcher, pattern.httpMethod, 
+                         pattern.name, middlewares)
+
+proc head*(group: Group, route: string, handler: HandlerAsync, name = "",
+           middlewares: openArray[HandlerAsync] = @[]) {.inline.} =
+  ## Adds `route` and `handler` with `HttpHead`.
+  group.app.addRoute(route, handler, HttpHead, name, middlewares)
+
+proc get*(group: Group, route: string, handler: HandlerAsync, name = "",
+          middlewares: openArray[HandlerAsync] = @[]) {.inline.} =
+  ## Adds `route` and `handler` with `HttpGet` and `HttpHead`.
+  group.app.addRoute(route, handler, HttpGet, name, middlewares)
+
+proc post*(group: Group, route: string, handler: HandlerAsync, name = "",
+           middlewares: openArray[HandlerAsync] = @[]) {.inline.} =
+  ## Adds `route` and `handler` with `HttpPost`.
+  let (route, middlewares) = getAllInfos(group, route, middlewares)
+  group.app.addRoute(route, handler, HttpPost, name, middlewares)
+
+proc put*(group: Group, route: string, handler: HandlerAsync, name = "",
+          middlewares: openArray[HandlerAsync] = @[]) {.inline.} =
+  ## Adds `route` and `handler` with `HttpPut`.
+  let (route, middlewares) = getAllInfos(group, route, middlewares)
+  group.app.addRoute(route, handler, HttpPut, name, middlewares)
+
+proc delete*(group: Group, route: string, handler: HandlerAsync, name = "",
+             middlewares: openArray[HandlerAsync] = @[]) {.inline.} =
+  ## Adds `route` and `handler` with `HttpDelete`.
+  let (route, middlewares) = getAllInfos(group, route, middlewares)
+  group.app.addRoute(route, handler, HttpDelete, name, middlewares)
+
+proc trace*(group: Group, route: string, handler: HandlerAsync, name = "",
+            middlewares: openArray[HandlerAsync] = @[]) {.inline.} =
+  ## Adds `route` and `handler` with `HttpTrace`.
+  let (route, middlewares) = getAllInfos(group, route, middlewares)
+  group.app.addRoute(route, handler, HttpTrace, name, middlewares)
+
+proc options*(group: Group, route: string, handler: HandlerAsync, name = "",
+              middlewares: openArray[HandlerAsync] = @[]) {.inline.} =
+  ## Adds `route` and `handler` with `HttpOptions`.
+  let (route, middlewares) = getAllInfos(group, route, middlewares)
+  group.app.addRoute(route, handler, HttpOptions, name, middlewares)
+
+proc connect*(group: Group, route: string, handler: HandlerAsync, name = "",
+              middlewares: openArray[HandlerAsync] = @[]) {.inline.} =
+  ## Adds `route` and `handler` with `HttpConnect`.
+  let (route, middlewares) = getAllInfos(group, route, middlewares)
+  group.app.addRoute(route, handler, HttpConnect, name, middlewares)
+
+proc patch*(group: Group, route: string, handler: HandlerAsync, name = "",
+            middlewares: openArray[HandlerAsync] = @[]) {.inline.} =
+  ## Adds `route` and `handler` with `HttpPatch`.
+  let (route, middlewares) = getAllInfos(group, route, middlewares)
+  group.app.addRoute(route, handler, HttpPatch, name, middlewares)
+
+proc all*(group: Group, route: string, handler: HandlerAsync, name = "",
+          middlewares: openArray[HandlerAsync] = @[]) {.inline.} =
+  ## Adds `route` and `handler` with all `HttpMethod`.
+  let (route, middlewares) = getAllInfos(group, route, middlewares)
+  group.app.addRoute(route, handler, @[HttpGet, HttpPost, HttpPut, HttpDelete,
+               HttpTrace, HttpOptions, HttpConnect, HttpPatch], name, middlewares)
 
 proc execEvent*(event: Event) {.inline.} =
   if event.async:

@@ -20,7 +20,7 @@ import ./response, ./pages, ./basicregex, ./request, ./httpcore/httplogue
 from ./types import BaseType, Session, `[]`, initSession
 from ./configure import parseValue
 from ./httpexception import AbortError, RouteError, DuplicatedRouteError
-from ./nativesettings import Settings, LocalSettings, CtxSettings, getOrDefault, hasKey, `[]`
+from ./nativesettings import Settings, CtxSettings, getOrDefault, hasKey, `[]`
 
 import pkg/cookiejar
 
@@ -29,7 +29,6 @@ type
   PathHandler* = ref object
     handler*: HandlerAsync
     middlewares*: seq[HandlerAsync]
-    settings*: Settings
 
   Path* = object
     route*: string
@@ -58,7 +57,6 @@ type
     handled*: bool
     session*: Session
     ctxData*: StringTableRef
-    localSettings*: Settings
     gScope: GlobalScope
     middlewares: seq[HandlerAsync]
     size: int8
@@ -202,20 +200,14 @@ func newContext*(request: Request, response: Response,
   Context(request: request, response: response,
           handled: false,
           ctxData: newStringTable(mode = modeCaseSensitive),
-          localSettings: nil,
           gScope: gScope,
           size: 0, first: true,
     )
 
 func getSettings*(ctx: Context, key: string): JsonNode {.inline.} =
-  ## Get context.settings(First lookup localSettings then lookup globalSettings).
+  ## Get settings from globalSetting.
   ## If key doesn't exist, `nil` will be returned.
-  if ctx.localSettings == nil:
-    result = ctx.gScope.settings.getOrDefault(key)
-  elif not ctx.localSettings.hasKey(key):
-    result = ctx.gScope.settings.getOrDefault(key)
-  else:
-    result = ctx.localSettings.getOrDefault(key)
+  result = ctx.gScope.settings.getOrDefault(key)
 
 proc respond*(
   ctx: Context, code: HttpCode, body: string,
@@ -235,33 +227,6 @@ proc respond*(ctx: Context, code: HttpCode, body: string): Future[void] {.inline
 proc send*(ctx: Context, content: string): Future[void] {.inline.} =
   ## Sends content to the client.
   result = ctx.request.send(content)
-
-func hasHeader*(request: Request, key: string): bool {.inline.} =
-  ## Returns true if key is in `request.headers`.
-  request.headers.hasKey(key)
-
-func getHeader*(request: Request, key: string): seq[string] {.inline.} =
-  ## Retrieves value of `request.headers[key]`.
-  seq[string](request.headers[key])
-
-func getHeaderOrDefault*(request: Request, key: string, default = @[""]): seq[string] {.inline.} =
-  ## Retrieves value of `request.headers[key]`. Otherwise `default` will be returned.
-  if request.headers.hasKey(key):
-    result = getHeader(request, key)
-  else:
-    result = default
-
-func setHeader*(request: var Request, key, value: string) {.inline.} =
-  ## Inserts a (key, value) pair into `request.headers`.
-  request.headers[key] = value
-
-func setHeader*(request: var Request, key: string, value: seq[string]) {.inline.} =
-  ## Inserts a (key, value) pair into `request.headers`.
-  request.headers[key] = value
-
-func addHeader*(request: var Request, key, value: string) {.inline.} =
-  ## Appends value to the existing key in `request.headers`.
-  request.headers.add(key, value)
 
 func getCookie*(ctx: Context, key: string, default = ""): string {.inline.} =
   ## Gets the value of `ctx.request.cookies[key]` if key is in cookies. Otherwise, the `default`

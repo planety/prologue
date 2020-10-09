@@ -1,7 +1,7 @@
 import strutils, strformat
 
 
-from ../core/context import Context, HandlerAsync, setHeader, hasHeader
+from ../core/context import Context, HandlerAsync
 from ../core/response import setHeader, hasHeader
 from ../core/encode import base64Decode
 import ../core/request

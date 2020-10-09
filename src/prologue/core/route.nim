@@ -20,7 +20,6 @@
 
 import std/[hashes, strutils, strtabs, options, critbits, sequtils, parseutils]
 
-from ./nativesettings import Settings
 from ./basicregex import Regex, RegexMatch, match, groupNames, groupFirstCapture
 import ./context
 import ./request
@@ -56,12 +55,14 @@ func initRePath*(route: Regex, httpMethod = HttpGet): RePath {.inline.} =
   RePath(route: route, httpMethod: httpMethod)
 
 func pattern*(route: string, handler: HandlerAsync, httpMethod = HttpGet,
-              name = "", middlewares: openArray[HandlerAsync] = @[]): UrlPattern{.inline.}  =
+              name = "", middlewares: openArray[HandlerAsync] = @[]
+): UrlPattern {.inline.}  =
   (route, handler, @[httpMethod], name, @middlewares)
 
 func pattern*(route: string, handler: HandlerAsync, 
               httpMethod: openArray[HttpMethod], name = "", 
-              middlewares: openArray[HandlerAsync] = @[]): UrlPattern {.inline.} =
+              middlewares: openArray[HandlerAsync] = @[]
+): UrlPattern {.inline.} =
   (route, handler, @httpMethod, name, @middlewares)
 
 func hash*(x: Path): Hash {.inline.} =
@@ -351,17 +352,15 @@ func contains(
   elif node.isLeaf and rope.len > 1: # the node is a leaf but we want to map further to it, so it won't conflict
     result = false
 
-func newPathHandler*(handler: HandlerAsync, middlewares: seq[HandlerAsync], 
-                     settings: Settings): PathHandler {.inline.} =
-  PathHandler(handler: handler, middlewares: middlewares, settings: settings)
+func newPathHandler*(handler: HandlerAsync, middlewares: seq[HandlerAsync]): PathHandler {.inline.} =
+  PathHandler(handler: handler, middlewares: middlewares)
 
 func addRoute*(
   router: Router,
   route: string,
   httpMethod: HttpMethod,
   handler: HandlerAsync,
-  middlewares: seq[HandlerAsync],
-  settings: Settings
+  middlewares: seq[HandlerAsync]
 ) =
   ## Add a new mapping to the given ``Router`` instance.
 
@@ -377,7 +376,7 @@ func addRoute*(
     nodeToBeMerged = PatternNode(kind: ptrnText, value: $pathSeparator,
                                  isLeaf: true, isTerminator: false)
 
-  router.data[httpMethod] = nodeToBeMerged.merge(rope, newPathHandler(handler, middlewares, settings), route)
+  router.data[httpMethod] = nodeToBeMerged.merge(rope, newPathHandler(handler, middlewares), route)
 
 func compress(node: PatternNode): PatternNode =
   ## Finds sequences of single ptrnText nodes and combines them to reduce the depth of the tree.

@@ -24,7 +24,7 @@ task tstdbackend, "Test asynchttpserver backend":
   exec "nim c -r -d:usestd tests/server/tserver_application.nim"
 
 task texamples, "Test examples":
-  exec "nim c -d:release -r tests/compile/test_examples/examples.nim"
+  exec "nim c -d:release tests/compile/test_examples/examples.nim"
 
 task treadme, "Test Readme":
   exec "nim c -d:release -r tests/compile/test_readme/readme.nim"

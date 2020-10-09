@@ -22,7 +22,7 @@ from ../core/middlewaresbase import switch
 proc clickjackingMiddleWare*(): HandlerAsync =
   result = proc(ctx: Context) {.async.} =
     await switch(ctx)
-    var option = ctx.getSettings("X-Frame-Options").getStr.toLowerAscii
+    var option = ctx.getSettings("prologue").getOrDefault("X-Frame-Options").getStr.toLowerAscii
 
     if option != "deny" and option != "sameorigin":
       option = "deny"

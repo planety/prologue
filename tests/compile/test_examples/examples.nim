@@ -1,38 +1,14 @@
-import os, osproc, strformat
-
-
-# Test Examples
-block:
-  let
-    helloWorldDir = "./examples/helloworld"
-    todolistDir = "./examples/todolist"
-    todoappDir = "./examples/todoapp"
-    blogDir = "./examples/blog"
-    basicDir = "./examples/basic"
-    app = "app.nim"
-    execCommand = "nim c --d:release --hints:off"
-
-  # helloworld can compile
-  block:
-    let (outp, errC) = execCmdEx(fmt"{execCommand} {helloWorldDir / app}")
-    doAssert errC == 0, outp
-
-  # todolist can compile
-  block:
-    let (outp, errC) = execCmdEx(fmt"{execCommand} {todolistDir / app}")
-    doAssert errC == 0, outp
-
-  # todoapp can compile
-  block:
-    let (outp, errC) = execCmdEx(fmt"{execCommand} {todoappDir / app}")
-    doAssert errC == 0, outp
-
-  # blog can compile
-  block:
-    let (outp, errC) = execCmdEx(fmt"{execCommand} {blogDir / app}")
-    doAssert errC == 0, outp
-
-  # basic can compile
-  block:
-    let (outp, errC) = execCmdEx(fmt"{execCommand} {basicDir / app}")
-    doAssert errC == 0, outp
+import ../../../examples/helloworld/app as a1
+import ../../../examples/todolist/app as a2
+import ../../../examples/todoapp/app as a3
+import ../../../examples/blog/app as a4
+import ../../../examples/basic/app as a5
+import ../../../examples/websocket/app as a6
+import ../../../examples/csrf/app as a7
+import ../../../examples/memorysession/app as a8
+import ../../../examples/redissession/app as a9
+import ../../../examples/signedcookiesession/app as a10
+import ../test_readme/example1
+import ../test_readme/example2
+import ../../../src/prologue
+import ../../../src/prologue/plugin

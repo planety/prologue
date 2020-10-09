@@ -1,6 +1,6 @@
 import db_sqlite, os, strutils, logging
 
-import consts
+import ./consts
 
 
 proc initDb*() =

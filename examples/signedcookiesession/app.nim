@@ -1,4 +1,5 @@
 import ../../src/prologue
+import ../../src/prologue/middlewares/utils
 import ../../src/prologue/middlewares/signedcookiesession
 import ./urls
 

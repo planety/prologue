@@ -3,7 +3,7 @@ import ../../src/prologue
 import views
 
 
-const
+let
   indexPatterns* = @[
     pattern("/", views.read, @[HttpGet], name = "index")
   ]

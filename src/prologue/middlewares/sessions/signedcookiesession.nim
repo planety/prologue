@@ -10,7 +10,7 @@ from ../../signing/signing import DefaultSep, DefaultKeyDerivation,
         initTimedSigner, unsign, sign
 from ../../core/middlewaresbase import switch
 from ../../core/urandom import randomString
-from ../../core/nativesettings import getOrdefault, Settings
+from ../../core/nativesettings import Settings, `[]`
 
 from pkg/cookiejar import SameSite
 
@@ -27,7 +27,7 @@ proc sessionMiddleware*(
   httpOnly = false
 ): HandlerAsync =
 
-  var secretKey = settings.getOrDefault("secretKey").getStr
+  var secretKey = settings["prologue"].getOrDefault("secretKey").getStr
   if secretKey.len == 0:
     secretKey = randomString(16)
 

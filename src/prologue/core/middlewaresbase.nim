@@ -45,7 +45,6 @@ proc switch*(ctx: Context) {.async.} =
       handler = findHandler(ctx)
       lastHandler = handler.handler
 
-    ctx.localSettings = handler.settings
     ctx.addMiddlewares handler.middlewares
     ctx.addMiddlewares lastHandler
     ctx.first = false

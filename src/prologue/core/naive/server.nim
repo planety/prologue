@@ -2,7 +2,7 @@ import std/[strtabs, json, asyncdispatch]
 from std/asynchttpserver import newAsyncHttpServer, serve, close, AsyncHttpServer
 
 from ./request import NativeRequest
-from ../nativesettings import Settings, CtxSettings, getOrDefault
+from ../nativesettings import Settings, CtxSettings, `[]`
 from ../context import Router, ReversedRouter, ReRouter, HandlerAsync,
     Event, ErrorHandlerTable, GlobalScope
 
@@ -36,10 +36,8 @@ func newPrologue*(
   shutdown: openArray[Event], errorHandlerTable: ErrorHandlerTable, 
   appData: StringTableRef
 ): Prologue {.inline.} =
-  ## Creates a new application instance.
-
   Prologue(server: newPrologueServer(true, settings.reusePort, 
-                                    settings.getOrDefault("stdlib_maxBody").getInt(8388608)), 
+                                    settings["prologue"].getOrDefault("maxBody").getInt(8388608)), 
            gScope: GlobalScope(settings: settings, ctxSettings: ctxSettings, router: router, 
            reversedRouter: reversedRouter, reRouter: reRouter, appData: appData),
            middlewares: @middlewares, startup: @startup, shutdown: @shutdown,

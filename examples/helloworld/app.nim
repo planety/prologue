@@ -30,7 +30,7 @@ var
 
 
 app.addRoute(urls.urlPatterns, "/todolist")
-# only sopport (?P<name>exp)
+# only supports (?P<name>exp)
 app.addRoute(re"/post(?P<num>[\d]+)", articles, HttpGet)
 app.addRoute(re"/post(?P<name>[\d]+)", articles, HttpGet)
 
