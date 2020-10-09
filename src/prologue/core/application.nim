@@ -39,7 +39,7 @@ import ./group
 
 import pkg/cookiejar
 
-export group except getAllInfos
+export group
 export request, server
 export httplogue
 export strtabs

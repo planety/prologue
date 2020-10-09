@@ -18,7 +18,7 @@ else:
 export cookiejar
 
 
-proc divide(info: RedisList): StringTableRef =
+func divide(info: RedisList): StringTableRef =
   result = newStringTable(modeCaseSensitive)
   for idx in countup(0, info.high, 2):
     result[info[idx]] = info[idx + 1]
