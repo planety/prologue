@@ -393,7 +393,7 @@ proc attachment*(ctx: Context, downloadName: string, charset = "utf-8") {.inline
 
 proc staticFileResponse*(
   ctx: Context, filename, dir: string, mimetype = "",
-  downloadName = "", charset = "utf-8", bufSize = 4096,
+  downloadName = "", charset = "utf-8", bufSize = 40960,
   headers = none(ResponseHeaders)
 ) {.async.} =
   ## Returns static files response.

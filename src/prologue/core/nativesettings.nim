@@ -76,9 +76,8 @@ func newSettings*(
     raise newException(EmptySecretKeyError, "Secret key can't be empty!")
 
   result = Settings(address: address, port: port, debug: debug, reusePort: reusePort,
-                    staticDirs: normalizedStaticDirs(staticDirs),
-                    appName: appName, bufSize: bufSize, 
-                    data: %* {"prologue": {"secretKey": secretKey}})
+                    staticDirs: normalizedStaticDirs(staticDirs), appName: appName, 
+                    data: %* {"prologue": {"secretKey": secretKey, "bufSize": bufSize}})
 
 func checkSettings(settings: var Settings, data: JsonNode) {.inline.} =
   if not data.hasKey("prologue"):
@@ -99,7 +98,6 @@ func checkSettings(settings: var Settings, data: JsonNode) {.inline.} =
 
   settings.staticDirs = normalizedStaticDirs(staticDirs)
   settings.appName = logueSettings.getOrDefault("appName").getStr("")
-  settings.bufSize = logueSettings.getOrDefault("bufSize").getInt(40960)
   settings.data = data
 
 func newSettings*(

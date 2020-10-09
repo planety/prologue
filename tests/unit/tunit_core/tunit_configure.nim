@@ -1,7 +1,7 @@
 import ../../../src/prologue/core/configure
 
 
-import os
+import std/os
 
 
 # "Test Config"

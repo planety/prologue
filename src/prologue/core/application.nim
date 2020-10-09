@@ -445,7 +445,8 @@ proc handleContext*(app: Prologue, ctx: Context) {.async, gcsafe.} =
     if staticFileFlag.hasValue:
       # serve static files
       await staticFileResponse(ctx, staticFileFlag.filename,
-                                staticFileFlag.dir)
+                               staticFileFlag.dir, 
+                               bufSize = ctx.getSettings("prologue").getOrDefault("bufSize").getInt(40960))
     else:
       # serve dynamic contents
       await switch(ctx)

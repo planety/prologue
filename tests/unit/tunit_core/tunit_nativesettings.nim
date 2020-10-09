@@ -9,8 +9,8 @@ block:
   doAssert settings.reusePort == true
   doAssert settings.staticDirs.len == 0
   doAssert settings.appName.len == 0
-  doAssert settings.bufSize == 40960
 
+  doAssert settings["prologue"].getOrDefault("bufSize").getInt == 40960
   doAssert settings["prologue"].hasKey("secretKey")
   doAssert settings["prologue"]["secretKey"].getStr.len == 8
   doAssert settings["prologue"].getOrDefault("secretKey").getStr == settings["prologue"]["secretKey"].getStr
