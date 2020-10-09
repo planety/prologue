@@ -111,7 +111,6 @@ block:
   var base = newGroup(app, "/apiv2", @[])
   var level1 = newGroup(app,"/level1", @[], base)
   var level2 = newGroup(app, "/level2", @[], level1)
-  # var level3 = newGroup(app, "/level3", @[], level2)
 
 
   proc hello(ctx: Context) {.async.} =
@@ -143,6 +142,3 @@ block:
     block:
       let ctx = app.runOnce(prepareRequest("/apiv2/level1/level2/home", HttpGet))
       doAssert ctx.response.body == "Home"
-
-# var tab = {level1: urlpattern1, level3: urlpattern2}
-# app.addRoute(tab)
