@@ -10,6 +10,3 @@ proc hello*(ctx: Context) {.async.} =
     await ws.send(packet)
 
   resp "<h1>Hello, Prologue!</h1>"
-
-# ws = new WebSocket("ws://localhost:8080/ws")
-# ws.send("hi")

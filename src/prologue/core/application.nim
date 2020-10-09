@@ -305,11 +305,13 @@ proc addRoute*(app: Prologue, patterns: openArray[(Group, seq[UrlPattern])]) =
 proc head*(group: Group, route: string, handler: HandlerAsync, name = "",
            middlewares: openArray[HandlerAsync] = @[]) {.inline.} =
   ## Adds `route` and `handler` with `HttpHead`.
+  let (route, middlewares) = getAllInfos(group, route, middlewares)
   group.app.addRoute(route, handler, HttpHead, name, middlewares)
 
 proc get*(group: Group, route: string, handler: HandlerAsync, name = "",
           middlewares: openArray[HandlerAsync] = @[]) {.inline.} =
   ## Adds `route` and `handler` with `HttpGet` and `HttpHead`.
+  let (route, middlewares) = getAllInfos(group, route, middlewares)
   group.app.addRoute(route, handler, HttpGet, name, middlewares)
 
 proc post*(group: Group, route: string, handler: HandlerAsync, name = "",

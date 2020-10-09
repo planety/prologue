@@ -21,10 +21,10 @@ func newGroup*(app: Prologue, route: string, middlewares: openArray[HandlerAsync
 func getAllInfos*(group: Group, route: string, middlewares: openArray[HandlerAsync]): (string, seq[HandlerAsync]) =
   var parent = group
   while parent != nil:
-    parent = group.parent
     if parent.route.len != 1:
       result[0].insert parent.route
     result[1].insert parent.middlewares
+    parent = parent.parent
 
   result[0].add route
   result[1].add middlewares
