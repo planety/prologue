@@ -2,6 +2,7 @@ import std/sequtils
 
 import ./context
 import ./server
+import ./httpexception
 
 
 type
@@ -13,9 +14,16 @@ type
 
 func newGroup*(app: Prologue, route: string, middlewares: openArray[HandlerAsync] = @[], 
                parent: Group = nil): Group =
-  doAssert route.len > 0, "Route can't be empty, at least use `/`!"
-  doAssert route[0] == '/', "Route must start with `/`!"
-  doAssert route[^1] != '/', "Route can't end with `/` except root directory!"
+  if route.len == 0:
+    raise newException(RouteError, "Route can't be empty, at least use `/`!")
+
+  if route[0] != '/':
+    raise newException(RouteError, "Route must start with `/`!")
+
+  if route.len > 1:
+    if route[^1] == '/':
+      raise newException(RouteError, "Route can't end with `/` except root directory!")
+
   Group(app: app, route: route, middlewares: @middlewares, parent: parent)
 
 func getAllInfos*(group: Group, route: string, middlewares: openArray[HandlerAsync]): (string, seq[HandlerAsync]) =
