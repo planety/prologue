@@ -46,9 +46,13 @@ proc sessionMiddleware*(
     if data.len != 0:
       try:
         ctx.session.loads(signer.unsign(data, maxAge))
-      except BadTimeSignatureError, SignatureExpiredError, ValueError:
-        # BadTimeSignature, SignatureExpired or ValueError
-        discard
+      except BadTimeSignatureError, SignatureExpiredError, ValueError, IndexError:
+        ctx.deleteCookie(sessionName, domain = domain,
+                path = path) # delete session data in cookie
+      except Exception as e:
+        ctx.deleteCookie(sessionName, domain = domain,
+                path = path) # delete session data in cookie
+        raise e
 
     await switch(ctx)
 
