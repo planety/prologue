@@ -63,7 +63,7 @@ proc isStaticFile*(
       return (true, file.name & file.ext, file.dir)
 
 template castNumber(result, number: typed): untyped =
-  ## Casts ``number`` to array[byte] in system endians order.
+  ## Casts ``number`` to array[byte] in system endianness order.
   cast[typeof(result)](number)
 
 func serialize*(number: int64): array[8, byte] {.inline.} =

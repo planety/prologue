@@ -87,15 +87,15 @@ func initSession*(data: StringTableRef, newCreated = false, modified = false,
   ## Initializes a new session.
   Session(data: data, modified: modified)
 
-proc update*(session: Session) {.inline.} =
+func update*(session: var Session) {.inline.} =
   session.accessed = true
   session.modified = true
 
-proc `[]`*(session: Session, key: string): string {.inline.} =
+func `[]`*(session: var Session, key: string): string {.inline.} =
   result = session.data[key]
   session.accessed = true
 
-proc `[]=`*(session: Session, key, value: string) {.inline.} =
+func `[]=`*(session: var Session, key, value: string) {.inline.} =
   session.data[key] = value
   update(session)
 
@@ -106,25 +106,25 @@ iterator pairs*(session: Session): tuple[key, val: string] =
   for (key, val) in session.data.pairs:
     yield (key, val)
 
-proc getOrDefault*(session: Session, key: string, default = ""): string {.inline.} =
+func getOrDefault*(session: var Session, key: string, default = ""): string {.inline.} =
   if session.data.hasKey(key):
     result = session.data[key]
   else:
     result = default
   session.accessed = true
 
-proc del*(session: Session, key: string) {.inline.} =
+func del*(session: var Session, key: string) {.inline.} =
   session.data.del(key)
   update(session)
 
-proc clear*(session: Session) {.inline.} =
+func clear*(session: var Session) {.inline.} =
   session.data.clear(modeCaseSensitive)
   update(session)
 
 func `$`*(session: Session): string {.inline.} =
   $session.data
 
-proc parseStringTable*(tabs: StringTableRef, s: string) =
+func parseStringTable*(tabs: var StringTableRef, s: string) =
   # """{username: flywind, password: root}"""
   # {:}
   # TODO make sure {':', ',', '}'} notin key or value
