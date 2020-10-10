@@ -21,10 +21,11 @@ task tests, "Run all tests":
   exec "testament all"
 
 task tstdbackend, "Test asynchttpserver backend":
-  exec "nim c -r -d:usestd tests/server/tserver_application.nim"
+  exec "nim c -r -d:release -d:usestd tests/server/tserver_application.nim"
 
 task texamples, "Test examples":
   exec "nim c -d:release tests/compile/test_examples/examples.nim"
+  exec "nim c -d:release -d:usestd tests/compile/test_examples/examples.nim"
 
 task treadme, "Test Readme":
   exec "nim c -d:release tests/compile/test_readme/readme.nim"
