@@ -16,7 +16,6 @@ import std/[uri, tables, strutils, strformat, logging, strtabs, options, json, a
 from std/nativesockets import Port, `$`
 from std/cgi import CgiError
 
-from ./utils import isStaticFile
 from ./form import parseFormParams
 from ./nativesettings import newSettings, newCtxSettings, 
                              getOrDefault, Settings
@@ -60,7 +59,6 @@ export response
 export route
 export types
 export urandom
-export utils
 export httpexception
 
 
@@ -382,6 +380,9 @@ proc shutDownHandler() {.noconv.} =
   echo "Shutting down Events are done after having received SIGINT!\n"
   quit(QuitSuccess)
 
+func use*(app: var Prologue, middlewares: varargs[HandlerAsync]) =
+  app.middlewares.add middlewares
+
 func newApp*(
   settings: Settings, 
   middlewares: openArray[HandlerAsync] = @[],
@@ -406,6 +407,15 @@ func newApp*(
                        reRouter = newReRouter(), middlewares = middlewares,
                        startup = startup, shutdown = shutdown,
                        errorHandlerTable = errorHandlerTable, appData = appData)
+
+# func newAppWithEnv*(
+#   middlewares: openArray[HandlerAsync] = @[],
+#   startup: openArray[Event] = @[], 
+#   shutdown: openArray[Event] = @[],
+#   errorHandlerTable = newErrorHandlerTable({Http404: default404Handler, Http500: default500Handler}),
+#   appData = newStringTable(mode = modeCaseSensitive)
+# ): Prologue =
+  
 
 proc handleNativeRequest(request: var Request) {.inline, gcsafe.} =
   ## Handles the request from the client.
@@ -434,22 +444,8 @@ proc handleContext*(app: Prologue, ctx: Context) {.async, gcsafe.} =
   ctx.middlewares = app.middlewares
   logging.debug(fmt"{ctx.request.reqMethod} {ctx.request.url.path}")
 
-  # whether request.path in the static path of settings.
-  let staticFileFlag = 
-    if ctx.gScope.settings.staticDirs.len != 0:
-      isStaticFile(ctx.request.path.decodeUrl, ctx.gScope.settings.staticDirs)
-    else:
-      (false, "", "")
-
   try:
-    if staticFileFlag.hasValue:
-      # serve static files
-      await staticFileResponse(ctx, staticFileFlag.filename,
-                               staticFileFlag.dir, 
-                               bufSize = ctx.getSettings("prologue").getOrDefault("bufSize").getInt(40960))
-    else:
-      # serve dynamic contents
-      await switch(ctx)
+    await switch(ctx)
   except RouteError as e:
     ctx.response.code = Http404
     ctx.response.body.setLen(0)
@@ -565,6 +561,5 @@ when isMainModule:
   app.addRoute("/login", login, HttpGet)
   app.addRoute("/login", doLogin, HttpPost)
   app.addRoute("/hello/{name}", helloName, HttpGet)
-  # app.serveStaticFile("static")
   # app.serveDocs()
   app.run()

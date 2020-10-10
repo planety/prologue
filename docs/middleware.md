@@ -33,9 +33,9 @@ proc myDebugRequestMiddleware*(appName = "Prologue"): HandlerAsync =
 
 var
   settings = newSettings()
-  app = newApp(settings = settings, middlewares = @[myDebugRequestMiddleware()])
+  app = newApp(settings = settings)
 
-
+app.use(myDebugRequestMiddleware())
 app.addRoute("/", hello, HttpGet, middlewares = @[myDebugRequestMiddleware()])
 ```
 

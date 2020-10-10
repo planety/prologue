@@ -13,7 +13,7 @@ let
     )
 
 
-var app = newApp(settings = settings, middlewares = 
-                 @[debugResponseMiddleware(), sessionMiddleware(settings)])
+var app = newApp(settings = settings)
+app.use([debugResponseMiddleware(), sessionMiddleware(settings)])
 app.addRoute(urls.urlPatterns, "")
 app.run()

@@ -6,7 +6,6 @@ let
   settings = newSettings(appName = env.getOrDefault("appName", "Prologue"),
                          debug = env.getOrDefault("debug", true),
                          port = Port(env.getOrDefault("port", 8080)),
-                         staticDirs = [],
                          secretKey = env.getOrDefault("secretKey", "")
     )
 

@@ -65,7 +65,7 @@ proc cookie(ctx: Context) {.async.} =
 
 
 let settings = newSettings(appName = "Prologue", debug = false, port = Port(8080))
-var app = newApp(settings = settings, middlewares = @[])
+var app = newApp(settings = settings)
 
 app.addRoute("/", home, HttpGet)
 app.addRoute("/home", home, HttpGet, middlewares = @[debugRequestMiddleware()])

@@ -1,4 +1,5 @@
 import ../../src/prologue
+import ../../src/prologue/middlewares/staticfile
 import ../../src/prologue/middlewares/utils
 from ../../src/prologue/openapi import serveDocs
 
@@ -12,7 +13,6 @@ let
                          debug = env.getOrDefault("debug", true),
                          address = env.getOrDefault("address", ""),
                          port = Port(env.getOrDefault("port", 8080)),
-                         staticDirs = [env.get("staticDir")],
                          secretKey = env.getOrDefault("secretKey", "")
     )
 
@@ -23,12 +23,14 @@ proc setLoggingLevel() =
   # logging.setLogFilter(lvlInfo)
 
 
-let 
+let
   event = initEvent(setLoggingLevel)
 var
-  app = newApp(settings = settings, middlewares = @[debugRequestMiddleware()], startup = @[event])
+  app = newApp(settings = settings,
+               startup = @[event])
 
-
+app.use(staticFileMiddleware(env.get("staticDir")))
+app.use(debugRequestMiddleware())
 app.addRoute(urls.urlPatterns, "/todolist")
 # only supports (?P<name>exp)
 app.addRoute(re"/post(?P<num>[\d]+)", articles, HttpGet)

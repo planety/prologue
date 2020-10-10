@@ -48,5 +48,5 @@ let
   event = initEvent(setLoggingLevel)
 
 var
-  app = newApp(settings = settings, middlewares = @[debugRequestMiddleware()], startup = @[event])
+  app = newApp(settings = settings, startup = @[event])
 ```

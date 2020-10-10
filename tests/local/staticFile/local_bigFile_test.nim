@@ -1,4 +1,8 @@
 import ../../../src/prologue
+import ../../../src/prologue/middlewares/staticfile
 
-let app = newApp(newSettings(staticDirs = ["public"], debug = false))
+
+var app = newApp(newSettings(debug = false))
+
+app.use(staticFileMiddleware("public"))
 app.run()

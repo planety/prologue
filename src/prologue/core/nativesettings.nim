@@ -13,8 +13,8 @@
 # limitations under the License.
 
 
-import std/[mimetypes, json, tables, strtabs, os, strutils]
-from nativesockets import Port
+import std/[mimetypes, json, tables, strtabs]
+from std/nativesockets import Port
 
 from ./types import SecretKey, EmptySecretKeyError, len
 from ./urandom import randomString
@@ -26,7 +26,6 @@ type
     port*: Port              ## The port of socket.
     debug*: bool             ## Debug mode(true is yes).
     reusePort*: bool         ## Use socket port in multiple times.
-    staticDirs*: seq[string] ## The path of static directories.
     appName*: string         ## The name of your application.
     bufSize*: int            ## The size of buffer in file streaming.
     data: JsonNode           ## Data which carries user defined settings.
@@ -52,21 +51,11 @@ func newCtxSettings*(): CtxSettings =
   ## Creates a new context settings.
   CtxSettings(mimeDB: newMimetypes(), config: newTable[string, StringTableRef]())
 
-func normalizedStaticDirs(dirs: openArray[string]): seq[string] =
-  ## Normalizes the path of static directories.
-  result = newSeqOfCap[string](dirs.len)
-  for item in dirs:
-    let dir = item.strip(chars = {'/'}, trailing = false)
-    if dir.len != 0:
-      result.add dir
-    normalizePath(result[^1])
-
 func newSettings*(
   address = "",
   port = Port(8080),
   debug = true,
   reusePort = true,
-  staticDirs: openArray[string] = [],
   secretKey = randomString(8),
   appName = "",
   bufSize = 40960
@@ -75,8 +64,8 @@ func newSettings*(
   if secretKey.len == 0:
     raise newException(EmptySecretKeyError, "Secret key can't be empty!")
 
-  result = Settings(address: address, port: port, debug: debug, reusePort: reusePort,
-                    staticDirs: normalizedStaticDirs(staticDirs), appName: appName, 
+  result = Settings(address: address, port: port, debug: debug, 
+                    reusePort: reusePort, appName: appName, 
                     data: %* {"prologue": {"secretKey": secretKey, "bufSize": bufSize}})
 
 func checkSettings(settings: var Settings, data: JsonNode) {.inline.} =
@@ -85,18 +74,14 @@ func checkSettings(settings: var Settings, data: JsonNode) {.inline.} =
 
   let logueSettings = data["prologue"]
 
+  if not logueSettings.hasKey("secretKey") or logueSettings["secretKey"].getStr.len == 0:
+    raise newException(EmptySecretKeyError, "Secret key can't be empty!")
+
   settings.address = logueSettings.getOrDefault("address").getStr
   settings.port = Port(logueSettings.getOrDefault("port").getInt(8080))
   settings.reusePort = logueSettings.getOrDefault("reusePort").getBool(true)
   settings.debug = logueSettings.getOrDefault("debug").getBool(true)
 
-  var staticDirs: seq[string] = @[]
-  let node = logueSettings.getOrDefault("staticDirs")
-  if node != nil:
-    for item in items(node):
-      staticDirs.add item.getStr
-
-  settings.staticDirs = normalizedStaticDirs(staticDirs)
   settings.appName = logueSettings.getOrDefault("appName").getStr("")
   settings.data = data
 

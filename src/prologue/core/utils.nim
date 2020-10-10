@@ -12,10 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
-import std/[strutils, os]
-
-
 template since*(version, body: untyped) {.dirty.} =
   ## limitation: can't be used to annotate a template (eg typetraits.get), would
   ## error: cannot attach a custom pragma.
@@ -44,23 +40,6 @@ func fromByteSeq*(sequence: openArray[byte]): string {.inline.} =
   if length > 0:
     result = newString(length)
     copyMem(result.cstring, sequence[0].unsafeAddr, length)
-
-proc isStaticFile*(
-  path: string, 
-  dirs: openArray[string]
-): tuple[hasValue: bool, filename, dir: string] =
-  result = (false, "", "")
-  var path = path.strip(chars = {'/'}, trailing = false)
-  normalizePath(path)
-  if not fileExists(path):
-    return
-  let file = splitFile(path)
-
-  for dir in dirs:
-    if dir.len == 0:
-      continue
-    if file.dir.startsWith(dir):
-      return (true, file.name & file.ext, file.dir)
 
 template castNumber(result, number: typed): untyped =
   ## Casts ``number`` to array[byte] in system endianness order.

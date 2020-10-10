@@ -21,7 +21,8 @@ proc do_login*(ctx: Context) {.async.} =
 
 
 let settings = newSettings(appName = "Prologue", debug = false)
-var app = newApp(settings = settings, middlewares = @[debugRequestMiddleware()])
+var app = newApp(settings = settings)
+app.use(debugRequestMiddleware())
 app.addRoute("/", home, @[HttpGet, HttpPost])
 app.addRoute("/home", home, HttpGet)
 app.addRoute("/redirect", doRedirect, HttpGet)

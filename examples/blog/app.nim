@@ -1,5 +1,6 @@
 import ../../src/prologue
 import ../../src/prologue/middlewares/signedcookiesession
+import ../../src/prologue/middlewares/staticfile
 
 import urls
 import initdb
@@ -13,13 +14,12 @@ let
   settings = newSettings(appName = env.getOrDefault("appName", "Prologue"),
       debug = env.getOrDefault("debug", true),
       port = Port(env.getOrDefault("port", 8080)),
-      staticDirs = [env.get("staticDir")],
       secretKey = env.getOrDefault("secretKey", "")
   )
 
-var app = newApp(settings = settings, middlewares = 
-                 @[sessionMiddleware(settings, path = "/")])
+var app = newApp(settings = settings)
 
+app.use(staticFileMiddleware(env.get("staticDir")), sessionMiddleware(settings, path = "/"))
 app.addRoute(urls.indexPatterns, "/")
 app.addRoute(urls.authPatterns, "/auth")
 app.addRoute(urls.blogPatterns, "/blog")

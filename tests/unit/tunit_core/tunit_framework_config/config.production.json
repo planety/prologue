@@ -1,0 +1,11 @@
+{
+  "prologue": {
+    "address": "",
+    "port": 8080,
+    "debug": false,
+    "reusePort": true,
+    "staticDirs": [],
+    "appName": "",
+    "bufSize": 40960
+  }
+}
