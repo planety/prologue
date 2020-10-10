@@ -1,12 +1,9 @@
 Settings	nativesettings.html#Settings	nativesettings: Settings	
 CtxSettings	nativesettings.html#CtxSettings	nativesettings: CtxSettings	
-LocalSettings	nativesettings.html#LocalSettings	nativesettings: LocalSettings	
 hasKey	nativesettings.html#hasKey,Settings,string	nativesettings: hasKey(settings: Settings; key: string): bool	
 `[]`	nativesettings.html#[],Settings,string	nativesettings: `[]`(settings: Settings; key: string): JsonNode	
 getOrDefault	nativesettings.html#getOrDefault,Settings,string	nativesettings: getOrDefault(settings: Settings; key: string): JsonNode	
 newCtxSettings	nativesettings.html#newCtxSettings	nativesettings: newCtxSettings(): CtxSettings	
-newLocalSettings	nativesettings.html#newLocalSettings,JsonNode	nativesettings: newLocalSettings(data: JsonNode): LocalSettings	
-newLocalSettings	nativesettings.html#newLocalSettings,string	nativesettings: newLocalSettings(configPath: string): LocalSettings	
-newSettings	nativesettings.html#newSettings,string,openArray[string],string,int	nativesettings: newSettings(address = &quot;&quot;; port = Port(8080); debug = true; reusePort = true;\n            staticDirs: openArray[string] = []; secretKey = randomString(8);\n            appName = &quot;&quot;; bufSize = 40960): Settings	
-newSettings	nativesettings.html#newSettings,JsonNode,string,openArray[string],string,int	nativesettings: newSettings(data: JsonNode; address = &quot;&quot;; port = Port(8080); debug = true;\n            reusePort = true; staticDirs: openArray[string] = []; appName = &quot;&quot;;\n            bufSize = 40960): Settings	
-newSettings	nativesettings.html#newSettings,string,string,openArray[string],string,int	nativesettings: newSettings(configPath: string; address = &quot;&quot;; port = Port(8080); debug = true;\n            reusePort = true; staticDirs: openArray[string] = []; appName = &quot;&quot;;\n            bufSize = 40960): Settings	
+newSettings	nativesettings.html#newSettings,string,string,int	nativesettings: newSettings(address = &quot;&quot;; port = Port(8080); debug = true; reusePort = true;\n            secretKey = randomString(8); appName = &quot;&quot;; bufSize = 40960): Settings	
+newSettings	nativesettings.html#newSettings,JsonNode	nativesettings: newSettings(data: JsonNode): Settings	
+newSettings	nativesettings.html#newSettings,string	nativesettings: newSettings(configPath: string): Settings	

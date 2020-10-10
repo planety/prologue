@@ -111,11 +111,17 @@ function main() {
 <li>
   <a class="reference reference-toplevel" href="#12" id="62">Procs</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#unauthenticate%2CContext%2CAuthMethod%2Cstring%2Cstring"
-    title="unauthenticate(ctx: Context; authMethod: AuthMethod; realm: string; charset = &quot;UTF-8&quot;)"><wbr />unauthenticate<span class="attachedType">AuthMethod</span></a></li>
-  <li><a class="reference" href="#basicAuth%2CContext%2Cstring%2CVerifyHandler%2Cstring"
+      <ul class="simple nested-toc-section">basicAuth
+      <li><a class="reference" href="#basicAuth%2CContext%2Cstring%2CVerifyHandler%2Cstring"
     title="basicAuth(ctx: Context; realm: string; verify: VerifyHandler; charset = &quot;UTF-8&quot;): tuple[
-    hasValue: bool, username, password: string]"><wbr />basic<wbr />Auth<span class="attachedType">VerifyHandler</span></a></li>
+    hasValue: bool, username, password: string]">basicAuth,Context,string,VerifyHandler,string<span class="attachedType">VerifyHandler</span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">unauthenticate
+      <li><a class="reference" href="#unauthenticate%2CContext%2CAuthMethod%2Cstring%2Cstring"
+    title="unauthenticate(ctx: Context; authMethod: AuthMethod; realm: string; charset = &quot;UTF-8&quot;)">unauthenticate,Context,AuthMethod,string,string<span class="attachedType">AuthMethod</span></a></li>
+
+  </ul>
 
   </ul>
 </li>
@@ -198,7 +204,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-07 02:34:30 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-10 07:31:16 UTC</small>
       </div>
     </div>
   </div>

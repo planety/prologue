@@ -110,22 +110,34 @@ function main() {
 <li>
   <a class="reference reference-toplevel" href="#12" id="62">Procs</a>
   <ul class="simple simple-toc-section">
+      <ul class="simple nested-toc-section">loadTranslate
       <li><a class="reference" href="#loadTranslate%2CStream%2Cstring"
-    title="loadTranslate(stream: Stream; filename = &quot;[stream]&quot;): TableRef[string, StringTableRef]"><wbr />load<wbr />Translate<span class="attachedType"></span></a></li>
+    title="loadTranslate(stream: Stream; filename = &quot;[stream]&quot;): TableRef[string, StringTableRef]">loadTranslate,Stream,string<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#loadTranslate%2Cstring"
-    title="loadTranslate(filename: string): TableRef[string, StringTableRef]"><wbr />load<wbr />Translate<span class="attachedType"></span></a></li>
+    title="loadTranslate(filename: string): TableRef[string, StringTableRef]">loadTranslate,string<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#loadTranslate%2CPrologue%2Cstring"
-    title="loadTranslate(app: Prologue; filename: string)"><wbr />load<wbr />Translate<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#setLanguage%2CContext%2Cstring"
-    title="setLanguage(ctx: Context; language: string): Translator"><wbr />set<wbr />Language<span class="attachedType">Translator</span></a></li>
-  <li><a class="reference" href="#translate%2CTranslator%2Cstring"
-    title="translate(t: Translator; text: string): string"><wbr />translate<span class="attachedType">Translator</span></a></li>
-  <li><a class="reference" href="#Tr%2CTranslator%2Cstring"
-    title="Tr(t: Translator; text: string): string"><wbr />Tr<span class="attachedType">Translator</span></a></li>
+    title="loadTranslate(app: Prologue; filename: string)">loadTranslate,Prologue,string<span class="attachedType"></span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">translate
+      <li><a class="reference" href="#translate%2CTranslator%2Cstring"
+    title="translate(t: Translator; text: string): string">translate,Translator,string<span class="attachedType">Translator</span></a></li>
   <li><a class="reference" href="#translate%2CContext%2Cstring%2Cstring"
-    title="translate(ctx: Context; text: string; language: string): string"><wbr />translate<span class="attachedType"></span></a></li>
+    title="translate(ctx: Context; text: string; language: string): string">translate,Context,string,string<span class="attachedType"></span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">Tr
+      <li><a class="reference" href="#Tr%2CTranslator%2Cstring"
+    title="Tr(t: Translator; text: string): string">Tr,Translator,string<span class="attachedType">Translator</span></a></li>
   <li><a class="reference" href="#Tr%2CContext%2Cstring%2Cstring"
-    title="Tr(ctx: Context; text: string; language: string): string"><wbr />Tr<span class="attachedType"></span></a></li>
+    title="Tr(ctx: Context; text: string; language: string): string">Tr,Context,string,string<span class="attachedType"></span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">setLanguage
+      <li><a class="reference" href="#setLanguage%2CContext%2Cstring"
+    title="setLanguage(ctx: Context; language: string): Translator">setLanguage,Context,string<span class="attachedType">Translator</span></a></li>
+
+  </ul>
 
   </ul>
 </li>
@@ -154,9 +166,9 @@ function main() {
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/i18n/i18n.nim#L24"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/i18n/i18n.nim#L23"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/i18n/i18n.nim#L24" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/i18n/i18n.nim#L23" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -172,9 +184,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/i18n/i18n.nim#L29"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/i18n/i18n.nim#L28"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/i18n/i18n.nim#L29" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/i18n/i18n.nim#L28" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="loadTranslate,string"></a>
@@ -185,9 +197,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/i18n/i18n.nim#L55"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/i18n/i18n.nim#L54"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/i18n/i18n.nim#L55" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/i18n/i18n.nim#L54" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="loadTranslate,Prologue,string"></a>
@@ -198,9 +210,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/i18n/i18n.nim#L62"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/i18n/i18n.nim#L61"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/i18n/i18n.nim#L62" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/i18n/i18n.nim#L61" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="setLanguage,Context,string"></a>
@@ -210,9 +222,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/i18n/i18n.nim#L66"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/i18n/i18n.nim#L65"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/i18n/i18n.nim#L66" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/i18n/i18n.nim#L65" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="translate,Translator,string"></a>
@@ -222,9 +234,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/i18n/i18n.nim#L69"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/i18n/i18n.nim#L68"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/i18n/i18n.nim#L69" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/i18n/i18n.nim#L68" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="Tr,Translator,string"></a>
@@ -233,9 +245,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/i18n/i18n.nim#L78"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/i18n/i18n.nim#L77"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/i18n/i18n.nim#L78" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/i18n/i18n.nim#L77" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="translate,Context,string,string"></a>
@@ -245,9 +257,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/i18n/i18n.nim#L81"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/i18n/i18n.nim#L80"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/i18n/i18n.nim#L81" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/i18n/i18n.nim#L80" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="Tr,Context,string,string"></a>
@@ -257,9 +269,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Helper function for <tt class="docutils literal"><span class="pre">translate</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/i18n/i18n.nim#L90"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/i18n/i18n.nim#L89"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/i18n/i18n.nim#L90" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/i18n/i18n.nim#L89" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -272,7 +284,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-07 02:34:30 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-10 07:31:16 UTC</small>
       </div>
     </div>
   </div>

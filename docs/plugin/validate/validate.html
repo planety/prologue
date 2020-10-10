@@ -113,44 +113,92 @@ function main() {
 <li>
   <a class="reference reference-toplevel" href="#12" id="62">Procs</a>
   <ul class="simple simple-toc-section">
+      <ul class="simple nested-toc-section">validate
       <li><a class="reference" href="#validate%2CFormValidation%2CStringTableRef"
-    title="validate(formValidation: FormValidation; textTable: StringTableRef; allMsgs = true): Info"><wbr />validate<span class="attachedType">FormValidation</span></a></li>
+    title="validate(formValidation: FormValidation; textTable: StringTableRef; allMsgs = true): Info">validate,FormValidation,StringTableRef<span class="attachedType">FormValidation</span></a></li>
+
+  </ul>
 
   </ul>
 </li>
 <li>
   <a class="reference reference-toplevel" href="#13" id="63">Funcs</a>
   <ul class="simple simple-toc-section">
+      <ul class="simple nested-toc-section">maxLength
+      <li><a class="reference" href="#maxLength%2CNatural%2Cstring"
+    title="maxLength(max: Natural; msg = &quot;&quot;): ValidateHandler">maxLength,Natural,string<span class="attachedType">ValidateHandler</span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">isBool
+      <li><a class="reference" href="#isBool%2Cstring"
+    title="isBool(msg = &quot;&quot;): ValidateHandler">isBool,string<span class="attachedType">ValidateHandler</span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">matchRegex
+      <li><a class="reference" href="#matchRegex%2CRegex%2Cstring"
+    title="matchRegex(value: Regex; msg = &quot;&quot;): ValidateHandler">matchRegex,Regex,string<span class="attachedType">ValidateHandler</span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">required
+      <li><a class="reference" href="#required%2Cstring"
+    title="required(msg = &quot;&quot;): ValidateHandler">required,string<span class="attachedType">ValidateHandler</span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">minLength
+      <li><a class="reference" href="#minLength%2CNatural%2Cstring"
+    title="minLength(min: Natural; msg = &quot;&quot;): ValidateHandler">minLength,Natural,string<span class="attachedType">ValidateHandler</span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">rangeLength
+      <li><a class="reference" href="#rangeLength%2CNatural%2CNatural%2Cstring"
+    title="rangeLength(min, max: Natural; msg = &quot;&quot;): ValidateHandler">rangeLength,Natural,Natural,string<span class="attachedType">ValidateHandler</span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">accepted
+      <li><a class="reference" href="#accepted%2Cstring"
+    title="accepted(msg = &quot;&quot;): ValidateHandler">accepted,string<span class="attachedType">ValidateHandler</span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">isInt
+      <li><a class="reference" href="#isInt%2Cstring"
+    title="isInt(msg = &quot;&quot;): ValidateHandler">isInt,string<span class="attachedType">ValidateHandler</span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">isNumeric
+      <li><a class="reference" href="#isNumeric%2Cstring"
+    title="isNumeric(msg = &quot;&quot;): ValidateHandler">isNumeric,string<span class="attachedType">ValidateHandler</span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">minValue
+      <li><a class="reference" href="#minValue%2Cfloat%2Cstring"
+    title="minValue(min: float; msg = &quot;&quot;): ValidateHandler">minValue,float,string<span class="attachedType">ValidateHandler</span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">rangeValue
+      <li><a class="reference" href="#rangeValue%2Cfloat%2Cfloat%2Cstring"
+    title="rangeValue(min, max: float; msg = &quot;&quot;): ValidateHandler">rangeValue,float,float,string<span class="attachedType">ValidateHandler</span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">newFormValidation
       <li><a class="reference" href="#newFormValidation%2CopenArray%5B%5D"
-    title="newFormValidation(validator: openArray[(string, seq[ValidateHandler])]): FormValidation"><wbr />new<wbr />Form<wbr />Validation<span class="attachedType">ValidateHandler</span></a></li>
-  <li><a class="reference" href="#isInt%2Cstring"
-    title="isInt(msg = &quot;&quot;): ValidateHandler"><wbr />is<wbr />Int<span class="attachedType">ValidateHandler</span></a></li>
-  <li><a class="reference" href="#isNumeric%2Cstring"
-    title="isNumeric(msg = &quot;&quot;): ValidateHandler"><wbr />is<wbr />Numeric<span class="attachedType">ValidateHandler</span></a></li>
-  <li><a class="reference" href="#isBool%2Cstring"
-    title="isBool(msg = &quot;&quot;): ValidateHandler"><wbr />is<wbr />Bool<span class="attachedType">ValidateHandler</span></a></li>
-  <li><a class="reference" href="#minValue%2Cfloat%2Cstring"
-    title="minValue(min: float; msg = &quot;&quot;): ValidateHandler"><wbr />min<wbr />Value<span class="attachedType">ValidateHandler</span></a></li>
-  <li><a class="reference" href="#maxValue%2Cfloat%2Cstring"
-    title="maxValue(max: float; msg = &quot;&quot;): ValidateHandler"><wbr />max<wbr />Value<span class="attachedType">ValidateHandler</span></a></li>
-  <li><a class="reference" href="#rangeValue%2Cfloat%2Cfloat%2Cstring"
-    title="rangeValue(min, max: float; msg = &quot;&quot;): ValidateHandler"><wbr />range<wbr />Value<span class="attachedType">ValidateHandler</span></a></li>
-  <li><a class="reference" href="#minLength%2CNatural%2Cstring"
-    title="minLength(min: Natural; msg = &quot;&quot;): ValidateHandler"><wbr />min<wbr />Length<span class="attachedType">ValidateHandler</span></a></li>
-  <li><a class="reference" href="#maxLength%2CNatural%2Cstring"
-    title="maxLength(max: Natural; msg = &quot;&quot;): ValidateHandler"><wbr />max<wbr />Length<span class="attachedType">ValidateHandler</span></a></li>
-  <li><a class="reference" href="#rangeLength%2CNatural%2CNatural%2Cstring"
-    title="rangeLength(min, max: Natural; msg = &quot;&quot;): ValidateHandler"><wbr />range<wbr />Length<span class="attachedType">ValidateHandler</span></a></li>
-  <li><a class="reference" href="#equals%2Cstring%2Cstring"
-    title="equals(value: string; msg = &quot;&quot;): ValidateHandler"><wbr />equals<span class="attachedType">ValidateHandler</span></a></li>
-  <li><a class="reference" href="#accepted%2Cstring"
-    title="accepted(msg = &quot;&quot;): ValidateHandler"><wbr />accepted<span class="attachedType">ValidateHandler</span></a></li>
-  <li><a class="reference" href="#required%2Cstring"
-    title="required(msg = &quot;&quot;): ValidateHandler"><wbr />required<span class="attachedType">ValidateHandler</span></a></li>
-  <li><a class="reference" href="#matchRegex%2CRegex%2Cstring"
-    title="matchRegex(value: Regex; msg = &quot;&quot;): ValidateHandler"><wbr />match<wbr />Regex<span class="attachedType">ValidateHandler</span></a></li>
-  <li><a class="reference" href="#matchURL%2Cstring"
-    title="matchURL(msg = &quot;&quot;): ValidateHandler"><wbr />match<wbr />URL<span class="attachedType">ValidateHandler</span></a></li>
+    title="newFormValidation(validator: openArray[(string, seq[ValidateHandler])]): FormValidation">newFormValidation,openArray[]<span class="attachedType">ValidateHandler</span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">equals
+      <li><a class="reference" href="#equals%2Cstring%2Cstring"
+    title="equals(value: string; msg = &quot;&quot;): ValidateHandler">equals,string,string<span class="attachedType">ValidateHandler</span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">matchURL
+      <li><a class="reference" href="#matchURL%2Cstring"
+    title="matchURL(msg = &quot;&quot;): ValidateHandler">matchURL,string<span class="attachedType">ValidateHandler</span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">maxValue
+      <li><a class="reference" href="#maxValue%2Cfloat%2Cstring"
+    title="maxValue(max: float; msg = &quot;&quot;): ValidateHandler">maxValue,float,string<span class="attachedType">ValidateHandler</span></a></li>
+
+  </ul>
 
   </ul>
 </li>
@@ -450,7 +498,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-07 02:34:11 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-10 07:30:56 UTC</small>
       </div>
     </div>
   </div>

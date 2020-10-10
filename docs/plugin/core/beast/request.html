@@ -119,63 +119,123 @@ function main() {
 <li>
   <a class="reference reference-toplevel" href="#12" id="62">Procs</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#send%2CRequest%2Cstring"
-    title="send(request: Request; content: string): Future[void]"><wbr />send<span class="attachedType">Request</span></a></li>
-  <li><a class="reference" href="#respond%2CRequest%2CHttpCode%2Cstring"
-    title="respond(request: Request; code: HttpCode; body: string): Future[void]"><wbr />respond<span class="attachedType">Request</span></a></li>
+      <ul class="simple nested-toc-section">close
+      <li><a class="reference" href="#close%2CRequest"
+    title="close(request: Request)">close,Request<span class="attachedType">Request</span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">respond
+      <li><a class="reference" href="#respond%2CRequest%2CHttpCode%2Cstring"
+    title="respond(request: Request; code: HttpCode; body: string): Future[void]">respond,Request,HttpCode,string<span class="attachedType">Request</span></a></li>
   <li><a class="reference" href="#respond%2CRequest%2CHttpCode%2Cstring%2CResponseHeaders"
     title="respond(request: Request; code: HttpCode; body: string; headers: ResponseHeaders): Future[
-    void]"><wbr />respond<span class="attachedType">Request</span></a></li>
+    void]">respond,Request,HttpCode,string,ResponseHeaders<span class="attachedType">Request</span></a></li>
   <li><a class="reference" href="#respond%2CRequest%2CResponse"
-    title="respond(request: Request; response: Response): Future[void]"><wbr />respond<span class="attachedType">Request</span></a></li>
-  <li><a class="reference" href="#close%2CRequest"
-    title="close(request: Request)"><wbr />close<span class="attachedType">Request</span></a></li>
+    title="respond(request: Request; response: Response): Future[void]">respond,Request,Response<span class="attachedType">Request</span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">send
+      <li><a class="reference" href="#send%2CRequest%2Cstring"
+    title="send(request: Request; content: string): Future[void]">send,Request,string<span class="attachedType">Request</span></a></li>
+
+  </ul>
 
   </ul>
 </li>
 <li>
   <a class="reference reference-toplevel" href="#13" id="63">Funcs</a>
   <ul class="simple simple-toc-section">
+      <ul class="simple nested-toc-section">path
+      <li><a class="reference" href="#path%2CRequest"
+    title="path(request: Request): string">path,Request<span class="attachedType">Request</span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">charset
+      <li><a class="reference" href="#charset%2CRequest"
+    title="charset(request: Request): string">charset,Request<span class="attachedType">Request</span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">getCookie
+      <li><a class="reference" href="#getCookie%2CRequest%2Cstring%2Cstring"
+    title="getCookie(request: Request; key: string; default: string): string">getCookie,Request,string,string<span class="attachedType">Request</span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">query
+      <li><a class="reference" href="#query%2CRequest"
+    title="query(request: Request): string">query,Request<span class="attachedType">Request</span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">url
       <li><a class="reference" href="#url%2CRequest"
-    title="url(request: Request): Uri"><wbr />url<span class="attachedType">Request</span></a></li>
-  <li><a class="reference" href="#port%2CRequest"
-    title="port(request: Request): string"><wbr />port<span class="attachedType">Request</span></a></li>
-  <li><a class="reference" href="#path%2CRequest"
-    title="path(request: Request): string"><wbr />path<span class="attachedType">Request</span></a></li>
-  <li><a class="reference" href="#stripPath%2CRequest"
-    title="stripPath(request: var Request)"><wbr />strip<wbr />Path<span class="attachedType">Request</span></a></li>
-  <li><a class="reference" href="#query%2CRequest"
-    title="query(request: Request): string"><wbr />query<span class="attachedType">Request</span></a></li>
-  <li><a class="reference" href="#scheme%2CRequest"
-    title="scheme(request: Request): string"><wbr />scheme<span class="attachedType">Request</span></a></li>
-  <li><a class="reference" href="#setScheme%2CRequest%2Cstring"
-    title="setScheme(request: var Request; value: string)"><wbr />set<wbr />Scheme<span class="attachedType">Request</span></a></li>
-  <li><a class="reference" href="#body%2CRequest"
-    title="body(request: Request): string"><wbr />body<span class="attachedType">Request</span></a></li>
-  <li><a class="reference" href="#headers%2CRequest"
-    title="headers(request: Request): HttpHeaders"><wbr />headers<span class="attachedType">Request</span></a></li>
-  <li><a class="reference" href="#reqMethod%2CRequest"
-    title="reqMethod(request: Request): HttpMethod"><wbr />req<wbr />Method<span class="attachedType">Request</span></a></li>
-  <li><a class="reference" href="#getCookie%2CRequest%2Cstring%2Cstring"
-    title="getCookie(request: Request; key: string; default: string): string"><wbr />get<wbr />Cookie<span class="attachedType">Request</span></a></li>
-  <li><a class="reference" href="#contentType%2CRequest"
-    title="contentType(request: Request): string"><wbr />content<wbr />Type<span class="attachedType">Request</span></a></li>
-  <li><a class="reference" href="#charset%2CRequest"
-    title="charset(request: Request): string"><wbr />charset<span class="attachedType">Request</span></a></li>
-  <li><a class="reference" href="#secure%2CRequest"
-    title="secure(request: Request): bool"><wbr />secure<span class="attachedType">Request</span></a></li>
-  <li><a class="reference" href="#hostName%2CRequest"
-    title="hostName(request: Request): string"><wbr />host<wbr />Name<span class="attachedType">Request</span></a></li>
-  <li><a class="reference" href="#initRequest%2CRequest"
-    title="initRequest(nativeRequest: NativeRequest; cookies = initCookieJar();
-            pathParams = newStringTable(modeCaseSensitive);
-            queryParams = newStringTable(modeCaseSensitive);
-            postParams = newStringTable(modeCaseSensitive)): Request"><wbr />init<wbr />Request<span class="attachedType">NativeRequest</span></a></li>
-  <li><a class="reference" href="#initMockingRequest%2CHttpMethod%2CHttpHeaders%2CUri"
+    title="url(request: Request): Uri">url,Request<span class="attachedType">Request</span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">headers
+      <li><a class="reference" href="#headers%2CRequest"
+    title="headers(request: Request): HttpHeaders">headers,Request<span class="attachedType">Request</span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">reqMethod
+      <li><a class="reference" href="#reqMethod%2CRequest"
+    title="reqMethod(request: Request): HttpMethod">reqMethod,Request<span class="attachedType">Request</span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">port
+      <li><a class="reference" href="#port%2CRequest"
+    title="port(request: Request): string">port,Request<span class="attachedType">Request</span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">body
+      <li><a class="reference" href="#body%2CRequest"
+    title="body(request: Request): string">body,Request<span class="attachedType">Request</span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">initMockingRequest
+      <li><a class="reference" href="#initMockingRequest%2CHttpMethod%2CHttpHeaders%2CUri"
     title="initMockingRequest(httpMethod: HttpMethod; headers: HttpHeaders; url: Uri;
                    cookies = initCookieJar(); postParams = newStringTable();
                    queryParams = newStringTable(); formParams = initFormPart();
-                   pathParams = newStringTable()): Request"><wbr />init<wbr />Mocking<wbr />Request<span class="attachedType">Request</span></a></li>
+                   pathParams = newStringTable()): Request">initMockingRequest,HttpMethod,HttpHeaders,Uri<span class="attachedType">Request</span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">scheme
+      <li><a class="reference" href="#scheme%2CRequest"
+    title="scheme(request: Request): string">scheme,Request<span class="attachedType">Request</span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">stripPath
+      <li><a class="reference" href="#stripPath%2CRequest"
+    title="stripPath(request: var Request)">stripPath,Request<span class="attachedType">Request</span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">contentType
+      <li><a class="reference" href="#contentType%2CRequest"
+    title="contentType(request: Request): string">contentType,Request<span class="attachedType">Request</span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">secure
+      <li><a class="reference" href="#secure%2CRequest"
+    title="secure(request: Request): bool">secure,Request<span class="attachedType">Request</span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">initRequest
+      <li><a class="reference" href="#initRequest%2CRequest"
+    title="initRequest(nativeRequest: NativeRequest; cookies = initCookieJar();
+            pathParams = newStringTable(modeCaseSensitive);
+            queryParams = newStringTable(modeCaseSensitive);
+            postParams = newStringTable(modeCaseSensitive)): Request">initRequest,Request<span class="attachedType">NativeRequest</span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">setScheme
+      <li><a class="reference" href="#setScheme%2CRequest%2Cstring"
+    title="setScheme(request: var Request; value: string)">setScheme,Request,string<span class="attachedType">Request</span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">hostName
+      <li><a class="reference" href="#hostName%2CRequest"
+    title="hostName(request: Request): string">hostName,Request<span class="attachedType">Request</span></a></li>
+
+  </ul>
 
   </ul>
 </li>
@@ -201,9 +261,9 @@ function main() {
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L16"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L12"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L16" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L12" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="Request"></a>
@@ -222,9 +282,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L17"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L13"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L17" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L13" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -239,9 +299,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Sends <tt class="docutils literal"><span class="pre">content</span></tt> to the client.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L124"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L120"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L124" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L120" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="respond,Request,HttpCode,string"></a>
@@ -251,9 +311,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Responds <tt class="docutils literal"><span class="pre">code</span></tt>, <tt class="docutils literal"><span class="pre">body</span></tt> to the client, the framework will generate the contents of the response automatically.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L130"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L126"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L130" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L126" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="respond,Request,HttpCode,string,ResponseHeaders"></a>
@@ -265,9 +325,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Responds <tt class="docutils literal"><span class="pre">code</span></tt>, <tt class="docutils literal"><span class="pre">body</span></tt> and <tt class="docutils literal"><span class="pre">headers</span></tt> to the client, the framework will generate the contents of the response automatically.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L137"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L133"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L137" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L133" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="respond,Request,Response"></a>
@@ -278,9 +338,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Responds <tt class="docutils literal"><span class="pre">response</span></tt> to the client, the framework will generate the contents of the response automatically.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L148"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L144"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L148" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L144" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="close,Request"></a>
@@ -289,9 +349,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Closes the request.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L181"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L177"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L181" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L177" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -305,9 +365,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Gets the url of the request.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L36"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L32"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L36" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L32" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="port,Request"></a>
@@ -316,9 +376,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Gets the port of the request.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L40"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L36"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L40" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L36" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="path,Request"></a>
@@ -327,9 +387,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Gets the path of the request.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L44"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L40"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L44" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L40" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="stripPath,Request"></a>
@@ -338,9 +398,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Strips the path of the request.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L48"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L44"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L48" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L44" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="query,Request"></a>
@@ -349,9 +409,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Gets the query strings of the request.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L53"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L49"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L53" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L49" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="scheme,Request"></a>
@@ -360,9 +420,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Gets the scheme of the request.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L57"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L53"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L57" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L53" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="setScheme,Request,string"></a>
@@ -371,9 +431,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Sets the scheme of the request.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L61"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L57"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L61" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L57" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="body,Request"></a>
@@ -382,9 +442,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Gets the body of the request. It is only present when using HttpPost method.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L65"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L61"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L65" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L61" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="headers,Request"></a>
@@ -393,9 +453,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Gets the <tt class="docutils literal"><span class="pre">HttpHeaders</span></tt> of the request.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L73"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L69"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L73" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L69" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="reqMethod,Request"></a>
@@ -404,9 +464,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Gets the <tt class="docutils literal"><span class="pre">HttpMethod</span></tt> of the request.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L77"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L73"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L77" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L73" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="getCookie,Request,string,string"></a>
@@ -416,9 +476,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Gets the value of <tt class="docutils literal"><span class="pre">request.cookies[key]</span></tt> if key is in cookies. Otherwise, the <tt class="docutils literal"><span class="pre">default</span></tt> value will be returned.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L81"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L77"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L81" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L77" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="contentType,Request"></a>
@@ -427,9 +487,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Gets the contentType of the request.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L86"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L82"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L86" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L82" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="charset,Request"></a>
@@ -438,9 +498,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Gets the charset of the request.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L92"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L88"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L92" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L88" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="secure,Request"></a>
@@ -449,9 +509,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Returns True if the request is secure.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L104"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L100"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L104" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L100" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="hostName,Request"></a>
@@ -460,9 +520,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Gets the hostname of the request.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L117"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L113"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L117" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L113" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="initRequest,Request"></a>
@@ -475,9 +535,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Initializes a new Request.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L153"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L149"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L153" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L149" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="initMockingRequest,HttpMethod,HttpHeaders,Uri"></a>
@@ -489,9 +549,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Initializes a new Request.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L185"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/beast/request.nim#L181"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L185" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/beast/request.nim#L181" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -504,7 +564,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-07 02:34:12 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-10 07:30:58 UTC</small>
       </div>
     </div>
   </div>

@@ -1,0 +1,6 @@
+hasHeader	core/request.html#hasHeader,Request,string	request: hasHeader(request: Request; key: string): bool	
+getHeader	core/request.html#getHeader,Request,string	request: getHeader(request: Request; key: string): seq[string]	
+getHeaderOrDefault	core/request.html#getHeaderOrDefault,Request,string	request: getHeaderOrDefault(request: Request; key: string; default = @[&quot;&quot;]): seq[string]	
+setHeader	core/request.html#setHeader,Request,string,string	request: setHeader(request: var Request; key, value: string)	
+setHeader	core/request.html#setHeader,Request,string,seq[string]	request: setHeader(request: var Request; key: string; value: seq[string])	
+addHeader	core/request.html#addHeader,Request,string,string	request: addHeader(request: var Request; key, value: string)	

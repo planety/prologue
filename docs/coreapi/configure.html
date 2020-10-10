@@ -113,42 +113,87 @@ function main() {
 <li>
   <a class="reference reference-toplevel" href="#12" id="62">Procs</a>
   <ul class="simple simple-toc-section">
+      <ul class="simple nested-toc-section">getPrologueEnv
+      <li><a class="reference" href="#getPrologueEnv%2Cstring%2Cstring%2Cstring"
+    title="getPrologueEnv(key: string; prefix: string; default = &quot;&quot;): string">getPrologueEnv,string,string,string<span class="attachedType"></span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">delPrologueEnv
+      <li><a class="reference" href="#delPrologueEnv%2Cstring%2Cstring"
+    title="delPrologueEnv(key: string; prefix: string)">delPrologueEnv,string,string<span class="attachedType"></span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">writePrologueEnv
+      <li><a class="reference" href="#writePrologueEnv%2Cstring%2CEnv"
+    title="writePrologueEnv(filename: string; env: Env)">writePrologueEnv,string,Env<span class="attachedType">Env</span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">existsPrologueEnv
+      <li><a class="reference" href="#existsPrologueEnv%2Cstring%2Cstring"
+    title="existsPrologueEnv(key: string; prefix: string): bool">existsPrologueEnv,string,string<span class="attachedType"></span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">getAllPrologueEnv
+      <li><a class="reference" href="#getAllPrologueEnv%2Cstring"
+    title="getAllPrologueEnv(prefix: string): OrderedTableRef[string, string]">getAllPrologueEnv,string<span class="attachedType"></span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">loadPrologueEnv
+      <li><a class="reference" href="#loadPrologueEnv%2Cstring"
+    title="loadPrologueEnv(filename: string): Env">loadPrologueEnv,string<span class="attachedType">Env</span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">putPrologueEnv
       <li><a class="reference" href="#putPrologueEnv%2Cstring%2Cstring%2Cstring"
-    title="putPrologueEnv(key, val: string; prefix: string)"><wbr />put<wbr />Prologue<wbr />Env<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#getPrologueEnv%2Cstring%2Cstring%2Cstring"
-    title="getPrologueEnv(key: string; prefix: string; default = &quot;&quot;): string"><wbr />get<wbr />Prologue<wbr />Env<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#getAllPrologueEnv%2Cstring"
-    title="getAllPrologueEnv(prefix: string): OrderedTableRef[string, string]"><wbr />get<wbr />All<wbr />Prologue<wbr />Env<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#existsPrologueEnv%2Cstring%2Cstring"
-    title="existsPrologueEnv(key: string; prefix: string): bool"><wbr />exists<wbr />Prologue<wbr />Env<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#delPrologueEnv%2Cstring%2Cstring"
-    title="delPrologueEnv(key: string; prefix: string)"><wbr />del<wbr />Prologue<wbr />Env<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#loadPrologueEnv%2Cstring"
-    title="loadPrologueEnv(filename: string): Env"><wbr />load<wbr />Prologue<wbr />Env<span class="attachedType">Env</span></a></li>
-  <li><a class="reference" href="#setPrologueEnv%2CEnv%2Cstring%2Cstring"
-    title="setPrologueEnv(env: Env; key, value: string)"><wbr />set<wbr />Prologue<wbr />Env<span class="attachedType">Env</span></a></li>
-  <li><a class="reference" href="#writePrologueEnv%2Cstring%2CEnv"
-    title="writePrologueEnv(filename: string; env: Env)"><wbr />write<wbr />Prologue<wbr />Env<span class="attachedType">Env</span></a></li>
+    title="putPrologueEnv(key, val: string; prefix: string)">putPrologueEnv,string,string,string<span class="attachedType"></span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">setPrologueEnv
+      <li><a class="reference" href="#setPrologueEnv%2CEnv%2Cstring%2Cstring"
+    title="setPrologueEnv(env: Env; key, value: string)">setPrologueEnv,Env,string,string<span class="attachedType">Env</span></a></li>
+
+  </ul>
 
   </ul>
 </li>
 <li>
   <a class="reference reference-toplevel" href="#13" id="63">Funcs</a>
   <ul class="simple simple-toc-section">
+      <ul class="simple nested-toc-section">contains
+      <li><a class="reference" href="#contains%2CEnv%2Cstring"
+    title="contains(env: Env; key: string): bool">contains,Env,string<span class="attachedType">Env</span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">$
+      <li><a class="reference" href="#%24%2CEnv"
+    title="`$`(env: Env): string">$,Env<span class="attachedType">Env</span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">getOrDefault
+      <li><a class="reference" href="#getOrDefault%2CEnv%2Cstring%2CT"
+    title="getOrDefault[T: BaseType](env: Env; key: string; default: T): T">getOrDefault,Env,string,T<span class="attachedType">Env</span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">hasKey
+      <li><a class="reference" href="#hasKey%2CEnv%2Cstring"
+    title="hasKey(env: Env; key: string): bool">hasKey,Env,string<span class="attachedType">Env</span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">get
+      <li><a class="reference" href="#get%2CEnv%2Cstring"
+    title="get(env: Env; key: string): string">get,Env,string<span class="attachedType">Env</span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">initEnv
       <li><a class="reference" href="#initEnv"
-    title="initEnv(): Env"><wbr />init<wbr />Env<span class="attachedType">Env</span></a></li>
-  <li><a class="reference" href="#%24%2CEnv"
-    title="`$`(env: Env): string"><wbr />`$`<span class="attachedType">Env</span></a></li>
-  <li><a class="reference" href="#%5B%5D%2CEnv%2Cstring"
-    title="`[]`(env: Env; key: string): string"><wbr />`[]`<span class="attachedType">Env</span></a></li>
-  <li><a class="reference" href="#hasKey%2CEnv%2Cstring"
-    title="hasKey(env: Env; key: string): bool"><wbr />has<wbr />Key<span class="attachedType">Env</span></a></li>
-  <li><a class="reference" href="#contains%2CEnv%2Cstring"
-    title="contains(env: Env; key: string): bool"><wbr />contains<span class="attachedType">Env</span></a></li>
-  <li><a class="reference" href="#get%2CEnv%2Cstring"
-    title="get(env: Env; key: string): string"><wbr />get<span class="attachedType">Env</span></a></li>
-  <li><a class="reference" href="#getOrDefault%2CEnv%2Cstring%2CT"
-    title="getOrDefault[T: BaseType](env: Env; key: string; default: T): T"><wbr />get<wbr />Or<wbr />Default<span class="attachedType">Env</span></a></li>
+    title="initEnv(): Env">initEnv<span class="attachedType">Env</span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">[]
+      <li><a class="reference" href="#%5B%5D%2CEnv%2Cstring"
+    title="`[]`(env: Env; key: string): string">[],Env,string<span class="attachedType">Env</span></a></li>
+
+  </ul>
 
   </ul>
 </li>
@@ -222,9 +267,9 @@ staticDir=static
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L58"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L57"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L58" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L57" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="EnvError"></a>
@@ -233,9 +278,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L60"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L59"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L60" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L59" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="EnvWrongFormatError"></a>
@@ -244,9 +289,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L61"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L60"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L61" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L60" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -261,9 +306,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Puts (<tt class="docutils literal"><span class="pre">key</span></tt>, <tt class="docutils literal"><span class="pre">val</span></tt>) pairs with <tt class="docutils literal"><span class="pre">prefix</span></tt> to environment variables.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L114"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L113"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L114" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L113" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="getPrologueEnv,string,string,string"></a>
@@ -273,9 +318,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Gets (<tt class="docutils literal"><span class="pre">key</span></tt>, <tt class="docutils literal"><span class="pre">val</span></tt>) pairs with <tt class="docutils literal"><span class="pre">prefix</span></tt> from environment variables. If <tt class="docutils literal"><span class="pre">key</span></tt> can't be found, <tt class="docutils literal"><span class="pre">default</span></tt> will be returned.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L118"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L117"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L118" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L117" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="getAllPrologueEnv,string"></a>
@@ -285,9 +330,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Gets all (<tt class="docutils literal"><span class="pre">key</span></tt>, <tt class="docutils literal"><span class="pre">val</span></tt>) pairs with <tt class="docutils literal"><span class="pre">prefix</span></tt> from environment variables.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L123"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L122"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L123" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L122" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="existsPrologueEnv,string,string"></a>
@@ -297,9 +342,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L130"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L129"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L130" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L129" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="delPrologueEnv,string,string"></a>
@@ -309,9 +354,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L133"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L132"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L133" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L132" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="loadPrologueEnv,string"></a>
@@ -322,9 +367,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L136"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L135"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L136" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L135" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="setPrologueEnv,Env,string,string"></a>
@@ -333,9 +378,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L155"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L154"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L155" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L154" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="writePrologueEnv,string,Env"></a>
@@ -345,9 +390,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L158"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L157"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L158" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L157" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -361,9 +406,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Initializes an <tt class="docutils literal"><span class="pre">Env</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L64"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L63"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L64" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L63" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="$,Env"></a>
@@ -372,9 +417,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Gets the string form of <tt class="docutils literal"><span class="pre">Env</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L68"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L67"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L68" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L67" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="[],Env,string"></a>
@@ -383,9 +428,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L72"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L71"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L72" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L71" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="hasKey,Env,string"></a>
@@ -394,9 +439,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Returns true if <tt class="docutils literal"><span class="pre">key</span></tt> exists in <tt class="docutils literal"><span class="pre">Env</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L76"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L75"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L76" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L75" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="contains,Env,string"></a>
@@ -405,9 +450,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Returns true if key exists in <tt class="docutils literal"><span class="pre">Env</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L83"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L82"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L83" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L82" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="get,Env,string"></a>
@@ -416,9 +461,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Retrieves a value of key in <tt class="docutils literal"><span class="pre">Env</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L90"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L89"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L90" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L89" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="getOrDefault,Env,string,T"></a>
@@ -427,9 +472,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Retrieves a value of key if key exists in <tt class="docutils literal"><span class="pre">Env</span></tt>. Otherwise the default value will be returned.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L94"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L93"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L94" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L93" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -443,9 +488,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L101"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L100"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L101" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L100" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="values.i,Env"></a>
@@ -454,9 +499,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L105"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L104"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L105" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L104" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="pairs.i,Env"></a>
@@ -465,9 +510,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L109"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L108"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L109" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L108" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -485,7 +530,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-07 02:33:43 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-10 07:30:30 UTC</small>
       </div>
     </div>
   </div>

@@ -94,18 +94,30 @@ function main() {
 <li>
   <a class="reference reference-toplevel" href="#12" id="62">Procs</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#base64Encode%2CopenArray%5BT%5D"
-    title="base64Encode[T: SomeInteger | char](s: openArray[T]): string"><wbr />base64Encode<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#base64Encode%2Cstring"
-    title="base64Encode(s: string): string"><wbr />base64Encode<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#base64Decode%2Cstring"
-    title="base64Decode(s: string): string"><wbr />base64Decode<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#urlsafeBase64Encode%2CopenArray%5BT%5D"
-    title="urlsafeBase64Encode[T: SomeInteger | char](s: openArray[T]): string"><wbr />urlsafe<wbr />Base64Encode<span class="attachedType"></span></a></li>
+      <ul class="simple nested-toc-section">urlsafeBase64Decode
+      <li><a class="reference" href="#urlsafeBase64Decode%2Cstring"
+    title="urlsafeBase64Decode(s: string): string">urlsafeBase64Decode,string<span class="attachedType"></span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">base64Decode
+      <li><a class="reference" href="#base64Decode%2Cstring"
+    title="base64Decode(s: string): string">base64Decode,string<span class="attachedType"></span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">urlsafeBase64Encode
+      <li><a class="reference" href="#urlsafeBase64Encode%2CopenArray%5BT%5D"
+    title="urlsafeBase64Encode[T: SomeInteger | char](s: openArray[T]): string">urlsafeBase64Encode,openArray[T]<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#urlsafeBase64Encode%2Cstring"
-    title="urlsafeBase64Encode(s: string): string"><wbr />urlsafe<wbr />Base64Encode<span class="attachedType"></span></a></li>
-  <li><a class="reference" href="#urlsafeBase64Decode%2Cstring"
-    title="urlsafeBase64Decode(s: string): string"><wbr />urlsafe<wbr />Base64Decode<span class="attachedType"></span></a></li>
+    title="urlsafeBase64Encode(s: string): string">urlsafeBase64Encode,string<span class="attachedType"></span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">base64Encode
+      <li><a class="reference" href="#base64Encode%2CopenArray%5BT%5D"
+    title="base64Encode[T: SomeInteger | char](s: openArray[T]): string">base64Encode,openArray[T]<span class="attachedType"></span></a></li>
+  <li><a class="reference" href="#base64Encode%2Cstring"
+    title="base64Encode(s: string): string">base64Encode,string<span class="attachedType"></span></a></li>
+
+  </ul>
 
   </ul>
 </li>
@@ -126,9 +138,9 @@ function main() {
 
 The base64 encode.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/encode.nim#L19"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/encode.nim#L18"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/encode.nim#L19" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/encode.nim#L18" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="base64Encode,string"></a>
@@ -137,9 +149,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 The base64 encode.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/encode.nim#L23"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/encode.nim#L22"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/encode.nim#L23" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/encode.nim#L22" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="base64Decode,string"></a>
@@ -148,9 +160,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 The base64 decode.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/encode.nim#L27"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/encode.nim#L26"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/encode.nim#L27" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/encode.nim#L26" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="urlsafeBase64Encode,openArray[T]"></a>
@@ -159,9 +171,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 URL-safe and Cookie-safe encoding.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/encode.nim#L31"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/encode.nim#L30"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/encode.nim#L31" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/encode.nim#L30" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="urlsafeBase64Encode,string"></a>
@@ -170,9 +182,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 URL-safe and Cookie-safe encoding.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/encode.nim#L35"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/encode.nim#L34"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/encode.nim#L35" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/encode.nim#L34" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="urlsafeBase64Decode,string"></a>
@@ -181,9 +193,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 URL-safe and Cookie-safe decoding.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/encode.nim#L39"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/encode.nim#L38"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/encode.nim#L39" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/encode.nim#L38" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -196,7 +208,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-07 02:33:37 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-10 07:30:23 UTC</small>
       </div>
     </div>
   </div>

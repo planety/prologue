@@ -12,7 +12,7 @@ if (typeof Float32Array === 'undefined') Float32Array = Array;
 if (typeof Float64Array === 'undefined') Float64Array = Array;
 var NTI10436058 = {size: 0, kind: 18, base: null, node: null, finalizer: null};
 var NTI1214653 = {size: 0, kind: 17, base: null, node: null, finalizer: null};
-var NTI10595561 = {size: 0,kind: 24,base: null,node: null,finalizer: null};
+var NTI10595580 = {size: 0,kind: 24,base: null,node: null,finalizer: null};
 var NTI1872476 = {size: 0,kind: 25,base: null,node: null,finalizer: null};
 var NTI1872472 = {size: 0,kind: 25,base: null,node: null,finalizer: null};
 var NTI1872468 = {size: 0,kind: 25,base: null,node: null,finalizer: null};
@@ -678,7 +678,7 @@ NTI1872205.base = NTI1214408;
 NTI1872237.base = NTI1872205;
 NTI1872235.base = NTI1872237;
 NTI1900505.base = NTI1872235;
-NTI10595561.base = NTI1208017;
+NTI10595580.base = NTI1208017;
 var NNI1214653 = {kind: 2, len: 0, offset: 0, typ: null, name: null, sons: []};
 NTI1214653.node = NNI1214653;
 NTI1214653.base = NTI1214619;
@@ -1014,6 +1014,11 @@ function nimMin(a_1480803, b_1480804) {
 
   return result_1480805;
 
+}
+function addChar(x_1525031, c_1525032) {
+    x_1525031.push(c_1525032);
+
+  
 }
 var globalRaiseHook_1377018 = [null];
 var localRaiseHook_1377023 = [null];
@@ -1664,8 +1669,8 @@ function groupBy(value_10595354) {
 }
 var db_10595518 = [[]];
 var contents_10595520 = [[]];
-var oldtoc_10605438 = [null];
-var timer_10605439 = [null];
+var oldtoc_10605439 = [null];
+var timer_10605440 = [null];
 function raiseRangeError() {
     raiseException({message: makeNimstrLit("value out of range"), parent: null, m_type: NTI1214653, name: null, trace: [], up: null}, "RangeDefect");
 
@@ -1814,6 +1819,47 @@ function fuzzyMatch_10436054(pattern_10436056, str_10436057) {
   return result_10436061;
 
 }
+function escapeCString_10595537(x_10595540, x_10595540_Idx) {
+    var s_10595541 = [];
+    L1: do {
+      var c_10595542 = 0;
+      var i_10615065 = 0;
+      var L_10615066 = (x_10595540[x_10595540_Idx]).length;
+      L2: do {
+          L3: while (true) {
+          if (!(i_10615065 < L_10615066)) break L3;
+            c_10595542 = x_10595540[x_10595540_Idx].charCodeAt(chckIndx(i_10615065, 0, (x_10595540[x_10595540_Idx]).length-1));
+            switch (c_10595542) {
+            case 38:
+              s_10595541.push.apply(s_10595541, makeNimstrLit("&amp;"));;
+              break;
+            case 60:
+              s_10595541.push.apply(s_10595541, makeNimstrLit("&lt;"));;
+              break;
+            case 62:
+              s_10595541.push.apply(s_10595541, makeNimstrLit("&gt;"));;
+              break;
+            case 34:
+              s_10595541.push.apply(s_10595541, makeNimstrLit("&quot;"));;
+              break;
+            case 39:
+              s_10595541.push.apply(s_10595541, makeNimstrLit("&#039;"));;
+              break;
+            case 47:
+              s_10595541.push.apply(s_10595541, makeNimstrLit("&#x2F;"));;
+              break;
+            default: 
+              addChar(s_10595541, c_10595542);;
+              break;
+            }
+            i_10615065 = addInt(i_10615065, 1);
+          }
+      } while(false);
+    } while(false);
+    x_10595540[x_10595540_Idx] = toJSStr(s_10595541);
+
+  
+}
 function text_10516152(s_10516154) {
   var result_10516155 = null;
 
@@ -1822,7 +1868,7 @@ function text_10516152(s_10516154) {
   return result_10516155;
 
 }
-function dosearch_10595537(value_10595539) {
+function dosearch_10595556(value_10595558) {
     function HEX3Aanonymous_10605276(a_10605285, b_10605286) {
       var result_10605292 = 0;
 
@@ -1832,10 +1878,10 @@ function dosearch_10595537(value_10595539) {
 
     }
 
-  var result_10595540 = null;
+  var result_10595559 = null;
 
     if (((db_10595518[0]).length == 0)) {
-    var stuff_10595546 = null;
+    var stuff_10595565 = null;
         var request = new XMLHttpRequest();
     request.open("GET", "theindex.html", false);
     request.send(null);
@@ -1846,10 +1892,10 @@ function dosearch_10595537(value_10595539) {
     //parser=new DOMParser();
     //doc=parser.parseFromString("<html></html>", "text/html");
 
-    stuff_10595546 = doc.documentElement;
+    stuff_10595565 = doc.documentElement;
     
-    db_10595518[0] = nimCopy(null, stuff_10595546.getElementsByClassName("reference"), NTI1900505);
-    contents_10595520[0] = nimCopy(null, [], NTI10595561);
+    db_10595518[0] = nimCopy(null, stuff_10595565.getElementsByClassName("reference"), NTI1900505);
+    contents_10595520[0] = nimCopy(null, [], NTI10595580);
     L1: do {
       var ahref_10605214 = null;
       var ahref_10605214_Idx = 0;
@@ -1871,8 +1917,8 @@ function dosearch_10595537(value_10595539) {
     }
     
     var ul_10605226 = tree_10516020(makeNimstrLit("UL"), []);
-    result_10595540 = tree_10516020(makeNimstrLit("DIV"), []);
-    setClass_10516135(result_10595540, makeNimstrLit("search_results"));
+    result_10595559 = tree_10516020(makeNimstrLit("DIV"), []);
+    setClass_10516135(result_10595559, makeNimstrLit("search_results"));
     var matches_10605247 = [];
     L4: do {
       var i_10605260 = 0;
@@ -1889,7 +1935,7 @@ function dosearch_10595537(value_10595539) {
               break L7;
               }
               
-              var colontmp__10615055 = fuzzyMatch_10436054(value_10595539, c_10605261);
+              var colontmp__10615055 = fuzzyMatch_10436054(value_10595558, c_10605261);
               var score_10605262 = colontmp__10615055["Field0"];
               var matched_10605263 = colontmp__10615055["Field1"];
               if (matched_10605263) {
@@ -1912,49 +1958,50 @@ function dosearch_10595537(value_10595539) {
           if (!(i_10615053 < colontmp__10615052)) break L10;
             i_10605331 = i_10615053;
             matches_10605247[chckIndx(i_10605331, 0, (matches_10605247).length-1)]["Field0"].innerHTML = matches_10605247[chckIndx(i_10605331, 0, (matches_10605247).length-1)]["Field0"].getAttribute("data-doc-search-tag");
+            escapeCString_10595537(matches_10605247[chckIndx(i_10605331, 0, (matches_10605247).length-1)]["Field0"], "innerHTML");
             add_10516117(ul_10605226, tree_10516020(makeNimstrLit("LI"), [matches_10605247[chckIndx(i_10605331, 0, (matches_10605247).length-1)]["Field0"]]));
             i_10615053 = addInt(i_10615053, 1);
           }
       } while(false);
     } while(false);
     if ((ul_10605226.childNodes.length == 0)) {
-    add_10516117(result_10595540, tree_10516020(makeNimstrLit("B"), [text_10516152(makeNimstrLit("no search results"))]));
+    add_10516117(result_10595559, tree_10516020(makeNimstrLit("B"), [text_10516152(makeNimstrLit("no search results"))]));
     }
     else {
-      add_10516117(result_10595540, tree_10516020(makeNimstrLit("B"), [text_10516152(makeNimstrLit("search results"))]));
-      add_10516117(result_10595540, ul_10605226);
+      add_10516117(result_10595559, tree_10516020(makeNimstrLit("B"), [text_10516152(makeNimstrLit("search results"))]));
+      add_10516117(result_10595559, ul_10605226);
     }
     
 
-  return result_10595540;
+  return result_10595559;
 
 }
 function search() {
-    function wrapper_10605470() {
-        var elem_10605472 = document.getElementById("searchInput");
-        var value_10605473 = elem_10605472.value;
-        if (!(((value_10605473).length == 0))) {
-        if ((oldtoc_10605438[0] == null)) {
-        oldtoc_10605438[0] = document.getElementById("tocRoot");
+    function wrapper_10605471() {
+        var elem_10605473 = document.getElementById("searchInput");
+        var value_10605474 = elem_10605473.value;
+        if (!(((value_10605474).length == 0))) {
+        if ((oldtoc_10605439[0] == null)) {
+        oldtoc_10605439[0] = document.getElementById("tocRoot");
         }
         
-        var results_10610006 = dosearch_10595537(value_10605473);
+        var results_10610006 = dosearch_10595556(value_10605474);
         replaceById_10516189("tocRoot", results_10610006);
         }
         else {
-        if (!((oldtoc_10605438[0] == null))) {
-        replaceById_10516189("tocRoot", oldtoc_10605438[0]);
+        if (!((oldtoc_10605439[0] == null))) {
+        replaceById_10516189("tocRoot", oldtoc_10605439[0]);
         }
         }
 
       
     }
 
-    if (!((timer_10605439[0] == null))) {
-    clearTimeout(timer_10605439[0]);
+    if (!((timer_10605440[0] == null))) {
+    clearTimeout(timer_10605440[0]);
     }
     
-    timer_10605439[0] = setTimeout(wrapper_10605470, 400);
+    timer_10605440[0] = setTimeout(wrapper_10605471, 400);
 
   
 }
