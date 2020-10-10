@@ -128,7 +128,7 @@ block:
     urlpattern2 = @[pattern("/home", home)]
     tab = {level1: urlpattern1, level2: urlpattern2}
   
-  app.addRoute(tab)
+  app.addGroup(tab)
 
   block:
     block:

@@ -1,0 +1,11 @@
+{
+  "prologue": {
+    "address": "",
+    "port": 8080,
+    "debug": false,
+    "reusePort": true,
+    "appName": "",
+    "secretKey": "Set by yourself",
+    "bufSize": 40960
+  }
+}

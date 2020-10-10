@@ -1,4 +1,4 @@
 import ../../../src/prologue/core/constants
 
 
-doAssert ProloguePrefix == "PROLOGUE_"
+doAssert ProloguePrefix == "PROLOGUE"

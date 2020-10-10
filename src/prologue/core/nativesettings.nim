@@ -85,14 +85,14 @@ func checkSettings(settings: var Settings, data: JsonNode) {.inline.} =
   settings.appName = logueSettings.getOrDefault("appName").getStr("")
   settings.data = data
 
-func newSettings*(
+func loadSettings*(
   data: JsonNode
 ): Settings =
   ## Creates a new `Settings`.
   new result
   checkSettings(result, data)
 
-proc newSettings*(
+proc loadSettings*(
   configPath: string
 ): Settings =
   ## Creates a new `Settings`.

@@ -12,13 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import std/[uri, tables, strutils, strformat, logging, strtabs, options, json, asyncdispatch]
+import std/[os, uri, tables, strutils, strformat, logging, strtabs, options, json, asyncdispatch]
 from std/nativesockets import Port, `$`
 from std/cgi import CgiError
 
 from ./form import parseFormParams
 from ./nativesettings import newSettings, newCtxSettings, 
-                             getOrDefault, Settings
+                             getOrDefault, Settings, loadSettings
 import ./httpexception
 import ./response
 import ./context
@@ -197,7 +197,7 @@ proc addRoute*(app: Prologue, route: string, handler: HandlerAsync,
     app.addRoute(route, handler, m, "", middlewares)
   app.addReversedRoute(name, route.stripRoute)
 
-proc addRoute*(app: Prologue, patterns: seq[UrlPattern], baseRoute = "", 
+proc addRoute*(app: Prologue, patterns: openArray[UrlPattern], baseRoute = "", 
                middlewares: Option[seq[HandlerAsync]] = none(seq[HandlerAsync])) =
   ## Adds multiple routes with handlers.
   if middlewares.isSome:
@@ -209,7 +209,6 @@ proc addRoute*(app: Prologue, patterns: seq[UrlPattern], baseRoute = "",
     for pattern in patterns:
       app.addRoute(baseRoute & pattern.route, pattern.matcher, pattern.httpMethod,
                   pattern.name, pattern.middlewares)
-
 
 # -------------------------------- API Route --------------------------------
 
@@ -266,7 +265,7 @@ proc all*(app: Prologue, route: string, handler: HandlerAsync, name = "",
 
 # -------------------------------- Group Route --------------------------------
 
-proc addRoute*(group: Group, route: string, handler: HandlerAsync,
+proc addGroup*(group: Group, route: string, handler: HandlerAsync,
                httpMethod = HttpGet, name = "", 
                middlewares: openArray[HandlerAsync] = @[]) =
   ## Adds a single route and handler. It checks whether route is duplicated.
@@ -276,7 +275,7 @@ proc addRoute*(group: Group, route: string, handler: HandlerAsync,
   let (route, middlewares) = getAllInfos(group, route, middlewares)
   group.app.addRoute(route, handler, httpMethod, name, middlewares)
 
-proc addRoute*(group: Group, route: string, handler: HandlerAsync,
+proc addGroup*(group: Group, route: string, handler: HandlerAsync,
                httpMethod: openArray[HttpMethod], name = "", 
                middlewares: openArray[HandlerAsync] = @[]) =
   ## Adds a single regex `route` and `handler`, but supports a set of HttpMethod.
@@ -284,15 +283,7 @@ proc addRoute*(group: Group, route: string, handler: HandlerAsync,
   let (route, middlewares) = getAllInfos(group, route, middlewares)
   group.app.addRoute(route, handler, httpMethod, name, middlewares)
 
-proc addRoute*(app: Prologue, patterns: (Group, seq[UrlPattern])) =
-  ## Adds multiple routes with handlers.
-  let (group, patterns) = patterns
-  for pattern in patterns:
-    let (route, middlewares) = getAllInfos(group, pattern.route, @[])
-    group.app.addRoute(route, pattern.matcher, pattern.httpMethod, 
-                        pattern.name, middlewares)
-
-proc addRoute*(app: Prologue, patterns: openArray[(Group, seq[UrlPattern])]) =
+proc addGroup*(app: Prologue, patterns: openArray[(Group, seq[UrlPattern])]) =
   ## Adds multiple routes with handlers.
   for (group, patterns) in patterns:
     for pattern in patterns:
@@ -401,21 +392,38 @@ func newApp*(
   ##        - `errorHandlerTable` stores HTTP codes and corresponding handlers.
   ##        - `appData` is a global user-defined data.
   if settings == nil:
-    raise newException(ValueError, "Settings can't be nil!")
+    raise newException(ValueError, "Settings can't be empty!")
   result = newPrologue(settings = settings, ctxSettings = newCtxSettings(),
                        router = newRouter(), reversedRouter = newReversedRouter(),
                        reRouter = newReRouter(), middlewares = middlewares,
                        startup = startup, shutdown = shutdown,
                        errorHandlerTable = errorHandlerTable, appData = appData)
 
-# func newAppWithEnv*(
-#   middlewares: openArray[HandlerAsync] = @[],
-#   startup: openArray[Event] = @[], 
-#   shutdown: openArray[Event] = @[],
-#   errorHandlerTable = newErrorHandlerTable({Http404: default404Handler, Http500: default500Handler}),
-#   appData = newStringTable(mode = modeCaseSensitive)
-# ): Prologue =
-  
+proc newAppQueryEnv*(
+  middlewares: openArray[HandlerAsync] = @[],
+  startup: openArray[Event] = @[], 
+  shutdown: openArray[Event] = @[],
+  errorHandlerTable = newErrorHandlerTable({Http404: default404Handler, Http500: default500Handler}),
+  appData = newStringTable(mode = modeCaseSensitive)
+): Prologue =
+  let path = getPrologueEnv()
+  var configPath: string
+  if path.len == 0:
+    configPath = ".config/config.json"
+  else:
+    configPath = fmt".config/config.{path}.json"
+
+  if not dirExists(".config"):
+    raise newException(IOError, "`.config` directory doesn't exist in the current path!")
+
+  if not fileExists(configPath):
+    raise newException(IOError, fmt"`{configPath}` file doesn't exist in the current path!")
+
+  result = newPrologue(settings = loadSettings(configPath), ctxSettings = newCtxSettings(),
+                       router = newRouter(), reversedRouter = newReversedRouter(),
+                       reRouter = newReRouter(), middlewares = middlewares,
+                       startup = startup, shutdown = shutdown,
+                       errorHandlerTable = errorHandlerTable, appData = appData)
 
 proc handleNativeRequest(request: var Request) {.inline, gcsafe.} =
   ## Handles the request from the client.

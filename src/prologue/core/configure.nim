@@ -48,7 +48,7 @@ staticDir=static
 
 import std/[os, tables, strutils, parsecfg, streams]
 
-import ./types
+import ./types, ./constants
 
 export Config, loadConfig, writeConfig, setSectionKey, types
 
@@ -60,38 +60,38 @@ type
   EnvWrongFormatError* = object of EnvError
 
 
-func initEnv*(): Env =
+func initEnv*(): Env {.inline.} =
   ## Initializes an `Env`.
   Env(data: newOrderedTable[string, string]())
 
-func `$`*(env: Env): string =
+func `$`*(env: Env): string {.inline.} =
   ## Gets the string form of `Env`.
   $env.data
 
-func `[]`*(env: Env, key: string): string =
+func `[]`*(env: Env, key: string): string {.inline.} =
   ## Retrieves a value of key in `Env`.
   env.data[key]
 
-func hasKey*(env: Env, key: string): bool =
+func hasKey*(env: Env, key: string): bool {.inline.} =
   ## Returns true if `key` exists in `Env`.
   if key in env.data:
     result = true
   else:
     result = false
 
-func contains*(env: Env, key: string): bool =
-  ## Returns true if key exists in `Env`.
+func contains*(env: Env, key: string): bool {.inline.} =
+  ## Returns true if `key` exists in `Env`.
   if key in env.data:
     result = true
   else:
     result = false
 
 func get*(env: Env, key: string): string {.inline.} =
-  ## Retrieves a value of key in `Env`.
+  ## Retrieves a value of `key` in `Env`.
   result = env.data[key]
 
 func getOrDefault*[T: BaseType](env: Env, key: string, default: T): T {.inline.} =
-  ## Retrieves a value of key if key exists in `Env`. Otherwise the default value
+  ## Retrieves a value of `key` if `key` exists in `Env`. Otherwise the default value
   ## will be returned.
   if key notin env.data:
     return default
@@ -109,15 +109,18 @@ iterator pairs*(env: Env): (string, string) =
   for pair in env.data.pairs:
     yield pair
 
+proc getPrologueEnv*(): string =
+  getEnv(ProloguePrefix, "")
+
 # please set env with prefix namely PROLOGUE
 proc putPrologueEnv*(key, val: string, prefix: string) {.inline.} =
   ## Puts (``key``, ``val``) pairs with ``prefix`` to environment variables.
-  putEnv(prefix & key, val)
+  putEnv(prefix & "_" & key, val)
 
 proc getPrologueEnv*(key: string, prefix: string, default = ""): string {.inline.} =
   ## Gets (``key``, ``val``) pairs with ``prefix`` from environment variables. If
   ## ``key`` can't be found, ``default`` will be returned.
-  getEnv(prefix & key, default)
+  getEnv(prefix & "_" & key, default)
 
 proc getAllPrologueEnv*(prefix: string): OrderedTableRef[string, string] {.inline.} =
   ## Gets all (``key``, ``val``) pairs with ``prefix`` from environment variables.
@@ -127,10 +130,10 @@ proc getAllPrologueEnv*(prefix: string): OrderedTableRef[string, string] {.inlin
       result[k] = v
 
 proc existsPrologueEnv*(key: string, prefix: string): bool {.inline.} =
-  existsEnv(prefix & key)
+  existsEnv(prefix & "_" & key)
 
 proc delPrologueEnv*(key: string, prefix: string) {.inline.} =
-  delEnv(prefix & key)
+  delEnv(prefix & "_" & key)
 
 proc loadPrologueEnv*(filename: string): Env =
   result = initEnv()
@@ -151,7 +154,7 @@ proc loadPrologueEnv*(filename: string): Env =
     f.close()
     p.close()
 
-proc setPrologueEnv*(env: Env, key, value: string) =
+proc setPrologueEnv*(env: Env, key, value: string) {.inline.} =
   env.data[key] = value
 
 proc writePrologueEnv*(filename: string, env: Env) =
