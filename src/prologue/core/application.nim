@@ -371,7 +371,7 @@ proc shutDownHandler() {.noconv.} =
   echo "Shutting down Events are done after having received SIGINT!\n"
   quit(QuitSuccess)
 
-func use*(app: var Prologue, middlewares: varargs[HandlerAsync]) =
+func use*(app: var Prologue, middlewares: varargs[HandlerAsync]) {.inline.} =
   app.middlewares.add middlewares
 
 func newApp*(
@@ -381,7 +381,7 @@ func newApp*(
   shutdown: openArray[Event] = @[],
   errorHandlerTable = newErrorHandlerTable({Http404: default404Handler, Http500: default500Handler}),
   appData = newStringTable(mode = modeCaseSensitive)
-): Prologue =
+): Prologue {.inline.} =
   ## Creates a new App instance.
   ## 
   ## Params:

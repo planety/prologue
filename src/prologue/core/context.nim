@@ -51,7 +51,7 @@ type
     settings*: Settings
     ctxSettings*: CtxSettings
 
-  Context* = ref object
+  Context* = ref object of RootObj
     request*: Request
     response*: Response
     handled*: bool
@@ -203,6 +203,18 @@ func newContext*(request: Request, response: Response,
           gScope: gScope,
           size: 0, first: true,
     )
+
+func newContext*(ctx: Context, src: Context) =
+  ## Creates a new Context.
+  ctx.request = src.request
+  ctx.response = src.response
+  ctx.handled = src.handled
+  ctx.session = src.session
+  ctx.ctxData = src.ctxData
+  ctx.gScope = src.gScope
+  ctx.middlewares = src.middlewares
+  ctx.size = src.size
+  ctx.first = src.first
 
 func getSettings*(ctx: Context, key: string): JsonNode {.inline.} =
   ## Get settings from globalSetting.
