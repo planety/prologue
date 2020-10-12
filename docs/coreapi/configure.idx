@@ -11,6 +11,7 @@ getOrDefault	configure.html#getOrDefault,Env,string,T	configure: getOrDefault[T:
 keys	configure.html#keys.i,Env	configure: keys(env: Env): string	
 values	configure.html#values.i,Env	configure: values(env: Env): string	
 pairs	configure.html#pairs.i,Env	configure: pairs(env: Env): (string, string)	
+getPrologueEnv	configure.html#getPrologueEnv	configure: getPrologueEnv(): string	
 putPrologueEnv	configure.html#putPrologueEnv,string,string,string	configure: putPrologueEnv(key, val: string; prefix: string)	
 getPrologueEnv	configure.html#getPrologueEnv,string,string,string	configure: getPrologueEnv(key: string; prefix: string; default = &quot;&quot;): string	
 getAllPrologueEnv	configure.html#getAllPrologueEnv,string	configure: getAllPrologueEnv(prefix: string): OrderedTableRef[string, string]	

@@ -126,7 +126,7 @@ function main() {
   settings*: Settings
   ctxSettings*: CtxSettings"><wbr />Global<wbr />Scope<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#Context"
-    title="Context = ref object
+    title="Context = ref object of RootObj
   request*: Request
   response*: Response
   handled*: bool
@@ -264,6 +264,11 @@ function main() {
     title="first=(ctx: Context; first: bool)">first=,Context,bool<span class="attachedType">Context</span></a></li>
 
   </ul>
+  <ul class="simple nested-toc-section">execEvent
+      <li><a class="reference" href="#execEvent%2CEvent"
+    title="execEvent(event: Event)">execEvent,Event<span class="attachedType">Event</span></a></li>
+
+  </ul>
   <ul class="simple nested-toc-section">newErrorHandlerTable
       <li><a class="reference" href="#newErrorHandlerTable"
     title="newErrorHandlerTable(initialSize = defaultInitialSize): ErrorHandlerTable">newErrorHandlerTable<span class="attachedType">ErrorHandlerTable</span></a></li>
@@ -384,6 +389,8 @@ function main() {
   <ul class="simple nested-toc-section">newContext
       <li><a class="reference" href="#newContext%2CRequest%2CResponse%2CGlobalScope"
     title="newContext(request: Request; response: Response; gScope: GlobalScope): Context">newContext,Request,Response,GlobalScope<span class="attachedType">Context</span></a></li>
+  <li><a class="reference" href="#newContext%2CContext%2CContext"
+    title="newContext(ctx: Context; src: Context)">newContext,Context,Context<span class="attachedType">Context</span></a></li>
 
   </ul>
   <ul class="simple nested-toc-section">size
@@ -495,7 +502,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 </dd>
 <a id="Context"></a>
-<dt><pre><a href="context.html#Context"><span class="Identifier">Context</span></a> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span>
+<dt><pre><a href="context.html#Context"><span class="Identifier">Context</span></a> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span> <span class="Keyword">of</span> <span class="Identifier">RootObj</span>
   <span class="Identifier">request</span><span class="Operator">*</span><span class="Other">:</span> <a href="beast/request.html#Request"><span class="Identifier">Request</span></a>
   <span class="Identifier">response</span><span class="Operator">*</span><span class="Other">:</span> <a href="response.html#Response"><span class="Identifier">Response</span></a>
   <span class="Identifier">handled</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">bool</span>
@@ -725,6 +732,18 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L154" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
+<a id="execEvent,Event"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#execEvent%2CEvent"><span class="Identifier">execEvent</span></a><span class="Other">(</span><span class="Identifier">event</span><span class="Other">:</span> <a href="context.html#Event"><span class="Identifier">Event</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">ValueError</span><span class="Other">,</span> <span class="Identifier">OSError</span><span class="Other">]</span><span class="Other">,</span>
+                            <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">,</span> <span class="Identifier">TimeEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L158"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L158" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
 <a id="save,UploadFile,string,string"></a>
 <dt><pre><span class="Keyword">proc</span> <a href="#save%2CUploadFile%2Cstring%2Cstring"><span class="Identifier">save</span></a><span class="Other">(</span><span class="Identifier">uploadFile</span><span class="Other">:</span> <a href="context.html#UploadFile"><span class="Identifier">UploadFile</span></a><span class="Other">;</span> <span class="Identifier">dir</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">filename</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span>
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">OSError</span><span class="Other">,</span> <span class="Identifier">IOError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ReadDirEffect</span><span class="Other">,</span> <span class="Identifier">WriteIOEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
@@ -732,9 +751,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Saves the UploadFile to <tt class="docutils literal"><span class="pre">dir</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L167"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L173"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L167" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L173" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="newErrorHandlerTable"></a>
@@ -744,9 +763,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Creates a new error handler table.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L176"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L182"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L176" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L182" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="newErrorHandlerTable,openArray[]"></a>
@@ -756,9 +775,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Creates a new error handler table.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L180"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L186"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L180" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L186" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="respond,Context,HttpCode,string,ResponseHeaders"></a>
@@ -770,9 +789,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Sends response to the client generating from <tt class="docutils literal"><span class="pre">code</span></tt>, <tt class="docutils literal"><span class="pre">body</span></tt> and <tt class="docutils literal"><span class="pre">headers</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L212"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L230"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L212" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L230" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="respond,Context"></a>
@@ -782,9 +801,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Sends response to the client generating from <tt class="docutils literal"><span class="pre">ctx.response</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L219"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L237"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L219" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L237" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="respond,Context,HttpCode,string"></a>
@@ -794,9 +813,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Sends response to the client generating from <tt class="docutils literal"><span class="pre">ctx.response</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L223"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L241"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L223" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L241" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="send,Context,string"></a>
@@ -806,9 +825,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Sends content to the client.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L227"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L245"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L227" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L245" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="setCookie,Context,string,string,string,Option[int],string,string"></a>
@@ -819,9 +838,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Sets Cookie for Response.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L236"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L254"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L236" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L254" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="setCookie,Context,string,string,,Option[int],string,string"></a>
@@ -832,9 +851,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Sets Cookie for Response.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L243"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L261"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L243" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L261" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="deleteCookie,Context,string,string,string"></a>
@@ -844,9 +863,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Deletes Cookie from Response.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L250"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L268"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L250" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L268" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="defaultHandler,Context"></a>
@@ -856,9 +875,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Default handler with HttpCode 404.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L254"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L272"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L254" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L272" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="default404Handler,Context"></a>
@@ -868,9 +887,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Default 404 pages.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L261"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L279"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L261" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L279" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="default500Handler,Context"></a>
@@ -880,9 +899,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Default 500 pages.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L268"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L286"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L268" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L286" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="setResponse,Context,HttpCode,string"></a>
@@ -892,9 +911,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Handy to make the response of <tt class="docutils literal"><span class="pre">ctx</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L305"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L323"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L305" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L323" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="setResponse,Context,Response"></a>
@@ -903,9 +922,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Handy to make the response of <tt class="docutils literal"><span class="pre">ctx</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L312"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L330"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L312" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L330" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="attachment,Context,string,string"></a>
@@ -924,9 +943,9 @@ class="link-seesrc" target="_blank">Source</a>
 </dl>
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L374"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L392"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L374" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L392" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="staticFileResponse,Context,string,string,string,string,string,int"></a>
@@ -938,9 +957,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Returns static files response. The following middlewares processing will be discarded.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L398"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L416"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L398" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L416" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1009,9 +1028,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Initiates a UploadFile.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L158"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L164"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L158" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L164" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="getUploadFile,Context,string"></a>
@@ -1021,9 +1040,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Gets the UploadFile from request.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L162"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L168"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L162" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L168" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="newReversedRouter"></a>
@@ -1032,9 +1051,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Creates a new reversed router table.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L185"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L191"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L185" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L191" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="initEvent,AsyncEvent"></a>
@@ -1043,9 +1062,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Initializes a new asynchronous event. 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L189"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L195"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L189" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L195" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="initEvent,SyncEvent"></a>
@@ -1054,9 +1073,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Initializes a new synchronous event. 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L193"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L199"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L193" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L199" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="newContext,Request,Response,GlobalScope"></a>
@@ -1066,9 +1085,20 @@ class="link-seesrc" target="_blank">Source</a>
 
 Creates a new Context.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L197"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L203"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L197" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L203" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="newContext,Context,Context"></a>
+<dt><pre><span class="Keyword">func</span> <a href="#newContext%2CContext%2CContext"><span class="Identifier">newContext</span></a><span class="Other">(</span><span class="Identifier">ctx</span><span class="Other">:</span> <a href="context.html#Context"><span class="Identifier">Context</span></a><span class="Other">;</span> <span class="Identifier">src</span><span class="Other">:</span> <a href="context.html#Context"><span class="Identifier">Context</span></a><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+Creates a new Context.
+&nbsp;&nbsp;<a
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L213"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L213" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="getSettings,Context,string"></a>
@@ -1077,9 +1107,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Get settings from globalSetting. If key doesn't exist, <tt class="docutils literal"><span class="pre">nil</span></tt> will be returned.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L207"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L225"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L207" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L225" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="getCookie,Context,string,string"></a>
@@ -1089,9 +1119,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Gets the value of <tt class="docutils literal"><span class="pre">ctx.request.cookies[key]</span></tt> if key is in cookies. Otherwise, the <tt class="docutils literal"><span class="pre">default</span></tt> value will be returned.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L231"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L249"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L231" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L249" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="getPostParams,Context,string,string"></a>
@@ -1101,9 +1131,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Gets the parameters by HttpPost.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L275"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L293"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L275" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L293" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="getQueryParams,Context,string,string"></a>
@@ -1113,9 +1143,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Gets the query strings(for example, &quot;www.google.com/hello?name=12&quot;, <tt class="docutils literal"><span class="pre">name=12</span></tt>).
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L283"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L301"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L283" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L301" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="getPathParams,Context,string"></a>
@@ -1124,9 +1154,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Gets the route parameters(for example, &quot;/hello/{name}&quot;).
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L287"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L305"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L287" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L305" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="getPathParams,Context,string,T"></a>
@@ -1135,9 +1165,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Gets the route parameters(for example, &quot;/hello/{name}&quot;).
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L291"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L309"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L291" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L309" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="getFormParams,Context,string,string"></a>
@@ -1147,9 +1177,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Gets the contents of the form if key exists. Otherwise <tt class="docutils literal"><span class="pre">default</span></tt> will be returned. If you need the filename of the form, use <tt class="docutils literal"><span class="pre">getUploadFile</span></tt> instead.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L297"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L315"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L297" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L315" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="urlFor,Context,string,openArray[],openArray[]"></a>
@@ -1167,9 +1197,9 @@ Returns the corresponding name of the handler.<dl class="docutils"><dt><strong>L
 </dl>
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L345"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L363"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L345" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L363" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="abortExit,Context,string"></a>
@@ -1179,9 +1209,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Aborts the program. It raises <tt class="docutils literal"><span class="pre">AbortError</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L366"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/context.nim#L384"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L366" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/context.nim#L384" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -1194,7 +1224,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-10 07:31:05 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-12 15:18:16 UTC</small>
       </div>
     </div>
   </div>

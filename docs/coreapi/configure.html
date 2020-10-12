@@ -114,7 +114,9 @@ function main() {
   <a class="reference reference-toplevel" href="#12" id="62">Procs</a>
   <ul class="simple simple-toc-section">
       <ul class="simple nested-toc-section">getPrologueEnv
-      <li><a class="reference" href="#getPrologueEnv%2Cstring%2Cstring%2Cstring"
+      <li><a class="reference" href="#getPrologueEnv"
+    title="getPrologueEnv(): string">getPrologueEnv<span class="attachedType"></span></a></li>
+  <li><a class="reference" href="#getPrologueEnv%2Cstring%2Cstring%2Cstring"
     title="getPrologueEnv(key: string; prefix: string; default = &quot;&quot;): string">getPrologueEnv,string,string,string<span class="attachedType"></span></a></li>
 
   </ul>
@@ -229,15 +231,15 @@ function main() {
 
 </span><span class="Keyword">let</span><span class="Whitespace"> </span><span class="Identifier">prefix</span><span class="Whitespace"> </span><span class="Operator">=</span><span class="Whitespace"> </span><span class="StringLit">&quot;PROLOGUE_&quot;</span><span class="Whitespace">
 </span><span class="Comment"># only work in application scope</span><span class="Whitespace">
+</span><span class="Identifier">delEnv</span><span class="Punctuation">(</span><span class="StringLit">&quot;PROLOGUE&quot;</span><span class="Punctuation">)</span><span class="Whitespace">
 </span><span class="Identifier">putPrologueEnv</span><span class="Punctuation">(</span><span class="StringLit">&quot;debug&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;true&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Identifier">prefix</span><span class="Punctuation">)</span><span class="Whitespace">
 </span><span class="Identifier">putPrologueEnv</span><span class="Punctuation">(</span><span class="StringLit">&quot;port&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;8080&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Identifier">prefix</span><span class="Punctuation">)</span><span class="Whitespace">
 </span><span class="Identifier">putPrologueEnv</span><span class="Punctuation">(</span><span class="StringLit">&quot;appName&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;Prologue&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Identifier">prefix</span><span class="Punctuation">)</span><span class="Whitespace">
 </span><span class="Identifier">putPrologueEnv</span><span class="Punctuation">(</span><span class="StringLit">&quot;staticDir&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;static&quot;</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="Identifier">prefix</span><span class="Punctuation">)</span><span class="Whitespace">
 
 
-</span><span class="Keyword">let</span><span class="Whitespace"> </span><span class="Identifier">res</span><span class="Whitespace"> </span><span class="Operator">=</span><span class="Whitespace"> </span><span class="Identifier">getAllPrologueEnv</span><span class="Punctuation">(</span><span class="Identifier">prefix</span><span class="Punctuation">)</span><span class="Whitespace">
+</span><span class="Keyword">discard</span><span class="Whitespace"> </span><span class="Identifier">getAllPrologueEnv</span><span class="Punctuation">(</span><span class="Identifier">prefix</span><span class="Punctuation">)</span><span class="Whitespace">
 
-</span><span class="Identifier">doAssert</span><span class="Punctuation">(</span><span class="Identifier">res</span><span class="Operator">.</span><span class="Identifier">len</span><span class="Whitespace"> </span><span class="Operator">==</span><span class="Whitespace"> </span><span class="DecNumber">4</span><span class="Punctuation">,</span><span class="Whitespace"> </span><span class="StringLit">&quot;got: &quot;</span><span class="Whitespace"> </span><span class="Operator">&amp;</span><span class="Whitespace"> </span><span class="Operator">$</span><span class="Identifier">res</span><span class="Punctuation">)</span><span class="Whitespace">
 
 </span><span class="Keyword">let</span><span class="Whitespace"> </span><span class="Identifier">config</span><span class="Whitespace"> </span><span class="Operator">=</span><span class="Whitespace"> </span><span class="Identifier">newStringStream</span><span class="Punctuation">(</span><span class="LongStringLit">&quot;&quot;&quot;[Prologue]
 debug=true
@@ -254,7 +256,7 @@ staticDir=static
   <div class="section" id="6">
 <h1><a class="toc-backref" href="#6">Imports</a></h1>
 <dl class="item">
-<a class="reference external" href="types.html">types</a>
+<a class="reference external" href="types.html">types</a>, <a class="reference external" href="constants.html">constants</a>
 </dl></div>
 <div class="section" id="7">
 <h1><a class="toc-backref" href="#7">Types</a></h1>
@@ -299,6 +301,17 @@ class="link-seesrc" target="_blank">Source</a>
 <div class="section" id="12">
 <h1><a class="toc-backref" href="#12">Procs</a></h1>
 <dl class="item">
+<a id="getPrologueEnv"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#getPrologueEnv"><span class="Identifier">getPrologueEnv</span></a><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ReadEnvEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+Gets <tt class="docutils literal"><span class="pre">PROLOGUE</span></tt> env variables.
+&nbsp;&nbsp;<a
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L112"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L112" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
 <a id="putPrologueEnv,string,string,string"></a>
 <dt><pre><span class="Keyword">proc</span> <a href="#putPrologueEnv%2Cstring%2Cstring%2Cstring"><span class="Identifier">putPrologueEnv</span></a><span class="Other">(</span><span class="Identifier">key</span><span class="Other">,</span> <span class="Identifier">val</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">prefix</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">OSError</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">WriteEnvEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
@@ -306,9 +319,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Puts (<tt class="docutils literal"><span class="pre">key</span></tt>, <tt class="docutils literal"><span class="pre">val</span></tt>) pairs with <tt class="docutils literal"><span class="pre">prefix</span></tt> to environment variables.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L113"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L117"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L113" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L117" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="getPrologueEnv,string,string,string"></a>
@@ -318,9 +331,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Gets (<tt class="docutils literal"><span class="pre">key</span></tt>, <tt class="docutils literal"><span class="pre">val</span></tt>) pairs with <tt class="docutils literal"><span class="pre">prefix</span></tt> from environment variables. If <tt class="docutils literal"><span class="pre">key</span></tt> can't be found, <tt class="docutils literal"><span class="pre">default</span></tt> will be returned.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L117"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L121"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L117" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L121" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="getAllPrologueEnv,string"></a>
@@ -330,9 +343,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Gets all (<tt class="docutils literal"><span class="pre">key</span></tt>, <tt class="docutils literal"><span class="pre">val</span></tt>) pairs with <tt class="docutils literal"><span class="pre">prefix</span></tt> from environment variables.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L122"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L126"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L122" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L126" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="existsPrologueEnv,string,string"></a>
@@ -342,9 +355,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L129"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L133"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L129" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L133" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="delPrologueEnv,string,string"></a>
@@ -354,9 +367,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L132"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L136"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L132" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L136" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="loadPrologueEnv,string"></a>
@@ -367,20 +380,20 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L135"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L139"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L135" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L139" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="setPrologueEnv,Env,string,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#setPrologueEnv%2CEnv%2Cstring%2Cstring"><span class="Identifier">setPrologueEnv</span></a><span class="Other">(</span><span class="Identifier">env</span><span class="Other">:</span> <a href="configure.html#Env"><span class="Identifier">Env</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">,</span> <span class="Identifier">value</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dt><pre><span class="Keyword">proc</span> <a href="#setPrologueEnv%2CEnv%2Cstring%2Cstring"><span class="Identifier">setPrologueEnv</span></a><span class="Other">(</span><span class="Identifier">env</span><span class="Other">:</span> <a href="configure.html#Env"><span class="Identifier">Env</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">,</span> <span class="Identifier">value</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L154"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L158"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L154" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L158" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="writePrologueEnv,string,Env"></a>
@@ -390,9 +403,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L157"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L161"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L157" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L161" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -401,7 +414,7 @@ class="link-seesrc" target="_blank">Source</a>
 <h1><a class="toc-backref" href="#13">Funcs</a></h1>
 <dl class="item">
 <a id="initEnv"></a>
-<dt><pre><span class="Keyword">func</span> <a href="#initEnv"><span class="Identifier">initEnv</span></a><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <a href="configure.html#Env"><span class="Identifier">Env</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dt><pre><span class="Keyword">func</span> <a href="#initEnv"><span class="Identifier">initEnv</span></a><span class="Other">(</span><span class="Other">)</span><span class="Other">:</span> <a href="configure.html#Env"><span class="Identifier">Env</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 Initializes an <tt class="docutils literal"><span class="pre">Env</span></tt>.
@@ -412,7 +425,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 </dd>
 <a id="$,Env"></a>
-<dt><pre><span class="Keyword">func</span> <a href="#%24%2CEnv"><span class="Identifier">`$`</span></a><span class="Other">(</span><span class="Identifier">env</span><span class="Other">:</span> <a href="configure.html#Env"><span class="Identifier">Env</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dt><pre><span class="Keyword">func</span> <a href="#%24%2CEnv"><span class="Identifier">`$`</span></a><span class="Other">(</span><span class="Identifier">env</span><span class="Other">:</span> <a href="configure.html#Env"><span class="Identifier">Env</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 Gets the string form of <tt class="docutils literal"><span class="pre">Env</span></tt>.
@@ -423,7 +436,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 </dd>
 <a id="[],Env,string"></a>
-<dt><pre><span class="Keyword">func</span> <a href="#%5B%5D%2CEnv%2Cstring"><span class="Identifier">`[]`</span></a><span class="Other">(</span><span class="Identifier">env</span><span class="Other">:</span> <a href="configure.html#Env"><span class="Identifier">Env</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dt><pre><span class="Keyword">func</span> <a href="#%5B%5D%2CEnv%2Cstring"><span class="Identifier">`[]`</span></a><span class="Other">(</span><span class="Identifier">env</span><span class="Other">:</span> <a href="configure.html#Env"><span class="Identifier">Env</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 
@@ -434,7 +447,7 @@ class="link-seesrc" target="_blank">Source</a>
 
 </dd>
 <a id="hasKey,Env,string"></a>
-<dt><pre><span class="Keyword">func</span> <a href="#hasKey%2CEnv%2Cstring"><span class="Identifier">hasKey</span></a><span class="Other">(</span><span class="Identifier">env</span><span class="Other">:</span> <a href="configure.html#Env"><span class="Identifier">Env</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dt><pre><span class="Keyword">func</span> <a href="#hasKey%2CEnv%2Cstring"><span class="Identifier">hasKey</span></a><span class="Other">(</span><span class="Identifier">env</span><span class="Other">:</span> <a href="configure.html#Env"><span class="Identifier">Env</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 Returns true if <tt class="docutils literal"><span class="pre">key</span></tt> exists in <tt class="docutils literal"><span class="pre">Env</span></tt>.
@@ -445,10 +458,10 @@ class="link-seesrc" target="_blank">Source</a>
 
 </dd>
 <a id="contains,Env,string"></a>
-<dt><pre><span class="Keyword">func</span> <a href="#contains%2CEnv%2Cstring"><span class="Identifier">contains</span></a><span class="Other">(</span><span class="Identifier">env</span><span class="Other">:</span> <a href="configure.html#Env"><span class="Identifier">Env</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dt><pre><span class="Keyword">func</span> <a href="#contains%2CEnv%2Cstring"><span class="Identifier">contains</span></a><span class="Other">(</span><span class="Identifier">env</span><span class="Other">:</span> <a href="configure.html#Env"><span class="Identifier">Env</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-Returns true if key exists in <tt class="docutils literal"><span class="pre">Env</span></tt>.
+Returns true if <tt class="docutils literal"><span class="pre">key</span></tt> exists in <tt class="docutils literal"><span class="pre">Env</span></tt>.
 &nbsp;&nbsp;<a
 href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L82"
 class="link-seesrc" target="_blank">Source</a>
@@ -459,7 +472,7 @@ class="link-seesrc" target="_blank">Source</a>
 <dt><pre><span class="Keyword">func</span> <a href="#get%2CEnv%2Cstring"><span class="Identifier">get</span></a><span class="Other">(</span><span class="Identifier">env</span><span class="Other">:</span> <a href="configure.html#Env"><span class="Identifier">Env</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-Retrieves a value of key in <tt class="docutils literal"><span class="pre">Env</span></tt>.
+Retrieves a value of <tt class="docutils literal"><span class="pre">key</span></tt> in <tt class="docutils literal"><span class="pre">Env</span></tt>.
 &nbsp;&nbsp;<a
 href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L89"
 class="link-seesrc" target="_blank">Source</a>
@@ -470,7 +483,7 @@ class="link-seesrc" target="_blank">Source</a>
 <dt><pre><span class="Keyword">func</span> <a href="#getOrDefault%2CEnv%2Cstring%2CT"><span class="Identifier">getOrDefault</span></a><span class="Other">[</span><span class="Identifier">T</span><span class="Other">:</span> <a href="types.html#BaseType"><span class="Identifier">BaseType</span></a><span class="Other">]</span><span class="Other">(</span><span class="Identifier">env</span><span class="Other">:</span> <a href="configure.html#Env"><span class="Identifier">Env</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">default</span><span class="Other">:</span> <span class="Identifier">T</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">T</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-Retrieves a value of key if key exists in <tt class="docutils literal"><span class="pre">Env</span></tt>. Otherwise the default value will be returned.
+Retrieves a value of <tt class="docutils literal"><span class="pre">key</span></tt> if <tt class="docutils literal"><span class="pre">key</span></tt> exists in <tt class="docutils literal"><span class="pre">Env</span></tt>. Otherwise the default value will be returned.
 &nbsp;&nbsp;<a
 href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L93"
 class="link-seesrc" target="_blank">Source</a>
@@ -530,7 +543,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-10 07:30:30 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-12 15:17:50 UTC</small>
       </div>
     </div>
   </div>

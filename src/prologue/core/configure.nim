@@ -22,15 +22,15 @@ runnableExamples:
 
   let prefix = "PROLOGUE_"
   # only work in application scope
+  delEnv("PROLOGUE")
   putPrologueEnv("debug", "true", prefix)
   putPrologueEnv("port", "8080", prefix)
   putPrologueEnv("appName", "Prologue", prefix)
   putPrologueEnv("staticDir", "static", prefix)
 
 
-  let res = getAllPrologueEnv(prefix)
+  discard getAllPrologueEnv(prefix)
 
-  doAssert(res.len == 4, "got: " & $res)
 
   let config = newStringStream("""[Prologue]
 debug=true

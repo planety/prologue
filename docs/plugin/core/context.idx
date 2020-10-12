@@ -28,6 +28,7 @@ middlewares	core/context.html#middlewares,Context	context: middlewares(ctx: Cont
 middlewares=	core/context.html#middlewares=,Context,seq[HandlerAsync]	context: middlewares=(ctx: Context; middlewares: seq[HandlerAsync])	
 addMiddlewares	core/context.html#addMiddlewares,Context,HandlerAsync	context: addMiddlewares(ctx: Context; middleware: HandlerAsync)	
 addMiddlewares	core/context.html#addMiddlewares,Context,seq[HandlerAsync]	context: addMiddlewares(ctx: Context; middleware: seq[HandlerAsync])	
+execEvent	core/context.html#execEvent,Event	context: execEvent(event: Event)	
 initUploadFile	core/context.html#initUploadFile,string,string	context: initUploadFile(filename, body: string): UploadFile	
 getUploadFile	core/context.html#getUploadFile,Context,string	context: getUploadFile(ctx: Context; name: string): UploadFile	
 save	core/context.html#save,UploadFile,string,string	context: save(uploadFile: UploadFile; dir: string; filename = &quot;&quot;)	
@@ -37,6 +38,7 @@ newReversedRouter	core/context.html#newReversedRouter	context: newReversedRouter
 initEvent	core/context.html#initEvent,AsyncEvent	context: initEvent(handler: AsyncEvent): Event	
 initEvent	core/context.html#initEvent,SyncEvent	context: initEvent(handler: SyncEvent): Event	
 newContext	core/context.html#newContext,Request,Response,GlobalScope	context: newContext(request: Request; response: Response; gScope: GlobalScope): Context	
+newContext	core/context.html#newContext,Context,Context	context: newContext(ctx: Context; src: Context)	
 getSettings	core/context.html#getSettings,Context,string	context: getSettings(ctx: Context; key: string): JsonNode	
 respond	core/context.html#respond,Context,HttpCode,string,ResponseHeaders	context: respond(ctx: Context; code: HttpCode; body: string; headers: ResponseHeaders): Future[\n    void]	
 respond	core/context.html#respond,Context	context: respond(ctx: Context): Future[void]	

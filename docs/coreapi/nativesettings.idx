@@ -5,5 +5,5 @@ hasKey	nativesettings.html#hasKey,Settings,string	nativesettings: hasKey(setting
 getOrDefault	nativesettings.html#getOrDefault,Settings,string	nativesettings: getOrDefault(settings: Settings; key: string): JsonNode	
 newCtxSettings	nativesettings.html#newCtxSettings	nativesettings: newCtxSettings(): CtxSettings	
 newSettings	nativesettings.html#newSettings,string,string,int	nativesettings: newSettings(address = &quot;&quot;; port = Port(8080); debug = true; reusePort = true;\n            secretKey = randomString(8); appName = &quot;&quot;; bufSize = 40960): Settings	
-newSettings	nativesettings.html#newSettings,JsonNode	nativesettings: newSettings(data: JsonNode): Settings	
-newSettings	nativesettings.html#newSettings,string	nativesettings: newSettings(configPath: string): Settings	
+loadSettings	nativesettings.html#loadSettings,JsonNode	nativesettings: loadSettings(data: JsonNode): Settings	
+loadSettings	nativesettings.html#loadSettings,string	nativesettings: loadSettings(configPath: string): Settings	

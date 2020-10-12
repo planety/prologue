@@ -124,6 +124,20 @@ function main() {
           <li><a class="reference external"
           data-doc-search-tag="route: add(reRouter: ReRouter; pairs: (RePath, PathHandler))" href="route.html#add%2CReRouter%2C">route: add(reRouter: ReRouter; pairs: (RePath, PathHandler))</a></li>
           </ul></dd>
+<dt><a name="addGroup" href="#addGroup"><span>addGroup:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="application: addGroup(group: Group; route: string; handler: HandlerAsync;
+         httpMethod: openArray[HttpMethod]; name = &quot;&quot;;
+         middlewares: openArray[HandlerAsync] = @[])" href="application.html#addGroup%2CGroup%2Cstring%2CHandlerAsync%2CopenArray%5BHttpMethod%5D%2Cstring%2CopenArray%5BHandlerAsync%5D">application: addGroup(group: Group; route: string; handler: HandlerAsync;
+         httpMethod: openArray[HttpMethod]; name = &quot;&quot;;
+         middlewares: openArray[HandlerAsync] = @[])</a></li>
+          <li><a class="reference external"
+          data-doc-search-tag="application: addGroup(group: Group; route: string; handler: HandlerAsync; httpMethod = HttpGet;
+         name = &quot;&quot;; middlewares: openArray[HandlerAsync] = @[])" href="application.html#addGroup%2CGroup%2Cstring%2CHandlerAsync%2Cstring%2CopenArray%5BHandlerAsync%5D">application: addGroup(group: Group; route: string; handler: HandlerAsync; httpMethod = HttpGet;
+         name = &quot;&quot;; middlewares: openArray[HandlerAsync] = @[])</a></li>
+          <li><a class="reference external"
+          data-doc-search-tag="application: addGroup(app: Prologue; patterns: openArray[(Group, seq[UrlPattern])])" href="application.html#addGroup%2CPrologue%2CopenArray%5B%5D">application: addGroup(app: Prologue; patterns: openArray[(Group, seq[UrlPattern])])</a></li>
+          </ul></dd>
 <dt><a name="addHeader" href="#addHeader"><span>addHeader:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="request: addHeader(request: var Request; key, value: string)" href="request.html#addHeader%2CRequest%2Cstring%2Cstring">request: addHeader(request: var Request; key, value: string)</a></li>
@@ -142,19 +156,9 @@ function main() {
           </ul></dd>
 <dt><a name="addRoute" href="#addRoute"><span>addRoute:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="application: addRoute(group: Group; route: string; handler: HandlerAsync;
-         httpMethod: openArray[HttpMethod]; name = &quot;&quot;;
-         middlewares: openArray[HandlerAsync] = @[])" href="application.html#addRoute%2CGroup%2Cstring%2CHandlerAsync%2CopenArray%5BHttpMethod%5D%2Cstring%2CopenArray%5BHandlerAsync%5D">application: addRoute(group: Group; route: string; handler: HandlerAsync;
-         httpMethod: openArray[HttpMethod]; name = &quot;&quot;;
-         middlewares: openArray[HandlerAsync] = @[])</a></li>
-          <li><a class="reference external"
-          data-doc-search-tag="application: addRoute(group: Group; route: string; handler: HandlerAsync; httpMethod = HttpGet;
-         name = &quot;&quot;; middlewares: openArray[HandlerAsync] = @[])" href="application.html#addRoute%2CGroup%2Cstring%2CHandlerAsync%2Cstring%2CopenArray%5BHandlerAsync%5D">application: addRoute(group: Group; route: string; handler: HandlerAsync; httpMethod = HttpGet;
-         name = &quot;&quot;; middlewares: openArray[HandlerAsync] = @[])</a></li>
-          <li><a class="reference external"
-          data-doc-search-tag="application: addRoute(app: Prologue; patterns: (Group, seq[UrlPattern]))" href="application.html#addRoute%2CPrologue%2C">application: addRoute(app: Prologue; patterns: (Group, seq[UrlPattern]))</a></li>
-          <li><a class="reference external"
-          data-doc-search-tag="application: addRoute(app: Prologue; patterns: openArray[(Group, seq[UrlPattern])])" href="application.html#addRoute%2CPrologue%2CopenArray%5B%5D">application: addRoute(app: Prologue; patterns: openArray[(Group, seq[UrlPattern])])</a></li>
+          data-doc-search-tag="application: addRoute(app: Prologue; patterns: openArray[UrlPattern]; baseRoute = &quot;&quot;;
+         middlewares: Option[seq[HandlerAsync]] = none(seq[HandlerAsync]))" href="application.html#addRoute%2CPrologue%2CopenArray%5BUrlPattern%5D%2Cstring%2COption%5Bseq%5BHandlerAsync%5D%5D">application: addRoute(app: Prologue; patterns: openArray[UrlPattern]; baseRoute = &quot;&quot;;
+         middlewares: Option[seq[HandlerAsync]] = none(seq[HandlerAsync]))</a></li>
           <li><a class="reference external"
           data-doc-search-tag="application: addRoute(app: Prologue; route: Regex; handler: HandlerAsync; httpMethod = HttpGet;
          middlewares: openArray[HandlerAsync] = @[])" href="application.html#addRoute%2CPrologue%2CRegex%2CHandlerAsync%2CopenArray%5BHandlerAsync%5D">application: addRoute(app: Prologue; route: Regex; handler: HandlerAsync; httpMethod = HttpGet;
@@ -165,10 +169,6 @@ function main() {
          middlewares: openArray[HandlerAsync] = @[])" href="application.html#addRoute%2CPrologue%2CRegex%2CHandlerAsync%2CopenArray%5BHttpMethod%5D%2CopenArray%5BHandlerAsync%5D">application: addRoute(app: Prologue; route: Regex; handler: HandlerAsync;
          httpMethod: openArray[HttpMethod];
          middlewares: openArray[HandlerAsync] = @[])</a></li>
-          <li><a class="reference external"
-          data-doc-search-tag="application: addRoute(app: Prologue; patterns: seq[UrlPattern]; baseRoute = &quot;&quot;;
-         middlewares: Option[seq[HandlerAsync]] = none(seq[HandlerAsync]))" href="application.html#addRoute%2CPrologue%2Cseq%5BUrlPattern%5D%2Cstring%2COption%5Bseq%5BHandlerAsync%5D%5D">application: addRoute(app: Prologue; patterns: seq[UrlPattern]; baseRoute = &quot;&quot;;
-         middlewares: Option[seq[HandlerAsync]] = none(seq[HandlerAsync]))</a></li>
           <li><a class="reference external"
           data-doc-search-tag="application: addRoute(app: Prologue; route: string; handler: HandlerAsync;
          httpMethod: openArray[HttpMethod]; name = &quot;&quot;;
@@ -390,7 +390,11 @@ function main() {
           </ul></dd>
 <dt><a name="execEvent" href="#execEvent"><span>execEvent:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="application: execEvent(event: Event)" href="application.html#execEvent%2CEvent">application: execEvent(event: Event)</a></li>
+          data-doc-search-tag="context: execEvent(event: Event)" href="context.html#execEvent%2CEvent">context: execEvent(event: Event)</a></li>
+          </ul></dd>
+<dt><a name="execStartupEvent" href="#execStartupEvent"><span>execStartupEvent:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="server: execStartupEvent(app: Prologue)" href="beast/server.html#execStartupEvent%2CPrologue">server: execStartupEvent(app: Prologue)</a></li>
           </ul></dd>
 <dt><a name="existsPrologueEnv" href="#existsPrologueEnv"><span>existsPrologueEnv:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -484,6 +488,8 @@ function main() {
           </ul></dd>
 <dt><a name="getPrologueEnv" href="#getPrologueEnv"><span>getPrologueEnv:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
+          data-doc-search-tag="configure: getPrologueEnv(): string" href="configure.html#getPrologueEnv">configure: getPrologueEnv(): string</a></li>
+          <li><a class="reference external"
           data-doc-search-tag="configure: getPrologueEnv(key: string; prefix: string; default = &quot;&quot;): string" href="configure.html#getPrologueEnv%2Cstring%2Cstring%2Cstring">configure: getPrologueEnv(key: string; prefix: string; default = &quot;&quot;): string</a></li>
           </ul></dd>
 <dt><a name="getQueryParams" href="#getQueryParams"><span>getQueryParams:</span></a></dt><dd><ul class="simple">
@@ -684,6 +690,12 @@ function main() {
 <li><a class="reference external"
           data-doc-search-tag="types: loads(session: Session; s: string)" href="types.html#loads%2CSession%2Cstring">types: loads(session: Session; s: string)</a></li>
           </ul></dd>
+<dt><a name="loadSettings" href="#loadSettings"><span>loadSettings:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="nativesettings: loadSettings(data: JsonNode): Settings" href="nativesettings.html#loadSettings%2CJsonNode">nativesettings: loadSettings(data: JsonNode): Settings</a></li>
+          <li><a class="reference external"
+          data-doc-search-tag="nativesettings: loadSettings(configPath: string): Settings" href="nativesettings.html#loadSettings%2Cstring">nativesettings: loadSettings(configPath: string): Settings</a></li>
+          </ul></dd>
 <dt><a name="loginPage" href="#loginPage"><span>loginPage:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="pages: loginPage(): string" href="pages.html#loginPage">pages: loginPage(): string</a></li>
@@ -716,8 +728,22 @@ function main() {
     [(Http404, default404Handler), (Http500, default500Handler)]);
        appData = newStringTable(mode = modeCaseSensitive)): Prologue</a></li>
           </ul></dd>
+<dt><a name="newAppQueryEnv" href="#newAppQueryEnv"><span>newAppQueryEnv:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="application: newAppQueryEnv(middlewares: openArray[HandlerAsync] = @[];
+               startup: openArray[Event] = @[]; shutdown: openArray[Event] = @[];
+    errorHandlerTable = newErrorHandlerTable(
+    [(Http404, default404Handler), (Http500, default500Handler)]);
+               appData = newStringTable(mode = modeCaseSensitive)): Prologue" href="application.html#newAppQueryEnv%2CopenArray%5BHandlerAsync%5D%2CopenArray%5BEvent%5D%2CopenArray%5BEvent%5D">application: newAppQueryEnv(middlewares: openArray[HandlerAsync] = @[];
+               startup: openArray[Event] = @[]; shutdown: openArray[Event] = @[];
+    errorHandlerTable = newErrorHandlerTable(
+    [(Http404, default404Handler), (Http500, default500Handler)]);
+               appData = newStringTable(mode = modeCaseSensitive)): Prologue</a></li>
+          </ul></dd>
 <dt><a name="newContext" href="#newContext"><span>newContext:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
+          data-doc-search-tag="context: newContext(ctx: Context; src: Context)" href="context.html#newContext%2CContext%2CContext">context: newContext(ctx: Context; src: Context)</a></li>
+          <li><a class="reference external"
           data-doc-search-tag="context: newContext(request: Request; response: Response; gScope: GlobalScope): Context" href="context.html#newContext%2CRequest%2CResponse%2CGlobalScope">context: newContext(request: Request; response: Response; gScope: GlobalScope): Context</a></li>
           </ul></dd>
 <dt><a name="newCtxSettings" href="#newCtxSettings"><span>newCtxSettings:</span></a></dt><dd><ul class="simple">
@@ -766,10 +792,6 @@ function main() {
           </ul></dd>
 <dt><a name="newSettings" href="#newSettings"><span>newSettings:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="nativesettings: newSettings(data: JsonNode): Settings" href="nativesettings.html#newSettings%2CJsonNode">nativesettings: newSettings(data: JsonNode): Settings</a></li>
-          <li><a class="reference external"
-          data-doc-search-tag="nativesettings: newSettings(configPath: string): Settings" href="nativesettings.html#newSettings%2Cstring">nativesettings: newSettings(configPath: string): Settings</a></li>
-          <li><a class="reference external"
           data-doc-search-tag="nativesettings: newSettings(address = &quot;&quot;; port = Port(8080); debug = true; reusePort = true;
             secretKey = randomString(8); appName = &quot;&quot;; bufSize = 40960): Settings" href="nativesettings.html#newSettings%2Cstring%2Cstring%2Cint">nativesettings: newSettings(address = &quot;&quot;; port = Port(8080); debug = true; reusePort = true;
             secretKey = randomString(8); appName = &quot;&quot;; bufSize = 40960): Settings</a></li>
@@ -1054,11 +1076,9 @@ function main() {
           </ul></dd>
 <dt><a name="serve" href="#serve"><span>serve:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="server: serve(app: Prologue; port: Port;
-      callback: proc (request: NativeRequest): Future[void] {.closure, gcsafe.};
-      address = &quot;&quot;)" href="beast/server.html#serve%2CPrologue%2CPort%2Cproc%28Request%29%2Cstring">server: serve(app: Prologue; port: Port;
-      callback: proc (request: NativeRequest): Future[void] {.closure, gcsafe.};
-      address = &quot;&quot;)</a></li>
+          data-doc-search-tag="server: serve(app: Prologue;
+      callback: proc (request: NativeRequest): Future[void] {.closure, gcsafe.})" href="beast/server.html#serve%2CPrologue%2Cproc%28Request%29">server: serve(app: Prologue;
+      callback: proc (request: NativeRequest): Future[void] {.closure, gcsafe.})</a></li>
           </ul></dd>
 <dt><a name="Session" href="#Session"><span>Session:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -1223,7 +1243,7 @@ function main() {
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-10 07:30:42 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-12 15:18:03 UTC</small>
       </div>
     </div>
   </div>
