@@ -12,6 +12,7 @@ type
     route: string
     middlewares: seq[HandlerAsync]
 
+
 func newGroup*(app: Prologue, route: string, middlewares: openArray[HandlerAsync] = @[], 
                parent: Group = nil): Group =
   if route.len == 0:

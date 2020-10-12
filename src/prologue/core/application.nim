@@ -271,7 +271,7 @@ proc addGroup*(group: Group, route: string, handler: HandlerAsync,
   ## Adds a single route and handler. It checks whether route is duplicated.
   ## 
   ## Notes: The framework will automatically register `HttpHead` method, if
-  ## HttpMethod is `HttpGet`.
+  ## `httpMethod` is `HttpGet`.
   let (route, middlewares) = getAllInfos(group, route, middlewares)
   group.app.addRoute(route, handler, httpMethod, name, middlewares)
 
@@ -408,7 +408,7 @@ proc newAppQueryEnv*(
 ): Prologue =
   let path = getPrologueEnv()
   var configPath: string
-  if path.len == 0:
+  if path.len == 0 or path == "default":
     configPath = ".config/config.json"
   else:
     configPath = fmt".config/config.{path}.json"

@@ -1,9 +1,10 @@
 import ../src/prologue except loginPage
 import ../src/prologue/middlewares/utils as ut
 import ../src/prologue/i18n
-import logging, os, strformat, strutils
 
-import server/utils
+import std/[logging, os, strformat, strutils]
+
+import ./server/utils
 
 
 proc hello*(ctx: Context) {.async.} =

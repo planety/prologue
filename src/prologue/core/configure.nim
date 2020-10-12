@@ -110,6 +110,7 @@ iterator pairs*(env: Env): (string, string) =
     yield pair
 
 proc getPrologueEnv*(): string =
+  ## Gets `PROLOGUE` env variables.
   getEnv(ProloguePrefix, "")
 
 # please set env with prefix namely PROLOGUE

@@ -4,8 +4,9 @@
     "port": 8080,
     "debug": false,
     "reusePort": true,
-    "staticDirs": [],
     "appName": "",
+    "secretKey": "Set by yourself",
     "bufSize": 40960
-  }
+  },
+  "name": "production"
 }

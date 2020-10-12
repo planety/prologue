@@ -1,7 +1,7 @@
 import ../../../src/prologue
-import ../../../src/prologue/mocking/mocking
+import ../../../src/prologue/mocking
 
-import uri
+import std/uri
 
 
 proc hello*(ctx: Context) {.async.} =

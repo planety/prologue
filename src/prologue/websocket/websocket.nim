@@ -5,6 +5,7 @@ else:
   {.error: "Please use `logue extension websocketx` to install!".}
 
 import ../core/context
+
 import std/asyncdispatch
 
 
