@@ -155,6 +155,12 @@ proc addMiddlewares*(ctx: Context, middleware: seq[HandlerAsync]) {.inline.} =
   ## Internal function. Do not use.
   ctx.middlewares.add(middleware)
 
+proc execEvent*(event: Event) {.inline.} =
+  if event.async:
+    waitFor event.asyncHandler()
+  else:
+    event.syncHandler()
+
 func initUploadFile*(filename, body: string): UpLoadFile =
   ## Initiates a UploadFile.
   UploadFile(filename: filename, body: body)

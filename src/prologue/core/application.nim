@@ -352,12 +352,6 @@ proc all*(group: Group, route: string, handler: HandlerAsync, name = "",
   group.app.addRoute(route, handler, @[HttpGet, HttpPost, HttpPut, HttpDelete,
                HttpTrace, HttpOptions, HttpConnect, HttpPatch], name, middlewares)
 
-proc execEvent*(event: Event) {.inline.} =
-  if event.async:
-    waitFor event.asyncHandler()
-  else:
-    event.syncHandler()
-
 proc shutDownHandler() {.noconv.} =
   # shutdown events
 
@@ -500,12 +494,11 @@ proc handleRequest*(app: Prologue, nativeRequest: NativeRequest): Future[void] {
 
 proc run*(app: Prologue) =
   ## Starts an Application.
-  
+
   app.gScope.router.compress()
 
   # start event
-  for event in app.startup:
-    execEvent(event)
+  app.execStartupEvent()
 
   dontUseThisShutDownEvents = app.shutdown
 
@@ -528,9 +521,8 @@ proc run*(app: Prologue) =
     logging.debug(fmt"Prologue is serving at {app.appAddress}:{app.appPort} {app.appName}")
 
 
-  app.serve(app.appPort, proc (nativeRequest: NativeRequest): Future[void] {.gcsafe.} =
-                           result = handleRequest(app, nativeRequest),
-            app.appAddress)
+  app.serve(proc (nativeRequest: NativeRequest): Future[void] {.gcsafe.} =
+                           result = handleRequest(app, nativeRequest))
 
 
 when isMainModule:

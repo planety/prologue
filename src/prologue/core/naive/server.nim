@@ -4,7 +4,7 @@ from std/asynchttpserver import newAsyncHttpServer, serve, close, AsyncHttpServe
 from ./request import NativeRequest
 from ../nativesettings import Settings, CtxSettings, `[]`
 from ../context import Router, ReversedRouter, ReRouter, HandlerAsync,
-    Event, ErrorHandlerTable, GlobalScope
+    Event, ErrorHandlerTable, GlobalScope, execEvent
 
 
 type
@@ -19,14 +19,18 @@ type
     errorHandlerTable*: ErrorHandlerTable
 
 
-proc serve*(app: Prologue, port: Port,
+proc execStartupEvent*(app: Prologue) =
+  for event in app.startup:
+    execEvent(event)
+
+proc serve*(app: Prologue,
             callback: proc (request: NativeRequest): Future[void] {.closure, gcsafe.},
-            address = "") {.inline.} =
+           ) {.inline.} =
   ## Serves a new web application.
-  waitFor app.server.serve(port, callback, address)
+  waitFor app.server.serve(app.gScope.settings.port, callback, app.gScope.settings.address)
 
 func newPrologueServer(reuseAddr = true, reusePort = false,
-                        maxBody = 8388608): Server {.inline.} =
+                       maxBody = 8388608): Server {.inline.} =
   newAsyncHttpServer(reuseAddr, reusePort, maxBody)
 
 func newPrologue*(

@@ -3,7 +3,7 @@ import std/[strtabs, json, asyncdispatch]
 from ./request import NativeRequest
 from ../nativesettings import Settings, CtxSettings, `[]`
 from ../context import Router, ReversedRouter, ReRouter, HandlerAsync,
-    Event, ErrorHandlerTable, GlobalScope
+    Event, ErrorHandlerTable, GlobalScope, execEvent
 
 import pkg/httpx except Settings, Request
 
@@ -15,12 +15,23 @@ type
     startup*: seq[Event]
     shutdown*: seq[Event]
     errorHandlerTable*: ErrorHandlerTable
+    startupClosure: proc () {.closure, gcsafe.}
 
-proc serve*(app: Prologue, port: Port,
+proc execStartupEvent*(app: Prologue) =
+  proc doStartup() {.gcsafe.} =
+    for event in app.startup:
+      execEvent(event)
+
+  app.startupClosure = doStartup
+
+proc serve*(app: Prologue,
             callback: proc (request: NativeRequest): Future[void] {.closure, gcsafe.},
-            address = "") {.inline.} =
+           ) {.inline.} =
   ## Serves a new web application.
-  run(callback, httpx.initSettings(port, address, app.gScope.settings["prologue"].getOrDefault("numThreads").getInt(0)))
+  run(callback, httpx.initSettings(app.gScope.settings.port, app.gScope.settings.address,
+                app.gScope.settings["prologue"].getOrDefault("numThreads").getInt(0),
+                app.startupClosure)
+                )
 
 func newPrologue*(settings: Settings, ctxSettings: CtxSettings, router: Router,
                   reversedRouter: ReversedRouter, reRouter: ReRouter, middlewares: openArray[HandlerAsync], 
