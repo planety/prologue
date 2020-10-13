@@ -22,18 +22,33 @@ proc downloadFile(ctx: Context) {.async.} =
 
 ## Serve static files
 
-You can specify `Settings.staticDirs` attributes to serve multiple
-static dirs. `staticDirs` is of `seq[string]` type, it contains all
-the dirs of static files which will be checked in every request.
+`staticfile` is implemented as middleware. It should be imported first. You can specify the path of static directories. `staticDirs` is of `varargs[string]` type. It contains all
+the directories of static files which will be checked in every request.
 
 ```nim
-let
-  env = loadPrologueEnv(".env")
-  settings = newSettings(staticDirs = [env.get("staticDir")])
+import prologue
+import prologue/middlewares/staticfile
+
+
+var app = newApp(settings = settings)
+app.use(staticFileMiddleware(env.get("staticDir")))
+app.addRoute(urls.urlPatterns, "")
+app.run()
 ```
 
-Or set `staticDirs` directly:
+Multiple directories:
 
 ```nim
-let settings = newSettings(staticDirs = ["/static", "/templates"])
+import prologue
+import prologue/middlewares/staticfile
+
+
+var app = newApp(settings = settings)
+app.use(staticFileMiddleware("public", "templates"))
+# Or seq[string]
+# app.use(staticFileMiddleware(@["public", "templates"]))
+# Or array[N, string]
+# app.use(staticFileMiddleware(["public", "templates"]))
+app.addRoute(urls.urlPatterns, "")
+app.run()
 ```

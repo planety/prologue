@@ -24,6 +24,7 @@ nav:
     - Upload Files: "uploadfile.md"
     - Session: "session.md"
     - Server Settings: "server.md"
+    - WebSocket: "websocket.md"
     - FAQ: "faq.md"
 
 

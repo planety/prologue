@@ -22,7 +22,7 @@ type
     pathParams*: StringTableRef
 
 
-func createHeaders(headers: ResponseHeaders): string =
+func createHeaders(headers: ResponseHeaders): string {.inline.} =
   if headers.len != 0:
     for (key, value) in headers.pairs:
       result.add(key & ": " & value & "\c\L")
