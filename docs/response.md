@@ -8,6 +8,7 @@ You can specify different responses by types.
 - jsonResponse -> Json format
 
 ## Respond by error code
+
 - error404 -> return 404
 - redirect -> return 301 and redirect to a new page
 - abort -> return 401

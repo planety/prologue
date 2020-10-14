@@ -26,6 +26,7 @@ nav:
     - Session: "session.md"
     - Server Settings: "server.md"
     - WebSocket: "websocket.md"
+    - Command Line Tool: "cli.md"
     - FAQ: "faq.md"
 
 
