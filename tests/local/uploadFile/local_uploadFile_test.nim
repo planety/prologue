@@ -15,7 +15,14 @@ proc upload(ctx: Context) {.async.} =
       file.save("not/exists/dir")
     resp fmt"<html><h1>{file.filename}</h1><p>{file.body}</p></html>"
 
-let settings = newSettings(port = Port(8080))
+let node = %* {
+    "prologue": {
+        "secretKey": "hello, world",
+        "maxBody": 1000
+      }
+    }
+
+let settings = loadSettings(node)
 var app = newApp(settings)
 app.use([debugRequestMiddleware()])
 app.addRoute("/upload", upload, @[HttpGet, HttpPost])

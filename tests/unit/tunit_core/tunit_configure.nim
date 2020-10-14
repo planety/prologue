@@ -21,7 +21,7 @@ block:
 
   # "can load config"
   block:
-    let env = loadPrologueEnv("tests/.env")
+    let env = loadPrologueEnv(filename)
     doAssert env["debug"] == "true"
     doAssert env["port"] == "8080"
     doAssert env["appName"] == "Prologue"

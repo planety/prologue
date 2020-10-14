@@ -97,8 +97,7 @@ proc registerErrorHandler*(app: Prologue, code: openArray[HttpCode],
     proc go30x*(ctx: Context) {.async.} =
       resp "EveryThing else?", Http301
 
-    let settings = newSettings()
-    var app = newApp(settings)
+    var app = newApp()
     app.registerErrorHandler(Http404, go404)
     app.registerErrorHandler({Http200 .. Http204}, go20x)
     app.registerErrorHandler(@[Http301, Http304, Http307], go30x)
@@ -369,7 +368,7 @@ func use*(app: var Prologue, middlewares: varargs[HandlerAsync]) {.inline.} =
   app.middlewares.add middlewares
 
 func newApp*(
-  settings: Settings, 
+  settings: Settings = newSettings(), 
   middlewares: openArray[HandlerAsync] = @[],
   startup: openArray[Event] = @[], 
   shutdown: openArray[Event] = @[],

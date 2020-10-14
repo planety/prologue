@@ -17,7 +17,6 @@ proc home(ctx: Context) {.async.} =
   resp "You logged in."
 
 
-let settings = newSettings()
-var app = newApp(settings)
+var app = newApp()
 app.addRoute("/home", home, middlewares = @[debugRequestMiddleware(), basicAuthMiddleware(realm = "home", verify)])
 app.run()

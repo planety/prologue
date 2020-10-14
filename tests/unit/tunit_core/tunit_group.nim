@@ -3,7 +3,7 @@ import ../../../src/prologue/middlewares/middlewares
 
 
 block:
-  var app = newApp(newSettings())
+  var app = newApp()
   doAssertRaises(RouteError):
     discard newGroup(app, "")
 
@@ -22,7 +22,7 @@ block:
     discard newGroup(app, "/hello/")
 
 block:
-  var app = newApp(newSettings())
+  var app = newApp()
   var base = newGroup(app, "/apiv2", @[debugRequestMiddleware()])
   var level1 = newGroup(app,"/level1", @[debugRequestMiddleware(), debugRequestMiddleware()], base)
   var level2 = newGroup(app, "/level2", @[debugRequestMiddleware()], level1)

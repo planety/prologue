@@ -12,6 +12,7 @@ nav:
     - Introduction: "index.md"
     - QuickStart: "quickstart.md"
     - Application: "application.md"
+    - Confugure: "configure.md"
     - Event: "event.md"
     - Error Handler: "errorhandler.md"
     - Headers: "headers.md"

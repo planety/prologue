@@ -24,8 +24,7 @@ proc go30x*(ctx: Context) {.async.} =
 block:
   # "registErrorHandler can work"
   block:
-    let settings = newSettings()
-    var app = newApp(settings)
+    var app = newApp()
     app.registerErrorHandler(Http404, go404)
     app.registerErrorHandler({Http200 .. Http204}, go20x)
     app.registerErrorHandler(@[Http301, Http304, Http307], go30x)

@@ -7,7 +7,6 @@ block:
   doAssert settings.port.int == 8080
   doAssert settings.debug == true
   doAssert settings.reusePort == true
-  doAssert settings.appName.len == 0
 
   doAssert settings["prologue"].getOrDefault("bufSize").getInt == 40960
   doAssert settings["prologue"].hasKey("secretKey")

@@ -56,8 +56,7 @@ app.registerErrorHandler(@[Http301, Http304, Http307], go30x)
 If you don't want to use the default Error handler, you could clear the whole error handler table.
 
 ```nim
-let settings = newSettings()
-var app = newApp(settings=settings, errorHandlerTable = newErrorHandlerTable())
+var app = newApp(errorHandlerTable = newErrorHandlerTable())
 ```
 
 ## HTTP 500 handler

@@ -54,7 +54,7 @@ app.addRoute(re"/post(?P<num>[\d]+)", articles, HttpGet)
 `Prologue` supports group route. You can add arbitrary levels of route.
 
 ```nim
-var app = newApp(newSettings())
+var app = newApp()
 var base = newGroup(app, "/apiv2", @[])
 var level1 = newGroup(app,"/level1", @[], base)
 var level2 = newGroup(app, "/level2", @[], level1)

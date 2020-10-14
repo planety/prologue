@@ -18,7 +18,7 @@ proc prepareRequest(path: string, httpMethod = HttpGet): Request =
 
 
 block:
-  var app = newApp(newSettings())
+  var app = newApp()
   mockApp(app)
 
   var base = newGroup(app, "/apiv2", @[])
@@ -105,7 +105,7 @@ block:
       doAssert ctx.response.body == "Home"
 
 block:
-  var app = newApp(newSettings())
+  var app = newApp()
   mockApp(app)
 
   var base = newGroup(app, "/apiv2", @[])

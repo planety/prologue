@@ -31,9 +31,7 @@ proc myDebugRequestMiddleware*(appName = "Prologue"): HandlerAsync =
     logging.info "debugRequestMiddleware->End"
 
 
-var
-  settings = newSettings()
-  app = newApp(settings = settings)
+var app = newApp()
 
 app.use(myDebugRequestMiddleware())
 app.addRoute("/", hello, HttpGet, middlewares = @[myDebugRequestMiddleware()])

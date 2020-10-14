@@ -76,8 +76,7 @@ block:
       ctx.ctxData["test"] = "true"
       respDefault(Http404)
 
-    let settings = newSettings()
-    var app = newApp(settings=settings, errorHandlerTable = newErrorHandlerTable())
+    var app = newApp(errorHandlerTable = newErrorHandlerTable())
     mockApp(app)
     app.addRoute("/hello", hello)
     let ctx = app.runOnce(prepareRequest("/hello"))
