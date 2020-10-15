@@ -1,7 +1,7 @@
 import ../../../src/prologue
 import ../../../src/prologue/mocking
 
-import std/uri
+import std/[uri, with]
 
 
 proc prepareRequest(path: string, httpMethod = HttpGet): Request =
@@ -36,21 +36,25 @@ block:
   proc home(ctx: Context) {.async.} =
     resp "Home"
 
-  base.get("/hello", hello)
-  base.get("/hi", hi)
-  base.post("/home", home)
+  with base:
+    get("/hello", hello)
+    get("/hi", hi)
+    post("/home", home)
 
-  level1.get("/hello", hello)
-  level1.get("/hi", hi)
-  level1.post("/home", home)
+  with level1:
+    get("/hello", hello)
+    get("/hi", hi)
+    post("/home", home)
 
-  level2.get("/hello", hello)
-  level2.get("/hi", hi)
-  level2.post("/home", home)
+  with level2:
+    get("/hello", hello)
+    get("/hi", hi)
+    post("/home", home)
 
-  level3.get("/hello", hello)
-  level3.get("/hi", hi)
-  level3.post("/home", home)
+  with level3:
+    get("/hello", hello)
+    get("/hi", hi)
+    post("/home", home)
 
   block:
     block:

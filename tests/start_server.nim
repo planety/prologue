@@ -2,41 +2,33 @@ import ../src/prologue except loginPage
 import ../src/prologue/middlewares/utils as ut
 import ../src/prologue/i18n
 
-import std/[logging, os, strformat, strutils]
+import std/[with, os, strformat, strutils]
 
 import ./server/utils
 
 
 proc hello*(ctx: Context) {.async.} =
-  logging.debug "hello"
   resp "<h1>Hello, Prologue!</h1>"
 
 proc home*(ctx: Context) {.async.} =
-  logging.debug "home"
   resp "<h1>Home</h1>"
 
 proc helloName*(ctx: Context) {.async.} =
-  logging.debug "helloname"
   resp "<h1>Hello, " & ctx.getPathParams("name", "Prologue!") & "</h1>"
 
 proc redirectHome*(ctx: Context) {.async.} =
-  logging.debug "redirectHome"
   resp redirect("/home")
 
 proc loginGet*(ctx: Context) {.async.} =
-  logging.debug "login get"
   resp loginGetPage()
 
 proc doLoginGet*(ctx: Context) {.async.} =
-  logging.debug "doLogin get"
   resp redirect("/hello/Nim")
 
 proc login*(ctx: Context) {.async.} =
-  logging.debug "log post"
   resp loginPage()
 
 proc doLogin*(ctx: Context) {.async.} =
-  logging.debug "doLogin post"
   resp redirect("/hello/Nim")
 
 proc translate*(ctx: Context) {.async.} =
@@ -68,17 +60,19 @@ proc cookie(ctx: Context) {.async.} =
 let settings = newSettings(appName = "Prologue", debug = false, port = Port(8080))
 var app = newApp(settings = settings)
 
-app.addRoute("/", home, HttpGet)
-app.addRoute("/home", home, HttpGet, middlewares = @[debugRequestMiddleware()])
-app.addRoute("/hello", hello, HttpGet)
-app.addRoute("/redirect", redirectHome, HttpGet)
-app.addRoute("/loginget", loginGet, HttpGet)
-app.addRoute("/loginpage", doLoginGet, @[HttpGet, HttpPost])
-app.addRoute("/login", login, HttpGet)
-app.addRoute("/login", doLogin, HttpPost)
-app.addRoute("/hello/{name}", helloName, HttpGet)
-app.addRoute("/translate", translate)
-app.addRoute("/upload", upload, @[HttpGet, HttpPost])
-app.get("/cookie", cookie)
-app.loadTranslate(expandFileName("tests/assets/i18n/trans.ini"))
-app.run()
+with app:
+  addRoute("/", home, HttpGet)
+  addRoute("/home", home, HttpGet, middlewares = @[debugRequestMiddleware()])
+  addRoute("/hello", hello, HttpGet)
+  addRoute("/redirect", redirectHome, HttpGet)
+  addRoute("/loginget", loginGet, HttpGet)
+  addRoute("/loginpage", doLoginGet, @[HttpGet, HttpPost])
+  addRoute("/login", login, HttpGet)
+  addRoute("/login", doLogin, HttpPost)
+  addRoute("/hello/{name}", helloName, HttpGet)
+  addRoute("/translate", translate)
+  addRoute("/upload", upload, @[HttpGet, HttpPost])
+  get("/cookie", cookie)
+
+  loadTranslate(expandFileName("tests/assets/i18n/trans.ini"))
+  run()
