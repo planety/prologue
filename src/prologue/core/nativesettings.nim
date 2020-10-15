@@ -57,7 +57,7 @@ func newSettings*(
   secretKey = randomString(8),
   appName = "",
   bufSize = 40960
-): Settings =
+): Settings {.inline.} =
   ## Creates a new `Settings`.
   if secretKey.len == 0:
     raise newException(EmptySecretKeyError, "Secret key can't be empty!")

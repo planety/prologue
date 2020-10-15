@@ -17,7 +17,7 @@ import std/[mimetypes, md5, uri, options, strutils, critbits,
             os, times, options, parseutils, json]
 
 import ./response, ./pages, ./basicregex, ./request, ./httpcore/httplogue
-from ./types import BaseType, Session, `[]`, initSession
+import ./types
 from ./configure import parseValue
 from ./httpexception import AbortError, RouteError, DuplicatedRouteError
 from ./nativesettings import Settings, CtxSettings, getOrDefault, hasKey, `[]`
@@ -226,6 +226,24 @@ func getSettings*(ctx: Context, key: string): JsonNode {.inline.} =
   ## Get settings from globalSetting.
   ## If key doesn't exist, `nil` will be returned.
   result = ctx.gScope.settings.getOrDefault(key)
+
+proc flash*(ctx: Context, msgs: string, category = FlashLevel.Info) {.inline.} =
+  ctx.session.flash(msgs, category)
+
+proc flash*(ctx: Context, msgs: string, category: string) {.inline.} =
+  ctx.session.flash(msgs, category)
+
+proc getFlashedMsgs*(ctx: Context): seq[string] {.inline.} =
+  ctx.session.messages
+
+proc getFlashedMsgsWithCategory*(ctx: Context): seq[(string, string)] {.inline.} =
+  ctx.session.messagesWithCategory
+
+proc getFlashedMsg*(ctx: Context, category: FlashLevel): Option[string] {.inline.} =
+  ctx.session.getMessage(category)
+
+proc getFlashedMsg*(ctx: Context, category: string): Option[string] {.inline.} =
+  ctx.session.getMessage(category)
 
 proc respond*(
   ctx: Context, code: HttpCode, body: string,

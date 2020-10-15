@@ -1,6 +1,6 @@
 import std/[options, strtabs, tables, asyncdispatch]
 
-from ../../core/types import BadSecretKeyError, SecretKey, len, Session, initSession
+from ../../core/types import BadSecretKeyError, SecretKey, len, Session, newSession
 from ../../core/context import Context, HandlerAsync, getCookie, setCookie,
                               deleteCookie
 from ../../core/urandom import randomBytesSeq
@@ -33,7 +33,7 @@ proc sessionMiddleware*(
     if data.len != 0 and memorySessionTable.hasKey(data):
       ctx.session = memorySessionTable[data]
     else:
-      ctx.session = initSession(data = newStringTable(modeCaseSensitive))
+      ctx.session = newSession(data = newStringTable(modeCaseSensitive))
 
       data = urlsafeBase64Encode(randomBytesSeq(16))
       ctx.setCookie(sessionName, data, 

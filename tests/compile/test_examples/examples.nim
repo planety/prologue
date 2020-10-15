@@ -8,7 +8,14 @@ import ../../../examples/csrf/app as a7
 import ../../../examples/memorysession/app as a8
 import ../../../examples/redissession/app as a9
 import ../../../examples/signedcookiesession/app as a10
-import ../test_readme/example1
-import ../test_readme/example2
-import ../../../src/prologue
-import ../../../src/prologue/plugin
+import ../test_readme/example1 as a11
+import ../test_readme/example2 as a12
+import ../../../src/prologue as a13
+import ../../../src/prologue/plugin as a14
+import ../../local/basic_auth/local_basic_auth_test as a15
+import ../../local/staticFile/local_bigFile_test as a16
+import ../../local/staticFile/local_download_test as a17
+import ../../local/staticFile/local_staticFile_test as a18
+import ../../local/uploadFile/local_uploadFile_test as a19
+import ../../start_server as a20
+import ../../server/tserver_application as a21

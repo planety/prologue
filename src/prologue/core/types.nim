@@ -11,10 +11,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-import std/[strutils, strtabs, parseutils, tables]
+import std/[strutils, strtabs, parseutils, tables, options]
 
 import ./encode
 
+
+const
+  FlashPrefix = "_flash_"
 
 type
   BadSecretKeyError* = object of CatchableError
@@ -29,6 +32,12 @@ type
     newCreated*: bool
     modified*: bool
     accessed*: bool
+
+  FlashLevel* = enum
+    Info = "info"
+    Warning = "warning"
+    Error = "error"
+    Fault = "fault"
 
   FormPart* = object
     data*: OrderedTableRef[string, tuple[params: StringTableRef, body: string]]
@@ -82,31 +91,36 @@ func `$`*(secretKey: SecretKey): string {.inline.} =
   ## Hide secretKey's value
   "SecretKey(********)"
 
-func initSession*(data: StringTableRef, newCreated = false, modified = false,
+func newSession*(data: StringTableRef, newCreated = false, modified = false,
     accessed = false): Session {.inline.} =
   ## Initializes a new session.
-  Session(data: data, modified: modified)
+  Session(data: data, newCreated: newCreated, modified: modified, accessed: accessed)
 
-func update*(session: var Session) {.inline.} =
+func update(session: var Session) {.inline.} =
   session.accessed = true
   session.modified = true
 
 func `[]`*(session: var Session, key: string): string {.inline.} =
+  ## Retrieves the value if `key` exists in `session`.
   result = session.data[key]
   session.accessed = true
 
 func `[]=`*(session: var Session, key, value: string) {.inline.} =
+  ## sets the (key, value) pair.
   session.data[key] = value
   update(session)
 
 func len*(session: Session): int {.inline.} =
+  ## Gets the size of `session`.
   session.data.len
 
 iterator pairs*(session: Session): tuple[key, val: string] =
+  session.accessed = true
   for (key, val) in session.data.pairs:
     yield (key, val)
 
 func getOrDefault*(session: var Session, key: string, default = ""): string {.inline.} =
+  ## Retrieves the value if `key` exists in `session`. Otherwise `default` will be returned.
   if session.data.hasKey(key):
     result = session.data[key]
   else:
@@ -114,10 +128,12 @@ func getOrDefault*(session: var Session, key: string, default = ""): string {.in
   session.accessed = true
 
 func del*(session: var Session, key: string) {.inline.} =
+  ## Deletes `key` from `session`.
   session.data.del(key)
   update(session)
 
 func clear*(session: var Session) {.inline.} =
+  ## Clears the data of `session`.
   session.data.clear(modeCaseSensitive)
   update(session)
 
@@ -151,7 +167,7 @@ func parseStringTable*(tabs: var StringTableRef, s: string) =
     if pos >= s.len:
       break
 
-proc loads*(session: Session, s: string) {.inline.} =
+proc loads*(session: var Session, s: string) {.inline.} =
   ## Loads session from strings.
   session.data = newStringTable(mode = modeCaseSensitive)
   session.data.parseStringTable(urlsafeBase64Decode(s))
@@ -159,3 +175,49 @@ proc loads*(session: Session, s: string) {.inline.} =
 proc dumps*(session: Session): string {.inline.} =
   ## Dumps session to strings.
   urlsafeBase64Encode($session)
+
+func flash*(session: var Session, msgs: string, category = FlashLevel.Info) {.inline.} =
+  session[FlashPrefix & $category] = msgs
+
+func flash*(session: var Session, msgs: string, category: string) {.inline.} =
+  session[FlashPrefix & category] = msgs
+
+proc messages*(session: var Session): seq[string] =
+  update(session)
+  var delKeys: seq[string]
+  for key, value in session.data:
+    if key.startsWith(FlashPrefix):
+      result.add value
+      delKeys.add key
+
+  for key in delKeys:
+    session.data.del(key)
+
+proc messagesWithCategory*(session: var Session): seq[(string, string)] =
+  update(session)
+  var delKeys: seq[string]
+  for key, value in session.data:
+    if key.startsWith(FlashPrefix):
+      result.add (key[FlashPrefix.len .. ^1], value)
+      delKeys.add key
+
+  for key in delKeys:
+    session.data.del(key)
+
+func getMessage*(session: var Session, category: FlashLevel): Option[string] {.inline.} =
+  update(session)
+  let key = FlashPrefix & $category
+  if session.data.hasKey(key):
+    result = some(session.data[key])
+    session.data.del(key)
+  else:
+    result = none(string)
+
+func getMessage*(session: var Session, category: string): Option[string] {.inline.} =
+  update(session)
+  let key = FlashPrefix & category
+  if session.data.hasKey(key):
+    result = some(session.data[key])
+    session.data.del(key)
+  else:
+    result = none(string)

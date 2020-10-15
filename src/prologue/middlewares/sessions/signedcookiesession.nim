@@ -1,7 +1,7 @@
 import std/[options, strtabs, asyncdispatch, json]
 
 
-from ../../core/types import BadSecretKeyError, SecretKey, loads, dumps, len, initSession
+from ../../core/types import BadSecretKeyError, SecretKey, loads, dumps, len, newSession
 from ../../core/context import Context, HandlerAsync, getCookie, setCookie,
     deleteCookie
 from ../../core/response import addHeader
@@ -39,7 +39,7 @@ proc sessionMiddleware*(
     signer = initTimedSigner(SecretKey(secretKey), salt, sep, keyDerivation, digestMethodType)
 
   result = proc(ctx: Context) {.async.} =
-    ctx.session = initSession(data = newStringTable(modeCaseSensitive))
+    ctx.session = newSession(data = newStringTable(modeCaseSensitive))
     let
       data = ctx.getCookie(sessionName)
 

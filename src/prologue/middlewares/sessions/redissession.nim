@@ -1,6 +1,6 @@
 import std/[options, strtabs, asyncdispatch]
 
-from ../../core/types import BadSecretKeyError, SecretKey, len, Session, initSession, pairs
+from ../../core/types import BadSecretKeyError, SecretKey, len, Session, newSession, pairs
 from ../../core/context import Context, HandlerAsync, getCookie, setCookie, deleteCookie
 from ../../core/response import addHeader
 from ../../core/middlewaresbase import switch
@@ -44,11 +44,11 @@ proc sessionMiddleware*(
         let info = await redisClient.hGetAll(data)
 
       if info.len != 0:
-        ctx.session = initSession(data = divide(info))
+        ctx.session = newSession(data = divide(info))
       else:
-        ctx.session = initSession(data = newStringTable(modeCaseSensitive))
+        ctx.session = newSession(data = newStringTable(modeCaseSensitive))
     else:
-      ctx.session = initSession(data = newStringTable(modeCaseSensitive))
+      ctx.session = newSession(data = newStringTable(modeCaseSensitive))
 
       data = genUid()
       ctx.setCookie(sessionName, data, 
