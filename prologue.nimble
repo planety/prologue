@@ -1,6 +1,6 @@
 # Package
 
-version       = "0.3.6"
+version       = "0.4.0"
 author        = "flywind"
 description   = "Full-Stack Web Framework."
 license       = "Apache-2.0"
@@ -8,7 +8,7 @@ srcDir        = "src"
 
 
 # Dependencies
-requires "nim >= 1.2.6"
+requires "nim >= 1.4.0"
 requires "regex >= 0.16.2"
 requires "nimcrypto >= 0.5.4"
 requires "cookiejar >= 0.2.0"

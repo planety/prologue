@@ -46,8 +46,7 @@ proc sessionMiddleware*(
     if data.len != 0:
       try:
         ctx.session.loads(signer.unsign(data, maxAge))
-      except BadTimeSignatureError, SignatureExpiredError, ValueError, IndexError:
-        ## TODO change to IndexDefect when Nim 1.4 is released
+      except BadTimeSignatureError, SignatureExpiredError, ValueError, IndexDefect:
         ctx.deleteCookie(sessionName, domain = domain,
                 path = path) # delete session data in cookie
       except Exception as e:

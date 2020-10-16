@@ -58,3 +58,15 @@ func serialize*(number: int16): array[2, byte] {.inline.} =
   # result[0] = byte(number shr 8'u16)
   # result[1] = byte(number)
   result = castNumber(result, number)
+
+func escape*(src: string): string =
+  result = newStringOfCap(src.len)
+  for c in src:
+    case c
+    of '&': result.add("&amp;")
+    of '<': result.add("&lt;")
+    of '>': result.add("&gt;")
+    of '"': result.add("&quot;")
+    of '\'': result.add("&#39;")
+    of '/': result.add("&#x2F;")
+    else: result.add(c)

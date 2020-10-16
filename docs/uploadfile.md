@@ -1,6 +1,6 @@
 # Upload Files
 
-`getUploadFile` accepts the name of file input(HTNL) to get the info of file. The function returns the name and contents of the file. For this example, the name is "file". 
+`getUploadFile` accepts the name of file in order to get the infos. The function returns the name and contents of the file. For this example, the name is "file". 
 
 ```html
 <form action="upload" method="post" enctype="multipart/form-data">

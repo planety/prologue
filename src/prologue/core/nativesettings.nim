@@ -26,6 +26,7 @@ type
     port*: Port              ## The port of socket.
     debug*: bool             ## Debug mode(true is yes).
     reusePort*: bool         ## Use socket port in multiple times.
+    bufSize*: int            ## Buffer size of sending static files.
     data: JsonNode           ## Data which carries user defined settings.
 
   CtxSettings* = ref object ## Context settings.
@@ -62,9 +63,10 @@ func newSettings*(
   if secretKey.len == 0:
     raise newException(EmptySecretKeyError, "Secret key can't be empty!")
 
-  result = Settings(address: address, port: port, debug: debug, reusePort: reusePort,
-                    data: %* {"prologue": {"secretKey": secretKey, "bufSize": bufSize, 
-                    "appName": appName}})
+  result = Settings(address: address, port: port, debug: debug, 
+                    reusePort: reusePort, bufSize: bufSize,
+                    data: %* {"prologue": {"secretKey": secretKey,
+                        "appName": appName}})
 
 func checkSettings(settings: var Settings, data: JsonNode) {.inline.} =
   if not data.hasKey("prologue"):
@@ -79,6 +81,7 @@ func checkSettings(settings: var Settings, data: JsonNode) {.inline.} =
   settings.port = Port(logueSettings.getOrDefault("port").getInt(8080))
   settings.reusePort = logueSettings.getOrDefault("reusePort").getBool(true)
   settings.debug = logueSettings.getOrDefault("debug").getBool(true)
+  settings.bufSize = logueSettings.getOrDefault("bufSize").getInt(40960)
   settings.data = data
 
 func loadSettings*(

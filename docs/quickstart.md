@@ -1,6 +1,6 @@
 # Quick Start
 
-## hello world
+## Hello World
 
 Now Let's begin a quick tour of `Prologue`.
 
@@ -32,7 +32,7 @@ Finally use `nim c -r app.nim` to run our application. Visit `localhost:8080`, `
 
 ![hello world](assets/quickstart/hello.jpg)
 
-## Command line tool
+## Command Line Tool
 
 `logue` can be used to initialize your
 program.
@@ -51,3 +51,84 @@ structure like this:
 ```
 
 You must switch to `/.../helloworld` directory to run `app.nim`. For example, you can type `logue run` and open the browser to visit the URL.
+
+## Debug Mode
+
+There are many ways to enable debug mode. If using default settings, debug mode is enabled too. You can also enable them on your own.
+
+```nim
+let settings = newSettings(debug = true)
+```
+
+If you use JSON config file:
+
+```json
+{
+  "prologue": {
+    "address": "",
+    "port": 8080,
+    "debug": true,
+    "reusePort": true,
+    "appName": "",
+    "secretKey": "Set by yourself",
+  }
+}
+```
+
+Set `debug = false` to disable debug mode.
+
+Once debug mode is enabled, the program will display useful logging messages. It is helpful for debugging. But it will slow down the program. If you want to benchmark or release your program, please set `debug = false`.
+
+## URL Building
+
+`Prologue` provides a special function `urlFor` to get the URL from the name of handler. Before using `urlFor`, you should register the name of handler first.
+
+```nim
+proc hello(ctx: Context) {.async.} =
+  resp ctx.urlFor("index)
+
+proc index(ctx: Context) {.async.} =
+  resp "Hello world"
+
+
+var app = newApp()
+app.get("/hello", hello)
+app.get("/index", index, name = "index")
+```
+
+If you visit `localhost:8080/hello`, the browser will display `/index` on the screen. `urlFor` only supports two forms of Route: 1. `/route/hello` 2. `/route/{parameter}/other`. So you can also pass parameters to `urlFor`. For example `urlFor("route", {"parameter": "think"})` will build `/route/think/other`. It also supports passing query parameters.
+
+## Static Files
+
+You may want to serve your HTML, CSS files. Static files middleware can be used for this purpose. You should put your static files under `/public` directory.
+
+```nim
+import prologue
+import prologue/middlewares/staticfile
+
+app.use(staticFileMiddleware("/public"))
+```
+
+## Redirect
+
+You can easily redirect to other URL using `redirect` function. The default HTTP code for `redirct` function is Http301. You could use Http302 to move temporarily.
+
+The program below redirects to `localhost:8080/home`.
+
+```nim
+proc redirectHome*(ctx: Context) {.async.} =
+  resp redirect("/home")
+```
+
+## Cookies
+
+`Prologue` provides `setCookie`, `deleteCookie` and `getCookie` to help you with cookies.
+
+The handler below will display the name in the cookies from the client if existing. Otherwise `AnyOne` will be displayed.
+
+```nim
+proc hello(ctx: Context) {.async.} =
+  resp ctx.getCookie("name", "Anyone")
+```
+
+`setCookie` sets the (key, value) pair in the HTTP headers. You could also set the `expires` or `maxAge` of the cookies. These attributes decide when the survival time of the cookies. `deleteCookie` will make the specific key expired at once.

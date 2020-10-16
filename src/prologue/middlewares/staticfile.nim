@@ -43,6 +43,18 @@ proc staticFileMiddleware*(staticDirs: varargs[string]): HandlerAsync =
       # serve static files
       await staticFileResponse(ctx, staticFileFlag.filename,
               staticFileFlag.dir,
-              bufSize = ctx.getSettings("prologue").getOrDefault("bufSize").getInt(40960))
+              bufSize = ctx.gScope.settings.bufSize)
     else:
       await switch(ctx)
+
+proc redirectTo*(
+  dest: string, mimetype = "",
+  downloadName = "", charset = "utf-8"
+): HandlerAsync =
+  let res = splitFile(dest)
+  let dir = res.dir
+  let file = res.name & res.ext
+  result = proc(ctx: Context) {.async.} =
+    await staticFileResponse(ctx, file, dir, mimetype,
+          downloadName, charset,
+          ctx.gScope.settings.bufSize)
