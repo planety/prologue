@@ -102,13 +102,12 @@ function main() {
   <ul class="simple simple-toc-section">
       <li><a class="reference" href="#Settings"
     title="Settings = ref object
-  address*: string             ## The address of socket.
-  port*: Port                  ## The port of socket.
-  debug*: bool                 ## Debug mode(true is yes).
-  reusePort*: bool             ## Use socket port in multiple times.
-  appName*: string             ## The name of your application.
-  bufSize*: int                ## The size of buffer in file streaming.
-  data: JsonNode               ## Data which carries user defined settings."><wbr />Settings<span class="attachedType"></span></a></li>
+  address*: string           ## The address of socket.
+  port*: Port                ## The port of socket.
+  debug*: bool               ## Debug mode(true is yes).
+  reusePort*: bool           ## Use socket port in multiple times.
+  bufSize*: int              ## Buffer size of sending static files.
+  data: JsonNode             ## Data which carries user defined settings."><wbr />Settings<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#CtxSettings"
     title="CtxSettings = ref object
   mimeDB*: MimeDB
@@ -182,13 +181,12 @@ function main() {
 <dl class="item">
 <a id="Settings"></a>
 <dt><pre><a href="nativesettings.html#Settings"><span class="Identifier">Settings</span></a> <span class="Other">=</span> <span class="Keyword">ref</span> <span class="Keyword">object</span>
-  <span class="Identifier">address</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">string</span>             <span class="Comment">## The address of socket.</span>
-  <span class="Identifier">port</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">Port</span>                  <span class="Comment">## The port of socket.</span>
-  <span class="Identifier">debug</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">bool</span>                 <span class="Comment">## Debug mode(true is yes).</span>
-  <span class="Identifier">reusePort</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">bool</span>             <span class="Comment">## Use socket port in multiple times.</span>
-  <span class="Identifier">appName</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">string</span>             <span class="Comment">## The name of your application.</span>
-  <span class="Identifier">bufSize</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">int</span>                <span class="Comment">## The size of buffer in file streaming.</span>
-  <span class="Identifier">data</span><span class="Other">:</span> <span class="Identifier">JsonNode</span>               <span class="Comment">## Data which carries user defined settings.</span>
+  <span class="Identifier">address</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">string</span>           <span class="Comment">## The address of socket.</span>
+  <span class="Identifier">port</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">Port</span>                <span class="Comment">## The port of socket.</span>
+  <span class="Identifier">debug</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">bool</span>               <span class="Comment">## Debug mode(true is yes).</span>
+  <span class="Identifier">reusePort</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">bool</span>           <span class="Comment">## Use socket port in multiple times.</span>
+  <span class="Identifier">bufSize</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">int</span>              <span class="Comment">## Buffer size of sending static files.</span>
+  <span class="Identifier">data</span><span class="Other">:</span> <span class="Identifier">JsonNode</span>             <span class="Comment">## Data which carries user defined settings.</span>
   </pre></dt>
 <dd>
 
@@ -208,9 +206,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Context settings.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/nativesettings.nim#L33"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/nativesettings.nim#L32"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/nativesettings.nim#L33" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/nativesettings.nim#L32" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -220,15 +218,15 @@ class="link-seesrc" target="_blank">Source</a>
 <dl class="item">
 <a id="loadSettings,string"></a>
 <dt><pre><span class="Keyword">proc</span> <a href="#loadSettings%2Cstring"><span class="Identifier">loadSettings</span></a><span class="Other">(</span><span class="Identifier">configPath</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <a href="nativesettings.html#Settings"><span class="Identifier">Settings</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">,</span>
-    <span class="Identifier">EmptySecretKeyError</span><span class="Other">,</span> <span class="Identifier">IOError</span><span class="Other">,</span> <span class="Identifier">OSError</span><span class="Other">,</span> <span class="Identifier">ValueError</span><span class="Other">,</span> <span class="Identifier">JsonParsingError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ReadIOEffect</span><span class="Other">,</span> <span class="Identifier">WriteIOEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+    <span class="Identifier">EmptySecretKeyError</span><span class="Other">,</span> <span class="Identifier">IOError</span><span class="Other">,</span> <span class="Identifier">OSError</span><span class="Other">,</span> <span class="Identifier">ValueError</span><span class="Other">,</span> <span class="Identifier">JsonParsingError</span><span class="Other">,</span>
+    <span class="Identifier">Exception</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ReadIOEffect</span><span class="Other">,</span> <span class="Identifier">WriteIOEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 Creates a new <tt class="docutils literal"><span class="pre">Settings</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/nativesettings.nim#L95"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/nativesettings.nim#L94"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/nativesettings.nim#L95" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/nativesettings.nim#L94" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -237,38 +235,39 @@ class="link-seesrc" target="_blank">Source</a>
 <h1><a class="toc-backref" href="#13">Funcs</a></h1>
 <dl class="item">
 <a id="hasKey,Settings,string"></a>
-<dt><pre><span class="Keyword">func</span> <a href="#hasKey%2CSettings%2Cstring"><span class="Identifier">hasKey</span></a><span class="Other">(</span><span class="Identifier">settings</span><span class="Other">:</span> <a href="nativesettings.html#Settings"><span class="Identifier">Settings</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dt><pre><span class="Keyword">func</span> <a href="#hasKey%2CSettings%2Cstring"><span class="Identifier">hasKey</span></a><span class="Other">(</span><span class="Identifier">settings</span><span class="Other">:</span> <a href="nativesettings.html#Settings"><span class="Identifier">Settings</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 Returns true if key is in <tt class="docutils literal"><span class="pre">settings</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/nativesettings.nim#L38"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/nativesettings.nim#L37"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/nativesettings.nim#L38" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/nativesettings.nim#L37" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="[],Settings,string"></a>
-<dt><pre><span class="Keyword">func</span> <a href="#%5B%5D%2CSettings%2Cstring"><span class="Identifier">`[]`</span></a><span class="Other">(</span><span class="Identifier">settings</span><span class="Other">:</span> <a href="nativesettings.html#Settings"><span class="Identifier">Settings</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">JsonNode</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dt><pre><span class="Keyword">func</span> <a href="#%5B%5D%2CSettings%2Cstring"><span class="Identifier">`[]`</span></a><span class="Other">(</span><span class="Identifier">settings</span><span class="Other">:</span> <a href="nativesettings.html#Settings"><span class="Identifier">Settings</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">JsonNode</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span>
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 Retrieves value if key is in <tt class="docutils literal"><span class="pre">settings</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/nativesettings.nim#L42"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/nativesettings.nim#L41"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/nativesettings.nim#L42" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/nativesettings.nim#L41" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="getOrDefault,Settings,string"></a>
-<dt><pre><span class="Keyword">func</span> <a href="#getOrDefault%2CSettings%2Cstring"><span class="Identifier">getOrDefault</span></a><span class="Other">(</span><span class="Identifier">settings</span><span class="Other">:</span> <a href="nativesettings.html#Settings"><span class="Identifier">Settings</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">JsonNode</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dt><pre><span class="Keyword">func</span> <a href="#getOrDefault%2CSettings%2Cstring"><span class="Identifier">getOrDefault</span></a><span class="Other">(</span><span class="Identifier">settings</span><span class="Other">:</span> <a href="nativesettings.html#Settings"><span class="Identifier">Settings</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">JsonNode</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span>
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 Retrieves value if key is in <tt class="docutils literal"><span class="pre">settings</span></tt>. Otherwise <tt class="docutils literal"><span class="pre">nil</span></tt> will be returned.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/nativesettings.nim#L46"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/nativesettings.nim#L45"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/nativesettings.nim#L46" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/nativesettings.nim#L45" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="newCtxSettings"></a>
@@ -277,22 +276,23 @@ class="link-seesrc" target="_blank">Source</a>
 
 Creates a new context settings.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/nativesettings.nim#L50"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/nativesettings.nim#L49"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/nativesettings.nim#L50" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/nativesettings.nim#L49" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="newSettings,string,string,int"></a>
-<dt><pre><span class="Keyword">func</span> <a href="#newSettings%2Cstring%2Cstring%2Cint"><span class="Identifier">newSettings</span></a><span class="Other">(</span><span class="Identifier">address</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">;</span> <span class="Identifier">port</span> <span class="Other">=</span> <span class="Identifier">Port</span><span class="Other">(</span><span class="DecNumber">8080</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">debug</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">;</span> <span class="Identifier">reusePort</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">;</span>
-                <span class="Identifier">secretKey</span> <span class="Other">=</span> <span class="Identifier">randomString</span><span class="Other">(</span><span class="DecNumber">8</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">appName</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">;</span> <span class="Identifier">bufSize</span> <span class="Other">=</span> <span class="DecNumber">40960</span><span class="Other">)</span><span class="Other">:</span> <a href="nativesettings.html#Settings"><span class="Identifier">Settings</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
+<dt><pre><span class="Keyword">func</span> <a href="#newSettings%2Cstring%2Cstring%2Cint"><span class="Identifier">newSettings</span></a><span class="Other">(</span><span class="Identifier">address</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">;</span> <span class="Identifier">port</span> <span class="Other">=</span> <span class="Identifier">Port</span><span class="Other">(</span><span class="DecNumber">8080</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">debug</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">;</span>
+                 <span class="Identifier">reusePort</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">;</span> <span class="Identifier">secretKey</span> <span class="Other">=</span> <span class="Identifier">randomString</span><span class="Other">(</span><span class="DecNumber">8</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">appName</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">;</span>
+                 <span class="Identifier">bufSize</span> <span class="Other">=</span> <span class="DecNumber">40960</span><span class="Other">)</span><span class="Other">:</span> <a href="nativesettings.html#Settings"><span class="Identifier">Settings</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span>
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">EmptySecretKeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 Creates a new <tt class="docutils literal"><span class="pre">Settings</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/nativesettings.nim#L54"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/nativesettings.nim#L53"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/nativesettings.nim#L54" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/nativesettings.nim#L53" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="loadSettings,JsonNode"></a>
@@ -302,9 +302,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Creates a new <tt class="docutils literal"><span class="pre">Settings</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/nativesettings.nim#L88"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/nativesettings.nim#L87"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/nativesettings.nim#L88" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/nativesettings.nim#L87" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -317,7 +317,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-12 15:18:10 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-16 14:06:22 UTC</small>
       </div>
     </div>
   </div>

@@ -2,7 +2,7 @@ Info	validate/validate.html#Info	validate: Info
 ValidateHandler	validate/validate.html#ValidateHandler	validate: ValidateHandler	
 FormValidation	validate/validate.html#FormValidation	validate: FormValidation	
 newFormValidation	validate/validate.html#newFormValidation,openArray[]	validate: newFormValidation(validator: openArray[(string, seq[ValidateHandler])]): FormValidation	
-validate	validate/validate.html#validate,FormValidation,StringTableRef	validate: validate(formValidation: FormValidation; textTable: StringTableRef; allMsgs = true): Info	
+validate	validate/validate.html#validate,FormValidation,StringTableRef	validate: validate(formValidation: FormValidation; textTable: StringTableRef;\n         allMsgs = true): Info	
 isInt	validate/validate.html#isInt,string	validate: isInt(msg = &quot;&quot;): ValidateHandler	
 isNumeric	validate/validate.html#isNumeric,string	validate: isNumeric(msg = &quot;&quot;): ValidateHandler	
 isBool	validate/validate.html#isBool,string	validate: isBool(msg = &quot;&quot;): ValidateHandler	

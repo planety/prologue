@@ -94,7 +94,12 @@ function main() {
 <li>
   <a class="reference reference-toplevel" href="#13" id="63">Funcs</a>
   <ul class="simple simple-toc-section">
-      <ul class="simple nested-toc-section">fromByteSeq
+      <ul class="simple nested-toc-section">escape
+      <li><a class="reference" href="#escape%2Cstring"
+    title="escape(src: string): string">escape,string<span class="attachedType"></span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">fromByteSeq
       <li><a class="reference" href="#fromByteSeq%2CopenArray%5Bbyte%5D"
     title="fromByteSeq(sequence: openArray[byte]): string">fromByteSeq,openArray[byte]<span class="attachedType"></span></a></li>
 
@@ -151,7 +156,8 @@ class="link-seesrc" target="_blank">Source</a>
 
 </dd>
 <a id="fromByteSeq,openArray[byte]"></a>
-<dt><pre><span class="Keyword">func</span> <a href="#fromByteSeq%2CopenArray%5Bbyte%5D"><span class="Identifier">fromByteSeq</span></a><span class="Other">(</span><span class="Identifier">sequence</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Identifier">byte</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dt><pre><span class="Keyword">func</span> <a href="#fromByteSeq%2CopenArray%5Bbyte%5D"><span class="Identifier">fromByteSeq</span></a><span class="Other">(</span><span class="Identifier">sequence</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><span class="Identifier">byte</span><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 Converts a byte sequence to the corresponding string.
@@ -192,6 +198,17 @@ Serializes int16 to byte array.
 href="https://github.com/planety/prologue/tree/devel/src/prologue/core/utils.nim#L56"
 class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/utils.nim#L56" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="escape,string"></a>
+<dt><pre><span class="Keyword">func</span> <a href="#escape%2Cstring"><span class="Identifier">escape</span></a><span class="Other">(</span><span class="Identifier">src</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/utils.nim#L62"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/utils.nim#L62" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -242,7 +259,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-12 15:17:45 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-16 14:05:49 UTC</small>
       </div>
     </div>
   </div>

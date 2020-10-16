@@ -6,3 +6,4 @@ fromByteSeq	core/utils.html#fromByteSeq,openArray[byte]	utils: fromByteSeq(seque
 serialize	core/utils.html#serialize,int64	utils: serialize(number: int64): array[8, byte]	
 serialize	core/utils.html#serialize,int32	utils: serialize(number: int32): array[4, byte]	
 serialize	core/utils.html#serialize,int16	utils: serialize(number: int16): array[2, byte]	
+escape	core/utils.html#escape,string	utils: escape(src: string): string	

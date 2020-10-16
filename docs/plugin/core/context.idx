@@ -40,13 +40,19 @@ initEvent	core/context.html#initEvent,SyncEvent	context: initEvent(handler: Sync
 newContext	core/context.html#newContext,Request,Response,GlobalScope	context: newContext(request: Request; response: Response; gScope: GlobalScope): Context	
 newContext	core/context.html#newContext,Context,Context	context: newContext(ctx: Context; src: Context)	
 getSettings	core/context.html#getSettings,Context,string	context: getSettings(ctx: Context; key: string): JsonNode	
+flash	core/context.html#flash,Context,string	context: flash(ctx: Context; msgs: string; category = FlashLevel.Info)	
+flash	core/context.html#flash,Context,string,string	context: flash(ctx: Context; msgs: string; category: string)	
+getFlashedMsgs	core/context.html#getFlashedMsgs,Context	context: getFlashedMsgs(ctx: Context): seq[string]	
+getFlashedMsgsWithCategory	core/context.html#getFlashedMsgsWithCategory,Context	context: getFlashedMsgsWithCategory(ctx: Context): seq[(string, string)]	
+getFlashedMsg	core/context.html#getFlashedMsg,Context,FlashLevel	context: getFlashedMsg(ctx: Context; category: FlashLevel): Option[string]	
+getFlashedMsg	core/context.html#getFlashedMsg,Context,string	context: getFlashedMsg(ctx: Context; category: string): Option[string]	
 respond	core/context.html#respond,Context,HttpCode,string,ResponseHeaders	context: respond(ctx: Context; code: HttpCode; body: string; headers: ResponseHeaders): Future[\n    void]	
 respond	core/context.html#respond,Context	context: respond(ctx: Context): Future[void]	
 respond	core/context.html#respond,Context,HttpCode,string	context: respond(ctx: Context; code: HttpCode; body: string): Future[void]	
 send	core/context.html#send,Context,string	context: send(ctx: Context; content: string): Future[void]	
 getCookie	core/context.html#getCookie,Context,string,string	context: getCookie(ctx: Context; key: string; default = &quot;&quot;): string	
-setCookie	core/context.html#setCookie,Context,string,string,string,Option[int],string,string	context: setCookie(ctx: Context; key, value: string; expires = &quot;&quot;;\n          maxAge: Option[int] = none(int); domain = &quot;&quot;; path = &quot;&quot;; secure = false;\n          httpOnly = false; sameSite = Lax)	
-setCookie	core/context.html#setCookie,Context,string,string,,Option[int],string,string	context: setCookie(ctx: Context; key, value: string; expires: DateTime | Time;\n          maxAge: Option[int] = none(int); domain = &quot;&quot;; path = &quot;&quot;; secure = false;\n          httpOnly = false; sameSite = Lax)	
+setCookie	core/context.html#setCookie,Context,string,string,string,Option[int],string,string	context: setCookie(ctx: Context; key, value: string; expires = &quot;&quot;;\n          maxAge: Option[int] = none(int); domain = &quot;&quot;; path = &quot;&quot;;\n          secure = false; httpOnly = false; sameSite = Lax)	
+setCookie	core/context.html#setCookie,Context,string,string,,Option[int],string,string	context: setCookie(ctx: Context; key, value: string; expires: DateTime | Time;\n          maxAge: Option[int] = none(int); domain = &quot;&quot;; path = &quot;&quot;;\n          secure = false; httpOnly = false; sameSite = Lax)	
 deleteCookie	core/context.html#deleteCookie,Context,string,string,string	context: deleteCookie(ctx: Context; key: string; path = &quot;&quot;; domain = &quot;&quot;)	
 defaultHandler	core/context.html#defaultHandler,Context	context: defaultHandler(ctx: Context): Future[void]	
 default404Handler	core/context.html#default404Handler,Context	context: default404Handler(ctx: Context): Future[void]	
@@ -58,7 +64,7 @@ getPathParams	core/context.html#getPathParams,Context,string,T	context: getPathP
 getFormParams	core/context.html#getFormParams,Context,string,string	context: getFormParams(ctx: Context; key: string; default = &quot;&quot;): string	
 setResponse	core/context.html#setResponse,Context,HttpCode,string	context: setResponse(ctx: Context; code: HttpCode; body = &quot;&quot;; version = HttpVer11)	
 setResponse	core/context.html#setResponse,Context,Response	context: setResponse(ctx: Context; response: Response)	
-urlFor	core/context.html#urlFor,Context,string,openArray[],openArray[]	context: urlFor(ctx: Context; handler: string;\n       parameters: openArray[(string, string)] = @[];\n       queryParams: openArray[(string, string)] = @[]; usePlus = true; omitEq = true): string	
-abortExit	core/context.html#abortExit,Context,string	context: abortExit(ctx: Context; code = Http401; body = &quot;&quot;; headers = initResponseHeaders();\n          version = HttpVer11)	
+urlFor	core/context.html#urlFor,Context,string,openArray[],openArray[]	context: urlFor(ctx: Context; handler: string;\n       parameters: openArray[(string, string)] = @[];\n       queryParams: openArray[(string, string)] = @[]; usePlus = true;\n       omitEq = true): string	
+abortExit	core/context.html#abortExit,Context,string	context: abortExit(ctx: Context; code = Http401; body = &quot;&quot;;\n          headers = initResponseHeaders(); version = HttpVer11)	
 attachment	core/context.html#attachment,Context,string,string	context: attachment(ctx: Context; downloadName: string; charset = &quot;utf-8&quot;)	
 staticFileResponse	core/context.html#staticFileResponse,Context,string,string,string,string,string,int	context: staticFileResponse(ctx: Context; filename, dir: string; mimetype = &quot;&quot;;\n                   downloadName = &quot;&quot;; charset = &quot;utf-8&quot;; bufSize = 40960;\n                   headers = none(ResponseHeaders)): owned(Future[void])	

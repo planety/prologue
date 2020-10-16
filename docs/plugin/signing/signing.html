@@ -396,7 +396,8 @@ class="link-seesrc" target="_blank">Source</a>
 
 </dd>
 <a id="sign,TimedSigner,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#sign%2CTimedSigner%2Cstring"><span class="Identifier">sign</span></a><span class="Other">(</span><span class="Identifier">s</span><span class="Other">:</span> <a href="signing.html#TimedSigner"><span class="Identifier">TimedSigner</span></a><span class="Other">;</span> <span class="Identifier">value</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">TimeEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dt><pre><span class="Keyword">proc</span> <a href="#sign%2CTimedSigner%2Cstring"><span class="Identifier">sign</span></a><span class="Other">(</span><span class="Identifier">s</span><span class="Other">:</span> <a href="signing.html#TimedSigner"><span class="Identifier">TimedSigner</span></a><span class="Other">;</span> <span class="Identifier">value</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">TimeEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 
@@ -431,7 +432,8 @@ class="link-seesrc" target="_blank">Source</a>
 
 </dd>
 <a id="validate,Signer,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#validate%2CSigner%2Cstring"><span class="Identifier">validate</span></a><span class="Other">(</span><span class="Identifier">s</span><span class="Other">:</span> <a href="signing.html#Signer"><span class="Identifier">Signer</span></a><span class="Other">;</span> <span class="Identifier">signedValue</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dt><pre><span class="Keyword">proc</span> <a href="#validate%2CSigner%2Cstring"><span class="Identifier">validate</span></a><span class="Other">(</span><span class="Identifier">s</span><span class="Other">:</span> <a href="signing.html#Signer"><span class="Identifier">Signer</span></a><span class="Other">;</span> <span class="Identifier">signedValue</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 
@@ -448,8 +450,8 @@ class="link-seesrc" target="_blank">Source</a>
 <dl class="item">
 <a id="initSigner,SecretKey"></a>
 <dt><pre><span class="Keyword">func</span> <a href="#initSigner%2CSecretKey"><span class="Identifier">initSigner</span></a><span class="Other">(</span><span class="Identifier">secretKey</span><span class="Other">:</span> <a href="../core/types.html#SecretKey"><span class="Identifier">SecretKey</span></a><span class="Other">;</span> <span class="Identifier">salt</span> <span class="Other">=</span> <span class="Identifier">DefaultSalt</span><span class="Other">;</span> <span class="Identifier">sep</span> <span class="Other">=</span> <span class="Identifier">DefaultSep</span><span class="Other">;</span>
-               <span class="Identifier">keyDerivation</span> <span class="Other">=</span> <span class="Identifier">DefaultKeyDerivation</span><span class="Other">;</span>
-               <span class="Identifier">digestMethod</span> <span class="Other">=</span> <span class="Identifier">DefaultDigestMethodType</span><span class="Other">)</span><span class="Other">:</span> <a href="signing.html#Signer"><span class="Identifier">Signer</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
+                <span class="Identifier">keyDerivation</span> <span class="Other">=</span> <span class="Identifier">DefaultKeyDerivation</span><span class="Other">;</span>
+                <span class="Identifier">digestMethod</span> <span class="Other">=</span> <span class="Identifier">DefaultDigestMethodType</span><span class="Other">)</span><span class="Other">:</span> <a href="signing.html#Signer"><span class="Identifier">Signer</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
@@ -462,8 +464,8 @@ class="link-seesrc" target="_blank">Source</a>
 </dd>
 <a id="initTimedSigner,SecretKey"></a>
 <dt><pre><span class="Keyword">func</span> <a href="#initTimedSigner%2CSecretKey"><span class="Identifier">initTimedSigner</span></a><span class="Other">(</span><span class="Identifier">secretKey</span><span class="Other">:</span> <a href="../core/types.html#SecretKey"><span class="Identifier">SecretKey</span></a><span class="Other">;</span> <span class="Identifier">salt</span> <span class="Other">=</span> <span class="Identifier">DefaultSalt</span><span class="Other">;</span> <span class="Identifier">sep</span> <span class="Other">=</span> <span class="Identifier">DefaultSep</span><span class="Other">;</span>
-                    <span class="Identifier">keyDerivation</span> <span class="Other">=</span> <span class="Identifier">DefaultKeyDerivation</span><span class="Other">;</span>
-                    <span class="Identifier">digestMethod</span> <span class="Other">=</span> <span class="Identifier">DefaultDigestMethodType</span><span class="Other">)</span><span class="Other">:</span> <a href="signing.html#TimedSigner"><span class="Identifier">TimedSigner</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
+                     <span class="Identifier">keyDerivation</span> <span class="Other">=</span> <span class="Identifier">DefaultKeyDerivation</span><span class="Other">;</span>
+                     <span class="Identifier">digestMethod</span> <span class="Other">=</span> <span class="Identifier">DefaultDigestMethodType</span><span class="Other">)</span><span class="Other">:</span> <a href="signing.html#TimedSigner"><span class="Identifier">TimedSigner</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
@@ -489,7 +491,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-12 15:18:08 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-16 14:06:14 UTC</small>
       </div>
     </div>
   </div>

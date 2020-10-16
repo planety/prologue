@@ -112,7 +112,8 @@ function main() {
   <ul class="simple simple-toc-section">
       <ul class="simple nested-toc-section">loadTranslate
       <li><a class="reference" href="#loadTranslate%2CStream%2Cstring"
-    title="loadTranslate(stream: Stream; filename = &quot;[stream]&quot;): TableRef[string, StringTableRef]">loadTranslate,Stream,string<span class="attachedType"></span></a></li>
+    title="loadTranslate(stream: Stream; filename = &quot;[stream]&quot;): TableRef[string,
+    StringTableRef]">loadTranslate,Stream,string<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#loadTranslate%2Cstring"
     title="loadTranslate(filename: string): TableRef[string, StringTableRef]">loadTranslate,string<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#loadTranslate%2CPrologue%2Cstring"
@@ -179,7 +180,7 @@ class="link-seesrc" target="_blank">Source</a>
 <a id="loadTranslate,Stream,string"></a>
 <dt><pre><span class="Keyword">proc</span> <a href="#loadTranslate%2CStream%2Cstring"><span class="Identifier">loadTranslate</span></a><span class="Other">(</span><span class="Identifier">stream</span><span class="Other">:</span> <span class="Identifier">Stream</span><span class="Other">;</span> <span class="Identifier">filename</span> <span class="Other">=</span> <span class="StringLit">&quot;[stream]&quot;</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">TableRef</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">,</span>
     <span class="Identifier">StringTableRef</span><span class="Other">]</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">IOError</span><span class="Other">,</span> <span class="Identifier">OSError</span><span class="Other">,</span> <span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">ValueError</span><span class="Other">,</span> <span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span>
-                     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ReadIOEffect</span><span class="Other">,</span> <span class="Identifier">RootEffect</span><span class="Other">,</span> <span class="Identifier">WriteIOEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+                      <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ReadIOEffect</span><span class="Other">,</span> <span class="Identifier">RootEffect</span><span class="Other">,</span> <span class="Identifier">WriteIOEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 
@@ -216,8 +217,8 @@ class="link-seesrc" target="_blank">Source</a>
 
 </dd>
 <a id="setLanguage,Context,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#setLanguage%2CContext%2Cstring"><span class="Identifier">setLanguage</span></a><span class="Other">(</span><span class="Identifier">ctx</span><span class="Other">:</span> <a href="../core/context.html#Context"><span class="Identifier">Context</span></a><span class="Other">;</span> <span class="Identifier">language</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <a href="i18n.html#Translator"><span class="Identifier">Translator</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dt><pre><span class="Keyword">proc</span> <a href="#setLanguage%2CContext%2Cstring"><span class="Identifier">setLanguage</span></a><span class="Other">(</span><span class="Identifier">ctx</span><span class="Other">:</span> <a href="../core/context.html#Context"><span class="Identifier">Context</span></a><span class="Other">;</span> <span class="Identifier">language</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <a href="i18n.html#Translator"><span class="Identifier">Translator</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span>
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 
@@ -228,8 +229,8 @@ class="link-seesrc" target="_blank">Source</a>
 
 </dd>
 <a id="translate,Translator,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#translate%2CTranslator%2Cstring"><span class="Identifier">translate</span></a><span class="Other">(</span><span class="Identifier">t</span><span class="Other">:</span> <a href="i18n.html#Translator"><span class="Identifier">Translator</span></a><span class="Other">;</span> <span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dt><pre><span class="Keyword">proc</span> <a href="#translate%2CTranslator%2Cstring"><span class="Identifier">translate</span></a><span class="Other">(</span><span class="Identifier">t</span><span class="Other">:</span> <a href="i18n.html#Translator"><span class="Identifier">Translator</span></a><span class="Other">;</span> <span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span>
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 
@@ -240,7 +241,8 @@ class="link-seesrc" target="_blank">Source</a>
 
 </dd>
 <a id="Tr,Translator,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#Tr%2CTranslator%2Cstring"><span class="Identifier">Tr</span></a><span class="Other">(</span><span class="Identifier">t</span><span class="Other">:</span> <a href="i18n.html#Translator"><span class="Identifier">Translator</span></a><span class="Other">;</span> <span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dt><pre><span class="Keyword">proc</span> <a href="#Tr%2CTranslator%2Cstring"><span class="Identifier">Tr</span></a><span class="Other">(</span><span class="Identifier">t</span><span class="Other">:</span> <a href="i18n.html#Translator"><span class="Identifier">Translator</span></a><span class="Other">;</span> <span class="Identifier">text</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 
@@ -284,7 +286,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-12 15:18:25 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-16 14:06:40 UTC</small>
       </div>
     </div>
   </div>

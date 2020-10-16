@@ -120,8 +120,8 @@ function main() {
   </ul>
   <ul class="simple nested-toc-section">newGroup
       <li><a class="reference" href="#newGroup%2CPrologue%2Cstring%2CopenArray%5BHandlerAsync%5D%2CGroup"
-    title="newGroup(app: Prologue; route: string; middlewares: openArray[HandlerAsync] = @[];
-         parent: Group = nil): Group">newGroup,Prologue,string,openArray[HandlerAsync],Group<span class="attachedType">Group</span></a></li>
+    title="newGroup(app: Prologue; route: string;
+         middlewares: openArray[HandlerAsync] = @[]; parent: Group = nil): Group">newGroup,Prologue,string,openArray[HandlerAsync],Group<span class="attachedType">Group</span></a></li>
 
   </ul>
 
@@ -166,7 +166,7 @@ class="link-seesrc" target="_blank">Source</a>
 <dl class="item">
 <a id="newGroup,Prologue,string,openArray[HandlerAsync],Group"></a>
 <dt><pre><span class="Keyword">func</span> <a href="#newGroup%2CPrologue%2Cstring%2CopenArray%5BHandlerAsync%5D%2CGroup"><span class="Identifier">newGroup</span></a><span class="Other">(</span><span class="Identifier">app</span><span class="Other">:</span> <a href="beast/server.html#Prologue"><span class="Identifier">Prologue</span></a><span class="Other">;</span> <span class="Identifier">route</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span>
-             <span class="Identifier">middlewares</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><a href="context.html#HandlerAsync"><span class="Identifier">HandlerAsync</span></a><span class="Other">]</span> <span class="Other">=</span> <span class="Operator">@</span><span class="Other">[</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">parent</span><span class="Other">:</span> <a href="group.html#Group"><span class="Identifier">Group</span></a> <span class="Other">=</span> <span class="Keyword">nil</span><span class="Other">)</span><span class="Other">:</span> <a href="group.html#Group"><span class="Identifier">Group</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
+              <span class="Identifier">middlewares</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><a href="context.html#HandlerAsync"><span class="Identifier">HandlerAsync</span></a><span class="Other">]</span> <span class="Other">=</span> <span class="Operator">@</span><span class="Other">[</span><span class="Other">]</span><span class="Other">;</span> <span class="Identifier">parent</span><span class="Other">:</span> <a href="group.html#Group"><span class="Identifier">Group</span></a> <span class="Other">=</span> <span class="Keyword">nil</span><span class="Other">)</span><span class="Other">:</span> <a href="group.html#Group"><span class="Identifier">Group</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RouteError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
@@ -178,8 +178,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 </dd>
 <a id="getAllInfos,Group,string,openArray[HandlerAsync]"></a>
-<dt><pre><span class="Keyword">func</span> <a href="#getAllInfos%2CGroup%2Cstring%2CopenArray%5BHandlerAsync%5D"><span class="Identifier">getAllInfos</span></a><span class="Other">(</span><span class="Identifier">group</span><span class="Other">:</span> <a href="group.html#Group"><span class="Identifier">Group</span></a><span class="Other">;</span> <span class="Identifier">route</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">middlewares</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><a href="context.html#HandlerAsync"><span class="Identifier">HandlerAsync</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Other">(</span>
-    <span class="Identifier">string</span><span class="Other">,</span> <span class="Identifier">seq</span><span class="Other">[</span><a href="context.html#HandlerAsync"><span class="Identifier">HandlerAsync</span></a><span class="Other">]</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dt><pre><span class="Keyword">func</span> <a href="#getAllInfos%2CGroup%2Cstring%2CopenArray%5BHandlerAsync%5D"><span class="Identifier">getAllInfos</span></a><span class="Other">(</span><span class="Identifier">group</span><span class="Other">:</span> <a href="group.html#Group"><span class="Identifier">Group</span></a><span class="Other">;</span> <span class="Identifier">route</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span>
+                 <span class="Identifier">middlewares</span><span class="Other">:</span> <span class="Identifier">openArray</span><span class="Other">[</span><a href="context.html#HandlerAsync"><span class="Identifier">HandlerAsync</span></a><span class="Other">]</span><span class="Other">)</span><span class="Other">:</span> <span class="Other">(</span><span class="Identifier">string</span><span class="Other">,</span>
+    <span class="Identifier">seq</span><span class="Other">[</span><a href="context.html#HandlerAsync"><span class="Identifier">HandlerAsync</span></a><span class="Other">]</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 
@@ -199,7 +200,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-12 15:18:16 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-16 14:06:27 UTC</small>
       </div>
     </div>
   </div>

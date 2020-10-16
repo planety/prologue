@@ -119,7 +119,8 @@ function main() {
   </ul>
   <ul class="simple nested-toc-section">unauthenticate
       <li><a class="reference" href="#unauthenticate%2CContext%2CAuthMethod%2Cstring%2Cstring"
-    title="unauthenticate(ctx: Context; authMethod: AuthMethod; realm: string; charset = &quot;UTF-8&quot;)">unauthenticate,Context,AuthMethod,string,string<span class="attachedType">AuthMethod</span></a></li>
+    title="unauthenticate(ctx: Context; authMethod: AuthMethod; realm: string;
+               charset = &quot;UTF-8&quot;)">unauthenticate,Context,AuthMethod,string,string<span class="attachedType">AuthMethod</span></a></li>
 
   </ul>
 
@@ -171,7 +172,7 @@ class="link-seesrc" target="_blank">Source</a>
 <dl class="item">
 <a id="unauthenticate,Context,AuthMethod,string,string"></a>
 <dt><pre><span class="Keyword">proc</span> <a href="#unauthenticate%2CContext%2CAuthMethod%2Cstring%2Cstring"><span class="Identifier">unauthenticate</span></a><span class="Other">(</span><span class="Identifier">ctx</span><span class="Other">:</span> <a href="../core/context.html#Context"><span class="Identifier">Context</span></a><span class="Other">;</span> <span class="Identifier">authMethod</span><span class="Other">:</span> <a href="auth.html#AuthMethod"><span class="Identifier">AuthMethod</span></a><span class="Other">;</span> <span class="Identifier">realm</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span>
-                   <span class="Identifier">charset</span> <span class="Other">=</span> <span class="StringLit">&quot;UTF-8&quot;</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+                    <span class="Identifier">charset</span> <span class="Other">=</span> <span class="StringLit">&quot;UTF-8&quot;</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 
@@ -182,9 +183,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 </dd>
 <a id="basicAuth,Context,string,VerifyHandler,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#basicAuth%2CContext%2Cstring%2CVerifyHandler%2Cstring"><span class="Identifier">basicAuth</span></a><span class="Other">(</span><span class="Identifier">ctx</span><span class="Other">:</span> <a href="../core/context.html#Context"><span class="Identifier">Context</span></a><span class="Other">;</span> <span class="Identifier">realm</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">verify</span><span class="Other">:</span> <a href="auth.html#VerifyHandler"><span class="Identifier">VerifyHandler</span></a><span class="Other">;</span> <span class="Identifier">charset</span> <span class="Other">=</span> <span class="StringLit">&quot;UTF-8&quot;</span><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">tuple</span><span class="Other">[</span>
-    <span class="Identifier">hasValue</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">,</span> <span class="Identifier">username</span><span class="Other">,</span> <span class="Identifier">password</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">]</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">,</span> <span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dt><pre><span class="Keyword">proc</span> <a href="#basicAuth%2CContext%2Cstring%2CVerifyHandler%2Cstring"><span class="Identifier">basicAuth</span></a><span class="Other">(</span><span class="Identifier">ctx</span><span class="Other">:</span> <a href="../core/context.html#Context"><span class="Identifier">Context</span></a><span class="Other">;</span> <span class="Identifier">realm</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">verify</span><span class="Other">:</span> <a href="auth.html#VerifyHandler"><span class="Identifier">VerifyHandler</span></a><span class="Other">;</span>
+               <span class="Identifier">charset</span> <span class="Other">=</span> <span class="StringLit">&quot;UTF-8&quot;</span><span class="Other">)</span><span class="Other">:</span> <span class="Keyword">tuple</span><span class="Other">[</span><span class="Identifier">hasValue</span><span class="Other">:</span> <span class="Identifier">bool</span><span class="Other">,</span>
+    <span class="Identifier">username</span><span class="Other">,</span> <span class="Identifier">password</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">]</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ValueError</span><span class="Other">,</span> <span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 
@@ -204,7 +205,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-12 15:18:24 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-16 14:06:40 UTC</small>
       </div>
     </div>
   </div>
