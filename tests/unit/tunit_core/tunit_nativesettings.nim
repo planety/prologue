@@ -8,7 +8,7 @@ block:
   doAssert settings.debug == true
   doAssert settings.reusePort == true
 
-  doAssert settings["prologue"].getOrDefault("bufSize").getInt == 40960
+  doAssert settings.bufSize == 40960
   doAssert settings["prologue"].hasKey("secretKey")
   doAssert settings["prologue"]["secretKey"].getStr.len == 8
   doAssert settings["prologue"].getOrDefault("secretKey").getStr == settings["prologue"]["secretKey"].getStr
