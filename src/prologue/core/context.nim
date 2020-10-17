@@ -211,16 +211,33 @@ func newContext*(request: Request, response: Response,
     )
 
 func newContext*(ctx: Context, src: Context) =
-  ## Creates a new Context.
+  ## Creates a new Context by copying object and sharing ref object.
   ctx.request = src.request
   ctx.response = src.response
-  ctx.handled = src.handled
   ctx.session = src.session
   ctx.ctxData = src.ctxData
   ctx.gScope = src.gScope
   ctx.middlewares = src.middlewares
+  ctx.handled = src.handled
   ctx.size = src.size
   ctx.first = src.first
+
+func newContextFrom*(ctx: Context, src: Context) =
+  ## Creates a new Context by moving object and sharing ref object.
+  ctx.request = move src.request
+  ctx.response = move src.response
+  ctx.session = src.session
+  ctx.gScope = src.gScope
+  ctx.middlewares = move src.middlewares
+  ctx.handled = src.handled
+  ctx.size = src.size
+  ctx.first = src.first
+
+func newContextTo*(ctx: Context, src: Context) =
+  ## Creates a new Context by moving object and copying necessary attributes.
+  ctx.request = move src.request
+  ctx.response = move src.response
+  ctx.handled = src.handled
 
 func getSettings*(ctx: Context, key: string): JsonNode {.inline.} =
   ## Get settings from globalSetting.
