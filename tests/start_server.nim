@@ -1,5 +1,6 @@
 import ../src/prologue except loginPage
 import ../src/prologue/middlewares/utils as ut
+import ../src/prologue/middlewares/staticfile
 import ../src/prologue/i18n
 
 import std/[with, os, strformat, strutils]
@@ -74,5 +75,7 @@ with app:
   addRoute("/upload", upload, @[HttpGet, HttpPost])
   get("/cookie", cookie)
 
+  get("/favicon.ico", redirectTo("tests/static/favicon.ico"))
+  get("/favicon", redirectTo("/tests/static/favicon.ico"))
   loadTranslate(expandFileName("tests/assets/i18n/trans.ini"))
   run()

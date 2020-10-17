@@ -52,3 +52,17 @@ app.use(staticFileMiddleware("public", "templates"))
 app.addRoute(urls.urlPatterns, "")
 app.run()
 ```
+
+## Serving Favicon
+
+You may want to add an icon for your website, you can use a favicon. The browser maybe request `/favicon.ico` to find an icon. `redirctTo` is handy for this work. `dest` is the real path of a favicon. For example, you can put it under `static` directory.
+
+```nim
+import prologue
+from prologue/middlewares/staticfile import redirectTo
+
+
+var app = newApp()
+app.get("/favicon.ico", redirectTo("/static/favicon.ico"))
+app.run()
+```

@@ -24,13 +24,13 @@ when defined(windows):
     let code = execCmd(toExecute)
     if code != 0:
       raise newException(IOError, "can't compile tests/start_server.nim")
-  process = startProcess(expandFileName("tests/start_server.exe"))
+  process = startProcess(expandFilename("tests/start_server.exe"))
 else:
   if not fileExists("tests/start_server"):
     let code = execCmd(toExecute)
     if code != 0:
       raise newException(IOError, "can't compile tests/start_server.nim")
-  process = startProcess(expandFileName("tests/start_server"))
+  process = startProcess(expandFilename("tests/start_server"))
 
 proc start() {.async.} =
   let address = "http://127.0.0.1:8080/home"
@@ -218,6 +218,23 @@ block:
 
     doAssert response.code == Http200, $response.code
     doAssert (waitFor response.body) == "Hello"
+
+  block favicon:
+    let
+      route1 = "/favicon.ico"
+      response1 = waitFor client.get(fmt"http://{address}:{port}{route1}")
+      bodyLen1 = len(waitFor response1.body)
+
+    doAssert response1.code == Http200
+
+    let
+      route2 = "/favicon"
+      response2 = waitFor client.get(fmt"http://{address}:{port}{route2}")
+      bodyLen2 = len(waitFor response2.body)
+
+    doAssert response2.code == Http200
+
+    doAssert bodyLen1 == bodyLen2
 
   client.close()
   process.terminate()

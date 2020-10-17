@@ -1,4 +1,4 @@
-import std/[asyncdispatch, strutils, os, json, uri]
+import std/[asyncdispatch, strutils, os, uri]
 
 import ../core/context, ../core/middlewaresbase, ../core/request
 
@@ -51,6 +51,8 @@ proc redirectTo*(
   dest: string, mimetype = "",
   downloadName = "", charset = "utf-8"
 ): HandlerAsync =
+  var dest = dest.strip(trailing = false, chars = {'/'})
+  normalizePath(dest)
   let res = splitFile(dest)
   let dir = res.dir
   let file = res.name & res.ext
