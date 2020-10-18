@@ -75,6 +75,13 @@ base.get("/hello", hello)
 base.get("/hi", hi)
 base.post("/home", home)
 
+# Or
+# import std/with
+# with base:
+#   get("/hello", hello)
+#   get("/hi", hi)
+#   post("/home", home)
+
 # /apiv2/level1/hello
 level1.get("/hello", hello)
 level1.get("/hi", hi)

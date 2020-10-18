@@ -9,7 +9,7 @@
 </form>
 ```
 
-`getUploadFile` only works when you use form parameters and HttpPost method. `Context` module provides a helper function to `save` the uploadFile to disks. If you don't specify the name of the file, it will use the origin name from user.
+`getUploadFile` only works when using form parameters and HttpPost method. `Context` provides a helper function to `save` the uploadFile to disks. If you don't specify the name of the file, it will use the origin name from the client.
 
 ```nim
 proc upload(ctx: Context) {.async.} =
