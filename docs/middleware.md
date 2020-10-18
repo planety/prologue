@@ -49,7 +49,31 @@ proc sessionMiddleware(): HandleAsync =
 
 You can put your middleware plugin in [collections](https://github.com/planety/awesome-prologue).
 
-## Use a middleware
+## Write reusable handler
+
+Every handler in `Prologue` is a closure function. It is flexible to create a reusable components.
+
+```nim
+import prologue
+
+
+proc home(ctx: Context) {.async.} =
+  resp "home"
+
+proc redirectTo(
+  dest: string
+): HandlerAsync =
+  result = proc(ctx: Context) {.async.} =
+    resp redirect(dest)
+
+
+var app = newApp()
+app.get("/", home)
+app.get("/redirect", redirectTo("/"))
+app.run()
+```
+
+## Use built-in middleware
 
 `prologue` also supplies some middleware plugins, you can directly import `middlewares`.
 
