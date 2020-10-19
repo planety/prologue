@@ -28,7 +28,7 @@ nav:
     - WebSocket: "websocket.md"
     - Command Line Tool: "cli.md"
     - Views: "views.md"
-    - OpenApi Docs: "openapi.md"
+    - OpenAPI: "openapi.md"
     - FAQ: "faq.md"
 
 
