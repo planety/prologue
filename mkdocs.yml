@@ -1,5 +1,5 @@
 site_name: Prologue
-site_description:  Elegant and high performance Web Framework.
+site_description: Prologue is an elegant and high performance web framework written in Nim language.
 
 theme:
     name: 'material'
