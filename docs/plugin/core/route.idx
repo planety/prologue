@@ -5,7 +5,7 @@ pattern	core/route.html#pattern,string,HandlerAsync,string,openArray[HandlerAsyn
 pattern	core/route.html#pattern,string,HandlerAsync,openArray[HttpMethod],string,openArray[HandlerAsync]	route: pattern(route: string; handler: HandlerAsync; httpMethod: openArray[HttpMethod];\n        name = &quot;&quot;; middlewares: openArray[HandlerAsync] = @[]): UrlPattern	
 hash	core/route.html#hash,Path	route: hash(x: Path): Hash	
 newReRouter	core/route.html#newReRouter	route: newReRouter(): ReRouter	
-add	core/route.html#add,ReRouter,	route: add(reRouter: ReRouter; pairs: (RePath, PathHandler))	
+add	core/route.html#add,ReRouter,	route: add(reRouter: var ReRouter; pairs: (RePath, PathHandler))	
 items	core/route.html#items.i,ReRouter	route: items(reRouter: ReRouter): (RePath, PathHandler)	
 `$`	core/route.html#$,BasePatternNode	route: `$`(piece: BasePatternNode): string	
 `$`	core/route.html#$,PatternNode	route: `$`(node: PatternNode): string	

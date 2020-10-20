@@ -39,6 +39,8 @@ initEvent	core/context.html#initEvent,AsyncEvent	context: initEvent(handler: Asy
 initEvent	core/context.html#initEvent,SyncEvent	context: initEvent(handler: SyncEvent): Event	
 newContext	core/context.html#newContext,Request,Response,GlobalScope	context: newContext(request: Request; response: Response; gScope: GlobalScope): Context	
 newContext	core/context.html#newContext,Context,Context	context: newContext(ctx: Context; src: Context)	
+newContextFrom	core/context.html#newContextFrom,Context,Context	context: newContextFrom(ctx: Context; src: Context)	
+newContextTo	core/context.html#newContextTo,Context,Context	context: newContextTo(ctx: Context; src: Context)	
 getSettings	core/context.html#getSettings,Context,string	context: getSettings(ctx: Context; key: string): JsonNode	
 flash	core/context.html#flash,Context,string	context: flash(ctx: Context; msgs: string; category = FlashLevel.Info)	
 flash	core/context.html#flash,Context,string,string	context: flash(ctx: Context; msgs: string; category: string)	

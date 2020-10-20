@@ -126,7 +126,7 @@ function main() {
 <li><a class="reference external"
           data-doc-search-tag="httplogue: add(headers: ResponseHeaders; key, value: string)" href="httpcore/httplogue.html#add%2CResponseHeaders%2Cstring%2Cstring">httplogue: add(headers: ResponseHeaders; key, value: string)</a></li>
           <li><a class="reference external"
-          data-doc-search-tag="route: add(reRouter: ReRouter; pairs: (RePath, PathHandler))" href="route.html#add%2CReRouter%2C">route: add(reRouter: ReRouter; pairs: (RePath, PathHandler))</a></li>
+          data-doc-search-tag="route: add(reRouter: var ReRouter; pairs: (RePath, PathHandler))" href="route.html#add%2CReRouter%2C">route: add(reRouter: var ReRouter; pairs: (RePath, PathHandler))</a></li>
           </ul></dd>
 <dt><a name="addGroup" href="#addGroup"><span>addGroup:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -814,6 +814,14 @@ function main() {
           <li><a class="reference external"
           data-doc-search-tag="context: newContext(request: Request; response: Response; gScope: GlobalScope): Context" href="context.html#newContext%2CRequest%2CResponse%2CGlobalScope">context: newContext(request: Request; response: Response; gScope: GlobalScope): Context</a></li>
           </ul></dd>
+<dt><a name="newContextFrom" href="#newContextFrom"><span>newContextFrom:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="context: newContextFrom(ctx: Context; src: Context)" href="context.html#newContextFrom%2CContext%2CContext">context: newContextFrom(ctx: Context; src: Context)</a></li>
+          </ul></dd>
+<dt><a name="newContextTo" href="#newContextTo"><span>newContextTo:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="context: newContextTo(ctx: Context; src: Context)" href="context.html#newContextTo%2CContext%2CContext">context: newContextTo(ctx: Context; src: Context)</a></li>
+          </ul></dd>
 <dt><a name="newCtxSettings" href="#newCtxSettings"><span>newCtxSettings:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="nativesettings: newCtxSettings(): CtxSettings" href="nativesettings.html#newCtxSettings">nativesettings: newCtxSettings(): CtxSettings</a></li>
@@ -1321,7 +1329,7 @@ function main() {
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-16 14:06:08 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-20 08:49:36 UTC</small>
       </div>
     </div>
   </div>

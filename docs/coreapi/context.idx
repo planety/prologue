@@ -39,6 +39,8 @@ initEvent	context.html#initEvent,AsyncEvent	context: initEvent(handler: AsyncEve
 initEvent	context.html#initEvent,SyncEvent	context: initEvent(handler: SyncEvent): Event	
 newContext	context.html#newContext,Request,Response,GlobalScope	context: newContext(request: Request; response: Response; gScope: GlobalScope): Context	
 newContext	context.html#newContext,Context,Context	context: newContext(ctx: Context; src: Context)	
+newContextFrom	context.html#newContextFrom,Context,Context	context: newContextFrom(ctx: Context; src: Context)	
+newContextTo	context.html#newContextTo,Context,Context	context: newContextTo(ctx: Context; src: Context)	
 getSettings	context.html#getSettings,Context,string	context: getSettings(ctx: Context; key: string): JsonNode	
 flash	context.html#flash,Context,string	context: flash(ctx: Context; msgs: string; category = FlashLevel.Info)	
 flash	context.html#flash,Context,string,string	context: flash(ctx: Context; msgs: string; category: string)	
