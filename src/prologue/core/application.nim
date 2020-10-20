@@ -17,7 +17,7 @@ from std/nativesockets import Port, `$`
 from std/cgi import CgiError
 
 from ./form import parseFormParams
-from ./nativesettings import newSettings, newCtxSettings, 
+from ./nativesettings import newSettings, newCtxSettings,
                              getOrDefault, Settings, loadSettings
 import ./httpexception
 import ./response
@@ -117,9 +117,6 @@ proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
   ## 
   ## Notes: The framework will automatically register `HttpHead` method, if
   ## HttpMethod is `HttpGet`.
-
-  # for group in route.namedGroups.keys:
-  #   echo group
 
   if httpMethod == HttpGet:
       app.gScope.reRouter.add (initRePath(route = route, httpMethod = HttpHead), 
@@ -400,6 +397,7 @@ proc newAppQueryEnv*(
   appData = newStringTable(mode = modeCaseSensitive)
 ): Prologue =
   let path = getPrologueEnv()
+
   var configPath: string
   if path.len == 0 or path == "default":
     configPath = ".config/config.json"

@@ -29,6 +29,7 @@ nav:
     - Command Line Tool: "cli.md"
     - Views: "views.md"
     - OpenAPI: "openapi.md"
+    - Validation: "validation.md"
     - FAQ: "faq.md"
 
 
