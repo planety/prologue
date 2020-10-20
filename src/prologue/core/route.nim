@@ -74,7 +74,7 @@ func hash*(x: Path): Hash {.inline.} =
 func newReRouter*(): ReRouter {.inline.} =
   ReRouter(callable: newSeq[(RePath, PathHandler)]())
 
-proc add*(reRouter: ReRouter, pairs: (RePath, PathHandler)) {.inline.} =
+func add*(reRouter: var ReRouter, pairs: (RePath, PathHandler)) {.inline.} =
   reRouter.callable.add(pairs)
 
 iterator items*(reRouter: ReRouter): (RePath, PathHandler) =

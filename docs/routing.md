@@ -38,6 +38,9 @@ app.addRoute("/hello", hello, @[HttpGet, HttpPost])
 
 `Prologue` supports parameters route. You can use `getPathParams` to get named arguments.
 
+
+### Basic Example
+
 ```nim
 import prologue
 
@@ -48,8 +51,42 @@ proc helloName*(ctx: Context) {.async.} =
 app.addRoute("/hello/{name}", helloName, HttpGet)
 ```
 
+### Wildcard
 
-### Regex Routing
+Wildcard will match only one URL section. For examples, `/static/*` only match `/static/static.css`, `/static/etc` and so on. You should use greedy(`$`) character to match multiple URL sections.
+
+```nim
+import prologue
+
+
+proc hello*(ctx: Context) {.async.} =
+  resp "Hello, Prologue"
+
+app.get("/static/*", hello)
+app.get("/*/static, hello)
+app.get("/{path}/*", hello)
+```
+
+### Greedy
+
+Greedy character(`$`) will match all the remaining URL sections. But it can only used at the end of the URL. `RouteError` will be raised if it is used in the middle of the URL.
+
+For `/test/{param}$`, `/test/foo/bar/baz/` is matched. The path parameter is "foo/bar/baz". For `/test/*$`, `/test/foo/bar/baz/` is matched too.
+
+```nim
+import prologue
+
+
+proc hello*(ctx: Context) {.async.} =
+  resp "Hello, Prologue"
+
+
+app.get("/test/{param}$", hello)
+app.get("/test/*$", hello)
+```
+
+
+## Regex Routing
 
 `Prologue` supports regex route.
 
@@ -63,7 +100,7 @@ proc articles*(ctx: Context) {.async.} =
 app.addRoute(re"/post(?P<num>[\d]+)", articles, HttpGet)
 ```
 
-### Pattern Routing
+## Pattern Routing
 
 ```nim
 import prologue
@@ -81,7 +118,7 @@ app.addRoute(urls.urlPatterns, "")
 app.run()
 ```
 
-### Group Routing
+## Group Routing
 
 `Prologue` supports group route. You can add arbitrary levels of route.
 
