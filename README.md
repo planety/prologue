@@ -49,31 +49,26 @@ It is ideal for building elegant and high performance web services.
   - [x] Form Data
   - [x] Static Files
   - [x] Middleware
-  - [x] Simple Route
-  - [x] Regex Route
-  - [x] DSL Route
-  - [x] CORS Response
-  - [x] Signing
+  - [x] Powerful Routing System(based on [nest](https://github.com/kedean/nest))
   - [x] Cookie
-  - [x] Session
-  - [x] Cache
   - [x] Startup and Shutdown Events
   - [x] URL Building
-  - [x] Data Validation
-  - [x] Exception Handler
-  - [x] Cross-Site Request Forgery
-  - [x] Cross-Site Scripting (XSS) Protection(`Karax` quote string automatically)
-  - [x] Clickjacking Protection
-  - [x] Authentication
-  - [x] I18n
-  - [x] Command line tools
-  - [x] Mocking test
+  - [x] Error Handler
 
 - Plugin
+  - [x] I18n
+  - [x] Basic Authentication
   - [x] Minimal OpenAPI support
-  - [x] Template(Using `Karax` Native)
   - [x] Websocket support
-  - [x] Test Client(Using `httpclient`)
+  - [x] Mocking test
+  - [x] CORS Response
+  - [x] Data Validation
+  - [x] Session
+  - [x] Cache
+  - [x] Signing
+  - [x] Command line tools
+  - [x] Cross-Site Request Forgery
+  - [x] Clickjacking Protection
 
 
 ## Installation
