@@ -25,6 +25,7 @@ nav:
     - Session: "session.md"
     - Mocking: "mocking.md"
     - Server Settings: "server.md"
+    - Extend Context: "extendctx.md"
     - WebSocket: "websocket.md"
     - Command Line Tool: "cli.md"
     - Views: "views.md"

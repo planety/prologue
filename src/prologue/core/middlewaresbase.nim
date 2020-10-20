@@ -16,11 +16,17 @@
 import std/[asyncdispatch]
 
 from ./context import HandlerAsync, Context, size, incSize, first, `first=`, 
-                      middlewares, `middlewares=`, addMiddlewares
+                      middlewares, `middlewares=`, addMiddlewares, newContextFrom,
+                      newContextTo
+
 from ./route import findHandler
 
 
 proc doNothingClosureMiddleware*(): HandlerAsync
+
+type
+  SubContext* = concept ctx
+    ctx is Context
 
 
 proc switch*(ctx: Context) {.async.} =
@@ -56,3 +62,11 @@ proc doNothingClosureMiddleware*(): HandlerAsync =
   ## Don't do anything, just for placeholder.
   result = proc(ctx: Context) {.async.} =
     await switch(ctx)
+
+proc extendContextMiddleWare*[T: SubContext](ctxType: typedesc[T]): HandlerAsync =
+  mixin await
+  result = proc(ctx: Context) {.async.} =
+    var userContext = new ctxType
+    newContextFrom(userContext, ctx)
+    await switch(userContext)
+    newContextTo(ctx, userContext)

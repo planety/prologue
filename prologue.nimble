@@ -2,7 +2,7 @@
 
 version       = "0.4.0"
 author        = "flywind"
-description   = "Full-Stack Web Framework."
+description   = "Prologue is an elegant and high performance web framework"
 license       = "Apache-2.0"
 srcDir        = "src"
 
