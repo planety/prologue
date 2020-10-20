@@ -16,6 +16,8 @@ import prologue
 proc hello*(ctx: Context) {.async.} =
   resp "<h1>Hello, Prologue!</h1>"
 
+
+var app = newApp()
 app.addRoute("/hello", hello)
 # or
 # app.get("/hello", hello)
@@ -31,6 +33,7 @@ import prologue
 proc hello*(ctx: Context) {.async.} =
   resp "<h1>Hello, Prologue!</h1>"
 
+var app = newApp()
 app.addRoute("/hello", hello, @[HttpGet, HttpPost])
 ```
 
@@ -45,10 +48,11 @@ app.addRoute("/hello", hello, @[HttpGet, HttpPost])
 import prologue
 
 
-proc helloName*(ctx: Context) {.async.} =
+proc hello*(ctx: Context) {.async.} =
   resp "<h1>Hello, " & ctx.getPathParams("name", "Prologue") & "</h1>"
 
-app.addRoute("/hello/{name}", helloName, HttpGet)
+var app = newApp()
+app.addRoute("/hello/{name}", hello, HttpGet)
 ```
 
 ### Wildcard
@@ -62,16 +66,17 @@ import prologue
 proc hello*(ctx: Context) {.async.} =
   resp "Hello, Prologue"
 
+var app = newApp()
 app.get("/static/*", hello)
-app.get("/*/static, hello)
-app.get("/{path}/*", hello)
+app.get("/*/static", hello)
+app.get("/static/templates/{path}/*", hello)
 ```
 
 ### Greedy
 
 Greedy character(`$`) will match all the remaining URL sections. But it can only used at the end of the URL. `RouteError` will be raised if it is used in the middle of the URL.
 
-For `/test/{param}$`, `/test/foo/bar/baz/` is matched. The path parameter is "foo/bar/baz". For `/test/*$`, `/test/foo/bar/baz/` is matched too.
+For `/test/{param}$`, `/test/foo/bar/baz/` is matched. The path parameter is "foo/bar/baz". For `/test/*$`, `/test/static/foo/bar/baz/` is matched.
 
 ```nim
 import prologue
@@ -80,9 +85,9 @@ import prologue
 proc hello*(ctx: Context) {.async.} =
   resp "Hello, Prologue"
 
-
+var app = newApp()
 app.get("/test/{param}$", hello)
-app.get("/test/*$", hello)
+app.get("/test/static/*$", hello)
 ```
 
 
@@ -97,6 +102,7 @@ import prologue
 proc articles*(ctx: Context) {.async.} =
   resp $ctx.getPathParams("num", 1)
 
+var app = newApp()
 app.addRoute(re"/post(?P<num>[\d]+)", articles, HttpGet)
 ```
 
@@ -108,14 +114,13 @@ import prologue
 proc hello(ctx: Context) {.async.} =
   resp "Hello World!"
 
-let urlPatterns* = @[
+const urlPatterns = @[
   pattern("/hello", hello)
 ]
 
 var app = newApp()
 
-app.addRoute(urls.urlPatterns, "")
-app.run()
+app.addRoute(urlPatterns, "")
 ```
 
 ## Group Routing
@@ -126,11 +131,12 @@ app.run()
 import prologue
 
 
-var app = newApp()
-var base = newGroup(app, "/apiv2", @[])
-var level1 = newGroup(app,"/level1", @[], base)
-var level2 = newGroup(app, "/level2", @[], level1)
-var level3 = newGroup(app, "/level3", @[], level2)
+var
+  app = newApp()
+  base = newGroup(app, "/apiv2", @[])
+  level1 = newGroup(app,"/level1", @[], base)
+  level2 = newGroup(app, "/level2", @[], level1)
+  level3 = newGroup(app, "/level3", @[], level2)
 
 
 proc hello(ctx: Context) {.async.} =
@@ -219,11 +225,11 @@ with level3:
 import prologue
 
 
-var app = newApp()
-
-var base = newGroup(app, "/apiv2", @[])
-var level1 = newGroup(app,"/level1", @[], base)
-var level2 = newGroup(app, "/level2", @[], level1)
+var
+  app = newApp()
+  base = newGroup(app, "/apiv2", @[])
+  level1 = newGroup(app,"/level1", @[], base)
+  level2 = newGroup(app, "/level2", @[], level1)
 
 
 proc hello(ctx: Context) {.async.} =
