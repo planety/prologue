@@ -24,6 +24,7 @@ nav:
     - Static Files: "staticfiles.md"
     - Upload Files: "uploadfile.md"
     - Session: "session.md"
+    - Mocking: "mocking.md"
     - Server Settings: "server.md"
     - WebSocket: "websocket.md"
     - Command Line Tool: "cli.md"
