@@ -29,8 +29,8 @@ secretKey=Pr435ol67ogue
 
 (3). There are two ways to disable logging messages:
 
-(1) set `settings.debug` = false
-(2) set a startup event
+- set `settings.debug` = false
+- set a startup event
 
 ```nim
 proc setLoggingLevel() =
