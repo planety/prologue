@@ -6,7 +6,7 @@ theme:
 
 repo_name: planety/prologue
 repo_url: https://github.com/planety/prologue
-edit_uri: ""
+edit_uri: "https://github.com/planety/prologue/tree/devel/docs"
 
 nav:
     - Introduction: "index.md"
