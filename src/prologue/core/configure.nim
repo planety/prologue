@@ -59,6 +59,11 @@ type
   EnvError* = object of CatchableError
   EnvWrongFormatError* = object of EnvError
 
+  ConfigFileExt* = enum
+    Json = "json"
+    Toml = "toml"
+    Yaml = "yaml"
+
 
 func initEnv*(): Env {.inline.} =
   ## Initializes an `Env`.

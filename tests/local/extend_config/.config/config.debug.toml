@@ -1,0 +1,10 @@
+name = "debug"
+
+[prologue]
+address = ""
+port = 8_080
+debug = true
+reusePort = true
+appName = ""
+secretKey = "Set by yourself"
+bufSize = 40_960

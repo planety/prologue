@@ -57,18 +57,28 @@ func newSettings*(
   reusePort = true,
   secretKey = randomString(8),
   appName = "",
-  bufSize = 40960
-): Settings {.inline.} =
+  bufSize = 40960,
+  data: JsonNode = nil
+): Settings =
   ## Creates a new `Settings`.
   if secretKey.len == 0:
     raise newException(EmptySecretKeyError, "Secret key can't be empty!")
 
-  result = Settings(address: address, port: port, debug: debug, 
-                    reusePort: reusePort, bufSize: bufSize,
-                    data: %* {"prologue": {"secretKey": secretKey,
-                        "appName": appName}})
+  if data == nil:
+    result = Settings(address: address, port: port, debug: debug, 
+                      reusePort: reusePort, bufSize: bufSize,
+                      data: %* {"prologue": {"secretKey": secretKey,
+                          "appName": appName}})
+  else:
+    var data = data
+    data["secretKey"] = %* secretKey
+    data["appName"] = %* appName
 
-func checkSettings(settings: var Settings, data: JsonNode) {.inline.} =
+    result = Settings(address: address, port: port, debug: debug, 
+                  reusePort: reusePort, bufSize: bufSize,
+                  data: data)
+
+func newSettingsFromJsonNode*(settings: var Settings, data: JsonNode) {.inline.} =
   if not data.hasKey("prologue"):
     raise newException(KeyError, "Key `prologue` must be present in the config file!")
 
@@ -89,11 +99,11 @@ func loadSettings*(
 ): Settings =
   ## Creates a new `Settings`.
   new result
-  checkSettings(result, data)
+  newSettingsFromJsonNode(result, data)
 
 proc loadSettings*(
   configPath: string
 ): Settings =
   ## Creates a new `Settings`.
   new result
-  checkSettings(result, parseFile(configPath))
+  newSettingsFromJsonNode(result, parseFile(configPath))

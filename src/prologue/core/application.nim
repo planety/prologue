@@ -390,6 +390,8 @@ func newApp*(
                        errorHandlerTable = errorHandlerTable, appData = appData)
 
 proc newAppQueryEnv*(
+  configFileExt: ConfigFileExt,
+  loadJsonNode: proc (configPath: string): JsonNode,
   middlewares: openArray[HandlerAsync] = @[],
   startup: openArray[Event] = @[], 
   shutdown: openArray[Event] = @[],
@@ -401,9 +403,9 @@ proc newAppQueryEnv*(
 
   var configPath: string
   if path.len == 0 or path == "default":
-    configPath = ".config/config.json"
+    configPath = fmt".config/config.{configFileExt}"
   else:
-    configPath = fmt".config/config.{path}.json"
+    configPath = fmt".config/config.{path}.{configFileExt}"
 
   if not dirExists(".config"):
     raise newException(IOError, "`.config` directory doesn't exist in the current path!")
@@ -411,11 +413,21 @@ proc newAppQueryEnv*(
   if not fileExists(configPath):
     raise newException(IOError, fmt"`{configPath}` file doesn't exist in the current path!")
 
-  result = newPrologue(settings = loadSettings(configPath), ctxSettings = newCtxSettings(),
+  result = newPrologue(settings = loadSettings(loadJsonNode(configPath)), ctxSettings = newCtxSettings(),
                        router = newRouter(), reversedRouter = newReversedRouter(),
                        reRouter = newReRouter(), middlewares = middlewares,
                        startup = startup, shutdown = shutdown,
                        errorHandlerTable = errorHandlerTable, appData = appData)
+
+proc newAppQueryEnv*(
+  middlewares: openArray[HandlerAsync] = @[],
+  startup: openArray[Event] = @[], 
+  shutdown: openArray[Event] = @[],
+  errorHandlerTable = newErrorHandlerTable({Http404: default404Handler, Http500: default500Handler}),
+  appData = newStringTable(mode = modeCaseSensitive)
+): Prologue {.inline.} =
+  ## Creates a new App instance. by querying environment variables: `PROLOGUE`.
+  newAppQueryEnv(ConfigFileExt.Json, parseFile)
 
 proc handleNativeRequest(request: var Request) {.inline, gcsafe.} =
   ## Handles the request from the client.

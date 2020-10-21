@@ -21,6 +21,7 @@ var app = newApp()
 app.addRoute("/hello", hello)
 # or
 # app.get("/hello", hello)
+app.run()
 ```
 
 You can also use `seq[httpMetod]` to register the same handler but supports multiple HTTP methods.
@@ -35,6 +36,7 @@ proc hello*(ctx: Context) {.async.} =
 
 var app = newApp()
 app.addRoute("/hello", hello, @[HttpGet, HttpPost])
+app.run()
 ```
 
 ## Parameters Routing
@@ -53,6 +55,7 @@ proc hello*(ctx: Context) {.async.} =
 
 var app = newApp()
 app.addRoute("/hello/{name}", hello, HttpGet)
+app.run()
 ```
 
 ### Wildcard
@@ -70,6 +73,7 @@ var app = newApp()
 app.get("/static/*", hello)
 app.get("/*/static", hello)
 app.get("/static/templates/{path}/*", hello)
+app.run()
 ```
 
 ### Greedy
@@ -88,6 +92,7 @@ proc hello*(ctx: Context) {.async.} =
 var app = newApp()
 app.get("/test/{param}$", hello)
 app.get("/test/static/*$", hello)
+app.run()
 ```
 
 
@@ -104,6 +109,7 @@ proc articles*(ctx: Context) {.async.} =
 
 var app = newApp()
 app.addRoute(re"/post(?P<num>[\d]+)", articles, HttpGet)
+app.run()
 ```
 
 ## Pattern Routing
@@ -121,6 +127,7 @@ const urlPatterns = @[
 var app = newApp()
 
 app.addRoute(urlPatterns, "")
+app.run()
 ```
 
 ## Group Routing
@@ -168,6 +175,8 @@ level2.post("/home", home)
 level3.get("/hello", hello)
 level3.get("/hi", hi)
 level3.post("/home", home)
+
+app.run()
 ```
 
 `std/with` provides a more neat routing fashion:
@@ -217,6 +226,8 @@ with level3:
   get("/hello", hello)
   get("/hi", hi)
   post("/home", home)
+
+app.run()
 ```
 
 `pattern routing` also supports grouping.
@@ -248,4 +259,5 @@ let
   tab = {level1: urlpattern1, level2: urlpattern2}
 
 app.addGroup(tab)
+app.run()
 ```
