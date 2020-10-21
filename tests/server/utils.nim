@@ -1,4 +1,4 @@
-import htmlgen
+import std/htmlgen
 
 
 func loginPage*(): string =

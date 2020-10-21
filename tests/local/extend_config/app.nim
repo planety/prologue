@@ -1,6 +1,6 @@
 import ../../../src/prologue
 import ./utils
-import parsetoml
+import pkg/parsetoml
 
 
 proc toml2json(configPath: string): JsonNode = 

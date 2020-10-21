@@ -22,11 +22,11 @@ proc mockingMiddleware*(): HandlerAsync =
     ctx.handled = true
     await switch(ctx)
 
-proc mockApp*(app: Prologue) =
+proc mockApp*(app: Prologue) {.inline.} =
   ## Adds mocking middleware to global middlewares.
   app.middlewares.add mockingMiddleware()
 
-func debugResponse*(ctx: Context) =
+func debugResponse*(ctx: Context) {.inline.} =
   debugEcho &"{ctx.response.code} {ctx.response.headers} \n {ctx.response.body}"
 
 proc runOnce*(app: Prologue, request: Request): Context =

@@ -5,7 +5,8 @@ from ./encode import urlsafeBase64Encode
 
 
 proc genUid*(): string =
-  ## TODO ADD Mac/IP address
+  ## Generates a simple user id.
+  # TODO ADD Mac/IP address
   let tseq = serialize(getMonoTime().ticks)
   let rseq = randomBytesSeq[8]()
   var res: array[16, byte]

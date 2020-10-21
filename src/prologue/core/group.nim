@@ -6,7 +6,7 @@ import ./httpexception
 
 
 type
-  Group* = ref object
+  Group* = ref object   ## Grouping object
     app*: Prologue
     parent {.cursor.}: Group
     route: string
@@ -15,6 +15,7 @@ type
 
 func newGroup*(app: Prologue, route: string, middlewares: openArray[HandlerAsync] = @[], 
                parent: Group = nil): Group =
+  ## Creates a new `Group`.
   if route.len == 0:
     raise newException(RouteError, "Route can't be empty, at least use `/`!")
 
@@ -28,7 +29,7 @@ func newGroup*(app: Prologue, route: string, middlewares: openArray[HandlerAsync
   Group(app: app, route: route, middlewares: @middlewares, parent: parent)
 
 func getAllInfos*(group: Group, route: string, middlewares: openArray[HandlerAsync]): (string, seq[HandlerAsync]) =
-  ## Group Infos.
+  ## Retrieves group infos regarding middlewares and route.
   var parent = group
   while parent != nil:
     if parent.route.len != 1:

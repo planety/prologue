@@ -22,7 +22,7 @@ from ../core/encode import base64Encode
 
 
 const
-  outLen = 64
+  outLen = 64 ## Default length.
 
 
 proc pbkdf2_sha256encode*(password: SecretKey, salt: string,

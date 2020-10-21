@@ -6,7 +6,7 @@ import pkg/cookiejar
 
 
 type
-  Response* = object
+  Response* = object            ## Response object.
     httpVersion*: HttpVersion
     code*: HttpCode
     headers*: ResponseHeaders

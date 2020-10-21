@@ -1,4 +1,4 @@
 const
-  PrologueVersion* = "0.4.0"            ## The version of Prologue.
-  ProloguePrefix* = "PROLOGUE"          ## The helper prefix for `env`.
+  PrologueVersion* = "0.4.0"            ## The current version of Prologue.
+  ProloguePrefix* = "PROLOGUE"          ## The helper prefix for environment variables.
   useAsyncHTTPServer* = defined(usestd) ## Uses `asynchttpserver`.

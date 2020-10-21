@@ -7,7 +7,7 @@ discard """
   exitcode: 0
   timeout:  60.0
 """
-import httpclient, asyncdispatch, nativesockets, strformat, os, osproc, terminal, strutils
+import std/[httpclient, asyncdispatch, nativesockets, strformat, os, osproc, terminal, strutils]
 
 
 import ./utils

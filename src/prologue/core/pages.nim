@@ -3,7 +3,7 @@ import ./constants
 
 
 func errorPage*(errorMsg: string): string {.inline.} =
-  ## Error pages.
+  ## Error pages for HTTP 404.
   result = html(head(title(errorMsg)),
                 body(h1(errorMsg),
                      "<hr/>",
@@ -21,7 +21,7 @@ func loginPage*(): string {.inline.} =
                 xmlns = "http://www.w3.org/1999/xhtml")
 
 func multiPartPage*(): string {.inline.} =
-  ## Multipart pages.
+  ## Multipart pages for uploading files.
   result = html(form(action = "/multipart?firstname=red green&lastname=tenth",
                `method` = "post", enctype = "multipart/form-data",
                 input(name = "username", `type` = "text", value = "play game"),
@@ -30,7 +30,7 @@ func multiPartPage*(): string {.inline.} =
                 xmlns = "http://www.w3.org/1999/xhtml")
 
 func internalServerErrorPage*(): string {.inline.} =
-  ## Internal server error pages.
+  ## Internal server error pages for HTTP 500.
   result = """<html>
 
 <head>

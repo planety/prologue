@@ -1,7 +1,6 @@
 import ../../../src/prologue
 import ../../../src/prologue/middlewares
-import strformat
-import json
+import std/[strformat, json]
 
 
 proc upload(ctx: Context) {.async.} =

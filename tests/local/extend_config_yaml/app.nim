@@ -1,5 +1,5 @@
 import ../../../src/prologue
-import yaml
+import pkg/yaml
 
 
 proc yaml2json(configPath: string): JsonNode =

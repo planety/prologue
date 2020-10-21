@@ -25,8 +25,10 @@ type
     ctx*: Context
 
 
-proc loadTranslate*(stream: Stream, 
-                    filename = "[stream]"): TableRef[string, StringTableRef] =
+proc loadTranslate*(
+  stream: Stream,
+  filename = "[stream]"
+): TableRef[string, StringTableRef] =
   var
     currentSection = ""
     p: CfgParser
@@ -78,6 +80,7 @@ proc Tr*(t: Translator, text: string): string {.inline.} =
   t.translate(text)
 
 proc translate*(ctx: Context, text: string, language: string): string {.inline.} =
+  ## Translates text by `language`.
   let config = ctx.gScope.ctxSettings.config
   if not config.hasKey(text):
     return text

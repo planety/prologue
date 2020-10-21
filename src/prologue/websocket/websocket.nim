@@ -10,4 +10,5 @@ import std/asyncdispatch
 
 
 proc newWebSocket*(ctx: Context): Future[WebSocket] =
+  ## Creates a new `Websocket`.
   result = newWebSocket(ctx.request.nativeRequest)

@@ -18,7 +18,7 @@ from ./utils import fromByteSeq
 
 
 const
-  DefaultEntropy* = 32
+  DefaultEntropy* = 32    ## The default length of random string.
 
 
 proc randomBytesSeq*(size = DefaultEntropy): seq[byte] {.inline.} =

@@ -252,8 +252,8 @@ func accepted*(msg = ""): ValidateHandler {.inline.} =
         result = (false, msg)
 
 func required*(msg = ""): ValidateHandler {.inline.} =
-  ## The content of ``text`` is not empty. If the length of 
-  ## ``msg`` is more than 0, returns this ``msg`` when failed.
+  ## Succeeds if The content of ``text`` is not empty. If the length of 
+  ## ``msg`` is more than 0, returns the ``msg`` when failed.
   result = func(text: string): Info =
     if text.len != 0:
       result = (true, "")
@@ -263,8 +263,8 @@ func required*(msg = ""): ValidateHandler {.inline.} =
       result = (false, msg)
 
 func matchRegex*(value: Regex, msg = ""): ValidateHandler {.inline.} =
-  ## The content of ``text`` matches the regex expression. If the length of 
-  ## ``msg`` is more than 0, returns this ``msg`` when failed.
+  ## Succeeds if the content of ``text`` matches the regex expression. If the length of 
+  ## ``msg`` is more than 0, returns the ``msg`` when failed.
   result = func(text: string): Info =
     var m: RegexMatch
     if text.match(value, m):
@@ -275,8 +275,8 @@ func matchRegex*(value: Regex, msg = ""): ValidateHandler {.inline.} =
       result = (false, msg)
 
 func matchURL*(msg = ""): ValidateHandler {.inline.} =
-  ## The content of ``text`` matches the url expression. If the length of 
-  ## ``msg`` is more than 0, returns this ``msg`` when failed.
+  ## Succeeds if the content of ``text`` matches the url expression. If the length of 
+  ## ``msg`` is more than 0, returns the ``msg`` when failed.
   result = func(text: string): Info =
     var m: RegexMatch
     if text.match(re"(https?|ftp|file)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]", m):

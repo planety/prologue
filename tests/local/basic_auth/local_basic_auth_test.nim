@@ -1,4 +1,4 @@
-import logging
+import std/logging
 
 import ../../../src/prologue
 import ../../../src/prologue/middlewares/auth
