@@ -103,24 +103,7 @@ function main() {
 <li>
   <a class="reference reference-toplevel" href="#12" id="62">Procs</a>
   <ul class="simple simple-toc-section">
-      <ul class="simple nested-toc-section">del
-      <li><a class="reference" href="#del%2CResponseHeaders%2Cstring"
-    title="del(headers: ResponseHeaders; key: string)">del,ResponseHeaders,string<span class="attachedType">ResponseHeaders</span></a></li>
-
-  </ul>
-  <ul class="simple nested-toc-section">[]=
-      <li><a class="reference" href="#%5B%5D%3D%2CResponseHeaders%2Cstring%2Cstring"
-    title="`[]=`(headers: ResponseHeaders; key, value: string)">[]=,ResponseHeaders,string,string<span class="attachedType">ResponseHeaders</span></a></li>
-  <li><a class="reference" href="#%5B%5D%3D%2CResponseHeaders%2Cstring%2Cseq%5Bstring%5D"
-    title="`[]=`(headers: ResponseHeaders; key: string; value: seq[string])">[]=,ResponseHeaders,string,seq[string]<span class="attachedType">ResponseHeaders</span></a></li>
-
-  </ul>
-  <ul class="simple nested-toc-section">add
-      <li><a class="reference" href="#add%2CResponseHeaders%2Cstring%2Cstring"
-    title="add(headers: ResponseHeaders; key, value: string)">add,ResponseHeaders,string,string<span class="attachedType">ResponseHeaders</span></a></li>
-
-  </ul>
-  <ul class="simple nested-toc-section">clear
+      <ul class="simple nested-toc-section">clear
       <li><a class="reference" href="#clear%2CResponseHeaders"
     title="clear(headers: ResponseHeaders)">clear,ResponseHeaders<span class="attachedType">ResponseHeaders</span></a></li>
 
@@ -136,11 +119,23 @@ function main() {
     title="`$`(headers: ResponseHeaders): string">$,ResponseHeaders<span class="attachedType">ResponseHeaders</span></a></li>
 
   </ul>
+  <ul class="simple nested-toc-section">del
+      <li><a class="reference" href="#del%2CResponseHeaders%2Cstring"
+    title="del(headers: var ResponseHeaders; key: string)">del,ResponseHeaders,string<span class="attachedType">ResponseHeaders</span></a></li>
+
+  </ul>
   <ul class="simple nested-toc-section">initResponseHeaders
       <li><a class="reference" href="#initResponseHeaders"
     title="initResponseHeaders(): ResponseHeaders">initResponseHeaders<span class="attachedType">ResponseHeaders</span></a></li>
   <li><a class="reference" href="#initResponseHeaders%2CopenArray%5Btuple%5Bstring%2Cstring%5D%5D"
     title="initResponseHeaders(keyValuePairs: openArray[tuple[key: string, val: string]]): ResponseHeaders">initResponseHeaders,openArray[tuple[string,string]]<span class="attachedType">ResponseHeaders</span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">[]=
+      <li><a class="reference" href="#%5B%5D%3D%2CResponseHeaders%2Cstring%2Cstring"
+    title="`[]=`(headers: var ResponseHeaders; key, value: string)">[]=,ResponseHeaders,string,string<span class="attachedType">ResponseHeaders</span></a></li>
+  <li><a class="reference" href="#%5B%5D%3D%2CResponseHeaders%2Cstring%2Cseq%5Bstring%5D"
+    title="`[]=`(headers: var ResponseHeaders; key: string; value: seq[string])">[]=,ResponseHeaders,string,seq[string]<span class="attachedType">ResponseHeaders</span></a></li>
 
   </ul>
   <ul class="simple nested-toc-section">getOrDefault
@@ -151,6 +146,11 @@ function main() {
   <ul class="simple nested-toc-section">len
       <li><a class="reference" href="#len%2CResponseHeaders"
     title="len(headers: ResponseHeaders): int">len,ResponseHeaders<span class="attachedType">ResponseHeaders</span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">add
+      <li><a class="reference" href="#add%2CResponseHeaders%2Cstring%2Cstring"
+    title="add(headers: var ResponseHeaders; key, value: string)">add,ResponseHeaders,string,string<span class="attachedType">ResponseHeaders</span></a></li>
 
   </ul>
   <ul class="simple nested-toc-section">getTables
@@ -219,55 +219,6 @@ class="link-seesrc" target="_blank">Source</a>
 href="https://github.com/planety/prologue/tree/devel/src/prologue/core/httpcore/httplogue.nim#L43"
 class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/httpcore/httplogue.nim#L43" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<a id="[]=,ResponseHeaders,string,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#%5B%5D%3D%2CResponseHeaders%2Cstring%2Cstring"><span class="Identifier">`[]=`</span></a><span class="Other">(</span><span class="Identifier">headers</span><span class="Other">:</span> <a href="httplogue.html#ResponseHeaders"><span class="Identifier">ResponseHeaders</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">,</span> <span class="Identifier">value</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
-    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Sets the header entries associated with <tt class="docutils literal"><span class="pre">key</span></tt> to the specified value. Replaces any existing values.
-&nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/httpcore/httplogue.nim#L60"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/httpcore/httplogue.nim#L60" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<a id="[]=,ResponseHeaders,string,seq[string]"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#%5B%5D%3D%2CResponseHeaders%2Cstring%2Cseq%5Bstring%5D"><span class="Identifier">`[]=`</span></a><span class="Other">(</span><span class="Identifier">headers</span><span class="Other">:</span> <a href="httplogue.html#ResponseHeaders"><span class="Identifier">ResponseHeaders</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">value</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span>
-    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-<p>Sets the header entries associated with <tt class="docutils literal"><span class="pre">key</span></tt> to the specified list of values. Replaces any existing values.</p>
-<p>If <tt class="docutils literal"><span class="pre">value</span></tt> is an empty sequence, the <tt class="docutils literal"><span class="pre">key</span></tt> will be removed from <tt class="docutils literal"><span class="pre">headers</span></tt>.</p>
-
-&nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/httpcore/httplogue.nim#L65"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/httpcore/httplogue.nim#L65" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<a id="add,ResponseHeaders,string,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#add%2CResponseHeaders%2Cstring%2Cstring"><span class="Identifier">add</span></a><span class="Other">(</span><span class="Identifier">headers</span><span class="Other">:</span> <a href="httplogue.html#ResponseHeaders"><span class="Identifier">ResponseHeaders</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">,</span> <span class="Identifier">value</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span>
-    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Adds the specified value to the specified key. Appends to any existing values associated with the key.
-&nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/httpcore/httplogue.nim#L75"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/httpcore/httplogue.nim#L75" class="link-seesrc" target="_blank" >Edit</a>
-
-</dd>
-<a id="del,ResponseHeaders,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#del%2CResponseHeaders%2Cstring"><span class="Identifier">del</span></a><span class="Other">(</span><span class="Identifier">headers</span><span class="Other">:</span> <a href="httplogue.html#ResponseHeaders"><span class="Identifier">ResponseHeaders</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
-<dd>
-
-Delete the header entries associated with <tt class="docutils literal"><span class="pre">key</span></tt>
-&nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/httpcore/httplogue.nim#L83"
-class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/httpcore/httplogue.nim#L83" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -348,6 +299,56 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/httpcore/httplogue.nim#L54" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
+<a id="[]=,ResponseHeaders,string,string"></a>
+<dt><pre><span class="Keyword">func</span> <a href="#%5B%5D%3D%2CResponseHeaders%2Cstring%2Cstring"><span class="Identifier">`[]=`</span></a><span class="Other">(</span><span class="Identifier">headers</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="httplogue.html#ResponseHeaders"><span class="Identifier">ResponseHeaders</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">,</span> <span class="Identifier">value</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span>
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+Sets the header entries associated with <tt class="docutils literal"><span class="pre">key</span></tt> to the specified value. Replaces any existing values.
+&nbsp;&nbsp;<a
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/httpcore/httplogue.nim#L60"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/httpcore/httplogue.nim#L60" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="[]=,ResponseHeaders,string,seq[string]"></a>
+<dt><pre><span class="Keyword">func</span> <a href="#%5B%5D%3D%2CResponseHeaders%2Cstring%2Cseq%5Bstring%5D"><span class="Identifier">`[]=`</span></a><span class="Other">(</span><span class="Identifier">headers</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="httplogue.html#ResponseHeaders"><span class="Identifier">ResponseHeaders</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">value</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Identifier">string</span><span class="Other">]</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
+    <span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+<p>Sets the header entries associated with <tt class="docutils literal"><span class="pre">key</span></tt> to the specified list of values. Replaces any existing values.</p>
+<p>If <tt class="docutils literal"><span class="pre">value</span></tt> is an empty sequence, the <tt class="docutils literal"><span class="pre">key</span></tt> will be removed from <tt class="docutils literal"><span class="pre">headers</span></tt>.</p>
+
+&nbsp;&nbsp;<a
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/httpcore/httplogue.nim#L65"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/httpcore/httplogue.nim#L65" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="add,ResponseHeaders,string,string"></a>
+<dt><pre><span class="Keyword">func</span> <a href="#add%2CResponseHeaders%2Cstring%2Cstring"><span class="Identifier">add</span></a><span class="Other">(</span><span class="Identifier">headers</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="httplogue.html#ResponseHeaders"><span class="Identifier">ResponseHeaders</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">,</span> <span class="Identifier">value</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span>
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+Adds the specified value to the specified key. Appends to any existing values associated with the key.
+&nbsp;&nbsp;<a
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/httpcore/httplogue.nim#L75"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/httpcore/httplogue.nim#L75" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
+<a id="del,ResponseHeaders,string"></a>
+<dt><pre><span class="Keyword">func</span> <a href="#del%2CResponseHeaders%2Cstring"><span class="Identifier">del</span></a><span class="Other">(</span><span class="Identifier">headers</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="httplogue.html#ResponseHeaders"><span class="Identifier">ResponseHeaders</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+Delete the header entries associated with <tt class="docutils literal"><span class="pre">key</span></tt>
+&nbsp;&nbsp;<a
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/httpcore/httplogue.nim#L83"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/httpcore/httplogue.nim#L83" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
 <a id="hasKey,ResponseHeaders,string"></a>
 <dt><pre><span class="Keyword">func</span> <a href="#hasKey%2CResponseHeaders%2Cstring"><span class="Identifier">hasKey</span></a><span class="Other">(</span><span class="Identifier">headers</span><span class="Other">:</span> <a href="httplogue.html#ResponseHeaders"><span class="Identifier">ResponseHeaders</span></a><span class="Other">;</span> <span class="Identifier">key</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">bool</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
@@ -410,7 +411,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-20 08:49:05 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-21 13:56:16 UTC</small>
       </div>
     </div>
   </div>

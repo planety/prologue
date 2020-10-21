@@ -17,7 +17,6 @@ from ./types import SecretKey
 from ./utils import fromByteSeq
 
 
-
 const
   DefaultEntropy* = 32
 

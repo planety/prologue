@@ -82,9 +82,9 @@ function main() {
           </ul></dd>
 <dt><a name="%60%5B%5D%3D%60" href="#%60%5B%5D%3D%60"><span>`[]=`:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="httplogue: `[]=`(headers: ResponseHeaders; key: string; value: seq[string])" href="core/httpcore/httplogue.html#%5B%5D%3D%2CResponseHeaders%2Cstring%2Cseq%5Bstring%5D">httplogue: `[]=`(headers: ResponseHeaders; key: string; value: seq[string])</a></li>
+          data-doc-search-tag="httplogue: `[]=`(headers: var ResponseHeaders; key: string; value: seq[string])" href="core/httpcore/httplogue.html#%5B%5D%3D%2CResponseHeaders%2Cstring%2Cseq%5Bstring%5D">httplogue: `[]=`(headers: var ResponseHeaders; key: string; value: seq[string])</a></li>
           <li><a class="reference external"
-          data-doc-search-tag="httplogue: `[]=`(headers: ResponseHeaders; key, value: string)" href="core/httpcore/httplogue.html#%5B%5D%3D%2CResponseHeaders%2Cstring%2Cstring">httplogue: `[]=`(headers: ResponseHeaders; key, value: string)</a></li>
+          data-doc-search-tag="httplogue: `[]=`(headers: var ResponseHeaders; key, value: string)" href="core/httpcore/httplogue.html#%5B%5D%3D%2CResponseHeaders%2Cstring%2Cstring">httplogue: `[]=`(headers: var ResponseHeaders; key, value: string)</a></li>
           <li><a class="reference external"
           data-doc-search-tag="types: `[]=`(formPart: FormPart; key: string; body: string)" href="core/types.html#%5B%5D%3D%2CFormPart%2Cstring%2Cstring">types: `[]=`(formPart: FormPart; key: string; body: string)</a></li>
           <li><a class="reference external"
@@ -128,7 +128,7 @@ function main() {
           </ul></dd>
 <dt><a name="add" href="#add"><span>add:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="httplogue: add(headers: ResponseHeaders; key, value: string)" href="core/httpcore/httplogue.html#add%2CResponseHeaders%2Cstring%2Cstring">httplogue: add(headers: ResponseHeaders; key, value: string)</a></li>
+          data-doc-search-tag="httplogue: add(headers: var ResponseHeaders; key, value: string)" href="core/httpcore/httplogue.html#add%2CResponseHeaders%2Cstring%2Cstring">httplogue: add(headers: var ResponseHeaders; key, value: string)</a></li>
           <li><a class="reference external"
           data-doc-search-tag="route: add(reRouter: var ReRouter; pairs: (RePath, PathHandler))" href="core/route.html#add%2CReRouter%2C">route: add(reRouter: var ReRouter; pairs: (RePath, PathHandler))</a></li>
           </ul></dd>
@@ -346,6 +346,10 @@ function main() {
 <li><a class="reference external"
           data-doc-search-tag="KeyDerivation.Concat" href="signing/signing.html#Concat">KeyDerivation.Concat</a></li>
           </ul></dd>
+<dt><a name="ConfigFileExt" href="#ConfigFileExt"><span>ConfigFileExt:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="configure: ConfigFileExt" href="core/configure.html#ConfigFileExt">configure: ConfigFileExt</a></li>
+          </ul></dd>
 <dt><a name="connect" href="#connect"><span>connect:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="application: connect(group: Group; route: string; handler: HandlerAsync; name = &quot;&quot;;
@@ -442,7 +446,7 @@ function main() {
           </ul></dd>
 <dt><a name="del" href="#del"><span>del:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="httplogue: del(headers: ResponseHeaders; key: string)" href="core/httpcore/httplogue.html#del%2CResponseHeaders%2Cstring">httplogue: del(headers: ResponseHeaders; key: string)</a></li>
+          data-doc-search-tag="httplogue: del(headers: var ResponseHeaders; key: string)" href="core/httpcore/httplogue.html#del%2CResponseHeaders%2Cstring">httplogue: del(headers: var ResponseHeaders; key: string)</a></li>
           <li><a class="reference external"
           data-doc-search-tag="types: del(session: var Session; key: string)" href="core/types.html#del%2CSession%2Cstring">types: del(session: var Session; key: string)</a></li>
           </ul></dd>
@@ -549,6 +553,10 @@ function main() {
 <dt><a name="existsPrologueEnv" href="#existsPrologueEnv"><span>existsPrologueEnv:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="configure: existsPrologueEnv(key: string; prefix: string): bool" href="core/configure.html#existsPrologueEnv%2Cstring%2Cstring">configure: existsPrologueEnv(key: string; prefix: string): bool</a></li>
+          </ul></dd>
+<dt><a name="extendContextMiddleWare" href="#extendContextMiddleWare"><span>extendContextMiddleWare:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="middlewaresbase: extendContextMiddleWare[T: SubContext](ctxType: typedesc[T]): HandlerAsync" href="core/middlewaresbase.html#extendContextMiddleWare%2Ctypedesc%5BT%5D">middlewaresbase: extendContextMiddleWare[T: SubContext](ctxType: typedesc[T]): HandlerAsync</a></li>
           </ul></dd>
 <dt><a name="Fault" href="#Fault"><span>Fault:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -918,6 +926,10 @@ function main() {
 <li><a class="reference external"
           data-doc-search-tag="route: items(reRouter: ReRouter): (RePath, PathHandler)" href="core/route.html#items.i%2CReRouter">route: items(reRouter: ReRouter): (RePath, PathHandler)</a></li>
           </ul></dd>
+<dt><a name="Json" href="#Json"><span>Json:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="ConfigFileExt.Json" href="core/configure.html#Json">ConfigFileExt.Json</a></li>
+          </ul></dd>
 <dt><a name="jsonResponse" href="#jsonResponse"><span>jsonResponse:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="response: jsonResponse(text: JsonNode; code = Http200; headers = initResponseHeaders();
@@ -1060,6 +1072,20 @@ function main() {
           </ul></dd>
 <dt><a name="newAppQueryEnv" href="#newAppQueryEnv"><span>newAppQueryEnv:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
+          data-doc-search-tag="application: newAppQueryEnv(configFileExt: ConfigFileExt;
+               loadJsonNode: proc (configPath: string): JsonNode;
+               middlewares: openArray[HandlerAsync] = @[];
+               startup: openArray[Event] = @[];
+               shutdown: openArray[Event] = @[]; errorHandlerTable = newErrorHandlerTable(
+    [(Http404, default404Handler), (Http500, default500Handler)]);
+               appData = newStringTable(mode = modeCaseSensitive)): Prologue" href="core/application.html#newAppQueryEnv%2CConfigFileExt%2Cproc%28string%29%2CopenArray%5BHandlerAsync%5D%2CopenArray%5BEvent%5D%2CopenArray%5BEvent%5D">application: newAppQueryEnv(configFileExt: ConfigFileExt;
+               loadJsonNode: proc (configPath: string): JsonNode;
+               middlewares: openArray[HandlerAsync] = @[];
+               startup: openArray[Event] = @[];
+               shutdown: openArray[Event] = @[]; errorHandlerTable = newErrorHandlerTable(
+    [(Http404, default404Handler), (Http500, default500Handler)]);
+               appData = newStringTable(mode = modeCaseSensitive)): Prologue</a></li>
+          <li><a class="reference external"
           data-doc-search-tag="application: newAppQueryEnv(middlewares: openArray[HandlerAsync] = @[];
                startup: openArray[Event] = @[];
                shutdown: openArray[Event] = @[]; errorHandlerTable = newErrorHandlerTable(
@@ -1141,8 +1167,14 @@ function main() {
 <dt><a name="newSettings" href="#newSettings"><span>newSettings:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="nativesettings: newSettings(address = &quot;&quot;; port = Port(8080); debug = true; reusePort = true;
-            secretKey = randomString(8); appName = &quot;&quot;; bufSize = 40960): Settings" href="core/nativesettings.html#newSettings%2Cstring%2Cstring%2Cint">nativesettings: newSettings(address = &quot;&quot;; port = Port(8080); debug = true; reusePort = true;
-            secretKey = randomString(8); appName = &quot;&quot;; bufSize = 40960): Settings</a></li>
+            secretKey = randomString(8); appName = &quot;&quot;; bufSize = 40960;
+            data: JsonNode = nil): Settings" href="core/nativesettings.html#newSettings%2Cstring%2Cstring%2Cint%2CJsonNode">nativesettings: newSettings(address = &quot;&quot;; port = Port(8080); debug = true; reusePort = true;
+            secretKey = randomString(8); appName = &quot;&quot;; bufSize = 40960;
+            data: JsonNode = nil): Settings</a></li>
+          </ul></dd>
+<dt><a name="newSettingsFromJsonNode" href="#newSettingsFromJsonNode"><span>newSettingsFromJsonNode:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="nativesettings: newSettingsFromJsonNode(settings: var Settings; data: JsonNode)" href="core/nativesettings.html#newSettingsFromJsonNode%2CSettings%2CJsonNode">nativesettings: newSettingsFromJsonNode(settings: var Settings; data: JsonNode)</a></li>
           </ul></dd>
 <dt><a name="None" href="#None"><span>None:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -1666,6 +1698,10 @@ function main() {
 <li><a class="reference external"
           data-doc-search-tag="route: stripRoute(route: string): string" href="core/route.html#stripRoute%2Cstring">route: stripRoute(route: string): string</a></li>
           </ul></dd>
+<dt><a name="SubContext" href="#SubContext"><span>SubContext:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="middlewaresbase: SubContext" href="core/middlewaresbase.html#SubContext">middlewaresbase: SubContext</a></li>
+          </ul></dd>
 <dt><a name="swaggerDocs" href="#swaggerDocs"><span>swaggerDocs:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="openapi: swaggerDocs" href="openapi/openapi.html#swaggerDocs">openapi: swaggerDocs</a></li>
@@ -1693,6 +1729,10 @@ function main() {
 <dt><a name="toByteSeq" href="#toByteSeq"><span>toByteSeq:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="utils: toByteSeq(str: string): seq[byte]" href="core/utils.html#toByteSeq%2Cstring">utils: toByteSeq(str: string): seq[byte]</a></li>
+          </ul></dd>
+<dt><a name="Toml" href="#Toml"><span>Toml:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="ConfigFileExt.Toml" href="core/configure.html#Toml">ConfigFileExt.Toml</a></li>
           </ul></dd>
 <dt><a name="Tr" href="#Tr"><span>Tr:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -1800,12 +1840,16 @@ function main() {
 <li><a class="reference external"
           data-doc-search-tag="configure: writePrologueEnv(filename: string; env: Env)" href="core/configure.html#writePrologueEnv%2Cstring%2CEnv">configure: writePrologueEnv(filename: string; env: Env)</a></li>
           </ul></dd>
+<dt><a name="Yaml" href="#Yaml"><span>Yaml:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="ConfigFileExt.Yaml" href="core/configure.html#Yaml">ConfigFileExt.Yaml</a></li>
+          </ul></dd>
 </dl>
     <div class="row">
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-20 08:50:09 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-21 13:56:56 UTC</small>
       </div>
     </div>
   </div>

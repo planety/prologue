@@ -245,9 +245,11 @@ func getSettings*(ctx: Context, key: string): JsonNode {.inline.} =
   result = ctx.gScope.settings.getOrDefault(key)
 
 proc flash*(ctx: Context, msgs: string, category = FlashLevel.Info) {.inline.} =
+  ## Sets flash messages.
   ctx.session.flash(msgs, category)
 
 proc flash*(ctx: Context, msgs: string, category: string) {.inline.} =
+  ## Sets flash messages.
   ctx.session.flash(msgs, category)
 
 proc getFlashedMsgs*(ctx: Context): seq[string] {.inline.} =

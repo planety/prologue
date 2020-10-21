@@ -1,6 +1,10 @@
 Env	core/configure.html#Env	configure: Env	
 EnvError	core/configure.html#EnvError	configure: EnvError	
 EnvWrongFormatError	core/configure.html#EnvWrongFormatError	configure: EnvWrongFormatError	
+Json	core/configure.html#Json	ConfigFileExt.Json	
+Toml	core/configure.html#Toml	ConfigFileExt.Toml	
+Yaml	core/configure.html#Yaml	ConfigFileExt.Yaml	
+ConfigFileExt	core/configure.html#ConfigFileExt	configure: ConfigFileExt	
 initEnv	core/configure.html#initEnv	configure: initEnv(): Env	
 `$`	core/configure.html#$,Env	configure: `$`(env: Env): string	
 `[]`	core/configure.html#[],Env,string	configure: `[]`(env: Env; key: string): string	

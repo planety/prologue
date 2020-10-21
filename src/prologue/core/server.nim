@@ -10,6 +10,7 @@ else:
 
 export server
 
+
 func appAddress*(app: Prologue): string {.inline.} =
   ## Gets the address from the settings.
   app.gScope.settings.address

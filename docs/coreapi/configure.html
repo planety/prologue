@@ -107,6 +107,9 @@ function main() {
     title="EnvError = object of CatchableError"><wbr />Env<wbr />Error<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#EnvWrongFormatError"
     title="EnvWrongFormatError = object of EnvError"><wbr />Env<wbr />Wrong<wbr />Format<wbr />Error<span class="attachedType"></span></a></li>
+  <li><a class="reference" href="#ConfigFileExt"
+    title="ConfigFileExt = enum
+  Json = &quot;json&quot;, Toml = &quot;toml&quot;, Yaml = &quot;yaml&quot;"><wbr />Config<wbr />File<wbr />Ext<span class="attachedType"></span></a></li>
 
   </ul>
 </li>
@@ -296,6 +299,18 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L60" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
+<a id="ConfigFileExt"></a>
+<dt><pre><a href="configure.html#ConfigFileExt"><span class="Identifier">ConfigFileExt</span></a> <span class="Other">=</span> <span class="Keyword">enum</span>
+  <span class="Identifier">Json</span> <span class="Other">=</span> <span class="StringLit">&quot;json&quot;</span><span class="Other">,</span> <span class="Identifier">Toml</span> <span class="Other">=</span> <span class="StringLit">&quot;toml&quot;</span><span class="Other">,</span> <span class="Identifier">Yaml</span> <span class="Other">=</span> <span class="StringLit">&quot;yaml&quot;</span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L62"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L62" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
 
 </dl></div>
 <div class="section" id="12">
@@ -307,9 +322,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Gets <tt class="docutils literal"><span class="pre">PROLOGUE</span></tt> env variables.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L112"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L117"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L112" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L117" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="putPrologueEnv,string,string,string"></a>
@@ -319,9 +334,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Puts (<tt class="docutils literal"><span class="pre">key</span></tt>, <tt class="docutils literal"><span class="pre">val</span></tt>) pairs with <tt class="docutils literal"><span class="pre">prefix</span></tt> to environment variables.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L117"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L122"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L117" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L122" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="getPrologueEnv,string,string,string"></a>
@@ -331,9 +346,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Gets (<tt class="docutils literal"><span class="pre">key</span></tt>, <tt class="docutils literal"><span class="pre">val</span></tt>) pairs with <tt class="docutils literal"><span class="pre">prefix</span></tt> from environment variables. If <tt class="docutils literal"><span class="pre">key</span></tt> can't be found, <tt class="docutils literal"><span class="pre">default</span></tt> will be returned.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L121"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L126"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L121" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L126" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="getAllPrologueEnv,string"></a>
@@ -343,9 +358,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Gets all (<tt class="docutils literal"><span class="pre">key</span></tt>, <tt class="docutils literal"><span class="pre">val</span></tt>) pairs with <tt class="docutils literal"><span class="pre">prefix</span></tt> from environment variables.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L126"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L131"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L126" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L131" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="existsPrologueEnv,string,string"></a>
@@ -355,9 +370,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L133"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L138"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L133" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L138" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="delPrologueEnv,string,string"></a>
@@ -367,9 +382,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L136"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L141"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L136" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L141" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="loadPrologueEnv,string"></a>
@@ -380,9 +395,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L139"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L144"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L139" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L144" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="setPrologueEnv,Env,string,string"></a>
@@ -391,9 +406,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L158"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L163"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L158" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L163" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="writePrologueEnv,string,Env"></a>
@@ -403,9 +418,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L161"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L166"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L161" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L166" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -419,9 +434,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Initializes an <tt class="docutils literal"><span class="pre">Env</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L63"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L68"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L63" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L68" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="$,Env"></a>
@@ -430,9 +445,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Gets the string form of <tt class="docutils literal"><span class="pre">Env</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L67"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L72"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L67" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L72" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="[],Env,string"></a>
@@ -441,9 +456,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L71"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L76"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L71" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L76" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="hasKey,Env,string"></a>
@@ -452,9 +467,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Returns true if <tt class="docutils literal"><span class="pre">key</span></tt> exists in <tt class="docutils literal"><span class="pre">Env</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L75"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L80"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L75" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L80" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="contains,Env,string"></a>
@@ -463,9 +478,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Returns true if <tt class="docutils literal"><span class="pre">key</span></tt> exists in <tt class="docutils literal"><span class="pre">Env</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L82"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L87"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L82" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L87" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="get,Env,string"></a>
@@ -474,9 +489,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Retrieves a value of <tt class="docutils literal"><span class="pre">key</span></tt> in <tt class="docutils literal"><span class="pre">Env</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L89"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L94"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L89" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L94" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="getOrDefault,Env,string,T"></a>
@@ -485,9 +500,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Retrieves a value of <tt class="docutils literal"><span class="pre">key</span></tt> if <tt class="docutils literal"><span class="pre">key</span></tt> exists in <tt class="docutils literal"><span class="pre">Env</span></tt>. Otherwise the default value will be returned.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L93"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L98"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L93" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L98" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -501,9 +516,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L100"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L105"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L100" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L105" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="values.i,Env"></a>
@@ -512,9 +527,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L104"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L109"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L104" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L109" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 <a id="pairs.i,Env"></a>
@@ -523,9 +538,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L108"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/configure.nim#L113"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L108" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/configure.nim#L113" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -543,7 +558,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-20 08:49:22 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-21 13:56:23 UTC</small>
       </div>
     </div>
   </div>

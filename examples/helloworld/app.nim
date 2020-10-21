@@ -51,5 +51,6 @@ app.addRoute("/multipart", multiPart, HttpGet)
 app.addRoute("/multipart", do_multiPart, HttpPost)
 app.addRoute("/upload", upload, HttpGet)
 app.addRoute("/upload", do_upload, HttpPost)
+# server openapi
 app.serveDocs("docs/openapi.json")
 app.run()

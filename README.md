@@ -13,7 +13,7 @@ What's past is prologue.
 
 ## Purpose
 
-`Prologue` is a web framework written in Nim.
+`Prologue` is a powerful web framework written in Nim.
 It is ideal for building elegant and high performance web services.
 
 **Reduce magic. Reduce surprise.**

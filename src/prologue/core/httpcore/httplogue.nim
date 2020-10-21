@@ -57,12 +57,12 @@ func `[]`*(headers: ResponseHeaders, key: string, i: int): string {.inline.} =
   ## an exception is raised.
   result = headers.table[toCaseInsensitive(key)][i]
 
-proc `[]=`*(headers: ResponseHeaders, key, value: string) {.inline.} =
+func `[]=`*(headers: var ResponseHeaders, key, value: string) {.inline.} =
   ## Sets the header entries associated with ``key`` to the specified value.
   ## Replaces any existing values.
   headers.table[toCaseInsensitive(key)] = @[value]
 
-proc `[]=`*(headers: ResponseHeaders, key: string, value: seq[string]) {.inline.} =
+func `[]=`*(headers: var ResponseHeaders, key: string, value: seq[string]) {.inline.} =
   ## Sets the header entries associated with ``key`` to the specified list of values.
   ## Replaces any existing values.
   ## 
@@ -72,7 +72,7 @@ proc `[]=`*(headers: ResponseHeaders, key: string, value: seq[string]) {.inline.
   else:
     headers.table.del(toCaseInsensitive(key))
 
-proc add*(headers: ResponseHeaders, key, value: string) {.inline.} =
+func add*(headers: var ResponseHeaders, key, value: string) {.inline.} =
   ## Adds the specified value to the specified key. Appends to any existing
   ## values associated with the key.
   if not headers.table.hasKey(toCaseInsensitive(key)):
@@ -80,7 +80,7 @@ proc add*(headers: ResponseHeaders, key, value: string) {.inline.} =
   else:
     headers.table[toCaseInsensitive(key)].add(value)
 
-proc del*(headers: ResponseHeaders, key: string) {.inline.} =
+func del*(headers: var ResponseHeaders, key: string) {.inline.} =
   ## Delete the header entries associated with ``key``
   headers.table.del(toCaseInsensitive(key))
 

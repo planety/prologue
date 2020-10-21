@@ -6,10 +6,10 @@ initResponseHeaders	core/httpcore/httplogue.html#initResponseHeaders,openArray[t
 clear	core/httpcore/httplogue.html#clear,ResponseHeaders	httplogue: clear(headers: ResponseHeaders)	
 `[]`	core/httpcore/httplogue.html#[],ResponseHeaders,string	httplogue: `[]`(headers: ResponseHeaders; key: string): seq[string]	
 `[]`	core/httpcore/httplogue.html#[],ResponseHeaders,string,int	httplogue: `[]`(headers: ResponseHeaders; key: string; i: int): string	
-`[]=`	core/httpcore/httplogue.html#[]=,ResponseHeaders,string,string	httplogue: `[]=`(headers: ResponseHeaders; key, value: string)	
-`[]=`	core/httpcore/httplogue.html#[]=,ResponseHeaders,string,seq[string]	httplogue: `[]=`(headers: ResponseHeaders; key: string; value: seq[string])	
-add	core/httpcore/httplogue.html#add,ResponseHeaders,string,string	httplogue: add(headers: ResponseHeaders; key, value: string)	
-del	core/httpcore/httplogue.html#del,ResponseHeaders,string	httplogue: del(headers: ResponseHeaders; key: string)	
+`[]=`	core/httpcore/httplogue.html#[]=,ResponseHeaders,string,string	httplogue: `[]=`(headers: var ResponseHeaders; key, value: string)	
+`[]=`	core/httpcore/httplogue.html#[]=,ResponseHeaders,string,seq[string]	httplogue: `[]=`(headers: var ResponseHeaders; key: string; value: seq[string])	
+add	core/httpcore/httplogue.html#add,ResponseHeaders,string,string	httplogue: add(headers: var ResponseHeaders; key, value: string)	
+del	core/httpcore/httplogue.html#del,ResponseHeaders,string	httplogue: del(headers: var ResponseHeaders; key: string)	
 pairs	core/httpcore/httplogue.html#pairs.i,ResponseHeaders	httplogue: pairs(headers: ResponseHeaders): tuple[key, value: string]	
 hasKey	core/httpcore/httplogue.html#hasKey,ResponseHeaders,string	httplogue: hasKey(headers: ResponseHeaders; key: string): bool	
 getOrDefault	core/httpcore/httplogue.html#getOrDefault,ResponseHeaders,string	httplogue: getOrDefault(headers: ResponseHeaders; key: string; default = @[&quot;&quot;]): seq[string]	

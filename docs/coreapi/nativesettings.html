@@ -130,9 +130,10 @@ function main() {
   <a class="reference reference-toplevel" href="#13" id="63">Funcs</a>
   <ul class="simple simple-toc-section">
       <ul class="simple nested-toc-section">newSettings
-      <li><a class="reference" href="#newSettings%2Cstring%2Cstring%2Cint"
+      <li><a class="reference" href="#newSettings%2Cstring%2Cstring%2Cint%2CJsonNode"
     title="newSettings(address = &quot;&quot;; port = Port(8080); debug = true; reusePort = true;
-            secretKey = randomString(8); appName = &quot;&quot;; bufSize = 40960): Settings">newSettings,string,string,int<span class="attachedType">Settings</span></a></li>
+            secretKey = randomString(8); appName = &quot;&quot;; bufSize = 40960;
+            data: JsonNode = nil): Settings">newSettings,string,string,int,JsonNode<span class="attachedType">Settings</span></a></li>
 
   </ul>
   <ul class="simple nested-toc-section">getOrDefault
@@ -148,6 +149,11 @@ function main() {
   <ul class="simple nested-toc-section">newCtxSettings
       <li><a class="reference" href="#newCtxSettings"
     title="newCtxSettings(): CtxSettings">newCtxSettings<span class="attachedType">CtxSettings</span></a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">newSettingsFromJsonNode
+      <li><a class="reference" href="#newSettingsFromJsonNode%2CSettings%2CJsonNode"
+    title="newSettingsFromJsonNode(settings: var Settings; data: JsonNode)">newSettingsFromJsonNode,Settings,JsonNode<span class="attachedType">Settings</span></a></li>
 
   </ul>
   <ul class="simple nested-toc-section">loadSettings
@@ -224,9 +230,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Creates a new <tt class="docutils literal"><span class="pre">Settings</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/nativesettings.nim#L94"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/nativesettings.nim#L104"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/nativesettings.nim#L94" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/nativesettings.nim#L104" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -281,11 +287,11 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/nativesettings.nim#L49" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
-<a id="newSettings,string,string,int"></a>
-<dt><pre><span class="Keyword">func</span> <a href="#newSettings%2Cstring%2Cstring%2Cint"><span class="Identifier">newSettings</span></a><span class="Other">(</span><span class="Identifier">address</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">;</span> <span class="Identifier">port</span> <span class="Other">=</span> <span class="Identifier">Port</span><span class="Other">(</span><span class="DecNumber">8080</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">debug</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">;</span>
+<a id="newSettings,string,string,int,JsonNode"></a>
+<dt><pre><span class="Keyword">func</span> <a href="#newSettings%2Cstring%2Cstring%2Cint%2CJsonNode"><span class="Identifier">newSettings</span></a><span class="Other">(</span><span class="Identifier">address</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">;</span> <span class="Identifier">port</span> <span class="Other">=</span> <span class="Identifier">Port</span><span class="Other">(</span><span class="DecNumber">8080</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">debug</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">;</span>
                  <span class="Identifier">reusePort</span> <span class="Other">=</span> <span class="Identifier">true</span><span class="Other">;</span> <span class="Identifier">secretKey</span> <span class="Other">=</span> <span class="Identifier">randomString</span><span class="Other">(</span><span class="DecNumber">8</span><span class="Other">)</span><span class="Other">;</span> <span class="Identifier">appName</span> <span class="Other">=</span> <span class="StringLit">&quot;&quot;</span><span class="Other">;</span>
-                 <span class="Identifier">bufSize</span> <span class="Other">=</span> <span class="DecNumber">40960</span><span class="Other">)</span><span class="Other">:</span> <a href="nativesettings.html#Settings"><span class="Identifier">Settings</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span>
-    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">EmptySecretKeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+                 <span class="Identifier">bufSize</span> <span class="Other">=</span> <span class="DecNumber">40960</span><span class="Other">;</span> <span class="Identifier">data</span><span class="Other">:</span> <span class="Identifier">JsonNode</span> <span class="Other">=</span> <span class="Keyword">nil</span><span class="Other">)</span><span class="Other">:</span> <a href="nativesettings.html#Settings"><span class="Identifier">Settings</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">EmptySecretKeyError</span><span class="Other">,</span> <span class="Identifier">KeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 Creates a new <tt class="docutils literal"><span class="pre">Settings</span></tt>.
@@ -295,6 +301,18 @@ class="link-seesrc" target="_blank">Source</a>
 <a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/nativesettings.nim#L53" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
+<a id="newSettingsFromJsonNode,Settings,JsonNode"></a>
+<dt><pre><span class="Keyword">func</span> <a href="#newSettingsFromJsonNode%2CSettings%2CJsonNode"><span class="Identifier">newSettingsFromJsonNode</span></a><span class="Other">(</span><span class="Identifier">settings</span><span class="Other">:</span> <span class="Keyword">var</span> <a href="nativesettings.html#Settings"><span class="Identifier">Settings</span></a><span class="Other">;</span> <span class="Identifier">data</span><span class="Other">:</span> <span class="Identifier">JsonNode</span><span class="Other">)</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span>
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">,</span> <span class="Identifier">EmptySecretKeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+
+&nbsp;&nbsp;<a
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/nativesettings.nim#L81"
+class="link-seesrc" target="_blank">Source</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/nativesettings.nim#L81" class="link-seesrc" target="_blank" >Edit</a>
+
+</dd>
 <a id="loadSettings,JsonNode"></a>
 <dt><pre><span class="Keyword">func</span> <a href="#loadSettings%2CJsonNode"><span class="Identifier">loadSettings</span></a><span class="Other">(</span><span class="Identifier">data</span><span class="Other">:</span> <span class="Identifier">JsonNode</span><span class="Other">)</span><span class="Other">:</span> <a href="nativesettings.html#Settings"><span class="Identifier">Settings</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">KeyError</span><span class="Other">,</span> <span class="Identifier">EmptySecretKeyError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
@@ -302,9 +320,9 @@ class="link-seesrc" target="_blank">Source</a>
 
 Creates a new <tt class="docutils literal"><span class="pre">Settings</span></tt>.
 &nbsp;&nbsp;<a
-href="https://github.com/planety/prologue/tree/devel/src/prologue/core/nativesettings.nim#L87"
+href="https://github.com/planety/prologue/tree/devel/src/prologue/core/nativesettings.nim#L97"
 class="link-seesrc" target="_blank">Source</a>
-<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/nativesettings.nim#L87" class="link-seesrc" target="_blank" >Edit</a>
+<a href="https://github.com/planety/prologue/edit/devel/src/prologue/core/nativesettings.nim#L97" class="link-seesrc" target="_blank" >Edit</a>
 
 </dd>
 
@@ -317,7 +335,7 @@ class="link-seesrc" target="_blank">Source</a>
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-20 08:49:07 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-10-21 13:56:16 UTC</small>
       </div>
     </div>
   </div>
