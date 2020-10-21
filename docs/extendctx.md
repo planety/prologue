@@ -4,6 +4,30 @@
 
 You may want to add an int to `Context`:
 
+
+```nim
+import prologue
+import strformat
+
+
+type
+  UserContext = ref object of Context
+    data: int
+
+
+proc hello*(ctx: Context) {.async.} =
+  inc ctx.UserContext.data
+  echo fmt"{ctx.UserContext.data = }"
+  resp "<h1>Hello, Prologue!</h1>"
+
+var app = newApp()
+app.use(extendContextMiddleWare(UserContext))
+app.get("/", hello)
+app.run()
+```
+
+You may want to write a middleware:
+
 ```nim
 import prologue
 import strformat
