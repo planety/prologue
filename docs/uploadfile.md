@@ -14,12 +14,12 @@
 ```nim
 proc upload(ctx: Context) {.async.} =
   if ctx.request.reqMethod == HttpGet:
-    await ctx.staticFileResponse("tests/test_uploadFile/upload.html", "")
+    await ctx.staticFileResponse("tests/local/uploadFile/upload.html", "")
   elif ctx.request.reqMethod == HttpPost:
     let file = ctx.getUploadFile("file")
-    file.save("tests/test_uploadFile")
-    file.save("tests/test_uploadFile", "set.txt")
+    file.save("tests/assets/temp")
+    file.save("tests/assets/temp", "set.txt")
     resp fmt"<html><h1>{file.filename}</h1><p>{file.body}</p></html>"
 ```
 
-The full [example](https://github.com/planety/prologue/blob/devel/tests/test_uploadFile)
+The full [example](https://github.com/planety/prologue/blob/devel/tests/local/uploadFile/local_uploadFile_test.nim)
