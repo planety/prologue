@@ -4,13 +4,15 @@ from sqlite3 import last_insert_rowid
 
 import templates/basic
 
-let 
+let
   db = open("todo.db", "", "", "") # Warning: This file is created in the current directory
-db.exec(sql"CREATE TABLE todo (id INTEGER PRIMARY KEY, task char(80) NOT NULL, status bool NOT NULL)")
-db.exec(sql"""INSERT INTO todo (task,status) VALUES ("Nim lang",0)""")
-db.exec(sql"""INSERT INTO todo (task,status) VALUES ("Prologue web framework",1)""")
-db.exec(sql"""INSERT INTO todo (task,status) VALUES ("Let's start to study Prologue web framework",1)""")
-db.exec(sql"""INSERT INTO todo (task,status) VALUES ("My favourite web framework",1)""")
+
+if not db.tryExec(sql"select count(*) from todo"):
+  db.exec(sql"CREATE TABLE todo (id INTEGER PRIMARY KEY, task char(80) NOT NULL, status bool NOT NULL)")
+  db.exec(sql"""INSERT INTO todo (task,status) VALUES ("Nim lang",0)""")
+  db.exec(sql"""INSERT INTO todo (task,status) VALUES ("Prologue web framework",1)""")
+  db.exec(sql"""INSERT INTO todo (task,status) VALUES ("Let's start to study Prologue web framework",1)""")
+  db.exec(sql"""INSERT INTO todo (task,status) VALUES ("My favourite web framework",1)""")
 db.close()
 
 proc todoList*(ctx: Context) {.async.} =
