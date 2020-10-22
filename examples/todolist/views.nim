@@ -4,13 +4,15 @@ from sqlite3 import last_insert_rowid
 
 import templates/basic
 
-let 
+let
   db = open("todo.db", "", "", "") # Warning: This file is created in the current directory
-db.exec(sql"CREATE TABLE todo (id INTEGER PRIMARY KEY, task char(80) NOT NULL, status bool NOT NULL)")
-db.exec(sql"""INSERT INTO todo (task,status) VALUES ("Nim lang",0)""")
-db.exec(sql"""INSERT INTO todo (task,status) VALUES ("Prologue web framework",1)""")
-db.exec(sql"""INSERT INTO todo (task,status) VALUES ("Let's start to study Prologue web framework",1)""")
-db.exec(sql"""INSERT INTO todo (task,status) VALUES ("My favourite web framework",1)""")
+
+if not db.tryExec(sql"select count(*) from todo"):
+  db.exec(sql"CREATE TABLE todo (id INTEGER PRIMARY KEY, task char(80) NOT NULL, status bool NOT NULL)")
+  db.exec(sql"""INSERT INTO todo (task,status) VALUES ("Nim lang",0)""")
+  db.exec(sql"""INSERT INTO todo (task,status) VALUES ("Prologue web framework",1)""")
+  db.exec(sql"""INSERT INTO todo (task,status) VALUES ("Let's start to study Prologue web framework",1)""")
+  db.exec(sql"""INSERT INTO todo (task,status) VALUES ("My favourite web framework",1)""")
 db.close()
 
 proc todoList*(ctx: Context) {.async.} =
@@ -28,7 +30,7 @@ proc newItem*(ctx: Context) {.async.} =
     let
       id = last_insert_rowid(db)
     db.close()
-    resp htmlResponse(fmt"<p>The new task was inserted into the database, the ID is {id}</p>")
+    resp htmlResponse(fmt"<p>The new task was inserted into the database, the ID is {id}</p><a href=/>Back to list</a>")
   else:
     resp htmlResponse(newList())
 
@@ -44,7 +46,7 @@ proc editItem*(ctx: Context) {.async.} =
     let db= open("todo.db", "", "", "")
     db.exec(sql"UPDATE todo SET task = ?, status = ? WHERE id LIKE ?", edit, statusId, id)
     db.close()
-    resp htmlResponse(fmt"<p>The item number {id} was successfully updated</p>")
+    resp htmlResponse(fmt"<p>The item number {id} was successfully updated</p><a href=/>Back to list</a>")
   else:
     let db= open("todo.db", "", "", "")
     let id = ctx.getPathParams("id", "")
@@ -55,9 +57,17 @@ proc showItem*(ctx: Context) {.async.} =
   let
     db = open("todo.db", "", "", "")
     item = ctx.getPathParams("item", "")
-    rows = db.getAllRows(sql"SELECT task FROM todo WHERE id LIKE ?", item)
+    rows = db.getAllRows(sql"SELECT task, status FROM todo WHERE id LIKE ?", item)
   db.close()
+  let home_link = """<a href="/">Back to list</a>"""
   if rows.len == 0:
-      resp "This item number does not exist!"
+    resp "This item number does not exist!" & home_link
   else:
-      resp fmt"Task: {rows[0]}"
+    let
+      task = rows[0][0]
+      status = block:
+        if rows[0][1] == "1":
+          "Done"
+        else:
+          "Doing"
+    resp fmt"Task: {task}<br/>Status: {status}</br>" & home_link
