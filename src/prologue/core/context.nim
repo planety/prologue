@@ -505,7 +505,16 @@ proc staticFileResponse*(
   elif contentLength < 10_000_000:
     ## TODO
     when defined(windows) and not defined(usestd):
-      ctx.response.body = readFile(filePath)
+      proc readAllData(f: AsyncFile): Future[string] {.async.} =
+        ## Reads all data from the specified file.
+        result = ""
+        while true:
+          let data = await read(f, 40000)
+          if data.len == 0:
+            return
+          result.add data
+    
+      ctx.response.body = await file.readAllData()
     else:
       ctx.response.body = await file.readAll()
     await ctx.respond()
