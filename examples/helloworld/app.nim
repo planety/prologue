@@ -1,7 +1,7 @@
-import ../../src/prologue
-import ../../src/prologue/middlewares/staticfile
-import ../../src/prologue/middlewares/utils
-from ../../src/prologue/openapi import serveDocs
+import prologue
+import prologue/middlewares/staticfile
+import prologue/middlewares/utils
+from prologue/openapi import serveDocs
 
 # import logging
 

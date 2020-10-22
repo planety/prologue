@@ -1,4 +1,4 @@
-import ../../src/prologue
+import prologue
 import std/[db_sqlite, strformat, strutils]
 from std/sqlite3 import last_insert_rowid
 

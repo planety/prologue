@@ -1,7 +1,7 @@
 import std/[db_sqlite, strformat]
 
-import ../../src/prologue
-import ../../src/prologue/security/hasher
+import prologue
+import prologue/security/hasher
 
 import ./consts
 
