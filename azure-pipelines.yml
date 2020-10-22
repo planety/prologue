@@ -16,11 +16,11 @@ strategy:
       UCPU: amd64
       CHANNEL: devel
       TEST_LANG: cpp
-    Linux_stable_64bit:
-      VM: 'ubuntu-latest'
-      UCPU: amd64
-      CHANNEL: stable
-      TEST_LANG: c
+    # Linux_stable_64bit:
+    #   VM: 'ubuntu-latest'
+    #   UCPU: amd64
+    #   CHANNEL: stable
+    #   TEST_LANG: c
     Linux_devel_64bit:
       VM: 'ubuntu-latest'
       UCPU: amd64

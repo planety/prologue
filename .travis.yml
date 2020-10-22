@@ -39,7 +39,7 @@ script:
     - nimble install -y
     - logue extension all
     - nimble tests
-    - nimble tstdbackend
+    # - nimble tstdbackend
     - nimble treadme
     - nimble tcompile
     - nimble texamples
