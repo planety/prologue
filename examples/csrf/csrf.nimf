@@ -1,8 +1,8 @@
 #? stdtmpl | standard
-#import ../../src/prologue/middlewares/csrf
+#import prologue/middlewares/csrf
 #
-#proc alignForm(tok: string): string =                                         
-#  result = "" 
+#proc alignForm(tok: string): string =
+#  result = ""
 <form method="post">
   $tok
 <-- All other inputs -->

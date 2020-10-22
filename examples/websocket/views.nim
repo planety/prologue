@@ -1,5 +1,5 @@
-import ../../src/prologue
-import ../../src/prologue/websocket
+import prologue
+import prologue/websocket
 
 
 proc hello*(ctx: Context) {.async.} =

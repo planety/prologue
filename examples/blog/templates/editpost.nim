@@ -1,5 +1,5 @@
 import karax / [karaxdsl, vdom]
-import ../../../src/prologue
+import prologue
 
 import
   share/head,

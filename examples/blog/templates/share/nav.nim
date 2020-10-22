@@ -1,4 +1,4 @@
-import ../../../../src/prologue
+import prologue
 import karax/[karaxdsl, vdom]
 
 
