@@ -497,16 +497,18 @@ proc staticFileResponse*(
   if downloadName.len != 0:
     ctx.attachment(downloadName)
 
-  var file = openAsync(filePath, fmRead)
-
   if ctx.request.hasHeader("If-None-Match") and ctx.request.headers[
         "If-None-Match"] == etag:
     await ctx.respond(Http304, "")
   elif contentLength < 10_000_000:
-    ctx.response.body = await file.readAll()
+    ## TODO asyncfile is slow
+    # ctx.response.body = await file.readAll()
+    ctx.response.body = readFile(filePath)
     await ctx.respond()
   else:
     ctx.response.setHeader("Content-Length", $contentLength)
+
+    var file = openAsync(filePath, fmRead)
     await ctx.respond(Http200, "", ctx.response.headers)
 
     while true:
@@ -516,6 +518,7 @@ proc staticFileResponse*(
         await ctx.send(value)
       else:
         break
+    
+    file.close()
 
   ctx.handled = true
-  file.close()
