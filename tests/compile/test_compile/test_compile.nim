@@ -1,4 +1,4 @@
-import os, osproc, strformat
+import std/[os, osproc, strformat]
 
 
 # Test Examples

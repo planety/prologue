@@ -2,7 +2,7 @@ from ../../../src/prologue/core/types import SecretKey
 from ../../../src/prologue/signing import initSigner, initTimedSigner,
     BaseDigestMethodType, BadSignatureError, sign, unsign, validate
 
-import json
+import std/json
 
 
 # "Test signing"

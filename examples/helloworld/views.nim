@@ -1,5 +1,5 @@
 import ../../src/prologue
-import tables, logging
+import std/[tables, logging]
 
 
 proc articles*(ctx: Context) {.async.} =

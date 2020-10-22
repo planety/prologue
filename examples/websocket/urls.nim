@@ -2,6 +2,6 @@ import ../../src/prologue
 import ./views
 
 
-let urlPatterns* = @[
+const urlPatterns* = @[
   pattern("/ws", hello)
 ]

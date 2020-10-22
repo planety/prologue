@@ -1,9 +1,9 @@
-import db_sqlite, strformat
+import std/[db_sqlite, strformat]
 
 import ../../src/prologue
 import ../../src/prologue/security/hasher
 
-import consts
+import ./consts
 
 import
   templates/login,

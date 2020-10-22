@@ -2,12 +2,11 @@ import ../../src/prologue
 import ../../src/prologue/middlewares/signedcookiesession
 import ../../src/prologue/middlewares/staticfile
 
-import urls
-import initdb
+import ./urls
+import ./initdb
 
 
 initDb()
-
 
 let
   env = loadPrologueEnv(".env")

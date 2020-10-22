@@ -1,9 +1,7 @@
 import ../../src/prologue
 import ../../src/prologue/middlewares/utils
 import ../../src/prologue/middlewares/staticfile
-
-
-import urls
+import ./urls
 
 let
   env = loadPrologueEnv(".env")
@@ -13,8 +11,7 @@ let
                 secretKey = env.getOrDefault("secretKey", "")
     )
 
-var
-  app = newApp(settings = settings)
+var app = newApp(settings = settings)
 
 app.use(staticFileMiddleware(env.get("staticDir")))
 app.use(debugRequestMiddleware())

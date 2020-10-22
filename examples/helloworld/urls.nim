@@ -1,11 +1,10 @@
 import ../../src/prologue
 
 
-import views
+import ./views
 
 
-let urlPatterns* = @[
-  # strip latter
+const urlPatterns* = @[
   pattern("/", home),
   pattern("/", home, HttpPost),
   pattern("/home", home),

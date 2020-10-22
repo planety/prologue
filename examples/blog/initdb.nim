@@ -1,4 +1,4 @@
-import db_sqlite, os, strutils, logging
+import std/[db_sqlite, os, strutils, logging]
 
 import ./consts
 

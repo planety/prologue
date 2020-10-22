@@ -6,11 +6,8 @@ proc home(ctx: Context) {.async.} =
   resp readFile("templates/todoapp.html")
 
 
-let 
-  settings = newSettings(port = Port(8080))
-
 var
-  app = newApp(settings)
+  app = newApp(newSettings(port = Port(8080)))
 
 app.use(staticFileMiddleware("templates"))
 app.addRoute("/home", home)

@@ -22,7 +22,6 @@ proc setLoggingLevel() =
   # addHandler(newConsoleLogger())
   # logging.setLogFilter(lvlInfo)
 
-
 let
   event = initEvent(setLoggingLevel)
 var

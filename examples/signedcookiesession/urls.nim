@@ -3,8 +3,7 @@ import ../../src/prologue
 import ./views
 
 
-let urlPatterns* = @[
-  # strip latter
+const urlPatterns* = @[
   pattern("/", hello),
   pattern("/login", login),
   pattern("/logout", logout)

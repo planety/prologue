@@ -1,8 +1,8 @@
 import ../../src/prologue
-import db_sqlite, strformat, strutils
-from sqlite3 import last_insert_rowid
+import std/[db_sqlite, strformat, strutils]
+from std/sqlite3 import last_insert_rowid
 
-import templates/basic
+import ./templates/basic
 
 let
   db = open("todo.db", "", "", "") # Warning: This file is created in the current directory

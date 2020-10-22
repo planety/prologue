@@ -12,8 +12,8 @@ let
                          secretKey = env.getOrDefault("secretKey", "")
     )
 
-
 var app = newApp(settings = settings)
+
 app.use(@[debugRequestMiddleware(), sessionMiddleware(settings)])
 app.addRoute(urls.urlPatterns, "")
 app.run()

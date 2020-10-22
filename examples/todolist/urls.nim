@@ -1,8 +1,8 @@
 import ../../src/prologue
 
-import views
+import ./views
 
-let urlPatterns* = @[
+const urlPatterns* = @[
   pattern("/", todoList),
   pattern("/new", newItem),
   pattern("/edit/{id}", editItem),

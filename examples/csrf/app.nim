@@ -15,5 +15,5 @@ let
 var app = newApp(settings = settings)
 
 app.use(staticFileMiddleware(env.get("staticDir")))
-app.addRoute(urls.urlPatterns, "/")
+app.addRoute(urls.urlPatterns, "")
 app.run()
