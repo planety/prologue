@@ -1,5 +1,5 @@
-import ../../src/prologue
-import ../../src/prologue/middlewares/staticfile
+import prologue
+import prologue/middlewares/staticfile
 
 
 proc home(ctx: Context) {.async.} =

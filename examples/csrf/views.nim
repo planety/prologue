@@ -1,4 +1,5 @@
-import ../../src/prologue
+import prologue
+
 include "csrf.nimf"
 
 proc hello*(ctx: Context) {.async.} =

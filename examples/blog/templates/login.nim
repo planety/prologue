@@ -3,7 +3,7 @@ when (compiles do: import karax / karaxdsl):
 else:
   {.error: "Please use `logue extension karax` to install!".}
 
-import ../../../src/prologue
+import prologue
 
 import
   share/head,

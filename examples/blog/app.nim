@@ -1,6 +1,6 @@
-import ../../src/prologue
-import ../../src/prologue/middlewares/signedcookiesession
-import ../../src/prologue/middlewares/staticfile
+import prologue
+import prologue/middlewares/signedcookiesession
+import prologue/middlewares/staticfile
 
 import ./urls
 import ./initdb
