@@ -16,7 +16,7 @@ assert b != ""
 
 ### prefer `plain functions` to `macros`
 
-You can avoid `macros`. If necessary, you should only use simple ones.
+You can avoid `macros`. If it is necessary, you should only use a simple one.
 
 ```nim
 macro resp*(response: Response) =

@@ -1,5 +1,4 @@
-import strutils, strformat
-
+import std/[strutils, strformat]
 
 from ../core/context import Context, HandlerAsync
 from ../core/response import setHeader, hasHeader

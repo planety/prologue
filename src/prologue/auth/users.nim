@@ -11,6 +11,6 @@ type
   SuperUser* = object of User
 
 func initUser*(username: string, password: SecretKey, email, firstName,
-    lastName = ""): User =
+    lastName = ""): User {.inline.} =
   User(username: username, password: password, email: email,
       firstName: firstName, lastName: lastName)
