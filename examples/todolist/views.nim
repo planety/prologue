@@ -30,7 +30,7 @@ proc newItem*(ctx: Context) {.async.} =
     let
       id = last_insert_rowid(db)
     db.close()
-    resp htmlResponse(fmt"<p>The new task was inserted into the database, the ID is {id}</p>")
+    resp htmlResponse(fmt"<p>The new task was inserted into the database, the ID is {id}</p><a href=/>Back to list</a>")
   else:
     resp htmlResponse(newList())
 
@@ -46,7 +46,7 @@ proc editItem*(ctx: Context) {.async.} =
     let db= open("todo.db", "", "", "")
     db.exec(sql"UPDATE todo SET task = ?, status = ? WHERE id LIKE ?", edit, statusId, id)
     db.close()
-    resp htmlResponse(fmt"<p>The item number {id} was successfully updated</p>")
+    resp htmlResponse(fmt"<p>The item number {id} was successfully updated</p><a href=/>Back to list</a>")
   else:
     let db= open("todo.db", "", "", "")
     let id = ctx.getPathParams("id", "")
@@ -57,9 +57,17 @@ proc showItem*(ctx: Context) {.async.} =
   let
     db = open("todo.db", "", "", "")
     item = ctx.getPathParams("item", "")
-    rows = db.getAllRows(sql"SELECT task FROM todo WHERE id LIKE ?", item)
+    rows = db.getAllRows(sql"SELECT task, status FROM todo WHERE id LIKE ?", item)
   db.close()
+  let home_link = """<a href="/">Back to list</a>"""
   if rows.len == 0:
-      resp "This item number does not exist!"
+    resp "This item number does not exist!" & home_link
   else:
-      resp fmt"Task: {rows[0]}"
+    let
+      task = rows[0][0]
+      status = block:
+        if rows[0][1] == "1":
+          "Done"
+        else:
+          "Doing"
+    resp fmt"Task: {task}<br/>Status: {status}</br>" & home_link

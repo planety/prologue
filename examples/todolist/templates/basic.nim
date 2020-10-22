@@ -13,8 +13,13 @@ proc makeList*(rows: seq[seq[string]]): string =
     table(border = "1"):
       for row in rows:
         tr:
-          for col in row:
-            td: text col
+          for i, col in row:
+            if i == 0:
+              td: a(href = fmt"/item/{col}"): text col
+            else:
+              td: text col
+          td: a(href = fmt"/edit/{row[0]}"): text "Edit"
+    p: a(href = "/new"): text "New Item"
   result = $vnode
 
 proc editList*(id: int, value: seq[string]): string =
