@@ -34,7 +34,7 @@ It is ideal for building elegant and high performance web services.
   <tr>
     <td class="tg-c3ow">Full API</td>
     <td class="tg-0pky"><a href="https://planety.github.io/prologue/plugin/theindex.html" target="_blank" rel="noopener noreferrer">Index Page</a></td>
-    <td class="tg-0pky"><a href="https://planety.github.io/prologue/plugin/index.html" target="_blank" rel="noopener noreferrer">Search Page</a></td>
+    <td class="tg-0pky"><a href="https://planety.github.io/prologue/plugin/plugin.html" target="_blank" rel="noopener noreferrer">Search Page</a></td>
   </tr>
 </tbody>
 </table>
