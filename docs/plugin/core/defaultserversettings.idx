@@ -1,3 +1,0 @@
-additionalSettings	core/defaultserversettings.html#additionalSettings	defaultserversettings: additionalSettings	
-getServerSettingsName	core/defaultserversettings.html#getServerSettingsName,string	defaultserversettings: getServerSettingsName(key: string): string	
-getServerSettingsNameOrKey	core/defaultserversettings.html#getServerSettingsNameOrKey,string	defaultserversettings: getServerSettingsNameOrKey(key: string): string	

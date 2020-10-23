@@ -1,1 +1,0 @@
-basicAuthMiddleware	middlewares/auth.html#basicAuthMiddleware,string,VerifyHandler,string	auth: basicAuthMiddleware(realm: string; verifyHandler: VerifyHandler;\n                    charset = &quot;UTF-8&quot;): HandlerAsync	
