@@ -1,15 +1,17 @@
 name: github pages
 
+#on: [push]  # debug
 on:
   push:
     branches:
       - devel
 
 jobs:
-  deploy:
+  framework-docs:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
 
       - name: Setup Python
         uses: actions/setup-python@v2
@@ -38,38 +40,79 @@ jobs:
 
       - run: mkdocs build
 
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Archive framework docs
+        uses: actions/upload-artifact@v2
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./site
+          name: framework-docs
+          path: |
+            site
 
+  api-docs:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
 
-  # I don't know.
-  # api:
-  #   runs-on: windows-latest
-  #   steps:
-  #     - name: Cache choosenim
-  #       id: cache-choosenim
-  #       uses: actions/cache@v1
-  #       with:
-  #         path: ~/.choosenim
-  #         key: ${{ runner.os }}-choosenim-devel-latest
+      - name: Cache choosenim
+        id: cache-choosenim
+        uses: actions/cache@v2
+        with:
+          path: ~/.choosenim
+          key: ${{ runner.os }}-choosenim-stable
 
-  #     - name: Setup Nim Enviroment
-  #       uses: actions/checkout@master
-  #     - uses: jiro4989/setup-nim-action@v1
-  #       with:
-  #         nim-version: 'devel'
-  #     - name: Install Packages
-  #       run: nimble install -y
-  #     - name: Install extension
-  #       run: logue extension all
-  #     - name: Build API docs
-  #       run: nimble apis
+      - name: Cache nimble
+        id: cache-nimble
+        uses: actions/cache@v2
+        with:
+          path: ~/.nimble
+          key: ${{ runner.os }}-nimble-stable
 
-  #     - name: Deploy
-  #       uses: peaceiris/actions-gh-pages@v3
-  #       with:
-  #         github_token: ${{ secrets.GITHUB_TOKEN }}
-  #         publish_dir: ./site
+      - name: Setup nim
+        uses: jiro4989/setup-nim-action@v1
+        with:
+          nim-version: stable
+
+      - name: Install Packages
+        run: nimble install -y
+
+      - name: Install extension
+        run: logue extension all
+
+      - name: Build API docs
+        run: nimble apis
+
+      - name: Archive API docs
+        uses: actions/upload-artifact@v2
+        with:
+          name: api-docs
+          path: |
+            docs/coreapi
+            docs/plugin
+
+  deploy-docs:
+    needs:
+      - framework-docs
+      - api-docs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download all docs
+        uses: actions/download-artifact@v2
+
+      - name: Check files
+        run: |
+          find .
+
+      - name: Setup docs
+        run: |
+          mv framework-docs/ docs/
+          rm -rf docs/coreapi docs/plugin
+          mv api-docs/coreapi api-docs/plugin docs/
+
+      - name: Deploy
+        if: success()
+        uses: crazy-max/ghaction-github-pages@v1.3.0
+        with:
+          target_branch: gh-pages
+          build_dir: ./docs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
