@@ -10,37 +10,43 @@ jobs:
         os:
           - ubuntu-latest
           - windows-latest
-        version:
+          - macOS-latest
+        nim-version:
           - stable
           - devel
+        exclude:
+          - os: macos-latest
+            nim-version: devel
     steps:
-    - uses: actions/checkout@v1
-    - uses: jiro4989/setup-nim-action@v1
-      with:
-        nim-version: ${{ matrix.version }}
-    - name: Install Packages
-      run: nimble install -y
-    - name: Install extension
-      run: logue extension all
-    - name: Test command
-      run: nimble tests
+    - name: Checkout
+      uses: actions/checkout@v2
 
-  test_macos:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os:
-          - macOS-latest
-        version:
-          - stable
-    steps:
-    - uses: actions/checkout@v1
-    - uses: jiro4989/setup-nim-action@v1
+    - name: Cache choosenim
+      id: cache-choosenim
+      uses: actions/cache@v2
       with:
-        nim-version: ${{ matrix.version }}
+        path: ~/.choosenim
+        key: ${{ runner.os }}-choosenim-${{ matrix.nim-version}}
+
+    - name: Cache nimble
+      id: cache-nimble
+      uses: actions/cache@v2
+      with:
+        path: ~/.nimble
+        key: ${{ runner.os }}-nimble-${{ matrix.nim-version}}-${{ hashFiles('prologue.nimble') }}
+        restore-keys: |
+          ${{ runner.os }}-nimble-${{ matrix.nim-version}}-
+
+    - name: Setup nim
+      uses: jiro4989/setup-nim-action@v1
+      with:
+        nim-version: ${{ matrix.nim-version }}
+
     - name: Install Packages
       run: nimble install -y
+
     - name: Install extension
       run: logue extension all
-    - name: Test command
+
+    - name: Test
       run: nimble tests

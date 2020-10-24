@@ -65,7 +65,9 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ~/.nimble
-          key: ${{ runner.os }}-nimble-stable
+          key: ${{ runner.os }}-nimble-${{ hashFiles('prologue.nimble') }}
+          restore-keys: |
+            ${{ runner.os }}-nimble-
 
       - name: Setup nim
         uses: jiro4989/setup-nim-action@v1
