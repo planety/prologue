@@ -1,3 +1,7 @@
+when not defined(nimdoc):
+  {.error: """"prologue/plugin" is for documentation purposes only.
+  Please import the package you need directly. For example:
+    import prologue/openapi""".}
 import ./signing
 import ./validater
 import ./security
