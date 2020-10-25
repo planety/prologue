@@ -10,8 +10,6 @@ import ../../../examples/redissession/app as a9
 import ../../../examples/signedcookiesession/app as a10
 import ../test_readme/example1 as a11
 import ../test_readme/example2 as a12
-import ../../../src/prologue as a13
-import ../../../src/prologue/plugin as a14
 import ../../local/basic_auth/local_basic_auth_test as a15
 import ../../local/staticFile/local_bigFile_test as a16
 import ../../local/staticFile/local_download_test as a17
