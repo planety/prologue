@@ -71,8 +71,7 @@ func newSettings*(
                           "appName": appName}})
   else:
     var data = data
-    data["secretKey"] = %* secretKey
-    data["appName"] = %* appName
+    data["prologue"] = %* {"secretKey": secretKey, "appName": appName}
 
     result = Settings(address: address, port: port, debug: debug, 
                   reusePort: reusePort, bufSize: bufSize,
