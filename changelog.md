@@ -1,5 +1,11 @@
 ## 0.4.2
 
+fix custom setting error (#100)
+
+plugin.nim is for document only (#99)
+
+fix static file serving is slow in windows(`usestd` also works)
+
 ## 0.3.8
 
 Move `basicAuthMiddleware` from `auth/auth.nim` to `middlewares/auth.nim`. Users need to change the import clause to `import prologue/middlewares/auth`.
