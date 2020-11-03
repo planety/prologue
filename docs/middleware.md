@@ -99,10 +99,10 @@ import prologue/middlewares/csrf
 
 For session middlewares, you need to import them directly.
 
-```
+```nim
 import prologue/middlewares/memorysession
-or
+# or
 import prologue/middlewares/redissession
-or
+# or
 import prologue/middlewares/signedcookiesession
-``
+```
