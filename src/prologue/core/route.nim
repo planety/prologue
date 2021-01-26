@@ -333,12 +333,16 @@ func contains(
       result = true
   else:
     if (node.kind == ptrnWildcard and bnode.kind == ptrnParam) or
-        (node.kind == ptrnParam and bnode.kind == ptrnWildcard) or
-        (node.kind == ptrnWildcard and bnode.kind == ptrnText) or
+        (node.kind == ptrnParam and bnode.kind == ptrnWildcard):
+      result = true
+    elif (node.kind == ptrnWildcard and bnode.kind == ptrnText) or
         (node.kind == ptrnParam and bnode.kind == ptrnText) or
         (node.kind == ptrnText and bnode.kind == ptrnParam) or
         (node.kind == ptrnText and bnode.kind == ptrnWildcard):
-      result = true
+      when defined(logueRouteLoose):
+        result = false
+      else:
+        result = true
     else:
       result = false
 

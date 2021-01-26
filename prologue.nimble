@@ -1,6 +1,6 @@
 # Package
 
-version       = "0.4.2"
+version       = "0.4.4"
 author        = "flywind"
 description   = "Prologue is an elegant and high performance web framework"
 license       = "Apache-2.0"

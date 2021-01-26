@@ -261,3 +261,8 @@ let
 app.addGroup(tab)
 app.run()
 ```
+
+## Tips
+
+You could compile the main program with `-d:logueRouteLoose` to enable loose route matching. Text and wildcard or text and parameters are considered different.
+For example `/blog/tag/{slug}` and `/blog/{year}/{id}` are not considered as the duplicated routes. If you define `/blog/tag/{slug}` first, then it will be matched first. Order matters. But `/blog/*/{slug}` and `/blog/{year}/{id}` are still duplicated.

@@ -1,3 +1,7 @@
+## 0.4.4
+
+Added `logueRouteLoose` to enable loosely route matching(fix #112).
+
 ## 0.4.2
 
 fix custom setting error (#100)

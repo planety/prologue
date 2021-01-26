@@ -1,4 +1,4 @@
-from ../../../src/prologue/validate/basic import isInt, isNumeric, isBool
+from ../../../src/prologue/validater/basic import isInt, isNumeric, isBool
 
 
 # "Test Is Utils"
