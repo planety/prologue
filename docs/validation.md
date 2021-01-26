@@ -25,20 +25,20 @@ You could also check whether multiple records meets the requirements.
 import prologue/validate/validate
 import strtabs
 
-var validater = newFormValidation({
+var form = newFormValidation({
       "accepted": @[required(), accepted()],
       "required": @[required()],
       "requiredInt": @[required(), isInt()],
       "minValue": @[required(), isInt(), minValue(12), maxValue(19)]
     })
 let
-  chk1 = validater.validate({"required": "on", "accepted": "true",
+  chk1 = form.validate({"required": "on", "accepted": "true",
       "requiredInt": "12", "minValue": "15"}.newStringTable)
-  chk2 = validater.validate({"requird": "on", "time": "555",
+  chk2 = form.validate({"requird": "on", "time": "555",
       "minValue": "10"}.newStringTable)
-  chk3 = validater.validate({"requird": "on", "time": "555",
+  chk3 = form.validate({"requird": "on", "time": "555",
       "minValue": "10"}.newStringTable, allMsgs = false)
-  chk4 = validater.validate({"required": "on", "accepted": "true",
+  chk4 = form.validate({"required": "on", "accepted": "true",
   "requiredInt": "12.5", "minValue": "13"}.newStringTable, allMsgs = false)
 
 doAssert chk1 == (true, "")
