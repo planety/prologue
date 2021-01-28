@@ -63,9 +63,30 @@ proc doNothingClosureMiddleware*(): HandlerAsync =
   result = proc(ctx: Context) {.async.} =
     await switch(ctx)
 
+import std/logging
+
+template handleCtxError(ctx: SubContext) =
+  try:
+    await switch(ctx)
+  except RouteError as e:
+    ctx.response.code = Http404
+    ctx.response.body.setLen(0)
+    logging.debug e.msg
+  except HttpError as e:
+    # catch general http error
+    logging.debug e.msg
+  except AbortError as e:
+    # catch abort error
+    logging.debug e.msg
+  except Exception as e:
+    logging.error e.msg
+    ctx.response.code = Http500
+    ctx.response.body = e.msg
+    ctx.response.setHeader("content-type", "text/plain; charset=UTF-8")
+
 proc extendContextMiddleWare*[T: SubContext](ctxType: typedesc[T]): HandlerAsync =
   result = proc(ctx: Context) {.async.} =
     var userContext = new ctxType
     newContextFrom(userContext, ctx)
-    await switch(userContext)
+    handleCtxError(userContext)
     newContextTo(ctx, userContext)
