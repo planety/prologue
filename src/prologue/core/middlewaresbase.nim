@@ -64,7 +64,6 @@ proc doNothingClosureMiddleware*(): HandlerAsync =
     await switch(ctx)
 
 proc extendContextMiddleWare*[T: SubContext](ctxType: typedesc[T]): HandlerAsync =
-  mixin await
   result = proc(ctx: Context) {.async.} =
     var userContext = new ctxType
     newContextFrom(userContext, ctx)

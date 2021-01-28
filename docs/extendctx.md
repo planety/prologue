@@ -43,7 +43,6 @@ type
 
 
 proc experimentMiddleware[T: ExperimentContext](ctxType: typedesc[T]): HandlerAsync =
-  mixin await
   result = proc(ctx: Context) {.async.} =
     inc ctx.ctxType.data
     echo fmt"{ctx.ctxType.data = }"
