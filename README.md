@@ -91,7 +91,8 @@ import prologue
 proc hello*(ctx: Context) {.async.} =
   resp "<h1>Hello, Prologue!</h1>"
 
-let app = newApp()
+var settings = newSettings()
+let app = newApp(settings)
 app.get("/", hello)
 app.run()
 ```
