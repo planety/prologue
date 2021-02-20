@@ -7,7 +7,7 @@ You may want to add an int to `Context`:
 
 ```nim
 import prologue
-import strformat
+import std/strformat
 
 
 type
@@ -15,9 +15,9 @@ type
     data: int
 
 
-proc hello*(ctx: Context) {.async.} =
-  inc ctx.UserContext.data
-  echo fmt"{ctx.UserContext.data = }"
+proc hello*(ctx: UserContext) {.async.} =
+  inc ctx.data
+  echo fmt"{ctx.data = }"
   resp "<h1>Hello, Prologue!</h1>"
 
 var app = newApp()
@@ -30,7 +30,7 @@ You may want to write a middleware:
 
 ```nim
 import prologue
-import strformat
+import std/strformat
 
 
 type
@@ -48,9 +48,9 @@ proc experimentMiddleware[T: ExperimentContext](ctxType: typedesc[T]): HandlerAs
     echo fmt"{ctx.ctxType.data = }"
     await switch(ctx)
 
-proc hello*(ctx: Context) {.async.} =
-  inc ctx.UserContext.data
-  echo fmt"{ctx.UserContext.data = }"
+proc hello*(ctx: UserContext) {.async.} =
+  inc ctx.data
+  echo fmt"{ctx.data = }"
   resp "<h1>Hello, Prologue!</h1>"
 
 var app = newApp()
