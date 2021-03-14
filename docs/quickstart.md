@@ -85,7 +85,7 @@ Once debug mode is enabled, the program will display useful logging messages. It
 
 ```nim
 proc hello(ctx: Context) {.async.} =
-  resp ctx.urlFor("index)
+  resp ctx.urlFor("index")
 
 proc index(ctx: Context) {.async.} =
   resp "Hello world"
