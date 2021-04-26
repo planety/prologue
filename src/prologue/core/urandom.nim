@@ -26,7 +26,7 @@ proc randomBytesSeq*(size = DefaultEntropy): seq[byte] {.inline.} =
   result = newSeq[byte](size)
   discard randomBytes(result)
 
-proc randomBytesSeq*[size = DefaultEntropy](): array[size, byte] {.inline.} =
+proc randomBytesSeq*[size: static[int]](): array[size, byte] {.inline.} =
   ## Generates a new system random sequence of bytes.
   discard randomBytes(result)
 

@@ -1,3 +1,7 @@
+## 0.4.6
+
+Fixed `genUid` error.
+
 ## 0.4.4
 
 Added `logueRouteLoose` to enable loosely route matching(fix #112).
