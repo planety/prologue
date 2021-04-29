@@ -17,6 +17,8 @@ proc login*(ctx: Context) {.async.} =
 
 Gets the parameters by HttpPost.
 
+Note that: `getPostParams` only handles `form-urlencoded` types.
+
 ```nim
 proc hello(ctx: Context) {.async.} =
   resp ctx.getPostParams("username")
@@ -44,6 +46,8 @@ proc hello(ctx: Context) {.async.} =
 
 Gets the contents of the form if key exists. Otherwise `default` will be returned.
 If you need the filename of the form, use `getUploadFile` instead.
+
+Note that: `getFormParams` handles both `form-urlencoded` and `multipart/form-data`.
 
 ```nim
 proc hello(ctx: Context) {.async.} =
