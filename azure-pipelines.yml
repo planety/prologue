@@ -128,7 +128,7 @@ steps:
       if [ ! -x "nim-${CHANNEL}/bin/nim" ]; then
         git clone -b "${BRANCH}" https://github.com/nim-lang/nim "nim-${CHANNEL}/"
         pushd "nim-${CHANNEL}"
-        git clone --depth 1 https://github.com/nim-lang/csources csources/
+        git clone --depth 1 https://github.com/nim-lang/csources_v1 csources/
         pushd csources
         make -j $ncpu ucpu=${UCPU} CC=gcc
         popd
