@@ -28,7 +28,7 @@ const
 
 
 proc isAllowedOrigin(origin: string, allowAllOrigins: bool,
-                     allowOrigins: seq[string], 
+                     allowOrigins: seq[string],
                      allowOriginRegex: Regex): bool =
   if allowAllOrigins:
     return true
@@ -91,7 +91,7 @@ proc CorsMiddleware*(
         errorMsg: seq[string] = @[]
 
       let
-        accessControlRequestMethod = reqHeaders["Access-Control-Request-Method"]
+        accessControlRequestMethod = toLowerAscii(reqHeaders["Access-Control-Request-Method"])
         accessControlRequestHeaders = seq[string](reqHeaders.getOrDefault("Access-Control-Request-Headers"))
 
       if "*" in allowOrigins:
