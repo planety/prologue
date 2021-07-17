@@ -1,0 +1,1 @@
+sessionMiddleware	middlewares/sessions/signedcookiesession.html#sessionMiddleware,Settings,string,int,string,string	signedcookiesession: sessionMiddleware(settings: Settings; sessionName = &quot;session&quot;;\n                  maxAge: int = 20160 * 60; path = &quot;&quot;; domain = &quot;&quot;;\n                  sameSite = Lax; httpOnly = false): HandlerAsync	

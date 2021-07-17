@@ -1,0 +1,9 @@
+DefaultTokenName	middlewares/csrf.html#DefaultTokenName	csrf: DefaultTokenName	
+DefaultSecretSize	middlewares/csrf.html#DefaultSecretSize	csrf: DefaultSecretSize	
+DefaultTokenSize	middlewares/csrf.html#DefaultTokenSize	csrf: DefaultTokenSize	
+getToken	middlewares/csrf.html#getToken,Context	csrf: getToken(ctx: Context; tokenName = DefaultTokenName): string	
+setToken	middlewares/csrf.html#setToken,Context,string	csrf: setToken(ctx: Context; value: string; tokenName = DefaultTokenName)	
+generateToken	middlewares/csrf.html#generateToken,Context	csrf: generateToken(ctx: Context; tokenName = DefaultTokenName): string	
+checkToken	middlewares/csrf.html#checkToken,string,string	csrf: checkToken(checked, secret: string): bool	
+csrfToken	middlewares/csrf.html#csrfToken,Context	csrf: csrfToken(ctx: Context; tokenName = DefaultTokenName): string	
+csrfMiddleWare	middlewares/csrf.html#csrfMiddleWare	csrf: csrfMiddleWare(tokenName = DefaultTokenName): HandlerAsync	

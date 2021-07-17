@@ -1,0 +1,4 @@
+Prologue	core/beast/server.html#Prologue	server: Prologue	
+execStartupEvent	core/beast/server.html#execStartupEvent,Prologue	server: execStartupEvent(app: Prologue)	
+serve	core/beast/server.html#serve,Prologue,proc(Request)	server: serve(app: Prologue;\n      callback: proc (request: NativeRequest): Future[void] {.closure, gcsafe.})	
+newPrologue	core/beast/server.html#newPrologue,Settings,CtxSettings,Router,ReversedRouter,ReRouter,openArray[HandlerAsync],openArray[Event],openArray[Event],ErrorHandlerTable,StringTableRef	server: newPrologue(settings: Settings; ctxSettings: CtxSettings; router: Router;\n            reversedRouter: ReversedRouter; reRouter: ReRouter;\n            middlewares: openArray[HandlerAsync]; startup: openArray[Event];\n            shutdown: openArray[Event]; errorHandlerTable: ErrorHandlerTable;\n            appData: StringTableRef): Prologue	

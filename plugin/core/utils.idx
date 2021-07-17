@@ -1,0 +1,9 @@
+since	core/utils.html#since.t,untyped,untyped	utils: since(version, body: untyped)	
+sinceAPI	core/utils.html#sinceAPI.t,untyped,untyped	utils: sinceAPI(version, body: untyped)	
+beforeAPI	core/utils.html#beforeAPI.t,untyped,untyped	utils: beforeAPI(version, body: untyped)	
+toByteSeq	core/utils.html#toByteSeq,string	utils: toByteSeq(str: string): seq[byte]	
+fromByteSeq	core/utils.html#fromByteSeq,openArray[byte]	utils: fromByteSeq(sequence: openArray[byte]): string	
+serialize	core/utils.html#serialize,int64	utils: serialize(number: int64): array[8, byte]	
+serialize	core/utils.html#serialize,int32	utils: serialize(number: int32): array[4, byte]	
+serialize	core/utils.html#serialize,int16	utils: serialize(number: int16): array[2, byte]	
+escape	core/utils.html#escape,string	utils: escape(src: string): string	

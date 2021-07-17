@@ -1,0 +1,10 @@
+Settings	nativesettings.html#Settings	nativesettings: Settings	
+CtxSettings	nativesettings.html#CtxSettings	nativesettings: CtxSettings	
+hasKey	nativesettings.html#hasKey,Settings,string	nativesettings: hasKey(settings: Settings; key: string): bool	
+`[]`	nativesettings.html#[],Settings,string	nativesettings: `[]`(settings: Settings; key: string): JsonNode	
+getOrDefault	nativesettings.html#getOrDefault,Settings,string	nativesettings: getOrDefault(settings: Settings; key: string): JsonNode	
+newCtxSettings	nativesettings.html#newCtxSettings	nativesettings: newCtxSettings(): CtxSettings	
+newSettings	nativesettings.html#newSettings,string,string,int,JsonNode	nativesettings: newSettings(address = &quot;&quot;; port = Port(8080); debug = true; reusePort = true;\n            secretKey = randomString(8); appName = &quot;&quot;; bufSize = 40960;\n            data: JsonNode = nil): Settings	
+newSettingsFromJsonNode	nativesettings.html#newSettingsFromJsonNode,Settings,JsonNode	nativesettings: newSettingsFromJsonNode(settings: var Settings; data: JsonNode)	
+loadSettings	nativesettings.html#loadSettings,JsonNode	nativesettings: loadSettings(data: JsonNode): Settings	
+loadSettings	nativesettings.html#loadSettings,string	nativesettings: loadSettings(configPath: string): Settings	

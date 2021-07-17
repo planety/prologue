@@ -1,0 +1,6 @@
+base64Encode	core/encode.html#base64Encode,openArray[T]	encode: base64Encode[T: SomeInteger | char](s: openArray[T]): string	
+base64Encode	core/encode.html#base64Encode,string	encode: base64Encode(s: string): string	
+base64Decode	core/encode.html#base64Decode,string	encode: base64Decode(s: string): string	
+urlsafeBase64Encode	core/encode.html#urlsafeBase64Encode,openArray[T]	encode: urlsafeBase64Encode[T: SomeInteger | char](s: openArray[T]): string	
+urlsafeBase64Encode	core/encode.html#urlsafeBase64Encode,string	encode: urlsafeBase64Encode(s: string): string	
+urlsafeBase64Decode	core/encode.html#urlsafeBase64Decode,string	encode: urlsafeBase64Decode(s: string): string	

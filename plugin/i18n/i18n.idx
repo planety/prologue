@@ -1,0 +1,9 @@
+Translator	i18n/i18n.html#Translator	i18n: Translator	
+loadTranslate	i18n/i18n.html#loadTranslate,Stream,string	i18n: loadTranslate(stream: Stream; filename = &quot;[stream]&quot;): TableRef[string,\n    StringTableRef]	
+loadTranslate	i18n/i18n.html#loadTranslate,string	i18n: loadTranslate(filename: string): TableRef[string, StringTableRef]	
+loadTranslate	i18n/i18n.html#loadTranslate,Prologue,string	i18n: loadTranslate(app: Prologue; filename: string)	
+setLanguage	i18n/i18n.html#setLanguage,Context,string	i18n: setLanguage(ctx: Context; language: string): Translator	
+translate	i18n/i18n.html#translate,Translator,string	i18n: translate(t: Translator; text: string): string	
+Tr	i18n/i18n.html#Tr,Translator,string	i18n: Tr(t: Translator; text: string): string	
+translate	i18n/i18n.html#translate,Context,string,string	i18n: translate(ctx: Context; text: string; language: string): string	
+Tr	i18n/i18n.html#Tr,Context,string,string	i18n: Tr(ctx: Context; text: string; language: string): string	

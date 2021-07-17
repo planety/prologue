@@ -1,0 +1,4 @@
+appAddress	core/server.html#appAddress,Prologue	server: appAddress(app: Prologue): string	
+appDebug	core/server.html#appDebug,Prologue	server: appDebug(app: Prologue): bool	
+appName	core/server.html#appName,Prologue	server: appName(app: Prologue): string	
+appPort	core/server.html#appPort,Prologue	server: appPort(app: Prologue): Port	

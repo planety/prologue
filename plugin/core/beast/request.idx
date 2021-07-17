@@ -1,0 +1,24 @@
+NativeRequest	core/beast/request.html#NativeRequest	request: NativeRequest	
+Request	core/beast/request.html#Request	request: Request	
+url	core/beast/request.html#url,Request	request: url(request: Request): Uri	
+port	core/beast/request.html#port,Request	request: port(request: Request): string	
+path	core/beast/request.html#path,Request	request: path(request: Request): string	
+stripPath	core/beast/request.html#stripPath,Request	request: stripPath(request: var Request)	
+query	core/beast/request.html#query,Request	request: query(request: Request): string	
+scheme	core/beast/request.html#scheme,Request	request: scheme(request: Request): string	
+setScheme	core/beast/request.html#setScheme,Request,string	request: setScheme(request: var Request; value: string)	
+body	core/beast/request.html#body,Request	request: body(request: Request): string	
+headers	core/beast/request.html#headers,Request	request: headers(request: Request): HttpHeaders	
+reqMethod	core/beast/request.html#reqMethod,Request	request: reqMethod(request: Request): HttpMethod	
+getCookie	core/beast/request.html#getCookie,Request,string,string	request: getCookie(request: Request; key: string; default: string): string	
+contentType	core/beast/request.html#contentType,Request	request: contentType(request: Request): string	
+charset	core/beast/request.html#charset,Request	request: charset(request: Request): string	
+secure	core/beast/request.html#secure,Request	request: secure(request: Request): bool	
+hostName	core/beast/request.html#hostName,Request	request: hostName(request: Request): string	
+send	core/beast/request.html#send,Request,string	request: send(request: Request; content: string): Future[void]	
+respond	core/beast/request.html#respond,Request,HttpCode,string	request: respond(request: Request; code: HttpCode; body: string): Future[void]	
+respond	core/beast/request.html#respond,Request,HttpCode,string,ResponseHeaders	request: respond(request: Request; code: HttpCode; body: string; headers: ResponseHeaders): Future[\n    void]	
+respond	core/beast/request.html#respond,Request,Response	request: respond(request: Request; response: Response): Future[void]	
+initRequest	core/beast/request.html#initRequest,Request	request: initRequest(nativeRequest: NativeRequest; cookies = initCookieJar();\n            pathParams = newStringTable(modeCaseSensitive);\n            queryParams = newStringTable(modeCaseSensitive);\n            postParams = newStringTable(modeCaseSensitive)): Request	
+close	core/beast/request.html#close,Request	request: close(request: Request)	
+initMockingRequest	core/beast/request.html#initMockingRequest,HttpMethod,HttpHeaders,Uri	request: initMockingRequest(httpMethod: HttpMethod; headers: HttpHeaders; url: Uri;\n                   cookies = initCookieJar(); postParams = newStringTable();\n                   queryParams = newStringTable(); formParams = initFormPart();\n                   pathParams = newStringTable()): Request	

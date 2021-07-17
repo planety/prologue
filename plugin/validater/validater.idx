@@ -1,0 +1,19 @@
+Info	validater/validater.html#Info	validater: Info	
+ValidateHandler	validater/validater.html#ValidateHandler	validater: ValidateHandler	
+FormValidation	validater/validater.html#FormValidation	validater: FormValidation	
+newFormValidation	validater/validater.html#newFormValidation,openArray[]	validater: newFormValidation(validator: openArray[(string, seq[ValidateHandler])]): FormValidation	
+validate	validater/validater.html#validate,FormValidation,StringTableRef	validater: validate(formValidation: FormValidation; textTable: StringTableRef;\n         allMsgs = true): Info	
+isInt	validater/validater.html#isInt,string	validater: isInt(msg = &quot;&quot;): ValidateHandler	
+isNumeric	validater/validater.html#isNumeric,string	validater: isNumeric(msg = &quot;&quot;): ValidateHandler	
+isBool	validater/validater.html#isBool,string	validater: isBool(msg = &quot;&quot;): ValidateHandler	
+minValue	validater/validater.html#minValue,float,string	validater: minValue(min: float; msg = &quot;&quot;): ValidateHandler	
+maxValue	validater/validater.html#maxValue,float,string	validater: maxValue(max: float; msg = &quot;&quot;): ValidateHandler	
+rangeValue	validater/validater.html#rangeValue,float,float,string	validater: rangeValue(min, max: float; msg = &quot;&quot;): ValidateHandler	
+minLength	validater/validater.html#minLength,Natural,string	validater: minLength(min: Natural; msg = &quot;&quot;): ValidateHandler	
+maxLength	validater/validater.html#maxLength,Natural,string	validater: maxLength(max: Natural; msg = &quot;&quot;): ValidateHandler	
+rangeLength	validater/validater.html#rangeLength,Natural,Natural,string	validater: rangeLength(min, max: Natural; msg = &quot;&quot;): ValidateHandler	
+equals	validater/validater.html#equals,string,string	validater: equals(value: string; msg = &quot;&quot;): ValidateHandler	
+accepted	validater/validater.html#accepted,string	validater: accepted(msg = &quot;&quot;): ValidateHandler	
+required	validater/validater.html#required,string	validater: required(msg = &quot;&quot;): ValidateHandler	
+matchRegex	validater/validater.html#matchRegex,Regex,string	validater: matchRegex(value: Regex; msg = &quot;&quot;): ValidateHandler	
+matchURL	validater/validater.html#matchURL,string	validater: matchURL(msg = &quot;&quot;): ValidateHandler	

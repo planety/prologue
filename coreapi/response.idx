@@ -1,0 +1,22 @@
+Response	response.html#Response	response: Response	
+`$`	response.html#$,Response	response: `$`(response: Response): string	
+initResponse	response.html#initResponse,HttpVersion,HttpCode,string	response: initResponse(httpVersion: HttpVersion; code: HttpCode; headers = [\n    (&quot;Content-Type&quot;, &quot;text/html; charset=UTF-8&quot;)].initResponseHeaders; body = &quot;&quot;): Response	
+initResponse	response.html#initResponse,HttpVersion,HttpCode,openArray[],string	response: initResponse(httpVersion: HttpVersion; code: HttpCode;\n             headers: openArray[(string, string)]; body = &quot;&quot;): Response	
+hasHeader	response.html#hasHeader.t,Response,string	response: hasHeader(response: Response; key: string): bool	
+getHeader	response.html#getHeader.t,Response,string	response: getHeader(response: Response; key: string): seq[string]	
+getHeaderOrDefault	response.html#getHeaderOrDefault.t,Response,string	response: getHeaderOrDefault(response: Response; key: string; default = @[&quot;&quot;]): seq[string]	
+setHeader	response.html#setHeader.t,Response,string,string	response: setHeader(response: var Response; key, value: string)	
+setHeader	response.html#setHeader.t,Response,string,seq[string]	response: setHeader(response: var Response; key: string; value: seq[string])	
+addHeader	response.html#addHeader.t,Response,string,string	response: addHeader(response: var Response; key, value: string)	
+setCookie	response.html#setCookie.t,Response,string,string,string,Option[int],string,string	response: setCookie(response: var Response; key, value: string; expires = &quot;&quot;;\n          maxAge: Option[int] = none(int); domain = &quot;&quot;; path = &quot;&quot;;\n          secure = false; httpOnly = false; sameSite = Lax)	
+setCookie	response.html#setCookie.t,Response,string,string,,Option[int],string,string	response: setCookie(response: var Response; key, value: string; expires: DateTime | Time;\n          maxAge: Option[int] = none(int); domain = &quot;&quot;; path = &quot;&quot;;\n          secure = false; httpOnly = false; sameSite = Lax)	
+deleteCookie	response.html#deleteCookie.t,Response,string,string,string,string	response: deleteCookie(response: var Response; key: string; value = &quot;&quot;; path = &quot;&quot;;\n             domain = &quot;&quot;)	
+abort	response.html#abort,string	response: abort(code = Http401; body = &quot;&quot;; headers = initResponseHeaders();\n      version = HttpVer11): Response	
+redirect	response.html#redirect,string,string,int	response: redirect(url: string; code = Http301; body = &quot;&quot;; delay = 0;\n         headers = initResponseHeaders(); version = HttpVer11): Response	
+error404	response.html#error404,string	response: error404(code = Http404; body = &quot;&lt;h1&gt;404 Not Found!&lt;/h1&gt;&quot;;\n         headers = initResponseHeaders(); version = HttpVer11): Response	
+htmlResponse	response.html#htmlResponse,string	response: htmlResponse(text: string; code = Http200; headers = initResponseHeaders();\n             version = HttpVer11): Response	
+plainTextResponse	response.html#plainTextResponse,string	response: plainTextResponse(text: string; code = Http200; headers = initResponseHeaders();\n                  version = HttpVer11): Response	
+jsonResponse	response.html#jsonResponse,JsonNode	response: jsonResponse(text: JsonNode; code = Http200; headers = initResponseHeaders();\n             version = HttpVer11): Response	
+respDefault	response.html#respDefault.m,HttpCode	response: respDefault(code: HttpCode)	
+resp	response.html#resp.m,string	response: resp(body: string; code = Http200; version = HttpVer11)	
+resp	response.html#resp.m,Response	response: resp(response: Response)	

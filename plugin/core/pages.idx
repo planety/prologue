@@ -1,0 +1,4 @@
+errorPage	core/pages.html#errorPage,string	pages: errorPage(errorMsg: string): string	
+loginPage	core/pages.html#loginPage	pages: loginPage(): string	
+multiPartPage	core/pages.html#multiPartPage	pages: multiPartPage(): string	
+internalServerErrorPage	core/pages.html#internalServerErrorPage	pages: internalServerErrorPage(): string	

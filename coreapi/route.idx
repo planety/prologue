@@ -1,0 +1,19 @@
+UrlPattern	route.html#UrlPattern	route: UrlPattern	
+initPath	route.html#initPath,string	route: initPath(route: string; httpMethod = HttpGet): Path	
+initRePath	route.html#initRePath,Regex	route: initRePath(route: Regex; httpMethod = HttpGet): RePath	
+pattern	route.html#pattern,string,HandlerAsync,string,openArray[HandlerAsync]	route: pattern(route: string; handler: HandlerAsync; httpMethod = HttpGet; name = &quot;&quot;;\n        middlewares: openArray[HandlerAsync] = @[]): UrlPattern	
+pattern	route.html#pattern,string,HandlerAsync,openArray[HttpMethod],string,openArray[HandlerAsync]	route: pattern(route: string; handler: HandlerAsync; httpMethod: openArray[HttpMethod];\n        name = &quot;&quot;; middlewares: openArray[HandlerAsync] = @[]): UrlPattern	
+hash	route.html#hash,Path	route: hash(x: Path): Hash	
+newReRouter	route.html#newReRouter	route: newReRouter(): ReRouter	
+add	route.html#add,ReRouter,	route: add(reRouter: var ReRouter; pairs: (RePath, PathHandler))	
+items	route.html#items.i,ReRouter	route: items(reRouter: ReRouter): (RePath, PathHandler)	
+`$`	route.html#$,BasePatternNode	route: `$`(piece: BasePatternNode): string	
+`$`	route.html#$,PatternNode	route: `$`(node: PatternNode): string	
+printRoutingTree	route.html#printRoutingTree,Router	route: printRoutingTree(router: Router)	
+newRouter	route.html#newRouter	route: newRouter(): Router	
+newPathHandler	route.html#newPathHandler,HandlerAsync,seq[HandlerAsync]	route: newPathHandler(handler: HandlerAsync; middlewares: seq[HandlerAsync]): PathHandler	
+addRoute	route.html#addRoute,Router,string,HttpMethod,HandlerAsync,seq[HandlerAsync]	route: addRoute(router: Router; route: string; httpMethod: HttpMethod;\n         handler: HandlerAsync; middlewares: seq[HandlerAsync])	
+compress	route.html#compress,Router	route: compress(router: Router)	
+findHandler	route.html#findHandler,Context,HttpMethod,string	route: findHandler(ctx: Context; reqMethod: HttpMethod; path: string): Option[\n    PathHandler]	
+stripRoute	route.html#stripRoute,string	route: stripRoute(route: string): string	
+findHandler	route.html#findHandler,Context	route: findHandler(ctx: Context): PathHandler	

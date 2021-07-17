@@ -1,0 +1,4 @@
+SubContext	middlewaresbase.html#SubContext	middlewaresbase: SubContext	
+switch	middlewaresbase.html#switch,Context	middlewaresbase: switch(ctx: Context): owned(Future[void])	
+doNothingClosureMiddleware	middlewaresbase.html#doNothingClosureMiddleware	middlewaresbase: doNothingClosureMiddleware(): HandlerAsync	
+extendContextMiddleWare	middlewaresbase.html#extendContextMiddleWare,typedesc[T]	middlewaresbase: extendContextMiddleWare[T: SubContext](ctxType: typedesc[T]): HandlerAsync	

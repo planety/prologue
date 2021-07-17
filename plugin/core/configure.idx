@@ -1,0 +1,26 @@
+Env	core/configure.html#Env	configure: Env	
+EnvError	core/configure.html#EnvError	configure: EnvError	
+EnvWrongFormatError	core/configure.html#EnvWrongFormatError	configure: EnvWrongFormatError	
+Json	core/configure.html#Json	ConfigFileExt.Json	
+Toml	core/configure.html#Toml	ConfigFileExt.Toml	
+Yaml	core/configure.html#Yaml	ConfigFileExt.Yaml	
+ConfigFileExt	core/configure.html#ConfigFileExt	configure: ConfigFileExt	
+initEnv	core/configure.html#initEnv	configure: initEnv(): Env	
+`$`	core/configure.html#$,Env	configure: `$`(env: Env): string	
+`[]`	core/configure.html#[],Env,string	configure: `[]`(env: Env; key: string): string	
+hasKey	core/configure.html#hasKey,Env,string	configure: hasKey(env: Env; key: string): bool	
+contains	core/configure.html#contains,Env,string	configure: contains(env: Env; key: string): bool	
+get	core/configure.html#get,Env,string	configure: get(env: Env; key: string): string	
+getOrDefault	core/configure.html#getOrDefault,Env,string,T	configure: getOrDefault[T: BaseType](env: Env; key: string; default: T): T	
+keys	core/configure.html#keys.i,Env	configure: keys(env: Env): string	
+values	core/configure.html#values.i,Env	configure: values(env: Env): string	
+pairs	core/configure.html#pairs.i,Env	configure: pairs(env: Env): (string, string)	
+getPrologueEnv	core/configure.html#getPrologueEnv	configure: getPrologueEnv(): string	
+putPrologueEnv	core/configure.html#putPrologueEnv,string,string,string	configure: putPrologueEnv(key, val: string; prefix: string)	
+getPrologueEnv	core/configure.html#getPrologueEnv,string,string,string	configure: getPrologueEnv(key: string; prefix: string; default = &quot;&quot;): string	
+getAllPrologueEnv	core/configure.html#getAllPrologueEnv,string	configure: getAllPrologueEnv(prefix: string): OrderedTableRef[string, string]	
+existsPrologueEnv	core/configure.html#existsPrologueEnv,string,string	configure: existsPrologueEnv(key: string; prefix: string): bool	
+delPrologueEnv	core/configure.html#delPrologueEnv,string,string	configure: delPrologueEnv(key: string; prefix: string)	
+loadPrologueEnv	core/configure.html#loadPrologueEnv,string	configure: loadPrologueEnv(filename: string): Env	
+setPrologueEnv	core/configure.html#setPrologueEnv,Env,string,string	configure: setPrologueEnv(env: Env; key, value: string)	
+writePrologueEnv	core/configure.html#writePrologueEnv,string,Env	configure: writePrologueEnv(filename: string; env: Env)	

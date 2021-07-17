@@ -1,0 +1,4 @@
+errorPage	pages.html#errorPage,string	pages: errorPage(errorMsg: string): string	
+loginPage	pages.html#loginPage	pages: loginPage(): string	
+multiPartPage	pages.html#multiPartPage	pages: multiPartPage(): string	
+internalServerErrorPage	pages.html#internalServerErrorPage	pages: internalServerErrorPage(): string	

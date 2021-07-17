@@ -1,0 +1,6 @@
+Basic	auth/auth.html#Basic	AuthMethod.Basic	
+Digest	auth/auth.html#Digest	AuthMethod.Digest	
+AuthMethod	auth/auth.html#AuthMethod	auth: AuthMethod	
+VerifyHandler	auth/auth.html#VerifyHandler	auth: VerifyHandler	
+unauthenticate	auth/auth.html#unauthenticate,Context,AuthMethod,string,string	auth: unauthenticate(ctx: Context; authMethod: AuthMethod; realm: string;\n               charset = &quot;UTF-8&quot;)	
+basicAuth	auth/auth.html#basicAuth,Context,string,VerifyHandler,string	auth: basicAuth(ctx: Context; realm: string; verify: VerifyHandler; charset = &quot;UTF-8&quot;): tuple[\n    hasValue: bool, username, password: string]	

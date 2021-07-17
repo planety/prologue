@@ -1,0 +1,36 @@
+BadSecretKeyError	core/types.html#BadSecretKeyError	types: BadSecretKeyError	
+EmptySecretKeyError	core/types.html#EmptySecretKeyError	types: EmptySecretKeyError	
+BaseType	core/types.html#BaseType	types: BaseType	
+SecretKey	core/types.html#SecretKey	types: SecretKey	
+SecretUrl	core/types.html#SecretUrl	types: SecretUrl	
+Session	core/types.html#Session	types: Session	
+Info	core/types.html#Info	FlashLevel.Info	
+Warning	core/types.html#Warning	FlashLevel.Warning	
+Error	core/types.html#Error	FlashLevel.Error	
+Fault	core/types.html#Fault	FlashLevel.Fault	
+FlashLevel	core/types.html#FlashLevel	types: FlashLevel	
+FormPart	core/types.html#FormPart	types: FormPart	
+initFormPart	core/types.html#initFormPart	types: initFormPart(): FormPart	
+`[]`	core/types.html#[],FormPart,string	types: `[]`(formPart: FormPart; key: string): tuple[params: StringTableRef,\n    body: string]	
+`[]=`	core/types.html#[]=,FormPart,string,string	types: `[]=`(formPart: FormPart; key: string; body: string)	
+parseValue	core/types.html#parseValue,string,T	types: parseValue[T: BaseType](value: string; default: T): T	
+len	core/types.html#len,SecretKey	types: len(secretKey: SecretKey): int	
+`$`	core/types.html#$,SecretKey	types: `$`(secretKey: SecretKey): string	
+newSession	core/types.html#newSession,StringTableRef	types: newSession(data: StringTableRef; newCreated = false; modified = false;\n           accessed = false): Session	
+`[]`	core/types.html#[],Session,string	types: `[]`(session: var Session; key: string): string	
+`[]=`	core/types.html#[]=,Session,string,string	types: `[]=`(session: var Session; key, value: string)	
+len	core/types.html#len,Session	types: len(session: Session): int	
+pairs	core/types.html#pairs.i,Session	types: pairs(session: Session): tuple[key, val: string]	
+getOrDefault	core/types.html#getOrDefault,Session,string,string	types: getOrDefault(session: var Session; key: string; default = &quot;&quot;): string	
+del	core/types.html#del,Session,string	types: del(session: var Session; key: string)	
+clear	core/types.html#clear,Session	types: clear(session: var Session)	
+`$`	core/types.html#$,Session	types: `$`(session: Session): string	
+parseStringTable	core/types.html#parseStringTable,StringTableRef,string	types: parseStringTable(tabs: var StringTableRef; s: string)	
+loads	core/types.html#loads,Session,string	types: loads(session: var Session; s: string)	
+dumps	core/types.html#dumps,Session	types: dumps(session: Session): string	
+flash	core/types.html#flash,Session,string	types: flash(session: var Session; msgs: string; category = FlashLevel.Info)	
+flash	core/types.html#flash,Session,string,string	types: flash(session: var Session; msgs: string; category: string)	
+messages	core/types.html#messages,Session	types: messages(session: var Session): seq[string]	
+messagesWithCategory	core/types.html#messagesWithCategory,Session	types: messagesWithCategory(session: var Session): seq[(string, string)]	
+getMessage	core/types.html#getMessage,Session,FlashLevel	types: getMessage(session: var Session; category: FlashLevel): Option[string]	
+getMessage	core/types.html#getMessage,Session,string	types: getMessage(session: var Session; category: string): Option[string]	

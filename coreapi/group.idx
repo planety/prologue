@@ -1,0 +1,3 @@
+Group	group.html#Group	group: Group	
+newGroup	group.html#newGroup,Prologue,string,openArray[HandlerAsync],Group	group: newGroup(app: Prologue; route: string;\n         middlewares: openArray[HandlerAsync] = @[]; parent: Group = nil): Group	
+getAllInfos	group.html#getAllInfos,Group,string,openArray[HandlerAsync]	group: getAllInfos(group: Group; route: string; middlewares: openArray[HandlerAsync]): (\n    string, seq[HandlerAsync])	

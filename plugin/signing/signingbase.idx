@@ -1,0 +1,4 @@
+BadDataError	signing/signingbase.html#BadDataError	signingbase: BadDataError	
+BadSignatureError	signing/signingbase.html#BadSignatureError	signingbase: BadSignatureError	
+BadTimeSignatureError	signing/signingbase.html#BadTimeSignatureError	signingbase: BadTimeSignatureError	
+SignatureExpiredError	signing/signingbase.html#SignatureExpiredError	signingbase: SignatureExpiredError	

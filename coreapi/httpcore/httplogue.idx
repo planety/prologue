@@ -1,0 +1,16 @@
+ResponseHeaders	httpcore/httplogue.html#ResponseHeaders	httplogue: ResponseHeaders	
+getTables	httpcore/httplogue.html#getTables,ResponseHeaders	httplogue: getTables(headers: ResponseHeaders): TableRef[string, seq[string]]	
+initResponseHeaders	httpcore/httplogue.html#initResponseHeaders	httplogue: initResponseHeaders(): ResponseHeaders	
+initResponseHeaders	httpcore/httplogue.html#initResponseHeaders,openArray[tuple[string,string]]	httplogue: initResponseHeaders(keyValuePairs: openArray[tuple[key: string, val: string]]): ResponseHeaders	
+`$`	httpcore/httplogue.html#$,ResponseHeaders	httplogue: `$`(headers: ResponseHeaders): string	
+clear	httpcore/httplogue.html#clear,ResponseHeaders	httplogue: clear(headers: ResponseHeaders)	
+`[]`	httpcore/httplogue.html#[],ResponseHeaders,string	httplogue: `[]`(headers: ResponseHeaders; key: string): seq[string]	
+`[]`	httpcore/httplogue.html#[],ResponseHeaders,string,int	httplogue: `[]`(headers: ResponseHeaders; key: string; i: int): string	
+`[]=`	httpcore/httplogue.html#[]=,ResponseHeaders,string,string	httplogue: `[]=`(headers: var ResponseHeaders; key, value: string)	
+`[]=`	httpcore/httplogue.html#[]=,ResponseHeaders,string,seq[string]	httplogue: `[]=`(headers: var ResponseHeaders; key: string; value: seq[string])	
+add	httpcore/httplogue.html#add,ResponseHeaders,string,string	httplogue: add(headers: var ResponseHeaders; key, value: string)	
+del	httpcore/httplogue.html#del,ResponseHeaders,string	httplogue: del(headers: var ResponseHeaders; key: string)	
+pairs	httpcore/httplogue.html#pairs.i,ResponseHeaders	httplogue: pairs(headers: ResponseHeaders): tuple[key, value: string]	
+hasKey	httpcore/httplogue.html#hasKey,ResponseHeaders,string	httplogue: hasKey(headers: ResponseHeaders; key: string): bool	
+getOrDefault	httpcore/httplogue.html#getOrDefault,ResponseHeaders,string	httplogue: getOrDefault(headers: ResponseHeaders; key: string; default = @[&quot;&quot;]): seq[string]	
+len	httpcore/httplogue.html#len,ResponseHeaders	httplogue: len(headers: ResponseHeaders): int	

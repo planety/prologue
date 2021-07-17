@@ -1,0 +1,5 @@
+DefaultEntropy	urandom.html#DefaultEntropy	urandom: DefaultEntropy	
+randomBytesSeq	urandom.html#randomBytesSeq	urandom: randomBytesSeq(size = DefaultEntropy): seq[byte]	
+randomBytesSeq	urandom.html#randomBytesSeq_2	urandom: randomBytesSeq[size: static[int]](): array[size, byte]	
+randomString	urandom.html#randomString	urandom: randomString(size = DefaultEntropy): string	
+randomSecretKey	urandom.html#randomSecretKey	urandom: randomSecretKey(size = DefaultEntropy): SecretKey	

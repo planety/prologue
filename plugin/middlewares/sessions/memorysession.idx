@@ -1,0 +1,1 @@
+sessionMiddleware	middlewares/sessions/memorysession.html#sessionMiddleware,Settings,string,int,string,string	memorysession: sessionMiddleware(settings: Settings; sessionName = &quot;session&quot;;\n                  maxAge: int = 20160 * 60; path = &quot;&quot;; domain = &quot;&quot;;\n                  sameSite = Lax; httpOnly = false): HandlerAsync	
