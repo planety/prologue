@@ -6,16 +6,16 @@ strategy:
     #   UCPU: amd64
     #   CHANNEL: stable
     #   TEST_LANG: c
-    Windows_devel_64bit:
-      VM: 'windows-latest'
-      UCPU: amd64
-      CHANNEL: devel
-      TEST_LANG: c
-    Windows_cpp_devel_64bit:
-      VM: 'windows-latest'
-      UCPU: amd64
-      CHANNEL: devel
-      TEST_LANG: cpp
+    #     Windows_devel_64bit:
+    #       VM: 'windows-latest'
+    #       UCPU: amd64
+    #       CHANNEL: devel
+    #       TEST_LANG: c
+    #     Windows_cpp_devel_64bit:
+    #       VM: 'windows-latest'
+    #       UCPU: amd64
+    #       CHANNEL: devel
+    #       TEST_LANG: cpp
     # Linux_stable_64bit:
     #   VM: 'ubuntu-latest'
     #   UCPU: amd64
@@ -36,11 +36,11 @@ strategy:
     #   UCPU: amd64
     #   CHANNEL: stable
     #   TEST_LANG: c
-    MacOS_devel_64bit:
-      VM: 'macOS-latest'
-      UCPU: amd64
-      CHANNEL: devel
-      TEST_LANG: c
+    #     MacOS_devel_64bit:
+    #       VM: 'macOS-latest'
+    #       UCPU: amd64
+    #       CHANNEL: devel
+    #       TEST_LANG: c
 pool:
   vmImage: $(VM)
 
