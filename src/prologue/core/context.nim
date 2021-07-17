@@ -330,7 +330,7 @@ proc default500Handler*(ctx: Context): Future[void] =
 func getPostParams*(ctx: Context, key: string, default = ""): string {.inline.} =
   ## Gets the parameters by HttpPost.
   ##
-  ## .. note:: `getPostParams` only handles `form-urlencoded` types.
+  ## `getPostParams` only handles `form-urlencoded` types.
   ##
   case ctx.request.reqMethod
   of HttpPost:
@@ -356,8 +356,7 @@ func getFormParams*(ctx: Context, key: string, default = ""): string {.inline.} 
   ## Gets the contents of the form if key exists. Otherwise `default` will be returned.
   ## If you need the filename of the form, use `getUploadFile` instead.
   ##
-  ## .. note:: `getFormParams` handles
-  ##    both `form-urlencoded` and `multipart/form-data`.
+  ## `getFormParams` handles both `form-urlencoded` and `multipart/form-data`.
   ##
   if key in ctx.request.formParams.data:
     result = ctx.request.formParams[key].body
