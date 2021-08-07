@@ -42,7 +42,6 @@ It is ideal for building elegant and high performance web services.
 ## Features
 
 - Core
-  - [x] Base on `httpx` and `asynchttpserver`
   - [x] Configure and Settings
   - [x] Context
   - [x] Param and Query Data

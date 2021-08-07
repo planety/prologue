@@ -2,7 +2,7 @@
 
 `Request` contains the information from the HTTP server. You can visit this attribute by using `ctx.request`.
 
-for example, you maybe want to get state from users, you can query the `cookies` attribute.
+For example If you want to get state from users, query the `cookies` attribute.
 
 ```nim
 proc hello(ctx: Context) {.async.} =
