@@ -32,7 +32,7 @@ import prologue/middlewares/staticfile
 
 var app = newApp(settings = settings)
 app.use(staticFileMiddleware(env.get("staticDir")))
-app.addRoute(urls.urlPatterns, "")
+# add your routes
 app.run()
 ```
 
