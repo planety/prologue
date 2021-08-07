@@ -1,6 +1,7 @@
 # Extend Context
 
-`Prologue` provides flexible way to extend `Context`. `User-defined Context` should inherit from the `Context` from `Prologue`.
+Soon!!!
+<!-- `Prologue` provides flexible way to extend `Context`. `User-defined Context` should inherit from the `Context` from `Prologue`.
 
 You may want to add an int to `Context`:
 
@@ -58,4 +59,4 @@ app.use(extendContextMiddleWare(UserContext))
 app.use(experimentMiddleware(UserContext))
 app.get("/", hello)
 app.run()
-```
+``` -->
