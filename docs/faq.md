@@ -44,7 +44,7 @@ var
   app = newApp(settings = settings, startup = @[event])
 ```
 
-(4). Avoid that a function name is same to the module name.
+(4). Avoid using a function name which is same to the module name.
 
 `src/index.nim`
 
