@@ -12,7 +12,8 @@ block:
   doAssert multiMatch("", @{"name": "flywind"}) == ""
 
 block:
-  let ctx = newContext(Request(), Response(), GlobalScope())
+  var ctx = new Context
+  init(ctx, Request(), Response(), GlobalScope())
   doAssert not ctx.handled
   doAssert ctx.size == 0
   doAssert ctx.first

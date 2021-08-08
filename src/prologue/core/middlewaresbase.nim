@@ -84,7 +84,7 @@ template handleCtxError(ctx: SubContext) =
     ctx.response.body = e.msg
     ctx.response.setHeader("content-type", "text/plain; charset=UTF-8")
 
-proc extendContextMiddleWare*[T: SubContext](ctxType: typedesc[T]): HandlerAsync =
+proc extendContextMiddleWare*[T: SubContext](ctxType: typedesc[T]): HandlerAsync {.deprecated.} =
   result = proc(ctx: Context) {.async.} =
     var userContext = new ctxType
     newContextFrom(userContext, ctx)

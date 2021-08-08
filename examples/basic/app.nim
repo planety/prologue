@@ -3,6 +3,8 @@ import prologue/middlewares/staticfile
 
 import ./urls
 
+import myctx
+
 let
   env = loadPrologueEnv(".env")
   settings = newSettings(appName = env.getOrDefault("appName", "Prologue"),
@@ -11,8 +13,8 @@ let
                          secretKey = env.getOrDefault("secretKey", "")
     )
 
-
 var app = newApp(settings = settings)
 app.use(staticFileMiddleware(env.get("staticDir")))
 app.addRoute(urls.urlPatterns, "")
-app.run()
+
+app.run(DataContext)

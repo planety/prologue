@@ -31,7 +31,8 @@ func debugResponse*(ctx: Context) {.inline.} =
 
 proc runOnce*(app: Prologue, request: Request): Context =
   ## Starts an Application.
-  result = newContext(request, initResponse(HttpVer11, Http200), app.gScope)
+  new result
+  init(result, request, initResponse(HttpVer11, Http200), app.gScope)
   waitFor handleContext(app, result)
 
 proc runOnce*(app: Prologue, ctx: Context) =

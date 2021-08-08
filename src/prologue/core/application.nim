@@ -490,21 +490,20 @@ proc handleContext*(app: Prologue, ctx: Context) {.async, gcsafe.} =
 
     logging.debug($(ctx.response))
 
-proc handleRequest*(app: Prologue, nativeRequest: NativeRequest): Future[void] {.gcsafe.} =
+proc handleRequest*(app: Prologue, nativeRequest: NativeRequest, ctx: Context): Future[void] {.gcsafe.} =
   ## Handles the native request and sends response to the client.
   var request = initRequest(nativeRequest)
   handleNativeRequest(request)
-  var
-    # initialize response
-    ctx = newContext(
-      request = request, 
-      response = initResponse(HttpVer11, Http200),
-                              gScope = app.gScope)
+
+  init(ctx, request, initResponse(HttpVer11, Http200), app.gScope)
+  extend(ctx)
   result = handleContext(app, ctx)
 
-proc run*(app: Prologue) =
+proc run*(app: Prologue, ctxTyp: typedesc[Context]) =
   ## Starts an Application.
 
+  # assert ctx != nil, "The memory of `ctx` must be allocated!"
+  var ctx = new ctxTyp
   app.gScope.router.compress()
 
   # start event
@@ -532,7 +531,11 @@ proc run*(app: Prologue) =
 
 
   app.serve(proc (nativeRequest: NativeRequest): Future[void] {.gcsafe.} =
-                           result = handleRequest(app, nativeRequest))
+                           result = handleRequest(app, nativeRequest, ctx))
+
+
+proc run*(app: Prologue) {.inline.} =
+  app.run(Context)
 
 
 when isMainModule:

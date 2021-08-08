@@ -200,29 +200,20 @@ func initEvent*(handler: SyncEvent): Event =
   ## Initializes a new synchronous event. 
   Event(async: false, syncHandler: handler)
 
-func newContext*(request: Request, response: Response,
-                 gScope: GlobalScope): Context =
-  ## Creates a new Context.
-  Context(request: request, response: response,
-          handled: false,
-          ctxData: newStringTable(mode = modeCaseSensitive),
-          gScope: gScope,
-          size: 0, first: true,
-    )
+proc init*(ctx: Context, request: Request, response: Response,
+                 gScope: GlobalScope) {.inline.} =
+  ctx.request = request
+  ctx.response = response
+  ctx.handled = false
+  ctx.ctxData = newStringTable(mode = modeCaseSensitive)
+  ctx.gScope = gScope
+  ctx.size = 0
+  ctx.first = true
 
-func newContext*(ctx: Context, src: Context) =
-  ## Creates a new Context by copying object and sharing ref object.
-  ctx.request = src.request
-  ctx.response = src.response
-  ctx.session = src.session
-  ctx.ctxData = src.ctxData
-  ctx.gScope = src.gScope
-  ctx.middlewares = src.middlewares
-  ctx.handled = src.handled
-  ctx.size = src.size
-  ctx.first = src.first
+method extend*(ctx: Context) {.base, inline.} =
+  discard
 
-func newContextFrom*(ctx: Context, src: Context) =
+func newContextFrom*(ctx: Context, src: Context) {.deprecated.} =
   ## Creates a new Context by moving object and sharing ref object.
   ctx.request = move src.request
   ctx.response = move src.response
@@ -233,7 +224,7 @@ func newContextFrom*(ctx: Context, src: Context) =
   ctx.size = src.size
   ctx.first = src.first
 
-func newContextTo*(ctx: Context, src: Context) =
+func newContextTo*(ctx: Context, src: Context) {.deprecated.} =
   ## Creates a new Context by moving object and copying necessary attributes.
   ctx.request = move src.request
   ctx.response = move src.response
