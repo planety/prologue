@@ -1,5 +1,8 @@
 ## 0.4.8
 
+A new form of user defined context.
+
+Make ip-address clickable(fix #85).
 
 ## 0.4.6
 
