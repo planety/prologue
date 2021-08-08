@@ -63,7 +63,7 @@ app.run(UserContext)
 
 ## Make a general purpose middleware
 
-**Notes**: use prefix or suffix to denote data member to avoid conflicts with other middlewares.
+**Notes**: use prefix or suffix denoting data member to avoid conflicts with other middlewares.
 
 ```nim
 import prologue
