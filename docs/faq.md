@@ -1,6 +1,6 @@
 # FAQ
 
-(1). `Prologue` supports two HTTP server: `httpx` and `asynchttpserver`. The default HTTP server is `httpx`. If you are in Linux or MacOS, use `--threads:on` to enable the multi-threads HTTP server. If you are in windows, `threads` can't speed up the server. You can use `-d:usestd` to switch to `asynchttpserver`.
+(1). `Prologue` supports two HTTP server: `httpbeast` and `asynchttpserver`. If you are in Linux or MacOS, use `--threads:on` to enable the multi-threads HTTP server. If you are in windows, `threads` should not be used. You can use `-d:usestd` to switch to `asynchttpserver`.
 
 (2). If you want to benchmark `prologue` or release you programs, make sure set `settings.debug` = false.
 
@@ -43,3 +43,15 @@ let
 var
   app = newApp(settings = settings, startup = @[event])
 ```
+
+(4). Avoid that a function name is same to the module name.
+
+`src/index.nim`
+
+```nim
+proc index(ctx: Context) {.async.} =
+  ...
+```
+
+(5). Use the full path of JS, CSS files. For instance in your HTML file use `templates/some.js` instead of
+`some.js`.

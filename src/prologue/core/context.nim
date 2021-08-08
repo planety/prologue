@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import std/[mimetypes, md5, uri, options, strutils, critbits, 
+import std/[mimetypes, md5, uri, strutils, critbits, 
             asyncfile, asyncdispatch,strtabs, tables, strformat, 
             os, times, options, parseutils, json]
 
