@@ -1,6 +1,12 @@
+## 0.4.8
+
+
 ## 0.4.6
 
 Fixed `genUid` error.
+
+Fixed https://github.com/planety/prologue/issues/122
+
 
 ## 0.4.4
 
