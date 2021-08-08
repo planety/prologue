@@ -523,11 +523,11 @@ proc run*(app: Prologue, ctxTyp: typedesc[Context]) =
 
   if app.appAddress.len == 0:
     when defined(windows):
-      logging.debug(fmt"Prologue is serving at 127.0.0.1:{app.appPort} {app.appName}")
+      logging.debug(fmt"Prologue is serving at http://127.0.0.1:{app.appPort} {app.appName}")
     else:
-      logging.debug(fmt"Prologue is serving at 0.0.0.0:{app.appPort} {app.appName}")
+      logging.debug(fmt"Prologue is serving at http://0.0.0.0:{app.appPort} {app.appName}")
   else:
-    logging.debug(fmt"Prologue is serving at {app.appAddress}:{app.appPort} {app.appName}")
+    logging.debug(fmt"Prologue is serving at http://{app.appAddress}:{app.appPort} {app.appName}")
 
 
   app.serve(proc (nativeRequest: NativeRequest): Future[void] {.gcsafe.} =
