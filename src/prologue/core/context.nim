@@ -500,20 +500,7 @@ proc staticFileResponse*(
         "If-None-Match"] == etag:
     await ctx.respond(Http304, "")
   elif contentLength < 10_000_000:
-    ## TODO
-    when defined(windows) and not defined(usestd):
-      proc readAllData(f: AsyncFile): Future[string] {.async.} =
-        ## Reads all data from the specified file.
-        result = ""
-        while true:
-          let data = await read(f, 40000)
-          if data.len == 0:
-            return
-          result.add data
-    
-      ctx.response.body = await file.readAllData()
-    else:
-      ctx.response.body = await file.readAll()
+    ctx.response.body = await file.readAll()
     await ctx.respond()
   else:
     ctx.response.setHeader("Content-Length", $contentLength)

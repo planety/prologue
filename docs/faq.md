@@ -1,6 +1,6 @@
 # FAQ
 
-(1). `Prologue` supports two HTTP server: `httpbeast` and `asynchttpserver`. If you are in Linux or MacOS, use `--threads:on` to enable the multi-threads HTTP server. If you are in windows, `threads` should not be used. You can use `-d:usestd` to switch to `asynchttpserver`.
+(1). `Prologue` supports two HTTP server: `httpbeast` and `asynchttpserver`. If you are in Linux or MacOS, use `--threads:on` to enable the multi-threads HTTP server. If you are in windows, `threads` should not be used. You can use `-d:usestd` to switch to `asynchttpserver` in Linux or MacOS.
 
 (2). If you want to benchmark `prologue` or release you programs, make sure set `settings.debug` = false.
 
