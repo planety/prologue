@@ -28,6 +28,15 @@ app.get("/", hello)
 app.run(UserContext)
 ```
 
+**Note**: If you want to use `UserContext` directly as the parameter of the function, make sure your proc is 
+`nimcall` instead of `closure`. Otherwise you have to use
+
+```nim
+proc hello*(ctx: Context) {.async.} =
+  doAssert ctx.UserContext.data == 999
+  resp "<h1>Hello, Prologue!</h1>"
+```
+
 ## Make a middleware for personal use
 
 ```nim
