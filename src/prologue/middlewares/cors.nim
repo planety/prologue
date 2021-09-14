@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from std/strutils import toLowerAscii, join
+from std/strutils import toUpperAscii, join
 import std/asyncdispatch
 
 from ../core/middlewaresbase import switch
@@ -24,7 +24,7 @@ import ../core/httpcore/httplogue
 
 
 const
-  AllHttpMethod = @["get", "post", "put", "patch", "options", "delete"]
+  AllHttpMethod = @["GET", "POST", "PUT", "PATCH", "OPTIONS", "DELETE"]
 
 
 proc isAllowedOrigin(origin: string, allowAllOrigins: bool,
@@ -42,7 +42,7 @@ proc isAllowedOrigin(origin: string, allowAllOrigins: bool,
 proc CorsMiddleware*(
   allowOrigins: seq[string] = @[],
   allowOriginRegex: Regex = re"",
-  allowMethods: seq[string] = @["get"],
+  allowMethods: seq[string] = @["GET"],
   allowHeaders: seq[string] = @[],
   exposeHeaders: seq[string] = @[],
   allowCredentials = false,
@@ -78,7 +78,7 @@ proc CorsMiddleware*(
       allowMethodsSeq = AllHttpMethod
 
     for httpMethod in allowMethods:
-      let value = toLowerAscii(httpMethod)
+      let value = toUpperAscii(httpMethod)
       if value in AllHttpMethod:
         allowMethodsSeq.add value
 
@@ -91,7 +91,7 @@ proc CorsMiddleware*(
         errorMsg: seq[string] = @[]
 
       let
-        accessControlRequestMethod = toLowerAscii(reqHeaders["Access-Control-Request-Method"])
+        accessControlRequestMethod = toUpperAscii(reqHeaders["Access-Control-Request-Method"])
         accessControlRequestHeaders = seq[string](reqHeaders.getOrDefault("Access-Control-Request-Headers"))
 
       if "*" in allowOrigins:
