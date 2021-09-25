@@ -1,24 +1,7 @@
 import std/[asyncdispatch, strutils, os, uri]
 
 import ../core/context, ../core/middlewaresbase, ../core/request
-
-
-proc isStaticFile(
-  path: string, 
-  dirs: openArray[string]
-): tuple[hasValue: bool, filename, dir: string] =
-  result = (false, "", "")
-  var path = path.strip(chars = {'/'}, trailing = false)
-  normalizePath(path)
-  if not fileExists(path):
-    return
-  let file = splitFile(path)
-
-  for dir in dirs:
-    if dir.len == 0:
-      continue
-    if file.dir.startsWith(dir):
-      return (true, file.name & file.ext, file.dir)
+import ./utils
 
 func normalizedStaticDirs(dirs: openArray[string]): seq[string] =
   ## Normalizes the path of static directories.

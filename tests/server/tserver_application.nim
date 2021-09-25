@@ -235,5 +235,44 @@ block:
 
     doAssert bodyLen1 == bodyLen2
 
+  # "can get static files via virtual path"
+  block:
+    # "can get static file via virtual path"
+    block:
+      let
+        route = "/assets/favicons/favicon.ico"
+        response = waitFor client.get(fmt"http://{address}:{port}{route}")
+
+      doAssert response.code == Http200
+    # "can get static file in nested dirs"
+    block:
+      let
+        route = "/assets/favicons/A/B/C/important_text.txt"
+        response = waitFor client.get(fmt"http://{address}:{port}{route}")
+
+      doAssert response.code == Http200
+    # "can get the same static file via different virtual path"
+    block:
+      let
+        route = "/very/important/texts/important_text.txt"
+        response = waitFor client.get(fmt"http://{address}:{port}{route}")
+
+      doAssert response.code == Http200
+    # "can get the same static file via different virtual path and nested dirs"
+    block:
+      let
+        route = "/important/texts/A/B/C/important_text.txt"
+        response = waitFor client.get(fmt"http://{address}:{port}{route}")
+
+      doAssert response.code == Http200
+    # "can get the same static file via different virtual path and overloaded dir"
+    block:
+      let
+        route = "/important/texts/A/important_text.txt"
+        response = waitFor client.get(fmt"http://{address}:{port}{route}")
+
+      doAssert response.code == Http200
+    
+
   client.close()
   process.terminate()
