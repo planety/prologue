@@ -1,6 +1,7 @@
 import ../src/prologue except loginPage
 import ../src/prologue/middlewares/utils as ut
 import ../src/prologue/middlewares/staticfile
+import ../src/prologue/middlewares/staticfilevirtualpath
 import ../src/prologue/i18n
 
 import std/[with, os, strformat, strutils]
@@ -78,4 +79,30 @@ with app:
   get("/favicon.ico", redirectTo("tests/static/favicon.ico"))
   get("/favicon", redirectTo("/tests/static/favicon.ico"))
   loadTranslate(expandFileName("tests/assets/i18n/trans.ini"))
+  
+  use(
+    staticFileVirtualPathMiddleware(
+      staticDir = "/tests/static/",
+      virtualPath = "/assets/favicons/"
+    )
+  )
+  use(
+    staticFileVirtualPathMiddleware(
+      staticDir = "/tests/static/",
+      virtualPath = "/important/texts/"
+    )
+  )
+  use(
+    staticFileVirtualPathMiddleware(
+      staticDir = "/tests/static/A/B/C",
+      virtualPath = "/very/important/texts/"
+    )
+  )
+  use(
+    staticFileVirtualPathMiddleware(
+      staticDir = "/tests/static/A/B/C",
+      virtualPath = "/important/texts/A"
+    )
+  )
+
   run()
