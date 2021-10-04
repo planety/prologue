@@ -279,6 +279,10 @@ func getCookie*(ctx: Context, key: string, default = ""): string {.inline.} =
   ## value will be returned.
   getCookie(ctx.request, key, default)
 
+proc setCookie*(ctx: Context, cookie: Cookie) =
+  ## Sets Cookie for Response.
+  ctx.response.setCookie(cookie)
+
 proc setCookie*(ctx: Context, key, value: string, expires = "", 
                 maxAge: Option[int] = none(int), domain = "", 
                 path = "", secure = false, httpOnly = false, sameSite = Lax) {.inline.} =
