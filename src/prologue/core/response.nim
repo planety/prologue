@@ -54,13 +54,17 @@ template addHeader*(response: var Response, key, value: string) =
   ## Adds header values to the existing `HttpHeaders`.
   response.headers.add(key, value)
 
+template setCookie*(response: var Response, cookie: Cookie) =
+  ## Sets the cookie of response.
+  response.addHeader("Set-Cookie", $cookie)
+
 template setCookie*(response: var Response, key, value: string, expires = "",
                 maxAge: Option[int] = none(int), domain = "", path = "", secure = false,
                 httpOnly = false, sameSite = Lax) =
   ## Sets the cookie of response.
   let cookies = initCookie(key, value, expires, maxAge, domain, 
                            path, secure, httpOnly, sameSite)
-  response.addHeader("Set-Cookie", $cookies)
+  response.setCookie(cookies)
 
 template setCookie*(response: var Response, key, value: string, expires: DateTime|Time, 
                 maxAge: Option[int] = none(int), domain = "",
@@ -68,7 +72,7 @@ template setCookie*(response: var Response, key, value: string, expires: DateTim
   ## Sets the cookie of response.
   let cookies = initCookie(key, value, expires, maxAge, domain, 
                           path, secure, httpOnly, sameSite)
-  response.addHeader("Set-Cookie", $cookies)
+  response.setCookie(cookies)
 
 template deleteCookie*(response: var Response, key: string, value = "", path = "",
                    domain = "") =
