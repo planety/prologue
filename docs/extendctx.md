@@ -19,7 +19,8 @@ type
 method extend(ctx: UserContext) =
   ctx.data = 999
 
-proc hello*(ctx: UserContext) {.async.} =
+proc hello*(ctx: Context) {.async.} =
+  var ctx = UserContext(ctx)
   doAssert ctx.data == 999
   resp "<h1>Hello, Prologue!</h1>"
 
@@ -28,20 +29,10 @@ app.get("/", hello)
 app.run(UserContext)
 ```
 
-**Note**: If you want to use `UserContext` directly as the parameter of the function, make sure your proc is 
-`nimcall` instead of `closure`. Otherwise you have to use
-
-```nim
-proc hello*(ctx: Context) {.async.} =
-  doAssert ctx.UserContext.data == 999
-  resp "<h1>Hello, Prologue!</h1>"
-```
-
 ## Make a middleware for personal use
 
 ```nim
 import prologue
-
 
 type
   UserContext = ref object of Context
@@ -51,7 +42,8 @@ proc init(ctx: UserContext) =
   ctx.data = 12
 
 proc experimentMiddleware(): HandlerAsync =
-  result = proc(ctx: UserContext) {.async.} =
+  result = proc(ctx: Context) {.async.} =
+    var ctx = UserContext(ctx)
     doAssert ctx.data == 12
     inc ctx.data
     await switch(ctx)
@@ -59,7 +51,8 @@ proc experimentMiddleware(): HandlerAsync =
 method extend(ctx: UserContext) =
   init(ctx)
 
-proc hello*(ctx: UserContext) {.async.} =
+proc hello*(ctx: Context) {.async.} =
+  var ctx = UserContext(ctx)
   assert ctx.data == 13
   echo ctx.data
   resp "<h1>Hello, Prologue!</h1>"
@@ -75,8 +68,6 @@ app.run(UserContext)
 **Notes**: use prefix or suffix denoting data member to avoid conflicts with other middlewares.
 
 ```nim
-import prologue
-
 # middleware for general purpose
 type
   ExperimentContext = concept ctx
@@ -88,8 +79,9 @@ proc init[T: ExperimentContext](ctx: T) =
 
 proc experimentMiddleware[T: ExperimentContext](ctxType: typedesc[T]): HandlerAsync =
   result = proc(ctx: Context) {.async.} =
-    doAssert ctx.ctxType.data == 12
-    inc ctx.ctxType.data
+    var ctx = ctxType(ctx)
+    doAssert ctx.data == 12
+    inc ctx.data
     await switch(ctx)
 
 
@@ -100,7 +92,8 @@ type
 method extend(ctx: UserContext) =
   init(ctx)
 
-proc hello*(ctx: UserContext) {.async.} =
+proc hello*(ctx: Context) {.async.} =
+  var ctx = UserContext(ctx)
   assert ctx.data == 13
   echo ctx.data
   resp "<h1>Hello, Prologue!</h1>"
