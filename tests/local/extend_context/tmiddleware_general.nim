@@ -11,7 +11,7 @@ proc init[T: ExperimentContext](ctx: T) =
 
 proc experimentMiddleware[T: ExperimentContext](ctxType: typedesc[T]): HandlerAsync =
   result = proc(ctx: Context) {.async.} =
-    var ctx = ctxType(ctx)
+    let ctx = ctxType(ctx)
     doAssert ctx.data == 12
     inc ctx.data
     await switch(ctx)
@@ -25,7 +25,7 @@ method extend(ctx: UserContext) =
   init(ctx)
 
 proc hello*(ctx: Context) {.async.} =
-  var ctx = UserContext(ctx)
+  let ctx = UserContext(ctx)
   assert ctx.data == 13
   echo ctx.data
   resp "<h1>Hello, Prologue!</h1>"

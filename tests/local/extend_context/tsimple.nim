@@ -9,7 +9,7 @@ method extend(ctx: UserContext) =
   ctx.data = 999
 
 proc hello*(ctx: Context) {.async.} =
-  var ctx = UserContext(ctx)
+  let ctx = UserContext(ctx)
   doAssert ctx.data == 999
   resp "<h1>Hello, Prologue!</h1>"
 
