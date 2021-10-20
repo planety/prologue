@@ -1,0 +1,9 @@
+# nimble tests
+nimcache/
+outputGotten.txt
+testresults/
+tests/megatest
+tests/megatest.nim
+tests/server/tserver_application
+tests/start_server
+examples/todoapp/app
