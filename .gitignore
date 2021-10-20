@@ -7,3 +7,12 @@ tests/megatest.nim
 tests/server/tserver_application
 tests/start_server
 examples/todoapp/app
+
+# nimble texample
+tests/compile/test_examples/examples
+
+# nimble treadme
+tests/compile/test_readme/readme
+
+# nimble tcompile
+tests/compile/test_compile/test_compile
