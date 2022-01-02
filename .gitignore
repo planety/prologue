@@ -16,3 +16,6 @@ tests/compile/test_readme/readme
 
 # nimble tcompile
 tests/compile/test_compile/test_compile
+
+*.exe
+.vscode
