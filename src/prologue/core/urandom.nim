@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from pkg/nimcrypto/sysrand import randomBytes
+from std/sysrand import urandom
 
 from ./types import SecretKey
 from ./utils import fromByteSeq
@@ -24,11 +24,11 @@ const
 proc randomBytesSeq*(size = DefaultEntropy): seq[byte] {.inline.} =
   ## Generates a new system random sequence of bytes.
   result = newSeq[byte](size)
-  discard randomBytes(result)
+  discard urandom(result)
 
 proc randomBytesSeq*[size: static[int]](): array[size, byte] {.inline.} =
   ## Generates a new system random sequence of bytes.
-  discard randomBytes(result)
+  discard urandom(result)
 
 proc randomString*(size = DefaultEntropy): string {.inline.} =
   ## Generates a new system random strings.

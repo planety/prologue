@@ -14,7 +14,6 @@
 
 import std/[os, uri, tables, strutils, strformat, logging, strtabs, options, json, asyncdispatch]
 from std/nativesockets import Port, `$`
-from std/cgi import CgiError
 
 from ./form import parseFormParams
 from ./nativesettings import newSettings, newCtxSettings,
@@ -445,8 +444,6 @@ proc handleNativeRequest(request: var Request) {.inline, gcsafe.} =
   # parse form params
   try:
     request.parseFormParams(contentType)
-  except CgiError:
-    logging.warn(fmt"Malformed query params: Got ?{request.query}")
   except Exception as e:
     logging.error(&"Malformed form params:\n{e.msg}")
 
