@@ -29,7 +29,7 @@ import ./httpexception
 
 const 
   pathSeparator = '/'
-  allowedCharsInUrl = {'a'..'z', 'A'..'Z', '0'..'9', '-', '.', '_', '~', pathSeparator}
+  allowedCharsInUrl = {'a'..'z', 'A'..'Z', '0'..'9', '-', '.', '_', '~', '%', pathSeparator}
   wildcard = '*'
   startParam = '{'
   endParam = '}'

@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import std/[logging, strtabs, strutils, asyncdispatch]
+import std/[logging, strtabs, strutils, asyncdispatch, os]
 
 from ../core/context import Context, HandlerAsync
 from ../core/middlewaresbase import switch
@@ -85,3 +85,20 @@ proc httpRedirectMiddleWare*(): HandlerAsync =
       return
     await switch(ctx)
     ctx.response.code = Http307
+
+proc isStaticFile*(
+  path: string, 
+  dirs: openArray[string]
+): tuple[hasValue: bool, filename, dir: string] =
+  result = (false, "", "")
+  var path = path.strip(chars = {'/'}, trailing = false)
+  normalizePath(path)
+  if not fileExists(path):
+    return
+  let file = splitFile(path)
+
+  for dir in dirs:
+    if dir.len == 0:
+      continue
+    if file.dir.startsWith(dir):
+      return (true, file.name & file.ext, file.dir)

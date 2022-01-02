@@ -43,7 +43,7 @@ proc sendResponse(ctx: Context) {.async.} =
 
 First this handler will send "data" to the client, then the handler will send "message" to the client. However, this may be not the intended behaviour. You want to make sure when you send response by yourself, the framework shouldn't handle the response anymore.
 
-You can set the `handled` attributes of context to true. Now the framework won't handle `ctx.response` any more, even the error handler won't work. Only "data" message is sent to the client.
+You can set the `handled` attribute of context to true. Now the framework won't handle `ctx.response` any more and the error handler won't handle the response too. Only the "data" message is sent to the client.
 
 ```nim
 proc sendResponse(ctx: Context) {.async.} =
