@@ -14,7 +14,7 @@
 
 
 import std/[strtabs, strutils, strformat, parseutils, tables]
-from cgi import decodeData
+from std/uri import decodeQuery
 
 import ./httpcore/httplogue
 from ./types import FormPart, initFormPart, `[]=`
@@ -102,5 +102,5 @@ func parseFormParams*(request: var Request, contentType: string) =
   # /student?name=simon&age=sixteen
   # query -> name=simon&age=sixteen
 
-  for (key, value) in decodeData(request.query):
+  for (key, value) in decodeQuery(request.query):
     request.queryParams[key] = value
