@@ -1,8 +1,8 @@
-# nimble tests
-nimcache/
+*exe
+nimcache
+testresults
+.gitignore
 outputGotten.txt
-testresults/
-tests/megatest
 tests/megatest.nim
 tests/server/tserver_application
 tests/start_server
@@ -19,3 +19,4 @@ tests/compile/test_compile/test_compile
 
 *.exe
 .vscode
+
