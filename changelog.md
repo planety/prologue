@@ -1,4 +1,4 @@
-## 0.5.0
+## 0.5.2
 
 Deprecated prologue/security/hashers (fix #140).
 
