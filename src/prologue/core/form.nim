@@ -92,7 +92,7 @@ func parseFormParams*(request: var Request, contentType: string) =
   if "form-urlencoded" in contentType:
     request.formParams = initFormPart()
     if request.reqMethod == HttpPost:
-      for (key, value) in decodeData(request.body):
+      for (key, value) in decodeQuery(request.body):
         # formPrams and postParams for secret event
         request.formParams[key] = value
         request.postParams[key] = value
