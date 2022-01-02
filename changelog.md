@@ -1,8 +1,12 @@
+## 0.5.0
+
+Deprecated prologue/security/hashers (fix #140).
+
 ## 0.4.8
 
 A new form of user defined context.
 
-Make ip-address clickable(fix #85).
+Make ip-address clickable (fix #85).
 
 ## 0.4.6
 
@@ -13,7 +17,7 @@ Fixed https://github.com/planety/prologue/issues/122
 
 ## 0.4.4
 
-Added `logueRouteLoose` to enable loosely route matching(fix #112).
+Added `logueRouteLoose` to enable loosely route matching (fix #112).
 
 ## 0.4.2
 
