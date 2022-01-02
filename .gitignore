@@ -1,18 +1,22 @@
-# nimble tests
-nimcache/
+*exe
+nimcache
+testresults
+.gitignore
 outputGotten.txt
-testresults/
-tests/megatest
 tests/megatest.nim
-tests/server/tserver_application
-tests/start_server
-examples/todoapp/app
-
-# nimble texample
-tests/compile/test_examples/examples
-
-# nimble treadme
-tests/compile/test_readme/readme
-
-# nimble tcompile
-tests/compile/test_compile/test_compile
+site
+test.nim
+examples/blog/blog.db
+.vscode
+route/
+tests/test_staticFile/public
+examples/blog/blog.db
+test.md
+test.html
+marketing.md
+mark.nim
+ok.nim
+ok2.nim
+okkk.nim
+think.nim
+wrong.nim

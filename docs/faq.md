@@ -38,10 +38,7 @@ proc setLoggingLevel() =
   logging.setLogFilter(lvlInfo)
 
 
-let 
-  event = initEvent(setLoggingLevel)
-var
-  app = newApp(settings = settings, startup = @[event])
+setLoggingLevel()
 ```
 
 (4). Avoid using a function name which is same to the module name.

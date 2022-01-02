@@ -1,4 +1,5 @@
-# Event
+deprecated
+<!-- # Event
 
 `Prologue` supports both `startup` and `shutdown` events. `startup` events will be only executed once before the main loop. In contrast, `shutdown` events will be executed once after the main loop.
 
@@ -49,4 +50,4 @@ let
 
 var
   app = newApp(settings = settings, startup = @[event])
-```
+``` -->
