@@ -115,8 +115,6 @@ If you need more extensions, you can refer to [awesome prologue](https://github.
 
 Thanks for supporting me!
 
-[buy me a coffee](https://www.buymeacoffee.com/flywind)
-
 [patreon](https://www.patreon.com/flywind)
 
 
