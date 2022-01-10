@@ -466,7 +466,7 @@ proc handleContext*(app: Prologue, ctx: Context) {.async, gcsafe.} =
     # catch abort error
     logging.debug e.msg
   except Exception as e:
-    logging.error e.msg
+    logging.error $e.name & ": " & e.msg 
     ctx.response.code = Http500
     ctx.response.body = e.msg
     ctx.response.setHeader("content-type", "text/plain; charset=UTF-8")
