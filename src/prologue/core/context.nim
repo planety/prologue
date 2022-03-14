@@ -322,41 +322,85 @@ proc default500Handler*(ctx: Context): Future[void] =
   result = newFuture[void]()
   complete(result)
 
+func getPostParamsOption*(ctx: Context, key: string): Option[string] {.inline.} =
+  ## Gets a param from the HttpPost parameters. Returns none(string) if the
+  ## request method is not HttpPost or the param is not in the post-parameters.
+  ##
+  ## `getPostParams` only handles `form-urlencoded` types.
+  if ctx.request.reqMethod == HttpPost:
+    let postParam: string = ctx.request.postParams.getOrDefault(key, default = "")
+    let hasPostParam = postParam != ""
+    result = if hasPostParam: some(postParam) else: none(string) 
+  
+  else:
+    result = none(string)
+
 func getPostParams*(ctx: Context, key: string, default = ""): string {.inline.} =
-  ## Gets the parameters by HttpPost.
+  ## Gets a param from the HttpPost parameters. Returns the default value 
+  ## (which is an empty string if unspecified) if the param is not in the post
+  ## parameters.
   ##
   ## `getPostParams` only handles `form-urlencoded` types.
   ##
-  case ctx.request.reqMethod
-  of HttpPost:
-    result = ctx.request.postParams.getOrDefault(key, default)
-  else:
-    result = ""
+  let postParamOption: Option[string] = getPostParamsOption(ctx, key)
+  result = if postParamOption.isSome(): postParamOption.get() else: default
+
+func getQueryParamsOption*(ctx: Context, key: string): Option[string] {.inline.} =
+  ## Gets a param from the query strings. Returns none(string) if the param does not exist.
+  ## (for example, "www.google.com/hello?name=12", `name=12`).
+  let queryParam: string = ctx.request.queryParams.getOrDefault(key, "")
+  let hasQueryParam = queryParam != ""
+  result = if hasQueryParam: some(queryParam) else: none(string)
 
 func getQueryParams*(ctx: Context, key: string, default = ""): string {.inline.} =
-  ## Gets the query strings(for example, "www.google.com/hello?name=12", `name=12`).
-  result = ctx.request.queryParams.getOrDefault(key, default)
+  ## Gets a param from the query strings(for example, "www.google.com/hello?name=12", `name=12`).
+  ## Returns the default value if the param does not exist.
+  let queryParamOption: Option[string] = getQueryParamsOption(ctx, key)
+  result = if queryParamOption.isSome():  queryParamOption.get() else: default
+
+func getPathParamsOption*(ctx: Context, key: string): Option[string] {.inline.} =
+  ## Gets a route parameter(for example, "/hello/{name}"). Returns none(string)
+  ## if the param does not exist.
+  let pathParam: string = ctx.request.pathParams.getOrDefault(key, default="")
+  let hasPathParam = pathParam != ""
+  result = if hasPathParam: some(pathParam) else: none(string)
 
 func getPathParams*(ctx: Context, key: string): string {.inline.} =
-  ## Gets the route parameters(for example, "/hello/{name}").
-  ctx.request.pathParams.getOrDefault(key)
+  ## Gets the route parameters(for example, "/hello/{name}"). Returns an empty 
+  ## string if the param does not exist.
+  let pathParamOption: Option[string] = getPathParamsOption(ctx, key)
+  result = if pathParamOption.isSome(): pathParamOption.get() else: ""
 
 func getPathParams*[T: BaseType](ctx: Context, key: string,
                     default: T): T {.inline.} =
-  ## Gets the route parameters(for example, "/hello/{name}").
-  let pathParams = ctx.request.pathParams.getOrDefault(key)
-  parseValue(pathParams, default)
+  ## Gets the route parameters(for example, "/hello/{name}"). Returns the
+  ## default value if the param does not exist.
+  let pathParamOption: Option[string] = getPathParamsOption(ctx, key)
+  if pathParamOption.isSome():
+    result = pathParamOption.get().parseValue(default) #default serves no purpose here but is kept due to the proc requiring it
+  else:
+    result = default
+
+func getFormParamsOption*(ctx: Context, key: string): Option[string] {.inline.} =
+  ## Gets the contents of the form if key exists.
+  ## If you need the filename of the form, use `getUploadFile` instead.
+  ## Returns none(string) if the form param does not exist
+  ##
+  ## `getFormParams` handles both `form-urlencoded` and `multipart/form-data`.
+  ##
+  let hasFormParam = key in ctx.request.formParams.data
+  result = if hasFormParam: some(ctx.request.formParams[key].body) else: none(string)
 
 func getFormParams*(ctx: Context, key: string, default = ""): string {.inline.} =
   ## Gets the contents of the form if key exists. Otherwise `default` will be returned.
   ## If you need the filename of the form, use `getUploadFile` instead.
+  ## Returns the default value (which is an empty string if unspecified) if the
+  ## form param does not exist.
   ##
   ## `getFormParams` handles both `form-urlencoded` and `multipart/form-data`.
   ##
-  if key in ctx.request.formParams.data:
-    result = ctx.request.formParams[key].body
-  else:
-    result = default
+  let formParam: Option[string] = getFormParamsOption(ctx, key)
+  result = if formParam.isSome(): formParam.get() else: default
 
 proc setResponse*(ctx: Context, code: HttpCode,
                   body = "", version = HttpVer11) {.inline.} =
