@@ -328,12 +328,10 @@ func getPostParamsOption*(ctx: Context, key: string): Option[string] {.inline.} 
   ##
   ## `getPostParams` only handles `form-urlencoded` types.
   if ctx.request.reqMethod == HttpPost:
-    let postParam: string = ctx.request.postParams.getOrDefault(key, default = "")
-    let hasPostParam = postParam != ""
-    if hasPostParam: 
-      result = some(postParam) 
-    else: 
-      result = none(string) 
+    if ctx.request.postParams.hasKey(key):
+      result = some(ctx.request.postParams[key])
+    else:
+      result = none(string)
   
   else:
     result = none(string)
