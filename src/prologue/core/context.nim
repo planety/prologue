@@ -352,38 +352,26 @@ func getPostParams*(ctx: Context, key: string, default = ""): string {.inline.} 
 func getQueryParamsOption*(ctx: Context, key: string): Option[string] {.inline.} =
   ## Gets a param from the query strings. Returns none(string) if the param does not exist.
   ## (for example, "www.google.com/hello?name=12", `name=12`).
-  let queryParam: string = ctx.request.queryParams.getOrDefault(key, "")
-  if queryParam != "": 
-    result = some(queryParam) 
-  else: 
-    result = none(string)
+  let hasQueryParam = ctx.request.queryParams.hasKey(key)
+  result = if hasQueryParam: some(ctx.request.queryParams[key]) else: none(string)
 
 func getQueryParams*(ctx: Context, key: string, default = ""): string {.inline.} =
   ## Gets a param from the query strings(for example, "www.google.com/hello?name=12", `name=12`).
   ## Returns the default value if the param does not exist.
   let queryParamOption: Option[string] = getQueryParamsOption(ctx, key)
-  if queryParamOption.isSome():  
-    result = queryParamOption.get() 
-  else: 
-    result = default
+  result = if queryParamOption.isSome(): queryParamOption.get() else: default
 
 func getPathParamsOption*(ctx: Context, key: string): Option[string] {.inline.} =
   ## Gets a route parameter(for example, "/hello/{name}"). Returns none(string)
   ## if the param does not exist.
-  let pathParam: string = ctx.request.pathParams.getOrDefault(key, default="")
-  if pathParam != "": 
-    result = some(pathParam) 
-  else: 
-    result = none(string)
+  let hasPathParam = ctx.request.pathParams.hasKey(key)
+  result = if hasPathParam: some(ctx.request.pathParams[key]) else: none(string)
 
 func getPathParams*(ctx: Context, key: string): string {.inline.} =
   ## Gets the route parameters(for example, "/hello/{name}"). Returns an empty 
   ## string if the param does not exist.
   let pathParamOption: Option[string] = getPathParamsOption(ctx, key)
-  if pathParamOption.isSome(): 
-    result = pathParamOption.get() 
-  else: 
-    result = ""
+  result = if pathParamOption.isSome(): pathParamOption.get() else: ""
 
 func getPathParams*[T: BaseType](ctx: Context, key: string,
                     default: T): T {.inline.} =
@@ -401,11 +389,8 @@ func getFormParamsOption*(ctx: Context, key: string): Option[string] {.inline.} 
   ## Returns none(string) if the form param does not exist
   ##
   ## `getFormParams` handles both `form-urlencoded` and `multipart/form-data`.
-  ##
-  if key in ctx.request.formParams.data: 
-    result = some(ctx.request.formParams[key].body) 
-  else: 
-    result = none(string)
+  let hasFormParam = key in ctx.request.formParams.data
+  result = if hasFormParam: some(ctx.request.formParams[key].body) else: none(string)
 
 func getFormParams*(ctx: Context, key: string, default = ""): string {.inline.} =
   ## Gets the contents of the form if key exists. Otherwise `default` will be returned.
@@ -416,10 +401,7 @@ func getFormParams*(ctx: Context, key: string, default = ""): string {.inline.} 
   ## `getFormParams` handles both `form-urlencoded` and `multipart/form-data`.
   ##
   let formParam: Option[string] = getFormParamsOption(ctx, key)
-  if formParam.isSome(): 
-    result = formParam.get() 
-  else: 
-    result = default
+  result = if formParam.isSome(): formParam.get() else: default
 
 proc setResponse*(ctx: Context, code: HttpCode,
                   body = "", version = HttpVer11) {.inline.} =
