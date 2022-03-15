@@ -353,8 +353,7 @@ func getQueryParamsOption*(ctx: Context, key: string): Option[string] {.inline.}
   ## Gets a param from the query strings. Returns none(string) if the param does not exist.
   ## (for example, "www.google.com/hello?name=12", `name=12`).
   let queryParam: string = ctx.request.queryParams.getOrDefault(key, "")
-  let hasQueryParam = queryParam != ""
-  if hasQueryParam: 
+  if queryParam != "": 
     result = some(queryParam) 
   else: 
     result = none(string)
@@ -372,8 +371,7 @@ func getPathParamsOption*(ctx: Context, key: string): Option[string] {.inline.} 
   ## Gets a route parameter(for example, "/hello/{name}"). Returns none(string)
   ## if the param does not exist.
   let pathParam: string = ctx.request.pathParams.getOrDefault(key, default="")
-  let hasPathParam = pathParam != ""
-  if hasPathParam: 
+  if pathParam != "": 
     result = some(pathParam) 
   else: 
     result = none(string)
@@ -404,8 +402,7 @@ func getFormParamsOption*(ctx: Context, key: string): Option[string] {.inline.} 
   ##
   ## `getFormParams` handles both `form-urlencoded` and `multipart/form-data`.
   ##
-  let hasFormParam = key in ctx.request.formParams.data
-  if hasFormParam: 
+  if key in ctx.request.formParams.data: 
     result = some(ctx.request.formParams[key].body) 
   else: 
     result = none(string)
