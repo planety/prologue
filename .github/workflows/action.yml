@@ -9,16 +9,16 @@ jobs:
       matrix:
         os:
           - ubuntu-latest
-          - windows-latest
-          - macOS-latest
+#           - windows-latest
+#           - macOS-latest
         nim-version:
           - stable
           - devel
-        exclude:
-          - os: windows-latest
-            nim-version: devel
-          - os: macos-latest
-            nim-version: devel
+#         exclude:
+#           - os: windows-latest
+#             nim-version: devel
+#           - os: macos-latest
+#             nim-version: devel
     steps:
     - name: Checkout
       uses: actions/checkout@v2
