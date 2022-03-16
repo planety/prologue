@@ -24,7 +24,7 @@ proc hello(ctx: Context) {.async.} =
   resp ctx.getPostParamsOption("username").get()
 ```
 
-If you want to specify a default value to return, take a look at <a href="https://planety.github.io/prologue/coreapi/context.html#getPostParams%2CContext%2Cstring%2Cstring"> getPostParams </a>
+If you want to specify a default value to return, take a look at [getPostParams](https://planety.github.io/prologue/coreapi/context.html#getPostParams%2CContext%2Cstring%2Cstring)
 
 ### getQueryParamsOption
 
@@ -35,7 +35,7 @@ proc hello(ctx: Context) {.async.} =
   doAssert ctx.getQueryParamsOption("name").get() == "12"
 ```
 
-If you want to specify a default value to return, take a look at <a href="https://planety.github.io/prologue/coreapi/context.html#getQueryParams%2CContext%2Cstring%2Cstring"> getQueryParams </a>
+If you want to specify a default value to return, take a look at [getQueryParams](https://planety.github.io/prologue/coreapi/context.html#getQueryParams%2CContext%2Cstring%2Cstring)
 
 ### getPathParamsOption
 
@@ -46,7 +46,7 @@ proc hello(ctx: Context) {.async.} =
   resp "<h1>Hello, " & ctx.getPathParams("name", "Prologue") & "</h1>"
 ```
 
-If you want to specify a default value to return and have automatic parsing to int, float or bool (depending on the type of the default you provide), take a look at <a href="https://planety.github.io/prologue/coreapi/context.html#getPathParams%2CContext%2Cstring%2CT"> getPathParams </a>
+If you want to specify a default value to return and have automatic parsing to int, float or bool (depending on the type of the default you provide), take a look at [getPathParams](https://planety.github.io/prologue/coreapi/context.html#getPathParams%2CContext%2Cstring%2CT)
 
 ### getFormParamsOption
 
@@ -60,7 +60,7 @@ proc hello(ctx: Context) {.async.} =
   resp "<h1>Hello, " & ctx.getFormParamsOption("name", "Prologue").get() & "</h1>"
 ```
 
-If you want to specify a default value to return, take a look at <a href="https://planety.github.io/prologue/coreapi/context.html#getFormParams%2CContext%2Cstring%2Cstring"> getFormParams </a>
+If you want to specify a default value to return, take a look at [getFormParams](https://planety.github.io/prologue/coreapi/context.html#getFormParams%2CContext%2Cstring%2Cstring)
 
 ### setResponse
 
