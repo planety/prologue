@@ -43,7 +43,7 @@ Gets the route parameters(for example, "/hello/{name}") as an `Option[string]`.
 
 ```nim
 proc hello(ctx: Context) {.async.} =
-  resp "<h1>Hello, " & ctx.getPathParams("name", "Prologue") & "</h1>"
+  resp "<h1>Hello, " & ctx.getPathParamsOption("name").get() & "</h1>"
 ```
 
 If you want to specify a default value to return and have automatic parsing to int, float or bool (depending on the type of the default you provide), take a look at [getPathParams](https://planety.github.io/prologue/coreapi/context.html#getPathParams%2CContext%2Cstring%2CT)
@@ -57,7 +57,7 @@ Note that: `getFormParams` handles both `form-urlencoded` and `multipart/form-da
 
 ```nim
 proc hello(ctx: Context) {.async.} =
-  resp "<h1>Hello, " & ctx.getFormParamsOption("name", "Prologue").get() & "</h1>"
+  resp "<h1>Hello, " & ctx.getFormParamsOption("name").get() & "</h1>"
 ```
 
 If you want to specify a default value to return, take a look at [getFormParams](https://planety.github.io/prologue/coreapi/context.html#getFormParams%2CContext%2Cstring%2Cstring)
