@@ -1,3 +1,7 @@
+## 0.5.6
+
+Added `getPostParamsOption`, `getQueryParamsOption`, `getFormParamsOption`, `getPathParamsOption`.
+
 ## 0.5.2
 
 Deprecated prologue/security/hashers (fix #140).
