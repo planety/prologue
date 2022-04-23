@@ -15,7 +15,7 @@ type
     startup*: seq[Event]
     shutdown*: seq[Event]
     errorHandlerTable*: ErrorHandlerTable
-    startupClosure {.cursor.} : proc () {.closure, gcsafe.}
+    startupClosure: proc () {.closure, gcsafe.}
 
 proc execStartupEvent*(app: Prologue) =
   proc doStartup() {.gcsafe.} =
