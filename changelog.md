@@ -1,3 +1,7 @@
+## 0.5.8
+
+remove cursor annotation; Prologue should work with ORC (thanks to @Yardanico's advice)
+
 ## 0.5.6
 
 Added `getPostParamsOption`, `getQueryParamsOption`, `getFormParamsOption`, `getPathParamsOption`.
