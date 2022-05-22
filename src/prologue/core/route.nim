@@ -29,7 +29,7 @@ import ./httpexception
 
 const 
   pathSeparator = '/'
-  allowedCharsInUrl = {'a'..'z', 'A'..'Z', '0'..'9', '-', '.', '_', '~', '%', pathSeparator}
+  allowedCharsInUrl = {'a'..'z', 'A'..'Z', '0'..'9', '-', '.', '_', '~', '%', '\'', pathSeparator}
   wildcard = '*'
   startParam = '{'
   endParam = '}'
@@ -130,7 +130,7 @@ func ensureCorrectRoute(
   ## Verifies that this given path is a valid path, strips trailing slashes, and guarantees leading slashes.
   if(not path.allCharsInSet(allowedCharsInPattern)):
     raise newException(RouteError, "Illegal characters occurred in the mapped pattern," &
-                  "please restrict to alphanumeric, or the following: - . _ ~ / * { } &")
+                  "please restrict to alphanumeric, or the following: - . _ ~ / * { } & '")
 
   result = path
 
