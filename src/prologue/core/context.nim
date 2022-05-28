@@ -14,7 +14,7 @@
 
 import std/[mimetypes, md5, uri, strutils, critbits, 
             asyncfile, asyncdispatch,strtabs, tables, strformat, 
-            os, times, options, parseutils, json, sugar]
+            os, times, options, parseutils, json]
 
 import ./response, ./pages, ./basicregex, ./request, ./httpcore/httplogue
 import ./types
