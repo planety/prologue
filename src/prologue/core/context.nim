@@ -14,7 +14,7 @@
 
 import std/[mimetypes, md5, uri, strutils, critbits, 
             asyncfile, asyncdispatch,strtabs, tables, strformat, 
-            os, times, options, parseutils, json]
+            os, times, options, parseutils, json, sugar]
 
 import ./response, ./pages, ./basicregex, ./request, ./httpcore/httplogue
 import ./types
@@ -353,7 +353,8 @@ func getQueryParamsOption*(ctx: Context, key: string): Option[string] {.inline.}
   ## Gets a param from the query strings. Returns none(string) if the param does not exist.
   ## (for example, "www.google.com/hello?name=12", `name=12`).
   let hasQueryParam = ctx.request.queryParams.hasKey(key)
-  result = if hasQueryParam: some(ctx.request.queryParams[key]) else: none(string)
+  let queryParam: Option[string] = if hasQueryParam: some(ctx.request.queryParams[key]) else: none(string)
+  result = queryParam.map(param => param.decodeUrl())
 
 func getQueryParams*(ctx: Context, key: string, default = ""): string {.inline.} =
   ## Gets a param from the query strings(for example, "www.google.com/hello?name=12", `name=12`).
@@ -365,7 +366,8 @@ func getPathParamsOption*(ctx: Context, key: string): Option[string] {.inline.} 
   ## Gets a route parameter(for example, "/hello/{name}"). Returns none(string)
   ## if the param does not exist.
   let hasPathParam = ctx.request.pathParams.hasKey(key)
-  result = if hasPathParam: some(ctx.request.pathParams[key]) else: none(string)
+  let pathParam: Option[string] = if hasPathParam: some(ctx.request.pathParams[key]) else: none(string)
+  result = pathParam.map(param => param.decodeUrl())
 
 func getPathParams*(ctx: Context, key: string): string {.inline.} =
   ## Gets the route parameters(for example, "/hello/{name}"). Returns an empty 
