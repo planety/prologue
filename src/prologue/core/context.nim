@@ -353,8 +353,7 @@ func getQueryParamsOption*(ctx: Context, key: string): Option[string] {.inline.}
   ## Gets a param from the query strings. Returns none(string) if the param does not exist.
   ## (for example, "www.google.com/hello?name=12", `name=12`).
   let hasQueryParam = ctx.request.queryParams.hasKey(key)
-  let queryParam: Option[string] = if hasQueryParam: some(ctx.request.queryParams[key]) else: none(string)
-  result = queryParam.map(param => param.decodeUrl())
+  result = if hasQueryParam: some(decodeUrl(ctx.request.queryParams[key])) else: none(string)
 
 func getQueryParams*(ctx: Context, key: string, default = ""): string {.inline.} =
   ## Gets a param from the query strings(for example, "www.google.com/hello?name=12", `name=12`).
@@ -366,8 +365,7 @@ func getPathParamsOption*(ctx: Context, key: string): Option[string] {.inline.} 
   ## Gets a route parameter(for example, "/hello/{name}"). Returns none(string)
   ## if the param does not exist.
   let hasPathParam = ctx.request.pathParams.hasKey(key)
-  let pathParam: Option[string] = if hasPathParam: some(ctx.request.pathParams[key]) else: none(string)
-  result = pathParam.map(param => param.decodeUrl())
+  result = if hasPathParam: some(decodeUrl(ctx.request.pathParams[key])) else: none(string)
 
 func getPathParams*(ctx: Context, key: string): string {.inline.} =
   ## Gets the route parameters(for example, "/hello/{name}"). Returns an empty 
