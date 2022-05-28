@@ -1,3 +1,7 @@
+## 0.6.0
+
+Added automatic URL decoding when fetching query parameters or path parameters from request object
+
 ## 0.5.8
 
 remove cursor annotation; Prologue should work with ORC (thanks to @Yardanico's advice)
