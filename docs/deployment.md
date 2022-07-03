@@ -84,8 +84,6 @@ http {
         listen 443 ssl http2;
         listen [::]:443 ssl http2;       
         
-        rewrite "^\/$" "/wiki2" last;
-
         root /media;
 
         # Passes requests on to the prologue application server
