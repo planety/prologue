@@ -31,6 +31,7 @@ nav:
     - Views: "views.md"
     - OpenAPI: "openapi.md"
     - Validation: "validation.md"
+    - Deployment: "deployment.md"
     - FAQ: "faq.md"
 
 
