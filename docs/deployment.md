@@ -3,10 +3,10 @@ This is an example of how you can deploy a prologue web-application that was com
 This example will use nginx as a reverse proxy for the prologue application, both within the same container for simplicities sake.
 
 This example assumes that:
-1) You have a server
-2) You can ssh into your server
-3) You can copy files to your server via e.g. scp
-4) You have set up your server with a domain name
+1. You have a server
+2. You can ssh into your server
+3. You can copy files to your server via e.g. scp
+4. You have set up your server with a domain name
 
 ## Compile your binary
 On any normal Linux system, you typically compile with gcc and dynamically link to your local installation of `glibc`.
@@ -32,17 +32,16 @@ Add the above to your `<YOUR_PROJECT>.nimble` file and then you can run `nimble 
 
 ## Prepare buildFiles
 For our docker container to run properly, we will need to:
-1) Set up your server to have SSL certificates with certbot to get `fullchain.pem` and `privkey.pem` files
-2) Write an `nginx.conf` file to configure nginx
-3) Write a bash file `dockerStartupScript.sh` to run inside the docker container when starting it.
-4) Write a `settings.json` file for prologue
+1. Set up your server to have SSL certificates with certbot to get `fullchain.pem` and `privkey.pem` files
+2. Write an `nginx.conf` file to configure nginx
+3. Write a bash file `dockerStartupScript.sh` to run inside the docker container when starting it.
+4. Write a `settings.json` file for prologue
 
 We will store these files in a directory called `buildFiles` and include them in our docker image later.
 
 ### Set up your server to have SSL certificates with certbot
 There are many great resources on how you can get free SSL certificates for use with your web-application.
-We recommend using certbot for this purpose. Follow the instructions on their website to set yourself up:
-https://certbot.eff.org/instructions
+We recommend using [certbot](https://certbot.eff.org/instructions) for this purpose. Follow the instructions on their website to set yourself up.
 
 ### Configuring nginx
 Nginx requires a config file, `nginx.conf` to work as we want it to.
@@ -151,7 +150,7 @@ It will contain the instructions necessary to create a docker image, from which 
 
 We will base this image off of `bitnami/minideb`, a minimal debian image that contains glibc and apt for installing further packages.
 
-As a sidenote, we will be setting up various folders ahead of time, in order to use them as mounting points for docker volumes when creating containers from the image (https://docs.docker.com/storage/volumes/). 
+As a sidenote, we will be setting up various folders ahead of time, in order to use them as mounting points for [docker volumes](https://docs.docker.com/storage/volumes/) when creating containers from the image. 
 This way you can use files inside your image without risking loosing them should the container crash.
 
 Here an example of how this can look like:
@@ -223,15 +222,15 @@ To fix this, you can specify a glibc version to link to when compiling.
 
 The simplest way to do so is installing the zig package and using zigs ability to call clang and link the desired glibc version with it.
 The steps go as follows:
-1) Install zig
-2) Write a bashscript called `zigcc`
+1. Install zig
+2. Write a bashscript called `zigcc`
 ```sh
 #!/bin/sh
 zig cc $@
 ```
-3) Move `zigcc` to somewhere on your path, e.g. `/usr/local/bin`.
+3. Move `zigcc` to somewhere on your path, e.g. `/usr/local/bin`.
 This is required since the nim compiler does not tolerate spaces in commands that call compilers.
-4) Write yourself a bashscript with a command to compile your project. 
+4. Write yourself a bashscript with a command to compile your project. 
 This can't be done via nimble tasks since the syntax is not allowed within nimble tasks.
 Replace the "X.XX" with the glibc version that you want as well as the other placeholders.
 ```sh
@@ -253,4 +252,5 @@ nim c \
 --outdir:"." \
 src/<YOUR_MAIN_FILE>.nim
 ```
-5) Run projectCompile.sh
+5. Run projectCompile.sh
+
