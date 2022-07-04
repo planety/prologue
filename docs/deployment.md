@@ -10,7 +10,7 @@ This example assumes that:
 
 ## Compile your binary
 On any normal Linux system, you typically compile with gcc and dynamically link to your local installation of `glibc`.
-Since you likely want to enable various flags, it makes sense to set up a nimble task for this, like this:
+Since you likely want to enable various flags, it makes sense to set up a nimble task for this:
 
 ```txt
 task release, "Build a production release":
@@ -22,17 +22,18 @@ task release, "Build a production release":
   --mm:orc
   --deepcopy:on
   --define:lto
-  --define:ssl # If you smtp clients
+  --define:ssl # If you use smtp clients
   --hints:off
   --outdir:"."
   setCommand "c", "src/<YOUR_MAIN_FILE>.nim"
 ```
 
-Add the above to your `<YOUR_PROJECT>.nimble` file and then you can run `nimble release` to compile your project with the flags specified in there!
+Add the above to your `<YOUR_PROJECT>.nimble` file.
+This allows you to run `nimble release` in your project to compile it with the flags specified in there!
 
 ## Prepare buildFiles
 For our docker container to run properly, we will need to:
-1. Set up your server to have SSL certificates with certbot to get `fullchain.pem` and `privkey.pem` files
+1. Set up the server to have SSL certificates with certbot to get `fullchain.pem` and `privkey.pem` files
 2. Write an `nginx.conf` file to configure nginx
 3. Write a bash file `dockerStartupScript.sh` to run inside the docker container when starting it.
 4. Write a `settings.json` file for prologue
@@ -43,13 +44,16 @@ We will store these files in a directory called `buildFiles` and include them in
 There are many great resources on how you can get free SSL certificates for use with your web-application.
 We recommend using [certbot](https://certbot.eff.org/instructions) for this purpose. Follow the instructions on their website to set yourself up.
 
+As a sidenote though, make sure you set up a mechanism to renew your certificates regularly, to make sure they do not expire.
 ### Configuring nginx
-Nginx requires a config file, `nginx.conf` to work as we want it to.
+Nginx requires a config file, `nginx.conf` to serve any media files and forward requests to our prologue backend.
 
 Here we'll set nginx up to use SSL with the SSL certificates received from the previous step.
 Further, for nginx to forward requests to a prologue backend, we can make use of its "proxy_pass" directive.
+
 Keep in mind that all of these directories will be filepaths within the *docker* container, not your actual server.
 
+See below an example of a small nginx.conf file:
 ```txt
 #user http;
 worker_processes  1;
@@ -65,8 +69,8 @@ http {
 
     sendfile        on;
 
-    keepalive_timeout  600;
-    proxy_send_timeout 600;
+    keepalive_timeout  30;
+    proxy_send_timeout 30;
 
     # Enforces HTTPS by redirecting users with HTTP requests to the HTTPS URL
     server {
@@ -108,7 +112,9 @@ http {
 }
 ```
 
-Store your nginx.conf file locally in `./buildFiles/nginx.conf`.
+Note that the file assumes there will be a `fullchain.pem` and `privkey.pem`, which you currently have on your server (e.g. `/etc/letsencrypt/live`). We will make these certificates accessible by creating the `/cert/live` directories inside the docker image and mounting the certificate directory to that folder when creating a container via [docker volumes](https://docs.docker.com/storage/volumes/).
+
+For now though, store your nginx.conf file locally in `./buildFiles/nginx.conf`.
 
 ### Provide a startup script for your docker container
 For convenience reasons, we want our nginx server and prologue server to automatically start when we start the docker container.
@@ -134,14 +140,14 @@ In order for prologue to function correctly, we will provide a simple settings f
         "port": 8080,
         "debug": false,
         "reusePort": true,
-        "appName": "",
+        "appName": "<YOUR APP NAME>",
         "secretKey": "<YOUR SECRET KEY>",
         "bufSize": 409600
     },
     "name": "production",
 ```
 
-Note that the port you specify here must be the same port used in the `proxy_pass` directive of `nginx.conf`.
+Note that the port you specify here must be the same port used in the `proxy_pass` directive of `./buildFiles/nginx.conf`.
 Store your settings file locally in `./buildFiles/settings.json`.
 
 ## Write your dockerfile
@@ -151,7 +157,7 @@ It will contain the instructions necessary to create a docker image, from which 
 We will base this image off of `bitnami/minideb`, a minimal debian image that contains glibc and apt for installing further packages.
 
 As a sidenote, we will be setting up various folders ahead of time, in order to use them as mounting points for [docker volumes](https://docs.docker.com/storage/volumes/) when creating containers from the image. 
-This way you can use files inside your image without risking loosing them should the container crash.
+This way you can access files inside your container (e.g. media files so that nginx can serve them, or an sqlite database) without risking loosing them should the container crash or be removed.
 
 Here an example of how this can look like:
 ```txt
@@ -159,7 +165,8 @@ FROM bitnami/minideb
 
 # Install dependencies
 RUN apt update
-RUN install_packages openrc openssl nginx libnginx-mod-http-uploadprogress sqlite3
+RUN install_packages openrc openssl nginx
+# RUN install_packages sqlite3 # in case you use an sqlite3 database
 
 # Copy necessary files, the first paths are all relative to your current working directory
 COPY ./path/to/your/binary .
@@ -191,15 +198,17 @@ sudo docker save -o image.tar <YOUR_IMAGE_NAME>
 ## Run the docker image on your server
 After copying your `image.tar` file to the server, you can load it there with docker and run a container from it.
 Besides starting the container, the commands needs to:
-- Open up the HTTP port (80)
-- Open up the HTTPS port (443)
-- Mount all the volumes for certificates, media files etc.
+
+1. Open up the HTTP port (80)
+2. Open up the HTTPS port (443)
+3. Mount all the volumes for certificates, media files etc.
+
 Opening up the ports is done using `-p`, mounting the volumes with `-v`.
-Note that in -v, the first path is the one outside of your container that you mount onto the directory specified by the second path.
+Note that in `-v`, the first path is the one *outside* of your container. It specifies which folder on your server to mount. The second path is the one *inside* your container. It specifies where to mount the server folder in your container.
 
 You may want to write yourself a small script that loads the file, stops and removes any previously running container of the sort before creating a new one from the new image. Here an example:
 ```sh
-#!/bin/bash
+#!/bin/sh
 sudo docker load -i image.tar
 
 sudo docker container stop <YOUR_CONTAINER_NAME>
@@ -213,7 +222,7 @@ sudo docker run -p 80:80 -p 443:443 \
 --name <YOUR_IMAGE_NAME> <YOUR_CONTAINER_NAME>
 ```
 
-Once done, all you need to do is run the command (or script), and your container should be accessible!
+Once done, all you need to do is run the command (or script), and your container will start up and be accessible via HTTP and HTTPS!
 
 ## Known issues
 ### Compile your binary - `error "/lib/x86_64-linux-gnu/libc.so.6: version 'GLIBC_<X.XX>' not found"`
