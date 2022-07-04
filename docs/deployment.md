@@ -28,6 +28,8 @@ task release, "Build a production release":
   setCommand "c", "src/<YOUR_MAIN_FILE>.nim"
 ```
 
+Add the above to your `<YOUR_PROJECT>.nimble` file and then you can run `nimble release` to compile your project with the flags specified in there!
+
 ## Prepare buildFiles
 For our docker container to run properly, we will need to:
 1) Set up your server to have SSL certificates with certbot to get `fullchain.pem` and `privkey.pem` files
