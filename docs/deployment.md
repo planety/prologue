@@ -216,11 +216,18 @@ sudo docker run -p 80:80 -p 443:443 \
 Once done, all you need to do is run the command (or script), and your container should be accessible!
 
 ## Known issues
-### Compile your bianry - `error "/lib/x86_64-linux-gnu/libc.so.6: version 'GLIBC_<X.XX>' not found"`
-You will run into this issue if your local glibc version, that your binary links against and thus states that it is dependant upon, is more up-to-date than the one bitnami/minideb has access to.
-To fix this, you can specify a glibc version to link to when compiling.
+### Compile your binary - `error "/lib/x86_64-linux-gnu/libc.so.6: version 'GLIBC_<X.XX>' not found"`
+You will run into this issue if your local glibc version is more up-to-date than the one bitnami/minideb has access to.
+This is the case because during compilation your binary is dynamically linked with your local glibc version.
+That means in order to run, it expects the environment that executes it to have *at least* that same glibc version in order to make system calls etc. .
 
-The simplest way to do so is installing the zig package and using zigs ability to call clang and link the desired glibc version with it.
+To fix this, you need to link your binary to an older glibc version when compiling.
+[Doing so is not straightforward.](https://stackoverflow.com/questions/2856438/how-can-i-link-to-a-specific-glibc-version)
+
+#### Solution 1: Using zig
+
+The simplest way is installing the [zig programming language](https://ziglang.org/download/), as it contains a Clang compiler, which you can tell which glibc version to use.
+
 The steps go as follows:
 1. Install zig
 2. Write a bashscript called `zigcc`
@@ -254,3 +261,8 @@ src/<YOUR_MAIN_FILE>.nim
 ```
 5. Run projectCompile.sh
 
+#### Solution 2: Create a compilation environment
+
+Instead of using zig, you can set up a second docker container that contains the glibc version you want, gcc, nim, nimble and the C-libs you require. 
+You can then mount your project-folder via [docker volume](https://docs.docker.com/storage/volumes/) in the container and compile as normal.
+Then, you can just compile your binary within the container as usual, your normal compilation command.
