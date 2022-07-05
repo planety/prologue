@@ -1,6 +1,6 @@
-# An example deployment on Linux with nginx inside of a docker container
+# Deploying Prologue with nginx and docker
 This is an example of how you can deploy a prologue web-application that was compiled under Linux.
-This example will use nginx as a reverse proxy for the prologue application, both within the same container for simplicities sake.
+In this example we will use nginx as our reverse proxy, and bundle our application together with nginx in a single linux docker container for simplicities sake.
 
 This example assumes that:
 1. You have a server
