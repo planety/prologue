@@ -3,12 +3,14 @@ This is an example of how you can deploy a prologue web-application that was com
 In this example we will use nginx as our reverse proxy, and bundle our application together with nginx in a single linux docker container for simplicities sake.
 
 As for docker containers, we will look at 2 base images as starting points for our own images:
+
 1. [bitnami/mindeb](https://hub.docker.com/r/bitnami/minideb)
 2. [alpine](https://hub.docker.com/_/alpine)
 
 The process is very similar for both of them, but does contain minor differences, particularly in the dockerfile and commands needed to compile your project.
 
 The examples in this guide assume that:
+
 1. You have a server
 2. You can ssh into your server
 3. You can copy files to your server via e.g. scp
@@ -77,6 +79,7 @@ For simplicities sake, we will still be linking to musl dynamically.
 #### Install musl
 You will first need to install musl.
 To do so, just follow these steps:
+
 1. [download](https://www.musl-libc.org/download.html) the tar file
 2. Unpack the tar file somewhere
 3. Run `bash configure` in the unpacked directory. WARNING: Make sure that you do NOT install musl with `--prefix` being  `/usr/local`, as that may adversely affect your system. Use somewhere else where it is unlikely to override files, e.g. `/usr/local/musl`. This path will further be referred to as <MUSL_INSTALL_PATH>
@@ -128,6 +131,7 @@ task alpine, "Build an alpine release":
 
 ## Prepare buildFiles
 For our docker container to run properly, we will need to:
+
 1. Set up the server to have SSL certificates with certbot to get `fullchain.pem` and `privkey.pem` files
 2. Write an `nginx.conf` file to configure nginx
 3. Write a bash file `dockerStartupScript.sh` to run inside the docker container when starting it.
@@ -365,17 +369,21 @@ To fix this, you need to link your binary to an older glibc version when compili
 The simplest way is installing the [compiler og the zig programming language](https://ziglang.org/download/), as it contains a Clang compiler, which you can tell which glibc version to use.
 
 The steps go as follows:
+
 1. Install zig
 2. Write a bashscript called `zigcc`
+
 ```sh
 #!/bin/sh
 zig cc $@
 ```
+
 3. Move `zigcc` to somewhere on your path, e.g. `/usr/local/bin`.
 This is required since the nim compiler does not tolerate spaces in commands that call compilers.
 4. Write yourself a bashscript with a command to compile your project. 
 This can't be done via nimble tasks since the syntax is not allowed within nimble tasks.
 Replace the "X.XX" with the glibc version that you want as well as the other placeholders.
+
 ```sh
 #!/bin/sh
 # Call this file projectCompile.sh
@@ -395,6 +403,7 @@ nim c \
 --outdir:"." \
 src/<YOUR_MAIN_FILE>.nim
 ```
+
 5. Run projectCompile.sh
 
 #### Solution 2: Create a compilation environment
