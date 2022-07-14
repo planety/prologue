@@ -24,7 +24,7 @@ app.addRoute("/hello", hello)
 app.run()
 ```
 
-You can also use `seq[httpMetod]` to register the same handler but supports multiple HTTP methods.
+You can also use `seq[HttpMethod]` to register the same handler but supports multiple HTTP methods.
 
 ```nim
 import prologue
