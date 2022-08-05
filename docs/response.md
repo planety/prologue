@@ -3,6 +3,7 @@
 ## Respond by types
 
 You can specify different responses by types.
+
 - htmlResponse -> HTML format
 ```nim
 import prologue
