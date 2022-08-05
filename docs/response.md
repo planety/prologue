@@ -34,13 +34,13 @@ import prologue, std/json
 # this proc will return json to the client
 proc response*(ctx: Context) {.async.} =
   # the %* operator creates json from nim types. more info: https://nim-lang.org/docs/json.html
-  var json = %* 
+  var info = %* 
     [
       { "name": "John", "age": 30 },
       { "name": "Susan", "age": 45 }
     ]
 
-  resp jsonResponse(json)
+  resp jsonResponse(info)
 
 let app = newApp()
 app.addRoute("/", response)
