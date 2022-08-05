@@ -33,7 +33,7 @@ import prologue, json
 
 # this proc will return json to the client
 proc response*(ctx: Context) {.async.} =
-# the %* operator creates json from nim types. more info: https://nim-lang.org/docs/json.html
+  # the %* operator creates json from nim types. more info: https://nim-lang.org/docs/json.html
   var json = %* 
     [
       { "name": "John", "age": 30 },
