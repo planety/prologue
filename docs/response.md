@@ -29,7 +29,7 @@ app.run()
 ```
 - jsonResponse -> Json format
 ```nim
-import prologue, json
+import prologue, std/json
 
 # this proc will return json to the client
 proc response*(ctx: Context) {.async.} =
