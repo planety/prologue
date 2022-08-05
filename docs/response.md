@@ -4,8 +4,48 @@
 
 You can specify different responses by types.
 - htmlResponse -> HTML format
+```nim
+import prologue
+
+# this proc will return an html response to the client
+proc response*(ctx: Context) {.async.} =
+  resp htmlResponse("<h1>Hello, Prologue!</h1>")
+
+let app = newApp()
+app.addRoute("/", response)
+app.run()
+```
 - plainTextResponse -> Plain Text format
+```nim
+import prologue
+
+# this proc will return plain text to the client
+proc response*(ctx: Context) {.async.} =
+  resp plainTextResponse("Hello, Prologue!")
+
+let app = newApp()
+app.addRoute("/", response)
+app.run()
+```
 - jsonResponse -> Json format
+```nim
+import prologue, json
+
+# this proc will return json to the client
+proc response*(ctx: Context) {.async.} =
+# the %* operator creates json from nim types. more info: https://nim-lang.org/docs/json.html
+  var json = %* 
+    [
+      { "name": "John", "age": 30 },
+      { "name": "Susan", "age": 45 }
+    ]
+
+  resp jsonResponse(json)
+
+let app = newApp()
+app.addRoute("/", response)
+app.run()
+```
 
 ## Respond by error code
 
