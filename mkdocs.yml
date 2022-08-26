@@ -36,6 +36,9 @@ nav:
 
 
 markdown_extensions:
-  - markdown.extensions.codehilite:
-      guess_lang: false
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
   - mkautodoc
