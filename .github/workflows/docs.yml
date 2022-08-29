@@ -41,7 +41,7 @@ jobs:
       - run: mkdocs build
 
       - name: Archive framework docs
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: framework-docs
           path: |
@@ -84,7 +84,7 @@ jobs:
         run: nimble apis
 
       - name: Archive API docs
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: api-docs
           path: |
