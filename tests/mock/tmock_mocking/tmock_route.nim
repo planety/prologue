@@ -30,13 +30,13 @@ proc prepareRequest(path: string, httpMethod: HttpMethod): Request =
 
 proc testContext(app: Prologue, path: string, httpMethod = HttpGet): Context =
   result = app.runOnce(prepareRequest(path, httpMethod))
-  doAssert result.response.code == Http200
+  doAssert result.response.code == Http200, $result.response.code
   doAssert result.response.getHeader("content-type") == @["text/html; charset=UTF-8"]
   doAssert result.response.body == "<h1>Hello, Prologue!</h1>"
 
 proc testFailedContext(app: Prologue, path: string, httpMethod = HttpGet): Context =
   result = app.runOnce(prepareRequest(path, httpMethod))
-  doAssert result.response.code == Http404
+  doAssert result.response.code == Http404, $result.response.code
 
 
 block Basic_Mapping:
