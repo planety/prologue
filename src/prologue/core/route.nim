@@ -468,8 +468,8 @@ func findHandler(
   let reqMethod = reqMethod.toUpperAscii
 
   if ctx.gScope.router.data.hasKey(reqMethod):
-    result = ctx.matchTree(ctx.gScope.router.data[reqMethod], ensureCorrectRoute(
-                        path))
+    result = ctx.matchTree(ctx.gScope.router.data[reqMethod], 
+                        path)
   else:
     result = none(PathHandler)
 
