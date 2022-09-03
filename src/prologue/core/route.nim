@@ -125,12 +125,14 @@ func newRouter*(): Router {.inline.} =
   result = Router(data: CritBitTree[PatternNode]())
 
 func ensureCorrectRoute(
+  checkInvalidPath: static bool,
   path: string
 ): string {.raises: [RouteError].} =
   ## Verifies that this given path is a valid path, strips trailing slashes, and guarantees leading slashes.
-  if(not path.allCharsInSet(allowedCharsInPattern)):
-    raise newException(RouteError, "Illegal characters occurred in the mapped pattern," &
-                  "please restrict to alphanumeric, or the following: - . _ ~ / * { } & '")
+  when checkInvalidPath:
+    if(not path.allCharsInSet(allowedCharsInPattern)):
+      raise newException(RouteError, "Illegal characters occurred in the mapped pattern," &
+                    "please restrict to alphanumeric, or the following: - . _ ~ / * { } & '")
 
   result = path
 
@@ -368,7 +370,7 @@ func addRoute*(
 ) =
   ## Add a new mapping to the given ``Router`` instance.
 
-  var rope = generateRope(ensureCorrectRoute(route))       # initialize rope
+  var rope = generateRope(ensureCorrectRoute(true, route))       # initialize rope
   let httpMethod = $httpMethod
 
   var nodeToBeMerged: PatternNode
@@ -468,8 +470,8 @@ func findHandler(
   let reqMethod = reqMethod.toUpperAscii
 
   if ctx.gScope.router.data.hasKey(reqMethod):
-    result = ctx.matchTree(ctx.gScope.router.data[reqMethod], 
-                        path)
+    result = ctx.matchTree(ctx.gScope.router.data[reqMethod],
+    ensureCorrectRoute(false, path))
   else:
     result = none(PathHandler)
 
