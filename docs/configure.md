@@ -79,6 +79,8 @@ bufSize: int
 }
 ```
 
+## Changing config file via environment variable
+
 `Prologue` also supports automatically loading configure file by environment variables. The `.config` directory must be present in the current path(in the same directory as the main program). If you don't set the environment variable(namely `PROLOGUE`) or the value is `default`, the application will read `.config/config.json` file. Otherwise, if you set the `PROLOGUE` environment variable to `custom`, the application will read `.config/config.custom.json`. The common names includes `debug` and `production`. If the file doesn't exist, it will raise exception.
 
 ```nim
