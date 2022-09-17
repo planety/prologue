@@ -1,10 +1,9 @@
 # Basic example
-A small example of a prologue application that demonstrates multiple things at once:
+A small example of a prologue application that demonstrates:
 1. How to set up a simple route
 2. One way to load settings
-3. How you can structure a prologue application
-4. How to use middleware for static file serving
-5. How to extend the context of a request with your own custom data (useful e.g. for adding login data to your context via middleware)
+3. How to use middleware for static file serving
+4. How to extend the context of a request with your own custom data (useful e.g. for adding login data to your context via middleware)
 
 The binary that this example compiles to serves a response on `/` and also serves file of a directory `./static` (filepath relative to binary placement) as defined by `.env`.
 
@@ -23,6 +22,8 @@ Extends the `Context` of a request (which contains the request the user sent, se
 
 ### urls.nim
 Simply associates urls (`"/"`) with procs to call when a HTTP request for that url arrives (`hello`).
+
+This is done in `urls.nim` instead of `views.nim` as an example of how you can structure a prologue application with a clean separation of concerns. This way, the `views` module is only concerned with creating procs that can handle HTTP requests, while the `urls` module is only concerned with mapping which proc should be used when a specific URL gets called.
 
 The `hello` proc stems from the `views.nim` module
 
