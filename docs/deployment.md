@@ -3,14 +3,12 @@ This is an example of how you can deploy a prologue web-application that was com
 In this example we will use nginx as our reverse proxy, and bundle our application together with nginx in a single linux docker container for simplicities sake.
 
 As for docker containers, we will look at 2 base images as starting points for our own images:
-
 1. [bitnami/mindeb](https://hub.docker.com/r/bitnami/minideb)
 2. [alpine](https://hub.docker.com/_/alpine)
 
 The process is very similar for both of them, but does contain minor differences, particularly in the dockerfile and commands needed to compile your project.
 
 The examples in this guide assume that:
-
 1. You have a server
 2. You can ssh into your server
 3. You can copy files to your server via e.g. scp
@@ -131,7 +129,6 @@ task alpine, "Build an alpine release":
 
 ## Prepare buildFiles
 For our docker container to run properly, we will need to:
-
 1. Set up the server to have SSL certificates with certbot to get `fullchain.pem` and `privkey.pem` files
 2. Write an `nginx.conf` file to configure nginx
 3. Write a bash file `dockerStartupScript.sh` to run inside the docker container when starting it.
