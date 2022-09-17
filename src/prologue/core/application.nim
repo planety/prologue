@@ -397,7 +397,10 @@ proc newAppQueryEnv*(
   errorHandlerTable = newErrorHandlerTable({Http404: default404Handler, Http500: default500Handler}),
   appData = newStringTable(mode = modeCaseSensitive)
 ): Prologue =
-  ## Creates a new App instance. by querying environment variables: `PROLOGUE`.
+  ## Creates a new App instance.
+  ## The config file used to create the instance is loaded from a `./.config` directory. 
+  ## The specific config file of that directory that is used is determined by querying 
+  ## the contents of the `PROLOGUE` environment variable, which must be set.
   let path = getPrologueEnv()
 
   var configPath: string
