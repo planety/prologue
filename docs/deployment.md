@@ -77,11 +77,12 @@ For simplicities sake, we will still be linking to musl dynamically.
 #### Install musl
 You will first need to install musl.
 To do so, just follow these steps:
+
 1. [download](https://www.musl-libc.org/download.html) the tar file
 2. Unpack the tar file somewhere
-3. Run `bash configure` in the unpacked directory. WARNING: Make sure that you do NOT install musl with `--prefix` being  `/usr/local`, as that may adversely affect your system. Use somewhere else where it is unlikely to override files, e.g. `/usr/local/musl`. This path will further be referred to as <MUSL_INSTALL_PATH>
+3. Run `bash configure` in the unpacked directory. WARNING: Make sure that you do NOT install musl with `--prefix` being  `/usr/local`, as that may adversely affect your system. Use somewhere else where it is unlikely to override files, e.g. `/usr/local/musl`. This path will further be referred to as `<MUSL_INSTALL_PATH>`
 4. Run `make && make install` in the unpacked directory
-5. Add <MUSL_INSTALL_PATH> to your PATH environment variable
+5. Add `<MUSL_INSTALL_PATH>` to your PATH environment variable
 6. Validate whether you set everything up correctly by opening a new terminal and seeing whether you have access to the `musl-gcc` binary
 
 #### Compiling your dynamically linked musl binary
@@ -365,17 +366,21 @@ To fix this, you need to link your binary to an older glibc version when compili
 The simplest way is installing the [compiler og the zig programming language](https://ziglang.org/download/), as it contains a Clang compiler, which you can tell which glibc version to use.
 
 The steps go as follows:
-1. Install zig
-2. Write a bashscript called `zigcc`
+
+- Install zig
+- Write a bashscript called `zigcc`
+
 ```sh
 #!/bin/sh
 zig cc $@
 ```
-3. Move `zigcc` to somewhere on your path, e.g. `/usr/local/bin`.
+
+- Move `zigcc` to somewhere on your path, e.g. `/usr/local/bin`.
 This is required since the nim compiler does not tolerate spaces in commands that call compilers.
-4. Write yourself a bashscript with a command to compile your project. 
+- Write yourself a bashscript with a command to compile your project. 
 This can't be done via nimble tasks since the syntax is not allowed within nimble tasks.
 Replace the "X.XX" with the glibc version that you want as well as the other placeholders.
+
 ```sh
 #!/bin/sh
 # Call this file projectCompile.sh
@@ -395,7 +400,8 @@ nim c \
 --outdir:"." \
 src/<YOUR_MAIN_FILE>.nim
 ```
-5. Run projectCompile.sh
+
+- Run projectCompile.sh
 
 #### Solution 2: Create a compilation environment
 Instead of using zig, you can set up a second docker container that contains the glibc version you want, gcc, nim, nimble and the C-libs you require. 

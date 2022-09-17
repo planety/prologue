@@ -124,14 +124,13 @@ func newRouter*(): Router {.inline.} =
   ## Creates a new ``Router`` instance.
   result = Router(data: CritBitTree[PatternNode]())
 
+template isInvalidPath(path: string): bool =
+  path.allCharsInSet(allowedCharsInPattern)
+
 func ensureCorrectRoute(
   path: string
-): string {.raises: [RouteError].} =
-  ## Verifies that this given path is a valid path, strips trailing slashes, and guarantees leading slashes.
-  if(not path.allCharsInSet(allowedCharsInPattern)):
-    raise newException(RouteError, "Illegal characters occurred in the mapped pattern," &
-                  "please restrict to alphanumeric, or the following: - . _ ~ / * { } & '")
-
+): string {.raises: [].} =
+  ## Strips trailing slashes, and guarantees leading slashes.
   result = path
 
   if result.len == 1 and result[0] == '/':
@@ -367,7 +366,9 @@ func addRoute*(
   middlewares: seq[HandlerAsync]
 ) =
   ## Add a new mapping to the given ``Router`` instance.
-
+  if not isInvalidPath(route):
+    raise newException(RouteError, "Illegal characters occurred in the mapped pattern," &
+                    "please restrict to alphanumeric, or the following: - . _ ~ / * { } & '")
   var rope = generateRope(ensureCorrectRoute(route))       # initialize rope
   let httpMethod = $httpMethod
 
@@ -468,8 +469,8 @@ func findHandler(
   let reqMethod = reqMethod.toUpperAscii
 
   if ctx.gScope.router.data.hasKey(reqMethod):
-    result = ctx.matchTree(ctx.gScope.router.data[reqMethod], ensureCorrectRoute(
-                        path))
+    result = ctx.matchTree(ctx.gScope.router.data[reqMethod],
+    ensureCorrectRoute(path))
   else:
     result = none(PathHandler)
 
@@ -501,9 +502,10 @@ func findHandler*(ctx: Context): PathHandler {.inline.} =
   let route = ctx.request.url.path
   let reqMethod = ctx.request.reqMethod
 
-  let handler = findHandler(ctx, reqMethod, route)
-  if handler.isSome:
-    return handler.get
+  if isInvalidPath(route):
+    let handler = findHandler(ctx, reqMethod, route)
+    if handler.isSome:
+      return handler.get
 
   # find regex route
   for (path, pathHandler) in ctx.gScope.reRouter:

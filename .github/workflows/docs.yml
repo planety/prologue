@@ -11,10 +11,10 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: '3.8'
 
@@ -28,7 +28,7 @@ jobs:
         run: echo "::set-output name=dir::$(pip cache dir)"
 
       - name: Cache dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ${{ steps.pip-cache.outputs.dir }}
           key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
@@ -41,7 +41,7 @@ jobs:
       - run: mkdocs build
 
       - name: Archive framework docs
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: framework-docs
           path: |
@@ -51,18 +51,18 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Cache choosenim
         id: cache-choosenim
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.choosenim
           key: ${{ runner.os }}-choosenim-stable
 
       - name: Cache nimble
         id: cache-nimble
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.nimble
           key: ${{ runner.os }}-nimble-${{ hashFiles('prologue.nimble') }}
@@ -84,7 +84,7 @@ jobs:
         run: nimble apis
 
       - name: Archive API docs
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: api-docs
           path: |
@@ -98,7 +98,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download all docs
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
 
       - name: Check files
         run: |
@@ -112,7 +112,7 @@ jobs:
 
       - name: Deploy
         if: success()
-        uses: crazy-max/ghaction-github-pages@v1.3.0
+        uses: crazy-max/ghaction-github-pages@v3.0.0
         with:
           target_branch: gh-pages
           build_dir: ./docs
