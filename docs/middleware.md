@@ -1,8 +1,28 @@
 # Middlewares
 
-## Write a middleware
+## Existing middlewares
 
-Middleware is like an onion.
+Prologue provides various middlewares out of the box
+
+### Static File Serving
+Allows serving files directly from the prologue webserver. It is recommended to only use this during development, as serving static files (e.g. images) is typically done by the reverse proxy server in production.
+
+Please note that the filepaths you specify there are relative to the position of the binary, so where you place the binary from matters!
+
+If you run the lower example locally on port 8080, a file in the folder `media/image.png` will be served on the URL `localhost:8080/media/image.png`
+
+```nim
+import prologue
+import prologue/middlewares/staticfile
+
+var app = newApp()
+app.use(staticFileMiddleware("media")) # 
+app.run()
+```
+
+## Write your own middleware
+
+Middlewares are like an onion.
 
 ```
 a request -> middlewareA does something -> middlewareB does something
