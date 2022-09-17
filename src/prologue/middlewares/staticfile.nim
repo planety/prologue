@@ -13,7 +13,9 @@ func normalizedStaticDirs(dirs: openArray[string]): seq[string] =
     normalizePath(result[^1])
 
 proc staticFileMiddleware*(staticDirs: varargs[string]): HandlerAsync =
-  # whether request.path in the static path of settings.
+  ## A middleware that serves files from the directories `specified` in `staticDirs`
+  ## if request.path matches the path to a file in one of the directories in `staticDirs`.
+  ## The paths in `staticDirs` are interpreted as relative to the binary.
   let staticDirs = normalizedStaticDirs(staticDirs)
   result = proc(ctx: Context) {.async.} =
     let staticFileFlag = 
