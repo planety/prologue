@@ -2,7 +2,7 @@
 
 ## Existing middlewares
 
-Prologue provides various middlewares out of the box
+Prologue provides various middlewares out of the box.
 
 ### Static File Serving
 Allows serving files directly from the prologue webserver. It is recommended to only use this during development, as serving static files (e.g. images) is typically done by the reverse proxy server in production.
