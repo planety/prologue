@@ -140,7 +140,13 @@ We will store these files in a directory called `buildFiles` and include them in
 There are many great resources on how you can get free SSL certificates for use with your web-application.
 We recommend using [certbot](https://certbot.eff.org/instructions) for this purpose. Follow the instructions on their website to set yourself up.
 
-As a sidenote though, make sure you set up a mechanism to renew your certificates regularly, to make sure they do not expire.
+After the initial setup, you may want to make sure that you regularly renew your certificates, to make sure they do not expire.
+Renewal is fairly easily done with [`sudo certbot renew`](https://eff-certbot.readthedocs.io/en/stable/using.html#renewing-certificates), but requires you to shut down the webserver first and boot it up after renewal again.
+It is recommended to automate this command and shut down/start up your container before and after renewal using certbot's pre and post hooks as :
+
+```txt
+certbot renew --pre-hook "docker container stop <YOUR_CONTAINER_NAME>" --post-hook "docker container start <YOUR_CONTAINER_NAME>"
+```
 
 ### Configuring nginx
 Nginx requires a config file, `nginx.conf` to serve any media files and forward requests to our prologue backend.
