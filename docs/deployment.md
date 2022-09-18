@@ -3,32 +3,34 @@ This is an example of how you can deploy a prologue web-application that was com
 .
 ## Base Images
 
-We will look at 2 base images as starting points for our own images:
-1. [bitnami/mindeb](https://hub.docker.com/r/bitnami/minideb)
-2. [alpine](https://hub.docker.com/_/alpine)
+We will look at 2 base images as starting points:
 
-The process is very similar for both of them, but does contain minor differences, particularly in the dockerfile and commands needed to compile your project.
+2. [bitnami/mindeb](https://hub.docker.com/r/bitnami/minideb)
+3. [alpine](https://hub.docker.com/_/alpine)
 
-The examples in this guide assume that:
+The process is similar for both, but does contain differences, particularly in the dockerfile and commands needed to compile your project.
+
+This guide assumes that:
+
 1. You have a server
 2. You can ssh into your server
 3. You can copy files to your server via e.g. scp
 4. You have set up your server with a domain name
 
 ## Compile your binary
-Compiling your binary is very different between alpine and other linux images.
-This is because unlike most other linux distributions, alpine does not use the `gnu c library` (glibc) to link all its binaries against.
-Instead it uses `musl`, which is much more minimalistic.
+Compiling your binary differs between alpine and other linux images.
+This is because unlike most other linux distributions, alpine does not use the `gnu c library` (glibc) to link its binaries against.
+Alpine uses `musl`, which is much more minimalistic.
 
-Because your binary is at its core linked to these libraries, you will need to compile them in different ways in order for one to link with `glibc` and the other to link with `musl`.
+Because `musl` and `glibc` are different, compiling your application to link with them also differs.
 
 ### On bitnami/mindeb
-bitnami/minideb is basically a stripped down version of debian, reduced to the bare essentials.
+bitnami/minideb is basically a debian image, reduced to the minimum.
 
-Since it is fundamentally a debian image, that means it will have the `gnu c library` (glibc) available, which is the main advantage of this image. 
+Since it is based on debian, it uses `gnu c library` (glibc), which is the main advantage of this image. 
 
-Since the overwhelming majority of Linux systems use `glibc` to link their C binaries, compiling on any Linux distro will give you a binary that is dynamically linked against your `glibc` version and thus is likely to work in the image.
-If you have to ask yourself whether your distro is using `glibc`, you are using `glibc`.
+Since the majority of Linux systems use `glibc`, compiling on any Linux distro will give you a binary that is dynamically linked against your `glibc` version and thus is likely to work in the image.
+If you have to ask whether your distro is using `glibc`, you are using `glibc`.
 
 You can compile your project like this:
 ```sh
@@ -46,8 +48,8 @@ nim c \
 <PATH_TO_YOUR_MAIN_PROJECT_FILE>.nim
 ```
 
-If you want to avoid re-typing all the flags you want to set, you can centrally define them in a [nimble task](https://github.com/nim-lang/nimble#nimble-tasks) that you can trigger instead!
-Just add the following to your `<YOUR_PROJECT>.nimble` file (run [`nimble init`](https://github.com/nim-lang/nimble#nimble-init) if you don't have one yet):
+If you want to avoid re-typing all the flags, you can define them in a [nimble task](https://github.com/nim-lang/nimble#nimble-tasks) that you can trigger instead!
+Just add the following to your `<YOUR_PROJECT>.nimble` file (run [`nimble init`](https://github.com/nim-lang/nimble#nimble-init) if you don't have one):
 
 ```txt
 task release, "Build a production release":
@@ -70,14 +72,12 @@ This allows you to run `nimble release` in your project to compile it with the s
 ### On alpine
 Alpine is among the smallest image out there. 
 At barely 5.53MB, any image you base on it is unlikely to get large. 
-This is unlikely to have any performance implications for your application, but it does speed up deploying the image since it uploads faster to your server due.
+This doesn't have effects on your application's performance, but does speed deployment as the image uploads faster to your server.
 
-Due to its usage of `musl` as core lib instead of `glibc`, compiling your project will look a little bit different.
-For simplicities sake, we will still be linking to musl dynamically.
+Since Alpine uses `musl`, compiling has some extra steps.
+For simplicities' sake, we will be linking to musl dynamically.
 
 #### Install musl
-You will first need to install musl.
-To do so, just follow these steps:
 
 1. [download](https://www.musl-libc.org/download.html) the tar file
 2. Unpack the tar file somewhere
@@ -87,10 +87,10 @@ To do so, just follow these steps:
 6. Validate whether you set everything up correctly by opening a new terminal and seeing whether you have access to the `musl-gcc` binary
 
 #### Compiling your dynamically linked musl binary
-Similarly to before, you can write yourself a compile command. 
-This time though, we need to swap out the compiler that is used. Instead of `gcc`, we want to use `musl-gcc` in order to dynamically link with `musl` instead of `glibc`.
+Like before, you can write a compile command. 
+This time though, we need to tell the compiler to use `musl-gcc` instead of `gcc` to dynamically link with `musl`.
 We similarly want to replace the linker with `musl-gcc`.
-We can use the flags `--gcc.exe:"musl-gcc"` and `--gcc.linkerexe:"musl-gcc"` to get a compile command similar to the one used for `bitnami/minideb`:
+We can use the flags `--gcc.exe:"musl-gcc"` and `--gcc.linkerexe:"musl-gcc"` to get a compile command:
 
 ```sh
 nim c \
@@ -109,7 +109,7 @@ nim c \
 <PATH_TO_YOUR_MAIN_PROJECT_FILE>.nim
 ```
 
-Analogous to `bitnami/minideb` we can set up a nimble task instead:
+Instead of a bash script we can also just set up a nimble task instead:
 ```txt
 task alpine, "Build an alpine release":
   --verbose
@@ -129,33 +129,35 @@ task alpine, "Build an alpine release":
 ```
 
 ## Prepare buildFiles
-For our docker container to run properly, we will need to:
+
 1. Set up the server to have SSL certificates with certbot to get `fullchain.pem` and `privkey.pem` files
 2. Write an `nginx.conf` file to configure nginx
 3. Write a bash file `dockerStartupScript.sh` to run inside the docker container when starting it.
 4. Write a `settings.json` file for prologue
 
-We will store these files in a directory called `buildFiles` and include them in our docker image later.
+We will store these files in a directory called `buildFiles` and include them in our docker image(s) later.
 
 ### Set up your server to have SSL certificates with certbot
-There are many great resources on how you can get free SSL certificates for use with your web-application.
-We recommend using [certbot](https://certbot.eff.org/instructions) for this purpose. Follow the instructions on their website to set yourself up.
+There are many great resources on how you can get free SSL certificates.
+We recommend using [certbot](https://certbot.eff.org/instructions). 
+Follow the instructions on their website to set up your certificates.
 
-After the initial setup, you may want to make sure that you regularly renew your certificates, to make sure they do not expire.
-Renewal is fairly easily done with [`sudo certbot renew`](https://eff-certbot.readthedocs.io/en/stable/using.html#renewing-certificates), but requires you to shut down the webserver first and boot it up after renewal again.
-It is recommended to automate this command and shut down/start up your container before and after renewal using certbot's pre and post hooks as :
+After the initial setup, you should automate the renewal of those certificates.
+Renewal is easily done with [`sudo certbot renew`](https://eff-certbot.readthedocs.io/en/stable/using.html#renewing-certificates), but requires you to shut down the webserver first and boot it up after renewal again.
+We recommend setting up a cronjob to regularly run the `certbot renew` command.
+User certbot's "pre-hook" and "post-hook" to shut down/starts up your container/docker-compose before and after the actual renewal happens.
 
 ```txt
 certbot renew --pre-hook "docker container stop <YOUR_CONTAINER_NAME>" --post-hook "docker container start <YOUR_CONTAINER_NAME>"
 ```
 
 ### Provide an `nginx.conf` config file
-Nginx requires a config file, `nginx.conf` to serve any media files and forward requests to our prologue backend.
+Nginx requires a config file, `nginx.conf` to define what files to serve and how to forward requests to the prologue application.
 
 Here we'll set nginx up to use SSL with the SSL certificates received from the previous step.
-Further, for nginx to forward requests to a prologue backend, we can make use of its "proxy_pass" directive.
+Further, to make nginx forward requests to our prologue backend, we use its "[proxy_pass](https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass)" directive.
 
-Keep in mind that all of these directories will be filepaths within the *docker* container, not your actual server.
+Note that all directories in the config file are directories within the *docker* container, not your actual server.
 
 See below an example of a small `nginx.conf` file:
 ```txt
@@ -216,9 +218,10 @@ http {
 }
 ```
 
-Note that the file assumes there will be a `fullchain.pem` and `privkey.pem`, which you currently have on your server (e.g. `/etc/letsencrypt/live`). We will make these certificates accessible by creating the `/cert/live` directories inside the docker image and mounting the certificate directory to that folder when creating a container via [docker volumes](https://docs.docker.com/storage/volumes/).
+Note that the file assumes there will be a `fullchain.pem` and `privkey.pem`, which you currently have on your server (e.g. `/etc/letsencrypt/live`). 
+We will make these certificates accessible by creating the `/cert/live` directories inside the docker image and mounting the certificate directory to that folder (e.g. when creating a container via [docker volumes](https://docs.docker.com/storage/volumes/)).
 
-For now though, store your `nginx.conf` file in your `./buildFiles` directory.
+For now store your `nginx.conf` file in your `./buildFiles` directory.
 
 ### Provide a `settings.json` config file for prologue
 In order for prologue to function correctly, we will provide a simple settings file.
@@ -241,17 +244,17 @@ Note that the port you specify here must be the same port used in the `proxy_pas
 Put this `settings.json` in your `./buildFiles` directory. 
 
 ## Setting up docker
-After completing the prior steps, we can now deliberate how exactly we want to deploy our server. 
-
+After completing the prior steps, we can now think how to deploy our application how we want to deploy our application and server.
 We have 2 different applications to manage here: nginx and our prologue application. We can deploy these in 2 different ways:
+
 - Prologue and Nginx in the same container (simpler)
 - Prologue and Nginx in separate containers via docker-compose (Enables hosting multiple web-applications from the same server)
 
 ## A) Prologue and Nginx in the same container
 
 When deploying prologue and nginx in the same container we need to start both applications on when starting the container.
-To do so we can set up a `startupScript.sh` file that contains the necessary commands to do so.
-Usually this would be done using systemd, for our smaller image though we will be using the simpler `openrc`.
+To do so we can set up a `startupScript.sh` file that gets executed when the container gets started.
+We will be using `openrc` to start and manage nginx.
 
 ```bash
 #!/bin/sh
@@ -264,17 +267,19 @@ rc-service nginx start # Starts up nginx
 Store your script file locally in `./buildFiles/startupScript.sh`.
 
 ### Write your dockerfile
-After completing the prior steps, we can start writing a `dockerfile`.
-It will contain the instructions necessary to create a docker image, from which containers can be made.
+After completing the prior steps, we can write a `dockerfile`.
+It will contain the instructions to create a docker image, from which containers are made.
 
-This process differs slightly between `bitnami/minideb` and `alpine`, since `alpine` uses `apk` to install packages from the [alpine repositories](https://alpine.pkgs.org/?) while `bitnami/minideb` uses apt to install [debian packages](https://www.debian.org/distrib/packages). 
-This means the commands look slightly different and the names of the packages also differ slightly.
+This process differs between `bitnami/minideb` and `alpine`, since `alpine` uses `apk` to install packages from the [alpine repositories](https://alpine.pkgs.org/?) while `bitnami/minideb` uses apt to install [debian packages](https://www.debian.org/distrib/packages). 
+This means the installation commands and package names differ.
 
-Additionally, we will be setting up various folders ahead of time, in order to use them as mounting points for [docker volumes](https://docs.docker.com/storage/volumes/) when creating containers from our images. 
-This way you can access files inside the container (e.g. media files so that nginx can serve them, or an sqlite database) without risking loosing them should the container crash or be removed.
+We will also set up various folders, in order to later use them as mounting points for [docker volumes](https://docs.docker.com/storage/volumes/) when creating containers from our images. 
+This way you can access files inside the container (e.g. media files so that nginx can serve them, or an sqlite database) without loosing them when the container shuts down.
+
+Store the dockerfile on your applications root directory.
 
 #### On `bitnami/minideb`
-In order to install packages without having to deal with `apt`'s commandline prompts, this image ships a `install_packages` command.
+To install packages without `apt`'s commandline prompts, this image ships a `install_packages` command.
 Here an example `dockerfile`:
 ```txt
 FROM bitnami/minideb
@@ -345,15 +350,19 @@ Once created, move that image file to your server, e.g. through `scp`.
 After copying your `image.tar` file to the server, you can load it there with docker and run a container from it.
 Besides starting the container, the commands needs to:
 
-1. Open up the HTTP port (80)
-2. Open up the HTTPS port (443)
-3. Mount all the volumes for certificates, media files to connect folders on your server to folders on your docker container etc.
+1. Open up the container's HTTP port to the internet (80)
+2. Open up the container's HTTPS port to the internet (443)
+3. Mount the volumes for certificates, media files etc.
 4. (Optional) Open up a port to talk to your database (e.g. 5432 for Postgres)
 
 Opening up the ports is done using `-p`, mounting the volumes with `-v`.
-Note that in `-v`, the first path is the one *outside* of your container. It specifies which folder on your server to mount. The second path is the one *inside* your container. It specifies where to mount the server folder in your container.
+Note that in `-v`, the first path is the one *outside* your container. 
+It specifies which folder on your server to mount. 
+The second path is the one *inside* your container. 
+It specifies which folder in your container the server folder gets mounted to.
 
-You may want to write yourself a small script that loads the file, stops and removes any previously running container of the sort before creating a new one from the new image. Here an example:
+You may want to write yourself a script that loads the file, stops and removes any previously running container and then creates a new one from the new image. 
+Here an example:
 ```sh
 #!/bin/sh
 sudo docker load -i image.tar
@@ -369,23 +378,27 @@ sudo docker run -p 80:80 -p 443:443 \
 --name <YOUR_IMAGE_NAME> <YOUR_CONTAINER_NAME>
 ```
 
-Once done, all you need to do is run the command (or script), and your container will start up and be accessible via HTTP and HTTPS!
+Now you can run the command (or script), and your container will start up and be accessible via HTTP and HTTPS!
 
 ## B) Prologue and Nginx in separate containers via docker-compose
+ 
+You can have your proxy (nginx) and your webserver (prologue) also in different images and thus different containers, that can communicate.
+For this you need to set it up so they get started together, with the ports they need opened and volumes they need mounted etc. 
+That's where you use [docker-compose](https://docs.docker.com/get-started/08_using_compose/).
 
-Instead of putting your proxy (nginx) and your webserver (prologue) into the same image and thus container, you can also have them as 2 separate images whose containers communicate.
-To do so you can use [docker-compose](https://docs.docker.com/get-started/08_using_compose/).
+First, add 2 directories to `./buildFiles` to separate the config files and dockerfiles of your proxy and your webserver:
 
-First, add 2 directories to `./buildFiles` to separate the config files and dockerfiles:
 - `./buildFiles/nginx`
   - Move the `nginx.conf` here
 - `./buildFiles/prologue`
   - Move the `settings.json` here
   - Move your application binary here
 
+Also, change your commands or nimble tasks for compiling to output into the `./buildFiles/prologue` directory.
+
 ### Write your `docker-compose.yml`
 A docker compose file contains the same things you would write in a `docker run` command:
-name of the container, from which images the container spawns, which volumes they have, which ports they expose etc.
+name of the container, the image to use, which volumes to mount, which ports to expose etc.
 
 Here an example of such a `docker-compose.yml` file that you can keep in your projects main folder:
 ```txt
@@ -416,7 +429,7 @@ services:
 
 To run this docker compose file with `docker-compose up`, you will first need to build images with the names you specify up there.
 
-This means you now need 2 dockerfiles that can build these images. We recommend giving the `buildFiles` directory one folder for each image you want to build and place the dockerfiles in there
+This means you now need 2 dockerfiles that can build these images. 
 
 ### Write your nginx dockerfile
 An example for a dockerfile of an alpine image with nginx:
@@ -428,7 +441,7 @@ RUN apk update
 RUN apk add nginx openssl --no-cache
 
 # Copy necessary files
-COPY ./buildFiles/nginx.conf /etc/nginx/nginx.conf
+COPY ./nginx.conf /etc/nginx/nginx.conf #Filepath is relative to dockerfile
 
 # Setup directories to add volumes to when creating the container
 RUN mkdir -p /run/nginx
@@ -440,14 +453,16 @@ RUN mkdir /media
 CMD ["nginx", "-g", "daemon off;"]
 ```
 
-Thanks to the container only needing to start nginx, we can use `CMD ["nginx", "-g", "daemon off;"]` instead of a bashscript with openrc to start nginx. 
+Since the container only contains nginx, we can use `CMD ["nginx", "-g", "daemon off;"]` instead of a bash script to start it. 
+
+Put the dockerfile in `./buildFiles/nginx`
 
 We could have used the [official nginx alpine image](https://hub.docker.com/_/nginx/) instead of vanilla alpine, but decided against it.
 Main reason being that the image appears to be binary-incompatible with the nginx-mods that can be installed via `apk`.
 Other than that, the official nginx image can be used just as well.
 
 ### Write your prologue dockerfile
-An example for a dockerfile of a alpine image with your prologue webserver:
+An example for a dockerfile of an alpine image with our prologue application:
 ```txt
 FROM alpine
 
@@ -457,36 +472,40 @@ RUN apk add openssl
 # RUN apk add sqlite-libs # in case you use an sqlite3 database
 
 # Copy necessary files
-COPY ./<YOUR_APPLICATION_BINARY> .
-COPY ./settings.json /settings.json
+COPY ./<YOUR_APPLICATION_BINARY> .    #Filepath is relative to dockerfile
+COPY ./settings.json /settings.json   #Filepath is relative to dockerfile
 
 # Setup necessary directories
 RUN mkdir /media
 
 #Startup command
-CMD ["/nimstoryfont"]
+CMD ["/<YOUR_APPLICATION_BINARY>"]
 ```
+Since the container only contains our application, we can just start it via `CMD ["/<YOUR_APPLICATION_BINARY>"]`.
 
-Since we only need to start the binary, no scripting is required, we just need to call the binary.
+Put the dockerfile in `./buildFiles/prologue`.
 
 ### Build the docker images
-With the dockerfile ready, you can create your images and give them the names you want:
+With the dockerfiles ready, we can create the images via the following commands from the applications root directory:
 
 ```sh
+#!/bin/sh
 # Creates your image
 sudo docker build --file ./buildFiles/nginx/dockerfile --tag <NGINX_IMAGE_NAME> ./buildFiles/nginx
 sudo docker build --file ./buildFiles/nimstoryfont/dockerfile --tag <PROLOGUE_IMAGE_NAME> ./buildFiles/nimstoryfont
 
 # Stores your images in your current working directory
-sudo docker save -o <NGINX_IMAGE_NAME>.tar <NGINX_IMAGE_NAME> 
-sudo docker save -o <PROLOGUE_IMAGE_NAME>.tar <PROLOGUE_IMAGE_NAME>
+sudo docker save -o nginx-image.tar <NGINX_IMAGE_NAME> 
+sudo docker save -o prologue-image.tar <PROLOGUE_IMAGE_NAME>
 ```
 
-Once created, move that image file to your server, e.g. through `scp`.
+Once created, move that image file to your server, e.g. via `scp`.
 
 ### Run the docker image on your server
-After copying your `docker-compose.yml`, the nginx-image.tar and the prologue-image.tar to your server, you can deploy your application.
-Unlike with deploying a single container, you only need to load the images and run docker-compose, everything else is already specified in your compose file.
+After copying your `docker-compose.yml`, the `nginx-image.tar` and the `prologue-image.tar` to your server, you can deploy your application.
+
+Simply load the images into docker and run `docker-compose up` (or `docker-compose restart`).
+There is no need to specify volumes or ports, as that is already in the `docker-compose.yml`.
 
 You may want to write yourself a small script that loads the images and restarts:
 ```sh
@@ -497,7 +516,7 @@ sudo docker load -i <PROLOGUE_IMAGE_NAME>.tar
 sudo docker-compose restart
 ```
 
-Once done, all you need to do is run the command (or script), and your containers will start up and be accessible via HTTP and HTTPS!
+Run the command and your containers will start up and be accessible via HTTP and HTTPS!
 
 # Known issues
 ## Compile your binary (under `bitnami/minideb` - `error "/lib/x86_64-linux-gnu/libc.so.6: version 'GLIBC_<X.XX>' not found"`
