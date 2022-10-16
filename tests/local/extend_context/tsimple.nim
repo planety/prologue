@@ -5,7 +5,7 @@ type
     data: int
 
 # initialize data
-method extend(ctx: UserContext) =
+method extend(ctx: UserContext) {.gcsafe.} =
   ctx.data = 999
 
 proc hello*(ctx: Context) {.async.} =
