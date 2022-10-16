@@ -210,7 +210,7 @@ proc init*(ctx: Context, request: Request, response: Response,
   ctx.size = 0
   ctx.first = true
 
-method extend*(ctx: Context) {.base, inline.} =
+method extend*(ctx: Context) {.base, gcsafe, inline.} =
   discard
 
 func newContextFrom*(ctx: Context, src: Context) {.deprecated.} =

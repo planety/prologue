@@ -14,7 +14,7 @@ proc experimentMiddleware(): HandlerAsync =
     inc ctx.data
     await switch(ctx)
 
-method extend(ctx: UserContext) =
+method extend(ctx: UserContext) {.gcsafe.} =
   init(ctx)
 
 proc hello*(ctx: Context) {.async.} =

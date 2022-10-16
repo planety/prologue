@@ -1,3 +1,7 @@
+## 0.6.2
+
+Added gcsafe pragmas to extend method.
+
 ## 0.6.0
 
 Added automatic URL decoding when fetching query parameters or path parameters from request object

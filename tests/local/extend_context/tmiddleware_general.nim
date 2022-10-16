@@ -21,7 +21,7 @@ type
   UserContext = ref object of Context
     data: int
 
-method extend(ctx: UserContext) =
+method extend(ctx: UserContext) {.gcsafe.} =
   init(ctx)
 
 proc hello*(ctx: Context) {.async.} =

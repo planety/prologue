@@ -16,7 +16,7 @@ type
     data: int
 
 # initialize data
-method extend(ctx: UserContext) =
+method extend(ctx: UserContext) {.gcsafe.} =
   ctx.data = 999
 
 proc hello*(ctx: Context) {.async.} =
@@ -48,7 +48,7 @@ proc experimentMiddleware(): HandlerAsync =
     inc ctx.data
     await switch(ctx)
 
-method extend(ctx: UserContext) =
+method extend(ctx: UserContext) {.gcsafe.} =
   init(ctx)
 
 proc hello*(ctx: Context) {.async.} =
@@ -89,7 +89,7 @@ type
   UserContext = ref object of Context
     data: int
 
-method extend(ctx: UserContext) =
+method extend(ctx: UserContext) {.gcsafe.} =
   init(ctx)
 
 proc hello*(ctx: Context) {.async.} =
