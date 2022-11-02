@@ -535,7 +535,10 @@ proc staticFileResponse*(
     ctx.response.headers = headers.get
 
   if mimetype.len != 0:
-    ctx.response.setHeader("Content-Type", fmt"{mimetype}; {charset}")
+    if charset.len != 0:
+      ctx.response.setHeader("Content-Type", fmt"{mimetype}; {charset}")
+    else:
+      ctx.response.setHeader("Content-Type", mimetype)
 
   ctx.response.setHeader("Last-Modified", $lastModified)
   ctx.response.setHeader("Etag", etag)
