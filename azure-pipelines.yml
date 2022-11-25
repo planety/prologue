@@ -1,5 +1,4 @@
 strategy:
-  maxParallel: 10
   matrix:
     Windows_stable_64bit:
       VM: 'windows-latest'
