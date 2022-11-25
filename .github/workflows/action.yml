@@ -14,11 +14,6 @@ jobs:
         nim-version:
           - stable
           - devel
-#         exclude:
-#           - os: windows-latest
-#             nim-version: devel
-#           - os: macos-latest
-#             nim-version: devel
     steps:
     - name: Checkout
       uses: actions/checkout@v3
