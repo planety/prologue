@@ -9,8 +9,8 @@ jobs:
       matrix:
         os:
           - ubuntu-latest
-          - windows-latest
-          - macOS-latest
+          # - windows-latest
+          # - macOS-latest
         nim-version:
           - stable
           - devel
