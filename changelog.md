@@ -1,3 +1,7 @@
+## 0.6.4
+
+Better deps management.
+
 ## 0.6.2
 
 Added gcsafe pragmas to extend method.

@@ -1,7 +1,7 @@
 # Package
 
-version       = "0.6.2"
-author        = "flywind"
+version       = "0.6.4"
+author        = "ringabout"
 description   = "Prologue is an elegant and high performance web framework"
 license       = "Apache-2.0"
 srcDir        = "src"
@@ -12,7 +12,7 @@ requires "nim >= 1.6.0"
 requires "regex >= 0.20.0"
 requires "nimcrypto >= 0.5.4"
 requires "cookiejar >= 0.2.0"
-requires "httpx >= 0.2.0"
+requires "httpx >= 0.3.4"
 requires "logue >= 0.2.0"
 
 

@@ -135,7 +135,7 @@ proc respond*(request: Request, code: HttpCode, body: string,
   ## Responds `code`, `body` and `headers` to the client, the framework
   ## will generate the contents of the response automatically.
   if headers.hasKey("Content-Length"):
-    request.nativeRequest.send(code, body, some(headers["Content-Length", 0]), headers.createHeaders)
+    request.nativeRequest.send(code, body, some(parseInt(headers["Content-Length", 0])), headers.createHeaders)
   else:
     request.nativeRequest.send(code, body, headers.createHeaders)
   result = newFuture[void]()
