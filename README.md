@@ -1,6 +1,4 @@
 ![Build Status](https://github.com/planety/prologue/workflows/Test%20Prologue/badge.svg)
-[![Build Status](https://dev.azure.com/xzsflywind/xlsx/_apis/build/status/planety.prologue?branchName=devel)](https://dev.azure.com/xzsflywind/xlsx/_build/latest?definitionId=4&branchName=devel)
-![Build Status](https://travis-ci.org/planety/prologue.svg?branch=devel)
 
 ![License: Apache-2.0](https://img.shields.io/github/license/planety/prologue)
 [![Version](https://img.shields.io/github/v/release/planety/prologue?include_prereleases)](https://github.com/planety/prologue/releases)
@@ -108,14 +106,14 @@ Run **app.nim** ( `nim c -r app.nim` ). Now the server is running at `localhost:
 
 ### Extensions
 
-If you need more extensions, you can refer to [awesome prologue](https://github.com/planety/awesome-prologue) and [awesome nim](https://github.com/xflywind/awesome-nim#web).
+If you need more extensions, you can refer to [awesome prologue](https://github.com/planety/awesome-prologue) and [awesome nim](https://github.com/ringabout/awesome-nim#web).
 
 
 ## Donations
 
 Thanks for supporting me!
 
-[patreon](https://www.patreon.com/flywind)
+https://github.com/sponsors/planety
 
 
 ## Stars
