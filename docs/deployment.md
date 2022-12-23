@@ -47,6 +47,7 @@ nim c \
 --outdir:"." \
 <PATH_TO_YOUR_MAIN_PROJECT_FILE>.nim
 ```
+**For Clang users (e.g. MacOs)**: Clang doesn't work properly with `--define:lto`. Replace it with `--passC:"-flto" --passL:"-flto"` which achieves the same thing.
 
 If you want to avoid re-typing all the flags, you can define them in a [nimble task](https://github.com/nim-lang/nimble#nimble-tasks) that you can trigger instead!
 Just add the following to your `<YOUR_PROJECT>.nimble` file (run [`nimble init`](https://github.com/nim-lang/nimble#nimble-init) if you don't have one):
