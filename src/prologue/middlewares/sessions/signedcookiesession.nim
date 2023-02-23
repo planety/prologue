@@ -24,7 +24,8 @@ proc sessionMiddleware*(
   path = "",
   domain = "",
   sameSite = Lax,
-  httpOnly = false
+  httpOnly = false,
+  secure = false
 ): HandlerAsync =
 
   var secretKey = settings["prologue"].getOrDefault("secretKey").getStr
@@ -69,4 +70,4 @@ proc sessionMiddleware*(
     if ctx.session.modified:
       ctx.setCookie(sessionName, signer.sign(dumps(ctx.session)), 
                     maxAge = some(maxAge), path = path, domain = domain, 
-                    sameSite = sameSite, httpOnly = httpOnly)
+                    sameSite = sameSite, httpOnly = httpOnly, secure = secure)
