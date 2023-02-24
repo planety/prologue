@@ -21,7 +21,8 @@ proc sessionMiddleware*(
   path = "",
   domain = "",
   sameSite = Lax,
-  httpOnly = false
+  httpOnly = false,
+  secure = false
 ): HandlerAsync =
 
   var memorySessionTable = newTable[string, Session]()
@@ -38,7 +39,7 @@ proc sessionMiddleware*(
       data = urlsafeBase64Encode(randomBytesSeq(16))
       ctx.setCookie(sessionName, data, 
               maxAge = some(maxAge), path = path, domain = domain, 
-              sameSite = sameSite, httpOnly = httpOnly)
+              sameSite = sameSite, httpOnly = httpOnly, secure = secure)
       memorySessionTable[data] = ctx.session
 
     await switch(ctx)

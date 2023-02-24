@@ -30,7 +30,8 @@ proc sessionMiddleware*(
   path = "",
   domain = "",
   sameSite = Lax,
-  httpOnly = false
+  httpOnly = false,
+  secure = false
 ): HandlerAsync =
 
   var redisClient = waitFor openAsync()
@@ -53,7 +54,7 @@ proc sessionMiddleware*(
       data = genUid()
       ctx.setCookie(sessionName, data, 
               maxAge = some(maxAge), path = path, domain = domain, 
-              sameSite = sameSite, httpOnly = httpOnly)
+              sameSite = sameSite, httpOnly = httpOnly, secure = secure)
 
     await switch(ctx)
 
