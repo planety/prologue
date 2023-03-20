@@ -32,7 +32,7 @@ proc logout*(ctx: Context) {.async.} =
   resp $ctx.session
 ```
 
-More session examples are in [Session](https://github.com/planety/prologue/tree/devel/examples/session) and [Blog](https://github.com/planety/prologue/tree/devel/examples/blog)
+More session examples are in [Signed Cookie Session](https://github.com/planety/prologue/tree/devel/examples/signedcookiesession) and [Blog](https://github.com/planety/prologue/tree/devel/examples/blog)
 
 
 ## Session based on memory
