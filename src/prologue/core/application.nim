@@ -500,9 +500,7 @@ proc handleRequest*(app: Prologue, nativeRequest: NativeRequest, ctxTyp: typedes
   extend(ctx)
   result = handleContext(app, ctx)
 
-proc run*(app: Prologue, ctxTyp: typedesc[Context]) =
-  ## Starts an Application.
-
+proc prepareRun(app: Prologue) =
   # assert ctx != nil, "The memory of `ctx` must be allocated!"
   app.gScope.router.compress()
 
@@ -529,13 +527,31 @@ proc run*(app: Prologue, ctxTyp: typedesc[Context]) =
   else:
     logging.debug(fmt"Prologue is serving at http://{app.appAddress}:{app.appPort} {app.appName}")
 
+proc run*(app: Prologue, ctxTyp: typedesc[Context]) =
+  ## Starts an Application.
 
-  app.serve(proc (nativeRequest: NativeRequest): Future[void] {.gcsafe.} =
-                           result = handleRequest(app, nativeRequest, ctxTyp))
+  prepareRun(app)
 
+  proc handler(nativeRequest: NativeRequest): Future[void] {.gcsafe.} =
+    result = handleRequest(app, nativeRequest, ctxTyp)
+
+  app.serve(handler)
 
 proc run*(app: Prologue) {.inline.} =
   app.run(Context)
+
+proc runAsync*(app: Prologue, ctxTyp: typedesc[Context]) {.async.} =
+  ## Starts an Application.
+
+  prepareRun(app)
+
+  proc handler(nativeRequest: NativeRequest): Future[void] {.gcsafe.} =
+    result = handleRequest(app, nativeRequest, ctxTyp)
+
+  await app.serveAsync(handler)
+
+proc runAsync*(app: Prologue) {.inline, async.} =
+  await app.runAsync(Context)
 
 
 when isMainModule:

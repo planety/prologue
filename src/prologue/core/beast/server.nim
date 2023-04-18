@@ -24,14 +24,22 @@ proc execStartupEvent*(app: Prologue) =
 
   app.startupClosure = doStartup
 
+proc getSettings(app: Prologue): httpx.Settings =
+  result = httpx.initSettings(app.gScope.settings.port, app.gScope.settings.address,
+                app.gScope.settings["prologue"].getOrDefault("numThreads").getInt(0),
+                app.startupClosure)
+
 proc serve*(app: Prologue,
             callback: proc (request: NativeRequest): Future[void] {.closure, gcsafe.},
            ) {.inline.} =
   ## Serves a new web application.
-  run(callback, httpx.initSettings(app.gScope.settings.port, app.gScope.settings.address,
-                app.gScope.settings["prologue"].getOrDefault("numThreads").getInt(0),
-                app.startupClosure)
-                )
+  run(callback, getSettings(app))
+
+proc serveAsync*(app: Prologue,
+            callback: proc (request: NativeRequest): Future[void] {.closure, gcsafe.},
+           ) {.inline, async.} =
+  ## Serves a new web application.
+  await runAsync(callback, getSettings(app))
 
 func newPrologue*(settings: Settings, ctxSettings: CtxSettings, router: Router,
                   reversedRouter: ReversedRouter, reRouter: ReRouter, middlewares: openArray[HandlerAsync], 

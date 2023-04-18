@@ -23,11 +23,17 @@ proc execStartupEvent*(app: Prologue) =
   for event in app.startup:
     execEvent(event)
 
+proc serveAsync*(app: Prologue,
+            callback: proc (request: NativeRequest): Future[void] {.closure, gcsafe.},
+           ) {.inline, async.} =
+  ## Serves a new web application.
+  await app.server.serve(app.gScope.settings.port, callback, app.gScope.settings.address)
+
 proc serve*(app: Prologue,
             callback: proc (request: NativeRequest): Future[void] {.closure, gcsafe.},
            ) {.inline.} =
   ## Serves a new web application.
-  waitFor app.server.serve(app.gScope.settings.port, callback, app.gScope.settings.address)
+  waitFor serveAsync(app, callback)
 
 func newPrologueServer(reuseAddr = true, reusePort = false,
                        maxBody = 8388608): Server {.inline.} =
