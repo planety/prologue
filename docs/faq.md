@@ -1,8 +1,12 @@
 # FAQ
 
-(1). `Prologue` supports two HTTP server: `httpbeast` and `asynchttpserver`. If you are in Linux or MacOS, use `--threads:on` to enable the multi-threads HTTP server. If you are in windows, `threads` should not be used. You can use `-d:usestd` to switch to `asynchttpserver` in Linux or MacOS.
+## Threads
 
-(2). If you want to benchmark `prologue` or release you programs, make sure set `settings.debug` = false.
+`Prologue` supports two HTTP server: `httpbeast` and `asynchttpserver`. If you are in Linux or MacOS, use `--threads:on` to enable the multi-threads HTTP server. If you are in windows, `threads` should not be used. You can use `-d:usestd` to switch to `asynchttpserver` in Linux or MacOS.
+
+## Benchmarking and debug
+
+If you want to benchmark `prologue` or release you programs, make sure set `settings.debug` = false.
 
 ```nim
 let
@@ -27,7 +31,9 @@ staticDir=/static
 secretKey=Pr435ol67ogue
 ```
 
-(3). There are two ways to disable logging messages:
+## Disable logging
+
+There are two ways to disable logging messages:
 
 - set `settings.debug` = false
 - set a startup event
@@ -44,7 +50,7 @@ var
   app = newApp(settings = settings, startup = @[event])
 ```
 
-(4). Avoid using a function name which is same to the module name.
+## Avoid using a function name which is same to the module name.
 
 `src/index.nim`
 
@@ -53,5 +59,25 @@ proc index(ctx: Context) {.async.} =
   ...
 ```
 
-(5). Use the full path of JS, CSS files. For instance in your HTML file use `templates/some.js` instead of
-`some.js`.
+## Use the full path of JS, CSS files.
+
+For instance in your HTML file use `templates/some.js` instead of `some.js`.
+
+## Run in async mode
+
+The server can run in async mode, this is useful to perform other tasks beside
+accepting connections.
+
+```nim
+import prologue
+
+proc handler(ctx: Context) {.async.} =
+  resp "Hello world"
+
+let settings = newSettings(port = Port(8000))
+let app = newApp(settings)
+app.all("/*$", handler)
+waitFor app.runAsync()
+
+```
+
