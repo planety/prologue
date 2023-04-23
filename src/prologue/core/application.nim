@@ -541,7 +541,7 @@ proc run*(app: Prologue) {.inline.} =
   app.run(Context)
 
 proc runAsync*(app: Prologue, ctxTyp: typedesc[Context]) {.async.} =
-  ## Starts an Application.
+  ## Starts an Application in the async mode.
 
   prepareRun(app)
 
@@ -551,6 +551,7 @@ proc runAsync*(app: Prologue, ctxTyp: typedesc[Context]) {.async.} =
   await app.serveAsync(handler)
 
 proc runAsync*(app: Prologue) {.inline, async.} =
+  ## Starts an Application in the async mode.
   await app.runAsync(Context)
 
 
