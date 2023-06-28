@@ -15,6 +15,7 @@
 
 import std/[mimetypes, json, tables, strtabs]
 from std/nativesockets import Port
+from std/net import Socket
 
 from ./types import SecretKey, EmptySecretKeyError, len
 from ./urandom import randomString
@@ -24,6 +25,7 @@ type
   Settings* = ref object     ## Global settings for all handlers.
     address*: string         ## The address of socket.
     port*: Port              ## The port of socket.
+    listener*: Socket        ## listening socket to use (nil to auto create)
     debug*: bool             ## Debug mode(true is yes).
     reusePort*: bool         ## Use socket port in multiple times.
     bufSize*: int            ## Buffer size of sending static files.
@@ -58,23 +60,24 @@ func newSettings*(
   secretKey = randomString(8),
   appName = "",
   bufSize = 40960,
-  data: JsonNode = nil
+  data: JsonNode = nil,
+  listener: Socket = nil
 ): Settings =
   ## Creates a new `Settings`.
   if secretKey.len == 0:
     raise newException(EmptySecretKeyError, "Secret key can't be empty!")
 
   if data == nil:
-    result = Settings(address: address, port: port, debug: debug, 
-                      reusePort: reusePort, bufSize: bufSize,
+    result = Settings(address: address, port: port, listener: listener,
+                      debug: debug, reusePort: reusePort, bufSize: bufSize,
                       data: %* {"prologue": {"secretKey": secretKey,
                           "appName": appName}})
   else:
     var data = data
     data["prologue"] = %* {"secretKey": secretKey, "appName": appName}
 
-    result = Settings(address: address, port: port, debug: debug, 
-                  reusePort: reusePort, bufSize: bufSize,
+    result = Settings(address: address, port: port, listener: listener,
+                  debug: debug, reusePort: reusePort, bufSize: bufSize,
                   data: data)
 
 func newSettingsFromJsonNode*(settings: var Settings, data: JsonNode) {.inline.} =

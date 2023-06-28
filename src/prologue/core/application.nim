@@ -555,6 +555,8 @@ proc runAsync*(app: Prologue) {.inline, async.} =
 
 
 when isMainModule:
+  import net
+
   proc hello(ctx: Context) {.async.} =
     logging.debug "hello"
     resp "<h1>Hello, Prologue!</h1>"
@@ -579,7 +581,11 @@ when isMainModule:
     logging.debug "doLogin"
     resp redirect("/hello/Nim")
 
-  let settings = newSettings(appName = "Prologue", debug = true)
+  let socket = newSocket()
+  socket.bindAddr(Port(8080), "0.0.0.0")
+  socket.setSockOpt(OptReuseAddr, true)
+  socket.listen()
+  let settings = newSettings(appName = "Prologue", debug = true, listener = socket)
   var app = newApp(settings = settings)
 
   app.addRoute("/", home, HttpGet)
