@@ -27,7 +27,7 @@ proc execStartupEvent*(app: Prologue) =
 proc getSettings(app: Prologue): httpx.Settings =
   result = httpx.initSettings(app.gScope.settings.port, app.gScope.settings.address,
                 app.gScope.settings["prologue"].getOrDefault("numThreads").getInt(0),
-                app.startupClosure)
+                app.startupClosure, app.gScope.settings.listener)
 
 proc serve*(app: Prologue,
             callback: proc (request: NativeRequest): Future[void] {.closure, gcsafe.},
