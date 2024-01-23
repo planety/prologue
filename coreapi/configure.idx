@@ -1,0 +1,28 @@
+nimTitle	configure	configure.html	module src/prologue/core/configure		0
+nim	Env	configure.html#Env	object Env		57
+nim	EnvError	configure.html#EnvError	object EnvError		59
+nim	EnvWrongFormatError	configure.html#EnvWrongFormatError	object EnvWrongFormatError		60
+nim	Json	configure.html#Json	ConfigFileExt.Json		62
+nim	Toml	configure.html#Toml	ConfigFileExt.Toml		62
+nim	Yaml	configure.html#Yaml	ConfigFileExt.Yaml		62
+nim	ConfigFileExt	configure.html#ConfigFileExt	enum ConfigFileExt		62
+nim	initEnv	configure.html#initEnv	proc initEnv(): Env		68
+nim	`$`	configure.html#$,Env	proc `$`(env: Env): string		72
+nim	`[]`	configure.html#[],Env,string	proc `[]`(env: Env; key: string): string		76
+nim	hasKey	configure.html#hasKey,Env,string	proc hasKey(env: Env; key: string): bool		80
+nim	contains	configure.html#contains,Env,string	proc contains(env: Env; key: string): bool		87
+nim	get	configure.html#get,Env,string	proc get(env: Env; key: string): string		94
+nim	getOrDefault	configure.html#getOrDefault,Env,string,T	proc getOrDefault[T: BaseType](env: Env; key: string; default: T): T		98
+nim	keys	configure.html#keys.i,Env	iterator keys(env: Env): string		105
+nim	values	configure.html#values.i,Env	iterator values(env: Env): string		109
+nim	pairs	configure.html#pairs.i,Env	iterator pairs(env: Env): (string, string)		113
+nim	getPrologueEnv	configure.html#getPrologueEnv	proc getPrologueEnv(): string		117
+nim	putPrologueEnv	configure.html#putPrologueEnv,string,string,string	proc putPrologueEnv(key, val: string; prefix: string)		122
+nim	getPrologueEnv	configure.html#getPrologueEnv,string,string,string	proc getPrologueEnv(key: string; prefix: string; default = ""): string		126
+nim	getAllPrologueEnv	configure.html#getAllPrologueEnv,string	proc getAllPrologueEnv(prefix: string): OrderedTableRef[string, string]		131
+nim	existsPrologueEnv	configure.html#existsPrologueEnv,string,string	proc existsPrologueEnv(key: string; prefix: string): bool		138
+nim	delPrologueEnv	configure.html#delPrologueEnv,string,string	proc delPrologueEnv(key: string; prefix: string)		141
+nim	loadPrologueEnv	configure.html#loadPrologueEnv,string	proc loadPrologueEnv(filename: string): Env		144
+nim	setPrologueEnv	configure.html#setPrologueEnv,Env,string,string	proc setPrologueEnv(env: Env; key, value: string)		163
+nim	writePrologueEnv	configure.html#writePrologueEnv,string,Env	proc writePrologueEnv(filename: string; env: Env)		166
+nimgrp	getprologueenv	configure.html#getPrologueEnv-procs-all	proc		117

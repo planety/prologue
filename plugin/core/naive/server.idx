@@ -1,0 +1,7 @@
+nimTitle	server	core/naive/server.html	module src/prologue/core/naive/server		0
+nim	Server	core/naive/server.html#Server	type Server		11
+nim	Prologue	core/naive/server.html#Prologue	type Prologue		13
+nim	execStartupEvent	core/naive/server.html#execStartupEvent,Prologue	proc execStartupEvent(app: Prologue)		22
+nim	serveAsync	core/naive/server.html#serveAsync,Prologue,proc(Request)	proc serveAsync(app: Prologue; callback: proc (request: NativeRequest): Future[void] {.\n    closure, gcsafe.}): owned(Future[void])		28
+nim	serve	core/naive/server.html#serve,Prologue,proc(Request)	proc serve(app: Prologue;\n      callback: proc (request: NativeRequest): Future[void] {.closure, gcsafe.})		32
+nim	newPrologue	core/naive/server.html#newPrologue,Settings,CtxSettings,Router,ReversedRouter,ReRouter,openArray[HandlerAsync],openArray[Event],openArray[Event],ErrorHandlerTable,StringTableRef	proc newPrologue(settings: Settings; ctxSettings: CtxSettings; router: Router;\n            reversedRouter: ReversedRouter; reRouter: ReRouter;\n            middlewares: openArray[HandlerAsync]; startup: openArray[Event];\n            shutdown: openArray[Event]; errorHandlerTable: ErrorHandlerTable;\n            appData: StringTableRef): Prologue		42

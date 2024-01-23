@@ -1,0 +1,2 @@
+nimTitle	clickjacking	middlewares/clickjacking.html	module src/prologue/middlewares/clickjacking		0
+nim	clickjackingMiddleWare	middlewares/clickjacking.html#clickjackingMiddleWare	proc clickjackingMiddleWare(): HandlerAsync		22

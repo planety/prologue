@@ -1,0 +1,28 @@
+nimTitle	response	core/response.html	module src/prologue/core/response		0
+nim	Response	core/response.html#Response	object Response		9
+nim	`$`	core/response.html#$,Response	proc `$`(response: Response): string		16
+nim	initResponse	core/response.html#initResponse,HttpVersion,HttpCode,string	proc initResponse(httpVersion: HttpVersion; code: HttpCode; headers = [\n    ("Content-Type", "text/html; charset=UTF-8")].initResponseHeaders; body = ""): Response		20
+nim	initResponse	core/response.html#initResponse,HttpVersion,HttpCode,openArray[],string	proc initResponse(httpVersion: HttpVersion; code: HttpCode;\n             headers: openArray[(string, string)]; body = ""): Response		26
+nim	hasHeader	core/response.html#hasHeader.t,Response,string	template hasHeader(response: Response; key: string): bool		33
+nim	getHeader	core/response.html#getHeader.t,Response,string	template getHeader(response: Response; key: string): seq[string]		37
+nim	getHeaderOrDefault	core/response.html#getHeaderOrDefault.t,Response,string	template getHeaderOrDefault(response: Response; key: string; default = @[""]): seq[string]		41
+nim	setHeader	core/response.html#setHeader.t,Response,string,string	template setHeader(response: var Response; key, value: string)		45
+nim	setHeader	core/response.html#setHeader.t,Response,string,seq[string]	template setHeader(response: var Response; key: string; value: seq[string])		49
+nim	addHeader	core/response.html#addHeader.t,Response,string,string	template addHeader(response: var Response; key, value: string)		53
+nim	setCookie	core/response.html#setCookie.t,Response,Cookie	template setCookie(response: var Response; cookie: Cookie)		57
+nim	setCookie	core/response.html#setCookie.t,Response,string,string,string,Option[int],string,string	template setCookie(response: var Response; key, value: string; expires = "";\n          maxAge: Option[int] = none(int); domain = ""; path = "";\n          secure = false; httpOnly = false; sameSite = Lax)		61
+nim	setCookie	core/response.html#setCookie.t,Response,string,string,,Option[int],string,string	template setCookie(response: var Response; key, value: string; expires: DateTime | Time;\n          maxAge: Option[int] = none(int); domain = ""; path = "";\n          secure = false; httpOnly = false; sameSite = Lax)		69
+nim	deleteCookie	core/response.html#deleteCookie.t,Response,string,string,string,string	template deleteCookie(response: var Response; key: string; value = ""; path = "";\n             domain = "")		77
+nim	abort	core/response.html#abort,string	proc abort(code = Http401; body = ""; headers = initResponseHeaders();\n      version = HttpVer11): Response		83
+nim	redirect	core/response.html#redirect,string,string,int	proc redirect(url: string; code = Http301; body = ""; delay = 0;\n         headers = initResponseHeaders(); version = HttpVer11): Response		89
+nim	error404	core/response.html#error404,string	proc error404(code = Http404; body = "<h1>404 Not Found!</h1>";\n         headers = initResponseHeaders(); version = HttpVer11): Response		100
+nim	htmlResponse	core/response.html#htmlResponse,string	proc htmlResponse(text: string; code = Http200; headers = initResponseHeaders();\n             version = HttpVer11): Response		106
+nim	plainTextResponse	core/response.html#plainTextResponse,string	proc plainTextResponse(text: string; code = Http200; headers = initResponseHeaders();\n                  version = HttpVer11): Response		112
+nim	jsonResponse	core/response.html#jsonResponse,JsonNode	proc jsonResponse(text: JsonNode; code = Http200; headers = initResponseHeaders();\n             version = HttpVer11): Response		118
+nim	respDefault	core/response.html#respDefault.m,HttpCode	macro respDefault(code: HttpCode)		124
+nim	resp	core/response.html#resp.m,string	macro resp(body: string; code = Http200; version = HttpVer11)		132
+nim	resp	core/response.html#resp.m,Response	macro resp(response: Response)		142
+nimgrp	initresponse	core/response.html#initResponse-procs-all	proc		20
+nimgrp	resp	core/response.html#resp-macros-all	macro		132
+nimgrp	setcookie	core/response.html#setCookie-templates-all	template		57
+nimgrp	setheader	core/response.html#setHeader-templates-all	template		45

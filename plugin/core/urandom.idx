@@ -1,0 +1,7 @@
+nimTitle	urandom	core/urandom.html	module src/prologue/core/urandom		0
+nim	DefaultEntropy	core/urandom.html#DefaultEntropy	const DefaultEntropy		21
+nim	randomBytesSeq	core/urandom.html#randomBytesSeq	proc randomBytesSeq(size = DefaultEntropy): seq[byte]		24
+nim	randomBytesSeq	core/urandom.html#randomBytesSeq_2	proc randomBytesSeq[size: static[int]](): array[size, byte]		29
+nim	randomString	core/urandom.html#randomString	proc randomString(size = DefaultEntropy): string		33
+nim	randomSecretKey	core/urandom.html#randomSecretKey	proc randomSecretKey(size = DefaultEntropy): SecretKey		37
+nimgrp	randombytesseq	core/urandom.html#randomBytesSeq-procs-all	proc		24

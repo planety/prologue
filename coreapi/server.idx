@@ -1,0 +1,5 @@
+nimTitle	server	server.html	module src/prologue/core/server		0
+nim	appAddress	server.html#appAddress,Prologue	proc appAddress(app: Prologue): string		14
+nim	appDebug	server.html#appDebug,Prologue	proc appDebug(app: Prologue): bool		18
+nim	appName	server.html#appName,Prologue	proc appName(app: Prologue): string		22
+nim	appPort	server.html#appPort,Prologue	proc appPort(app: Prologue): Port		26

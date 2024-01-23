@@ -1,0 +1,2 @@
+nimTitle	memorysession	middlewares/sessions/memorysession.html	module src/prologue/middlewares/sessions/memorysession		0
+nim	sessionMiddleware	middlewares/sessions/memorysession.html#sessionMiddleware,Settings,string,int,string,string	proc sessionMiddleware(settings: Settings; sessionName = "session";\n                  maxAge: int = 20160 * 60; path = ""; domain = "";\n                  sameSite = Lax; httpOnly = false; secure = false): HandlerAsync		17

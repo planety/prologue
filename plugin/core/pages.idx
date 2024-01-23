@@ -1,0 +1,5 @@
+nimTitle	pages	core/pages.html	module src/prologue/core/pages		0
+nim	errorPage	core/pages.html#errorPage,string	proc errorPage(errorMsg: string): string		5
+nim	loginPage	core/pages.html#loginPage	proc loginPage(): string		14
+nim	multiPartPage	core/pages.html#multiPartPage	proc multiPartPage(): string		23
+nim	internalServerErrorPage	core/pages.html#internalServerErrorPage	proc internalServerErrorPage(): string		32

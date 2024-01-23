@@ -1,0 +1,3 @@
+nimTitle	form	form.html	module src/prologue/core/form		0
+nim	parseFormPart	form.html#parseFormPart,string,string	proc parseFormPart(body, contentType: string): FormPart		24
+nim	parseFormParams	form.html#parseFormParams,Request,string	proc parseFormParams(request: var Request; contentType: string)		90

@@ -1,0 +1,8 @@
+nimTitle	utils	middlewares/utils.html	module src/prologue/middlewares/utils		0
+nim	testMiddleware	middlewares/utils.html#testMiddleware	proc testMiddleware(): HandlerAsync		23
+nim	loggingMiddleware	middlewares/utils.html#loggingMiddleware,string	proc loggingMiddleware(appName = "Prologue"): HandlerAsync		30
+nim	debugRequestMiddleware	middlewares/utils.html#debugRequestMiddleware,string	proc debugRequestMiddleware(appName = "Prologue"): HandlerAsync		41
+nim	debugResponseMiddleware	middlewares/utils.html#debugResponseMiddleware,string	proc debugResponseMiddleware(appName = "Prologue"): HandlerAsync		55
+nim	stripPathMiddleware	middlewares/utils.html#stripPathMiddleware,string	proc stripPathMiddleware(appName = "Prologue"): HandlerAsync		66
+nim	httpRedirectMiddleWare	middlewares/utils.html#httpRedirectMiddleWare	proc httpRedirectMiddleWare(): HandlerAsync		77
+nim	isStaticFile	middlewares/utils.html#isStaticFile,string,openArray[string]	proc isStaticFile(path: string; dirs: openArray[string]): tuple[hasValue: bool,\n    filename, dir: string]		89

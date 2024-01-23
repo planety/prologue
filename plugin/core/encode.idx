@@ -1,0 +1,9 @@
+nimTitle	encode	core/encode.html	module src/prologue/core/encode		0
+nim	base64Encode	core/encode.html#base64Encode,openArray[T]	proc base64Encode[T: SomeInteger | char](s: openArray[T]): string		17
+nim	base64Encode	core/encode.html#base64Encode,string	proc base64Encode(s: string): string		21
+nim	base64Decode	core/encode.html#base64Decode,string	proc base64Decode(s: string): string		25
+nim	urlsafeBase64Encode	core/encode.html#urlsafeBase64Encode,openArray[T]	proc urlsafeBase64Encode[T: SomeInteger | char](s: openArray[T]): string		29
+nim	urlsafeBase64Encode	core/encode.html#urlsafeBase64Encode,string	proc urlsafeBase64Encode(s: string): string		33
+nim	urlsafeBase64Decode	core/encode.html#urlsafeBase64Decode,string	proc urlsafeBase64Decode(s: string): string		37
+nimgrp	urlsafebase64encode	core/encode.html#urlsafeBase64Encode-procs-all	proc		29
+nimgrp	base64encode	core/encode.html#base64Encode-procs-all	proc		17

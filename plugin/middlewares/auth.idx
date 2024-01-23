@@ -1,0 +1,2 @@
+nimTitle	auth	middlewares/auth.html	module src/prologue/middlewares/auth		0
+nim	basicAuthMiddleware	middlewares/auth.html#basicAuthMiddleware,string,VerifyHandler,string	proc basicAuthMiddleware(realm: string; verifyHandler: VerifyHandler;\n                    charset = "UTF-8"): HandlerAsync		8

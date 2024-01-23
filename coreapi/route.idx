@@ -1,0 +1,23 @@
+nimTitle	route	route.html	module src/prologue/core/route		0
+nim	UrlPattern	route.html#UrlPattern	tuple UrlPattern		43
+nim	initPath	route.html#initPath,string	proc initPath(route: string; httpMethod = HttpGet): Path		51
+nim	initRePath	route.html#initRePath,Regex	proc initRePath(route: Regex; httpMethod = HttpGet): RePath		54
+nim	pattern	route.html#pattern,string,HandlerAsync,string,openArray[HandlerAsync]	proc pattern(route: string; handler: HandlerAsync; httpMethod = HttpGet; name = "";\n        middlewares: openArray[HandlerAsync] = @[]): UrlPattern		57
+nim	pattern	route.html#pattern,string,HandlerAsync,openArray[HttpMethod],string,openArray[HandlerAsync]	proc pattern(route: string; handler: HandlerAsync; httpMethod: openArray[HttpMethod];\n        name = ""; middlewares: openArray[HandlerAsync] = @[]): UrlPattern		62
+nim	hash	route.html#hash,Path	proc hash(x: Path): Hash		68
+nim	newReRouter	route.html#newReRouter	proc newReRouter(): ReRouter		74
+nim	add	route.html#add,ReRouter,	proc add(reRouter: var ReRouter; pairs: (RePath, PathHandler))		77
+nim	items	route.html#items.i,ReRouter	iterator items(reRouter: ReRouter): (RePath, PathHandler)		80
+nim	`$`	route.html#$,BasePatternNode	proc `$`(piece: BasePatternNode): string		84
+nim	`$`	route.html#$,PatternNode	proc `$`(node: PatternNode): string		91
+nim	printRoutingTree	route.html#printRoutingTree,Router	proc printRoutingTree(router: Router)		117
+nim	newRouter	route.html#newRouter	proc newRouter(): Router		123
+nim	newPathHandler	route.html#newPathHandler,HandlerAsync,seq[HandlerAsync]	proc newPathHandler(handler: HandlerAsync; middlewares: seq[HandlerAsync]): PathHandler		351
+nim	addRoute	route.html#addRoute,Router,string,HttpMethod,HandlerAsync,seq[HandlerAsync]	proc addRoute(router: Router; route: string; httpMethod: HttpMethod;\n         handler: HandlerAsync; middlewares: seq[HandlerAsync])		354
+nim	compress	route.html#compress,Router	proc compress(router: Router)		394
+nim	findHandler	route.html#findHandler,Context,HttpMethod,string	proc findHandler(ctx: Context; reqMethod: HttpMethod; path: string): Option[\n    PathHandler]		470
+nim	stripRoute	route.html#stripRoute,string	proc stripRoute(route: string): string		478
+nim	findHandler	route.html#findHandler,Context	proc findHandler(ctx: Context): PathHandler		485
+nimgrp	$	route.html#$-procs-all	proc		84
+nimgrp	findhandler	route.html#findHandler-procs-all	proc		470
+nimgrp	pattern	route.html#pattern-procs-all	proc		57

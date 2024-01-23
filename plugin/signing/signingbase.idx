@@ -1,0 +1,5 @@
+nimTitle	signingbase	signing/signingbase.html	module src/prologue/signing/signingbase		0
+nim	BadDataError	signing/signingbase.html#BadDataError	object BadDataError		2
+nim	BadSignatureError	signing/signingbase.html#BadSignatureError	object BadSignatureError		3
+nim	BadTimeSignatureError	signing/signingbase.html#BadTimeSignatureError	object BadTimeSignatureError		4
+nim	SignatureExpiredError	signing/signingbase.html#SignatureExpiredError	object SignatureExpiredError		5

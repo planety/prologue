@@ -1,0 +1,7 @@
+nimTitle	openapi	openapi/openapi.html	module src/prologue/openapi/openapi		0
+nim	swaggerDocs	openapi/openapi.html#swaggerDocs	const swaggerDocs		24
+nim	redocs	openapi/openapi.html#redocs	const redocs		56
+nim	openapiHandler	openapi/openapi.html#openapiHandler,Context	proc openapiHandler(ctx: Context): owned(Future[void])		82
+nim	swaggerHandler	openapi/openapi.html#swaggerHandler,Context	proc swaggerHandler(ctx: Context): owned(Future[void])		85
+nim	redocsHandler	openapi/openapi.html#redocsHandler,Context	proc redocsHandler(ctx: Context): owned(Future[void])		88
+nim	serveDocs	openapi/openapi.html#serveDocs,Prologue,string	proc serveDocs(app: Prologue; source: string; onlyDebug = false)		91

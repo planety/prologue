@@ -1,0 +1,20 @@
+nimTitle	validater	validater/validater.html	module src/prologue/validater/validater		0
+nim	Info	validater/validater.html#Info	tuple Info		71
+nim	ValidateHandler	validater/validater.html#ValidateHandler	type ValidateHandler		72
+nim	FormValidation	validater/validater.html#FormValidation	object FormValidation		74
+nim	newFormValidation	validater/validater.html#newFormValidation,openArray[]	proc newFormValidation(validator: openArray[(string, seq[ValidateHandler])]): FormValidation		78
+nim	validate	validater/validater.html#validate,FormValidation,StringTableRef	proc validate(formValidation: FormValidation; textTable: StringTableRef;\n         allMsgs = true): Info		83
+nim	isInt	validater/validater.html#isInt,string	proc isInt(msg = ""): ValidateHandler		109
+nim	isNumeric	validater/validater.html#isNumeric,string	proc isNumeric(msg = ""): ValidateHandler		120
+nim	isBool	validater/validater.html#isBool,string	proc isBool(msg = ""): ValidateHandler		131
+nim	minValue	validater/validater.html#minValue,float,string	proc minValue(min: float; msg = ""): ValidateHandler		142
+nim	maxValue	validater/validater.html#maxValue,float,string	proc maxValue(max: float; msg = ""): ValidateHandler		159
+nim	rangeValue	validater/validater.html#rangeValue,float,float,string	proc rangeValue(min, max: float; msg = ""): ValidateHandler		176
+nim	minLength	validater/validater.html#minLength,Natural,string	proc minLength(min: Natural; msg = ""): ValidateHandler		193
+nim	maxLength	validater/validater.html#maxLength,Natural,string	proc maxLength(max: Natural; msg = ""): ValidateHandler		205
+nim	rangeLength	validater/validater.html#rangeLength,Natural,Natural,string	proc rangeLength(min, max: Natural; msg = ""): ValidateHandler		217
+nim	equals	validater/validater.html#equals,string,string	proc equals(value: string; msg = ""): ValidateHandler		229
+nim	accepted	validater/validater.html#accepted,string	proc accepted(msg = ""): ValidateHandler		240
+nim	required	validater/validater.html#required,string	proc required(msg = ""): ValidateHandler		254
+nim	matchRegex	validater/validater.html#matchRegex,Regex,string	proc matchRegex(value: Regex; msg = ""): ValidateHandler		265
+nim	matchURL	validater/validater.html#matchURL,string	proc matchURL(msg = ""): ValidateHandler		277

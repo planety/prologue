@@ -1,0 +1,12 @@
+nimTitle	nativesettings	nativesettings.html	module src/prologue/core/nativesettings		0
+nim	Settings	nativesettings.html#Settings	type Settings		25
+nim	CtxSettings	nativesettings.html#CtxSettings	type CtxSettings		34
+nim	hasKey	nativesettings.html#hasKey,Settings,string	proc hasKey(settings: Settings; key: string): bool		39
+nim	`[]`	nativesettings.html#[],Settings,string	proc `[]`(settings: Settings; key: string): JsonNode		43
+nim	getOrDefault	nativesettings.html#getOrDefault,Settings,string	proc getOrDefault(settings: Settings; key: string): JsonNode		47
+nim	newCtxSettings	nativesettings.html#newCtxSettings	proc newCtxSettings(): CtxSettings		51
+nim	newSettings	nativesettings.html#newSettings,string,string,int,JsonNode,Socket	proc newSettings(address = ""; port = Port(8080); debug = true; reusePort = true;\n            secretKey = randomString(8); appName = ""; bufSize = 40960;\n            data: JsonNode = nil; listener: Socket = nil): Settings		55
+nim	newSettingsFromJsonNode	nativesettings.html#newSettingsFromJsonNode,Settings,JsonNode	proc newSettingsFromJsonNode(settings: var Settings; data: JsonNode)		83
+nim	loadSettings	nativesettings.html#loadSettings,JsonNode	proc loadSettings(data: JsonNode): Settings		99
+nim	loadSettings	nativesettings.html#loadSettings,string	proc loadSettings(configPath: string): Settings		106
+nimgrp	loadsettings	nativesettings.html#loadSettings-procs-all	proc		99

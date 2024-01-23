@@ -1,0 +1,46 @@
+nimTitle	signing	signing/signing.html	module src/prologue/signing/signing		0
+nim	BaseDigestType	signing/signing.html#BaseDigestType	type BaseDigestType		48
+nim	Sha1Type	signing/signing.html#Sha1Type	BaseDigestMethodType.Sha1Type		50
+nim	Sha224Type	signing/signing.html#Sha224Type	BaseDigestMethodType.Sha224Type		50
+nim	Sha384Type	signing/signing.html#Sha384Type	BaseDigestMethodType.Sha384Type		50
+nim	Sha512Type	signing/signing.html#Sha512Type	BaseDigestMethodType.Sha512Type		50
+nim	Sha512_224Type	signing/signing.html#Sha512_224Type	BaseDigestMethodType.Sha512_224Type		50
+nim	Sha512_256Type	signing/signing.html#Sha512_256Type	BaseDigestMethodType.Sha512_256Type		50
+nim	Keccak224Type	signing/signing.html#Keccak224Type	BaseDigestMethodType.Keccak224Type		50
+nim	Keccak256Type	signing/signing.html#Keccak256Type	BaseDigestMethodType.Keccak256Type		50
+nim	Keccak384Type	signing/signing.html#Keccak384Type	BaseDigestMethodType.Keccak384Type		50
+nim	Keccak512Type	signing/signing.html#Keccak512Type	BaseDigestMethodType.Keccak512Type		50
+nim	Sha3_224Type	signing/signing.html#Sha3_224Type	BaseDigestMethodType.Sha3_224Type		50
+nim	Sha3_256Type	signing/signing.html#Sha3_256Type	BaseDigestMethodType.Sha3_256Type		50
+nim	Sha3_384Type	signing/signing.html#Sha3_384Type	BaseDigestMethodType.Sha3_384Type		50
+nim	Sha3_512Type	signing/signing.html#Sha3_512Type	BaseDigestMethodType.Sha3_512Type		50
+nim	Ripemd128Type	signing/signing.html#Ripemd128Type	BaseDigestMethodType.Ripemd128Type		50
+nim	Ripemd160Type	signing/signing.html#Ripemd160Type	BaseDigestMethodType.Ripemd160Type		50
+nim	Ripemd256Type	signing/signing.html#Ripemd256Type	BaseDigestMethodType.Ripemd256Type		50
+nim	Ripemd320Type	signing/signing.html#Ripemd320Type	BaseDigestMethodType.Ripemd320Type		50
+nim	Blake2_224Type	signing/signing.html#Blake2_224Type	BaseDigestMethodType.Blake2_224Type		50
+nim	Blake2_256Type	signing/signing.html#Blake2_256Type	BaseDigestMethodType.Blake2_256Type		50
+nim	Blake2_384Type	signing/signing.html#Blake2_384Type	BaseDigestMethodType.Blake2_384Type		50
+nim	Blake2_512Type	signing/signing.html#Blake2_512Type	BaseDigestMethodType.Blake2_512Type		50
+nim	BaseDigestMethodType	signing/signing.html#BaseDigestMethodType	enum BaseDigestMethodType		50
+nim	Concat	signing/signing.html#Concat	KeyDerivation.Concat		58
+nim	MoreConcat	signing/signing.html#MoreConcat	KeyDerivation.MoreConcat		58
+nim	KeyHmac	signing/signing.html#KeyHmac	KeyDerivation.KeyHmac		58
+nim	None	signing/signing.html#None	KeyDerivation.None		58
+nim	KeyDerivation	signing/signing.html#KeyDerivation	enum KeyDerivation		58
+nim	Signer	signing/signing.html#Signer	object Signer		61
+nim	TimedSigner	signing/signing.html#TimedSigner	object TimedSigner		68
+nim	DefaultSep	signing/signing.html#DefaultSep	const DefaultSep		78
+nim	DefaultKeyDerivation	signing/signing.html#DefaultKeyDerivation	const DefaultKeyDerivation		80
+nim	DefaultDigestMethodType	signing/signing.html#DefaultDigestMethodType	const DefaultDigestMethodType		81
+nim	initSigner	signing/signing.html#initSigner,SecretKey	proc initSigner(secretKey: SecretKey; salt = DefaultSalt; sep = DefaultSep;\n           keyDerivation = DefaultKeyDerivation;\n           digestMethod = DefaultDigestMethodType): Signer		84
+nim	initTimedSigner	signing/signing.html#initTimedSigner,SecretKey	proc initTimedSigner(secretKey: SecretKey; salt = DefaultSalt; sep = DefaultSep;\n                keyDerivation = DefaultKeyDerivation;\n                digestMethod = DefaultDigestMethodType): TimedSigner		96
+nim	getSignatureEncode	signing/signing.html#getSignatureEncode,,openArray[byte]	proc getSignatureEncode(s: Signer | TimedSigner; value: openArray[byte]): string		154
+nim	getSignatureDecode	signing/signing.html#getSignatureDecode	proc getSignatureDecode(s: Signer | TimedSigner): string		202
+nim	sign	signing/signing.html#sign,Signer,string	proc sign(s: Signer; value: string): string		249
+nim	sign	signing/signing.html#sign,TimedSigner,string	proc sign(s: TimedSigner; value: string): string		252
+nim	unsign	signing/signing.html#unsign,,string	proc unsign(s: Signer | TimedSigner; signedValue: string): string		261
+nim	unsign	signing/signing.html#unsign,TimedSigner,string,Natural	proc unsign(s: TimedSigner; signedValue: string; max_age: Natural): string		273
+nim	validate	signing/signing.html#validate,Signer,string	proc validate(s: Signer; signedValue: string): bool		308
+nimgrp	sign	signing/signing.html#sign-procs-all	proc		249
+nimgrp	unsign	signing/signing.html#unsign-procs-all	proc		261

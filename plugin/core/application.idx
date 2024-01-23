@@ -1,0 +1,58 @@
+nimTitle	application	core/application.html	module src/prologue/core/application		0
+nim	registerErrorHandler	core/application.html#registerErrorHandler,Prologue,HttpCode,ErrorHandler	proc registerErrorHandler(app: Prologue; code: HttpCode; handler: ErrorHandler)		69
+nim	registerErrorHandler	core/application.html#registerErrorHandler,Prologue,set[HttpCode],ErrorHandler	proc registerErrorHandler(app: Prologue; code: set[HttpCode]; handler: ErrorHandler)		78
+nim	registerErrorHandler	core/application.html#registerErrorHandler,Prologue,openArray[HttpCode],ErrorHandler	proc registerErrorHandler(app: Prologue; code: openArray[HttpCode];\n                     handler: ErrorHandler)		84
+nim	addRoute	core/application.html#addRoute,Prologue,Regex,HandlerAsync,openArray[HandlerAsync]	proc addRoute(app: Prologue; route: Regex; handler: HandlerAsync;\n         httpMethod = HttpGet; middlewares: openArray[HandlerAsync] = @[])		113
+nim	addRoute	core/application.html#addRoute,Prologue,Regex,HandlerAsync,openArray[HttpMethod],openArray[HandlerAsync]	proc addRoute(app: Prologue; route: Regex; handler: HandlerAsync;\n         httpMethod: openArray[HttpMethod];\n         middlewares: openArray[HandlerAsync] = @[])		129
+nim	addRoute	core/application.html#addRoute,Prologue,string,HandlerAsync,string,openArray[HandlerAsync]	proc addRoute(app: Prologue; route: string; handler: HandlerAsync;\n         httpMethod = HttpGet; name = "";\n         middlewares: openArray[HandlerAsync] = @[])		166
+nim	addRoute	core/application.html#addRoute,Prologue,string,HandlerAsync,openArray[HttpMethod],string,openArray[HandlerAsync]	proc addRoute(app: Prologue; route: string; handler: HandlerAsync;\n         httpMethod: openArray[HttpMethod]; name = "";\n         middlewares: openArray[HandlerAsync] = @[])		186
+nim	addRoute	core/application.html#addRoute,Prologue,openArray[UrlPattern],string,Option[seq[HandlerAsync]]	proc addRoute(app: Prologue; patterns: openArray[UrlPattern]; baseRoute = "";\n         middlewares: Option[seq[HandlerAsync]] = none(seq[HandlerAsync]))		195
+nim	head	core/application.html#head,Prologue,string,HandlerAsync,string,openArray[HandlerAsync]	proc head(app: Prologue; route: string; handler: HandlerAsync; name = "";\n     middlewares: openArray[HandlerAsync] = @[])		210
+nim	get	core/application.html#get,Prologue,string,HandlerAsync,string,openArray[HandlerAsync]	proc get(app: Prologue; route: string; handler: HandlerAsync; name = "";\n    middlewares: openArray[HandlerAsync] = @[])		215
+nim	post	core/application.html#post,Prologue,string,HandlerAsync,string,openArray[HandlerAsync]	proc post(app: Prologue; route: string; handler: HandlerAsync; name = "";\n     middlewares: openArray[HandlerAsync] = @[])		220
+nim	put	core/application.html#put,Prologue,string,HandlerAsync,string,openArray[HandlerAsync]	proc put(app: Prologue; route: string; handler: HandlerAsync; name = "";\n    middlewares: openArray[HandlerAsync] = @[])		225
+nim	delete	core/application.html#delete,Prologue,string,HandlerAsync,string,openArray[HandlerAsync]	proc delete(app: Prologue; route: string; handler: HandlerAsync; name = "";\n       middlewares: openArray[HandlerAsync] = @[])		230
+nim	trace	core/application.html#trace,Prologue,string,HandlerAsync,string,openArray[HandlerAsync]	proc trace(app: Prologue; route: string; handler: HandlerAsync; name = "";\n      middlewares: openArray[HandlerAsync] = @[])		235
+nim	options	core/application.html#options,Prologue,string,HandlerAsync,string,openArray[HandlerAsync]	proc options(app: Prologue; route: string; handler: HandlerAsync; name = "";\n        middlewares: openArray[HandlerAsync] = @[])		240
+nim	connect	core/application.html#connect,Prologue,string,HandlerAsync,string,openArray[HandlerAsync]	proc connect(app: Prologue; route: string; handler: HandlerAsync; name = "";\n        middlewares: openArray[HandlerAsync] = @[])		245
+nim	patch	core/application.html#patch,Prologue,string,HandlerAsync,string,openArray[HandlerAsync]	proc patch(app: Prologue; route: string; handler: HandlerAsync; name = "";\n      middlewares: openArray[HandlerAsync] = @[])		250
+nim	all	core/application.html#all,Prologue,string,HandlerAsync,string,openArray[HandlerAsync]	proc all(app: Prologue; route: string; handler: HandlerAsync; name = "";\n    middlewares: openArray[HandlerAsync] = @[])		255
+nim	addGroup	core/application.html#addGroup,Group,string,HandlerAsync,string,openArray[HandlerAsync]	proc addGroup(group: Group; route: string; handler: HandlerAsync;\n         httpMethod = HttpGet; name = "";\n         middlewares: openArray[HandlerAsync] = @[])		263
+nim	addGroup	core/application.html#addGroup,Group,string,HandlerAsync,openArray[HttpMethod],string,openArray[HandlerAsync]	proc addGroup(group: Group; route: string; handler: HandlerAsync;\n         httpMethod: openArray[HttpMethod]; name = "";\n         middlewares: openArray[HandlerAsync] = @[])		273
+nim	addGroup	core/application.html#addGroup,Prologue,openArray[]	proc addGroup(app: Prologue; patterns: openArray[(Group, seq[UrlPattern])])		281
+nim	head	core/application.html#head,Group,string,HandlerAsync,string,openArray[HandlerAsync]	proc head(group: Group; route: string; handler: HandlerAsync; name = "";\n     middlewares: openArray[HandlerAsync] = @[])		289
+nim	get	core/application.html#get,Group,string,HandlerAsync,string,openArray[HandlerAsync]	proc get(group: Group; route: string; handler: HandlerAsync; name = "";\n    middlewares: openArray[HandlerAsync] = @[])		295
+nim	post	core/application.html#post,Group,string,HandlerAsync,string,openArray[HandlerAsync]	proc post(group: Group; route: string; handler: HandlerAsync; name = "";\n     middlewares: openArray[HandlerAsync] = @[])		301
+nim	put	core/application.html#put,Group,string,HandlerAsync,string,openArray[HandlerAsync]	proc put(group: Group; route: string; handler: HandlerAsync; name = "";\n    middlewares: openArray[HandlerAsync] = @[])		307
+nim	delete	core/application.html#delete,Group,string,HandlerAsync,string,openArray[HandlerAsync]	proc delete(group: Group; route: string; handler: HandlerAsync; name = "";\n       middlewares: openArray[HandlerAsync] = @[])		313
+nim	trace	core/application.html#trace,Group,string,HandlerAsync,string,openArray[HandlerAsync]	proc trace(group: Group; route: string; handler: HandlerAsync; name = "";\n      middlewares: openArray[HandlerAsync] = @[])		319
+nim	options	core/application.html#options,Group,string,HandlerAsync,string,openArray[HandlerAsync]	proc options(group: Group; route: string; handler: HandlerAsync; name = "";\n        middlewares: openArray[HandlerAsync] = @[])		325
+nim	connect	core/application.html#connect,Group,string,HandlerAsync,string,openArray[HandlerAsync]	proc connect(group: Group; route: string; handler: HandlerAsync; name = "";\n        middlewares: openArray[HandlerAsync] = @[])		331
+nim	patch	core/application.html#patch,Group,string,HandlerAsync,string,openArray[HandlerAsync]	proc patch(group: Group; route: string; handler: HandlerAsync; name = "";\n      middlewares: openArray[HandlerAsync] = @[])		337
+nim	all	core/application.html#all,Group,string,HandlerAsync,string,openArray[HandlerAsync]	proc all(group: Group; route: string; handler: HandlerAsync; name = "";\n    middlewares: openArray[HandlerAsync] = @[])		343
+nim	use	core/application.html#use,Prologue,varargs[HandlerAsync]	proc use(app: var Prologue; middlewares: varargs[HandlerAsync])		363
+nim	newApp	core/application.html#newApp,Settings,openArray[HandlerAsync],openArray[Event],openArray[Event]	proc newApp(settings: Settings = newSettings();\n       middlewares: openArray[HandlerAsync] = @[];\n       startup: openArray[Event] = @[]; shutdown: openArray[Event] = @[];\n    errorHandlerTable = newErrorHandlerTable(\n    [(Http404, default404Handler), (Http500, default500Handler)]);\n       appData = newStringTable(mode = modeCaseSensitive)): Prologue		366
+nim	newAppQueryEnv	core/application.html#newAppQueryEnv,ConfigFileExt,proc(string),openArray[HandlerAsync],openArray[Event],openArray[Event]	proc newAppQueryEnv(configFileExt: ConfigFileExt;\n               loadJsonNode: proc (configPath: string): JsonNode;\n               middlewares: openArray[HandlerAsync] = @[];\n               startup: openArray[Event] = @[];\n               shutdown: openArray[Event] = @[]; errorHandlerTable = newErrorHandlerTable(\n    [(Http404, default404Handler), (Http500, default500Handler)]);\n               appData = newStringTable(mode = modeCaseSensitive)): Prologue		391
+nim	newAppQueryEnv	core/application.html#newAppQueryEnv,openArray[HandlerAsync],openArray[Event],openArray[Event]	proc newAppQueryEnv(middlewares: openArray[HandlerAsync] = @[];\n               startup: openArray[Event] = @[];\n               shutdown: openArray[Event] = @[]; errorHandlerTable = newErrorHandlerTable(\n    [(Http404, default404Handler), (Http500, default500Handler)]);\n               appData = newStringTable(mode = modeCaseSensitive)): Prologue		424
+nim	handleContext	core/application.html#handleContext,Prologue,Context	proc handleContext(app: Prologue; ctx: Context): owned(Future[void])		453
+nim	handleRequest	core/application.html#handleRequest,Prologue,Request,typedesc[Context]	proc handleRequest(app: Prologue; nativeRequest: NativeRequest;\n              ctxTyp: typedesc[Context]): Future[void]		493
+nim	run	core/application.html#run,Prologue,typedesc[Context]	proc run(app: Prologue; ctxTyp: typedesc[Context])		530
+nim	run	core/application.html#run,Prologue	proc run(app: Prologue)		540
+nim	runAsync	core/application.html#runAsync,Prologue,typedesc[Context]	proc runAsync(app: Prologue; ctxTyp: typedesc[Context]): owned(Future[void])		543
+nim	runAsync	core/application.html#runAsync,Prologue	proc runAsync(app: Prologue): owned(Future[void])		553
+nimgrp	put	core/application.html#put-procs-all	proc		225
+nimgrp	run	core/application.html#run-procs-all	proc		530
+nimgrp	head	core/application.html#head-procs-all	proc		210
+nimgrp	all	core/application.html#all-procs-all	proc		255
+nimgrp	newappqueryenv	core/application.html#newAppQueryEnv-procs-all	proc		391
+nimgrp	addroute	core/application.html#addRoute-procs-all	proc		113
+nimgrp	post	core/application.html#post-procs-all	proc		220
+nimgrp	options	core/application.html#options-procs-all	proc		240
+nimgrp	get	core/application.html#get-procs-all	proc		215
+nimgrp	registererrorhandler	core/application.html#registerErrorHandler-procs-all	proc		69
+nimgrp	patch	core/application.html#patch-procs-all	proc		250
+nimgrp	connect	core/application.html#connect-procs-all	proc		245
+nimgrp	delete	core/application.html#delete-procs-all	proc		230
+nimgrp	runasync	core/application.html#runAsync-procs-all	proc		543
+nimgrp	trace	core/application.html#trace-procs-all	proc		235
+nimgrp	addgroup	core/application.html#addGroup-procs-all	proc		263

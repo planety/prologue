@@ -1,0 +1,20 @@
+nimTitle	httplogue	core/httpcore/httplogue.html	module src/prologue/core/httpcore/httplogue		0
+nim	ResponseHeaders	core/httpcore/httplogue.html#ResponseHeaders	object ResponseHeaders		14
+nim	getTables	core/httpcore/httplogue.html#getTables,ResponseHeaders	proc getTables(headers: ResponseHeaders): TableRef[string, seq[string]]		18
+nim	initResponseHeaders	core/httpcore/httplogue.html#initResponseHeaders	proc initResponseHeaders(): ResponseHeaders		25
+nim	initResponseHeaders	core/httpcore/httplogue.html#initResponseHeaders,openArray[tuple[string,string]]	proc initResponseHeaders(keyValuePairs: openArray[tuple[key: string, val: string]]): ResponseHeaders		29
+nim	`$`	core/httpcore/httplogue.html#$,ResponseHeaders	proc `$`(headers: ResponseHeaders): string		40
+nim	clear	core/httpcore/httplogue.html#clear,ResponseHeaders	proc clear(headers: ResponseHeaders)		43
+nim	`[]`	core/httpcore/httplogue.html#[],ResponseHeaders,string	proc `[]`(headers: ResponseHeaders; key: string): seq[string]		46
+nim	`[]`	core/httpcore/httplogue.html#[],ResponseHeaders,string,int	proc `[]`(headers: ResponseHeaders; key: string; i: int): string		54
+nim	`[]=`	core/httpcore/httplogue.html#[]=,ResponseHeaders,string,string	proc `[]=`(headers: var ResponseHeaders; key, value: string)		60
+nim	`[]=`	core/httpcore/httplogue.html#[]=,ResponseHeaders,string,seq[string]	proc `[]=`(headers: var ResponseHeaders; key: string; value: seq[string])		65
+nim	add	core/httpcore/httplogue.html#add,ResponseHeaders,string,string	proc add(headers: var ResponseHeaders; key, value: string)		75
+nim	del	core/httpcore/httplogue.html#del,ResponseHeaders,string	proc del(headers: var ResponseHeaders; key: string)		83
+nim	pairs	core/httpcore/httplogue.html#pairs.i,ResponseHeaders	iterator pairs(headers: ResponseHeaders): tuple[key, value: string]		87
+nim	hasKey	core/httpcore/httplogue.html#hasKey,ResponseHeaders,string	proc hasKey(headers: ResponseHeaders; key: string): bool		93
+nim	getOrDefault	core/httpcore/httplogue.html#getOrDefault,ResponseHeaders,string	proc getOrDefault(headers: ResponseHeaders; key: string; default = @[""]): seq[string]		96
+nim	len	core/httpcore/httplogue.html#len,ResponseHeaders	proc len(headers: ResponseHeaders): int		105
+nimgrp	initresponseheaders	core/httpcore/httplogue.html#initResponseHeaders-procs-all	proc		25
+nimgrp	[]=	core/httpcore/httplogue.html#[]=-procs-all	proc		60
+nimgrp	[]	core/httpcore/httplogue.html#[]-procs-all	proc		46

@@ -1,0 +1,4 @@
+nimTitle	basic	validater/basic.html	module src/prologue/validater/basic		0
+nim	isInt	validater/basic.html#isInt,string	proc isInt(value: string): bool		4
+nim	isNumeric	validater/basic.html#isNumeric,string	proc isNumeric(value: string): bool		10
+nim	isBool	validater/basic.html#isBool,string	proc isBool(value: string): bool		16

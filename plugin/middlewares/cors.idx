@@ -1,0 +1,2 @@
+nimTitle	cors	middlewares/cors.html	module src/prologue/middlewares/cors		0
+nim	CorsMiddleware	middlewares/cors.html#CorsMiddleware,seq[string],Regex,seq[string],seq[string],seq[string],int,seq[string]	proc CorsMiddleware(allowOrigins: seq[string] = @[]; allowOriginRegex: Regex = re"";\n               allowMethods: seq[string] = @["GET"];\n               allowHeaders: seq[string] = @[];\n               exposeHeaders: seq[string] = @[]; allowCredentials = false;\n               maxAge = 7200; excludeEndPoint: seq[string] = @[]): HandlerAsync		42

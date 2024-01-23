@@ -1,0 +1,7 @@
+nimTitle	auth	auth/auth.html	module src/prologue/auth/auth		0
+nim	Basic	auth/auth.html#Basic	AuthMethod.Basic		11
+nim	Digest	auth/auth.html#Digest	AuthMethod.Digest		11
+nim	AuthMethod	auth/auth.html#AuthMethod	enum AuthMethod		11
+nim	VerifyHandler	auth/auth.html#VerifyHandler	type VerifyHandler		14
+nim	unauthenticate	auth/auth.html#unauthenticate,Context,AuthMethod,string,string	proc unauthenticate(ctx: Context; authMethod: AuthMethod; realm: string;\n               charset = "UTF-8")		17
+nim	basicAuth	auth/auth.html#basicAuth,Context,string,VerifyHandler,string	proc basicAuth(ctx: Context; realm: string; verify: VerifyHandler; charset = "UTF-8"): tuple[\n    hasValue: bool, username, password: string]		23

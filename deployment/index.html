@@ -1,0 +1,1803 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Prologue is an elegant and high performance web framework written in Nim language.">
+      
+      
+      
+      
+        <link rel="prev" href="../validation/">
+      
+      
+        <link rel="next" href="../faq/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.4">
+    
+    
+      
+        <title>Deployment - Prologue</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.50c56a3b.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#deploying-prologue-with-nginx-and-docker" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Prologue" class="md-header__button md-logo" aria-label="Prologue" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Prologue
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Deployment
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/planety/prologue" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    planety/prologue
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Prologue" class="md-nav__button md-logo" aria-label="Prologue" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Prologue
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/planety/prologue" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    planety/prologue
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quickstart/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    QuickStart
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configure
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../event/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Event
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../errorhandler/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Error Handler
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../headers/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Headers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../request/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Requests
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../response/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Response
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../context/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Context
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../routing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Routing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../middleware/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Middleware
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../staticfiles/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Static Files
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../uploadfile/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Upload Files
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../session/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Session
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mocking/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mocking
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../server/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Server Settings
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../extendctx/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Extend Context
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../websocket/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    WebSocket
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Command Line Tool
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../views/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Views
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../openapi/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    OpenAPI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../validation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Validation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Deployment
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Deployment
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#base-images" class="md-nav__link">
+    <span class="md-ellipsis">
+      Base Images
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compile-your-binary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compile your binary
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Compile your binary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#on-bitnamimindeb" class="md-nav__link">
+    <span class="md-ellipsis">
+      On bitnami/mindeb
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#on-alpine" class="md-nav__link">
+    <span class="md-ellipsis">
+      On alpine
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="On alpine">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-musl" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install musl
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compiling-your-dynamically-linked-musl-binary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compiling your dynamically linked musl binary
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prepare-buildfiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prepare buildFiles
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Prepare buildFiles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set-up-your-server-to-have-ssl-certificates-with-certbot" class="md-nav__link">
+    <span class="md-ellipsis">
+      Set up your server to have SSL certificates with certbot
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#provide-an-nginxconf-config-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      Provide an nginx.conf config file
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#provide-a-settingsjson-config-file-for-prologue" class="md-nav__link">
+    <span class="md-ellipsis">
+      Provide a settings.json config file for prologue
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting up docker
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-prologue-and-nginx-in-the-same-container" class="md-nav__link">
+    <span class="md-ellipsis">
+      A) Prologue and Nginx in the same container
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="A) Prologue and Nginx in the same container">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#write-your-dockerfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      Write your dockerfile
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Write your dockerfile">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#on-bitnamiminideb" class="md-nav__link">
+    <span class="md-ellipsis">
+      On bitnami/minideb
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#on-alpine_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      On alpine
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build-the-docker-image" class="md-nav__link">
+    <span class="md-ellipsis">
+      Build the docker image
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-the-docker-image-on-your-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      Run the docker image on your server
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#b-prologue-and-nginx-in-separate-containers-via-docker-compose" class="md-nav__link">
+    <span class="md-ellipsis">
+      B) Prologue and Nginx in separate containers via docker-compose
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="B) Prologue and Nginx in separate containers via docker-compose">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#write-your-docker-composeyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      Write your docker-compose.yml
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#write-your-nginx-dockerfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      Write your nginx dockerfile
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#write-your-prologue-dockerfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      Write your prologue dockerfile
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build-the-docker-images" class="md-nav__link">
+    <span class="md-ellipsis">
+      Build the docker images
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-the-docker-image-on-your-server_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Run the docker image on your server
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FAQ
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#base-images" class="md-nav__link">
+    <span class="md-ellipsis">
+      Base Images
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compile-your-binary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compile your binary
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Compile your binary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#on-bitnamimindeb" class="md-nav__link">
+    <span class="md-ellipsis">
+      On bitnami/mindeb
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#on-alpine" class="md-nav__link">
+    <span class="md-ellipsis">
+      On alpine
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="On alpine">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-musl" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install musl
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compiling-your-dynamically-linked-musl-binary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compiling your dynamically linked musl binary
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prepare-buildfiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prepare buildFiles
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Prepare buildFiles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set-up-your-server-to-have-ssl-certificates-with-certbot" class="md-nav__link">
+    <span class="md-ellipsis">
+      Set up your server to have SSL certificates with certbot
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#provide-an-nginxconf-config-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      Provide an nginx.conf config file
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#provide-a-settingsjson-config-file-for-prologue" class="md-nav__link">
+    <span class="md-ellipsis">
+      Provide a settings.json config file for prologue
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting up docker
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-prologue-and-nginx-in-the-same-container" class="md-nav__link">
+    <span class="md-ellipsis">
+      A) Prologue and Nginx in the same container
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="A) Prologue and Nginx in the same container">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#write-your-dockerfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      Write your dockerfile
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Write your dockerfile">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#on-bitnamiminideb" class="md-nav__link">
+    <span class="md-ellipsis">
+      On bitnami/minideb
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#on-alpine_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      On alpine
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build-the-docker-image" class="md-nav__link">
+    <span class="md-ellipsis">
+      Build the docker image
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-the-docker-image-on-your-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      Run the docker image on your server
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#b-prologue-and-nginx-in-separate-containers-via-docker-compose" class="md-nav__link">
+    <span class="md-ellipsis">
+      B) Prologue and Nginx in separate containers via docker-compose
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="B) Prologue and Nginx in separate containers via docker-compose">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#write-your-docker-composeyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      Write your docker-compose.yml
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#write-your-nginx-dockerfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      Write your nginx dockerfile
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#write-your-prologue-dockerfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      Write your prologue dockerfile
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build-the-docker-images" class="md-nav__link">
+    <span class="md-ellipsis">
+      Build the docker images
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-the-docker-image-on-your-server_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Run the docker image on your server
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="deploying-prologue-with-nginx-and-docker">Deploying Prologue with nginx and docker</h1>
+<p>This is an example of how you can deploy a prologue web-application that was compiled under Linux.
+.</p>
+<h2 id="base-images">Base Images</h2>
+<p>We will look at 2 base images as starting points:</p>
+<ol>
+<li><a href="https://hub.docker.com/r/bitnami/minideb">bitnami/mindeb</a></li>
+<li><a href="https://hub.docker.com/_/alpine">alpine</a></li>
+</ol>
+<p>The process is similar for both, but does contain differences, particularly in the dockerfile and commands needed to compile your project.</p>
+<p>This guide assumes that:</p>
+<ol>
+<li>You have a server</li>
+<li>You can ssh into your server</li>
+<li>You can copy files to your server via e.g. scp</li>
+<li>You have set up your server with a domain name</li>
+</ol>
+<h2 id="compile-your-binary">Compile your binary</h2>
+<p>Compiling your binary differs between alpine and other linux images.
+This is because unlike most other linux distributions, alpine does not use the <code>gnu c library</code> (glibc) to link its binaries against.
+Alpine uses <code>musl</code>, which is much more minimalistic.</p>
+<p>Because <code>musl</code> and <code>glibc</code> are different, compiling your application to link with them also differs.</p>
+<h3 id="on-bitnamimindeb">On bitnami/mindeb</h3>
+<p>bitnami/minideb is basically a debian image, reduced to the minimum.</p>
+<p>Since it is based on debian, it uses <code>gnu c library</code> (glibc), which is the main advantage of this image. </p>
+<p>Since the majority of Linux systems use <code>glibc</code>, compiling on any Linux distro will give you a binary that is dynamically linked against your <code>glibc</code> version and thus is likely to work in the image.
+If you have to ask whether your distro is using <code>glibc</code>, you are using <code>glibc</code>.</p>
+<p>You can compile your project like this:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>nim<span class="w"> </span>c<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>--forceBuild:on<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>--opt:speed<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>--define:release<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>--threads:on<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>--mm:orc<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>--deepcopy:on<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>--define:lto<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>--define:ssl<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>--hints:off<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>--outdir:<span class="s2">&quot;.&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>&lt;PATH_TO_YOUR_MAIN_PROJECT_FILE&gt;.nim
+</code></pre></div>
+<strong>For Clang users (e.g. MacOs)</strong>: Clang doesn't work properly with <code>--define:lto</code>. Replace it with <code>--passC:"-flto" --passL:"-flto"</code> which achieves the same thing.</p>
+<p>If you want to avoid re-typing all the flags, you can define them in a <a href="https://github.com/nim-lang/nimble#nimble-tasks">nimble task</a> that you can trigger instead!
+Just add the following to your <code>&lt;YOUR_PROJECT&gt;.nimble</code> file (run <a href="https://github.com/nim-lang/nimble#nimble-init"><code>nimble init</code></a> if you don't have one):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>task release, &quot;Build a production release&quot;:
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  --verbose
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  --forceBuild:on
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  --opt:speed
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>  --define:release
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>  --threads:on
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>  --mm:orc
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>  --deepcopy:on
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>  --define:lto
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>  --define:ssl # If you use smtp clients
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>  --hints:off
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>  --outdir:&quot;.&quot;
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>  setCommand &quot;c&quot;, &quot;src/&lt;YOUR_MAIN_FILE&gt;.nim&quot;
+</code></pre></div>
+<p>This allows you to run <code>nimble release</code> in your project to compile it with the specified flags!</p>
+<h3 id="on-alpine">On alpine</h3>
+<p>Alpine is among the smallest image out there. 
+At barely 5.53MB, any image you base on it is unlikely to get large. 
+This doesn't have effects on your application's performance, but does speed deployment as the image uploads faster to your server.</p>
+<p>Since Alpine uses <code>musl</code>, compiling has some extra steps.
+For simplicities' sake, we will be linking to musl dynamically.</p>
+<h4 id="install-musl">Install musl</h4>
+<ol>
+<li><a href="https://www.musl-libc.org/download.html">download</a> the tar file</li>
+<li>Unpack the tar file somewhere</li>
+<li>Run <code>bash configure</code> in the unpacked directory. WARNING: Make sure that you do NOT install musl with <code>--prefix</code> being  <code>/usr/local</code>, as that may adversely affect your system. Use somewhere else where it is unlikely to override files, e.g. <code>/usr/local/musl</code>. This path will further be referred to as <code>&lt;MUSL_INSTALL_PATH&gt;</code></li>
+<li>Run <code>make &amp;&amp; make install</code> in the unpacked directory</li>
+<li>Add <code>&lt;MUSL_INSTALL_PATH&gt;</code> to your PATH environment variable</li>
+<li>Validate whether you set everything up correctly by opening a new terminal and seeing whether you have access to the <code>musl-gcc</code> binary</li>
+</ol>
+<h4 id="compiling-your-dynamically-linked-musl-binary">Compiling your dynamically linked musl binary</h4>
+<p>Like before, you can write a compile command. 
+This time though, we need to tell the compiler to use <code>musl-gcc</code> instead of <code>gcc</code> to dynamically link with <code>musl</code>.
+We similarly want to replace the linker with <code>musl-gcc</code>.
+We can use the flags <code>--gcc.exe:"musl-gcc"</code> and <code>--gcc.linkerexe:"musl-gcc"</code> to get a compile command:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>nim<span class="w"> </span>c<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>--gcc.exe:<span class="s2">&quot;musl-gcc&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>--gcc.linkerexe:<span class="s2">&quot;musl-gcc&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>--forceBuild:on<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>--opt:speed<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>--define:release<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>--threads:on<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>--mm:orc<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>--deepcopy:on<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>--define:lto<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>--define:ssl<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>--hints:off<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>--outdir:<span class="s2">&quot;.&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>&lt;PATH_TO_YOUR_MAIN_PROJECT_FILE&gt;.nim
+</code></pre></div>
+<p>Instead of a bash script we can also just set up a nimble task instead:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>task alpine, &quot;Build an alpine release&quot;:
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  --verbose
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>  --gcc.exe:&quot;musl-gcc&quot;
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>  --gcc.linkerexe:&quot;musl-gcc&quot;
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>  --forceBuild:on
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>  --opt:speed
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>  --define:release
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>  --threads:on
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>  --mm:orc
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>  --deepcopy:on
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>  --define:lto
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>  --define:ssl
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>  --hints:off
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>  --outdir:&quot;.&quot;
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>  setCommand &quot;c&quot;, &quot;src/nimstoryfont.nim&quot;
+</code></pre></div></p>
+<h2 id="prepare-buildfiles">Prepare buildFiles</h2>
+<ol>
+<li>Set up the server to have SSL certificates with certbot to get <code>fullchain.pem</code> and <code>privkey.pem</code> files</li>
+<li>Write an <code>nginx.conf</code> file to configure nginx</li>
+<li>Write a bash file <code>dockerStartupScript.sh</code> to run inside the docker container when starting it.</li>
+<li>Write a <code>settings.json</code> file for prologue</li>
+</ol>
+<p>We will store these files in a directory called <code>buildFiles</code> and include them in our docker image(s) later.</p>
+<h3 id="set-up-your-server-to-have-ssl-certificates-with-certbot">Set up your server to have SSL certificates with certbot</h3>
+<p>There are many great resources on how you can get free SSL certificates.
+We recommend using <a href="https://certbot.eff.org/instructions">certbot</a>. 
+Follow the instructions on their website to set up your certificates.</p>
+<p>After the initial setup, you should automate the renewal of those certificates.
+Renewal is easily done with <a href="https://eff-certbot.readthedocs.io/en/stable/using.html#renewing-certificates"><code>sudo certbot renew</code></a>, but requires you to shut down the webserver first and boot it up after renewal again.
+We recommend setting up a cronjob to regularly run the <code>certbot renew</code> command.
+User certbot's "pre-hook" and "post-hook" to shut down/starts up your container/docker-compose before and after the actual renewal happens.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>certbot renew --pre-hook &quot;docker container stop &lt;YOUR_CONTAINER_NAME&gt;&quot; --post-hook &quot;docker container start &lt;YOUR_CONTAINER_NAME&gt;&quot;
+</code></pre></div>
+<h3 id="provide-an-nginxconf-config-file">Provide an <code>nginx.conf</code> config file</h3>
+<p>Nginx requires a config file, <code>nginx.conf</code> to define what files to serve and how to forward requests to the prologue application.</p>
+<p>Here we'll set nginx up to use SSL with the SSL certificates received from the previous step.
+Further, to make nginx forward requests to our prologue backend, we use its "<a href="https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass">proxy_pass</a>" directive.</p>
+<p>Note that all directories in the config file are directories within the <em>docker</em> container, not your actual server.</p>
+<p>See below an example of a small <code>nginx.conf</code> file:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>#user http;
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>worker_processes  1;
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>events {
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    worker_connections  1024;
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>}
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>http {
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>    include       mime.types;
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>    default_type  application/octet-stream;
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>    types_hash_max_size 4096;
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>    sendfile        on;
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>    keepalive_timeout  30;
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>    proxy_send_timeout 30;
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>    # Enforces HTTPS by redirecting users with HTTP requests to the HTTPS URL
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>    server {
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>        listen 80;
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>        listen [::]:80;
+<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a>
+<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a>        server_name &lt;SERVER_NAME&gt;;
+<a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>
+<a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a>        return 301 https://$server_name$request_uri;
+<a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a>    }
+<a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a>
+<a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a>    server {
+<a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a>        server_name &lt;SERVER_NAME&gt;;
+<a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a>        autoindex off;
+<a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a>
+<a id="__codelineno-5-32" name="__codelineno-5-32" href="#__codelineno-5-32"></a>        listen 443 ssl http2;
+<a id="__codelineno-5-33" name="__codelineno-5-33" href="#__codelineno-5-33"></a>        listen [::]:443 ssl http2;       
+<a id="__codelineno-5-34" name="__codelineno-5-34" href="#__codelineno-5-34"></a>
+<a id="__codelineno-5-35" name="__codelineno-5-35" href="#__codelineno-5-35"></a>        root /media;
+<a id="__codelineno-5-36" name="__codelineno-5-36" href="#__codelineno-5-36"></a>
+<a id="__codelineno-5-37" name="__codelineno-5-37" href="#__codelineno-5-37"></a>        # Passes requests on to the prologue application server
+<a id="__codelineno-5-38" name="__codelineno-5-38" href="#__codelineno-5-38"></a>        location /server {
+<a id="__codelineno-5-39" name="__codelineno-5-39" href="#__codelineno-5-39"></a>            rewrite ^/server/(.*) /$1  break; #Removes &quot;/server&quot; from the url for the application-server
+<a id="__codelineno-5-40" name="__codelineno-5-40" href="#__codelineno-5-40"></a>
+<a id="__codelineno-5-41" name="__codelineno-5-41" href="#__codelineno-5-41"></a>            proxy_pass http://localhost:8080; #Hands request over to localhost:8080 where the application server is listening
+<a id="__codelineno-5-42" name="__codelineno-5-42" href="#__codelineno-5-42"></a>            proxy_set_header Host $host;
+<a id="__codelineno-5-43" name="__codelineno-5-43" href="#__codelineno-5-43"></a>            proxy_send_timeout 600;
+<a id="__codelineno-5-44" name="__codelineno-5-44" href="#__codelineno-5-44"></a>            proxy_set_header X-Real_IP $remote_addr;
+<a id="__codelineno-5-45" name="__codelineno-5-45" href="#__codelineno-5-45"></a>        }
+<a id="__codelineno-5-46" name="__codelineno-5-46" href="#__codelineno-5-46"></a>
+<a id="__codelineno-5-47" name="__codelineno-5-47" href="#__codelineno-5-47"></a>        error_page   500 502 503 504  /50x.html;
+<a id="__codelineno-5-48" name="__codelineno-5-48" href="#__codelineno-5-48"></a>        location = /50x.html {
+<a id="__codelineno-5-49" name="__codelineno-5-49" href="#__codelineno-5-49"></a>            root   /usr/share/nginx/html;
+<a id="__codelineno-5-50" name="__codelineno-5-50" href="#__codelineno-5-50"></a>        }
+<a id="__codelineno-5-51" name="__codelineno-5-51" href="#__codelineno-5-51"></a>
+<a id="__codelineno-5-52" name="__codelineno-5-52" href="#__codelineno-5-52"></a>        ssl_certificate /cert/live/&lt;SERVER_NAME&gt;/fullchain.pem;
+<a id="__codelineno-5-53" name="__codelineno-5-53" href="#__codelineno-5-53"></a>        ssl_certificate_key /cert/live/&lt;SERVER_NAME&gt;/privkey.pem;
+<a id="__codelineno-5-54" name="__codelineno-5-54" href="#__codelineno-5-54"></a>    }
+<a id="__codelineno-5-55" name="__codelineno-5-55" href="#__codelineno-5-55"></a>}
+</code></pre></div></p>
+<p>Note that the file assumes there will be a <code>fullchain.pem</code> and <code>privkey.pem</code>, which you currently have on your server (e.g. <code>/etc/letsencrypt/live</code>). 
+We will make these certificates accessible by creating the <code>/cert/live</code> directories inside the docker image and mounting the certificate directory to that folder (e.g. when creating a container via <a href="https://docs.docker.com/storage/volumes/">docker volumes</a>).</p>
+<p>For now store your <code>nginx.conf</code> file in your <code>./buildFiles</code> directory.</p>
+<h3 id="provide-a-settingsjson-config-file-for-prologue">Provide a <code>settings.json</code> config file for prologue</h3>
+<p>In order for prologue to function correctly, we will provide a simple settings file.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="w">    </span><span class="nt">&quot;prologue&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">        </span><span class="nt">&quot;address&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">        </span><span class="nt">&quot;port&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">8080</span><span class="p">,</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">        </span><span class="nt">&quot;debug&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">        </span><span class="nt">&quot;reusePort&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">        </span><span class="nt">&quot;appName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;YOUR APP NAME&gt;&quot;</span><span class="p">,</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">        </span><span class="nt">&quot;secretKey&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&lt;YOUR SECRET KEY&gt;&quot;</span><span class="p">,</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">        </span><span class="nt">&quot;bufSize&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">409600</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;production&quot;</span><span class="p">,</span>
+</code></pre></div>
+<p>Note that the port you specify here must be the same port used in the <code>proxy_pass</code> directive of <code>./buildFiles/nginx.conf</code>.</p>
+<p>Put this <code>settings.json</code> in your <code>./buildFiles</code> directory. </p>
+<h2 id="setting-up-docker">Setting up docker</h2>
+<p>After completing the prior steps, we can now think how to deploy our application how we want to deploy our application and server.
+We have 2 different applications to manage here: nginx and our prologue application. We can deploy these in 2 different ways:</p>
+<ul>
+<li>Prologue and Nginx in the same container (simpler)</li>
+<li>Prologue and Nginx in separate containers via docker-compose (Enables hosting multiple web-applications from the same server)</li>
+</ul>
+<h2 id="a-prologue-and-nginx-in-the-same-container">A) Prologue and Nginx in the same container</h2>
+<p>When deploying prologue and nginx in the same container we need to start both applications on when starting the container.
+To do so we can set up a <code>startupScript.sh</code> file that gets executed when the container gets started.
+We will be using <code>openrc</code> to start and manage nginx.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="ch">#!/bin/sh</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="c1"># This file contains all commands that shall be run on the docker container on startup</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>openrc<span class="w"> </span>boot<span class="w"> </span><span class="c1"># Enables running rc-service, which manages nginx</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>rc-service<span class="w"> </span>nginx<span class="w"> </span>start<span class="w"> </span><span class="c1"># Starts up nginx</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>/&lt;YOUR_BINARY&gt;<span class="w"> </span><span class="c1"># Starts your prologue application</span>
+</code></pre></div>
+<p>Store your script file locally in <code>./buildFiles/startupScript.sh</code>.</p>
+<h3 id="write-your-dockerfile">Write your dockerfile</h3>
+<p>After completing the prior steps, we can write a <code>dockerfile</code>.
+It will contain the instructions to create a docker image, from which containers are made.</p>
+<p>This process differs between <code>bitnami/minideb</code> and <code>alpine</code>, since <code>alpine</code> uses <code>apk</code> to install packages from the <a href="https://alpine.pkgs.org/?">alpine repositories</a> while <code>bitnami/minideb</code> uses apt to install <a href="https://www.debian.org/distrib/packages">debian packages</a>. 
+This means the installation commands and package names differ.</p>
+<p>We will also set up various folders, in order to later use them as mounting points for <a href="https://docs.docker.com/storage/volumes/">docker volumes</a> when creating containers from our images. 
+This way you can access files inside the container (e.g. media files so that nginx can serve them, or an sqlite database) without loosing them when the container shuts down.</p>
+<p>Store the dockerfile on your applications root directory.</p>
+<h4 id="on-bitnamiminideb">On <code>bitnami/minideb</code></h4>
+<p>To install packages without <code>apt</code>'s commandline prompts, this image ships a <code>install_packages</code> command.
+Here an example <code>dockerfile</code>:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>FROM bitnami/minideb
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a># Install dependencies
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>RUN apt update
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>RUN install_packages openrc openssl nginx
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a># RUN install_packages sqlite3 # in case you use an sqlite3 database
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a># Copy necessary files, the first paths are all relative to your current working directory
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>COPY ./&lt;PATH_TO_YOUR_BINARY&gt; .
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>COPY ./buildFiles/nginx.conf /etc/nginx/nginx.conf
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>COPY ./buildFiles/dockerStartScript.sh .
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>COPY ./buildFiles/settings.json /settings.json
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>RUN chmod 777 /settings.json
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a># Setup directories to add volumes to when creating the container
+<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>RUN mkdir -p /run/nginx
+<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a>RUN mkdir -p /cert/live/&lt;YOUR_SERVER_NAME&gt;
+<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a>RUN mkdir -p /cert/archive/&lt;YOUR_SERVER_NAME&gt;
+<a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a>RUN mkdir /media
+<a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a>
+<a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a>#Startup command
+<a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a>RUN chmod +x /dockerStartScript.sh
+<a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a>CMD [&quot;/dockerStartScript.sh&quot;]
+</code></pre></div></p>
+<h4 id="on-alpine_1">On <code>alpine</code></h4>
+<p>Here an example dockerfile:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>FROM alpine
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a># Install dependencies
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>RUN apk update
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>RUN apk add openrc nginx openssl bash
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a># RUN apk add sqlite-libs # in case you use an sqlite3 database
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a># Copy necessary files
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>COPY ./buildFiles/nginx.conf /etc/nginx/nginx.conf
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>COPY ./buildFiles/dockerStartScript.sh .
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>COPY ./buildFiles/settings.json /settings.json
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>RUN chmod 777 /settings.json
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a># Setup directories to add volumes to when creating the container
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>RUN mkdir -p /run/nginx
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>RUN mkdir -p /cert/live/&lt;YOUR_SERVER_NAME&gt;
+<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a>RUN mkdir -p /cert/archive/&lt;YOUR_SERVER_NAME&gt;
+<a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a>RUN mkdir /media
+<a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a>
+<a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a>#Startup command
+<a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a>RUN chmod +x /dockerStartScript.sh
+<a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a>CMD [&quot;/dockerStartScript.sh&quot;]
+</code></pre></div></p>
+<h3 id="build-the-docker-image">Build the docker image</h3>
+<p>With the binary, buildFiles and dockerfile ready, you can create your image:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># Creates your image</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>sudo<span class="w"> </span>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>&lt;YOUR_IMAGE_NAME&gt;<span class="w"> </span>.
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="c1"># Stores your image in your current working directory in a file called &quot;image.tar&quot;</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>sudo<span class="w"> </span>docker<span class="w"> </span>save<span class="w"> </span>-o<span class="w"> </span>image.tar<span class="w"> </span>&lt;YOUR_IMAGE_NAME&gt;
+</code></pre></div>
+<p>Once created, move that image file to your server, e.g. through <code>scp</code>.</p>
+<h3 id="run-the-docker-image-on-your-server">Run the docker image on your server</h3>
+<p>After copying your <code>image.tar</code> file to the server, you can load it there with docker and run a container from it.
+Besides starting the container, the commands needs to:</p>
+<ol>
+<li>Open up the container's HTTP port to the internet (80)</li>
+<li>Open up the container's HTTPS port to the internet (443)</li>
+<li>Mount the volumes for certificates, media files etc.</li>
+<li>(Optional) Open up a port to talk to your database (e.g. 5432 for Postgres)</li>
+</ol>
+<p>Opening up the ports is done using <code>-p</code>, mounting the volumes with <code>-v</code>.
+Note that in <code>-v</code>, the first path is the one <em>outside</em> your container. 
+It specifies which folder on your server to mount. 
+The second path is the one <em>inside</em> your container. 
+It specifies which folder in your container the server folder gets mounted to.</p>
+<p>You may want to write yourself a script that loads the file, stops and removes any previously running container and then creates a new one from the new image. 
+Here an example:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="ch">#!/bin/sh</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>sudo<span class="w"> </span>docker<span class="w"> </span>load<span class="w"> </span>-i<span class="w"> </span>image.tar
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>sudo<span class="w"> </span>docker<span class="w"> </span>container<span class="w"> </span>stop<span class="w"> </span>&lt;YOUR_CONTAINER_NAME&gt;
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>sudo<span class="w"> </span>docker<span class="w"> </span>container<span class="w"> </span>rm<span class="w"> </span>&lt;YOUR_CONTAINER_NAME&gt;
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>sudo<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>-p<span class="w"> </span><span class="m">80</span>:80<span class="w"> </span>-p<span class="w"> </span><span class="m">443</span>:443<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>-v<span class="w"> </span>/etc/letsencrypt/live/&lt;SERVER_NAME&gt;:/cert/live/&lt;SERVER_NAME&gt;:ro<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>-v<span class="w"> </span>/etc/letsencrypt/archive/&lt;SERVER_NAME&gt;:/cert/archive/&lt;SERVER_NAME&gt;:ro<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>-v<span class="w"> </span>&lt;PATH_TO_MEDIA_FOLDER&gt;/media:/media<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>-v<span class="w"> </span>&lt;PATH_TO_DIRECTORY_FOR_SERVER_LOGS&gt;:/var/log/nginx<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>--name<span class="w"> </span>&lt;YOUR_IMAGE_NAME&gt;<span class="w"> </span>&lt;YOUR_CONTAINER_NAME&gt;
+</code></pre></div></p>
+<p>Now you can run the command (or script), and your container will start up and be accessible via HTTP and HTTPS!</p>
+<h2 id="b-prologue-and-nginx-in-separate-containers-via-docker-compose">B) Prologue and Nginx in separate containers via docker-compose</h2>
+<p>You can have your proxy (nginx) and your webserver (prologue) also in different images and thus different containers, that can communicate.
+For this you need to set it up so they get started together, with the ports they need opened and volumes they need mounted etc. 
+That's where you use <a href="https://docs.docker.com/get-started/08_using_compose/">docker-compose</a>.</p>
+<p>First, add 2 directories to <code>./buildFiles</code> to separate the config files and dockerfiles of your proxy and your webserver:</p>
+<ul>
+<li><code>./buildFiles/nginx</code></li>
+<li>Move the <code>nginx.conf</code> here</li>
+<li><code>./buildFiles/prologue</code></li>
+<li>Move the <code>settings.json</code> here</li>
+<li>Move your application binary here</li>
+</ul>
+<p>Also, change your commands or nimble tasks for compiling to output into the <code>./buildFiles/prologue</code> directory.</p>
+<h3 id="write-your-docker-composeyml">Write your <code>docker-compose.yml</code></h3>
+<p>A docker compose file contains the same things you would write in a <code>docker run</code> command:
+name of the container, the image to use, which volumes to mount, which ports to expose etc.</p>
+<p>Here an example of such a <code>docker-compose.yml</code> file that you can keep in your projects main folder:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>version: &quot;3.4&quot;
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>services:
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>  #Nginx Reverse Proxy
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>  proxy:
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>    image: &lt;NGINX_IMAGE_NAME&gt;
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>    ports:
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>     - &quot;443:443&quot;
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>     - &quot;80:80&quot;
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>    volumes:
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>      -/etc/letsencrypt/live/&lt;SERVER_NAME&gt;:/cert/live/&lt;SERVER_NAME&gt;
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>      -/etc/letsencrypt/archive/&lt;SERVER_NAME&gt;:/cert/archive/&lt;SERVER_NAME&gt;
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>      - &lt;PATH_TO_MEDIA_FOLDER&gt;/media:/media
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>      - &lt;PATH_TO_DIRECTORY_FOR_SERVER_LOGS&gt;:/var/log/nginx
+<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>    container_name: &lt;NGINX_CONTAINER_NAME&gt;
+<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a>
+<a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a>  #Prologue webserver that receives requests on port 8080
+<a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a>  prologue:
+<a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a>    image: &lt;PROLOGUE_IMAGE_NAME&gt;
+<a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a>    expose: 
+<a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a>      - &quot;8080&quot; # Annotation for readability to make it clear that this container should be talked to on port 8080
+<a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a>    volumes:
+<a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a>      - &lt;PATH_TO_MEDIA_FOLDER&gt;/media:/media
+<a id="__codelineno-12-23" name="__codelineno-12-23" href="#__codelineno-12-23"></a>    container_name: &lt;PROLOGUE_CONTAINER_NAME&gt;
+</code></pre></div></p>
+<p>To run this docker compose file with <code>docker-compose up</code>, you will first need to build images with the names you specify up there.</p>
+<p>This means you now need 2 dockerfiles that can build these images. </p>
+<h3 id="write-your-nginx-dockerfile">Write your nginx dockerfile</h3>
+<p>An example for a dockerfile of an alpine image with nginx:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>FROM alpine
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a># Install dependencies
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>RUN apk update
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>RUN apk add nginx openssl --no-cache
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a># Copy necessary files
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>COPY ./nginx.conf /etc/nginx/nginx.conf #Filepath is relative to dockerfile
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a># Setup directories to add volumes to when creating the container
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>RUN mkdir -p /run/nginx
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>RUN mkdir -p /cert/live/&lt;YOUR_SERVER_NAME&gt;
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>RUN mkdir -p /cert/archive/&lt;YOUR_SERVER_NAME&gt;
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>RUN mkdir /media
+<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>
+<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a># Command to start nginx in container
+<a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a>CMD [&quot;nginx&quot;, &quot;-g&quot;, &quot;daemon off;&quot;]
+</code></pre></div></p>
+<p>Since the container only contains nginx, we can use <code>CMD ["nginx", "-g", "daemon off;"]</code> instead of a bash script to start it. </p>
+<p>Put the dockerfile in <code>./buildFiles/nginx</code></p>
+<p>We could have used the <a href="https://hub.docker.com/_/nginx/">official nginx alpine image</a> instead of vanilla alpine, but decided against it.
+Main reason being that the image appears to be binary-incompatible with the nginx-mods that can be installed via <code>apk</code>.
+Other than that, the official nginx image can be used just as well.</p>
+<h3 id="write-your-prologue-dockerfile">Write your prologue dockerfile</h3>
+<p>An example for a dockerfile of an alpine image with our prologue application:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>FROM alpine
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a># Install dependencies
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>RUN apk update
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>RUN apk add openssl
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a># RUN apk add sqlite-libs # in case you use an sqlite3 database
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a># Copy necessary files
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>COPY ./&lt;YOUR_APPLICATION_BINARY&gt; .    #Filepath is relative to dockerfile
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>COPY ./settings.json /settings.json   #Filepath is relative to dockerfile
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a># Setup necessary directories
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a>RUN mkdir /media
+<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a>
+<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a>#Startup command
+<a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a>CMD [&quot;/&lt;YOUR_APPLICATION_BINARY&gt;&quot;]
+</code></pre></div>
+Since the container only contains our application, we can just start it via <code>CMD ["/&lt;YOUR_APPLICATION_BINARY&gt;"]</code>.</p>
+<p>Put the dockerfile in <code>./buildFiles/prologue</code>.</p>
+<h3 id="build-the-docker-images">Build the docker images</h3>
+<p>With the dockerfiles ready, we can create the images via the following commands from the applications root directory:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="ch">#!/bin/sh</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="c1"># Creates your image</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>sudo<span class="w"> </span>docker<span class="w"> </span>build<span class="w"> </span>--file<span class="w"> </span>./buildFiles/nginx/dockerfile<span class="w"> </span>--tag<span class="w"> </span>&lt;NGINX_IMAGE_NAME&gt;<span class="w"> </span>./buildFiles/nginx
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>sudo<span class="w"> </span>docker<span class="w"> </span>build<span class="w"> </span>--file<span class="w"> </span>./buildFiles/nimstoryfont/dockerfile<span class="w"> </span>--tag<span class="w"> </span>&lt;PROLOGUE_IMAGE_NAME&gt;<span class="w"> </span>./buildFiles/nimstoryfont
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="c1"># Stores your images in your current working directory</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>sudo<span class="w"> </span>docker<span class="w"> </span>save<span class="w"> </span>-o<span class="w"> </span>nginx-image.tar<span class="w"> </span>&lt;NGINX_IMAGE_NAME&gt;<span class="w"> </span>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>sudo<span class="w"> </span>docker<span class="w"> </span>save<span class="w"> </span>-o<span class="w"> </span>prologue-image.tar<span class="w"> </span>&lt;PROLOGUE_IMAGE_NAME&gt;
+</code></pre></div>
+<p>Once created, move that image file to your server, e.g. via <code>scp</code>.</p>
+<h3 id="run-the-docker-image-on-your-server_1">Run the docker image on your server</h3>
+<p>After copying your <code>docker-compose.yml</code>, the <code>nginx-image.tar</code> and the <code>prologue-image.tar</code> to your server, you can deploy your application.</p>
+<p>Simply load the images into docker and run <code>docker-compose up</code> (or <code>docker-compose restart</code>).
+There is no need to specify volumes or ports, as that is already in the <code>docker-compose.yml</code>.</p>
+<p>You may want to write yourself a small script that loads the images and restarts:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="ch">#!/bin/sh</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>sudo<span class="w"> </span>docker<span class="w"> </span>load<span class="w"> </span>-i<span class="w"> </span>&lt;NGINX_IMAGE_NAME&gt;.tar
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>sudo<span class="w"> </span>docker<span class="w"> </span>load<span class="w"> </span>-i<span class="w"> </span>&lt;PROLOGUE_IMAGE_NAME&gt;.tar
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>sudo<span class="w"> </span>docker-compose<span class="w"> </span>restart
+</code></pre></div></p>
+<p>Run the command and your containers will start up and be accessible via HTTP and HTTPS!</p>
+<h1 id="known-issues">Known issues</h1>
+<h2 id="compile-your-binary-under-bitnamiminideb-error-libx86_64-linux-gnulibcso6-version-glibc_xxx-not-found">Compile your binary (under <code>bitnami/minideb</code> - <code>error "/lib/x86_64-linux-gnu/libc.so.6: version 'GLIBC_&lt;X.XX&gt;' not found"</code></h2>
+<p>You will run into this issue if your local <code>glibc</code> version is more up-to-date than the one <code>bitnami/minideb</code> has access to.
+This is the case because during compilation your binary is dynamically linked with your local <code>glibc</code> version.
+That means in order to run, it expects the environment that executes it to have <em>at least</em> that same glibc version.</p>
+<p>To fix this, you need to link your binary to an older glibc version when compiling, even though your own version is newer.
+<a href="https://stackoverflow.com/questions/2856438/how-can-i-link-to-a-specific-glibc-version">Doing so is not straightforward.</a></p>
+<h3 id="solution-1-using-zig">Solution 1: Using zig</h3>
+<p>The simplest way is installing the <a href="https://ziglang.org/download/">compiler og the zig programming language</a>, as it contains a Clang compiler, which you can tell which glibc version to use.</p>
+<p>The steps go as follows:</p>
+<ul>
+<li>Install zig</li>
+<li>Write a bashscript called <code>zigcc</code></li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="ch">#!/bin/sh</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>zig<span class="w"> </span>cc<span class="w"> </span><span class="nv">$@</span>
+</code></pre></div>
+<ul>
+<li>Move <code>zigcc</code> to somewhere on your path, e.g. <code>/usr/local/bin</code>.
+This is required since the nim compiler does not tolerate spaces in commands that call compilers.</li>
+<li>Write yourself a bashscript with a command to compile your project. 
+This can't be done via nimble tasks since the syntax is not allowed within nimble tasks.
+Replace the "X.XX" with the glibc version that you want as well as the other placeholders.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="ch">#!/bin/sh</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="c1"># Call this file projectCompile.sh</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>nim<span class="w"> </span>c<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>--cc:clang<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>--clang.exe<span class="o">=</span><span class="s2">&quot;zigcc&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>--clang.linkerexe<span class="o">=</span><span class="s2">&quot;zigcc&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>--passC:<span class="s2">&quot;-target x86_64-linux-gnu.X.XX -fno-sanitize=undefined&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>--passL:<span class="s2">&quot;-target x86_64-linux-gnu.X.XX -fno-sanitize=undefined&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>--forceBuild:on<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>--opt:speed<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>--deepcopy:on<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>--mm:orc<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a>--define:release<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a>--define:lto<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a>--define:ssl<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a>--outdir:<span class="s2">&quot;.&quot;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a>src/&lt;YOUR_MAIN_FILE&gt;.nim
+</code></pre></div>
+<ul>
+<li>Run projectCompile.sh</li>
+</ul>
+<h3 id="solution-2-create-a-compilation-environment">Solution 2: Create a compilation environment</h3>
+<p>Instead of using zig, you can set up a second docker container that contains the glibc version you want, gcc, nim, nimble and the C-libs you require. 
+You can then mount your project-folder via <a href="https://docs.docker.com/storage/volumes/">docker volume</a> in the container and compile as normal.
+Then, you can just compile your binary within the container as usual, your normal compilation command.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.c011b7c0.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.7389ff0e.min.js"></script>
+      
+    
+  </body>
+</html>
