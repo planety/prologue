@@ -24,7 +24,7 @@ import ./request
 func parseFormPart*(body, contentType: string): FormPart =
   ## Parses form part of the body of the request.
   let
-    sep = contentType[contentType.rfind("boundary") + 9 .. ^1]
+    sep = contentType[contentType.find("boundary") + 9 .. ^1]
     startSep = fmt"--{sep}"
     endSep = fmt"--{sep}--"
     startPos = find(body, startSep)
