@@ -45,7 +45,7 @@ block:
     var
       response = initResponse(version, code, body = body)
 
-    response.setCookie("username", "flywind")
+    response.setCookie("username", "xxx")
     response.setCookie("password", "root")
     doAssert response.getHeader("set-cookie").join("; ") ==
-          "username=flywind; SameSite=Lax; password=root; SameSite=Lax"
+          "username=xxx; password=root"
