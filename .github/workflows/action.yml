@@ -12,7 +12,7 @@ jobs:
           # - windows-latest
           # - macOS-latest
         nim-version:
-          - stable
+          - 2.2.0
           - devel
     steps:
     - name: Checkout
