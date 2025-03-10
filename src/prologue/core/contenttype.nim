@@ -1,4 +1,4 @@
-import std/[strutils, tables, strformat]
+import std/[strutils, tables, strformat, sequtils]
 
 type
   MediaType* = object
@@ -105,13 +105,7 @@ proc `$`*(mediaType: MediaType): string =
   result = mediaType.mainType & "/" & mediaType.subType
 
   for name, value in mediaType.parameters:
-    var needsQuotes = false
-    for c in value:
-      if c notin VALID_TOKEN_CHARACTERS:
-        needsQuotes = true
-        break
-
-    if needsQuotes:
+    if value.anyIt(it notin VALID_TOKEN_CHARACTERS):
       result.add(&"; {name}=\"{value}\"")
     else:
       result.add(&"; {name}={value}")
