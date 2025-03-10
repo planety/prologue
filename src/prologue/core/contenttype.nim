@@ -6,6 +6,12 @@ type
     subType*: string
     parameters*: Table[string, string]
 
+const
+  # Token characters as per RFC 7230 section 3.2.6
+  # https://datatracker.ietf.org/doc/html/rfc7230#section-3.2.6
+  VALID_TOKEN_CHARACTERS = {'a'..'z', 'A'..'Z', '0'..'9',
+    '!', '#', '$', '%', '&', '\'', '*', '+', '-', '.', '^', '_', '`', '|', '~'}
+
 proc parseContentType*(headerValue: string): MediaType =
   ## Parses a Content-Type header according to RFC 7230, RFC 2045, and RFC 2046.
   ## Returns a MediaType object containing the main type, sub type, and parameters.
@@ -101,9 +107,7 @@ proc `$`*(mediaType: MediaType): string =
   for name, value in mediaType.parameters:
     var needsQuotes = false
     for c in value:
-      # valid token characters as per RFC 7230 section 3.2.6
-      if not (c in {'a'..'z', 'A'..'Z', '0'..'9',
-                    '!', '#', '$', '%', '&', '\'', '*', '+', '-', '.', '^', '_', '`', '|', '~'}):
+      if c notin VALID_TOKEN_CHARACTERS:
         needsQuotes = true
         break
 
