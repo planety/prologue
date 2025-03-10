@@ -12,6 +12,12 @@ const
   VALID_TOKEN_CHARACTERS = {'a'..'z', 'A'..'Z', '0'..'9',
     '!', '#', '$', '%', '&', '\'', '*', '+', '-', '.', '^', '_', '`', '|', '~'}
 
+proc skipWhitespace(headerValue: string, i: var int) =
+  ## Skips the next whitespace characters beginning from index ``i``.
+  ## This updates the param ``i``
+  while i < headerValue.len and headerValue[i] in Whitespace:
+    inc i
+
 proc parseContentType*(headerValue: string): MediaType =
   ## Parses a Content-Type header according to RFC 7230, RFC 2045, and RFC 2046.
   ## Returns a MediaType object containing the main type, sub type, and parameters.
@@ -27,8 +33,7 @@ proc parseContentType*(headerValue: string): MediaType =
     i = 0
     headerLen = headerValue.len
 
-  while i < headerLen and headerValue[i] in Whitespace:
-    inc i
+  headerValue.skipWhitespace(i)
 
   # media type
   let mediaTypeStart = i
@@ -44,15 +49,13 @@ proc parseContentType*(headerValue: string): MediaType =
   result.mainType = typeParts[0].toLowerAscii
   result.subType = typeParts[1].toLowerAscii
 
-  while i < headerLen and headerValue[i] in Whitespace:
-    inc i
+  headerValue.skipWhitespace(i)
 
   # params
   while i < headerLen and headerValue[i] == ';':
     inc i
 
-    while i < headerLen and headerValue[i] in Whitespace:
-      inc i
+    headerValue.skipWhitespace(i)
 
     # param name
     let paramNameStart = i
@@ -68,8 +71,7 @@ proc parseContentType*(headerValue: string): MediaType =
     let paramName = headerValue[paramNameStart..<i].strip().toLowerAscii()
     inc i
 
-    while i < headerLen and headerValue[i] in Whitespace:
-      inc i
+    headerValue.skipWhitespace(i)
 
     # param value
     var
@@ -103,9 +105,7 @@ proc parseContentType*(headerValue: string): MediaType =
       paramValue = headerValue[valueStart..<i]
 
     result.parameters[paramName] = paramValue
-
-    while i < headerLen and headerValue[i] in Whitespace:
-      inc i
+    headerValue.skipWhitespace(i)
 
 proc `$`*(mediaType: MediaType): string =
   ## Convert MediaType to string representation
