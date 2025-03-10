@@ -15,6 +15,13 @@ const
 proc parseContentType*(headerValue: string): MediaType =
   ## Parses a Content-Type header according to RFC 7230, RFC 2045, and RFC 2046.
   ## Returns a MediaType object containing the main type, sub type, and parameters.
+  runnableExamples:
+    let mediaType = parseContentType("text/plain; charset=\"utf-8\"")
+    doAssert mediaType.mainType == "text"
+    doAssert mediaType.subType == "plain"
+    doAssert mediaType.parameters.len == 1
+    doAssert mediaType.parameters["charset"] == "utf-8"
+
   result = MediaType(parameters: initTable[string, string]())
   var
     i = 0
