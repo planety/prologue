@@ -12,23 +12,30 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 import std/[strtabs, strutils, strformat, parseutils, tables]
 from std/uri import decodeQuery
 
 import ./httpcore/httplogue
 from ./types import FormPart, initFormPart, `[]=`
 import ./request
+import ./contenttype
 
 
 func parseFormPart*(body, contentType: string): FormPart =
   ## Parses form part of the body of the request.
   let
-    sep = contentType[contentType.rfind("boundary") + 9 .. ^1]
+    mediaType = parseContentType(contentType)
+    sep = if "boundary" in mediaType.parameters: mediaType.parameters["boundary"] else: ""
     startSep = fmt"--{sep}"
     endSep = fmt"--{sep}--"
     startPos = find(body, startSep)
     endPos = rfind(body, endSep)
+
+  # make sure we found valid boundaries
+  if startPos < 0 or endPos < 0 or startPos >= endPos:
+    return initFormPart()
+
+  let
     formData = body[startPos ..< endPos]
     formDataSeq = formData.split(startSep & "\c\L")
 
@@ -89,18 +96,19 @@ func parseFormPart*(body, contentType: string): FormPart =
 
 func parseFormParams*(request: var Request, contentType: string) =
   ## Parses get or post or query parameters.
-  if "form-urlencoded" in contentType:
+  let mediaType = parseContentType(contentType)
+
+  if mediaType.mainType == "application" and mediaType.subType == "x-www-form-urlencoded":
     request.formParams = initFormPart()
     if request.reqMethod == HttpPost:
       for (key, value) in decodeQuery(request.body):
         # formPrams and postParams for secret event
         request.formParams[key] = value
         request.postParams[key] = value
-  elif "multipart/form-data" in contentType and "boundary" in contentType:
+  elif mediaType.mainType == "multipart" and mediaType.subType == "form-data" and "boundary" in mediaType.parameters:
     request.formParams = parseFormPart(request.body, contentType)
 
   # /student?name=simon&age=sixteen
   # query -> name=simon&age=sixteen
-
   for (key, value) in decodeQuery(request.query):
     request.queryParams[key] = value
