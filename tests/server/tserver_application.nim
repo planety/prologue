@@ -1,6 +1,6 @@
 discard """
   cmd:      "nim c -r --styleCheck:hint --panics:on $options $file"
-  matrix:   "--gc:refc"
+  matrix:   "--mm:refc; --mm:orc"
   targets:  "c"
   action:   "run"
   exitcode: 0
