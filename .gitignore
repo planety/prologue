@@ -20,3 +20,5 @@ tests/compile/test_compile/test_compile
 *.exe
 .vscode
 
+docs/
+htmldocs/
