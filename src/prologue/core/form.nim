@@ -107,6 +107,8 @@ func parseFormParams*(request: var Request, contentType: string) =
         request.postParams[key] = value
   elif mediaType.mainType == "multipart" and mediaType.subType == "form-data" and "boundary" in mediaType.parameters:
     request.formParams = parseFormPart(request.body, contentType)
+  else:
+    request.formParams = initFormPart()
 
   # /student?name=simon&age=sixteen
   # query -> name=simon&age=sixteen
