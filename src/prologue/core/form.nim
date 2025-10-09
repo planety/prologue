@@ -96,10 +96,10 @@ func parseFormPart*(body, contentType: string): FormPart =
 
 func parseFormParams*(request: var Request, contentType: string) =
   ## Parses get or post or query parameters.
-  if contentType == "":
-    return
-
-  let mediaType = parseContentType(contentType)
+  let mediaType = try:
+      parseContentType(contentType)
+    except:
+      MediaType(parameters: initTable[string, string]())
 
   if mediaType.mainType == "application" and mediaType.subType == "x-www-form-urlencoded":
     request.formParams = initFormPart()
