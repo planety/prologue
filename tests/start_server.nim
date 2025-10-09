@@ -15,6 +15,10 @@ proc hello*(ctx: Context) {.async.} =
 proc home*(ctx: Context) {.async.} =
   resp "<h1>Home</h1>"
 
+proc query*(ctx: Context) {.async.} =
+  let query = ctx.getQueryParamsOption("query").get("")
+  resp query
+
 proc helloName*(ctx: Context) {.async.} =
   resp "<h1>Hello, " & ctx.getPathParams("name", "Prologue!") & "</h1>"
 
@@ -65,6 +69,7 @@ var app = newApp(settings = settings)
 with app:
   addRoute("/", home, HttpGet)
   addRoute("/home", home, HttpGet, middlewares = @[debugRequestMiddleware()])
+  addRoute("/query", query, HttpGet)
   addRoute("/hello", hello, HttpGet)
   addRoute("/redirect", redirectHome, HttpGet)
   addRoute("/loginget", loginGet, HttpGet)
