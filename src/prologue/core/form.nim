@@ -98,7 +98,7 @@ func parseFormParams*(request: var Request, contentType: string) =
   ## Parses get or post or query parameters.
   let mediaType = try:
       parseContentType(contentType)
-    except:
+    except CatchableError:
       MediaType(parameters: initTable[string, string]())
 
   if mediaType.mainType == "application" and mediaType.subType == "x-www-form-urlencoded":
