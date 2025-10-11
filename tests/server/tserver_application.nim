@@ -127,6 +127,15 @@ block:
     doAssert response.code == Http200, $response.code
     doAssert (waitFor response.body) == "<h1>Home</h1>"
 
+  # "can get /query?query=foo"
+  block:
+    let
+      route = "/query?query=foo"
+      response = waitFor client.get(fmt"http://{address}:{port}{route}")
+
+    doAssert response.code == Http200, $response.code
+    doAssert (waitFor response.body) == "foo"
+
   # "can get /loginget using get method"
   block:
     let
