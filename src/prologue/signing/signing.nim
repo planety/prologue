@@ -45,11 +45,11 @@ export signingbase
 
 
 type
-  BaseDigestType* = sha1 | sha2 | keccak | ripemd | blake2
+  BaseDigestType* = sha1 | sha224 | sha256 | sha384 | sha512 | sha512_224 | sha512_256 | keccak | ripemd | blake2
 
   BaseDigestMethodType* = enum
     Sha1Type,
-    Sha224Type, Sha384Type, Sha512Type, Sha512_224Type, Sha512_256Type
+    Sha224Type, Sha256Type, Sha384Type, Sha512Type, Sha512_224Type, Sha512_256Type
     Keccak224Type, Keccak256Type, Keccak384Type, Keccak512Type, Sha3_224Type,
         Sha3_256Type, Sha3_384Type, Sha3_512Type
     Ripemd128Type, Ripemd160Type, Ripemd256Type, Ripemd320Type
@@ -158,6 +158,8 @@ proc getSignatureEncode*(s: Signer | TimedSigner, value: openArray[
     result = getKeyDerivationEncode(s, sha1, value)
   of Sha224Type:
     result = getKeyDerivationEncode(s, sha224, value)
+  of Sha256Type:
+    result = getKeyDerivationEncode(s, sha256, value)
   of Sha384Type:
     result = getKeyDerivationEncode(s, sha384, value)
   of Sha512Type:
@@ -205,6 +207,8 @@ proc getSignatureDecode*(s: Signer | TimedSigner): string =
     result = getKeyDerivationDecode(s, sha1)
   of Sha224Type:
     result = getKeyDerivationDecode(s, sha224)
+  of Sha256Type:
+    result = getKeyDerivationDecode(s, sha256)
   of Sha384Type:
     result = getKeyDerivationDecode(s, sha384)
   of Sha512Type:
