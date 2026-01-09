@@ -45,7 +45,7 @@ export signingbase
 
 
 type
-  BaseDigestType* = sha1 | sha2 | keccak | ripemd | blake2
+  BaseDigestType* = sha1 | sha224 | sha384 | sha512 | sha512_224 | sha512_256 | keccak | ripemd | blake2
 
   BaseDigestMethodType* = enum
     Sha1Type,
