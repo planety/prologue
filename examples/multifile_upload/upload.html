@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Multiple File Upload Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .upload-form {
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+        }
+        input[type="file"] {
+            margin: 20px 0;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Multiple File Upload Example</h1>
+    <div class="upload-form">
+        <h2>Select Multiple Files</h2>
+        <form method="post" action="/upload" enctype="multipart/form-data">
+            <input type="file" name="files" multiple required />
+            <br>
+            <input type="submit" value="Upload Files" />
+        </form>
+    </div>
+    <p><strong>Note:</strong> You can select multiple files at once using Ctrl+Click (or Cmd+Click on Mac) in the file picker dialog.</p>
+</body>
+</html>
