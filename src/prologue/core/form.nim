@@ -58,7 +58,7 @@ func parseFormPart*(body, contentType: string): FormPart =
     tail = data[pos ..< ^2] # 2 because of protocol newline after content disposition body
 
     if not head.startsWith("Content-Disposition"):
-      break
+      continue
 
     for line in head.splitLines:
       let header = line.parseHeader
