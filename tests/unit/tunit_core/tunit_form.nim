@@ -56,3 +56,45 @@ block:
   doAssert formPart.data.contains("myfile"), "myfile field should be present"
   doAssert formPart.data["myfile"].body == "Hello World"
   doAssert formPart.data["myfile"].params.getOrDefault("filename", "") == "test.txt"
+
+block:
+  # Test for multiple file inputs with the same name (issue: handle multiple file upload from a single input element)
+  # This tests that multiple files uploaded with the same input name are all captured
+  const testmime =
+    "------WebKitFormBoundary7MA4YWxkTrZu0gW\13\10" &
+    "Content-Disposition: form-data; name=\"files\"; filename=\"test1.txt\"\13\10" &
+    "Content-Type: text/plain\13\10" &
+    "\13\10" &
+    "First file content\13\10" &
+    "------WebKitFormBoundary7MA4YWxkTrZu0gW\13\10" &
+    "Content-Disposition: form-data; name=\"files\"; filename=\"test2.txt\"\13\10" &
+    "Content-Type: text/plain\13\10" &
+    "\13\10" &
+    "Second file content\13\10" &
+    "------WebKitFormBoundary7MA4YWxkTrZu0gW\13\10" &
+    "Content-Disposition: form-data; name=\"files\"; filename=\"test3.txt\"\13\10" &
+    "Content-Type: text/plain\13\10" &
+    "\13\10" &
+    "Third file content\13\10" &
+    "------WebKitFormBoundary7MA4YWxkTrZu0gW--\13\10"
+  const contenttype = "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW"
+  let formPart = parseFormPart(testmime, contenttype)
+  
+  # Verify that all three files with the same name are captured
+  doAssert formPart.data.contains("files"), "files field should be present"
+  doAssert formPart.data["files"].len == 3, "Should have 3 files"
+  
+  # Verify first file
+  doAssert formPart.data["files"][0].body == "First file content"
+  doAssert formPart.data["files"][0].params.getOrDefault("filename", "") == "test1.txt"
+  doAssert formPart.data["files"][0].params.getOrDefault("Content-Type", "") == "text/plain"
+  
+  # Verify second file
+  doAssert formPart.data["files"][1].body == "Second file content"
+  doAssert formPart.data["files"][1].params.getOrDefault("filename", "") == "test2.txt"
+  doAssert formPart.data["files"][1].params.getOrDefault("Content-Type", "") == "text/plain"
+  
+  # Verify third file
+  doAssert formPart.data["files"][2].body == "Third file content"
+  doAssert formPart.data["files"][2].params.getOrDefault("filename", "") == "test3.txt"
+  doAssert formPart.data["files"][2].params.getOrDefault("Content-Type", "") == "text/plain"

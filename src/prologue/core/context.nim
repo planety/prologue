@@ -166,9 +166,18 @@ func initUploadFile*(filename, body: string): UpLoadFile =
   UploadFile(filename: filename, body: body)
 
 func getUploadFile*(ctx: Context, name: string): UpLoadFile {.inline.} =
-  ## Gets the UploadFile from request.
+  ## Gets the first UploadFile from request with the given name.
+  ## For retrieving multiple files with the same name, use `getUploadFiles` instead.
   let file = ctx.request.formParams[name]
   initUploadFile(filename = file.params.getOrDefault("filename"), body = file.body)
+
+func getUploadFiles*(ctx: Context, name: string): seq[UpLoadFile] {.inline.} =
+  ## Gets all UploadFiles from request with the given name.
+  ## This is useful when multiple files are uploaded from a single input element with the `multiple` attribute.
+  result = @[]
+  if ctx.request.formParams.data.hasKey(name):
+    for file in ctx.request.formParams.data[name]:
+      result.add(initUploadFile(filename = file.params.getOrDefault("filename"), body = file.body))
 
 proc save*(uploadFile: UpLoadFile, dir: string, filename = "") {.inline.} =
   ## Saves the UploadFile to ``dir``.
