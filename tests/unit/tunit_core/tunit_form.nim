@@ -1,5 +1,5 @@
 import ../../../src/prologue/core/form
-import tables, strutils
+import tables, strutils, strtabs
 
 block:
   const testmime =
@@ -40,3 +40,19 @@ block:
   let formPart = parseFormPart(testmime, contenttype)
   doAssert formPart.data["upload"].body.len == testfile.len
   doAssert formPart.data["upload"].body == testfile
+
+block:
+  # Test for file input field (issue: multipart/form-data not working)
+  # This tests that file inputs with filename parameter work correctly
+  const testmime =
+    "------WebKitFormBoundary7MA4YWxkTrZu0gW\13\10" &
+    "Content-Disposition: form-data; name=\"myfile\"; filename=\"test.txt\"\13\10" &
+    "Content-Type: text/plain\13\10" &
+    "\13\10" &
+    "Hello World\13\10" &
+    "------WebKitFormBoundary7MA4YWxkTrZu0gW--\13\10"
+  const contenttype = "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW"
+  let formPart = parseFormPart(testmime, contenttype)
+  doAssert formPart.data.contains("myfile"), "myfile field should be present"
+  doAssert formPart.data["myfile"].body == "Hello World"
+  doAssert formPart.data["myfile"].params.getOrDefault("filename", "") == "test.txt"
