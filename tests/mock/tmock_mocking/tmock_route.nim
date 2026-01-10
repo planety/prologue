@@ -272,3 +272,11 @@ block Basic_Mapping:
     discard testContext(app, "/hi", HttpPut)
     discard testContext(app, "/hi", HttpOptions)
     discard testContext(app, "/hi", HttpDelete)
+
+  # test "Edge case: greedy parameter with trailing slash"
+  block:
+    var app = prepareApp()
+    app.addTestRoute("/test/{param}$")
+    let ctx = testContext(app, "/test/")
+    # Parameter should be empty string, not cause IndexDefect
+    doAssert ctx.getPathParams("param") == ""
