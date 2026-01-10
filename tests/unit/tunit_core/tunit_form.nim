@@ -1,5 +1,5 @@
 import ../../../src/prologue/core/form
-import tables, strutils
+import tables, strutils, strtabs
 
 block:
   const testmime =
@@ -55,5 +55,4 @@ block:
   let formPart = parseFormPart(testmime, contenttype)
   doAssert formPart.data.contains("myfile"), "myfile field should be present"
   doAssert formPart.data["myfile"].body == "Hello World"
-  doAssert formPart.data["myfile"].params.hasKey("filename")
-  doAssert formPart.data["myfile"].params["filename"] == "test.txt"
+  doAssert formPart.data["myfile"].params.getOrDefault("filename", "") == "test.txt"
