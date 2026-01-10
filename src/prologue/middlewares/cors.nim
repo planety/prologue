@@ -18,7 +18,7 @@ import std/asyncdispatch
 from ../core/middlewaresbase import switch
 from ../core/context import Context, HandlerAsync
 from ../core/response import plainTextResponse, resp, setHeader, addHeader
-from ../core/basicregex import re, Regex, RegexMatch, match
+from ../core/basicregex import re2, Regex2, RegexMatch2, match
 import ../core/request
 import ../core/httpcore/httplogue
 
@@ -29,11 +29,11 @@ const
 
 proc isAllowedOrigin(origin: string, allowAllOrigins: bool,
                      allowOrigins: seq[string],
-                     allowOriginRegex: Regex): bool =
+                     allowOriginRegex: Regex2): bool =
   if allowAllOrigins:
     return true
 
-  var m: RegexMatch
+  var m: RegexMatch2
   if origin.match(allowOriginRegex, m):
     return true
 
@@ -41,7 +41,7 @@ proc isAllowedOrigin(origin: string, allowAllOrigins: bool,
 
 proc CorsMiddleware*(
   allowOrigins: seq[string] = @[],
-  allowOriginRegex: Regex = re"",
+  allowOriginRegex: Regex2 = re2"",
   allowMethods: seq[string] = @["GET"],
   allowHeaders: seq[string] = @[],
   exposeHeaders: seq[string] = @[],

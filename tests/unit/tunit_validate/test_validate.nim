@@ -181,8 +181,8 @@ block:
   block:
     let
       msg = "Regex doesn't match!"
-      decide = matchRegex(re"(?P<greet>hello) (?:(?P<who>[^\s]+)\s?)+", msg)
-      decideDefaultMsg = matchRegex(re"abc")
+      decide = matchRegex(re2"(?P<greet>hello) (?:(?P<who>[^\s]+)\s?)+", msg)
+      decideDefaultMsg = matchRegex(re2"abc")
 
     doAssert decide("hello beautiful world") == (true, "")
     doAssert decide("time") == (false, msg)

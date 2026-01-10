@@ -110,7 +110,7 @@ proc registerErrorHandler*(app: Prologue, code: openArray[HttpCode],
 
 # -------------------------------- Regex Route --------------------------------
 
-proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
+proc addRoute*(app: Prologue, route: Regex2, handler: HandlerAsync,
                httpMethod = HttpGet, middlewares: openArray[HandlerAsync] = @[]) {.inline.} =
   ## Adds a single regex `route` with `handler` and don't check whether route is duplicated.
   ## 
@@ -126,7 +126,7 @@ proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
                            newPathHandler(handler, @middlewares)
                            )
 
-proc addRoute*(app: Prologue, route: Regex, handler: HandlerAsync,
+proc addRoute*(app: Prologue, route: Regex2, handler: HandlerAsync,
                httpMethod: openArray[HttpMethod], 
                middlewares: openArray[HandlerAsync] = @[]) {.inline.} =
   ## Adds a single regex `route` and `handler`, but supports a set of HttpMethod.

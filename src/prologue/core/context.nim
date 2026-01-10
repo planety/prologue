@@ -35,7 +35,7 @@ type
     httpMethod*: HttpMethod
 
   RePath* = object
-    route*: Regex
+    route*: Regex2
     httpMethod*: HttpMethod
 
   ReRouter* = ref object
