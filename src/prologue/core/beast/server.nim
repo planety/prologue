@@ -48,8 +48,7 @@ proc serveAsync*(app: Prologue,
             callback: proc (request: NativeRequest): Future[void] {.closure, gcsafe.},
            ) {.async.} =
   ## Serves a new web application asynchronously.
-  {.cast(raises: []).}:
-    run(callback, getSettings(app))
+  await runAsync(callback, getSettings(app))
 
 func newPrologue*(settings: Settings, ctxSettings: CtxSettings, router: Router,
                   reversedRouter: ReversedRouter, reRouter: ReRouter, middlewares: openArray[HandlerAsync],

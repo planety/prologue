@@ -4,7 +4,7 @@
 ##   nimble install prologue[kairos]
 ##
 ## Or manually:
-##   nim c -d:feature.prologue.kairos myapp.nim
+##   nim c -d:features.prologue.kairos myapp.nim
 ##   nim c -d:asyncBackend="chronos" myapp.nim
 ##
 ## Default is asyncdispatch + httpx.

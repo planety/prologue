@@ -37,6 +37,10 @@ task texamples, "Test examples":
 task treadme, "Test Readme":
   exec "nim c -d:release tests/compile/test_readme/readme.nim"
 
+task tkairos, "Test kairos backend":
+  exec "nimble install kairos -l -y"
+  exec "testament all -d:asyncBackend=chronos"
+
 task tcompile, "Test Compile":
   exec "nim c -r -d:release tests/compile/test_compile/test_compile.nim"
 
