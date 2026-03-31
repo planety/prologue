@@ -13,7 +13,7 @@
 # limitations under the License.
 
 from std/strutils import toUpperAscii, join
-import std/asyncdispatch
+import ../core/asyncbackend
 
 from ../core/middlewaresbase import switch
 from ../core/context import Context, HandlerAsync

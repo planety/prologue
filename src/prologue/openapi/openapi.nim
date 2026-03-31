@@ -12,7 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import std/[json, strtabs, asyncdispatch]
+import std/[json, strtabs]
+import ../core/asyncbackend
 
 from ../core/application import Prologue, addRoute, appDebug
 from ../core/response import htmlResponse, resp, jsonResponse

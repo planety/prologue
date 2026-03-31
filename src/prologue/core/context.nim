@@ -12,9 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import std/[mimetypes, md5, uri, strutils, critbits, 
-            asyncfile, asyncdispatch,strtabs, tables, strformat, 
+import std/[mimetypes, md5, uri, strutils, critbits,
+            strtabs, tables, strformat,
             os, times, options, parseutils, json]
+import ./asyncbackend
+
+when useKairos:
+  import pkg/kairos/asyncfile
+else:
+  import std/asyncfile
 
 import ./response, ./pages, ./basicregex, ./request, ./httpcore/httplogue
 import ./types
@@ -24,6 +30,10 @@ from ./nativesettings import Settings, CtxSettings, getOrDefault, hasKey, `[]`
 
 import pkg/cookiejar
 
+when useKairos:
+  {.pragma: asyncRaises, raises: [CatchableError].}
+else:
+  {.pragma: asyncRaises.}
 
 type
   PathHandler* = ref object
@@ -72,9 +82,9 @@ type
     of false:
       syncHandler*: SyncEvent
 
-  HandlerAsync* = proc(ctx: Context): Future[void] {.closure, gcsafe.}
+  HandlerAsync* = proc(ctx: Context): Future[void] {.closure, gcsafe, asyncRaises.}
 
-  ErrorHandler* = proc(ctx: Context): Future[void] {.nimcall, gcsafe.}
+  ErrorHandler* = proc(ctx: Context): Future[void] {.nimcall, gcsafe, asyncRaises.}
 
   ErrorHandlerTable* = TableRef[HttpCode, ErrorHandler]
 
@@ -179,7 +189,7 @@ proc save*(uploadFile: UpLoadFile, dir: string, filename = "") {.inline.} =
   else:
     writeFile(dir / filename, uploadFile.body)
 
-proc newErrorHandlerTable*(initialSize = defaultInitialSize): ErrorHandlerTable =
+proc newErrorHandlerTable*(initialSize = tables.defaultInitialSize): ErrorHandlerTable =
   ## Creates a new error handler table.
   newTable[HttpCode, ErrorHandler](initialSize)
 

@@ -1,4 +1,5 @@
-import std/[options, strtabs, asyncdispatch]
+import std/[options, strtabs]
+import ../../core/asyncbackend
 
 from ../../core/types import BadSecretKeyError, SecretKey, len, Session, newSession, pairs
 from ../../core/context import Context, HandlerAsync, getCookie, setCookie, deleteCookie

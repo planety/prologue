@@ -12,7 +12,8 @@
 
 
 ## This module implements some core synchronization primitives
-import std/[sequtils, deques, asyncdispatch]
+import std/[sequtils, deques]
+import ../asyncbackend
 
 
 type

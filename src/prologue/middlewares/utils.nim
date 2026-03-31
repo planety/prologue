@@ -12,7 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import std/[logging, strtabs, strutils, asyncdispatch, os]
+import std/[logging, strtabs, strutils, os]
+import ../core/asyncbackend
 
 from ../core/context import Context, HandlerAsync
 from ../core/middlewaresbase import switch
