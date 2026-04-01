@@ -5,7 +5,7 @@
 ##
 ## Or manually:
 ##   nim c -d:features.prologue.kairos myapp.nim
-##   nim c -d:asyncBackend="chronos" myapp.nim
+##   nim c -d:asyncBackend=chronos myapp.nim
 ##
 ## Default is asyncdispatch + httpx.
 
