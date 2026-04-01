@@ -7,7 +7,7 @@
 #    Apache License, version 2.0, (LICENSE-APACHEv2)
 #                MIT license (LICENSE-MIT)
 # 
-#             Copyright 2020 Zeshen Xing
+#             Copyright 2020 ringabout
 #
 
 
