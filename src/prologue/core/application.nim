@@ -12,7 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import std/[os, uri, tables, strutils, strformat, logging, strtabs, options, json, asyncdispatch]
+import std/[os, uri, tables, strutils, strformat, logging, strtabs, options, json]
+import ./asyncbackend
 from std/nativesockets import Port, `$`
 
 from ./form import parseFormParams
@@ -37,12 +38,18 @@ import ./group
 
 import pkg/cookiejar
 
+template logDebug(msg: string) =
+  {.cast(raises: []).}: logging.debug(msg)
+
+template logError(msg: string) =
+  {.cast(raises: []).}: logging.error(msg)
+
 export group
 export request, server
 export httplogue
 export strtabs
 export tables
-export asyncdispatch except register
+export asyncbackend except register
 export options
 export json
 export basicregex
@@ -454,22 +461,22 @@ proc handleContext*(app: Prologue, ctx: Context) {.async, gcsafe.} =
   ## Handles the context of each request.
   ## Todo Optimization
   ctx.middlewares = app.middlewares
-  logging.debug(fmt"{ctx.request.reqMethod} {ctx.request.url.path}")
+  logDebug(fmt"{ctx.request.reqMethod} {ctx.request.url.path}")
 
   try:
     await switch(ctx)
   except RouteError as e:
     ctx.response.code = Http404
     ctx.response.body.setLen(0)
-    logging.debug e.msg
+    logDebug e.msg
   except HttpError as e:
     # catch general http error
-    logging.debug e.msg
+    logDebug e.msg
   except AbortError as e:
     # catch abort error
-    logging.debug e.msg
+    logDebug e.msg
   except Exception as e:
-    logging.error $e.name & ": " & e.msg 
+    logError $e.name & ": " & e.msg
     ctx.response.code = Http500
     ctx.response.body = e.msg
     ctx.response.setHeader("content-type", "text/plain; charset=UTF-8")
@@ -477,18 +484,14 @@ proc handleContext*(app: Prologue, ctx: Context) {.async, gcsafe.} =
   # display error messages only in debug mode
   if ctx.gScope.settings.debug and ctx.response.code == Http500 and ctx.response.body.len != 0:
     discard
-  elif ctx.response.code in app.errorHandlerTable and 
+  elif ctx.response.code in app.errorHandlerTable and
           (ctx.response.body.len == 0 or ctx.response.code == Http500):
     await (app.errorHandlerTable[ctx.response.code])(ctx)
 
   if not ctx.handled:
-    # central processing
-    # the context is processed here except static file
-
-    # Only process the context when `ctx.handled` is false.
     await respond(ctx)
 
-    logging.debug($(ctx.response))
+    logDebug($(ctx.response))
 
 proc handleRequest*(app: Prologue, nativeRequest: NativeRequest, ctxTyp: typedesc[Context]): Future[void] {.gcsafe.} =
   ## Handles the native request and sends response to the client.
@@ -542,13 +545,14 @@ proc run*(app: Prologue) {.inline.} =
 
 proc runAsync*(app: Prologue, ctxTyp: typedesc[Context]) {.async.} =
   ## Starts an Application.
+  {.cast(gcsafe).}:
+    {.cast(raises: []).}:
+      prepareRun(app)
 
-  prepareRun(app)
+      proc handler(nativeRequest: NativeRequest): Future[void] {.gcsafe.} =
+        result = handleRequest(app, nativeRequest, ctxTyp)
 
-  proc handler(nativeRequest: NativeRequest): Future[void] {.gcsafe.} =
-    result = handleRequest(app, nativeRequest, ctxTyp)
-
-  await app.serveAsync(handler)
+      await app.serveAsync(handler)
 
 proc runAsync*(app: Prologue) {.inline, async.} =
   await app.runAsync(Context)

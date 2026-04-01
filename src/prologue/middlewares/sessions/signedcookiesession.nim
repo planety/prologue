@@ -1,4 +1,5 @@
-import std/[options, strtabs, asyncdispatch, json]
+import std/[options, strtabs, json]
+import ../../core/asyncbackend
 
 
 from ../../core/types import BadSecretKeyError, SecretKey, loads, dumps, len, newSession

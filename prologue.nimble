@@ -12,8 +12,15 @@ requires "nim >= 2.0.0"
 requires "regex >= 0.20.0"
 requires "nimcrypto >= 0.6.0"
 requires "cookiejar >= 0.2.0"
-requires "httpx >= 0.3.7"
 requires "logue >= 0.2.0"
+requires "httpx >= 0.3.7"
+
+# HTTP backend features — install with: nimble install prologue[kairos]
+feature "kairos":
+  requires "kairos >= 0.1.0"
+
+
+
 
 
 # tests
@@ -29,6 +36,10 @@ task texamples, "Test examples":
 
 task treadme, "Test Readme":
   exec "nim c -d:release tests/compile/test_readme/readme.nim"
+
+task tkairos, "Test kairos backend":
+  exec "nimble install kairos -l -y"
+  exec "testament all -d:asyncBackend=chronos"
 
 task tcompile, "Test Compile":
   exec "nim c -r -d:release tests/compile/test_compile/test_compile.nim"

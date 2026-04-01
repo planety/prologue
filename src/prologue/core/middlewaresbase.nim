@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-import std/[asyncdispatch]
+import ./asyncbackend
 
 from ./context import HandlerAsync, Context, size, incSize, first, `first=`, 
                       middlewares, `middlewares=`, addMiddlewares, newContextFrom,

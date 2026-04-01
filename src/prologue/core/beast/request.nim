@@ -1,15 +1,21 @@
-import std/[uri, strutils, strtabs, options, asyncdispatch]
+import std/[uri, strutils, strtabs, options]
 
 from ../response import Response
 from ../types import FormPart, initFormPart
 import ../httpcore/httplogue
 
 import pkg/cookiejar
-import pkg/httpx except Settings
 
+import ../asyncbackend
+
+when useKairos:
+  import pkg/kairos except Settings, HttpHeaders, newHttpHeaders, HttpMethod, HttpCode
+  type NativeRequest* = kairos.Request
+else:
+  import pkg/httpx except Settings
+  type NativeRequest* = httpx.Request
 
 type
-  NativeRequest* = httpx.Request
   Request* = object
     nativeRequest*: NativeRequest
     cookies*: CookieJar
@@ -110,7 +116,7 @@ func secure*(request: Request): bool {.inline.} =
   else:
     result = false
 
-func hostName*(request: Request): string {.inline.} =
+proc hostName*(request: Request): string {.inline.} =
   ## Gets the hostname of the request.
   result = request.nativeRequest.ip
   if request.headers.hasKey("REMOTE_ADDR"):
@@ -147,13 +153,13 @@ proc respond*(request: Request, response: Response): Future[void] {.inline.} =
   ## will generate the contents of the response automatically.
   result = request.respond(response.code, response.body, response.headers)
 
-func initRequest*(nativeRequest: NativeRequest, 
+func initRequest*(nativeRequest: NativeRequest,
                   cookies = initCookieJar(),
-                  pathParams = newStringTable(modeCaseSensitive), 
+                  pathParams = newStringTable(modeCaseSensitive),
                   queryParams = newStringTable(modeCaseSensitive),
                   postParams = newStringTable(modeCaseSensitive)): Request =
   ## Initializes a new Request.
-  let url = 
+  let url =
     if nativeRequest.path.isSome:
       parseUri(nativeRequest.path.get)
     else:
@@ -165,7 +171,7 @@ func initRequest*(nativeRequest: NativeRequest,
     else:
       HttpGet
 
-  let headers = 
+  let headers =
     if nativeRequest.headers.isSome:
       nativeRequest.headers.get
     else:

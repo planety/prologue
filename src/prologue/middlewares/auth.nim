@@ -1,4 +1,5 @@
-import std/[asyncdispatch, strtabs]
+import std/strtabs
+import ../core/asyncbackend
 
 from ../auth/auth import basicAuth, VerifyHandler
 from  ../core/context import HandlerAsync, Context
@@ -8,8 +9,11 @@ from ../core/middlewaresbase import switch
 proc basicAuthMiddleware*(realm: string, verifyHandler: VerifyHandler,
     charset = "UTF-8"): HandlerAsync =
   result = proc(ctx: Context) {.async.} =
-    let (hasValue, username, password) = basicAuth(ctx, realm,
-        verifyHandler, charset)
+    var hasValue: bool
+    var username, password: string
+    {.cast(raises: []).}:
+      (hasValue, username, password) = basicAuth(ctx, realm,
+          verifyHandler, charset)
     if not hasValue:
       return
 

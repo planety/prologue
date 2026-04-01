@@ -1,4 +1,5 @@
-import std/[asyncdispatch, strutils, strformat, os, uri, sugar, logging]
+import std/[strutils, strformat, os, uri, sugar, logging]
+import ../core/asyncbackend
 
 import ../core/context, ../core/middlewaresbase, ../core/request
 import ./utils

@@ -12,7 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import std/[json, strutils, asyncdispatch]
+import std/[json, strutils]
+import ../core/asyncbackend
 
 from ../core/response import setHeader
 from ../core/context import Context, HandlerAsync, getSettings

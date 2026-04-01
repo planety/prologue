@@ -12,66 +12,73 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import std/[logging, strtabs, strutils, asyncdispatch, os]
+import std/[logging, strtabs, strutils, os]
+import ../core/asyncbackend
 
 from ../core/context import Context, HandlerAsync
 from ../core/middlewaresbase import switch
 import ../core/request
 import ../core/httpcore/httplogue
 
+template logInfo(msg: string) =
+  {.cast(raises: []).}: logging.info(msg)
+
+template logDebug(msg: string) =
+  {.cast(raises: []).}: logging.debug(msg)
+
 
 proc testMiddleware*(): HandlerAsync =
   result = proc(ctx: Context) {.async.} =
-    logging.info "debug->begin"
+    logInfo "debug->begin"
     await switch(ctx)
-    logging.info "debug->end"
+    logInfo "debug->end"
 
 
 proc loggingMiddleware*(appName = "Prologue"): HandlerAsync =
   result = proc(ctx: Context) {.async.} =
-    logging.info "loggingMiddleware->begin"
-    logging.debug "============================"
-    logging.debug appName
-    logging.debug "route: " & ctx.request.path
-    logging.debug "headers: " & $ctx.request.headers
-    logging.debug "============================"
-    logging.info "loggingMiddleware->end"
+    logInfo "loggingMiddleware->begin"
+    logDebug "============================"
+    logDebug appName
+    logDebug "route: " & ctx.request.path
+    logDebug "headers: " & $ctx.request.headers
+    logDebug "============================"
+    logInfo "loggingMiddleware->end"
     await switch(ctx)
 
 proc debugRequestMiddleware*(appName = "Prologue"): HandlerAsync =
   result = proc(ctx: Context) {.async.} =
-    logging.info "debugRequestMiddleware->begin"
-    logging.debug "============================"
-    logging.debug appName
-    logging.debug "url: " & $ctx.request.url
-    logging.debug "queryParams: " & $ctx.request.queryParams
-    logging.debug "method: " & $ctx.request.reqMethod
-    logging.debug "headers: " & $ctx.request.headers
-    logging.debug "body: " & ctx.request.body
-    logging.debug "============================"
-    logging.info "debugRequestMiddleware->end"
+    logInfo "debugRequestMiddleware->begin"
+    logDebug "============================"
+    logDebug appName
+    logDebug "url: " & $ctx.request.url
+    logDebug "queryParams: " & $ctx.request.queryParams
+    logDebug "method: " & $ctx.request.reqMethod
+    logDebug "headers: " & $ctx.request.headers
+    logDebug "body: " & ctx.request.body
+    logDebug "============================"
+    logInfo "debugRequestMiddleware->end"
     await switch(ctx)
 
 proc debugResponseMiddleware*(appName = "Prologue"): HandlerAsync =
   result = proc(ctx: Context) {.async.} =
     await switch(ctx)
-    logging.info "debugResponseMiddleware->begin"
-    logging.debug "============================"
-    logging.debug appName
-    logging.debug "headers: " & $ctx.response.headers
-    logging.debug "body: " & ctx.response.body
-    logging.debug "============================"
-    logging.info "debugResponseMiddleware->end"
+    logInfo "debugResponseMiddleware->begin"
+    logDebug "============================"
+    logDebug appName
+    logDebug "headers: " & $ctx.response.headers
+    logDebug "body: " & ctx.response.body
+    logDebug "============================"
+    logInfo "debugResponseMiddleware->end"
 
 proc stripPathMiddleware*(appName = "Prologue"): HandlerAsync =
   result = proc(ctx: Context) {.async.} =
-    logging.info "stripPathMiddleware->begin"
-    logging.debug "============================"
-    logging.debug appName
+    logInfo "stripPathMiddleware->begin"
+    logDebug "============================"
+    logDebug appName
     ctx.request.stripPath()
-    logging.debug ctx.request.path
-    logging.debug "============================"
-    logging.info "stripPathMiddleware->end"
+    logDebug ctx.request.path
+    logDebug "============================"
+    logInfo "stripPathMiddleware->end"
     await switch(ctx)
 
 proc httpRedirectMiddleWare*(): HandlerAsync =

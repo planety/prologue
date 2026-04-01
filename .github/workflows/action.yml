@@ -48,3 +48,6 @@ jobs:
 
     - name: Test
       run: nimble tests
+
+    - name: Test kairos backend
+      run: nimble tkairos

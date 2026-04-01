@@ -80,6 +80,16 @@ Then you can use `nimble` command to install `prologue`.
 nimble install prologue
 ```
 
+### Chronos Backend
+
+Prologue can use [chronos](https://github.com/status-im/nim-chronos) instead of asyncdispatch via the [kairos](https://github.com/jmgomez/kairos) HTTP server:
+
+```nim
+requires "prologue[kairos]"
+```
+
+Or without nimble, pass `-d:asyncBackend=chronos` to the compiler. No code changes needed — your handlers work with both backends.
+
 ## Usages
 
 ### Hello World
