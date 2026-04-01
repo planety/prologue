@@ -49,7 +49,7 @@ export request, server
 export httplogue
 export strtabs
 export tables
-export asyncbackend
+export asyncbackend except register
 export options
 export json
 export basicregex
