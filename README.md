@@ -37,7 +37,7 @@ It is ideal for building elegant and high performance web services.
 </tbody>
 </table>
 
-Welcome to write your own experience with Prologue at our [wiki](https://github.com/planety/prologue/wiki).
+Welcome to write your own experience with Prologue at our [wiki](https://github.com/planety/prologue/wiki). To get familiar with the code structure, use DeepWiki: [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/planety/prologue)
 
 ## Features
 
