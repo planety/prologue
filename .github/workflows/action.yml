@@ -16,7 +16,7 @@ jobs:
           - devel
     steps:
     - name: Checkout
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
 
     - name: Cache choosenim
       id: cache-choosenim
