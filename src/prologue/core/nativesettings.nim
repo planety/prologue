@@ -37,19 +37,20 @@ type
 
 
 func hasKey*(settings: Settings, key: string): bool {.inline.} =
-  ## Returns true if key is in `settings`.
+  ## Returns true if `key` exists in `settings.data`.
   settings.data.hasKey(key)
 
 func `[]`*(settings: Settings, key: string): JsonNode {.inline.} =
-  ## Retrieves value if key is in `settings`.
+  ## Retrieves the value for `key` from `settings.data`.
+  ## Raises `KeyError` if `key` is not present.
   settings.data[key]
 
 func getOrDefault*(settings: Settings, key: string): JsonNode {.inline.} =
-  ## Retrieves value if key is in `settings`. Otherwise `nil` will be returned.
+  ## Returns the value for `key` from `settings.data`, or `nil` if not present.
   settings.data.getOrDefault(key)
 
 func newCtxSettings*(): CtxSettings =
-  ## Creates a new context settings.
+  ## Creates a new `CtxSettings` with default MIME database and empty config.
   CtxSettings(mimeDB: newMimetypes(), config: newTable[string, StringTableRef]())
 
 func newSettings*(
@@ -63,7 +64,20 @@ func newSettings*(
   data: JsonNode = nil,
   listener: Socket = nil
 ): Settings =
-  ## Creates a new `Settings`.
+  ## Creates a new `Settings` with the given parameters.
+  ##
+  ## When `data` is provided, any existing `"prologue"` key inside it is
+  ## preserved — only `secretKey` and `appName` are merged in. This allows
+  ## passing custom settings like `maxBody` via `data`:
+  ##
+  ## .. code-block:: nim
+  ##   let settings = newSettings(
+  ##     data = %* {"prologue": {"maxBody": 1_000}},
+  ##     secretKey = "my-secret"
+  ##   )
+  ##
+  ## When `data` is `nil`, a default JSON tree is created containing only
+  ## `secretKey` and `appName`.
   if secretKey.len == 0:
     raise newException(EmptySecretKeyError, "Secret key can't be empty!")
 
@@ -74,13 +88,21 @@ func newSettings*(
                           "appName": appName}})
   else:
     var data = data
-    data["prologue"] = %* {"secretKey": secretKey, "appName": appName}
+    if not data.hasKey("prologue"):
+      data["prologue"] = %* {"secretKey": secretKey, "appName": appName}
+    else:
+      data["prologue"]["secretKey"] = % secretKey
+      data["prologue"]["appName"] = % appName
 
     result = Settings(address: address, port: port, listener: listener,
                   debug: debug, reusePort: reusePort, bufSize: bufSize,
                   data: data)
 
 func newSettingsFromJsonNode*(settings: var Settings, data: JsonNode) {.inline.} =
+  ## Populates `settings` fields from `data`. The `"prologue"` key is required
+  ## and must include `secretKey`. Standard fields (`address`, `port`, `debug`,
+  ## `reusePort`, `bufSize`) are read from `"prologue"` if present; the full
+  ## `data` tree is stored in `settings.data` for custom keys.
   if not data.hasKey("prologue"):
     raise newException(KeyError, "Key `prologue` must be present in the config file!")
 
@@ -99,13 +121,17 @@ func newSettingsFromJsonNode*(settings: var Settings, data: JsonNode) {.inline.}
 func loadSettings*(
   data: JsonNode
 ): Settings =
-  ## Creates a new `Settings`.
+  ## Creates a `Settings` from a `JsonNode`. The `"prologue"` key must
+  ## contain at least `secretKey`. All other keys (e.g. `maxBody`) are
+  ## preserved and accessible via `settings["prologue"]`.
   new result
   newSettingsFromJsonNode(result, data)
 
 proc loadSettings*(
   configPath: string
 ): Settings =
-  ## Creates a new `Settings`.
+  ## Creates a `Settings` by reading and parsing the JSON file at
+  ## `configPath`. The file must contain a `"prologue"` key with
+  ## `secretKey`.
   new result
   newSettingsFromJsonNode(result, parseFile(configPath))
