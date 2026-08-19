@@ -98,11 +98,12 @@ block:
   doAssert mediaType.parameters.len == 0
 
 block:
-  try:
-    discard parseContentType("text")
-    doAssert false, "Should have raised an exception"
-  except ValueError:
-    doAssert true
+  for invalidMediaType in ["", "text"]:
+    try:
+      discard parseContentType(invalidMediaType)
+      doAssert false, "Should have raised an exception"
+    except ValueError:
+      doAssert true
 
 block:
   let mediaType = parseContentType("text/plain; charset=utf-8; format=flowed")

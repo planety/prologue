@@ -29,7 +29,6 @@ proc parseContentType*(headerValue: string): MediaType =
     doAssert mediaType.parameters.len == 1
     doAssert mediaType.parameters["charset"] == "utf-8"
 
-  result = MediaType(parameters: initTable[string, string]())
   var
     i = 0
     headerLen = headerValue.len
@@ -47,6 +46,7 @@ proc parseContentType*(headerValue: string): MediaType =
   if typeParts.len != 2:
     raise newException(ValueError, &"Invalid media type: {mediaType}")
 
+  result.parameters = initTable[string, string]()
   result.mainType = typeParts[0].toLowerAscii
   result.subType = typeParts[1].toLowerAscii
 
