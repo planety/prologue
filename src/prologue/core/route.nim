@@ -425,16 +425,25 @@ func matchTree(
             pathIndex = path.len
       of ptrnParam:
         if node.isGreedy:
-          ctx.request.pathParams[node.value] = path[pathIndex .. ^1]
+          if pathIndex < path.len:
+            ctx.request.pathParams[node.value] = path[pathIndex .. ^1]
+          else:
+            ctx.request.pathParams[node.value] = ""
           pathIndex = path.len
         else:
           let newPathIndex = path.find(pathSeparator,
                                        pathIndex) # skip forward to the next separator
           if newPathIndex == -1:
-            ctx.request.pathParams[node.value] = path[pathIndex .. ^1]
+            if pathIndex < path.len:
+              ctx.request.pathParams[node.value] = path[pathIndex .. ^1]
+            else:
+              ctx.request.pathParams[node.value] = ""
             pathIndex = path.len
           else:
-            ctx.request.pathParams[node.value] = path[pathIndex .. newPathIndex - 1]
+            if pathIndex < newPathIndex:
+              ctx.request.pathParams[node.value] = path[pathIndex .. newPathIndex - 1]
+            else:
+              ctx.request.pathParams[node.value] = ""
             pathIndex = newPathIndex
 
       if pathIndex == path.len and node.isTerminator: # the path was exhausted and we reached a node that has a handler
