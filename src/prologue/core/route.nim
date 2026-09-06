@@ -127,6 +127,19 @@ func newRouter*(): Router {.inline.} =
 template isInvalidPath(path: string): bool =
   path.allCharsInSet(allowedCharsInPattern)
 
+func containsEncodedPathSeparator(value: string): bool {.inline.} =
+  ## Prevent a non-greedy route parameter from gaining another path segment
+  ## when `getPathParams` URL-decodes it after routing.
+  var index = 0
+  while index + 2 < value.len:
+    if value[index] == '%':
+      let high = value[index + 1]
+      let low = value[index + 2]
+      if (high == '2' and low in {'f', 'F'}) or
+          (high == '5' and low in {'c', 'C'}):
+        return true
+    inc index
+
 func ensureCorrectRoute(
   path: string
 ): string {.raises: [].} =
@@ -430,12 +443,14 @@ func matchTree(
         else:
           let newPathIndex = path.find(pathSeparator,
                                        pathIndex) # skip forward to the next separator
-          if newPathIndex == -1:
-            ctx.request.pathParams[node.value] = path[pathIndex .. ^1]
-            pathIndex = path.len
-          else:
-            ctx.request.pathParams[node.value] = path[pathIndex .. newPathIndex - 1]
-            pathIndex = newPathIndex
+          let paramValue = if newPathIndex == -1:
+                             path[pathIndex .. ^1]
+                           else:
+                             path[pathIndex .. newPathIndex - 1]
+          if paramValue.containsEncodedPathSeparator:
+            break matching
+          ctx.request.pathParams[node.value] = paramValue
+          pathIndex = if newPathIndex == -1: path.len else: newPathIndex
 
       if pathIndex == path.len and node.isTerminator: # the path was exhausted and we reached a node that has a handler
         return some(node.handler)
