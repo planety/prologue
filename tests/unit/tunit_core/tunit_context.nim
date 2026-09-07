@@ -301,3 +301,89 @@ suite "getFormParams":
     #Then
     check param == ""
 
+
+
+suite "getUploadFile":
+  test "Given a single uploaded file, When getUploadFile is called, Then return the file":
+    #Given
+    var ctx = new Context
+    ctx.request.formParams = initFormPart()
+    let expectedFilename = "test.txt"
+    let expectedBody = "file content"
+    ctx.request.formParams.data["file"] = @[(newStringTable({"filename": expectedFilename}.newStringTable), expectedBody)]
+    
+    #When
+    let uploadFile = ctx.getUploadFile("file")
+
+    #Then
+    check uploadFile.filename == expectedFilename
+    check uploadFile.body == expectedBody
+  
+  test "Given multiple uploaded files with same name, When getUploadFile is called, Then return the first file":
+    #Given
+    var ctx = new Context
+    ctx.request.formParams = initFormPart()
+    let expectedFilename = "test1.txt"
+    let expectedBody = "first file content"
+    ctx.request.formParams.data["files"] = @[
+      (newStringTable({"filename": expectedFilename}.newStringTable), expectedBody),
+      (newStringTable({"filename": "test2.txt"}.newStringTable), "second file content")
+    ]
+    
+    #When
+    let uploadFile = ctx.getUploadFile("files")
+
+    #Then
+    check uploadFile.filename == expectedFilename
+    check uploadFile.body == expectedBody
+
+
+suite "getUploadFiles":
+  test "Given multiple uploaded files with same name, When getUploadFiles is called, Then return all files":
+    #Given
+    var ctx = new Context
+    ctx.request.formParams = initFormPart()
+    ctx.request.formParams.data["files"] = @[
+      (newStringTable({"filename": "test1.txt"}.newStringTable), "first file content"),
+      (newStringTable({"filename": "test2.txt"}.newStringTable), "second file content"),
+      (newStringTable({"filename": "test3.txt"}.newStringTable), "third file content")
+    ]
+    
+    #When
+    let uploadFiles = ctx.getUploadFiles("files")
+
+    #Then
+    check uploadFiles.len == 3
+    check uploadFiles[0].filename == "test1.txt"
+    check uploadFiles[0].body == "first file content"
+    check uploadFiles[1].filename == "test2.txt"
+    check uploadFiles[1].body == "second file content"
+    check uploadFiles[2].filename == "test3.txt"
+    check uploadFiles[2].body == "third file content"
+  
+  test "Given a single uploaded file, When getUploadFiles is called, Then return a sequence with one file":
+    #Given
+    var ctx = new Context
+    ctx.request.formParams = initFormPart()
+    let expectedFilename = "test.txt"
+    let expectedBody = "file content"
+    ctx.request.formParams.data["file"] = @[(newStringTable({"filename": expectedFilename}.newStringTable), expectedBody)]
+    
+    #When
+    let uploadFiles = ctx.getUploadFiles("file")
+
+    #Then
+    check uploadFiles.len == 1
+    check uploadFiles[0].filename == expectedFilename
+    check uploadFiles[0].body == expectedBody
+  
+  test "Given no uploaded files, When getUploadFiles is called, Then return an empty sequence":
+    #Given
+    var ctx = new Context
+    ctx.request.formParams = initFormPart()
+    
+    #When
+    let uploadFiles = ctx.getUploadFiles("nonexistent")
+
+    #Then
+    check uploadFiles.len == 0

@@ -63,7 +63,8 @@ func parseFormPart*(body, contentType: string): FormPart =
     for line in head.splitLines:
       let header = line.parseHeader
       if header.key != "Content-Disposition":
-        result.data[name].params[header.key] = header.value[0]
+        if name.len > 0 and result.data.hasKey(name) and result.data[name].len > 0:
+          result.data[name][^1].params[header.key] = header.value[0]
         continue
       pos = 0
       let
@@ -81,18 +82,20 @@ func parseFormPart*(body, contentType: string): FormPart =
         case formKey
         of "name":
           name = move(formValue)
-          result.data[name] = (newStringTable(mode = modeCaseSensitive), "")
+          if not result.data.hasKey(name):
+            result.data[name] = @[]
+          result.data[name].add((newStringTable(mode = modeCaseSensitive), ""))
         of "filename":
-          result.data[name].params["filename"] = move(formValue)
+          result.data[name][^1].params["filename"] = move(formValue)
         of "filename*":
-          result.data[name].params["filenameStar"] = move(formValue)
+          result.data[name][^1].params["filenameStar"] = move(formValue)
         else:
           discard
         inc(times)
         if times >= 3:
           break
 
-    result.data[name].body = tail
+    result.data[name][^1].body = tail
 
 func parseFormParams*(request: var Request, contentType: string) =
   ## Parses get or post or query parameters.
