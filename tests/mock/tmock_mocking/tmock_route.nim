@@ -86,6 +86,69 @@ block Basic_Mapping:
     let ctx = testContext(app, "/value")
     doAssert ctx.getPathParams("param") == "value"
 
+  # Encoded separators must not turn a single-segment parameter into a path.
+  block:
+    let routeCases = [
+      (route: "/{param}", prefix: "/", suffix: ""),
+      (route: "/files/{param}", prefix: "/files/", suffix: ""),
+      (route: "/files/{param}/metadata", prefix: "/files/", suffix: "/metadata")
+    ]
+    let encodedSeparators = ["%2F", "%2f", "%5C", "%5c", "%%2F", "%%5C"]
+
+    for httpMethod in [HttpGet, HttpPost]:
+      for routeCase in routeCases:
+        for separator in encodedSeparators:
+          for paramValue in [separator & "outside.txt",
+                             ".." & separator & "outside.txt",
+                             "outside.txt" & separator]:
+            var app = prepareApp()
+            app.addTestRoute(routeCase.route, httpMethod)
+            let ctx = testFailedContext(
+              app,
+              routeCase.prefix & paramValue & routeCase.suffix,
+              httpMethod
+            )
+            doAssert not ctx.request.pathParams.hasKey("param")
+
+  # Ordinary, double, incomplete, and invalid encodings remain single segments.
+  block:
+    let encodedValues = [
+      (encoded: "hello%20world", decoded: "hello world"),
+      (encoded: "%2E%2E", decoded: ".."),
+      (encoded: "value%25done", decoded: "value%done"),
+      (encoded: "caf%C3%A9", decoded: "caf\xC3\xA9"),
+      (encoded: "..%252Foutside.txt", decoded: "..%2Foutside.txt"),
+      (encoded: "..%255Coutside.txt", decoded: "..%5Coutside.txt"),
+      (encoded: "percent%", decoded: "percent%"),
+      (encoded: "short%2", decoded: "short%2"),
+      (encoded: "invalid%2G", decoded: "invalid%2G"),
+      (encoded: "invalid%GG", decoded: "invalid%GG")
+    ]
+
+    for httpMethod in [HttpGet, HttpPost]:
+      for value in encodedValues:
+        var app = prepareApp()
+        app.addTestRoute("/files/{param}", httpMethod)
+        let ctx = testContext(app, "/files/" & value.encoded, httpMethod)
+        doAssert ctx.getPathParams("param") == value.decoded
+
+  # Greedy parameters explicitly accept multiple path segments.
+  block:
+    let pathValues = [
+      (encoded: "foo/bar", decoded: "foo/bar"),
+      (encoded: "foo%2Fbar", decoded: "foo/bar"),
+      (encoded: "foo%2fbar", decoded: "foo/bar"),
+      (encoded: "foo%5Cbar", decoded: "foo\\bar"),
+      (encoded: "foo%5cbar", decoded: "foo\\bar")
+    ]
+
+    for httpMethod in [HttpGet, HttpPost]:
+      for value in pathValues:
+        var app = prepareApp()
+        app.addTestRoute("/files/{param}$", httpMethod)
+        let ctx = testContext(app, "/files/" & value.encoded, httpMethod)
+        doAssert ctx.getPathParams("param") == value.decoded
+
   # test "Wildcard in middle":
   block:
     var app = prepareApp()
