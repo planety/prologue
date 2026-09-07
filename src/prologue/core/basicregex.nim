@@ -1,4 +1,4 @@
 import pkg/regex
 
 
-export re, Regex, RegexMatch, match, groupNames, groupFirstCapture
+export re2, Regex2, RegexMatch2, match, groupNames, groupFirstCapture

@@ -64,7 +64,7 @@ runnableExamples:
 import std/[tables, strtabs, strutils, strformat]
 
 from ./basic import nil
-from ../core/basicregex import match, re, Regex, RegexMatch
+from ../core/basicregex import match, re2, Regex2, RegexMatch2
 
 
 type
@@ -262,11 +262,11 @@ func required*(msg = ""): ValidateHandler {.inline.} =
     else:
       result = (false, msg)
 
-func matchRegex*(value: Regex, msg = ""): ValidateHandler {.inline.} =
+func matchRegex*(value: Regex2, msg = ""): ValidateHandler {.inline.} =
   ## Succeeds if the content of ``text`` matches the regex expression. If the length of 
   ## ``msg`` is more than 0, returns the ``msg`` when failed.
   result = func(text: string): Info =
-    var m: RegexMatch
+    var m: RegexMatch2
     if text.match(value, m):
       result = (true, "")
     elif msg.len == 0:
@@ -278,8 +278,8 @@ func matchURL*(msg = ""): ValidateHandler {.inline.} =
   ## Succeeds if the content of ``text`` matches the url expression. If the length of 
   ## ``msg`` is more than 0, returns the ``msg`` when failed.
   result = func(text: string): Info =
-    var m: RegexMatch
-    if text.match(re"(https?|ftp|file)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]", m):
+    var m: RegexMatch2
+    if text.match(re2"(https?|ftp|file)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]", m):
       result = (true, "")
     elif msg.len == 0:
       result = (false, fmt"{text} doesn't match url")

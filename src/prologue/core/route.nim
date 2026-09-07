@@ -20,7 +20,7 @@
 
 import std/[hashes, strutils, strtabs, options, critbits, sequtils, parseutils]
 
-from ./basicregex import Regex, RegexMatch, match, groupNames, groupFirstCapture
+from ./basicregex import Regex2, RegexMatch2, match, groupNames, groupFirstCapture
 import ./context
 import ./request
 import ./httpcore/httplogue
@@ -51,7 +51,7 @@ type
 func initPath*(route: string, httpMethod = HttpGet): Path {.inline.} =
   Path(route: route, httpMethod: httpMethod)
 
-func initRePath*(route: Regex, httpMethod = HttpGet): RePath {.inline.} =
+func initRePath*(route: Regex2, httpMethod = HttpGet): RePath {.inline.} =
   RePath(route: route, httpMethod: httpMethod)
 
 func pattern*(route: string, handler: HandlerAsync, httpMethod = HttpGet,
@@ -519,7 +519,7 @@ func findHandler*(ctx: Context): PathHandler {.inline.} =
   for (path, pathHandler) in ctx.gScope.reRouter:
     if path.httpMethod != reqMethod:
       continue
-    var m: RegexMatch
+    var m: RegexMatch2
 
     if route.match(path.route, m):
       for name in groupNames(m):
