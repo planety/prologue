@@ -1,0 +1,10 @@
+nimTitle	csrf	middlewares/csrf.html	module src/prologue/middlewares/csrf		0
+nim	DefaultTokenName	middlewares/csrf.html#DefaultTokenName	const DefaultTokenName		32
+nim	DefaultSecretSize	middlewares/csrf.html#DefaultSecretSize	const DefaultSecretSize		33
+nim	DefaultTokenSize	middlewares/csrf.html#DefaultTokenSize	const DefaultTokenSize		34
+nim	getToken	middlewares/csrf.html#getToken,Context	proc getToken(ctx: Context; tokenName = DefaultTokenName): string		37
+nim	setToken	middlewares/csrf.html#setToken,Context,string	proc setToken(ctx: Context; value: string; tokenName = DefaultTokenName)		40
+nim	generateToken	middlewares/csrf.html#generateToken,Context	proc generateToken(ctx: Context; tokenName = DefaultTokenName): string		70
+nim	checkToken	middlewares/csrf.html#checkToken,string,string	proc checkToken(checked, secret: string): bool		80
+nim	csrfToken	middlewares/csrf.html#csrfToken,Context	proc csrfToken(ctx: Context; tokenName = DefaultTokenName): string		87
+nim	csrfMiddleWare	middlewares/csrf.html#csrfMiddleWare	proc csrfMiddleWare(tokenName = DefaultTokenName): HandlerAsync		91

@@ -1,0 +1,2 @@
+nimTitle	uid	core/uid.html	module src/prologue/core/uid		0
+nim	genUid	core/uid.html#genUid	proc genUid(): string		7

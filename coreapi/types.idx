@@ -1,0 +1,43 @@
+nimTitle	types	types.html	module src/prologue/core/types		0
+nim	BadSecretKeyError	types.html#BadSecretKeyError	object BadSecretKeyError		23
+nim	EmptySecretKeyError	types.html#EmptySecretKeyError	object EmptySecretKeyError		24
+nim	BaseType	types.html#BaseType	type BaseType		25
+nim	SecretKey	types.html#SecretKey	type SecretKey		26
+nim	SecretUrl	types.html#SecretUrl	type SecretUrl		27
+nim	Session	types.html#Session	type Session		30
+nim	Info	types.html#Info	FlashLevel.Info		36
+nim	Warning	types.html#Warning	FlashLevel.Warning		36
+nim	Error	types.html#Error	FlashLevel.Error		36
+nim	Fault	types.html#Fault	FlashLevel.Fault		36
+nim	FlashLevel	types.html#FlashLevel	enum FlashLevel		36
+nim	FormPart	types.html#FormPart	object FormPart		42
+nim	initFormPart	types.html#initFormPart	proc initFormPart(): FormPart		46
+nim	`[]`	types.html#[],FormPart,string	proc `[]`(formPart: FormPart; key: string): tuple[params: StringTableRef,\n    body: string]		49
+nim	`[]=`	types.html#[]=,FormPart,string,string	proc `[]=`(formPart: FormPart; key: string; body: string)		53
+nim	parseValue	types.html#parseValue,string,T	proc parseValue[T: BaseType](value: string; default: T): T		74
+nim	len	types.html#len,SecretKey	proc len(secretKey: SecretKey): int		87
+nim	`$`	types.html#$,SecretKey	proc `$`(secretKey: SecretKey): string		90
+nim	newSession	types.html#newSession,StringTableRef	proc newSession(data: StringTableRef; newCreated = false; modified = false;\n           accessed = false): Session		94
+nim	`[]`	types.html#[],Session,string	proc `[]`(session: var Session; key: string): string		103
+nim	`[]=`	types.html#[]=,Session,string,string	proc `[]=`(session: var Session; key, value: string)		108
+nim	len	types.html#len,Session	proc len(session: Session): int		113
+nim	pairs	types.html#pairs.i,Session	iterator pairs(session: Session): tuple[key, val: string]		117
+nim	getOrDefault	types.html#getOrDefault,Session,string,string	proc getOrDefault(session: var Session; key: string; default = ""): string		122
+nim	del	types.html#del,Session,string	proc del(session: var Session; key: string)		130
+nim	clear	types.html#clear,Session	proc clear(session: var Session)		135
+nim	`$`	types.html#$,Session	proc `$`(session: Session): string		140
+nim	parseStringTable	types.html#parseStringTable,StringTableRef,string	proc parseStringTable(tabs: var StringTableRef; s: string)		143
+nim	loads	types.html#loads,Session,string	proc loads(session: var Session; s: string)		170
+nim	dumps	types.html#dumps,Session	proc dumps(session: Session): string		175
+nim	flash	types.html#flash,Session,string	proc flash(session: var Session; msgs: string; category = FlashLevel.Info)		179
+nim	flash	types.html#flash,Session,string,string	proc flash(session: var Session; msgs: string; category: string)		182
+nim	messages	types.html#messages,Session	proc messages(session: var Session): seq[string]		185
+nim	messagesWithCategory	types.html#messagesWithCategory,Session	proc messagesWithCategory(session: var Session): seq[(string, string)]		196
+nim	getMessage	types.html#getMessage,Session,FlashLevel	proc getMessage(session: var Session; category: FlashLevel): Option[string]		207
+nim	getMessage	types.html#getMessage,Session,string	proc getMessage(session: var Session; category: string): Option[string]		216
+nimgrp	$	types.html#$-procs-all	proc		90
+nimgrp	[]=	types.html#[]=-procs-all	proc		53
+nimgrp	[]	types.html#[]-procs-all	proc		49
+nimgrp	len	types.html#len-procs-all	proc		87
+nimgrp	flash	types.html#flash-procs-all	proc		179
+nimgrp	getmessage	types.html#getMessage-procs-all	proc		207

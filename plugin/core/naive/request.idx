@@ -1,0 +1,26 @@
+nimTitle	request	core/naive/request.html	module src/prologue/core/naive/request		0
+nim	NativeRequest	core/naive/request.html#NativeRequest	type NativeRequest		11
+nim	Request	core/naive/request.html#Request	object Request		12
+nim	url	core/naive/request.html#url,Request	proc url(request: Request): Uri		21
+nim	port	core/naive/request.html#port,Request	proc port(request: Request): string		25
+nim	path	core/naive/request.html#path,Request	proc path(request: Request): string		29
+nim	stripPath	core/naive/request.html#stripPath,Request	proc stripPath(request: var Request)		33
+nim	query	core/naive/request.html#query,Request	proc query(request: Request): string		38
+nim	scheme	core/naive/request.html#scheme,Request	proc scheme(request: Request): string		42
+nim	setScheme	core/naive/request.html#setScheme,Request,string	proc setScheme(request: var Request; value: string)		46
+nim	body	core/naive/request.html#body,Request	proc body(request: Request): string		50
+nim	headers	core/naive/request.html#headers,Request	proc headers(request: Request): HttpHeaders		55
+nim	reqMethod	core/naive/request.html#reqMethod,Request	proc reqMethod(request: Request): HttpMethod		59
+nim	getCookie	core/naive/request.html#getCookie,Request,string,string	proc getCookie(request: Request; key: string; default = ""): string		63
+nim	contentType	core/naive/request.html#contentType,Request	proc contentType(request: Request): string		68
+nim	charset	core/naive/request.html#charset,Request	proc charset(request: Request): string		75
+nim	secure	core/naive/request.html#secure,Request	proc secure(request: Request): bool		86
+nim	hostName	core/naive/request.html#hostName,Request	proc hostName(request: Request): string		100
+nim	send	core/naive/request.html#send,Request,string	proc send(request: Request; content: string): Future[void]		109
+nim	respond	core/naive/request.html#respond,Request,HttpCode,string	proc respond(request: Request; code: HttpCode; body: string): Future[void]		113
+nim	respond	core/naive/request.html#respond,Request,HttpCode,string,ResponseHeaders	proc respond(request: Request; code: HttpCode; body: string; headers: ResponseHeaders): Future[\n    void]		118
+nim	respond	core/naive/request.html#respond,Request,Response	proc respond(request: Request; response: Response): Future[void]		125
+nim	initRequest	core/naive/request.html#initRequest,Request	proc initRequest(nativeRequest: NativeRequest; cookies = initCookieJar();\n            pathParams = newStringTable(modeCaseSensitive);\n            queryParams = newStringTable(modeCaseSensitive);\n            postParams = newStringTable(modeCaseSensitive)): Request		131
+nim	close	core/naive/request.html#close,Request	proc close(request: Request)		140
+nim	initMockingRequest	core/naive/request.html#initMockingRequest,HttpMethod,HttpHeaders,Uri	proc initMockingRequest(httpMethod: HttpMethod; headers: HttpHeaders; url: Uri;\n                   cookies = initCookieJar(); postParams = newStringTable();\n                   queryParams = newStringTable(); formParams = initFormPart();\n                   pathParams = newStringTable()): Request		144
+nimgrp	respond	core/naive/request.html#respond-procs-all	proc		113

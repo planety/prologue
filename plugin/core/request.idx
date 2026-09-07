@@ -1,0 +1,8 @@
+nimTitle	request	core/request.html	module src/prologue/core/request		0
+nim	hasHeader	core/request.html#hasHeader,Request,string	proc hasHeader(request: Request; key: string): bool		13
+nim	getHeader	core/request.html#getHeader,Request,string	proc getHeader(request: Request; key: string): seq[string]		17
+nim	getHeaderOrDefault	core/request.html#getHeaderOrDefault,Request,string	proc getHeaderOrDefault(request: Request; key: string; default = @[""]): seq[string]		21
+nim	setHeader	core/request.html#setHeader,Request,string,string	proc setHeader(request: var Request; key, value: string)		28
+nim	setHeader	core/request.html#setHeader,Request,string,seq[string]	proc setHeader(request: var Request; key: string; value: seq[string])		32
+nim	addHeader	core/request.html#addHeader,Request,string,string	proc addHeader(request: var Request; key, value: string)		36
+nimgrp	setheader	core/request.html#setHeader-procs-all	proc		28

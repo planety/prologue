@@ -1,0 +1,4 @@
+nimTitle	constants	core/constants.html	module src/prologue/core/constants		0
+nim	PrologueVersion	core/constants.html#PrologueVersion	const PrologueVersion		2
+nim	ProloguePrefix	core/constants.html#ProloguePrefix	const ProloguePrefix		3
+nim	useAsyncHTTPServer	core/constants.html#useAsyncHTTPServer	const useAsyncHTTPServer		4

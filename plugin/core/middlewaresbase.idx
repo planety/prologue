@@ -1,0 +1,5 @@
+nimTitle	middlewaresbase	core/middlewaresbase.html	module src/prologue/core/middlewaresbase		0
+nim	doNothingClosureMiddleware	core/middlewaresbase.html#doNothingClosureMiddleware	proc doNothingClosureMiddleware(): HandlerAsync		25
+nim	SubContext	core/middlewaresbase.html#SubContext	type SubContext		28
+nim	switch	core/middlewaresbase.html#switch,Context	proc switch(ctx: Context): owned(Future[void])		32
+nim	extendContextMiddleWare	core/middlewaresbase.html#extendContextMiddleWare,typedesc[T]	proc extendContextMiddleWare[T: SubContext](ctxType: typedesc[T]): HandlerAsync		87

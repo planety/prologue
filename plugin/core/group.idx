@@ -1,0 +1,4 @@
+nimTitle	group	core/group.html	module src/prologue/core/group		0
+nim	Group	core/group.html#Group	type Group		9
+nim	newGroup	core/group.html#newGroup,Prologue,string,openArray[HandlerAsync],Group	proc newGroup(app: Prologue; route: string;\n         middlewares: openArray[HandlerAsync] = @[]; parent: Group = nil): Group		16
+nim	getAllInfos	core/group.html#getAllInfos,Group,string,openArray[HandlerAsync]	proc getAllInfos(group: Group; route: string; middlewares: openArray[HandlerAsync]): (\n    string, seq[HandlerAsync])		31

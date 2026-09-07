@@ -1,0 +1,13 @@
+nimTitle	i18n	i18n/i18n.html	module src/prologue/i18n/i18n		0
+nim	Translator	i18n/i18n.html#Translator	object Translator		23
+nim	loadTranslate	i18n/i18n.html#loadTranslate,Stream,string	proc loadTranslate(stream: Stream; filename = "[stream]"): TableRef[string,\n    StringTableRef]		28
+nim	loadTranslate	i18n/i18n.html#loadTranslate,string	proc loadTranslate(filename: string): TableRef[string, StringTableRef]		56
+nim	loadTranslate	i18n/i18n.html#loadTranslate,Prologue,string	proc loadTranslate(app: Prologue; filename: string)		63
+nim	setLanguage	i18n/i18n.html#setLanguage,Context,string	proc setLanguage(ctx: Context; language: string): Translator		67
+nim	translate	i18n/i18n.html#translate,Translator,string	proc translate(t: Translator; text: string): string		70
+nim	Tr	i18n/i18n.html#Tr,Translator,string	proc Tr(t: Translator; text: string): string		79
+nim	translate	i18n/i18n.html#translate,Context,string,string	proc translate(ctx: Context; text: string; language: string): string		82
+nim	Tr	i18n/i18n.html#Tr,Context,string,string	proc Tr(ctx: Context; text: string; language: string): string		92
+nimgrp	Tr	i18n/i18n.html#Tr-procs-all	proc		79
+nimgrp	translate	i18n/i18n.html#translate-procs-all	proc		70
+nimgrp	loadtranslate	i18n/i18n.html#loadTranslate-procs-all	proc		28

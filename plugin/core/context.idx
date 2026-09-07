@@ -1,0 +1,87 @@
+nimTitle	context	core/context.html	module src/prologue/core/context		0
+nim	PathHandler	core/context.html#PathHandler	type PathHandler		39
+nim	Path	core/context.html#Path	object Path		43
+nim	RePath	core/context.html#RePath	object RePath		47
+nim	ReRouter	core/context.html#ReRouter	type ReRouter		51
+nim	ReversedRouter	core/context.html#ReversedRouter	type ReversedRouter		54
+nim	GlobalScope	core/context.html#GlobalScope	type GlobalScope		56
+nim	Context	core/context.html#Context	type Context		64
+nim	AsyncEvent	core/context.html#AsyncEvent	type AsyncEvent		75
+nim	SyncEvent	core/context.html#SyncEvent	type SyncEvent		76
+nim	Event	core/context.html#Event	object Event		78
+nim	HandlerAsync	core/context.html#HandlerAsync	type HandlerAsync		85
+nim	ErrorHandler	core/context.html#ErrorHandler	type ErrorHandler		87
+nim	ErrorHandlerTable	core/context.html#ErrorHandlerTable	type ErrorHandlerTable		89
+nim	UploadFile	core/context.html#UploadFile	object UploadFile		91
+nim	ptrnWildcard	core/context.html#ptrnWildcard	PatternMatchingType.ptrnWildcard		95
+nim	ptrnParam	core/context.html#ptrnParam	PatternMatchingType.ptrnParam		95
+nim	ptrnText	core/context.html#ptrnText	PatternMatchingType.ptrnText		95
+nim	PatternMatchingType	core/context.html#PatternMatchingType	enum PatternMatchingType		95
+nim	BasePatternNode	core/context.html#BasePatternNode	object BasePatternNode		101
+nim	PatternNode	core/context.html#PatternNode	object PatternNode		110
+nim	Router	core/context.html#Router	type Router		124
+nim	default404Handler	core/context.html#default404Handler,Context	proc default404Handler(ctx: Context): Future[void]		128
+nim	default500Handler	core/context.html#default500Handler,Context	proc default500Handler(ctx: Context): Future[void]		129
+nim	gScope	core/context.html#gScope,Context	proc gScope(ctx: Context): lent GlobalScope		132
+nim	size	core/context.html#size,Context	proc size(ctx: Context): int8		136
+nim	incSize	core/context.html#incSize,Context,int	proc incSize(ctx: Context; num = 1)		140
+nim	first	core/context.html#first,Context	proc first(ctx: Context): bool		144
+nim	first=	core/context.html#first=,Context,bool	proc first=(ctx: Context; first: bool)		148
+nim	middlewares	core/context.html#middlewares,Context	proc middlewares(ctx: Context): lent seq[HandlerAsync]		152
+nim	middlewares=	core/context.html#middlewares=,Context,seq[HandlerAsync]	proc middlewares=(ctx: Context; middlewares: seq[HandlerAsync])		156
+nim	addMiddlewares	core/context.html#addMiddlewares,Context,HandlerAsync	proc addMiddlewares(ctx: Context; middleware: HandlerAsync)		160
+nim	addMiddlewares	core/context.html#addMiddlewares,Context,seq[HandlerAsync]	proc addMiddlewares(ctx: Context; middleware: seq[HandlerAsync])		164
+nim	execEvent	core/context.html#execEvent,Event	proc execEvent(event: Event)		168
+nim	initUploadFile	core/context.html#initUploadFile,string,string	proc initUploadFile(filename, body: string): UploadFile		174
+nim	getUploadFile	core/context.html#getUploadFile,Context,string	proc getUploadFile(ctx: Context; name: string): UploadFile		178
+nim	save	core/context.html#save,UploadFile,string,string	proc save(uploadFile: UploadFile; dir: string; filename = "")		183
+nim	newErrorHandlerTable	core/context.html#newErrorHandlerTable	proc newErrorHandlerTable(initialSize = tables.defaultInitialSize): ErrorHandlerTable		192
+nim	newErrorHandlerTable	core/context.html#newErrorHandlerTable,openArray[]	proc newErrorHandlerTable(pairs: openArray[(HttpCode, ErrorHandler)]): ErrorHandlerTable		196
+nim	newReversedRouter	core/context.html#newReversedRouter	proc newReversedRouter(): ReversedRouter		201
+nim	initEvent	core/context.html#initEvent,AsyncEvent	proc initEvent(handler: AsyncEvent): Event		205
+nim	initEvent	core/context.html#initEvent,SyncEvent	proc initEvent(handler: SyncEvent): Event		209
+nim	init	core/context.html#init,Context,Request,Response,GlobalScope	proc init(ctx: Context; request: Request; response: Response; gScope: GlobalScope)		213
+nim	extend	core/context.html#extend.e,Context	method extend(ctx: Context)		223
+nim	newContextFrom	core/context.html#newContextFrom,Context,Context	proc newContextFrom(ctx: Context; src: Context)		226
+nim	newContextTo	core/context.html#newContextTo,Context,Context	proc newContextTo(ctx: Context; src: Context)		237
+nim	getSettings	core/context.html#getSettings,Context,string	proc getSettings(ctx: Context; key: string): JsonNode		243
+nim	flash	core/context.html#flash,Context,string	proc flash(ctx: Context; msgs: string; category = FlashLevel.Info)		248
+nim	flash	core/context.html#flash,Context,string,string	proc flash(ctx: Context; msgs: string; category: string)		252
+nim	getFlashedMsgs	core/context.html#getFlashedMsgs,Context	proc getFlashedMsgs(ctx: Context): seq[string]		256
+nim	getFlashedMsgsWithCategory	core/context.html#getFlashedMsgsWithCategory,Context	proc getFlashedMsgsWithCategory(ctx: Context): seq[(string, string)]		259
+nim	getFlashedMsg	core/context.html#getFlashedMsg,Context,FlashLevel	proc getFlashedMsg(ctx: Context; category: FlashLevel): Option[string]		262
+nim	getFlashedMsg	core/context.html#getFlashedMsg,Context,string	proc getFlashedMsg(ctx: Context; category: string): Option[string]		265
+nim	respond	core/context.html#respond,Context,HttpCode,string,ResponseHeaders	proc respond(ctx: Context; code: HttpCode; body: string; headers: ResponseHeaders): Future[\n    void]		268
+nim	respond	core/context.html#respond,Context	proc respond(ctx: Context): Future[void]		275
+nim	respond	core/context.html#respond,Context,HttpCode,string	proc respond(ctx: Context; code: HttpCode; body: string): Future[void]		279
+nim	send	core/context.html#send,Context,string	proc send(ctx: Context; content: string): Future[void]		283
+nim	getCookie	core/context.html#getCookie,Context,string,string	proc getCookie(ctx: Context; key: string; default = ""): string		287
+nim	setCookie	core/context.html#setCookie,Context,Cookie	proc setCookie(ctx: Context; cookie: Cookie)		292
+nim	setCookie	core/context.html#setCookie,Context,string,string,string,Option[int],string,string	proc setCookie(ctx: Context; key, value: string; expires = "";\n          maxAge: Option[int] = none(int); domain = ""; path = "";\n          secure = false; httpOnly = false; sameSite = Lax)		296
+nim	setCookie	core/context.html#setCookie,Context,string,string,,Option[int],string,string	proc setCookie(ctx: Context; key, value: string; expires: DateTime | Time;\n          maxAge: Option[int] = none(int); domain = ""; path = "";\n          secure = false; httpOnly = false; sameSite = Lax)		303
+nim	deleteCookie	core/context.html#deleteCookie,Context,string,string,string	proc deleteCookie(ctx: Context; key: string; path = ""; domain = "")		310
+nim	defaultHandler	core/context.html#defaultHandler,Context	proc defaultHandler(ctx: Context): Future[void]		314
+nim	getPostParamsOption	core/context.html#getPostParamsOption,Context,string	proc getPostParamsOption(ctx: Context; key: string): Option[string]		335
+nim	getPostParams	core/context.html#getPostParams,Context,string,string	proc getPostParams(ctx: Context; key: string; default = ""): string		349
+nim	getQueryParamsOption	core/context.html#getQueryParamsOption,Context,string	proc getQueryParamsOption(ctx: Context; key: string): Option[string]		362
+nim	getQueryParams	core/context.html#getQueryParams,Context,string,string	proc getQueryParams(ctx: Context; key: string; default = ""): string		368
+nim	getPathParamsOption	core/context.html#getPathParamsOption,Context,string	proc getPathParamsOption(ctx: Context; key: string): Option[string]		374
+nim	getPathParams	core/context.html#getPathParams,Context,string	proc getPathParams(ctx: Context; key: string): string		380
+nim	getPathParams	core/context.html#getPathParams,Context,string,T	proc getPathParams[T: BaseType](ctx: Context; key: string; default: T): T		386
+nim	getFormParamsOption	core/context.html#getFormParamsOption,Context,string	proc getFormParamsOption(ctx: Context; key: string): Option[string]		396
+nim	getFormParams	core/context.html#getFormParams,Context,string,string	proc getFormParams(ctx: Context; key: string; default = ""): string		405
+nim	setResponse	core/context.html#setResponse,Context,HttpCode,string	proc setResponse(ctx: Context; code: HttpCode; body = ""; version = HttpVer11)		416
+nim	setResponse	core/context.html#setResponse,Context,Response	proc setResponse(ctx: Context; response: Response)		423
+nim	urlFor	core/context.html#urlFor,Context,string,openArray[],openArray[]	proc urlFor(ctx: Context; handler: string;\n       parameters: openArray[(string, string)] = @[];\n       queryParams: openArray[(string, string)] = @[]; usePlus = true;\n       omitEq = true): string		456
+nim	abortExit	core/context.html#abortExit,Context,string	proc abortExit(ctx: Context; code = Http401; body = "";\n          headers = initResponseHeaders(); version = HttpVer11)		477
+nim	attachment	core/context.html#attachment,Context,string,string	proc attachment(ctx: Context; downloadName: string; charset = "utf-8")		485
+nim	staticFileResponse	core/context.html#staticFileResponse,Context,string,string,string,string,string,int	proc staticFileResponse(ctx: Context; filename, dir: string; mimetype = "";\n                   downloadName = ""; charset = "utf-8"; bufSize = 40960;\n                   headers = none(ResponseHeaders)): owned(Future[void])		509
+nimgrp	flash	core/context.html#flash-procs-all	proc		248
+nimgrp	addmiddlewares	core/context.html#addMiddlewares-procs-all	proc		160
+nimgrp	newerrorhandlertable	core/context.html#newErrorHandlerTable-procs-all	proc		192
+nimgrp	setresponse	core/context.html#setResponse-procs-all	proc		416
+nimgrp	initevent	core/context.html#initEvent-procs-all	proc		205
+nimgrp	setcookie	core/context.html#setCookie-procs-all	proc		292
+nimgrp	respond	core/context.html#respond-procs-all	proc		268
+nimgrp	getpathparams	core/context.html#getPathParams-procs-all	proc		380
+nimgrp	getflashedmsg	core/context.html#getFlashedMsg-procs-all	proc		262

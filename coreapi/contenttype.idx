@@ -1,0 +1,4 @@
+nimTitle	contenttype	contenttype.html	module src/prologue/core/contenttype		0
+nim	MediaType	contenttype.html#MediaType	object MediaType		4
+nim	parseContentType	contenttype.html#parseContentType,string	proc parseContentType(headerValue: string): MediaType		21
+nim	`$`	contenttype.html#$,MediaType	proc `$`(mediaType: MediaType): string		111

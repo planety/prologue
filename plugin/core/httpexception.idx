@@ -1,0 +1,8 @@
+nimTitle	httpexception	core/httpexception.html	module src/prologue/core/httpexception		0
+nim	PrologueError	core/httpexception.html#PrologueError	object PrologueError		2
+nim	HttpError	core/httpexception.html#HttpError	object HttpError		4
+nim	AbortError	core/httpexception.html#AbortError	object AbortError		5
+nim	RouteError	core/httpexception.html#RouteError	object RouteError		7
+nim	RouteResetError	core/httpexception.html#RouteResetError	object RouteResetError		8
+nim	DuplicatedRouteError	core/httpexception.html#DuplicatedRouteError	object DuplicatedRouteError		9
+nim	DuplicatedReversedRouteError	core/httpexception.html#DuplicatedReversedRouteError	object DuplicatedReversedRouteError		10

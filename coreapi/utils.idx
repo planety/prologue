@@ -1,0 +1,11 @@
+nimTitle	utils	utils.html	module src/prologue/core/utils		0
+nim	since	utils.html#since.t,untyped,untyped	template since(version, body: untyped)		15
+nim	sinceAPI	utils.html#sinceAPI.t,untyped,untyped	template sinceAPI(version, body: untyped)		21
+nim	beforeAPI	utils.html#beforeAPI.t,untyped,untyped	template beforeAPI(version, body: untyped)		27
+nim	toByteSeq	utils.html#toByteSeq,string	proc toByteSeq(str: string): seq[byte]		33
+nim	fromByteSeq	utils.html#fromByteSeq,openArray[byte]	proc fromByteSeq(sequence: openArray[byte]): string		37
+nim	serialize	utils.html#serialize,int64	proc serialize(number: int64): array[8, byte]		48
+nim	serialize	utils.html#serialize,int32	proc serialize(number: int32): array[4, byte]		52
+nim	serialize	utils.html#serialize,int16	proc serialize(number: int16): array[2, byte]		56
+nim	escape	utils.html#escape,string	proc escape(src: string): string		62
+nimgrp	serialize	utils.html#serialize-procs-all	proc		48
